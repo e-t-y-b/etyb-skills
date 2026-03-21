@@ -68,8 +68,9 @@ Client Component ("use client")
 - **Error handling**: `error.tsx` — route-level error boundary
 - **Server Actions**: `"use server"` for form mutations
 - **Metadata API**: `export const metadata = {}` or `generateMetadata()` for dynamic SEO
-- **ISR**: `export const revalidate = 3600` per route
-- **PPR (Partial Prerendering)**: Static shell + streamed dynamic content (experimental)
+- **ISR**: `export const revalidate = 3600` per route (legacy pattern)
+- **Cache Components** (Next.js 16+): `'use cache'` directive with `cacheLife()` and `cacheTag()` — replaces ISR/revalidate patterns as default caching model
+- **PPR (Partial Prerendering)**: Static shell + streamed dynamic content — now default rendering model in Next.js 16+
 - **Image Optimization**: `next/image` — auto WebP/AVIF, srcset, lazy loading, blur placeholder
 - **Middleware**: Edge middleware for auth, redirects, A/B testing
 - **Turbopack**: `next dev --turbo` for faster dev server
