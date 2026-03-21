@@ -77,16 +77,20 @@ Client Component ("use client")
 
 **When to choose Next.js**: Most React projects. SSR/SSG/ISR needs. SEO-critical apps. Full-stack with Server Actions.
 
-### Remix (React Router v7 Framework Mode)
-- **Loaders**: Route-level data fetching (runs on server)
-- **Actions**: Route-level mutations (form submissions)
-- **Nested routing**: Layout routes with parallel data loading
-- **Progressive enhancement**: Works without JS (forms submit normally)
-- **Web standards**: Built on Fetch API, FormData, Response
-- **Vite-based**: Fast dev server
-- **SPA Mode**: Can run as pure SPA without server
+### React Router v7 / Remix (v7.13+)
+Remix has **merged into React Router v7**. Three operating modes:
 
-**When to choose Remix**: Progressive enhancement priority. Form-heavy apps. Teams valuing web standards.
+1. **Framework Mode** (full Remix replacement): File-based routing, loaders/actions, SSR, route modules
+2. **Data Mode**: Manual route config with loader/action support via `createBrowserRouter`
+3. **Declarative Mode**: Traditional `<BrowserRouter>`/`<Routes>` for simple SPAs
+
+- **Loaders**: Route-level data fetching (server or client)
+- **Actions**: Form submission handling with progressive enhancement
+- **Nested routing**: Parent layouts with `<Outlet>`, parallel data loading
+- **View Transitions**: `useViewTransitionState` hook
+- **Vite-based**: Fast dev server, future `v8_viteEnvironmentApi`
+
+**When to choose**: Progressive enhancement priority. Form-heavy apps. Lighter than Next.js.
 
 ### TanStack Start
 - Full-stack React framework from TanStack (TanStack Router + Query + Form)
@@ -99,10 +103,10 @@ Client Component ("use client")
 - React components as "islands": `<ReactComponent client:load />`
 - **When to choose**: Content-heavy sites (blogs, docs, marketing) with some React interactivity.
 
-### Gatsby — Status
-- Lost significant market share to Next.js and Astro.
-- Netlify (owner) has deprioritized investment.
-- **Not recommended for new projects**. Migrate to Astro or Next.js.
+### Gatsby — Dead
+- Acquired by Netlify (Feb 2023), Gatsby Cloud shut down.
+- No significant releases since Gatsby 5 (Nov 2022). Repository barely maintained.
+- **Do not use for new projects**. Migrate existing to Astro or Next.js.
 
 ---
 
@@ -144,9 +148,9 @@ Complex client state? → Zustand or Jotai
 - **For new projects**: TanStack Query + Zustand covers most needs with less boilerplate.
 - **Use when**: Large team with Redux expertise, complex client-side state machines.
 
-### Recoil — Status
-- Meta project, development has slowed significantly.
-- **Not recommended for new projects**. Use Jotai (similar atom model, actively maintained).
+### Recoil — Abandoned
+- Meta deprioritized; never reached 1.0. Team reassigned.
+- **Do not use for new projects**. Use Jotai (similar atomic model, actively maintained).
 
 ---
 
