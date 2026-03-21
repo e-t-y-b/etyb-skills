@@ -1,0 +1,101 @@
+{
+  "skill_name": "social-platform-architect",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "We're building a new social platform for creators. Think Twitter meets Reddit — users can post, follow, vote, comment. We expect to start with ~5K users and grow to maybe 500K in the first year. What architecture should we use?",
+      "expected_output": "Should ask clarifying questions before recommending architecture. Should NOT dump a full architecture doc immediately. Should be conversational and present tradeoffs.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "asks_clarifying_questions",
+          "type": "contains_pattern",
+          "description": "Response should ask at least 2 clarifying questions before recommending",
+          "check": "Contains question marks indicating clarifying questions about requirements"
+        },
+        {
+          "name": "does_not_prescribe_immediately",
+          "type": "negative_check",
+          "description": "Should NOT immediately dump a full architecture document with component diagrams",
+          "check": "Does not start with a complete architecture diagram or exhaustive tech stack list"
+        },
+        {
+          "name": "mentions_scale_awareness",
+          "type": "contains_concept",
+          "description": "Should acknowledge that 5K-500K is a specific scale tier and tailor advice accordingly",
+          "check": "References the startup/growth scale tier and suggests appropriate simplicity"
+        },
+        {
+          "name": "presents_tradeoffs",
+          "type": "contains_concept",
+          "description": "Should present at least one tradeoff or comparison between approaches",
+          "check": "Contains comparison language (vs, tradeoff, alternative, on the other hand)"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "We're debating whether to use fan-out on write or fan-out on read for our feed system. Some of our users will be brands with millions of followers. What should we consider?",
+      "expected_output": "Should provide deep technical comparison of fan-out strategies with specific numbers. Should mention the hybrid approach (Twitter's pattern). Should reference real-world examples.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "explains_both_approaches",
+          "type": "contains_concept",
+          "description": "Should explain both fan-out on write and fan-out on read with tradeoffs",
+          "check": "Covers both approaches with pros and cons"
+        },
+        {
+          "name": "mentions_hybrid",
+          "type": "contains_pattern",
+          "description": "Should mention the hybrid approach as a solution for the celebrity/brand problem",
+          "check": "Contains 'hybrid' approach or describes combining both strategies"
+        },
+        {
+          "name": "references_real_platforms",
+          "type": "contains_pattern",
+          "description": "Should reference how Twitter or other platforms handle this",
+          "check": "Mentions Twitter, X, or other real platforms as examples"
+        },
+        {
+          "name": "addresses_million_follower_problem",
+          "type": "contains_concept",
+          "description": "Should specifically address the millions-of-followers scenario mentioned in the prompt",
+          "check": "Discusses write amplification or celebrity problem with large follower counts"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're at about 2M MAU right now and spending $15K/month on AWS. Our CEO wants to cut costs by 40%. Where should we look?",
+      "expected_output": "Should ask what services they're using before making specific recommendations. Should provide concrete cost-saving strategies with estimated savings percentages. Should mention reserved instances, Graviton, spot instances, caching optimization.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "asks_about_current_stack",
+          "type": "contains_pattern",
+          "description": "Should ask what AWS services they're currently using before recommending cuts",
+          "check": "Asks about current infrastructure breakdown or AWS services in use"
+        },
+        {
+          "name": "provides_specific_savings",
+          "type": "contains_pattern",
+          "description": "Should mention specific cost-saving strategies with approximate savings percentages",
+          "check": "Contains specific percentages or dollar amounts for potential savings"
+        },
+        {
+          "name": "mentions_reserved_instances",
+          "type": "contains_pattern",
+          "description": "Should mention reserved instances or savings plans as a key lever",
+          "check": "Contains 'reserved' or 'savings plan' or 'committed use'"
+        },
+        {
+          "name": "actionable_recommendations",
+          "type": "contains_concept",
+          "description": "Recommendations should be specific and actionable, not vague",
+          "check": "Contains specific service names and actions (e.g., switch to Graviton, use spot for workers)"
+        }
+      ]
+    }
+  ]
+}
