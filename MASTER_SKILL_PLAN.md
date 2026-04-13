@@ -360,13 +360,13 @@ These are brought in when building specific types of products. They complement t
 |---|-------------|------------|--------|----------|
 | 0 | `orchestrator` | — | NEW | P0 — Build last (needs all teams to exist first) |
 | 1 | `research-analyst` | 4 sub-skills | NEW | P1 |
-| 2 | `system-architect` | 5 sub-skills | NEW | P0 |
+| 2 | `system-architect` | 5 sub-skills | DONE | P0 |
 | 3 | `frontend-architect` | 5 new + 4 existing = 9 | PARTIAL | P1 (groom existing + add new) |
 | 4 | `backend-architect` | 4 new + 5 existing = 9 | PARTIAL | P1 (groom existing + add new) |
-| 5 | `database-architect` | 6 sub-skills | NEW | P0 |
+| 5 | `database-architect` | 6 sub-skills | DONE | P0 |
 | 6 | `mobile-architect` | 5 sub-skills | NEW | P1 |
 | 7 | `qa-engineer` | 6 sub-skills | NEW | P0 |
-| 8 | `devops-engineer` | 8 sub-skills | NEW | P0 |
+| 8 | `devops-engineer` | 8 sub-skills | DONE | P0 |
 | 9 | `security-engineer` | 6 sub-skills | NEW | P0 |
 | 10 | `sre-engineer` | 6 sub-skills | NEW | P0 |
 | 11 | `ai-ml-engineer` | 5 sub-skills | NEW | P1 |
