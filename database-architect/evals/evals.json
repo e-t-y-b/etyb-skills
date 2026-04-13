@@ -1,0 +1,96 @@
+{
+  "skill_name": "database-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "greenfield-ecommerce-database",
+      "prompt": "I'm building an e-commerce platform from scratch. We expect about 10K orders per day initially, growing to 100K/day in a year. We need a product catalog with flexible attributes (clothing has sizes/colors, electronics has specs), user accounts, order history, and a search feature for products. The team is 4 backend engineers, all comfortable with PostgreSQL. What should our database architecture look like?",
+      "expected_output": "Should recommend PostgreSQL as primary database, discuss JSONB for flexible product attributes, suggest Redis for caching, and recommend either PostgreSQL FTS or Meilisearch for search. Should ask about consistency requirements, should be scale-aware (don't over-architect for 10K orders/day), and should present tradeoffs.",
+      "assertions": [
+        {
+          "text": "Recommends PostgreSQL as primary database with reasoning",
+          "type": "content_check"
+        },
+        {
+          "text": "Discusses JSONB for flexible product attributes (not suggesting MongoDB)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends a caching strategy (Redis/Valkey)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses search needs (PostgreSQL FTS or Meilisearch/Typesense, not jumping to Elasticsearch)",
+          "type": "content_check"
+        },
+        {
+          "text": "Scale-appropriate advice (doesn't recommend sharding or microservices for 10K orders/day)",
+          "type": "content_check"
+        },
+        {
+          "text": "Asks clarifying questions about requirements before prescribing",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "slow-query-optimization",
+      "prompt": "Our PostgreSQL query is taking 15 seconds on a table with 50M rows. Here's the query:\n\nSELECT o.id, o.total_amount, u.email, u.name\nFROM orders o\nJOIN users u ON u.id = o.user_id\nWHERE o.status = 'pending'\nAND o.created_at > NOW() - INTERVAL '7 days'\nORDER BY o.created_at DESC\nLIMIT 50;\n\nThe orders table has indexes on (id), (user_id), and (created_at). The status column has 5 possible values. What's wrong and how do I fix it?",
+      "expected_output": "Should identify missing composite index, suggest a partial index on status='pending', recommend EXPLAIN ANALYZE, discuss covering indexes, and potentially suggest partitioning if the table is large enough. Should provide specific SQL for the recommended indexes.",
+      "assertions": [
+        {
+          "text": "Identifies the missing composite index as the primary issue",
+          "type": "content_check"
+        },
+        {
+          "text": "Suggests a specific composite or partial index with SQL DDL",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends using EXPLAIN ANALYZE to verify the fix",
+          "type": "content_check"
+        },
+        {
+          "text": "Explains WHY the current indexes don't help (column order, selectivity)",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides actionable SQL that can be directly executed",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "zero-downtime-migration",
+      "prompt": "We need to rename a column in our PostgreSQL production database from 'username' to 'display_name' in the users table (200M rows). We're running a Rails app with ~500 req/sec hitting this table. We can't have any downtime. How do we do this safely?",
+      "expected_output": "Should recommend the expand-and-contract pattern: add new column, dual-write, backfill, switch reads, drop old column. Should NOT recommend a simple ALTER TABLE RENAME since that requires a brief lock. Should discuss PostgreSQL's transactional DDL advantage, backfill strategies for 200M rows, and application-level changes needed.",
+      "assertions": [
+        {
+          "text": "Recommends expand-and-contract pattern (not simple RENAME)",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides step-by-step migration plan with specific phases",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses the 200M row backfill challenge (batched updates)",
+          "type": "content_check"
+        },
+        {
+          "text": "Discusses application code changes needed alongside schema changes",
+          "type": "content_check"
+        },
+        {
+          "text": "Warns about potential pitfalls (locking, NOT NULL constraints, index creation)",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}
