@@ -367,7 +367,7 @@ These are brought in when building specific types of products. They complement t
 | 6 | `mobile-architect` | 5 sub-skills | NEW | P1 |
 | 7 | `qa-engineer` | 6 sub-skills | NEW | P0 |
 | 8 | `devops-engineer` | 8 sub-skills | DONE | P0 |
-| 9 | `security-engineer` | 6 sub-skills | NEW | P0 |
+| 9 | `security-engineer` | 6 sub-skills | DONE | P0 |
 | 10 | `sre-engineer` | 6 sub-skills | NEW | P0 |
 | 11 | `ai-ml-engineer` | 5 sub-skills | NEW | P1 |
 | 12 | `technical-writer` | 4 sub-skills | NEW | P2 |
