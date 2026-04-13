@@ -359,7 +359,7 @@ These are brought in when building specific types of products. They complement t
 | # | Master Skill | Sub-skills | Status | Priority |
 |---|-------------|------------|--------|----------|
 | 0 | `orchestrator` | — | NEW | P0 — Build last (needs all teams to exist first) |
-| 1 | `research-analyst` | 4 sub-skills | NEW | P1 |
+| 1 | `research-analyst` | 4 sub-skills | DONE | P1 |
 | 2 | `system-architect` | 5 sub-skills | DONE | P0 |
 | 3 | `frontend-architect` | 5 new + 4 existing = 9 | PARTIAL | P1 (groom existing + add new) |
 | 4 | `backend-architect` | 4 new + 5 existing = 9 | PARTIAL | P1 (groom existing + add new) |
