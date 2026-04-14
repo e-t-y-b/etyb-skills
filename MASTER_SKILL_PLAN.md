@@ -369,7 +369,7 @@ These are brought in when building specific types of products. They complement t
 | 8 | `devops-engineer` | 8 sub-skills | DONE | P0 |
 | 9 | `security-engineer` | 6 sub-skills | DONE | P0 |
 | 10 | `sre-engineer` | 6 sub-skills | NEW | P0 |
-| 11 | `ai-ml-engineer` | 5 sub-skills | NEW | P1 |
+| 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 |
 | 12 | `technical-writer` | 4 sub-skills | NEW | P2 |
 | 13 | `project-planner` | 3 sub-skills | NEW | P2 |
 | 14 | `code-reviewer` | 4 sub-skills | NEW | P1 |
@@ -422,7 +422,7 @@ These extend coverage across the full SDLC and add specialized development capab
 | 8 | Groom `frontend-architect` + add 5 new sub-skills | Updated SKILL.md + 5 new reference files |
 | 9 | Groom `backend-architect` + add 4 new sub-skills | Updated SKILL.md + 4 new reference files |
 | 10 | ~~Create `mobile-architect` master skill + all 5 sub-skills~~ | DONE |
-| 11 | Create `ai-ml-engineer` master skill + all 5 sub-skills | SKILL.md + 5 reference files |
+| 11 | ~~Create `ai-ml-engineer` master skill + all 5 sub-skills~~ | DONE |
 | 12 | Create `code-reviewer` master skill + all 4 sub-skills | SKILL.md + 4 reference files |
 
 ### Wave 3 — Support & Domain (P2 Teams)
