@@ -368,7 +368,7 @@ These are brought in when building specific types of products. They complement t
 | 7 | `qa-engineer` | 6 sub-skills | NEW | P0 |
 | 8 | `devops-engineer` | 8 sub-skills | DONE | P0 |
 | 9 | `security-engineer` | 6 sub-skills | DONE | P0 |
-| 10 | `sre-engineer` | 6 sub-skills | NEW | P0 |
+| 10 | `sre-engineer` | 6 sub-skills | DONE | P0 |
 | 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 |
 | 12 | `technical-writer` | 4 sub-skills | DONE | P2 |
 | 13 | `project-planner` | 3 sub-skills | DONE | P2 |
@@ -410,7 +410,7 @@ These are the essential teams that every engineering org needs. Without these, y
 | 3 | Create `devops-engineer` master skill + all 8 sub-skills | SKILL.md + 8 reference files |
 | 4 | Create `security-engineer` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
 | 5 | Create `qa-engineer` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
-| 6 | Create `sre-engineer` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
+| 6 | ~~Create `sre-engineer` master skill + all 6 sub-skills~~ | DONE |
 
 ### Wave 2 — Extended Core (P1 Teams)
 
