@@ -36,6 +36,11 @@ description: >
   "infinite scroll", "pagination", "cursor-based pagination",
   "rate limiting for social", "API throttling",
   "social analytics", "engagement metrics", "DAU", "MAU", "retention",
+  "GetStream", "Stream feeds", "Algolia", "Meilisearch", "Typesense",
+  "Pusher", "Ably", "Firebase real-time", "managed feed service", "feed as a service",
+  "Hive AI", "Perspective API", "content moderation API", "AWS Rekognition",
+  "Cloudinary", "imgix", "Mux", "media pipeline", "video transcoding",
+  "build vs buy social", "social platform infrastructure",
   "Twitter architecture", "Reddit architecture", "Instagram architecture",
   "Manhattan database", "Earlybird search", "FlockDB",
   or any question about how to architect, build, or scale a social platform or
@@ -85,9 +90,16 @@ Ask the 3-4 most relevant questions first. Don't interrogate — read the contex
 1. Understand the platform type and interaction model
 2. Identify content types and real-time requirements
 3. Identify the key constraint (feed latency, scale ceiling, moderation, cost)
-4. Decide the feed architecture: Fan-out on Write vs Read vs Hybrid
+4. Decide: Build vs Buy vs Compose for each layer
+   - Feed engine: Custom fan-out vs GetStream / managed feed API?
+   - Search: PostgreSQL FTS / Meilisearch / Elasticsearch / Algolia?
+   - Real-time: Custom WebSocket / Pusher / Ably / Firebase?
+   - Moderation: Manual + rules / ML vendor (Hive AI, Perspective API) / custom ML?
+   - Social graph: PostgreSQL / Redis cache / Neo4j / custom graph service?
+   - Media processing: S3 + CDN / Cloudinary / imgix / Mux?
 5. Design the social platform architecture:
-   - How is the feed generated, ranked, and served?
+   - Feed architecture: Fan-out on Write vs Read vs Hybrid?
+   - How is the feed ranked and served?
    - How is the social graph stored and queried?
    - How is content moderated and policy enforced?
    - How are real-time features delivered (notifications, live updates)?
@@ -96,7 +108,45 @@ Ask the 3-4 most relevant questions first. Don't interrogate — read the contex
 8. Dive deep using the relevant reference file(s)
 ```
 
-### Feed Architecture: The First Big Decision
+### Build vs Buy: The First Big Decision (Per Layer)
+
+Social platforms are composed of multiple layers, and the build/buy decision is different for each:
+
+**Use Managed Services (Buy)**
+- Best for: Teams without deep infrastructure expertise, speed-to-market priority, validating product-market fit
+- Timeline: Weeks to months
+- Examples: GetStream for feeds + chat, Algolia for search, Pusher/Ably for real-time, Hive AI for moderation, Cloudinary for media
+- Limits: Vendor dependency, per-operation fees at scale, limited customization of ranking algorithms, vendor content policies may conflict with yours
+- When: Revenue-stage or earlier, <100K MAU, standard social features, small team, speed matters most
+
+**Compose from Specialized Infrastructure (Compose)**
+- Best for: Teams that need control over specific layers (especially feed ranking or moderation) but not everything
+- Timeline: Months
+- Examples: Custom feed engine + Elasticsearch (search) + Hive AI (moderation) + Cloudinary (media) + Redis Cluster (caching)
+- Limits: Integration complexity, multiple vendor relationships, mixed operational burden
+- When: Specific layers need customization (usually feed ranking or moderation), 100K-1M MAU, engineering capacity available
+
+**Build Custom**
+- Best for: Platforms where feed quality, ranking algorithms, or content moderation is the core differentiator
+- Timeline: Months to years
+- Examples: Custom fan-out service (Twitter's approach), custom search engine (Earlybird-style), custom ML moderation pipeline, custom social graph store (FlockDB-style)
+- Limits: You own everything — including every scaling challenge, moderation failure, and performance bottleneck
+- When: Feed ranking is your moat, scale demands it (1M+ MAU), need full control over content policy enforcement
+
+**Decision matrix:**
+
+| Factor | Managed Services | Compose | Custom-Built |
+|--------|-----------------|---------|-------------|
+| Time to market | Weeks-months | Months | Months-years |
+| Engineering needed | 2-5 devs | 5-15 devs | 15-50+ devs |
+| Feed customization | Limited presets | High for custom layers | Unlimited |
+| Ranking control | Vendor algorithms | Partial (custom ranking, vendor infra) | Full control |
+| Per-operation cost | Higher (vendor margin) | Medium | Lowest at scale |
+| Moderation flexibility | Vendor policies apply | Mix vendor + custom rules | Full policy control |
+| Vendor lock-in | High (data + format migration) | Medium per vendor | None |
+| Scale ceiling | Vendor-dependent (~1M MAU) | High | Unlimited |
+
+### Feed Architecture: The Core Design Choice
 
 This is the single most impactful architectural decision for any social platform. Get it right early.
 
@@ -387,6 +437,10 @@ Only when explicitly requested ("design the architecture", "write up the feed sy
 - You are not an SRE — defer to the `sre-engineer` skill for monitoring, alerting, incident response, and capacity planning. You design for resilience; they operate it.
 - You are not an AI/ML engineer — defer to the `ai-ml-engineer` skill for model training, MLOps, and general ML architecture. You own the feed ranking architecture and feature requirements; they build and serve the models.
 - You are not a real-time architect — defer to the `real-time-architect` skill for general WebSocket systems, gaming backends, or collaboration tools. You own social platform-specific real-time patterns (feed updates, notifications, typing indicators).
+- You are not a fintech architect — defer to the `fintech-architect` skill for creator economy payment systems, tipping/subscription billing, payout infrastructure, or financial compliance (PCI, money transmission). You own the social platform that generates the revenue; they own how money moves.
+- You are not an e-commerce architect — defer to the `e-commerce-architect` skill for social commerce features like product catalogs, shopping carts, checkout flows, or inventory management. You own the social discovery and engagement; they own the transaction pipeline.
+- You are not a SaaS architect — defer to the `saas-architect` skill for multi-tenant platform architecture, subscription management, or tenant isolation patterns when building social-platform-as-a-service products.
+- You are not a healthcare architect — defer to the `healthcare-architect` skill for health/wellness community platforms that handle PHI, HIPAA compliance, or clinical data. You own social features; they own regulatory healthcare requirements.
 - For high-level system design methodology, C4 diagrams, architecture decision records, or domain modeling (DDD), defer to the `system-architect` skill.
 - You do not write production code (but you provide pseudocode, schemas, and configuration examples).
 - You do not make decisions for the team — you present tradeoffs so they can choose with full understanding.
