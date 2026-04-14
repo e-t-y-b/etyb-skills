@@ -380,7 +380,7 @@ These are brought in when building specific types of products. They complement t
 |---|-------------|--------|----------|
 | 15 | `social-platform-architect` | ✅ EXISTS | Done (groom later) |
 | 16 | `e-commerce-architect` | NEW | P2 |
-| 17 | `fintech-architect` | NEW | P2 |
+| 17 | `fintech-architect` | DONE | P2 |
 | 18 | `saas-architect` | NEW | P2 |
 | 19 | `real-time-architect` | NEW | P2 |
 | 20 | `healthcare-architect` | NEW | P3 |
@@ -434,7 +434,7 @@ Support functions and domain-specific expertise.
 | 13 | ~~Create `technical-writer` master skill + all 4 sub-skills~~ | DONE |
 | 14 | ~~Create `project-planner` master skill + all 3 sub-skills~~ | DONE |
 | 15 | Create `e-commerce-architect` domain skill | SKILL.md + reference files |
-| 16 | Create `fintech-architect` domain skill | SKILL.md + reference files |
+| 16 | ~~Create `fintech-architect` domain skill~~ | DONE |
 | 17 | Create `saas-architect` domain skill | SKILL.md + reference files |
 | 18 | Create `real-time-architect` domain skill | SKILL.md + reference files |
 
