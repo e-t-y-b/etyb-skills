@@ -3,39 +3,52 @@
 ## Bird's-Eye View
 
 ```
-                            ┌─────────────────────┐
-                            │     ORCHESTRATOR     │
-                            │  (Intent Router /    │
-                            │   Project Manager)   │
-                            └─────────┬───────────┘
-                                      │
-        ┌──────────┬──────────┬───────┴───────┬──────────┬──────────┐
-        ▼          ▼          ▼               ▼          ▼          ▼
-   ┌─────────┐┌─────────┐┌─────────┐   ┌─────────┐┌─────────┐┌─────────┐
-   │Research &││Design & ││  Dev    │   │  Test & ││ DevOps &││  SRE &  │
-   │Discovery││Architect││  Teams  │   │   QA    ││  Infra  ││  Ops    │
-   └─────────┘└─────────┘└─────────┘   └─────────┘└─────────┘└─────────┘
-        │          │          │               │          │          │
-        │          │     ┌────┼────┐          │          │          │
-        │          │     ▼    ▼    ▼          │          │          │
-        │          │  Front  Back  DB &       │          │          │
-        │          │  end    end   Data       │          │          │
-        │          │               Mobile     │          │          │
-        │          │               AI/ML      │          │          │
-        │          │                          │          │          │
-   ┌────┴──────────┴──────────────────────────┴──────────┴──────────┴────┐
-   │                    CROSS-CUTTING TEAMS                              │
-   │         Security  ·  Documentation  ·  Code Review                  │
-   └─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          PROCESS LAYER (v2)                                 │
+│  ┌──────────┐  ┌──────────┐  ┌───────────┐  ┌──────────┐  ┌──────────┐    │
+│  │  DESIGN  │→ │   PLAN   │→ │ IMPLEMENT │→ │  VERIFY  │→ │   SHIP   │    │
+│  │   Gate   │  │   Gate   │  │   Gate    │  │   Gate   │  │   Gate   │    │
+│  └──────────┘  └──────────┘  └───────────┘  └──────────┘  └──────────┘    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                            ┌─────────────────────┐                         │
+│                            │     ORCHESTRATOR     │                         │
+│                            │  (Process-Enforcing  │                         │
+│                            │   CTO / Router)      │                         │
+│                            └─────────┬───────────┘                         │
+│                                      │                                     │
+│        ┌──────────┬──────────┬───────┴───────┬──────────┬──────────┐       │
+│        ▼          ▼          ▼               ▼          ▼          ▼       │
+│   ┌─────────┐┌─────────┐┌─────────┐   ┌─────────┐┌─────────┐┌─────────┐  │
+│   │Research &││Design & ││  Dev    │   │  Test & ││ DevOps &││  SRE &  │  │
+│   │Discovery││Architect││  Teams  │   │   QA    ││  Infra  ││  Ops    │  │
+│   └─────────┘└─────────┘└─────────┘   └─────────┘└─────────┘└─────────┘  │
+│        │          │          │               │          │          │       │
+│        │          │     ┌────┼────┐          │          │          │       │
+│        │          │     ▼    ▼    ▼          │          │          │       │
+│        │          │  Front  Back  DB &       │          │          │       │
+│        │          │  end    end   Data       │          │          │       │
+│        │          │               Mobile     │          │          │       │
+│        │          │               AI/ML      │          │          │       │
+│        │          │                          │          │          │       │
+│   ┌────┴──────────┴──────────────────────────┴──────────┴──────────┴────┐  │
+│   │                    CROSS-CUTTING TEAMS                              │  │
+│   │         Security  ·  Documentation  ·  Code Review                  │  │
+│   └─────────────────────────────────────────────────────────────────────┘  │
+│                                                                            │
+│   Quality Gates: qa-engineer (TDD), security-engineer (auto-consult),     │
+│                  code-reviewer (mandatory review)                          │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## The Concept
 
-Think of this as a virtual engineering company:
+Think of this as a **virtual engineering company with process discipline** — not just a roster of experts, but an operating team with gates, verification, and living plans:
 
-- **Orchestrator** = CTO / VP Engineering — understands the intent of any request, knows which team(s) to pull in, coordinates across teams
-- **Master Skills** = Team Leads — broad domain knowledge, delegates to specialists
+- **Orchestrator** = Process-enforcing CTO — classifies request complexity (Tier 0–4), mandates the right experts, enforces phase gates, and tracks plan state
+- **Master Skills** = Team Leads — broad domain knowledge, delegates to specialists, participates in plan lifecycle
 - **Sub-Skills** = Specialists — deep expertise in one area, does the actual work
+- **Quality Gates** = Mandatory checkpoints — qa-engineer enforces TDD, security-engineer auto-consults on sensitive changes, code-reviewer blocks Ship without review
+- **Process Layer** = The 5-gate lifecycle (Design → Plan → Implement → Verify → Ship) that wraps every Tier 2+ project, with living plan artifacts, verification protocols, and debugging escalation
 
 ## SDLC Phase Coverage
 
@@ -356,42 +369,43 @@ These are brought in when building specific types of products. They complement t
 
 ### Core Teams (14 master skills + 1 orchestrator)
 
-| # | Master Skill | Sub-skills | Status | Priority |
-|---|-------------|------------|--------|----------|
-| 0 | `orchestrator` | — | NEW | P0 — Build last (needs all teams to exist first) |
-| 1 | `research-analyst` | 4 sub-skills | DONE | P1 |
-| 2 | `system-architect` | 5 sub-skills | DONE | P0 |
-| 3 | `frontend-architect` | 5 new + 4 existing = 9 | DONE | P1 (groomed + 5 new sub-skills added) |
-| 4 | `backend-architect` | 4 new + 5 existing = 9 | DONE | P1 (groomed + 4 new sub-skills added) |
-| 5 | `database-architect` | 6 sub-skills | DONE | P0 |
-| 6 | `mobile-architect` | 5 sub-skills | DONE | P1 |
-| 7 | `qa-engineer` | 6 sub-skills | NEW | P0 |
-| 8 | `devops-engineer` | 8 sub-skills | DONE | P0 |
-| 9 | `security-engineer` | 6 sub-skills | DONE | P0 |
-| 10 | `sre-engineer` | 6 sub-skills | DONE | P0 |
-| 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 |
-| 12 | `technical-writer` | 4 sub-skills | DONE | P2 |
-| 13 | `project-planner` | 3 sub-skills | DONE | P2 |
-| 14 | `code-reviewer` | 4 sub-skills | DONE | P1 |
+| # | Master Skill | Sub-skills | Status | Priority | Process |
+|---|-------------|------------|--------|----------|---------|
+| 0 | `orchestrator` | — | DONE | P0 — Build last | v2 — process-enforcing CTO |
+| 1 | `research-analyst` | 4 sub-skills | DONE | P1 | v2 |
+| 2 | `system-architect` | 5 sub-skills | DONE | P0 | v2 |
+| 3 | `frontend-architect` | 5 new + 4 existing = 9 | DONE | P1 | v2 |
+| 4 | `backend-architect` | 4 new + 5 existing = 9 | DONE | P1 | v2 |
+| 5 | `database-architect` | 6 sub-skills | DONE | P0 | v2 |
+| 6 | `mobile-architect` | 5 sub-skills | DONE | P1 | v2 |
+| 7 | `qa-engineer` | 6 sub-skills | DONE | P0 | v2 — quality gate (TDD) |
+| 8 | `devops-engineer` | 8 sub-skills | DONE | P0 | v2 |
+| 9 | `security-engineer` | 6 sub-skills | DONE | P0 | v2 — quality gate (auto-consult) |
+| 10 | `sre-engineer` | 6 sub-skills | DONE | P0 | v2 |
+| 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 | v2 |
+| 12 | `technical-writer` | 4 sub-skills | DONE | P2 | v2 — plan-integrated docs |
+| 13 | `project-planner` | 3 sub-skills | DONE | P2 | v2 — plan lifecycle owner |
+| 14 | `code-reviewer` | 4 sub-skills | DONE | P1 | v2 — quality gate (mandatory review) |
 
 ### Domain-Specific Teams (6 master skills)
 
-| # | Master Skill | Status | Priority |
-|---|-------------|--------|----------|
-| 15 | `social-platform-architect` | DONE | Done (groomed to new structure) |
-| 16 | `e-commerce-architect` | NEW | P2 |
-| 17 | `fintech-architect` | DONE | P2 |
-| 18 | `saas-architect` | DONE | P2 |
-| 19 | `real-time-architect` | DONE | P2 |
-| 20 | `healthcare-architect` | DONE | P3 |
+| # | Master Skill | Status | Priority | Process |
+|---|-------------|--------|----------|---------|
+| 15 | `social-platform-architect` | DONE | Done (groomed) | v2 |
+| 16 | `e-commerce-architect` | DONE | P2 | v2 |
+| 17 | `fintech-architect` | DONE | P2 | v2 |
+| 18 | `saas-architect` | DONE | P2 | v2 |
+| 19 | `real-time-architect` | DONE | P2 | v2 |
+| 20 | `healthcare-architect` | DONE | P3 | v2 |
 
 ### Totals
 
-- **21 master skills** (including orchestrator)
-- **~80 sub-skills** across all teams
-- **3 already exist** (frontend-architect, backend-architect, social-platform-architect)
-- **18 master skills to create**
-- **~70 sub-skills to create**
+- **21 master skills** (including orchestrator) — ALL DONE, all at process v2
+- **~80 sub-skills** across all teams — ALL DONE
+- **28 sessions completed** (Waves 1–4: 22 sessions, Wave 5: 6 sessions)
+- Cross-references verified across all 21 skills
+- Orchestrator routing tested with 15 prompts (10 PASS, 5 WARN, 0 FAIL)
+- Process discipline: 5 new reference files, 21 SKILL.md upgrades, 10 process evals
 
 ---
 
@@ -409,7 +423,7 @@ These are the essential teams that every engineering org needs. Without these, y
 | 2 | Create `database-architect` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
 | 3 | Create `devops-engineer` master skill + all 8 sub-skills | SKILL.md + 8 reference files |
 | 4 | Create `security-engineer` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
-| 5 | Create `qa-engineer` master skill + all 6 sub-skills | SKILL.md + 6 reference files |
+| 5 | ~~Create `qa-engineer` master skill + all 6 sub-skills~~ | DONE |
 | 6 | ~~Create `sre-engineer` master skill + all 6 sub-skills~~ | DONE |
 
 ### Wave 2 — Extended Core (P1 Teams)
@@ -418,9 +432,9 @@ These extend coverage across the full SDLC and add specialized development capab
 
 | Session | Task | Deliverable |
 |---------|------|-------------|
-| 7 | Create `research-analyst` master skill + all 4 sub-skills | SKILL.md + 4 reference files |
-| 8 | Groom `frontend-architect` + add 5 new sub-skills | Updated SKILL.md + 5 new reference files |
-| 9 | Groom `backend-architect` + add 4 new sub-skills | Updated SKILL.md + 4 new reference files |
+| 7 | ~~Create `research-analyst` master skill + all 4 sub-skills~~ | DONE |
+| 8 | ~~Groom `frontend-architect` + add 5 new sub-skills~~ | DONE |
+| 9 | ~~Groom `backend-architect` + add 4 new sub-skills~~ | DONE |
 | 10 | ~~Create `mobile-architect` master skill + all 5 sub-skills~~ | DONE |
 | 11 | ~~Create `ai-ml-engineer` master skill + all 5 sub-skills~~ | DONE |
 | 12 | ~~Create `code-reviewer` master skill + all 4 sub-skills~~ | DONE |
@@ -433,7 +447,7 @@ Support functions and domain-specific expertise.
 |---------|------|-------------|
 | 13 | ~~Create `technical-writer` master skill + all 4 sub-skills~~ | DONE |
 | 14 | ~~Create `project-planner` master skill + all 3 sub-skills~~ | DONE |
-| 15 | Create `e-commerce-architect` domain skill | SKILL.md + reference files |
+| 15 | ~~Create `e-commerce-architect` domain skill~~ | DONE |
 | 16 | ~~Create `fintech-architect` domain skill~~ | DONE |
 | 17 | ~~Create `saas-architect` domain skill~~ | DONE |
 | 18 | ~~Create `real-time-architect` domain skill~~ | DONE |
@@ -444,8 +458,73 @@ Support functions and domain-specific expertise.
 |---------|------|-------------|
 | 19 | ~~Create `healthcare-architect` domain skill~~ | DONE |
 | 20 | ~~Groom `social-platform-architect` (align with new structure)~~ | DONE |
-| 21 | Create `orchestrator` master skill (routing logic across all teams) | SKILL.md + routing rules + team registry |
-| 22 | Integration testing — verify cross-references and routing across all skills | Updated cross-references in all skills |
+| 21 | ~~Create `orchestrator` master skill (routing logic across all teams)~~ | DONE |
+| 22 | ~~Integration testing — verify cross-references and routing across all skills~~ | DONE |
+
+### Wave 5 — Process Discipline (Plan #2)
+
+Transforms etyb-skills from a roster of experts into an operating team with gates, verification, and living plans. 6 sessions adding process architecture across all 21 skills.
+
+#### Overview
+
+**What was added:**
+- **Process Architecture** — 5-gate lifecycle (Design → Plan → Implement → Verify → Ship) with tier-based complexity classification (Tier 0–4)
+- **Verification Protocol** — Universal 5-question framework ("What was done? How verified? What tests? Edge cases? What could go wrong?") with role-specific checklists
+- **Debugging Protocol** — Root-cause-first methodology, one-variable rule, 3-failure escalation to domain experts
+- **Plan Lifecycle** — Living plan artifacts in `.etyb/plans/`, Claude plan mode integration, gate readiness assessments
+- **Quality Gates** — Three mandatory checkpoints: qa-engineer (TDD enforcement), security-engineer (auto-consultation), code-reviewer (mandatory review before Ship)
+- **Expert Mandating** — Orchestrator automatically mandates specialists for auth, PII, payments, infrastructure, database, and healthcare work
+- **Expert Continuity** — Experts consulted at Design gate are re-consulted at Verify gate
+
+#### New Files Created
+
+| File | Purpose |
+|------|---------|
+| `orchestrator/references/process-architecture.md` | Master process reference — plan format, gates, expert mandating, coordination patterns |
+| `orchestrator/references/verification-protocol.md` | Verification framework — 5 questions, role-specific checklists, done criteria per gate |
+| `orchestrator/references/debugging-protocol.md` | Debugging methodology — root cause first, hypothesis-driven, escalation paths |
+| `project-planner/references/plan-lifecycle.md` | Plan creation workflow, update patterns, gate readiness assessment, templates |
+| `orchestrator/evals/process-evals.json` | 10 end-to-end eval scenarios testing process-enforced workflow |
+
+#### All 21 SKILL.md Modifications
+
+Every SKILL.md received three new sections (placed before the final "What You Are NOT"):
+
+1. **Process Awareness** — Read active plan, understand current phase, respect gate boundaries
+2. **Verification Protocol** — Domain-specific checklist (e.g., database checks query plans; frontend checks Lighthouse scores; healthcare checks HIPAA)
+3. **Debugging Protocol** — Systematic debugging with skill-specific escalation paths
+
+Additionally, three skills were enhanced as **mandatory quality gates**:
+- `qa-engineer` — TDD enforcement, plan-time test strategy, Verify gate participation
+- `security-engineer` — Auto-consultation triggers (8 conditions), security checkpoints per gate
+- `code-reviewer` — Mandatory review gate, tier-based review requirements, plan compliance verification
+
+And two skills were enhanced as **process owners**:
+- `orchestrator` — Plan lifecycle management, phase gating enforcement, expert mandating, state tracking, debugging protocol activation
+- `project-planner` — Plan artifact population, living plan updates, gate readiness assessment, decision logging
+
+#### Coordination Model
+
+| Role | Process Behavior |
+|------|-----------------|
+| `orchestrator` | **Process-enforcing** — classifies tiers, mandates experts, enforces gates, blocks progression without exit criteria |
+| `qa-engineer` | **Quality gate** — blocks Ship without test coverage, enforces TDD at Plan gate |
+| `security-engineer` | **Quality gate** — auto-consulted on auth/PII/payments/infra, blocks Ship without security sign-off |
+| `code-reviewer` | **Quality gate** — mandatory review before Ship gate passes |
+| `project-planner` | **Process owner** — creates and maintains plan artifacts, assesses gate readiness |
+| `technical-writer` | **Process-integrated** — decision logs, ADRs as plan artifacts, docs assigned per gate |
+| All other skills | **Process-aware** — read plan, respect gates, follow verification protocol, use debugging protocol |
+
+#### Session Log
+
+| Session | Task | Deliverable |
+|---------|------|-------------|
+| 23 | ~~Create process architecture foundation — 3 orchestrator reference files~~ | `process-architecture.md`, `verification-protocol.md`, `debugging-protocol.md` |
+| 24 | ~~Enhance orchestrator to process-enforcing CTO~~ | Plan lifecycle, phase gating, expert mandating, state tracking |
+| 25 | ~~Enhance project-planner and technical-writer for plan-centric workflow~~ | `plan-lifecycle.md`, living plans, gate readiness, decision logging |
+| 26 | ~~Enhance qa-engineer, code-reviewer, security-engineer as quality gates~~ | TDD enforcement, mandatory review, auto-consultation |
+| 27 | ~~Add process sections to all 15 remaining skills~~ | Process awareness, verification, debugging for all skills |
+| 28 | ~~Validate system, update master docs, add process evals~~ | This document update, `process-evals.json`, cross-reference verification |
 
 ---
 
@@ -467,3 +546,4 @@ For each session creating a new skill:
 4. **Current** — Always use WebSearch to verify advice. Ecosystems change fast.
 5. **Cross-referencing** — Skills should know their boundaries and defer to other skills when appropriate.
 6. **Scale-aware** — Different advice for a 3-person startup vs a 200-person enterprise.
+7. **Process-aware** — Every skill participates in the plan lifecycle, follows the verification protocol, and respects gate boundaries.

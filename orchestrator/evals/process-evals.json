@@ -1,0 +1,204 @@
+[
+  {
+    "id": 1,
+    "name": "full-tier-4-lifecycle",
+    "description": "Full Tier 4 lifecycle — plan creation, expert mandating, gate-by-gate progression",
+    "prompt": "Build me a SaaS invoicing platform with multi-tenant billing, Stripe integration, and PDF generation. Users should be able to create invoices, track payments, and manage clients.",
+    "expected_behavior": [
+      "Classify as Tier 4 (full project, multi-team)",
+      "Create plan artifact in .etyb/plans/",
+      "Mandate saas-architect for multi-tenancy and billing",
+      "Mandate security-engineer for payment processing (Stripe)",
+      "Mandate qa-engineer for plan-time test strategy",
+      "Show gate-by-gate progression: Design → Plan → Implement → Verify → Ship",
+      "Assign frontend-architect, backend-architect, database-architect for implementation",
+      "Include technical-writer for API docs"
+    ],
+    "assertions": [
+      { "type": "keyword", "value": "Tier 4", "description": "Must classify as Tier 4" },
+      { "type": "semantic", "value": "Plan artifact should be created with gate structure", "description": "Plan lifecycle initiated" },
+      { "type": "keyword", "value": "saas-architect", "description": "SaaS domain expert mandated" },
+      { "type": "keyword", "value": "security-engineer", "description": "Security mandated for payment processing" },
+      { "type": "keyword", "value": "qa-engineer", "description": "QA mandated for test strategy" },
+      { "type": "semantic", "value": "Gates should progress sequentially from Design through Ship", "description": "Gate progression enforced" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "gate-enforcement-no-skip",
+    "description": "Gate enforcement — user tries to skip Design gate and jump to code",
+    "prompt": "Just write the code for a user notification system with email, SMS, and push notifications. I don't need a design, just start coding.",
+    "expected_behavior": [
+      "Classify as Tier 3 (focused multi-team project)",
+      "Redirect user to Design gate first despite request to skip",
+      "Explain why Design gate matters for a notification system (channel selection, delivery guarantees, template system)",
+      "Offer to make Design gate lightweight but not skip it entirely",
+      "After Design, proceed through Plan gate before Implementation"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should not immediately start writing code", "description": "Must not skip to implementation" },
+      { "type": "semantic", "value": "Should redirect to Design gate or architectural consideration first", "description": "Gate enforcement active" },
+      { "type": "keyword", "value": "Design", "description": "Design gate referenced" },
+      { "type": "semantic", "value": "Should explain the value of designing before coding for this scope", "description": "Explains gate rationale" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "security-auto-consultation",
+    "description": "Security auto-consultation — payment endpoint triggers mandatory security review",
+    "prompt": "Add a new POST /api/payments/charge endpoint that accepts credit card details, charges via Stripe, and stores the transaction record.",
+    "expected_behavior": [
+      "Mandate security-engineer automatically (payment processing trigger)",
+      "security-engineer should flag: PCI compliance, card data handling, tokenization requirement",
+      "Should NOT store raw credit card details — redirect to Stripe tokenization",
+      "Mandate backend-architect for API implementation",
+      "Include input validation and rate limiting requirements"
+    ],
+    "assertions": [
+      { "type": "keyword", "value": "security-engineer", "description": "Security auto-consulted for payment endpoint" },
+      { "type": "semantic", "value": "Should flag PCI compliance or card data handling concerns", "description": "PCI/security concerns raised" },
+      { "type": "semantic", "value": "Should recommend tokenization instead of storing raw card data", "description": "Secure payment pattern recommended" },
+      { "type": "semantic", "value": "Should not allow storing raw credit card numbers", "description": "Insecure pattern blocked" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "debugging-protocol-escalation",
+    "description": "Debugging protocol — 3 failures on same issue triggers expert escalation",
+    "prompt": "I've been trying to fix this database connection timeout for 3 attempts now. First I increased the pool size, then I adjusted the timeout config, then I switched connection libraries. Tests still fail with the same timeout error on high concurrency.",
+    "expected_behavior": [
+      "Recognize 3-failure escalation trigger from debugging protocol",
+      "Activate structured debugging — stop trying random fixes",
+      "Escalate to database-architect for connection pool expertise",
+      "Possibly involve sre-engineer for infrastructure-level diagnosis",
+      "Apply root-cause-first methodology: reproduce, hypothesize, test one variable",
+      "Track debugging state"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should recognize the three-failure pattern and change approach", "description": "3-failure escalation recognized" },
+      { "type": "keyword", "value": "database-architect", "description": "Database expert escalated" },
+      { "type": "semantic", "value": "Should apply systematic debugging instead of more random attempts", "description": "Structured debugging activated" },
+      { "type": "semantic", "value": "Should focus on root cause analysis before proposing another fix", "description": "Root cause methodology applied" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "verification-before-ship",
+    "description": "Verification before done — user says ship it without verification",
+    "prompt": "That looks done, ship it. The feature works on my machine, let's deploy to production.",
+    "expected_behavior": [
+      "Do NOT proceed to Ship gate immediately",
+      "Run verification protocol checklist before allowing Ship",
+      "Ask the five verification questions: What was done? How verified? What tests? Edge cases? What could go wrong?",
+      "Require code-reviewer sign-off (mandatory review gate)",
+      "Check if qa-engineer has confirmed test coverage",
+      "Check if security-engineer has signed off (if applicable)"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should not immediately deploy without verification", "description": "Ship gate not bypassed" },
+      { "type": "semantic", "value": "Should run verification checklist or ask verification questions", "description": "Verification protocol activated" },
+      { "type": "keyword", "value": "code-reviewer", "description": "Mandatory code review required" },
+      { "type": "semantic", "value": "Should require evidence beyond 'works on my machine'", "description": "Evidence standards enforced" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "claude-plan-mode-integration",
+    "description": "Claude plan mode — skills annotate existing plan instead of creating .etyb/plans/",
+    "prompt": "I'm in Claude plan mode working on a REST API for user management. Help me design the endpoints and data model.",
+    "expected_behavior": [
+      "Detect Claude plan mode context",
+      "Annotate the existing Claude plan rather than creating a new .etyb/plans/ artifact",
+      "Provide design guidance within the plan mode format",
+      "system-architect and backend-architect contribute to the plan",
+      "database-architect contributes data model to the plan",
+      "Do NOT create duplicate plan artifacts"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should detect or respect Claude plan mode", "description": "Plan mode awareness" },
+      { "type": "semantic", "value": "Should annotate existing plan context, not create .etyb/plans/ file", "description": "No duplicate plan artifacts" },
+      { "type": "keyword", "value": "backend-architect", "description": "Backend architect contributes" },
+      { "type": "semantic", "value": "Should work within the existing plan structure", "description": "Plan mode integration" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "expert-continuity-across-gates",
+    "description": "Expert continuity — security consulted at Design should be re-consulted at Verify",
+    "prompt": "We finished implementing the OAuth2 login flow that security-engineer reviewed during the Design phase. The code is ready for verification. Can you verify it's complete?",
+    "expected_behavior": [
+      "Recognize that security-engineer was involved at Design gate",
+      "Re-consult security-engineer at Verify gate (expert continuity protocol)",
+      "security-engineer should verify: OAuth2 implementation matches Design recommendations, token storage is secure, PKCE is implemented",
+      "qa-engineer should verify test coverage for auth flows",
+      "code-reviewer should review the implementation"
+    ],
+    "assertions": [
+      { "type": "keyword", "value": "security-engineer", "description": "Security re-consulted at Verify gate" },
+      { "type": "semantic", "value": "Should reference the Design phase security review and verify those recommendations were followed", "description": "Expert continuity enforced" },
+      { "type": "keyword", "value": "qa-engineer", "description": "QA involved at Verify gate" },
+      { "type": "semantic", "value": "Should verify implementation matches design decisions", "description": "Design-to-verify traceability" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "lightweight-tier-1-no-process",
+    "description": "Lightweight Tier 1 — simple question should NOT trigger heavy process",
+    "prompt": "How do I set up Redis caching with a TTL-based invalidation strategy in a Node.js Express app?",
+    "expected_behavior": [
+      "Classify as Tier 1 (single specialist question)",
+      "Route to database-architect (cache-specialist) or backend-architect",
+      "Provide direct, actionable answer",
+      "Do NOT create a plan artifact",
+      "Do NOT trigger gate progression",
+      "Do NOT mandate multiple experts",
+      "Conversational response, not process-heavy"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should provide a direct technical answer without heavy process", "description": "Lightweight response for simple question" },
+      { "type": "semantic", "value": "Should NOT create a plan artifact or mention gate progression", "description": "No plan creation for Tier 1" },
+      { "type": "semantic", "value": "Should route to a single relevant specialist", "description": "Single specialist routing" },
+      { "type": "semantic", "value": "Response should be conversational and actionable", "description": "Appropriate response weight" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "mandatory-code-review-before-ship",
+    "description": "Mandatory code review — Tier 2+ work requires code-reviewer before Ship gate",
+    "prompt": "The new user registration API with email verification is implemented and all tests pass. QA has signed off. Security reviewed the auth flow. Ready to ship.",
+    "expected_behavior": [
+      "Check if code-reviewer has been consulted (mandatory for Tier 2+)",
+      "If not, mandate code-reviewer before Ship gate passes",
+      "code-reviewer should check: code quality, SOLID principles, error handling, performance",
+      "Only after code-reviewer approval should Ship gate open",
+      "Verify all quality gates have signed off: qa-engineer, security-engineer, code-reviewer"
+    ],
+    "assertions": [
+      { "type": "keyword", "value": "code-reviewer", "description": "Code reviewer mandated before Ship" },
+      { "type": "semantic", "value": "Should verify code review has happened before allowing Ship gate to pass", "description": "Mandatory review enforced" },
+      { "type": "semantic", "value": "Should check all quality gate sign-offs before Ship", "description": "All gates verified" },
+      { "type": "semantic", "value": "Ship gate should not pass without code review", "description": "Review blocks Ship" }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "plan-update-mid-implementation",
+    "description": "Plan update mid-implementation — new requirement discovered, plan and gates re-evaluated",
+    "prompt": "We're halfway through implementing the inventory management system and just discovered we need real-time stock updates via WebSockets for the warehouse dashboard. This wasn't in the original plan.",
+    "expected_behavior": [
+      "Recognize this as a plan update trigger (new requirement mid-implementation)",
+      "Update the existing plan artifact with the new requirement",
+      "Re-evaluate affected gates — the new WebSocket requirement may need Design review",
+      "Mandate real-time-architect for WebSocket expertise",
+      "Assess impact on existing implementation and timeline",
+      "Do NOT start a new plan — update the existing one",
+      "May need to re-open Design gate for the real-time component"
+    ],
+    "assertions": [
+      { "type": "semantic", "value": "Should update the existing plan rather than creating a new one", "description": "Plan update, not replacement" },
+      { "type": "keyword", "value": "real-time-architect", "description": "Real-time expert brought in for WebSocket requirement" },
+      { "type": "semantic", "value": "Should re-evaluate gates or reopen Design for the new scope", "description": "Gates re-evaluated" },
+      { "type": "semantic", "value": "Should assess impact on existing work and timeline", "description": "Impact assessment performed" }
+    ]
+  }
+]
