@@ -1,0 +1,137 @@
+{
+  "skill_name": "technical-writer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "api-documentation-platform-selection",
+      "prompt": "We're a B2B SaaS startup (15 engineers, Series A) launching a public REST API. We have an OpenAPI 3.1 spec with about 40 endpoints. We need to set up API documentation that includes interactive try-it-out, code examples in Python/Node/Go, and authentication guides. We're a Next.js shop. What documentation platform should we use and how should we structure the docs?",
+      "expected_output": "Should recommend 2-3 platform options with tradeoffs (likely Mintlify, Fumadocs, or Docusaurus given Next.js stack), discuss interactive API reference rendering (Scalar, built-in platform features), recommend code example strategy (multi-language with language switcher), suggest Diataxis-based structure (quickstart tutorial, how-to guides per use case, auto-generated reference, concepts section), mention API linting (Spectral) in CI, and address sustainability (docs-as-code workflow, preview deployments). Should ask about budget, whether non-engineers will contribute, and existing CI/CD setup.",
+      "assertions": [
+        {
+          "text": "Presents 2-3 platform options with pros/cons rather than prescribing a single solution",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Considers the Next.js tech stack when recommending platforms (mentions Fumadocs, Nextra, or notes Docusaurus is React-based)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses interactive API reference (try-it-out functionality) with specific tool recommendations",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends multi-language code examples with specific approach (language switcher, tabs)",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions documentation structure using Diataxis or equivalent framework (tutorials, guides, reference, concepts)",
+          "type": "content_check"
+        },
+        {
+          "text": "Asks clarifying questions about budget, team, or existing infrastructure before making final recommendation",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "adr-writing-for-database-decision",
+      "prompt": "We need to write an ADR for choosing between PostgreSQL and DynamoDB for our new order management service. We're currently a monolith moving to microservices. The order service will handle ~5000 orders/day initially but we expect 50x growth in 2 years. Our team has deep PostgreSQL experience but limited DynamoDB experience. Can you help me write this ADR?",
+      "expected_output": "Should produce a well-structured ADR following MADR 4.0 format with: title, status (proposed), context explaining the microservices migration and order service requirements, decision drivers (scale requirements, team expertise, query patterns, operational complexity), considered options with detailed pros/cons for both PostgreSQL and DynamoDB (and possibly a third option like Aurora), decision outcome with clear justification weighing team expertise against future scale, and consequences. Should include a decision matrix comparing the options on weighted criteria.",
+      "assertions": [
+        {
+          "text": "Uses MADR or recognized ADR format with proper sections (title, status, context, decision drivers, options, outcome, consequences)",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes detailed pros and cons for both PostgreSQL and DynamoDB specific to the order management use case",
+          "type": "content_check"
+        },
+        {
+          "text": "Considers team expertise as a significant decision factor (PostgreSQL experience vs DynamoDB learning curve)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses the scaling concern (5000 orders/day now, 50x growth) with specific analysis for each option",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes a decision matrix or structured comparison with weighted criteria",
+          "type": "content_check"
+        },
+        {
+          "text": "Documents consequences of the decision (what follows from it, what trade-offs are accepted)",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "incident-runbook-for-api-service",
+      "prompt": "Our API service keeps having intermittent 503 errors during peak hours. We need a runbook that our on-call engineers can follow when this happens. The service runs on Kubernetes (EKS), uses PostgreSQL (RDS), Redis for caching, and sits behind an ALB. We use Datadog for monitoring and PagerDuty for alerting. The team has 3 on-call engineers who rotate weekly.",
+      "expected_output": "Should produce a complete runbook with: metadata (service, owner, last-reviewed date), purpose, prerequisites (kubectl access, AWS console, Datadog, PagerDuty), step-by-step triage flow starting with the most common causes of 503s (pod health, database connections, Redis connectivity, ALB target group health), specific kubectl/aws CLI/Datadog commands with expected output for each diagnostic step, decision tree format for branching based on findings, remediation steps for each root cause, rollback procedures, escalation contacts and criteria, and verification steps to confirm resolution. Should be written for 3 AM readability.",
+      "assertions": [
+        {
+          "text": "Includes specific diagnostic commands (kubectl, aws CLI, or Datadog queries) with expected output for each step",
+          "type": "content_check"
+        },
+        {
+          "text": "Follows a structured triage flow checking multiple potential causes (pods, database, Redis, ALB)",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes rollback or remediation steps for identified root causes",
+          "type": "content_check"
+        },
+        {
+          "text": "Contains escalation criteria and contacts (when to stop and escalate)",
+          "type": "content_check"
+        },
+        {
+          "text": "Uses code blocks for all commands with expected output shown (not inline commands in paragraphs)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Formatted for 3 AM readability: scannable, no walls of text, clear decision points",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "documentation-site-setup-with-versioning",
+      "prompt": "We're an open-source database tool with 3 supported versions (v3, v4, v5). Our docs are currently scattered Markdown files in the repo. We want to set up a proper documentation site with versioning, search, and a getting-started tutorial. We have no budget for paid tools. Our contributors use Python and Go primarily. What do you recommend?",
+      "expected_output": "Should recommend open-source options (likely MkDocs Material given Python background, or Docusaurus for richer features), address multi-version documentation with specific mechanisms (Docusaurus versioning or MkDocs mike plugin), recommend search solution (Algolia DocSearch free for open-source, or Pagefind), outline Diataxis-based structure for the docs site, provide a getting-started tutorial template, suggest docs-as-code CI/CD workflow (GitHub Actions for building/deploying), and address contributor experience (how open-source contributors can contribute to docs). Should mention prose linting with Vale.",
+      "assertions": [
+        {
+          "text": "Recommends open-source platforms only (respects zero budget constraint)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses multi-version documentation with specific versioning mechanism for the recommended platform",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends a search solution appropriate for open-source projects (Algolia DocSearch free tier, Pagefind, or similar)",
+          "type": "content_check"
+        },
+        {
+          "text": "Suggests documentation structure using Diataxis or equivalent framework",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses CI/CD for docs (automated builds, preview deployments, quality checks)",
+          "type": "content_check"
+        },
+        {
+          "text": "Considers the Python/Go contributor base when recommending platforms",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

@@ -370,7 +370,7 @@ These are brought in when building specific types of products. They complement t
 | 9 | `security-engineer` | 6 sub-skills | DONE | P0 |
 | 10 | `sre-engineer` | 6 sub-skills | NEW | P0 |
 | 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 |
-| 12 | `technical-writer` | 4 sub-skills | NEW | P2 |
+| 12 | `technical-writer` | 4 sub-skills | DONE | P2 |
 | 13 | `project-planner` | 3 sub-skills | NEW | P2 |
 | 14 | `code-reviewer` | 4 sub-skills | DONE | P1 |
 
@@ -431,7 +431,7 @@ Support functions and domain-specific expertise.
 
 | Session | Task | Deliverable |
 |---------|------|-------------|
-| 13 | Create `technical-writer` master skill + all 4 sub-skills | SKILL.md + 4 reference files |
+| 13 | ~~Create `technical-writer` master skill + all 4 sub-skills~~ | DONE |
 | 14 | Create `project-planner` master skill + all 3 sub-skills | SKILL.md + 3 reference files |
 | 15 | Create `e-commerce-architect` domain skill | SKILL.md + reference files |
 | 16 | Create `fintech-architect` domain skill | SKILL.md + reference files |
