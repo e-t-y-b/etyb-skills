@@ -1,0 +1,89 @@
+{
+  "skill_name": "e-commerce-architect",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm building a DTC skincare brand, currently on Shopify but hitting limits with our product variants. We have 200+ products, each with 3-8 variants across size and formulation. We're also starting wholesale (B2B) and the pricing complexity is killing us — different prices for different retailers, volume discounts, etc. Team is 4 engineers. Revenue is around $3M/year. Should we migrate to headless commerce? If so, which platform and how should we model the product catalog and pricing?",
+      "expected_output": "Should ask clarifying questions about current pain points, then recommend appropriate headless platform (likely Medusa or Saleor), provide product/variant data modeling guidance, and address B2B pricing with price list architecture. Should be scale-aware for a $3M/year DTC brand with 4 engineers.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Asks clarifying questions before prescribing a solution",
+          "check": "Response should ask 2-3 clarifying questions about specific Shopify limitations, B2B requirements, or migration constraints"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Recommends appropriate platform for the scale",
+          "check": "Should recommend a headless platform appropriate for 4-engineer team and $3M revenue — likely Medusa or Saleor, not Commercetools (enterprise overkill)"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Addresses B2B pricing complexity",
+          "check": "Should discuss price lists, customer-group pricing, or volume/tiered pricing patterns"
+        },
+        {
+          "type": "does_not_contain",
+          "text": "Does not over-engineer",
+          "check": "Should NOT recommend building custom from scratch, Kubernetes, microservices, or enterprise solutions for a $3M DTC brand"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We're launching a limited-edition sneaker drop next Friday. Expecting 50,000 people to hit the site simultaneously for 500 pairs. Last time we tried this, we oversold by 200 pairs and it was a nightmare. We're on a custom Node.js backend with PostgreSQL. How do I architect the inventory and checkout to handle the flash sale without overselling?",
+      "expected_output": "Should provide specific technical patterns for flash sale inventory management: Redis-based stock reservation, queue-based checkout, bot protection, idempotent order creation. Should include code-level guidance for preventing race conditions.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Addresses concurrency and race conditions",
+          "check": "Should discuss database locking (SELECT FOR UPDATE or atomic conditional UPDATE) or Redis-based reservation to prevent overselling"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Recommends queue-based checkout or waiting room",
+          "check": "Should mention queue-based checkout, waiting room (Queue-it, Cloudflare Waiting Room), or similar pattern for managing 50K simultaneous users"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Addresses bot protection",
+          "check": "Should mention bot protection strategies (CAPTCHA, rate limiting, device fingerprinting) since flash sales attract bots"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Provides actionable implementation guidance",
+          "check": "Should include specific technical patterns (code snippets, SQL, or pseudocode) not just high-level advice"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We're a marketplace connecting local artisans with customers. About 500 sellers, 15,000 products, processing around $800K/month in GMV. Currently using Stripe Connect for payments. We need to add: 1) proper order management with split fulfillment (sellers ship their own items), 2) a promotions engine (marketplace-wide sales, seller-specific coupons), and 3) returns handling. What's the architecture?",
+      "expected_output": "Should design a marketplace order management architecture with separate seller fulfillments, Stripe Connect payment splits, promotion engine design, and return workflows. Should be appropriate for a mid-scale marketplace.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Designs multi-seller order management",
+          "check": "Should describe how an order with items from multiple sellers results in separate fulfillments per seller, with independent tracking"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Addresses marketplace payments with Stripe Connect",
+          "check": "Should discuss Stripe Connect patterns (destination charges or separate charges), commission handling, and payout to sellers"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Designs promotions engine for marketplace",
+          "check": "Should address both marketplace-wide promotions and seller-specific coupons, including who bears the discount cost"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Covers return flow for marketplace",
+          "check": "Should describe how returns work when the marketplace doesn't hold inventory — customer returns to seller, marketplace coordinates refund"
+        }
+      ]
+    }
+  ]
+}
