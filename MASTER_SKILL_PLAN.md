@@ -362,7 +362,7 @@ These are brought in when building specific types of products. They complement t
 | 1 | `research-analyst` | 4 sub-skills | DONE | P1 |
 | 2 | `system-architect` | 5 sub-skills | DONE | P0 |
 | 3 | `frontend-architect` | 5 new + 4 existing = 9 | DONE | P1 (groomed + 5 new sub-skills added) |
-| 4 | `backend-architect` | 4 new + 5 existing = 9 | PARTIAL | P1 (groom existing + add new) |
+| 4 | `backend-architect` | 4 new + 5 existing = 9 | DONE | P1 (groomed + 4 new sub-skills added) |
 | 5 | `database-architect` | 6 sub-skills | DONE | P0 |
 | 6 | `mobile-architect` | 5 sub-skills | NEW | P1 |
 | 7 | `qa-engineer` | 6 sub-skills | NEW | P0 |
