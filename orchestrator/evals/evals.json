@@ -1,0 +1,77 @@
+{
+  "skill_name": "orchestrator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build a real-time collaborative document editor like Google Docs. It needs to support 10k concurrent users, have offline mode, and work on web and mobile. Where do I even start?",
+      "expected_output": "The orchestrator should identify this as a complex multi-team greenfield project requiring: (1) real-time-architect for real-time collaboration patterns (CRDTs, OT), (2) system-architect for overall system design, (3) frontend-architect for the web editor, (4) mobile-architect for mobile clients, (5) backend-architect for the collaboration server, (6) database-architect for document storage. It should propose a sequential-then-parallel execution plan: start with real-time-architect + system-architect for architecture, then parallel frontend/mobile/backend development, then QA and DevOps. Should NOT attempt to design the system itself.",
+      "files": [],
+      "assertions": [
+        {"name": "identifies-real-time-architect", "type": "contains_keyword", "keywords": ["real-time-architect"]},
+        {"name": "identifies-system-architect", "type": "contains_keyword", "keywords": ["system-architect"]},
+        {"name": "identifies-multiple-dev-teams", "type": "contains_keyword", "keywords": ["frontend-architect", "mobile-architect", "backend-architect"]},
+        {"name": "defines-execution-sequence", "type": "semantic", "description": "Should define a clear execution order — architecture first, then parallel development, then testing/deployment"},
+        {"name": "does-not-design-system", "type": "semantic", "description": "Should NOT attempt to design the system itself"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Our Node.js API is throwing 500 errors on the /users/profile endpoint after we deployed the new avatar upload feature yesterday. The logs show 'ENOMEM' errors. We're running on ECS with 512MB containers.",
+      "expected_output": "Route to sre-engineer as lead for incident triage with backend-architect as secondary. Should identify this as an incident response pattern. Should NOT diagnose the issue itself.",
+      "files": [],
+      "assertions": [
+        {"name": "routes-to-sre", "type": "contains_keyword", "keywords": ["sre-engineer"]},
+        {"name": "identifies-backend-support", "type": "contains_keyword", "keywords": ["backend-architect"]},
+        {"name": "identifies-incident-pattern", "type": "semantic", "description": "Should recognize as incident response scenario"},
+        {"name": "does-not-diagnose", "type": "semantic", "description": "Should NOT diagnose the memory issue itself"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We're a 3-person startup building a SaaS invoicing tool for freelancers. We need multi-tenancy, Stripe billing integration, PDF invoice generation, and a simple dashboard. What's our tech stack and how should we architect this?",
+      "expected_output": "Route to saas-architect + system-architect. Calibrate to startup scale. Should NOT pick the tech stack itself.",
+      "files": [],
+      "assertions": [
+        {"name": "identifies-saas-architect", "type": "contains_keyword", "keywords": ["saas-architect"]},
+        {"name": "identifies-core-teams", "type": "contains_keyword", "keywords": ["system-architect"]},
+        {"name": "startup-scale-awareness", "type": "semantic", "description": "Should calibrate to startup scale"},
+        {"name": "does-not-pick-tech-stack", "type": "semantic", "description": "Should NOT make tech stack decisions itself"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "How do I set up Prometheus and Grafana to monitor my Kubernetes cluster?",
+      "expected_output": "Route directly to sre-engineer with minimal overhead. No multi-team plan needed.",
+      "files": [],
+      "assertions": [
+        {"name": "routes-to-sre", "type": "contains_keyword", "keywords": ["sre-engineer"]},
+        {"name": "minimal-overhead", "type": "semantic", "description": "Should route directly without multi-team coordination"},
+        {"name": "does-not-explain-prometheus", "type": "semantic", "description": "Should NOT explain Prometheus setup itself"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "We're preparing for SOC 2 Type II audit next quarter. We need to review our entire stack — the React frontend handles PII in forms, the Go backend processes payments, we use PostgreSQL and Redis, everything runs on AWS EKS. What's the plan?",
+      "expected_output": "Hub-and-spoke with security-engineer leading. Multiple spoke teams for stack review. Flag technical-writer for documentation.",
+      "files": [],
+      "assertions": [
+        {"name": "security-engineer-leads", "type": "contains_keyword", "keywords": ["security-engineer"]},
+        {"name": "identifies-spoke-teams", "type": "semantic", "description": "Should identify teams for each stack component"},
+        {"name": "hub-and-spoke-pattern", "type": "semantic", "description": "Should use hub-and-spoke coordination"},
+        {"name": "flags-documentation", "type": "contains_keyword", "keywords": ["technical-writer"]}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "I need to add a chat feature to our existing e-commerce platform. Users should be able to message sellers in real-time, with typing indicators, read receipts, and message history.",
+      "expected_output": "Domain-augmented development with real-time-architect + e-commerce-architect + core dev teams. Recognize existing system context.",
+      "files": [],
+      "assertions": [
+        {"name": "identifies-real-time-architect", "type": "contains_keyword", "keywords": ["real-time-architect"]},
+        {"name": "identifies-e-commerce-architect", "type": "contains_keyword", "keywords": ["e-commerce-architect"]},
+        {"name": "identifies-dev-teams", "type": "semantic", "description": "Should identify backend + database + frontend teams"},
+        {"name": "recognizes-existing-system", "type": "semantic", "description": "Should recognize this is adding to an existing system"}
+      ]
+    }
+  ]
+}
