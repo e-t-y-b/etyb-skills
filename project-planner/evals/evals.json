@@ -1,0 +1,50 @@
+{
+  "skill_name": "project-planner",
+  "evals": [
+    {
+      "id": 0,
+      "name": "sprint-planning-capacity-constraints",
+      "prompt": "We're a team of 6 engineers working in 2-week sprints using Scrum. Our average velocity over the last 4 sprints is 42, 38, 45, and 40 story points. Next sprint, one senior engineer (who typically handles 12 points) is on PTO for the entire sprint, and another mid-level engineer will be pulled into on-call rotation for 3 days. We use Linear for tracking. Our backlog has 3 epics: a payment integration (estimated 25 points total remaining), a dashboard redesign (18 points), and a performance optimization initiative (12 points). The payment integration has a hard deadline in 3 sprints. We also have 8 points of carry-over bugs from last sprint. Help us plan this sprint — what should we commit to, and what's our realistic capacity?",
+      "expected_output": "Should calculate adjusted capacity accounting for PTO and on-call, recommend a sprint goal focused on the payment integration deadline, and propose a specific commitment that fits within the reduced capacity while addressing the carry-over bugs.",
+      "assertions": [
+        {"text": "Calculates adjusted velocity or capacity accounting for the senior engineer's PTO and the mid-level engineer's partial on-call availability", "type": "content_check"},
+        {"text": "Prioritizes the payment integration work given the 3-sprint hard deadline and back-calculates required pace", "type": "content_check"},
+        {"text": "Addresses the 8 points of carry-over bugs and whether they should be included in the sprint commitment", "type": "content_check"},
+        {"text": "Proposes a specific sprint goal statement, not just a list of tasks", "type": "content_check"},
+        {"text": "References focus factor or capacity reduction method for calculating realistic throughput", "type": "content_check"},
+        {"text": "Warns against overcommitting and suggests what to defer (dashboard redesign or performance work) given reduced capacity", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "project-breakdown-dependency-mapping",
+      "prompt": "We're building a new B2B SaaS product for invoice management. The team is 12 engineers split into 3 squads: Platform (4 people — auth, infra, APIs), Product (5 people — core features, UI), and Data (3 people — analytics, reporting, integrations). The project scope includes: user authentication with SSO (SAML + OIDC), a multi-tenant invoice CRUD system, PDF generation and email delivery, a QuickBooks and Xero integration, a reporting dashboard with exportable CSV/Excel, and Stripe billing for our own SaaS subscriptions. We need to ship an MVP in 12 weeks. Break this project down into phases, map the dependencies across squads, identify the critical path, and flag where cross-team coordination will be needed. We're using GitHub Projects for tracking.",
+      "expected_output": "Should produce a phased breakdown (likely 3-4 phases), identify inter-squad dependencies (e.g., Product depends on Platform for auth and APIs), map the critical path through the highest-risk dependency chain, and recommend coordination ceremonies.",
+      "assertions": [
+        {"text": "Breaks the project into distinct phases with clear deliverables per phase, not just a flat task list", "type": "content_check"},
+        {"text": "Maps dependencies between the three squads, specifically identifying where Product blocks on Platform for auth and API contracts", "type": "content_check"},
+        {"text": "Identifies the critical path — the longest chain of dependent tasks that determines the 12-week feasibility", "type": "content_check"},
+        {"text": "Recommends cross-team coordination mechanisms such as API contract agreements, cross-squad syncs, or dependency boards", "type": "content_check"},
+        {"text": "Calls out the QuickBooks/Xero integration as a risk area due to third-party API dependency and suggests parallel work or early spike", "type": "content_check"},
+        {"text": "Provides effort estimates or sizing at the phase or epic level, not just task names", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "risk-assessment-migration-project",
+      "prompt": "Our company is migrating a monolithic Rails application (350K LOC, 8 years old, PostgreSQL 12, Redis, Sidekiq) to a microservices architecture using Go and Node.js on Kubernetes. We have 22 engineers, but only 5 have Go experience. The monolith serves 2,400 RPM at peak with 99.95% uptime SLA. The migration was approved with a 9-month timeline and we're 2 months in. So far we've extracted the authentication service and are starting on the order processing service, which is the most complex part of the system with 47 database tables. Management is asking for a risk assessment. Produce a comprehensive risk register for this migration project — what could go wrong, how likely is it, what's the impact, and what should we do about it?",
+      "expected_output": "Should produce a structured risk register with at least 5-7 risks covering technical risks (data consistency during migration, Go skill gap), operational risks (maintaining uptime SLA during cutover), organizational risks (timeline pressure, team burnout), and mitigation strategies for each.",
+      "assertions": [
+        {"text": "Produces a structured risk register with probability, impact, and severity ratings for each risk", "type": "content_check"},
+        {"text": "Identifies the Go skill gap (only 5 of 22 engineers) as a risk with mitigation such as training, pair programming, or hiring", "type": "content_check"},
+        {"text": "Flags the order processing service migration (47 tables) as a high-risk item due to data consistency and complexity", "type": "content_check"},
+        {"text": "Addresses the 99.95% uptime SLA risk during cutover and recommends a strangler fig pattern or parallel running approach", "type": "content_check"},
+        {"text": "Assesses timeline risk given only 2 months elapsed of 9 months with the hardest work still ahead", "type": "content_check"},
+        {"text": "Recommends concrete mitigations, not just risk identification — including specific patterns like feature flags, canary releases, or rollback strategies", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

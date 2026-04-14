@@ -1,0 +1,50 @@
+{
+  "skill_name": "fintech-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "multi-psp-payment-orchestration",
+      "prompt": "We're a Series B e-commerce marketplace processing $45M/month in GMV across 12 countries (US, Canada, UK, Germany, France, Netherlands, Spain, Italy, Brazil, Mexico, India, Australia). Currently we use Stripe exclusively but our authorization rate in Brazil is 62% and India is 58%, which is killing our conversion. We also had a 4-hour Stripe outage last quarter that cost us $180K in lost transactions. The team is 8 backend engineers (Go/PostgreSQL) and 2 payments specialists. We want to add regional PSPs (dLocal for LatAm, Razorpay for India, Adyen as a secondary global PSP) and build a payment orchestration layer with smart routing, automatic failover, and retry logic. We need to handle authorization, capture, refund, and partial refund flows across all PSPs with a unified API for our checkout team. We also need idempotency guarantees — a retry must never result in a double charge. How should we architect this payment orchestration layer? Should we build custom or use Primer/Spreedly? What does the routing logic look like? How do we handle webhook normalization from 4 different PSPs?",
+      "expected_output": "Should compare build vs buy for orchestration (Primer/Spreedly vs custom), design the routing and failover logic, address webhook normalization, and emphasize idempotency patterns for preventing double charges.",
+      "assertions": [
+        {"text": "Compares build-vs-buy for orchestration layer (Primer, Spreedly, Gr4vy vs custom) with tradeoffs for the $45M/month scale", "type": "content_check"},
+        {"text": "Designs smart routing logic based on geography, card type, amount, and authorization rate optimization", "type": "content_check"},
+        {"text": "Addresses PSP failover and retry logic with specific patterns (circuit breaker, cascading fallback)", "type": "content_check"},
+        {"text": "Covers idempotency key design to prevent double charges across retries and PSP failovers", "type": "content_check"},
+        {"text": "Discusses webhook normalization from multiple PSPs into a unified event model", "type": "content_check"},
+        {"text": "Addresses the unified API design that abstracts PSP differences for the checkout team", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "double-entry-ledger-neobank",
+      "prompt": "We're building a neobank (US market, awaiting state money transmitter licenses, partnering with a sponsor bank). We need to design our financial ledger from scratch. Requirements: support customer checking accounts, savings accounts, and a future lending product; handle ACH deposits/withdrawals, internal transfers between accounts, debit card transactions via Marqeta, and interest accrual on savings accounts. We need to process about 50,000 transactions/day initially, growing to 500,000/day in 18 months. Every cent must be accounted for — we'll be audited by our sponsor bank quarterly and by state regulators annually. The engineering team is 6 people with fintech experience. We're on PostgreSQL and considering whether to build a custom event-sourced ledger or use something like Formance Numary or TigerBeetle. Design the ledger architecture: chart of accounts structure, journal entry format, how to handle multi-currency (we may add international remittances), balance computation strategy (running balance vs computed), concurrency control for high-volume account operations, and how interest accrual entries work.",
+      "expected_output": "Should design a double-entry ledger with chart of accounts, journal entry model, balance computation strategy, concurrency control approach, and explain how interest accrual creates ledger entries. Should compare build-vs-buy for the ledger layer.",
+      "assertions": [
+        {"text": "Designs a chart of accounts with asset, liability, equity, revenue, and expense account types appropriate for a neobank", "type": "content_check"},
+        {"text": "Specifies journal entry data model with debit/credit entries that must balance (sum of debits equals sum of credits)", "type": "content_check"},
+        {"text": "Discusses balance computation strategy (running balance vs computed) with tradeoffs for concurrency and auditability", "type": "content_check"},
+        {"text": "Addresses concurrency control for high-volume account operations (optimistic locking, serializable isolation, or SELECT FOR UPDATE)", "type": "content_check"},
+        {"text": "Explains how interest accrual creates journal entries (debit interest expense, credit customer liability)", "type": "content_check"},
+        {"text": "Compares custom PostgreSQL ledger vs Formance vs TigerBeetle for the team's scale and requirements", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "pci-dss-compliance-architecture",
+      "prompt": "We're a SaaS platform that just acquired a company with a legacy payment system that stores raw credit card numbers in a PostgreSQL database (yes, really). They have about 120,000 stored cards and process 8,000 card transactions per day. We need to remediate this to achieve PCI DSS v4.0.1 compliance. Our current infrastructure is on AWS (EKS, RDS PostgreSQL, S3). We have 15 engineers total, with no one who has PCI compliance experience. We need to: (1) migrate all stored card data to a compliant tokenization solution, (2) redesign the payment flow so raw card data never touches our servers, (3) implement the network segmentation and access controls PCI requires, (4) set up the logging and monitoring PCI mandates, and (5) understand what SAQ level we should target and what a QSA assessment involves. Our goal is to go from 'storing raw PANs in a database' to 'PCI DSS v4.0.1 compliant' within 6 months. What's the architecture and migration plan?",
+      "expected_output": "Should outline a migration plan from raw PAN storage to tokenization, recommend reducing PCI scope via hosted payment fields, address network segmentation, logging requirements, and explain SAQ levels and the QSA assessment process.",
+      "assertions": [
+        {"text": "Recommends tokenization strategy (PSP tokenization via Stripe/Adyen, or dedicated vault like Basis Theory/VGS) to replace raw PAN storage", "type": "content_check"},
+        {"text": "Advises reducing PCI scope by using hosted payment fields or iframes so raw card data never touches their servers (SAQ A target)", "type": "content_check"},
+        {"text": "Addresses migration plan for the 120K existing stored cards to tokenized format", "type": "content_check"},
+        {"text": "Covers PCI DSS network segmentation requirements (CDE isolation, firewall rules, restricted access)", "type": "content_check"},
+        {"text": "Discusses PCI logging and monitoring requirements (audit trails, access logging, log retention, anomaly detection)", "type": "content_check"},
+        {"text": "Explains SAQ levels (A, A-EP, D) and recommends which one to target given their architecture, and mentions QSA assessment", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

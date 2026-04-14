@@ -1,0 +1,50 @@
+{
+  "skill_name": "ai-ml-engineer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "rag-pipeline-legal-documents",
+      "prompt": "We're building a legal document search system for a law firm with 2.3 million case documents (average 15 pages each). The team is 4 engineers with Python/TypeScript experience but no ML background. We're on AWS and have a $3,000/month budget for AI infrastructure. Users need to search by natural language queries like 'find cases where the landlord was liable for mold damage in California after 2018' and get back relevant excerpts with citations. Latency needs to be under 3 seconds for search results. We tried naive keyword search with Elasticsearch but relevance is poor for complex multi-concept queries. Design a RAG pipeline architecture for this system. What embedding model should we use, how should we chunk legal documents, what vector database fits our scale and budget, and how do we handle the retrieval and reranking stages? Also concerned about hallucination — we absolutely cannot have the system fabricate case citations that don't exist.",
+      "expected_output": "Should recommend a chunking strategy appropriate for legal documents (e.g., section-based or sliding window with overlap), suggest specific embedding models, recommend a vector database that fits the budget and scale, and address hallucination prevention with citation grounding techniques.",
+      "assertions": [
+        {"text": "Discusses chunking strategy with overlap or section-aware parsing for legal documents", "type": "content_check"},
+        {"text": "Recommends specific embedding models (e.g., text-embedding-3-large, BGE, E5, Cohere embed) with reasoning", "type": "content_check"},
+        {"text": "Recommends a vector database with cost/scale justification (e.g., pgvector, Qdrant, Pinecone, Weaviate)", "type": "content_check"},
+        {"text": "Addresses retrieval reranking stage (e.g., Cohere Rerank, cross-encoder, ColBERT)", "type": "content_check"},
+        {"text": "Addresses hallucination prevention with citation grounding or source attribution techniques", "type": "content_check"},
+        {"text": "Mentions latency considerations for the 3-second budget across embedding, retrieval, and generation", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "ml-model-deployment-fraud-detection",
+      "prompt": "Our fintech startup has a fraud detection model trained in PyTorch — a gradient-boosted ensemble combined with a small transformer for transaction sequence analysis. The model takes about 200ms for a single inference on a GPU and we need to bring that down to under 50ms at p99 because it sits in the critical path of payment authorization. We're processing about 800 transactions per second at peak with expected growth to 5,000 TPS within 12 months. Currently the model runs on a single g5.xlarge EC2 instance and we're seeing timeouts during traffic spikes. Team is 3 ML engineers and 5 backend engineers. We use Kubernetes (EKS) and have experience with Docker but have never set up a proper model serving infrastructure. What's the right serving architecture? Should we use Triton, vLLM, BentoML, Ray Serve, or something else? How do we handle model versioning, A/B testing between model versions, and graceful rollback if a new model increases false positives?",
+      "expected_output": "Should recommend a model serving framework appropriate for the latency and throughput requirements, discuss model optimization techniques (quantization, ONNX, TensorRT), and address model versioning, canary deployment, and rollback strategies.",
+      "assertions": [
+        {"text": "Recommends a specific serving framework with justification (Triton for multi-model, Ray Serve for flexibility, BentoML for simplicity)", "type": "content_check"},
+        {"text": "Discusses model optimization techniques to reduce latency (quantization, ONNX conversion, TensorRT, batching)", "type": "content_check"},
+        {"text": "Addresses horizontal scaling and autoscaling for the 800-to-5000 TPS growth trajectory", "type": "content_check"},
+        {"text": "Covers model versioning and A/B testing or canary deployment between model versions", "type": "content_check"},
+        {"text": "Discusses rollback strategy and monitoring for false positive rate regression", "type": "content_check"},
+        {"text": "Mentions GPU resource management or multi-model serving on shared GPU infrastructure", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "llm-integration-customer-support-product",
+      "prompt": "We're adding AI-powered features to our B2B SaaS customer support platform (think Zendesk competitor). We have 1,200 enterprise customers generating about 50,000 support tickets per day across all tenants. We want three LLM-powered features: (1) automatic ticket classification and routing to the right team, (2) suggested reply drafts that agents can edit before sending, and (3) a knowledge base search that answers questions using the customer's own help docs. Each tenant has their own knowledge base (ranging from 50 to 10,000 articles). We're a 40-person engineering team with 2 people who have ML experience. Our backend is Node.js/TypeScript on AWS. We're worried about cost — at 50K tickets/day with multiple LLM calls per ticket, API costs could explode. We also need tenant data isolation — Customer A's data must never leak into Customer B's responses. What's the architecture? Which models for which tasks? How do we keep costs under $15K/month for LLM APIs?",
+      "expected_output": "Should recommend different model tiers for different tasks (smaller/cheaper for classification, larger for generation), address multi-tenant RAG isolation, and provide concrete cost optimization strategies like caching, model routing, and batching.",
+      "assertions": [
+        {"text": "Recommends different models for different tasks (e.g., fine-tuned smaller model or Claude Haiku for classification, larger model for draft generation)", "type": "content_check"},
+        {"text": "Addresses multi-tenant data isolation in the RAG architecture (separate vector namespaces, metadata filtering, or per-tenant indexes)", "type": "content_check"},
+        {"text": "Provides cost optimization strategies (semantic caching, prompt caching, model routing, batching, smaller models where sufficient)", "type": "content_check"},
+        {"text": "Discusses the knowledge base RAG architecture with per-tenant document isolation", "type": "content_check"},
+        {"text": "Addresses streaming responses for the suggested reply feature for good UX", "type": "content_check"},
+        {"text": "Mentions evaluation strategy or quality metrics for classification accuracy and reply quality", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}
