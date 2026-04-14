@@ -348,7 +348,7 @@ These are brought in when building specific types of products. They complement t
 | `fintech-architect` | `fintech-architect/` | NEW | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
 | `saas-architect` | `saas-architect/` | DONE | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
 | `real-time-architect` | `real-time-architect/` | DONE | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
-| `healthcare-architect` | `healthcare-architect/` | NEW | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
+| `healthcare-architect` | `healthcare-architect/` | DONE | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
 
 ---
 
@@ -383,7 +383,7 @@ These are brought in when building specific types of products. They complement t
 | 17 | `fintech-architect` | DONE | P2 |
 | 18 | `saas-architect` | DONE | P2 |
 | 19 | `real-time-architect` | DONE | P2 |
-| 20 | `healthcare-architect` | NEW | P3 |
+| 20 | `healthcare-architect` | DONE | P3 |
 
 ### Totals
 
@@ -442,7 +442,7 @@ Support functions and domain-specific expertise.
 
 | Session | Task | Deliverable |
 |---------|------|-------------|
-| 19 | Create `healthcare-architect` domain skill | SKILL.md + reference files |
+| 19 | ~~Create `healthcare-architect` domain skill~~ | DONE |
 | 20 | Groom `social-platform-architect` (align with new structure) | Updated SKILL.md + references |
 | 21 | Create `orchestrator` master skill (routing logic across all teams) | SKILL.md + routing rules + team registry |
 | 22 | Integration testing — verify cross-references and routing across all skills | Updated cross-references in all skills |
