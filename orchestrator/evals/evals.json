@@ -72,6 +72,91 @@
         {"name": "identifies-dev-teams", "type": "semantic", "description": "Should identify backend + database + frontend teams"},
         {"name": "recognizes-existing-system", "type": "semantic", "description": "Should recognize this is adding to an existing system"}
       ]
+    },
+    {
+      "id": 7,
+      "prompt": "We need to add Stripe subscription billing to our SaaS platform. Users can upgrade/downgrade plans, we need webhook handling for payment events, and usage-based metering for API calls. Our stack is Next.js frontend, Go backend, PostgreSQL database. Team of 12 engineers.",
+      "expected_output": "Should classify as Tier 3 or 4. Should create a plan artifact with phase gates. Should mandate security-engineer (payment + API changes) and fintech-architect (financial flows). Should identify saas-architect for billing patterns. Plan should start at Design gate, not jump to implementation.",
+      "files": [],
+      "assertions": [
+        {"name": "creates-plan-artifact", "type": "semantic", "description": "Should create a plan artifact (.etyb/plans/ or Claude plan annotation) with phase gates"},
+        {"name": "mandates-security-engineer", "type": "contains_keyword", "keywords": ["security-engineer"]},
+        {"name": "mandates-fintech-architect", "type": "contains_keyword", "keywords": ["fintech-architect"]},
+        {"name": "identifies-saas-architect", "type": "contains_keyword", "keywords": ["saas-architect"]},
+        {"name": "starts-at-design-gate", "type": "semantic", "description": "Should enter the Design gate first, not jump to implementation"}
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Add a password reset feature to our app. It needs to send email verification links that expire after 24 hours. We have an Express.js backend with Passport.js auth and a React frontend.",
+      "expected_output": "Should classify as Tier 3. Should mandate security-engineer because it touches auth (login, session, tokens). Should NOT skip security review even though it seems like a simple feature.",
+      "files": [],
+      "assertions": [
+        {"name": "mandates-security-engineer", "type": "contains_keyword", "keywords": ["security-engineer"]},
+        {"name": "identifies-auth-sensitivity", "type": "semantic", "description": "Should recognize this touches auth and mandate security review at Design and Verify gates"},
+        {"name": "creates-plan", "type": "semantic", "description": "Should create a plan artifact for this Tier 3 request"},
+        {"name": "does-not-skip-security", "type": "semantic", "description": "Should NOT treat this as a simple feature that bypasses security review"}
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "I'm in plan mode working on a new user onboarding flow. The plan file is at .claude/plans/user-onboarding.md. I need to figure out the database schema, API endpoints, and frontend components. We're a growth-stage startup with 15 engineers.",
+      "expected_output": "Should detect Claude plan mode and annotate the existing plan rather than creating a separate .etyb/plans/ file. Should add gate status, expert assignments, and verification checkpoints to the Claude plan.",
+      "files": [],
+      "assertions": [
+        {"name": "detects-plan-mode", "type": "semantic", "description": "Should detect that the user is in Claude plan mode"},
+        {"name": "annotates-claude-plan", "type": "semantic", "description": "Should annotate the existing Claude plan rather than creating a .etyb/plans/ file"},
+        {"name": "adds-gate-status", "type": "semantic", "description": "Should add gate status and expert assignments to the plan"},
+        {"name": "growth-scale-calibration", "type": "semantic", "description": "Should calibrate to growth scale (15 engineers)"}
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "We've been trying to fix a flaky integration test for 2 days. The test for the order creation endpoint passes locally but fails in CI about 40% of the time. We've tried adding retries, increasing timeouts, and resetting the database between runs — nothing works.",
+      "expected_output": "Should activate the debugging protocol. Should recognize this as a 3+ failure scenario requiring escalation. Should follow the debugging loop: reproduce, hypothesize, test one variable, verify. Should NOT suggest more retries or timeouts.",
+      "files": [],
+      "assertions": [
+        {"name": "activates-debugging-protocol", "type": "semantic", "description": "Should activate the debugging protocol for persistent test failures"},
+        {"name": "recognizes-escalation", "type": "semantic", "description": "Should recognize multiple failed attempts and apply the 3-failure escalation rule"},
+        {"name": "hypothesis-driven", "type": "semantic", "description": "Should follow hypothesis-driven debugging, not shotgun debugging"},
+        {"name": "does-not-suggest-retries", "type": "semantic", "description": "Should NOT suggest retries or timeouts (already tried, treats symptoms not causes)"}
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "We're building a patient portal for a hospital. We need to display lab results, allow appointment scheduling, and enable secure messaging between patients and doctors. The system needs to integrate with the hospital's Epic EHR system via HL7 FHIR APIs. Budget is tight — we're 4 engineers.",
+      "expected_output": "Should classify as Tier 4 and create a full plan artifact. Should mandate healthcare-architect (healthcare data, HIPAA) AND security-engineer (healthcare + PII). Should detect that despite being a small team, compliance requirements demand full process rigor for healthcare data. Should NOT skip gates for the auth/data/compliance aspects even at startup scale.",
+      "files": [],
+      "assertions": [
+        {"name": "mandates-healthcare-architect", "type": "contains_keyword", "keywords": ["healthcare-architect"]},
+        {"name": "mandates-security-engineer", "type": "contains_keyword", "keywords": ["security-engineer"]},
+        {"name": "creates-full-plan", "type": "semantic", "description": "Should create a full plan artifact with all phase gates"},
+        {"name": "hipaa-compliance-awareness", "type": "semantic", "description": "Should recognize HIPAA requirements and not relax security gates despite small team size"},
+        {"name": "startup-with-compliance", "type": "semantic", "description": "Should calibrate to startup scale but maintain full process rigor for compliance-sensitive work"}
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "We just finished the Design gate for our new API. The system-architect documented the architecture and the security-engineer completed the threat model. Now the user wants to jump straight to implementation and skip the Plan gate because 'we already know what to build'.",
+      "expected_output": "Should enforce the Plan gate and NOT allow skipping it. Should explain that the Plan gate is where task breakdown, test strategy (by qa-engineer), and risk register happen. Should offer scale-appropriate alternatives but not skip the gate entirely.",
+      "files": [],
+      "assertions": [
+        {"name": "blocks-gate-skip", "type": "semantic", "description": "Should NOT allow skipping the Plan gate"},
+        {"name": "explains-plan-gate-value", "type": "semantic", "description": "Should explain what the Plan gate provides (task breakdown, test strategy, risk register)"},
+        {"name": "mentions-qa-engineer", "type": "contains_keyword", "keywords": ["qa-engineer"]},
+        {"name": "offers-alternatives", "type": "semantic", "description": "Should offer scale-appropriate alternatives (e.g., lightweight plan) rather than a hard no"}
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Fix the typo in our README — it says 'Auhentication' instead of 'Authentication'.",
+      "expected_output": "Should classify as Tier 0 — trivial. Should just fix it directly with zero process overhead. No plan, no gates, no expert mandating, no routing to specialists.",
+      "files": [],
+      "assertions": [
+        {"name": "classifies-tier-0", "type": "semantic", "description": "Should classify as Tier 0 trivial request"},
+        {"name": "no-process-overhead", "type": "semantic", "description": "Should NOT create a plan, invoke gates, or route to specialists"},
+        {"name": "just-fixes-it", "type": "semantic", "description": "Should just fix the typo directly"}
+      ]
     }
   ]
 }
