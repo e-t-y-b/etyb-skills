@@ -346,7 +346,7 @@ These are brought in when building specific types of products. They complement t
 | `social-platform-architect` | `social-platform-architect/` | ✅ EXISTS | Feed systems, fan-out, social graphs, real-time delivery, content ranking |
 | `e-commerce-architect` | `e-commerce-architect/` | NEW | Product catalogs, cart/checkout, payments, inventory, order management |
 | `fintech-architect` | `fintech-architect/` | NEW | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
-| `saas-architect` | `saas-architect/` | NEW | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
+| `saas-architect` | `saas-architect/` | DONE | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
 | `real-time-architect` | `real-time-architect/` | NEW | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
 | `healthcare-architect` | `healthcare-architect/` | NEW | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
 
@@ -381,7 +381,7 @@ These are brought in when building specific types of products. They complement t
 | 15 | `social-platform-architect` | ✅ EXISTS | Done (groom later) |
 | 16 | `e-commerce-architect` | NEW | P2 |
 | 17 | `fintech-architect` | DONE | P2 |
-| 18 | `saas-architect` | NEW | P2 |
+| 18 | `saas-architect` | DONE | P2 |
 | 19 | `real-time-architect` | NEW | P2 |
 | 20 | `healthcare-architect` | NEW | P3 |
 
@@ -435,7 +435,7 @@ Support functions and domain-specific expertise.
 | 14 | ~~Create `project-planner` master skill + all 3 sub-skills~~ | DONE |
 | 15 | Create `e-commerce-architect` domain skill | SKILL.md + reference files |
 | 16 | ~~Create `fintech-architect` domain skill~~ | DONE |
-| 17 | Create `saas-architect` domain skill | SKILL.md + reference files |
+| 17 | ~~Create `saas-architect` domain skill~~ | DONE |
 | 18 | Create `real-time-architect` domain skill | SKILL.md + reference files |
 
 ### Wave 4 — Orchestrator & Integration (P0 but built last)
