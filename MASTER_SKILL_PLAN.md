@@ -372,7 +372,7 @@ These are brought in when building specific types of products. They complement t
 | 11 | `ai-ml-engineer` | 5 sub-skills | DONE | P1 |
 | 12 | `technical-writer` | 4 sub-skills | NEW | P2 |
 | 13 | `project-planner` | 3 sub-skills | NEW | P2 |
-| 14 | `code-reviewer` | 4 sub-skills | NEW | P1 |
+| 14 | `code-reviewer` | 4 sub-skills | DONE | P1 |
 
 ### Domain-Specific Teams (6 master skills)
 
@@ -423,7 +423,7 @@ These extend coverage across the full SDLC and add specialized development capab
 | 9 | Groom `backend-architect` + add 4 new sub-skills | Updated SKILL.md + 4 new reference files |
 | 10 | ~~Create `mobile-architect` master skill + all 5 sub-skills~~ | DONE |
 | 11 | ~~Create `ai-ml-engineer` master skill + all 5 sub-skills~~ | DONE |
-| 12 | Create `code-reviewer` master skill + all 4 sub-skills | SKILL.md + 4 reference files |
+| 12 | ~~Create `code-reviewer` master skill + all 4 sub-skills~~ | DONE |
 
 ### Wave 3 — Support & Domain (P2 Teams)
 
