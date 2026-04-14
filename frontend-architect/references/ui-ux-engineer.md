@@ -1,6 +1,6 @@
 # UI/UX Engineer — Deep Reference
 
-**Always use `WebSearch` to verify tool versions, design token specs, and component library status. Design tooling evolves rapidly.**
+**Always use `WebSearch` to verify tool versions, design token specs, and component library status. Design tooling evolves rapidly. Last verified: April 2026.**
 
 ## Table of Contents
 1. [Design Systems](#1-design-systems)
@@ -93,7 +93,7 @@ Tier 3: Component Tokens (specific)
 - Component tokens allow fine-grained overrides
 
 ### W3C Design Tokens Specification (v2025.10 — First Stable)
-- First stable version published **October 28, 2025** by the Design Tokens Community Group
+- First stable version published **October 28, 2025** by the Design Tokens Community Group. No new spec version since, but tooling adoption is accelerating.
 - JSON-based: `{ "color": { "primary": { "$value": "#3b82f6", "$type": "color" } } }`
 - All spec properties use `$` prefix: `$value`, `$type`, `$description`, `$extensions`, `$deprecated`
 - Token types: color (CSS Color 4 spaces including P3/Oklch), dimension, fontFamily, fontWeight, duration, cubicBezier, number, strokeStyle, border, transition, shadow, gradient, typography
@@ -115,11 +115,12 @@ Tier 3: Component Tokens (specific)
 | Opacity | Disabled, overlay | `--opacity-*` |
 | Z-index | Layers (dropdown, modal, toast) | `--z-*` |
 
-### Style Dictionary
+### Style Dictionary (Latest: 5.4.0)
 - Build system for design tokens
-- Input: JSON/YAML token definitions
+- Input: JSON/YAML token definitions (supports DTCG v2025.10 dimension token type object values)
 - Output: CSS custom properties, SCSS, JS modules, iOS, Android, etc.
 - Transform pipeline: name format, value resolution, platform output
+- All built-in transforms now support DTCG format natively
 - **Use when**: Need multi-platform token output (web + mobile + design tool)
 
 ### Tokens Studio (Figma Plugin)
@@ -127,6 +128,7 @@ Tier 3: Component Tokens (specific)
 - Git integration (push token changes as PRs)
 - Supports W3C Design Tokens format
 - Theme switching in Figma tied to code tokens
+- **2026 update**: Variable Scoping — define where variables apply in Figma (strokes, fills, text). Code Syntax support for developer-friendly token references.
 
 ---
 
@@ -138,7 +140,7 @@ Build accessible behavior without styling, then layer design on top:
 
 | Library | Framework | Components | Philosophy |
 |---------|-----------|-----------|------------|
-| **Radix UI** | React | 30+ primitives | Unstyled, accessible, composable |
+| **Radix UI** (unified `radix-ui` package since Feb 2026) | React | 30+ primitives | Unstyled, accessible, composable |
 | **React Aria** (Adobe) | React | 40+ hooks/components | Maximum a11y compliance, i18n |
 | **Headless UI** | React, Vue | 10+ components | Tailwind Labs, simpler API |
 | **Bits UI** | Svelte | 30+ primitives | Radix port for Svelte |
@@ -194,12 +196,14 @@ const button = cva('inline-flex items-center rounded font-medium', {
 
 ## 4. Storybook
 
-### Storybook 10 (Current)
+### Storybook 10 (Current — Latest: 10.3.3)
+- **ESM-only distribution**: Breaking maintenance release focused on modern ESM package distribution
 - **CSF Factories**: Next evolution of Component Story Format — `preview.meta()` + `meta.story()` for full type safety
 - **Visual testing**: Chromatic integration for pixel-perfect regression testing
 - **Vitest addon** (`@storybook/addon-vitest`): Run component tests via Vitest, calculate project coverage
 - **Interaction testing**: Play functions + `sb.mock` for simplified mocking
 - **MCP integration**: `@storybook/addon-mcp` exposes component knowledge to AI agents
+- **Accessibility improvements** (10.3+): Substantially improved ARIA semantics, keyboard navigation, focus management, color contrast, high-contrast support, landmark navigation, and motion reduction
 - **Docs mode**: Auto-generated documentation from stories + JSDoc + MDX
 - **Controls**: Auto-generated knobs from component props
 - **First-class Vite support**: Fast builds with Vite builder
@@ -285,24 +289,27 @@ export const WithInteraction = meta.story({
 - **Anima**: Generate code from Figma with design-to-code accuracy
 
 ### Figma MCP / AI Integration
-- Use Figma API/MCP to read design data programmatically
+- **Figma MCP Server** (2026): Enables two-way UI-to-code workflows. AI agents (Claude Code, Cursor, etc.) can read Figma libraries, inspect components, and write directly to Figma files.
 - AI tools can parse Figma frames and generate component code
 - Style extraction: colors, fonts, spacing from Figma designs
 - **Workflow**: Figma frame → AI reads design specs → generates component matching design
+- **2026 AI tools**: Expand, Erase, Isolate, Vectorize now available in FigJam, Slides, and Buzz (beta)
+- **Native Git integration**: Designers can branch, commit, and merge Figma files directly to GitHub/GitLab. PRs show visual diffs alongside code diffs.
+- **AI-generated design tokens** that write to production repositories
 
 ---
 
 ## 6. CSS Architecture
 
-### Modern CSS Features (2025)
+### Modern CSS Features (2026)
 ```css
-/* Container queries — component-level responsiveness */
+/* Container queries — 95%+ global support, Baseline since 2023 */
 .card-container { container-type: inline-size; }
 @container (min-width: 400px) {
   .card { display: grid; grid-template-columns: 1fr 2fr; }
 }
 
-/* CSS nesting — native, no preprocessor needed */
+/* CSS nesting — Baseline Widely Available June 2026 */
 .card {
   padding: 1rem;
   & .title { font-weight: bold; }
@@ -331,15 +338,40 @@ export const WithInteraction = meta.story({
 /* Scroll-driven animations */
 @keyframes reveal { from { opacity: 0; } to { opacity: 1; } }
 .card { animation: reveal linear; animation-timeline: view(); }
+
+/* @starting-style — clean enter animations without flashes */
+dialog {
+  opacity: 1;
+  transition: opacity 0.3s;
+  @starting-style { opacity: 0; }
+}
+
+/* CSS Anchor Positioning — tooltips, popovers without JS */
+.tooltip {
+  position: absolute;
+  position-anchor: --trigger;
+  top: anchor(bottom);
+  left: anchor(center);
+}
+
+/* Popover attribute — native popovers (Chrome 125+, Edge 125+, Safari 26+, Firefox 147+) */
+<button popovertarget="menu">Open</button>
+<div id="menu" popover>Menu content</div>
+
+/* Scroll State Queries — detect sticky, snapped, scrollable states in CSS */
+@container scroll-state(stuck: top) {
+  .header { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+}
 ```
 
-### Tailwind CSS v4
+### Tailwind CSS v4 (Latest: 4.2.0)
 - CSS-first configuration (no `tailwind.config.js` needed)
 - Lightning CSS engine (faster builds)
 - `@theme` directive for custom values
 - Automatic content detection
 - Container queries: `@container`, `@sm:`, `@lg:`
 - 3D transforms: `rotate-x-45`, `perspective-500`
+- **v4.2.0** (Feb 2026): `@tailwindcss/webpack` package, four new default color palettes, expanded logical property utilities, faster recompilation
 - **Migration**: `npx @tailwindcss/upgrade` from v3
 
 ### CSS Custom Properties for Theming
@@ -380,13 +412,13 @@ export const WithInteraction = meta.story({
 
 | Library | Framework | Best For |
 |---------|-----------|----------|
-| **Motion** (formerly Framer Motion) | React, Vue | Spring physics, gestures, layout animations, scroll |
-| **GSAP** (now 100% free, acquired by Webflow) | Any | Advanced timelines, ScrollTrigger, SVG morphing, scroll-driven |
+| **Motion** v12 (formerly Framer Motion) | React, Vue | Spring physics, gestures, layout animations, scroll |
+| **GSAP** (100% free since Webflow acquisition Oct 2024) | Any | Advanced timelines, ScrollTrigger, SVG morphing, scroll-driven |
 | **Svelte transitions** | Svelte | Built-in, zero-config transitions |
 | **Angular Animations** | Angular | Component state transitions |
 | **Auto Animate** | Any | Drop-in list animations |
 
-### View Transitions API
+### View Transitions API (Full Cross-Browser Support)
 ```typescript
 // Same-document transition
 document.startViewTransition(() => {
@@ -401,8 +433,9 @@ document.startViewTransition(() => {
 .hero-image { view-transition-name: hero; }
 ```
 - Smooth page transitions without SPA overhead
-- Cross-document transitions (MPA)
-- Framework support: Next.js (experimental), SvelteKit, Astro
+- **Same-document transitions**: Chrome 111+, Edge 111+, Firefox 133+, Safari 18+ (Baseline Newly Available Oct 2025)
+- **Cross-document transitions (MPA)**: Chrome 126+, Edge 126+, Firefox, Safari — all major engines now support both SPA and MPA transitions
+- Framework support: Next.js, SvelteKit, Astro, Nuxt
 
 ### Scroll-Driven Animations (CSS)
 ```css
@@ -720,7 +753,7 @@ Every design system component should meet WCAG 2.2 AA by default:
 | Design tokens | CSS custom properties (3-tier) | Multi-platform → Style Dictionary |
 | Component approach | Headless primitives + Tailwind | Internal tools → full library (MUI) |
 | Variant management | CVA (class-variance-authority) | Non-Tailwind → CSS custom properties |
-| Documentation | Storybook 8 | Small team → inline docs |
+| Documentation | Storybook 10 | Small team → inline docs |
 | Visual testing | Chromatic | Self-hosted → Playwright screenshots |
 | Figma sync | Tokens Studio → Git | Simple → manual token maintenance |
 | Dark mode | Token-based (data-theme attribute) | Simple app → Tailwind dark: classes |

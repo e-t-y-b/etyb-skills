@@ -1,6 +1,6 @@
 # Svelte Stack — Deep Reference
 
-**Always use `WebSearch` to verify version numbers and features. Svelte 5 introduced major changes — verify runes API stability.**
+**Always use `WebSearch` to verify version numbers and features. Svelte 5 runes are stable. Svelte 6 is in planning. Last verified: April 2026.**
 
 ## Table of Contents
 1. [Svelte 5 (Current)](#1-svelte-5-current)
@@ -254,7 +254,7 @@ export const ssr = false
 export const prerender = 'auto'  // prerender if no dynamic data
 ```
 
-### Async SSR and Boundaries (Experimental)
+### Error Boundaries (Stable) and Async SSR (Experimental)
 ```svelte
 <!-- svelte:boundary — error and loading boundaries -->
 <svelte:boundary>
@@ -268,10 +268,9 @@ export const prerender = 'auto'  // prerender if no dynamic data
   {/snippet}
 </svelte:boundary>
 ```
-- **Async SSR** (experimental, Svelte 5.39.3+): Allows `await` anywhere in components
-- `svelte:boundary` provides error and async boundaries with `pending` snippets
-- Opt-in via `experimental.async` in SvelteKit config
-- **Will be stable in Svelte 6**
+- **`svelte:boundary`** is **stable and production-ready** — error boundaries now work on both client and server (server-side error boundaries added in SvelteKit 2.57+)
+- **Async SSR** (experimental): Allows `await` anywhere in components. Opt-in via `experimental.async` in SvelteKit config. Expected stable in **Svelte 6**.
+- **Svelte 6**: In planning (GitHub milestone exists). Will stabilize async SSR and further mature the runes system. No release date confirmed yet.
 
 ### API Routes
 ```typescript
@@ -402,14 +401,15 @@ URL state → SvelteKit $page.url.searchParams
 
 ## 5. Component Libraries
 
-### shadcn-svelte — Recommended
+### shadcn-svelte (Latest: 1.2.5) — Recommended
 - Port of shadcn/ui for Svelte — copy-paste components
-- Built on Bits UI (headless) + Tailwind CSS
+- Built on Bits UI (headless) + Tailwind CSS v4
+- Requires Svelte 5 + Tailwind v4
 - Full ownership and customization
 - CLI: `npx shadcn-svelte@latest add button`
 - Active development, growing ecosystem
 
-### Bits UI (Headless)
+### Bits UI (Latest: 2.17.3) — Headless
 - Headless, accessible component primitives for Svelte
 - Foundation for shadcn-svelte
 - Components: Dialog, Dropdown, Tooltip, Tabs, Select, etc.
@@ -436,8 +436,9 @@ URL state → SvelteKit $page.url.searchParams
 
 ## 6. Forms and Validation
 
-### Superforms — Recommended for SvelteKit
-- SvelteKit-native form handling with Zod/Valibot validation
+### Superforms (Latest: 2.30.1) — Recommended for SvelteKit
+- SvelteKit-native form handling with Zod/Valibot/TypeBox validation
+- **Zod 4 adapter** with discriminated union support
 - Progressive enhancement (works without JS)
 - Client + server validation from single schema
 - Flash messages, rate limiting, file uploads
@@ -573,8 +574,9 @@ Svelte's core performance advantage is that it compiles components to optimized 
 
 ## 9. Build Tools
 
-### Vite — Default
-- SvelteKit is built on Vite
+### Vite 8 (March 2026) — Default
+- SvelteKit is built on Vite (Vite 8 support since SvelteKit 2.53.0)
+- **Vite 8** powered by Rolldown (Rust-based bundler) — 10-30x faster builds
 - `@sveltejs/vite-plugin-svelte` for standalone Svelte projects
 - Instant HMR, preserving component state
 
@@ -588,10 +590,11 @@ Svelte's core performance advantage is that it compiles components to optimized 
 | `@sveltejs/adapter-netlify` | Netlify |
 | `@sveltejs/adapter-static` | Static site / SPA |
 
-### sv CLI
+### sv CLI (v0.12.6)
 - `npx sv create my-app` — scaffold new SvelteKit project
-- `npx sv add` — add integrations (Tailwind, Drizzle, Lucia, Paraglide, etc.)
+- `npx sv add` — add integrations (Tailwind, Drizzle, Better Auth, Paraglide, Cloudflare Workers, etc.)
 - `npx sv migrate svelte-5` — migrate Svelte 4 → 5
+- Supports Svelte MCP via OpenCode configuration
 
 ---
 
@@ -726,14 +729,15 @@ export async function POST({ request }) {
 - **Lucia** — **DEPRECATED** (March 2025). Now an educational resource for building auth from scratch, no longer an installable package.
 - **Auth.js (SvelteKit)**: `@auth/sveltekit` — 80+ OAuth providers. **Recommended replacement** for OAuth/social login.
 - **Arctic**: Lightweight OAuth client library supporting 50+ providers. Recommended by Lucia's creator for OAuth flows.
-- **Better Auth**: Rising alternative in the Svelte ecosystem.
+- **Better Auth** (18K+ GitHub stars): Now an **official SvelteKit addon** via `npx sv add`. Rising fast with multiple releases per week. Supports email/password, social OAuth, MFA, organizations, and more. Growing alternative to Auth.js.
 - **Supabase Auth**: Supabase client for SvelteKit
 
 ### Internationalization
-- **Paraglide**: Compile-time i18n — zero runtime overhead
+- **Paraglide 2.0**: Compile-time i18n — zero runtime overhead, up to 70% smaller i18n bundles vs runtime libraries
   - Fully typed translations
   - Tree-shakeable (only ships used translations)
-  - SvelteKit integration via `@inlang/paraglide-sveltekit`
+  - SvelteKit's official i18n integration
+  - v2.0 is a major step forward with improved developer experience
 - **svelte-i18n**: Runtime i18n library
 - **typesafe-i18n**: Lightweight, type-safe i18n
 
@@ -754,21 +758,21 @@ export async function POST({ request }) {
 
 ---
 
-## Recommended Svelte Stack (2025)
+## Recommended Svelte Stack (2026)
 
 | Layer | Recommended | Alternative |
 |-------|------------|-------------|
-| Framework | SvelteKit | Svelte + Vite (SPA only) |
+| Framework | SvelteKit 2.57+ | Svelte 5 + Vite 8 (SPA only) |
 | Routing | SvelteKit file-based | — |
 | Server data | Load functions (+page.server.ts) | API routes (+server.ts) |
 | Client state | Runes ($state, $derived) | Svelte stores (svelte/store) |
 | Styling | Tailwind CSS v4 | Scoped styles, UnoCSS |
-| Components | shadcn-svelte (Bits UI + Tailwind) | Skeleton UI, Melt UI (headless) |
-| Forms | Superforms + Zod | SvelteKit form actions (simple) |
+| Components | shadcn-svelte 1.2+ (Bits UI + Tailwind) | Skeleton UI, Melt UI (headless) |
+| Forms | Superforms 2.30+ + Zod | SvelteKit form actions (simple) |
 | Testing | Vitest + Svelte Testing Library + Playwright | — |
-| Build | Vite + SvelteKit adapters | — |
-| Auth | Auth.js (`@auth/sveltekit`) | Arctic, Better Auth, Supabase Auth |
-| i18n | Paraglide | svelte-i18n |
+| Build | Vite 8 (Rolldown) + SvelteKit adapters | — |
+| Auth | Auth.js (`@auth/sveltekit`) | Better Auth (official addon), Arctic, Supabase Auth |
+| i18n | Paraglide 2.0 | svelte-i18n |
 | Monitoring | Sentry + web-vitals | Vercel Analytics |
 
 ### When to Choose Svelte/SvelteKit

@@ -1,6 +1,6 @@
 # Web Performance — Deep Reference
 
-**Always use `WebSearch` to verify Core Web Vitals thresholds, tool versions, and browser support. Performance standards evolve with browser updates and Google ranking changes.**
+**Always use `WebSearch` to verify Core Web Vitals thresholds, tool versions, and browser support. Performance standards evolve with browser updates and Google ranking changes. Last verified: April 2026.**
 
 ## Table of Contents
 1. [Core Web Vitals (2025)](#1-core-web-vitals-2025)
@@ -19,7 +19,7 @@
 
 ---
 
-## 1. Core Web Vitals (2025)
+## 1. Core Web Vitals (2026)
 
 ### The Three Metrics
 
@@ -186,6 +186,7 @@ const handleChartClick = async () => {
 ### Breaking Up Long Tasks
 ```typescript
 // scheduler.yield() — give browser a chance to process events
+// Supported: Chrome 129+, Edge 129+, Firefox 142+. Safari: not yet.
 async function processLargeList(items) {
   for (let i = 0; i < items.length; i++) {
     processItem(items[i])
@@ -197,6 +198,9 @@ async function processLargeList(items) {
 
 // Fallback for browsers without scheduler.yield()
 function yieldToMain() {
+  if ('scheduler' in globalThis && 'yield' in scheduler) {
+    return scheduler.yield()
+  }
   return new Promise(resolve => setTimeout(resolve, 0))
 }
 
@@ -234,6 +238,14 @@ worker.postMessage({ canvas: offscreen }, [offscreen])
 ```
 - Move canvas/WebGL rendering to Web Worker
 - Main thread stays responsive during complex rendering
+
+### Long Animation Frames API (LoAF)
+- Successor to Long Tasks API with much richer attribution data
+- Reports frames taking > 50ms with script attribution, source URLs, and timing breakdowns
+- **Chrome 123+** only (not yet in Firefox/Safari)
+- Provides `PerformanceLongAnimationFrameTiming` entries with `scripts` array showing exactly which scripts caused the long frame
+- Essential for diagnosing INP issues in production
+- Use with `PerformanceObserver` to capture and send to analytics
 
 ### requestAnimationFrame
 ```typescript
@@ -463,7 +475,8 @@ Content-Type: text/html
 - Browser prerenders or prefetches pages before user navigates
 - Instant page transitions for predicted navigations
 - More powerful than `<link rel="prefetch">` — prerender includes full page render
-- Supported in Chrome, adoption growing
+- Supported in Chrome 122+, Edge. Growing adoption in frameworks (Next.js, Astro).
+- **Document rules** (`where` syntax) allow matching patterns without listing every URL
 
 ---
 
@@ -610,9 +623,9 @@ onINP((metric) => {
 | Tool | Type | Best For |
 |------|------|---------|
 | **Google Search Console** | Field | CWV by page, indexing issues |
-| **CrUX API / CrUX Vis** | Field | Historical CWV trends (CrUX Dashboard deprecated Nov 2025) |
+| **CrUX API / CrUX Vis** | Field | Historical CWV trends (CrUX Dashboard deprecated Nov 2025, use CrUX Vis or API) |
 | **PageSpeed Insights** | Lab + Field | Quick URL analysis |
-| **Lighthouse CI** | Lab | CI/CD performance gates |
+| **Lighthouse 13** (Latest: 13.1.0) | Lab | CI/CD performance gates. Requires Node 22 LTS+. |
 | **web-vitals** | Field (RUM) | Custom analytics integration |
 | **SpeedCurve** | Lab + Field | Performance monitoring platform |
 | **Calibre** | Lab + Field | Performance monitoring + budgets |
@@ -663,7 +676,7 @@ onINP((metric) => {
 - **`v-once`**: Render once, never update
 - **`defineAsyncComponent()`**: Component-level code splitting
 - **KeepAlive**: Cache component instances for tab interfaces
-- **Vapor mode** (experimental): Direct DOM operations, no VDOM
+- **Vapor mode** (Vue 3.6 beta): Direct DOM operations, no VDOM. Feature-complete but in beta — expected stable Q3-Q4 2026.
 
 ### Svelte Performance
 - **Compile-time reactivity**: No runtime framework overhead
@@ -684,10 +697,11 @@ onINP((metric) => {
 
 ## 12. Network Optimization
 
-### HTTP/3 (QUIC)
+### HTTP/3 (QUIC) — 35% Global Adoption
 - UDP-based: no head-of-line blocking
 - Faster connection setup (0-RTT)
 - Better performance on lossy connections (mobile)
+- **35% of global traffic** flows over HTTP/3 (as of late 2025, per Cloudflare)
 - Enabled by default on major CDNs (Cloudflare, Fastly, Google)
 - No code changes needed — server/CDN configuration
 
@@ -697,7 +711,7 @@ onINP((metric) => {
 |-----------|------------|-------|---------|
 | **Brotli** (br) | Best (15-25% smaller than gzip) | Slower compress, same decompress | All modern browsers |
 | **gzip** | Good | Fast | Universal |
-| **Zstandard** (zstd) | Better than Brotli for some content | Fastest | Chrome 125+, Firefox 129+, Edge 124+, growing (~12% adoption) |
+| **Zstandard** (zstd) | Better than Brotli for some content | Fastest | Chrome 123+, Firefox 126+, Edge 123+. Safari: not yet. Growing adoption. |
 
 - Use Brotli for static assets (pre-compress at build time)
 - Use gzip as fallback

@@ -1,6 +1,6 @@
 # Vue Stack — Deep Reference
 
-**Always use `WebSearch` to verify version numbers and features. Vue ecosystem releases frequently.**
+**Always use `WebSearch` to verify version numbers and features. Vue ecosystem releases frequently. Last verified: April 2026.**
 
 ## Table of Contents
 1. [Vue 3 (Current)](#1-vue-3-current)
@@ -60,10 +60,10 @@ const increment = () => count.value++
 - **`onWatcherCleanup()`**: Cleanup function for watchers
 - **Lazy Hydration** (experimental): `defineAsyncComponent({ hydrate: ... })` strategies for SSR
 
-### Vue 3.6 (Beta — December 2025)
-- **Vapor Mode**: The headline feature — eliminates Virtual DOM overhead entirely. Compiles templates to imperative DOM operations (similar to Solid.js). Can mount 100,000 components in ~100ms. Base framework size under 10KB. Opt-in per component — mix Vapor and VDOM components in same app.
+### Vue 3.6 (Beta — v3.6.0-beta.10, April 2026)
+- **Vapor Mode**: The headline feature — eliminates Virtual DOM overhead entirely. Compiles templates to imperative DOM operations (similar to Solid.js). Can mount 100,000 components in ~100ms. Base framework size under 10KB. Opt-in per component — mix Vapor and VDOM components in same app. **Feature-complete** with parity to all stable Virtual DOM features. Expected stable Q3-Q4 2026.
 - **Alien Signals**: New signal-based reactivity system. 14% memory reduction over Vue 3.5. Faster state change processing.
-- **Status**: Beta — verify production readiness with `WebSearch` before recommending
+- **Status**: Beta (feature-complete but API may change) — verify production readiness with `WebSearch` before recommending for production
 
 ### `<script setup>` (Standard SFC Pattern)
 ```vue
@@ -140,15 +140,15 @@ export default defineNuxtConfig({
 
 **When to choose Nuxt**: Most Vue projects. SSR/SSG/ISR needs. SEO-critical apps. Full-stack Vue development.
 
-### Nuxt 4 (Stable — July 2025)
+### Nuxt 4 (Stable — Latest: 4.4.2, April 2026)
 - **New directory structure**: Application code moves to `app/` directory
 - **Improved data fetching**: Smarter `useAsyncData`/`useFetch` with automatic data sharing, auto-cleanup on unmount, reactive keys with automatic refetch
 - **Server Components**: Server-render individual components within client-side apps
 - **Lazy Hydration** (Nuxt 3.16+/4): `<LazyMyComponent hydrate-on-visible />` — defer component hydration until needed
   - Strategies: `hydrate-on-visible`, `hydrate-on-idle`, `hydrate-on-interaction`, `hydrate-on-media-query`
-- **vue-router v5 integration** (Nuxt 4.4): Typed routes progressing toward stable
-- **NuxtLabs acquired by Vercel** (July 2025)
-- **Nuxt 5**: Expected with Nitro v3, H3 v2, Rolldown-powered builds
+- **Vue Router 5 integration** (Nuxt 4.4): Merged unplugin-vue-router into core — file-based routing with full TypeScript support built-in
+- **NuxtLabs acquired by Vercel** (July 2025): Nuxt, Nitro, and related projects remain open-source. Core team (atinux, pi0, antfu) hired by Vercel to work full-time on open source.
+- **Nuxt 5**: Expected with Nitro v3, H3 v2, Rolldown-powered builds. Timeline TBD — waiting on Nitro v3 readiness.
 
 ### Astro (with Vue)
 - Content-first framework. Ships zero JS by default.
@@ -180,10 +180,10 @@ Shared UI state (theme, auth)? → Pinia
 Complex client state? → Pinia
 ```
 
-### Pinia 3 (Official Store) — Recommended
-- Official Vue state management (replaced Vuex). Pinia 3 dropped Vue 2 support.
+### Pinia 3 (Official Store — Latest: 3.0.4) — Recommended
+- Official Vue state management (replaced Vuex). Pinia 3 dropped Vue 2 support, requires TypeScript 5+.
 - Lightweight (~1KB), TypeScript-first, Composition API native
-- Devtools integration with time-travel debugging, SSR support, HMR
+- Devtools API upgraded to v7, Nuxt 3+ module support
 - **Pinia 3 new features**: Signal-based architecture integration, native Subscription Stores (WebSocket/SSE as reactive state), isolated scoping for micro-frontends
 
 ```typescript
@@ -285,20 +285,21 @@ const color = ref('red')
 ### Reka UI (formerly Radix Vue — rebranded 2025)
 - Headless, unstyled, accessibility-first primitives (40+ components)
 - WAI-ARIA compliant with keyboard navigation and focus management
-- Foundation for shadcn-vue and Nuxt UI v3
+- Foundation for shadcn-vue and Nuxt UI
+- Growing rapidly: 6,100+ GitHub stars, 590,000+ weekly npm downloads (as of Jan 2026)
 - **When to use**: Custom design systems, accessibility-critical applications
 
-### shadcn-vue
+### shadcn-vue (Latest: 2.6.0)
 - Port of shadcn/ui for Vue — copy-paste components
-- Built on **Reka UI** (since v2) + Tailwind CSS
+- Built on **Reka UI** (since v2) + Tailwind CSS v4
 - Full ownership: customize freely
 - CLI: `npx shadcn-vue@latest add button`
 - **Recommended for**: Custom-designed apps with Vue
 
-### Nuxt UI v3
-- Official Nuxt component library: 54 core + 50 Pro + 42 Prose components
+### Nuxt UI v4 (Latest: 4.6.1)
+- Official Nuxt component library: **110+ components** (core + Pro + Prose unified)
 - Built on Reka UI + Tailwind CSS v4
-- Now **fully open-source** (Pro features made free after Vercel acquisition)
+- Now **fully open-source** — Nuxt UI and Nuxt UI Pro merged into single free package `@nuxt/ui` after Vercel acquisition
 - **When to use**: Nuxt projects wanting integrated, first-party UI solution
 
 ### Vuetify 3
@@ -479,12 +480,14 @@ const HeavyChart = defineAsyncComponent({
 
 ## 9. Build Tools
 
-### Vite — Default for Vue
+### Vite 8 (Released March 2026) — Default for Vue
 - Vue's official recommended build tool
+- **Vite 8 ships with Rolldown** — a Rust-based bundler replacing Rollup, delivering 10-30x faster builds with full plugin compatibility
 - Dev: Native ESM, instant HMR (< 50ms)
-- Production: Rollup bundling
+- Production: Rolldown bundling (unified Rust-based pipeline)
 - `@vitejs/plugin-vue` for SFC support
 - `@vitejs/plugin-vue-jsx` for JSX support
+- **Vite+**: New unified CLI toolchain combining Vite, Vitest, Oxlint, Oxfmt, Rolldown, tsdown, and Vite Task into one zero-config developer experience
 
 ### unplugin Ecosystem
 - **unplugin-auto-import**: Auto-import Vue/Nuxt/Pinia APIs (no explicit imports)
@@ -507,7 +510,9 @@ const HeavyChart = defineAsyncComponent({
 
 ## 10. Routing
 
-### Vue Router 4 (Official)
+### Vue Router 5 (Official — merged unplugin-vue-router)
+- **Vue Router 5** absorbs unplugin-vue-router — file-based routing with full TypeScript support now built into the core package
+- Drop-in upgrade for Vue Router 4 projects
 ```typescript
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -610,8 +615,8 @@ const { mutate } = useMutation({
 
 ## 12. Ecosystem Tools
 
-### VueUse — Essential Utility Library
-- 200+ composables for common tasks
+### VueUse (Latest: 14.2.1) — Essential Utility Library
+- 200+ composables for common tasks (requires Vue 3.5+ since v14.0)
 - Categories: Browser, Sensors, Animation, State, Network, Utilities
 - Key composables:
   - `useLocalStorage()`, `useSessionStorage()` — reactive storage
@@ -650,19 +655,19 @@ const { mutate } = useMutation({
 
 ---
 
-## Recommended Vue Stack (2025)
+## Recommended Vue Stack (2026)
 
 | Layer | Recommended | Alternative |
 |-------|------------|-------------|
-| Framework | Nuxt 3 | Vue 3 + Vite (SPA only) |
-| Routing | Nuxt file-based | Vue Router 4 (manual) |
+| Framework | Nuxt 4 | Vue 3 + Vite 8 (SPA only) |
+| Routing | Nuxt file-based / Vue Router 5 | Vue Router 5 (manual) |
 | Server data | `useFetch` / `useAsyncData` (Nuxt) | TanStack Query (complex caching) |
-| Client state | Pinia | `ref()` / `reactive()` (simple) |
+| Client state | Pinia 3 | `ref()` / `reactive()` (simple) |
 | Styling | Tailwind CSS v4 | UnoCSS, Scoped styles |
-| Components | shadcn-vue (Reka UI + Tailwind) | Nuxt UI v3, PrimeVue (enterprise), Vuetify 3 (Material) |
+| Components | shadcn-vue (Reka UI + Tailwind) | Nuxt UI v4 (110+ components), PrimeVue (enterprise), Vuetify 3 (Material) |
 | Forms | VeeValidate + Zod | FormKit (batteries-included) |
 | Testing | Vitest + Vue Testing Library + Playwright | Vue Test Utils (internals testing) |
-| Build | Vite (Vue) / Nitro (Nuxt) | — |
-| Utilities | VueUse | Custom composables |
+| Build | Vite 8 / Rolldown (Vue) / Nitro (Nuxt) | Vite+ unified toolchain |
+| Utilities | VueUse 14+ | Custom composables |
 | Docs site | VitePress | Nuxt Content |
 | Monitoring | Sentry + web-vitals | Vercel Analytics |

@@ -1,6 +1,6 @@
 # Accessibility Specialist — Deep Reference
 
-**Always use `WebSearch` to verify WCAG versions, legal requirements, and tool compatibility. Accessibility standards and legal landscape evolve frequently.**
+**Always use `WebSearch` to verify WCAG versions, legal requirements, and tool compatibility. Accessibility standards and legal landscape evolve frequently. Last verified: April 2026.**
 
 ## Table of Contents
 1. [WCAG 2.2](#1-wcag-22)
@@ -27,6 +27,7 @@
 - Builds on WCAG 2.1 with 9 new success criteria
 - Three conformance levels: A (minimum), AA (standard target), AAA (enhanced)
 - **Target AA** for all web projects — it's the legal standard in most jurisdictions
+- **Errata updates** (June/Oct 2025): Corrected alphabetical order of definitions, amended motion animation definition, harmonized "breakpoint" terminology in 3.2.6 Consistent Help. Always check latest errata at w3.org.
 
 ### The Four Principles (POUR)
 
@@ -103,9 +104,11 @@ Based on WebAIM Million survey:
 ## 2. WCAG 3.0 Status
 
 ### Where It Stands
-- Working Draft stage (latest: September 4, 2025) — **NOT ready for adoption**
+- Working Draft stage — **NOT ready for adoption**
 - **NOT a W3C Recommendation** — must not be used for compliance purposes yet
 - Major conceptual shift from WCAG 2.x
+- Latest updates: **March 2026 Working Draft** with changes to structure, terminology, new sections on best practices and conformance, and new guidance on functional categories
+- January 2026: W3C published an Editor's Draft of WCAG 3.0
 
 ### Expected Timeline
 - **Q4 2027**: Candidate Recommendation anticipated
@@ -125,7 +128,7 @@ Based on WebAIM Million survey:
 
 ### What to Do Now
 - **Build to WCAG 2.2 AA** — it's the current standard
-- **Watch APCA** — it's the candidate contrast method for WCAG 3.0
+- **APCA status uncertain**: APCA was removed from the WCAG 3 working draft in July 2023. As of April 2026, the draft states "the contrast algorithm used in WCAG 3 is yet to be determined." Do not abandon WCAG 2 contrast ratios in favor of APCA — ensure colors pass WCAG 2 requirements to avoid legal exposure.
 - Don't wait for WCAG 3.0 to start accessibility work
 
 ---
@@ -402,7 +405,7 @@ Read all: VO+A
 - Accounts for font size, weight, and polarity (light/dark mode)
 - More accurate than simple ratio — allows more design flexibility for large/bold text
 - Stricter for small/thin text on dark backgrounds
-- **Not yet a WCAG requirement** — but recommended for modern design systems
+- **Not a WCAG requirement** — APCA was removed from the WCAG 3 working draft in July 2023. Its return to the spec is uncertain. Use APCA informally as a supplemental tool but **always ensure WCAG 2 contrast ratios are met** for compliance.
 - Tool: `apca-w3` npm package, Polypane browser
 
 ### Color Blindness Considerations
@@ -570,10 +573,10 @@ Types:
 
 **Automated tools catch ~30% of accessibility issues.** Manual testing with assistive tech is essential.
 
-### axe-core (Engine)
+### axe-core (Engine — Latest: 4.11.2)
 - Industry-standard accessibility testing engine
 - Zero false positives by design
-- Integrations: Playwright, Cypress, Jest, Storybook, Chrome DevTools
+- Integrations: Playwright, Cypress, Jest, Storybook (10.3+), Chrome DevTools
 
 ### Tool Comparison
 
@@ -753,20 +756,25 @@ Requirements:
 | **AODA** | Ontario, Canada | Public and large private orgs | WCAG 2.0 AA |
 | **Equality Act** | UK | Service providers | WCAG 2.1 AA (PSBAR compliance) |
 
-### EAA (European Accessibility Act) — Now Active
-- **June 28, 2025**: Enforcement began across all EU member states
+### EAA (European Accessibility Act) — Actively Enforced
+- **June 28, 2025**: Enforcement began across all 27 EU member states
+- EU member states have designated **Market Surveillance Authorities** to police compliance
 - Covers: websites, mobile apps, e-commerce, banking, transport, e-books, telecommunications
 - References **EN 301 549** (aligned with WCAG 2.1 AA)
 - Applies to private sector (not just government)
 - **Penalties vary by member state**: administrative fines EUR 5,000 to EUR 100,000 typically; up to **EUR 3 million** in some jurisdictions; product/service removal from market possible
 - Micro-enterprises (<10 employees, <EUR 2M turnover) have partial exemptions
+- **2026 status**: Enforcement agencies are actively investigating complaints. Organizations that haven't complied face increasing risk.
 
-### US Litigation Trends (2025)
-- **5,000+ ADA digital accessibility lawsuits** filed in 2025 (~20% increase over 2024)
+### US Litigation Trends (2025-2026)
+- **5,100+ ADA digital accessibility lawsuits** filed in 2025 (**37% increase** year-over-year). H1 2025 alone saw 2,014 filings.
+- From ~800 cases in 2018 to 5,100+ in 2025 — exponential growth trajectory continuing into 2026
 - E-commerce is the top target: **69%** of all digital accessibility lawsuits
 - **45-46%** of federal cases targeted companies already sued before (repeat litigation)
 - **Overlay widgets are not a defense**: 1,000+ businesses sued despite having accessibility widgets/overlays
 - Top states: New York (31.6%), Florida (24.2%), California (18.9%)
+- **AI-enabled litigation**: Pro se (self-represented) lawsuits increased 40% in 2025, driven by AI tools helping individuals draft complaints
+- **Key 2026 deadline**: April 24, 2026 — public entities with 50,000+ population must meet WCAG 2.1 AA under ADA Title II web accessibility rule
 - **Settlements typically require**: WCAG 2.1 AA conformance, ongoing monitoring, remediation timeline
 
 ### Best Practices for Compliance
