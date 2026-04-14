@@ -2,98 +2,142 @@
   "skill_name": "social-platform-architect",
   "evals": [
     {
-      "id": 0,
-      "prompt": "We're building a new social platform for creators. Think Twitter meets Reddit — users can post, follow, vote, comment. We expect to start with ~5K users and grow to maybe 500K in the first year. What architecture should we use?",
-      "expected_output": "Should ask clarifying questions before recommending architecture. Should NOT dump a full architecture doc immediately. Should be conversational and present tradeoffs.",
-      "files": [],
-      "assertions": [
-        {
-          "name": "asks_clarifying_questions",
-          "type": "contains_pattern",
-          "description": "Response should ask at least 2 clarifying questions before recommending",
-          "check": "Contains question marks indicating clarifying questions about requirements"
-        },
-        {
-          "name": "does_not_prescribe_immediately",
-          "type": "negative_check",
-          "description": "Should NOT immediately dump a full architecture document with component diagrams",
-          "check": "Does not start with a complete architecture diagram or exhaustive tech stack list"
-        },
-        {
-          "name": "mentions_scale_awareness",
-          "type": "contains_concept",
-          "description": "Should acknowledge that 5K-500K is a specific scale tier and tailor advice accordingly",
-          "check": "References the startup/growth scale tier and suggests appropriate simplicity"
-        },
-        {
-          "name": "presents_tradeoffs",
-          "type": "contains_concept",
-          "description": "Should present at least one tradeoff or comparison between approaches",
-          "check": "Contains comparison language (vs, tradeoff, alternative, on the other hand)"
-        }
-      ]
-    },
-    {
       "id": 1,
-      "prompt": "We're debating whether to use fan-out on write or fan-out on read for our feed system. Some of our users will be brands with millions of followers. What should we consider?",
-      "expected_output": "Should provide deep technical comparison of fan-out strategies with specific numbers. Should mention the hybrid approach (Twitter's pattern). Should reference real-world examples.",
+      "prompt": "We're building a new social platform for creators. Think Twitter meets Reddit — users can post, follow, vote, comment. We expect to start with ~5K users and grow to maybe 500K in the first year. What architecture should we use?",
+      "expected_output": "Should ask clarifying questions before recommending architecture. Should NOT dump a full architecture doc immediately. Should be conversational and present tradeoffs. Should recognize this is startup/growth scale and recommend appropriate simplicity.",
       "files": [],
       "assertions": [
         {
-          "name": "explains_both_approaches",
           "type": "contains_concept",
-          "description": "Should explain both fan-out on write and fan-out on read with tradeoffs",
-          "check": "Covers both approaches with pros and cons"
+          "text": "Asks clarifying questions before prescribing a solution",
+          "check": "Response should ask 2-3 clarifying questions about content types, interaction model, team size, or real-time requirements before recommending architecture"
         },
         {
-          "name": "mentions_hybrid",
-          "type": "contains_pattern",
-          "description": "Should mention the hybrid approach as a solution for the celebrity/brand problem",
-          "check": "Contains 'hybrid' approach or describes combining both strategies"
+          "type": "does_not_contain",
+          "text": "Does not prescribe immediately",
+          "check": "Should NOT start with a complete architecture diagram or exhaustive tech stack list on first response"
         },
         {
-          "name": "references_real_platforms",
-          "type": "contains_pattern",
-          "description": "Should reference how Twitter or other platforms handle this",
-          "check": "Mentions Twitter, X, or other real platforms as examples"
-        },
-        {
-          "name": "addresses_million_follower_problem",
           "type": "contains_concept",
-          "description": "Should specifically address the millions-of-followers scenario mentioned in the prompt",
-          "check": "Discusses write amplification or celebrity problem with large follower counts"
+          "text": "Recognizes appropriate scale tier",
+          "check": "References the startup/growth scale tier and suggests appropriate simplicity — monolith, PostgreSQL, Redis, not microservices or Kafka"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Presents tradeoffs between approaches",
+          "check": "Contains comparison language (vs, tradeoff, alternative, on the other hand) presenting at least one architectural choice"
         }
       ]
     },
     {
       "id": 2,
+      "prompt": "We're debating whether to use fan-out on write or fan-out on read for our feed system. Some of our users will be brands with millions of followers. What should we consider?",
+      "expected_output": "Should provide deep technical comparison of fan-out strategies with specific numbers. Should mention the hybrid approach (Twitter's pattern). Should reference real-world examples. Should specifically address the celebrity/brand problem.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Explains both fan-out approaches with tradeoffs",
+          "check": "Covers both fan-out on write and fan-out on read with pros and cons including write amplification and read latency"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Recommends hybrid approach for the celebrity problem",
+          "check": "Contains 'hybrid' approach or describes combining both strategies to handle the millions-of-followers scenario"
+        },
+        {
+          "type": "contains_concept",
+          "text": "References real platforms as examples",
+          "check": "Mentions Twitter, X, or other real platforms as production examples of these patterns"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Addresses write amplification at scale",
+          "check": "Discusses write amplification or the computational cost when a user with millions of followers posts (1M writes per post)"
+        }
+      ]
+    },
+    {
+      "id": 3,
       "prompt": "We're at about 2M MAU right now and spending $15K/month on AWS. Our CEO wants to cut costs by 40%. Where should we look?",
       "expected_output": "Should ask what services they're using before making specific recommendations. Should provide concrete cost-saving strategies with estimated savings percentages. Should mention reserved instances, Graviton, spot instances, caching optimization.",
       "files": [],
       "assertions": [
         {
-          "name": "asks_about_current_stack",
-          "type": "contains_pattern",
-          "description": "Should ask what AWS services they're currently using before recommending cuts",
-          "check": "Asks about current infrastructure breakdown or AWS services in use"
-        },
-        {
-          "name": "provides_specific_savings",
-          "type": "contains_pattern",
-          "description": "Should mention specific cost-saving strategies with approximate savings percentages",
-          "check": "Contains specific percentages or dollar amounts for potential savings"
-        },
-        {
-          "name": "mentions_reserved_instances",
-          "type": "contains_pattern",
-          "description": "Should mention reserved instances or savings plans as a key lever",
-          "check": "Contains 'reserved' or 'savings plan' or 'committed use'"
-        },
-        {
-          "name": "actionable_recommendations",
           "type": "contains_concept",
-          "description": "Recommendations should be specific and actionable, not vague",
-          "check": "Contains specific service names and actions (e.g., switch to Graviton, use spot for workers)"
+          "text": "Asks about current infrastructure breakdown",
+          "check": "Asks what AWS services they're currently using or requests a cost breakdown before recommending specific cuts"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Provides specific savings percentages",
+          "check": "Contains specific percentages or dollar amounts for potential savings from at least 2-3 strategies"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Mentions reserved instances or savings plans",
+          "check": "Contains 'reserved' or 'savings plan' or 'committed use' as a key cost optimization lever"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Gives actionable, specific recommendations",
+          "check": "Contains specific service names and actions (e.g., switch to Graviton, use spot for workers, Cloudflare R2 for egress) rather than vague advice"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "We're building a community platform like Reddit — users can create communities, post, comment, and vote. We have 3 engineers and want to ship an MVP in 2 months. How should we design the social graph and community membership system? Also worried about comment threads getting deeply nested — Reddit has this problem. And how should we handle voting at scale?",
+      "expected_output": "Should provide startup-appropriate architecture for social graph and communities. Should address comment tree storage strategies (recursive queries, materialized path, nested sets). Should cover voting system design with denormalized counters. Should recommend simple approaches for MVP, noting what to change at scale.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Recommends MVP-appropriate social graph design",
+          "check": "Recommends PostgreSQL adjacency list or similar simple approach for social graph, not Neo4j or custom graph stores for a 3-person team MVP"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Addresses nested comment tree storage",
+          "check": "Discusses at least one approach for nested comments — recursive CTEs, materialized path, closure table, or parent_id with depth tracking"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Covers voting with denormalized counters",
+          "check": "Recommends denormalized vote counts on the content record rather than computing from a votes table on every read"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Distinguishes MVP from scale-stage recommendations",
+          "check": "Clearly separates what to build now (simple) from what to migrate to later (at scale), acknowledging the 3-engineer constraint"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Our social platform just had a moderation crisis — a coordinated spam attack flooded our trending topics, and we also got a wave of CSAM reports we weren't prepared for. We have about 800K MAU and currently rely on user reports + one part-time moderator. What content moderation architecture should we build? We need both automated detection and a proper human review pipeline.",
+      "expected_output": "Should urgently address CSAM as a legal requirement (NCMEC reporting). Should design an automated moderation pipeline (ML classifiers, hash matching, keyword filters). Should design a human review queue with priority routing. Should recommend trust & safety infrastructure including user trust scores and rate limiting.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Prioritizes CSAM detection as a legal requirement",
+          "check": "Identifies CSAM detection as the most urgent and legally required priority, mentions PhotoDNA, CSAI Match, NCMEC reporting, or similar industry-standard approaches"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Designs automated moderation pipeline",
+          "check": "Recommends ML-based text/image classification, hash matching for known-bad content, or keyword filtering as automated detection layers"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Designs human review queue with prioritization",
+          "check": "Describes a priority-routed moderation queue where severe content (CSAM, threats) is reviewed before spam, with moderator tooling"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Recommends anti-spam measures for coordinated attacks",
+          "check": "Addresses the coordinated spam attack with rate limiting, bot detection, or trust scoring to prevent future trending topic manipulation"
         }
       ]
     }

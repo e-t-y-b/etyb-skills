@@ -378,7 +378,7 @@ These are brought in when building specific types of products. They complement t
 
 | # | Master Skill | Status | Priority |
 |---|-------------|--------|----------|
-| 15 | `social-platform-architect` | ✅ EXISTS | Done (groom later) |
+| 15 | `social-platform-architect` | DONE | Done (groomed to new structure) |
 | 16 | `e-commerce-architect` | NEW | P2 |
 | 17 | `fintech-architect` | DONE | P2 |
 | 18 | `saas-architect` | DONE | P2 |
@@ -443,7 +443,7 @@ Support functions and domain-specific expertise.
 | Session | Task | Deliverable |
 |---------|------|-------------|
 | 19 | ~~Create `healthcare-architect` domain skill~~ | DONE |
-| 20 | Groom `social-platform-architect` (align with new structure) | Updated SKILL.md + references |
+| 20 | ~~Groom `social-platform-architect` (align with new structure)~~ | DONE |
 | 21 | Create `orchestrator` master skill (routing logic across all teams) | SKILL.md + routing rules + team registry |
 | 22 | Integration testing — verify cross-references and routing across all skills | Updated cross-references in all skills |
 
