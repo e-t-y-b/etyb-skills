@@ -1,0 +1,117 @@
+{
+  "skill_name": "tdd-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "implement-without-test",
+      "prompt": "Add a function that calculates the total price including tax for an e-commerce cart. The function should take an array of items (each with price and quantity) and a tax rate, and return the subtotal, tax amount, and total.",
+      "expected_output": "Should insist on writing a failing test FIRST before any implementation code. Should guide the user through the RED step (write a test that calls calculateTotal and asserts the expected output), verify the test fails, then write minimal GREEN implementation, then REFACTOR.",
+      "assertions": [
+        {
+          "text": "Writes or asks to write a test BEFORE any production code",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "References the red-green-refactor cycle explicitly",
+          "type": "content_check"
+        },
+        {
+          "text": "Shows or describes a failing test with specific assertions (not vague)",
+          "type": "content_check"
+        },
+        {
+          "text": "Emphasizes minimal implementation in the GREEN step — not over-engineering",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT produce complete implementation code before a test exists",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "rationalization-resistance",
+      "prompt": "I know I should write tests but we have a demo tomorrow and the PM is breathing down my neck. Can you just help me implement the user authentication flow? I'll add tests next sprint, I promise.",
+      "expected_output": "Should acknowledge the time pressure but counter the rationalization with evidence. Should explain that TDD is faster for anything beyond trivial code because it reduces debugging time. Should offer a pragmatic approach: TDD the critical path (auth is critical), use the spike-then-delete pattern if needed. Should NOT just comply and skip tests.",
+      "assertions": [
+        {
+          "text": "Does NOT simply comply with skipping tests — maintains TDD discipline",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Acknowledges the time pressure without being dismissive",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Provides evidence or reasoning for why TDD is faster (reduced debugging, fewer regressions)",
+          "type": "content_check"
+        },
+        {
+          "text": "Offers a pragmatic path forward that maintains TDD discipline (TDD critical path, spike-then-delete)",
+          "type": "content_check"
+        },
+        {
+          "text": "Points out that 'tests next sprint' never happens based on evidence",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "verify-red-enforcement",
+      "prompt": "Here's my test for the email validator:\n\n```typescript\nimport { validateEmail } from './validator';\n\nit('validates correct emails', () => {\n  expect(validateEmail('test@example.com')).toBe(true);\n});\n```\n\nI haven't run it yet. Let me just write the implementation now — I know what it needs to do.",
+      "expected_output": "Should STOP the user from writing implementation before running the test. Should insist on the Verify RED step: run the test, confirm it fails, confirm it fails for the RIGHT reason (function doesn't exist or returns wrong value, not a syntax error). Only after verifying RED should implementation proceed.",
+      "assertions": [
+        {
+          "text": "Insists on running the test before writing any implementation",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Explains WHY verify RED matters (test might pass unexpectedly, might fail for wrong reason)",
+          "type": "content_check"
+        },
+        {
+          "text": "Describes what a correct failure looks like vs an incorrect failure (syntax error vs missing function)",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT proceed to implementation without the RED verification step",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "refactor-step-guidance",
+      "prompt": "My test is green! Here's what I have:\n\n```typescript\nexport function processOrder(items: any[], taxRate: any, discount: any, coupon: any) {\n  let s = 0;\n  for (let i = 0; i < items.length; i++) {\n    s = s + items[i].price * items[i].quantity;\n  }\n  let t = s * taxRate;\n  let d = discount ? s * discount : 0;\n  let c = coupon ? coupon.amount : 0;\n  return { subtotal: s, tax: t, discount: d, coupon: c, total: s + t - d - c };\n}\n```\n\nAll tests pass. What's next?",
+      "expected_output": "Should guide through the REFACTOR step: rename variables for clarity (s -> subtotal, t -> tax, d -> discountAmount), add type safety (replace 'any' with proper types), extract helper functions, improve readability. Should emphasize running tests AFTER EACH refactoring step, not just at the end. Should then prompt for a commit.",
+      "assertions": [
+        {
+          "text": "Identifies this as the REFACTOR step of the TDD cycle",
+          "type": "content_check"
+        },
+        {
+          "text": "Suggests specific refactoring improvements (rename variables, add types, extract functions)",
+          "type": "content_check"
+        },
+        {
+          "text": "Emphasizes running tests after each refactoring change, not just at the end",
+          "type": "content_check"
+        },
+        {
+          "text": "Prompts for a commit after refactoring is complete and tests are green",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT suggest adding new behavior during refactoring (that would be a new RED)",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

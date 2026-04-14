@@ -335,6 +335,46 @@ After resolving the bug:
 
 > **Reference:** See `orchestrator/references/debugging-protocol.md` for the complete debugging methodology, hypothesis-driven debugging, root cause verification, and decision trees.
 
+## Engineering Culture — Always-On Protocols
+
+These are non-negotiable engineering disciplines. They apply to ALL work, ALL tiers, ALL gates. They are your organization's culture, not optional tools. When you need the detailed HOW, read the protocol's SKILL.md and references.
+
+### 1. TDD Discipline (always on)
+NO production code without a failing test first. Red-green-refactor on every change. Hooks enforce this deterministically (pre-edit-check, post-test-log).
+→ Deep knowledge: `tdd-protocol/SKILL.md` + `tdd-protocol/references/`
+
+### 2. Verification Discipline (always on)
+Evidence before claims, always. Run commands fresh, read full output, verify exit codes. Never say "done" without proof. The 5-question protocol applies to EVERY completion.
+→ Deep knowledge: `orchestrator/references/verification-protocol.md`
+
+### 3. Review Discipline (always on)
+No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context. Hook enforces review-before-commit.
+→ Deep knowledge: `review-protocol/SKILL.md` + `review-protocol/references/`
+
+### 4. Plan Execution Discipline (always on when a plan exists)
+One task at a time. Verify before advancing. Update the plan after every task. Never skip tasks or jump gates.
+→ Deep knowledge: `plan-execution-protocol/SKILL.md` + references
+
+### 5. Brainstorm-First Discipline (always on for ambiguous requests)
+Explore the problem space before the solution space. Never jump to implementation on an ambiguous request. Produce a design brief before entering the Design gate.
+→ Deep knowledge: `brainstorm-protocol/SKILL.md` + references
+
+### 6. Branch Safety Discipline (always on)
+Never merge or PR without green tests compared against baseline. Hook enforces test-before-merge deterministically.
+→ Deep knowledge: `git-workflow-protocol/SKILL.md` + references
+
+### 7. Subagent Coordination Discipline (always on for parallel work)
+One agent per independent domain. No shared mutable state. Two-stage review for all subagent output.
+→ Deep knowledge: `subagent-protocol/SKILL.md` + references
+
+### 8. Self-Improvement Discipline (always on)
+No skill change without a failing eval first. The system gets better over time.
+→ Deep knowledge: `skill-evolution-protocol/SKILL.md` + references
+
+### 9. Debugging Discipline (always on during troubleshooting)
+Root cause first. One variable at a time. 3-failure escalation.
+→ Deep knowledge: `orchestrator/references/debugging-protocol.md`
+
 ## Team Registry
 
 ### Core Teams (14)
@@ -380,6 +420,20 @@ Bring these in when the user is building in their domain. They provide patterns 
 | WebSockets, real-time updates, collaboration, chat, gaming | `real-time-architect` |
 | Patient data, HIPAA, HL7/FHIR, EHR, clinical workflows | `healthcare-architect` |
 | ML models, training, inference, drift, embeddings, LLMs | `ai-ml-engineer` |
+
+### Process Protocols (7)
+
+Always-on engineering disciplines with deep reference knowledge. Principles are embedded in the Engineering Culture section above. Read these skills when you need the detailed HOW.
+
+| # | Protocol | Deep Knowledge For | Hooks |
+|---|----------|--------------------|-------|
+| 21 | `tdd-protocol` | Red-green-refactor patterns, rationalization counters, framework-specific TDD | pre-edit, post-test |
+| 22 | `subagent-protocol` | Dispatch templates, parallel coordination, context isolation, two-stage review | — |
+| 23 | `git-workflow-protocol` | Worktree management, branch finishing, parallel development | pre-merge |
+| 24 | `plan-execution-protocol` | Task execution cycle, blocker management, gate transitions | post-edit |
+| 25 | `brainstorm-protocol` | Exploration techniques, convergence patterns, design brief templates | — |
+| 26 | `review-protocol` | Review dispatch, feedback evaluation, review integration | pre-commit |
+| 27 | `skill-evolution-protocol` | Skill creation, eval engineering, improvement loops, institutional memory | — |
 
 ### Domain Overlap Resolution
 
@@ -520,6 +574,8 @@ When planning multi-team work, use these patterns. Each pattern includes gate ch
 **Sequential Pipeline:** Research → **[DESIGN GATE]** → Architecture → **[PLAN GATE]** → Development → **[IMPLEMENT GATE]** → Testing → **[VERIFY GATE]** → Deployment → **[SHIP GATE]** → Operations. Gate owners: Design = `system-architect` + `security-engineer` (if applicable), Plan = `orchestrator` + `qa-engineer`, Implement = assigned experts + `qa-engineer`, Verify = `code-reviewer` + `security-engineer` (if applicable), Ship = `devops-engineer` + `sre-engineer`. Use for greenfield projects.
 
 **Parallel Tracks:** After architecture is set (Design gate passed) and tasks are defined (Plan gate passed), frontend/backend/database/mobile can work in parallel against API contracts. The **IMPLEMENT gate blocks until ALL parallel tracks complete**. Individual tracks can have internal checkpoints, but the formal gate applies to the combined work. Use to compress timelines.
+
+When parallel tracks can be delegated to subagents, read `subagent-protocol` for dispatch patterns, context isolation, and two-stage review. When parallel tracks need separate working directories, read `git-workflow-protocol` for worktree creation, baseline testing, and branch finishing.
 
 **Hub-and-Spoke:** One team (usually security or architecture) coordinates reviews across all other teams. Each spoke goes through Design → Plan → Implement independently. The hub performs **VERIFY gate reviews for each spoke**. Combined work passes through the **SHIP gate together**. Use for audits, compliance, and cross-cutting initiatives.
 

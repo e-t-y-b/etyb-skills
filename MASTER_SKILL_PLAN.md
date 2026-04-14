@@ -10,6 +10,10 @@
 │  │   Gate   │  │   Gate   │  │   Gate    │  │   Gate   │  │   Gate   │    │
 │  └──────────┘  └──────────┘  └───────────┘  └──────────┘  └──────────┘    │
 ├─────────────────────────────────────────────────────────────────────────────┤
+│                     PROCESS PROTOCOLS (always-on HOW)                       │
+│  tdd · verification · review · plan-execution · brainstorm · branch-safety │
+│  subagent-coordination · self-improvement · debugging                       │
+├─────────────────────────────────────────────────────────────────────────────┤
 │                            ┌─────────────────────┐                         │
 │                            │     ORCHESTRATOR     │                         │
 │                            │  (Process-Enforcing  │                         │
@@ -398,14 +402,28 @@ These are brought in when building specific types of products. They complement t
 | 19 | `real-time-architect` | DONE | P2 | v2 |
 | 20 | `healthcare-architect` | DONE | P3 | v2 |
 
+### Process Protocols (7 skills)
+
+| # | Protocol | Status | Priority | Process |
+|---|----------|--------|----------|---------|
+| 21 | `tdd-protocol` | DONE | P0 | v2 — always-on TDD enforcement |
+| 22 | `subagent-protocol` | DONE | P1 | v2 — parallel coordination |
+| 23 | `git-workflow-protocol` | DONE | P1 | v2 — branch safety |
+| 24 | `plan-execution-protocol` | DONE | P0 | v2 — task-by-task execution |
+| 25 | `brainstorm-protocol` | DONE | P1 | v2 — exploration before solution |
+| 26 | `review-protocol` | DONE | P0 | v2 — review lifecycle |
+| 27 | `skill-evolution-protocol` | DONE | P2 | v2 — self-improvement |
+
 ### Totals
 
-- **21 master skills** (including orchestrator) — ALL DONE, all at process v2
+- **29 skills** (1 orchestrator + 14 core teams + 6 domain specialists + 7 process protocols + 1 orchestrator) — ALL DONE, all at process v2
 - **~80 sub-skills** across all teams — ALL DONE
-- **28 sessions completed** (Waves 1–4: 22 sessions, Wave 5: 6 sessions)
-- Cross-references verified across all 21 skills
+- **7 process protocols** with hooks and deep reference knowledge — ALL DONE
+- **29 sessions completed** (Waves 1-4: 22 sessions, Wave 5: 6 sessions, Wave 6: 1 session)
+- Cross-references verified across all 29 skills
 - Orchestrator routing tested with 15 prompts (10 PASS, 5 WARN, 0 FAIL)
 - Process discipline: 5 new reference files, 21 SKILL.md upgrades, 10 process evals
+- Engineering culture: 9 always-on disciplines embedded in orchestrator, 5 hooks registered
 
 ---
 
@@ -525,6 +543,51 @@ And two skills were enhanced as **process owners**:
 | 26 | ~~Enhance qa-engineer, code-reviewer, security-engineer as quality gates~~ | TDD enforcement, mandatory review, auto-consultation |
 | 27 | ~~Add process sections to all 15 remaining skills~~ | Process awareness, verification, debugging for all skills |
 | 28 | ~~Validate system, update master docs, add process evals~~ | This document update, `process-evals.json`, cross-reference verification |
+
+---
+
+## Wave 6: Process Protocols (7 new skills)
+
+**Purpose:** Always-on engineering disciplines that govern HOW work gets done. These are behavioral enforcers with deep reference knowledge, not domain experts. Principles are embedded in the orchestrator; deep knowledge is loaded on demand.
+
+### Process Protocol #21: TDD Protocol
+**Folder:** `tdd-protocol/`
+**Always on for:** All code-producing work
+**Sub-skills:** red-green-refactor, rationalization-counters, tdd-patterns
+**Hooks:** pre-edit-check (warns if no test file), post-test-log (logs results)
+
+### Process Protocol #22: Subagent Protocol
+**Folder:** `subagent-protocol/`
+**Always on for:** Parallel work, delegated tasks
+**Sub-skills:** dispatch-patterns, parallel-coordination, two-stage-review, context-isolation
+
+### Process Protocol #23: Git Workflow Protocol
+**Folder:** `git-workflow-protocol/`
+**Always on for:** Branch management, parallel development
+**Sub-skills:** worktree-management, branch-finishing, parallel-development
+**Hooks:** pre-merge-verify (blocks merge if tests fail)
+
+### Process Protocol #24: Plan Execution Protocol
+**Folder:** `plan-execution-protocol/`
+**Always on for:** Any active plan
+**Sub-skills:** task-execution-cycle, blocker-management, gate-transitions
+**Hooks:** post-edit-log (traces edits to plan tasks)
+
+### Process Protocol #25: Brainstorm Protocol
+**Folder:** `brainstorm-protocol/`
+**Always on for:** Ambiguous or exploratory requests
+**Sub-skills:** exploration-techniques, convergence-patterns, design-brief-template
+
+### Process Protocol #26: Review Protocol
+**Folder:** `review-protocol/`
+**Always on for:** Code review lifecycle
+**Sub-skills:** review-dispatch, feedback-evaluation, review-integration
+**Hooks:** pre-commit-review-check (verifies review before commit)
+
+### Process Protocol #27: Skill Evolution Protocol
+**Folder:** `skill-evolution-protocol/`
+**Always on for:** Skill creation, evaluation, improvement
+**Sub-skills:** skill-creation, eval-engineering, improvement-loop, institutional-memory
 
 ---
 

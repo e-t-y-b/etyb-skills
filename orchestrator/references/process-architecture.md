@@ -23,6 +23,7 @@
 18. [Plan Lifecycle Management](#18-plan-lifecycle-management)
 19. [Cross-Skill Integration Points](#19-cross-skill-integration-points)
 20. [Process Anti-Patterns](#20-process-anti-patterns)
+21. [Process Protocol Integration](#21-process-protocol-integration)
 
 ---
 
@@ -1134,3 +1135,40 @@ Domain-Augmented:
 | **Silent Gate Failure** | Proceeding past a failed gate without documenting the failure | All gate failures must be recorded and remediated |
 | **Plan Artifact Staleness** | Creating a plan and never updating it as work progresses | Plan artifact is updated at every task completion and gate transition |
 | **Scope Creep Without Decision** | Adding tasks mid-implementation without updating the plan | All scope changes go through the Decision Log and update the task breakdown |
+
+---
+
+## 21. Process Protocol Integration
+
+### How Process Protocols Fit the Gate System
+
+Process protocols are always-on engineering disciplines with deep reference knowledge. Their principles are embedded in the orchestrator's Engineering Culture section. Their deep knowledge lives in dedicated skill directories loaded on demand.
+
+| Gate | Protocols Active | What They Enforce |
+|------|-----------------|-------------------|
+| Pre-Design | brainstorm-protocol | Structured exploration for ambiguous requests |
+| Design | (domain experts lead) | Protocols provide background discipline |
+| Plan | (qa-engineer + project-planner lead) | TDD strategy informs tdd-protocol execution |
+| Implement | tdd-protocol, plan-execution-protocol, subagent-protocol | Red-green-refactor, task-by-task execution, parallel dispatch |
+| Verify | review-protocol | Review dispatch and rigorous feedback evaluation |
+| Ship | git-workflow-protocol | Branch finishing with test verification |
+| All Gates | Verification discipline, debugging discipline | Evidence before claims, root cause first |
+
+### Protocol + Expert Combinations
+
+Protocols activate ALONGSIDE domain experts, not instead of them:
+- Implement gate: tdd-protocol + backend-architect (for a backend task)
+- Parallel Implement: subagent-protocol + git-workflow-protocol + multiple experts
+- Verify gate: review-protocol + code-reviewer + security-engineer (if mandated)
+
+### Hook Enforcement (Deterministic)
+
+Hooks fire outside the LLM reasoning loop — they cannot be bypassed by rationalization:
+
+| Hook | When | What | Blocking? |
+|------|------|------|-----------|
+| tdd-protocol/hooks/pre-edit-check.sh | Before Edit tool | Warns if no test file exists | Warning |
+| tdd-protocol/hooks/post-test-log.sh | After test runs | Logs results for verification | No |
+| git-workflow-protocol/hooks/pre-merge-verify.sh | Before git merge | Blocks if tests fail | Blocking |
+| review-protocol/hooks/pre-commit-review-check.sh | Before git commit | Warns if no review evidence | Warning |
+| plan-execution-protocol/hooks/post-edit-log.sh | After Edit tool | Logs edits for plan traceability | No |

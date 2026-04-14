@@ -1,0 +1,121 @@
+{
+  "skill_name": "git-workflow-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "parallel-worktree-creation",
+      "prompt": "I need to work on two features at the same time: user authentication and payment processing. They touch different parts of the codebase. How should I set this up?",
+      "expected_output": "Should recommend creating isolated worktrees for each feature. Should walk through the full creation protocol: git worktree add with proper branch naming (feature/user-auth, feature/payment-flow), dependency bootstrapping (detect package manager and install), and baseline testing BEFORE any changes. Should explain the shared-nothing principle — each worktree is independent.",
+      "assertions": [
+        {
+          "text": "Recommends creating separate worktrees for parallel development",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Uses proper branch naming convention (feature/ prefix) for both worktrees",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes dependency bootstrapping step (detect package manager, run install)",
+          "type": "content_check"
+        },
+        {
+          "text": "Emphasizes running baseline tests BEFORE making any changes in each worktree",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT suggest working on both features in the same branch or worktree",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "merge-with-failing-tests",
+      "prompt": "I finished the refactoring work on my feature branch. 3 tests are failing but they look like they were already broken before my changes. Can we just merge to main?",
+      "expected_output": "Should BLOCK the merge and insist on comparing against the baseline. Should ask: were these 3 tests failing in the baseline? If yes (pre-existing), document them and proceed. If no (regressions), STOP and fix before merging. Should never allow merging with undetermined test failures — the baseline comparison is mandatory.",
+      "assertions": [
+        {
+          "text": "Does NOT allow the merge without verifying against baseline",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Asks about or references the baseline test results for comparison",
+          "type": "content_check"
+        },
+        {
+          "text": "Explains the difference between pre-existing failures and regressions",
+          "type": "content_check"
+        },
+        {
+          "text": "States that regressions must be fixed before merging — no exceptions",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT say 'just merge and fix later' or skip the pre-finish gate",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "branch-finishing-options",
+      "prompt": "I've been working on a feature branch for a few days. Tests are all passing. I'm not sure whether I should merge directly or create a PR. What are my options?",
+      "expected_output": "Should present all 4 branch finishing options (merge, PR, keep, discard) with clear criteria for when to use each. Should recommend PR if team review is standard practice, or merge if review is not required and work is ready. Should explain the pre-finish gate (test comparison against baseline) is required before merge or PR. Should include a decision framework to help the user choose.",
+      "assertions": [
+        {
+          "text": "Presents all 4 finishing options: merge, PR, keep, and discard",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides decision criteria for choosing between options",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions the pre-finish gate (baseline test comparison) as mandatory before merge or PR",
+          "type": "content_check"
+        },
+        {
+          "text": "Makes a recommendation based on the user's situation (tests passing, work complete)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Does NOT skip mentioning the discard option even though it's unlikely here",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "discard-with-uncommitted-changes",
+      "prompt": "This spike branch was a dead end. Let's just delete everything and start fresh. I haven't committed the last round of changes.",
+      "expected_output": "Should NOT immediately discard. Should warn that there are uncommitted changes that will be permanently lost. Should present what will be destroyed (uncommitted changes, any unmerged commits). Should require explicit user confirmation before proceeding. Should also mention the KEEP option as an alternative if the user might want to revisit the work later.",
+      "assertions": [
+        {
+          "text": "Does NOT immediately discard the branch — asks for confirmation first",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Warns about uncommitted changes that will be permanently lost",
+          "type": "content_check"
+        },
+        {
+          "text": "Requires explicit user confirmation before proceeding with discard",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions KEEP as an alternative option in case user wants to preserve work",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT run git worktree remove --force without user saying 'yes' or confirming",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

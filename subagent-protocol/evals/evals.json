@@ -1,0 +1,121 @@
+{
+  "skill_name": "subagent-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "parallel-dispatch-independent-domains",
+      "prompt": "I need to implement three features for our Node.js app: (1) an authentication module in /src/auth/ with login, registration, and JWT token management, (2) a payment processing module in /src/payments/ with Stripe integration and checkout flow, and (3) a notification module in /src/notifications/ with email and SMS sending. These are separate modules with no shared code except the User type in /src/shared/types.ts. How should I dispatch subagents for this work?",
+      "expected_output": "Should recommend parallel dispatch across all three domains since they are independent. Should construct a dispatch plan with three agents (auth-implementation, payment-implementation, notification-implementation), each scoped to its own directory. Should verify independence via a file modification matrix showing no overlap in modified files. Should mark /src/shared/types.ts as read-only for all agents. Should select Sonnet for auth and payment (moderate complexity, 3-10 files), potentially Haiku for notifications if it's simple template work. Should specify integration review steps: merge conflict check, combined test suite, semantic conflict detection.",
+      "assertions": [
+        {
+          "text": "Recommends parallel dispatch (not sequential) for the three independent modules",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Constructs or describes a dispatch plan with three separate agents, each scoped to its own domain directory",
+          "type": "content_check"
+        },
+        {
+          "text": "Verifies independence by checking for file overlap -- identifies /src/shared/types.ts as read-only for all agents",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes model selection reasoning (Sonnet for auth/payment complexity, Haiku possible for simpler notification work)",
+          "type": "content_check"
+        },
+        {
+          "text": "Specifies post-integration steps: combined test suite, merge conflict check, or semantic conflict detection",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes success criteria or done-when conditions for at least one of the agents",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "detect-cross-dependency-recommend-sequential",
+      "prompt": "I want to parallelize two tasks: (1) refactor the authentication module to add session management with a new sessions table in the database, and (2) update the user profile endpoint to show active sessions. The session management task creates the Session type and database table, and the profile endpoint needs to query that table and use the Session type. Can I run these in parallel?",
+      "expected_output": "Should identify the dependency: task 2 depends on task 1's output (the Session type and sessions table). Should fail the independence test -- task 2 cannot proceed without task 1's Session type and database schema. Should recommend sequential dispatch: first the session management agent, then the profile endpoint agent with the Session type and schema from task 1 included in its context. Should NOT recommend parallel dispatch. May suggest an alternative decomposition if possible, or a pipeline pattern (Phase 1: session management, Phase 2: profile endpoint).",
+      "assertions": [
+        {
+          "text": "Identifies the dependency between the two tasks (Session type and/or sessions table from task 1 is needed by task 2)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Does NOT recommend parallel dispatch for these two tasks",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends sequential dispatch or a phased pipeline (task 1 before task 2)",
+          "type": "content_check"
+        },
+        {
+          "text": "Explains that task 2's context packet should include task 1's output (Session type, schema)",
+          "type": "content_check"
+        },
+        {
+          "text": "References the independence test or dependency analysis as the reason for sequencing",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "two-stage-review-catches-spec-deviation",
+      "prompt": "I dispatched an agent to implement a REST endpoint POST /api/orders that accepts { items, shippingAddress } and returns { orderId, total, estimatedDelivery }. The spec said to validate that items is non-empty and shippingAddress has all required fields, returning 400 with specific error messages on validation failure. The agent came back with DONE status. The code compiles and the agent's own tests pass, but looking at the output I notice: (1) the agent also added a GET /api/orders endpoint that wasn't requested, (2) the validation returns a generic 400 error message instead of field-specific messages, and (3) it added a caching layer for orders. How should I handle this in the two-stage review?",
+      "expected_output": "Should walk through Stage 1 (spec conformance) findings: (1) scope creep -- GET /api/orders was not in the spec, (2) under-delivery -- validation error messages don't match the specified 'specific error messages' requirement, (3) scope creep -- caching layer was not requested. Should recommend Stage 1 FAIL. Should recommend re-dispatch with specific corrections: remove the GET endpoint (or flag for separate dispatch), implement field-specific validation messages as specified, remove the caching layer. Should NOT proceed to Stage 2 until Stage 1 passes. Should format the corrections clearly in a re-dispatch context packet.",
+      "assertions": [
+        {
+          "text": "Identifies all three deviations: unrequested GET endpoint (scope creep), generic vs specific error messages (under-delivery), and unrequested caching (scope creep)",
+          "type": "content_check"
+        },
+        {
+          "text": "Classifies the review as Stage 1 (spec conformance) failure, not a quality issue",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends re-dispatch with specific corrections rather than manual fixes",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT proceed to Stage 2 (quality review) -- Stage 1 must pass first",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Provides structured feedback format for the re-dispatch (specific items to fix/remove)",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "trivial-change-pushback-on-dispatch",
+      "prompt": "I need to rename the function getUserById to findUserById in /src/users/service.ts. It's used in 3 places within that same file. Should I dispatch a subagent for this?",
+      "expected_output": "Should push back on dispatching a subagent for this task. Should explain that this is a trivial change (under 10 lines, single file, mechanical rename) where the overhead of constructing a context packet, dispatching, and reviewing exceeds the value of the change. Should recommend doing it inline -- a simple find-and-replace within the file. Should reference the complexity threshold test: dispatch is not worth it for changes this small.",
+      "assertions": [
+        {
+          "text": "Recommends against dispatching a subagent for this trivial task",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Explains that the overhead of dispatch exceeds the value for a small rename in one file",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends inline execution (do it directly) instead of dispatch",
+          "type": "content_check"
+        },
+        {
+          "text": "References the complexity threshold or similar heuristic for when dispatch is appropriate",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

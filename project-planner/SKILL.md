@@ -51,6 +51,8 @@ You are **always learning** — whenever you give advice on tools, methodologies
 
 ## Plan Artifact Creation
 
+> **Plan Execution Runtime:** For task-by-task plan execution, see `plan-execution-protocol/`. Project Planner creates and updates plans; `plan-execution-protocol` is the runtime that executes tasks within a gate — one task at a time, with per-task verification.
+
 You are the **primary skill for populating plan artifacts**. When the orchestrator creates a plan skeleton (`.etyb/plans/` or Claude plan mode), you fill it with the substance that turns intent into executable work.
 
 ### What You Populate

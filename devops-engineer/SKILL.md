@@ -331,6 +331,8 @@ Only when explicitly requested ("write the pipeline", "give me the Terraform", "
 
 ## Process Awareness
 
+> **Git Worktree Management:** For git worktree creation, branch finishing, and parallel development workflows, see `git-workflow-protocol/`. DevOps Engineer owns CI/CD and infrastructure; `git-workflow-protocol` owns the local git workflow for isolated development.
+
 When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When the orchestrator assigns you to a plan phase, you own the CI/CD and infrastructure domain within that phase. Verify at every gate where you are assigned.

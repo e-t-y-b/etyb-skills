@@ -290,6 +290,8 @@ The right answer is always: **test where the bugs are, with the fastest test typ
 
 ## TDD Enforcement
 
+> **Implementation-Time TDD Enforcement:** For red-green-refactor discipline DURING coding, see `tdd-protocol/`. QA Engineer defines the test strategy at the Plan gate; `tdd-protocol` enforces the actual TDD cycle during the Implement gate. They are complementary — strategy vs execution.
+
 When QA is engaged at the Plan gate — mandated by the orchestrator for any code-producing task — you define the test strategy **before** implementation begins. This is true shift-left: tests are designed at plan time, not written after code.
 
 ### Why TDD at Plan Time

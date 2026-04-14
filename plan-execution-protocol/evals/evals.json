@@ -1,0 +1,121 @@
+{
+  "skill_name": "plan-execution-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "blocked-task-skip",
+      "prompt": "I'm working through the plan for our e-commerce platform. Task #5 (implement checkout flow) depends on Task #3 (payment service integration), but Task #3 is still blocked waiting for the Stripe API keys from the infrastructure team. What should I do?",
+      "expected_output": "Should NOT attempt to work on Task #5 since its dependency (Task #3) is blocked. Should mark Task #5 as blocked with a documented reason referencing B-id for Task #3's blocker. Should scan the plan for the next UNBLOCKED task that has all dependencies satisfied. Should present that task to the user. Should NOT guess what the payment service API will look like and code against assumptions.",
+      "assertions": [
+        {
+          "text": "Does NOT proceed with Task #5 or suggest coding against assumed payment API",
+          "type": "negative_check"
+        },
+        {
+          "text": "Identifies Task #5 as blocked due to its dependency on blocked Task #3",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Searches for the next unblocked task with satisfied dependencies",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends documenting the blocker in the plan artifact with reason and impact",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT suggest guessing past the blocker or assuming the Stripe keys will arrive soon",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "gate-exit-verification",
+      "prompt": "All 6 tasks in the Implement gate are marked done. Let's move on to the Verify gate and start the code review.",
+      "expected_output": "Should NOT immediately jump to the Verify gate. Should trigger the gate exit verification checklist first: verify all tasks have 5-question verification reports, all tests pass, no unresolved blockers, decision log is current, risk register is current, mandatory expert reviews for Implement gate are complete. Should produce a gate completion report for the orchestrator. Only after the checklist passes should it recommend advancing.",
+      "assertions": [
+        {
+          "text": "Does NOT immediately start the Verify gate or code review",
+          "type": "negative_check"
+        },
+        {
+          "text": "Triggers the gate exit verification checklist before advancing",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Checks that all tasks have verification reports (5 questions answered)",
+          "type": "content_check"
+        },
+        {
+          "text": "Checks that all tests pass before gate transition",
+          "type": "content_check"
+        },
+        {
+          "text": "Produces or references a gate completion report for the orchestrator",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "mid-execution-new-requirement",
+      "prompt": "While implementing Task #8 (user profile API), I realized we also need an endpoint for profile image upload. That wasn't in the plan. I'll just add it to this task and knock it out together.",
+      "expected_output": "Should NOT silently merge the new work into the current task. Should recognize this as a plan mutation (new task discovered during execution). Should advise: finish Task #8 as scoped, then add a NEW task to the plan for profile image upload with its own estimate, expert assignment, and dependencies. Should add a decision log entry documenting the discovery. Should update the risk register if the new work affects timeline or scope.",
+      "assertions": [
+        {
+          "text": "Does NOT allow merging the new requirement into the current task without documentation",
+          "type": "negative_check"
+        },
+        {
+          "text": "Identifies this as a plan mutation requiring a new task entry",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends completing the current task as originally scoped first",
+          "type": "content_check"
+        },
+        {
+          "text": "Requires adding a decision log entry documenting the discovered requirement",
+          "type": "content_check"
+        },
+        {
+          "text": "Requires adding the new task to the plan with estimate and expert assignment",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "skip-task-evaluation",
+      "prompt": "Task #4 in the plan is to write API documentation for the endpoints. We're in a hurry and the team already knows the API. Can we just skip it and move on to the next task?",
+      "expected_output": "Should evaluate whether Task #4 is on the critical path (do other tasks depend on it?). If documentation is not blocking other tasks and is not a gate requirement at the current gate, it CAN be dropped — but only with a decision log entry explaining why, what the tradeoff is, and when it will be revisited. Should check if the current gate's exit criteria require documentation. Should NOT silently skip it. Should present the tradeoffs: skipping saves time now but creates knowledge debt and may block the Verify gate (which often requires documentation).",
+      "assertions": [
+        {
+          "text": "Evaluates whether the task is on the critical path or blocks other tasks",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Checks gate exit criteria to see if documentation is required at this gate",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT silently skip the task without documentation",
+          "type": "negative_check"
+        },
+        {
+          "text": "Requires a decision log entry if the task is dropped, with rationale and tradeoffs",
+          "type": "content_check"
+        },
+        {
+          "text": "Presents tradeoffs of skipping (knowledge debt, potential Verify gate block) vs time saved",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}
