@@ -1,0 +1,23 @@
+{
+  "skill_name": "system-architect",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "We're a 12-person startup building a B2B SaaS invoicing platform. We need to handle multi-tenant billing, PDF generation, and integrate with Stripe and QuickBooks. We expect ~500 customers in year 1, growing to 5K in year 3. I need a high-level architecture — what components, how they talk to each other, and where the data lives.",
+      "expected_output": "A conversational response that asks clarifying questions OR presents a scale-appropriate architecture (modular monolith, not microservices) with components, data storage strategy, integration approach, and Mermaid diagram. Should be tradeoff-oriented, not prescriptive.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "I'm working on an order management system for a logistics company. Orders can be split across warehouses, have complex fulfillment rules, and need real-time status tracking. My team is debating whether to use DDD with event sourcing or just a straightforward CRUD approach. We're 8 engineers, mostly experienced with Spring Boot. Help me think through this.",
+      "expected_output": "A nuanced response that explores both approaches with tradeoffs. Should recommend DDD tactical patterns for the core domain (order fulfillment) but simpler patterns for supporting subdomains. Should mention aggregate design, domain events, and whether event sourcing is warranted. Should consider team expertise with Spring Boot.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We have 6 microservices that currently communicate via synchronous REST calls. We're getting cascading failures when one service goes down. Our CTO wants us to move to event-driven architecture with Kafka, but I'm not sure we need that complexity. We're on AWS, team of 15, and we process about 10K orders per day. What should we do?",
+      "expected_output": "A response that doesn't jump straight to Kafka. Should explore intermediate options (circuit breakers, async messaging with SQS/SNS, retry patterns) before considering Kafka. Should present a spectrum of solutions from simple to complex, with tradeoffs. Should consider the 10K orders/day scale (modest) and team size.",
+      "files": []
+    }
+  ]
+}

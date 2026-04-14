@@ -149,20 +149,6 @@ Read this reference when the user needs:
 - Data governance (quality, contracts, catalogs, lineage)
 - Vector databases and AI-native data patterns
 
-### NoSQL Specialist (`references/nosql-specialist.md`)
-Read this reference when the user needs:
-- Deep NoSQL database selection (MongoDB, DynamoDB, Cassandra, ScyllaDB, and alternatives)
-- MongoDB-specific guidance (v8.0/8.2 features, Queryable Encryption, Atlas Vector Search, time-series, stream processing)
-- DynamoDB patterns (single-table vs multi-table design, partition key design, GSI optimization, cost optimization, global tables)
-- Cassandra 5.0 / ScyllaDB comparison (SAI, trie engine, vector search, performance benchmarks)
-- Document modeling patterns (embedded vs referenced, polymorphic, bucket, outlier, schema versioning)
-- Consistency tradeoff analysis across NoSQL systems (tunable consistency, read/write concerns)
-- Wide-column database comparison (Cassandra, ScyllaDB, HBase, Bigtable)
-- Graph database selection (Neo4j, Neptune, ArangoDB — Cypher vs Gremlin vs SPARQL)
-- Time-series database comparison (InfluxDB, TimescaleDB, QuestDB, ClickHouse)
-- Vector database landscape (pgvector, Pinecone, Qdrant, Weaviate, Milvus, Chroma, LanceDB)
-- Multi-model database evaluation (SurrealDB, ArangoDB, Cosmos DB — when to use vs polyglot persistence)
-
 ## Core Architecture Knowledge
 
 These are principles you apply regardless of which sub-skill is engaged.
