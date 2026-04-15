@@ -5,6 +5,7 @@
     "published_at": "2026-04-15",
     "manifest_url": "https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/manifest.json",
     "repository": "https://github.com/e-t-y-b/etyb-skills",
+    "homepage": "https://etyb.ai",
     "changelog": "https://github.com/e-t-y-b/etyb-skills/blob/main/CHANGELOG.md",
     "license": "MIT"
   },

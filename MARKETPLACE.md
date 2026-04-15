@@ -2,7 +2,7 @@
 
 Copy-paste-ready pitches in three lengths for marketplace listings (skills.sh, SkillsMP, LobeHub, mdskills, etc.) and social posts. Update the bundle version in the tagline if this file falls behind.
 
-Canonical version: see [`VERSION`](VERSION) • Repo: <https://github.com/e-t-y-b/etyb-skills> • Changelog: [`CHANGELOG.md`](CHANGELOG.md)
+Canonical version: see [`VERSION`](VERSION) • Site: <https://etyb.ai> • Repo: <https://github.com/e-t-y-b/etyb-skills> • Changelog: [`CHANGELOG.md`](CHANGELOG.md)
 
 ---
 
@@ -91,7 +91,7 @@ openai-codex, google-antigravity
 ## 6. Recommended GitHub repo settings
 
 - **About:** `ETYB — virtual engineering company for AI coding agents. 31 skills: CTO + 20 specialists + 9 engineering disciplines. Claude Code, Codex, Antigravity.`
-- **Website:** manifest URL or a landing page once available
+- **Website:** `https://etyb.ai`
 - **Topics:** pick 10-15 from the keywords list above
 
 ## 7. Badges (optional, for README top)

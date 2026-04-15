@@ -1,16 +1,22 @@
 {
   "name": "etyb-skills",
-  "version": "1.0.0",
-  "description": "Virtual engineering company — 29 AI agent skills organized as a coordinated engineering team",
+  "version": "2.0.0",
+  "description": "ETYB — virtual engineering company for AI coding agents. 31 coordinated skills: CTO + 20 specialists + 9 always-on engineering disciplines. Works on Claude Code, OpenAI Codex, and Google Antigravity.",
   "author": "e-t-y-b",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/e-t-y-b/etyb-skills"
   },
-  "homepage": "https://github.com/e-t-y-b/etyb-skills",
+  "homepage": "https://etyb.ai",
+  "bugs": {
+    "url": "https://github.com/e-t-y-b/etyb-skills/issues"
+  },
   "keywords": [
-    "skills", "agent-skills", "claude-code", "engineering", "architecture",
-    "tdd", "devops", "security", "full-stack", "virtual-team"
+    "skills", "agent-skills", "agentskills", "claude-code", "openai-codex", "google-antigravity",
+    "ai-agent", "virtual-team", "cto", "engineering", "architecture", "sdlc",
+    "tdd", "code-review", "devops", "sre", "security", "backend", "frontend",
+    "database", "mobile", "ai-ml", "fintech", "healthcare", "e-commerce", "saas",
+    "real-time", "social-platform", "verification", "debugging", "quality-gates"
   ]
 }

@@ -2,6 +2,8 @@
 
 **Install a virtual engineering company. Your AI agent gets a CTO, 20 specialists, and 9 always-on engineering disciplines — out of the box.**
 
+🌐 **Live at [etyb.ai](https://etyb.ai)** — v2.0.0 shipped • [Release notes](https://github.com/e-t-y-b/etyb-skills/releases/tag/v2.0.0) • [Changelog](CHANGELOG.md)
+
 31 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done."
 
 ```bash
@@ -198,6 +200,17 @@ We tested 3 scenarios comparing vanilla Claude vs Claude with etyb-skills:
 
 **Average token overhead: +53%. What you get: an engineer who says "no" when it matters.**
 
+## Links
+
+- 🌐 Website: [etyb.ai](https://etyb.ai)
+- 📦 Repo: [github.com/e-t-y-b/etyb-skills](https://github.com/e-t-y-b/etyb-skills)
+- 🏷️ Latest release: [v2.0.0](https://github.com/e-t-y-b/etyb-skills/releases/tag/v2.0.0)
+- 📝 Changelog: [CHANGELOG.md](CHANGELOG.md)
+- 📘 Install guide: [docs/installation.md](docs/installation.md)
+- 🏛️ Architecture: [docs/architecture.md](docs/architecture.md)
+- 📋 Manifest: [manifest.json](manifest.json)
+- 🤝 Issues & contributions: [github.com/e-t-y-b/etyb-skills/issues](https://github.com/e-t-y-b/etyb-skills/issues)
+
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
