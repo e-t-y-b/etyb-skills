@@ -4,12 +4,7 @@ These are non-negotiable engineering disciplines. They apply to ALL work, ALL ti
 
 ## 1. TDD Discipline (always on)
 
-NO production code without a failing test first. Red-green-refactor on every change.
-
-<!-- PLATFORM-SPECIFIC: claude — hook enforcement -->
-Hooks enforce this deterministically (pre-edit-check, post-test-log).
-<!-- /PLATFORM-SPECIFIC -->
-
+NO production code without a failing test first. Red-green-refactor on every change. If a platform adapter provides hook enforcement, this is deterministic; otherwise model-trusted (see `adapters/{platform}/hooks.md`).
 → Deep knowledge: `skills/tdd-protocol/SKILL.md` + `skills/tdd-protocol/references/`
 
 ## 2. Verification Discipline (always on)
@@ -19,12 +14,7 @@ Evidence before claims, always. Run commands fresh, read full output, verify exi
 
 ## 3. Review Discipline (always on)
 
-No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context.
-
-<!-- PLATFORM-SPECIFIC: claude — hook enforcement -->
-Hook enforces review-before-commit.
-<!-- /PLATFORM-SPECIFIC -->
-
+No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context. Platforms with hook support enforce review-before-commit deterministically (see `adapters/{platform}/hooks.md`); otherwise model-trusted.
 → Deep knowledge: `skills/review-protocol/SKILL.md` + `skills/review-protocol/references/`
 
 ## 4. Plan Execution Discipline (always on when a plan exists)
@@ -39,12 +29,7 @@ Explore the problem space before the solution space. Never jump to implementatio
 
 ## 6. Branch Safety Discipline (always on)
 
-Never merge or PR without green tests compared against baseline.
-
-<!-- PLATFORM-SPECIFIC: claude — hook enforcement -->
-Hook enforces test-before-merge deterministically.
-<!-- /PLATFORM-SPECIFIC -->
-
+Never merge or PR without green tests compared against baseline. Platforms with hook support enforce test-before-merge deterministically (see `adapters/{platform}/hooks.md`); otherwise model-trusted.
 → Deep knowledge: `skills/git-workflow-protocol/SKILL.md` + references
 
 ## 7. Subagent Coordination Discipline (always on for parallel work)

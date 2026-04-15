@@ -10,11 +10,7 @@ Plans are required for Tier 3+ requests (see `core/charter.md` Step 1). Addition
 
 ### Where to Create the Plan
 
-<!-- PLATFORM-SPECIFIC: claude — see adapters/claude/plan-mode.md when built -->
-Check if Claude plan mode is active (see **Claude Plan Mode Awareness** section below). If active, annotate Claude's plan. If not, create `.etyb/plans/{plan-name}.md`.
-<!-- /PLATFORM-SPECIFIC -->
-
-On platforms without plan-mode integration, always create `.etyb/plans/{plan-name}.md`.
+By default, plans live at `.etyb/plans/{plan-name}.md`. If a platform adapter overrides this (e.g. Claude Code has native plan mode at `.claude/plans/`), follow its guidance — see `adapters/{platform}/plan-mode.md` if present.
 
 ### Plan Population
 
@@ -128,43 +124,8 @@ When the user asks about project status, report from the plan artifact:
 **Risks:** {any P1/P2 risks that need attention}
 ```
 
-<!-- PLATFORM-SPECIFIC: claude — move to adapters/claude/plan-mode.md in Commit 3 -->
+## Platform Plan Integration
 
-## Claude Plan Mode Awareness
+Some platforms have their own plan primitives (Claude Code has `.claude/plans/`). When an adapter is present, it defines how ETYB interacts with the platform's native plan rather than creating a parallel `.etyb/plans/` artifact.
 
-Claude Code has a built-in plan mode that creates plan files in `.claude/plans/`. When active, you annotate Claude's plan rather than duplicating into `.etyb/plans/`.
-
-### Detection
-
-Check these signals in order:
-1. Claude explicitly states it is in plan mode
-2. The conversation context shows plan mode was entered
-3. A plan file exists in `.claude/plans/`
-
-### When Claude Plan Mode Is Active
-
-Annotate the Claude plan with process architecture sections:
-
-- **Gate Status** — current gate and status for each phase gate
-- **Expert Assignments** — mandatory and optional experts with their roles at each gate
-- **Verification Checkpoints** — what needs to be verified before each gate passes
-- **Decision Log** — architectural decisions with rationale
-- **Risk Register** — identified risks with mitigations
-
-### When Claude Plan Mode Is Not Active
-
-Create a standalone plan artifact at `.etyb/plans/{plan-name}.md` using the full template from the process-architecture reference.
-
-### Dual Plan Resolution
-
-If both a Claude plan and `.etyb/plans/` artifact exist:
-
-| Situation | Action |
-|-----------|--------|
-| Claude plan is canonical | Merge `.etyb/plans/` into Claude plan annotations, remove the duplicate |
-| `.etyb/plans/` was created first | Migrate to Claude plan annotations if plan mode is later activated |
-| User explicitly wants `.etyb/plans/` | Honor preference, add a cross-reference in the Claude plan |
-
-> **Reference:** See `skills/etyb/references/process-architecture.md` §8 for the full Claude plan mode integration protocol.
-
-<!-- /PLATFORM-SPECIFIC -->
+See `adapters/{platform}/plan-mode.md` if present for platform-specific detection, annotation, and dual-plan resolution. When no adapter provides plan integration, use `.etyb/plans/{plan-name}.md` exclusively.
