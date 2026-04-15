@@ -7,7 +7,7 @@ license: MIT
 compatibility: Designed for Claude Code and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "1.0.0"
+  version: "2.0.0"
   category: etyb
 ---
 

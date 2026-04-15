@@ -1,0 +1,60 @@
+{
+  "bundle": {
+    "name": "etyb-skills",
+    "version": "2.0.0",
+    "published_at": "2026-04-15",
+    "manifest_url": "https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/manifest.json",
+    "repository": "https://github.com/e-t-y-b/etyb-skills",
+    "changelog": "https://github.com/e-t-y-b/etyb-skills/blob/main/CHANGELOG.md",
+    "license": "MIT"
+  },
+  "skills": {
+    "etyb": "2.0.0",
+    "research-analyst": "1.0.0",
+    "system-architect": "1.0.0",
+    "frontend-architect": "1.0.0",
+    "backend-architect": "1.0.0",
+    "database-architect": "1.0.0",
+    "mobile-architect": "1.0.0",
+    "qa-engineer": "1.0.0",
+    "devops-engineer": "1.0.0",
+    "security-engineer": "1.0.0",
+    "sre-engineer": "1.0.0",
+    "ai-ml-engineer": "1.0.0",
+    "technical-writer": "1.0.0",
+    "project-planner": "1.0.0",
+    "code-reviewer": "1.0.0",
+    "social-platform-architect": "1.0.0",
+    "e-commerce-architect": "1.0.0",
+    "fintech-architect": "1.0.0",
+    "saas-architect": "1.0.0",
+    "real-time-architect": "1.0.0",
+    "healthcare-architect": "1.0.0",
+    "tdd-protocol": "1.0.0",
+    "brainstorm-protocol": "1.0.0",
+    "review-protocol": "1.0.0",
+    "subagent-protocol": "1.0.0",
+    "git-workflow-protocol": "1.0.0",
+    "plan-execution-protocol": "1.0.0",
+    "skill-evolution-protocol": "1.0.0",
+    "verification-protocol": "1.0.0",
+    "debugging-protocol": "1.0.0"
+  },
+  "platforms": {
+    "claude-code": {
+      "supported": true,
+      "adapter": "skills/etyb/adapters/claude/",
+      "enforcement": "hook-enforced (flagship)"
+    },
+    "openai-codex": {
+      "supported": true,
+      "adapter": "skills/etyb/adapters/codex/",
+      "enforcement": "model-trusted"
+    },
+    "google-antigravity": {
+      "supported": true,
+      "adapter": "skills/etyb/adapters/antigravity/",
+      "enforcement": "model-trusted (optional ADK sub-agent elevation)"
+    }
+  }
+}
