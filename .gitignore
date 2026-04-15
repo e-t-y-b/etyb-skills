@@ -6,3 +6,8 @@
 
 # Claude local files
 .claude/
+
+# Internal documents (not for public distribution)
+MARKETPLACE.md
+docs/plan-*.md
+.internal/
