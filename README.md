@@ -1,15 +1,29 @@
 # etyb-skills
 
-**A virtual engineering company for your AI coding agent.**
+**Install a virtual engineering company. Your AI agent gets a CTO, 20 specialists, and 9 always-on engineering disciplines — out of the box.**
 
-31 skills organized as a coordinated engineering team — not just a list of experts, but an operating system for engineering work with process discipline, quality gates, and domain depth.
+31 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done."
 
-```
+```bash
+# Claude Code — native plugin
 /plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb-full@etyb-skills
+
+# OpenAI Codex, Google Antigravity, or manual install
+git clone https://github.com/e-t-y-b/etyb-skills.git
+./etyb-skills/scripts/install.sh   # auto-detects .agents/skills, .agent/skills, or skills/
 ```
 
+Works on **Claude Code** (flagship — hook-enforced gates), **OpenAI Codex** (model-trusted), **Google Antigravity** (model-trusted + optional ADK sub-agents). See [docs/installation.md](docs/installation.md) for the full platform guide.
+
 ---
+
+## Who this is for
+
+- **Teams shipping real software** who want their AI agent to work like a disciplined team member, not a solo cowboy
+- **Engineers tired of AI "yes-and" behavior** — agents that skip tests when pressured, rubber-stamp reviews, or chase symptoms instead of root causes
+- **Leaders of regulated or high-stakes codebases** (fintech, healthcare, e-commerce) who need traceable decisions, gated releases, and evidence-backed completion claims
+- **Solo developers** who want one expert on demand — every specialist works standalone; the CTO is optional
 
 ## What this gives you
 
@@ -56,10 +70,10 @@ DOMAIN EXPERTS (14 core teams + 6 vertical specialists)
 DEEP REFERENCES (100+ files, loaded on demand)
 ```
 
-## The 29 Skills
+## The 31 Skills
 
-### ETYB
-The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement → Verify → Ship), mandates experts, tracks living plans.
+### ETYB (1)
+Your virtual CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement → Verify → Ship), mandates experts, tracks living plans. Works standalone, or as the conductor that pulls the other 30 skills into a coordinated team.
 
 ### Core Team (14 skills)
 
