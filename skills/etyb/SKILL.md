@@ -1,8 +1,8 @@
 ---
 name: etyb
 description: >
-  ETYB — your virtual CTO and engineering team. Routes requests to 20 specialist teams across the full SDLC, enforces 9 always-on engineering disciplines, and manages delivery through 5 quality gates. Use when intent spans multiple disciplines, is ambiguous, or needs end-to-end planning.
-  Triggers: build me, create a system, help me build, design and implement, full stack, end to end, new project, greenfield, from scratch, production-ready, ship this, MVP, product launch, project plan, technical roadmap, which skill, which team, route this to, cross-functional, cross-team, build and deploy, full SDLC, tech stack selection, platform engineering, build a SaaS, build an app, build a platform, build an API, build a mobile app, build a web app, build a dashboard, build a data pipeline, migrate from, rewrite, re-platform, modernize, scale the system, production readiness review, launch checklist, technical due diligence, engineering assessment, system audit, multi-step project, how should I approach, coordinate between.
+  ETYB — your virtual CTO and engineering team. Routes to 20 specialists, enforces 9 always-on engineering disciplines, and manages delivery through 5 quality gates. Use when intent spans multiple disciplines, is ambiguous, or needs end-to-end planning.
+  Triggers: build me, create a system, help me build, design and implement, full stack, end to end, new project, greenfield, from scratch, production-ready, ship this, MVP, product launch, project plan, technical roadmap, which skill, which team, route this to, cross-functional, cross-team, build and deploy, full SDLC, tech stack selection, platform engineering, build a SaaS, build an app, build a platform, build an API, build a mobile app, build a web app, build a dashboard, build a data pipeline, migrate from, rewrite, re-platform, modernize, scale the system, production readiness review, launch checklist, technical due diligence, engineering assessment, system audit, multi-step project, how should I approach.
 license: MIT
 compatibility: Designed for Claude Code and compatible AI coding agents
 metadata:
