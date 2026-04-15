@@ -5,7 +5,7 @@
 29 skills organized as a coordinated engineering team — not just a list of experts, but an operating system for engineering work with process discipline, quality gates, and domain depth.
 
 ```
-/plugin marketplace add re-manish/etyb-skills
+/plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb-full@etyb-skills
 ```
 
@@ -108,7 +108,7 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 
 ### Everything
 ```bash
-/plugin marketplace add re-manish/etyb-skills
+/plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb-full@etyb-skills
 ```
 

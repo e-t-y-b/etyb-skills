@@ -5,8 +5,8 @@
   "author": {
     "name": "re-labs"
   },
-  "homepage": "https://github.com/re-manish/etyb-skills",
-  "repository": "https://github.com/re-manish/etyb-skills",
+  "homepage": "https://github.com/e-t-y-b/etyb-skills",
+  "repository": "https://github.com/e-t-y-b/etyb-skills",
   "license": "MIT",
   "keywords": [
     "engineering", "architecture", "tdd", "code-review", "devops", "security",

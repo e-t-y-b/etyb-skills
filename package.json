@@ -6,9 +6,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/re-manish/etyb-skills"
+    "url": "https://github.com/e-t-y-b/etyb-skills"
   },
-  "homepage": "https://github.com/re-manish/etyb-skills",
+  "homepage": "https://github.com/e-t-y-b/etyb-skills",
   "keywords": [
     "skills", "agent-skills", "claude-code", "engineering", "architecture",
     "tdd", "devops", "security", "full-stack", "virtual-team"
