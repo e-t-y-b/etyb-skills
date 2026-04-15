@@ -67,11 +67,11 @@ fi
 
 # -------- fetch remote manifest --------
 echo "→ checking $MANIFEST_URL ..."
-CURL_AUTH=()
 if [[ -n "${GITHUB_TOKEN:-}" ]]; then
-  CURL_AUTH=(-H "Authorization: token $GITHUB_TOKEN")
+  REMOTE_MANIFEST=$(curl -fsSL -H "Authorization: token $GITHUB_TOKEN" "$MANIFEST_URL" || true)
+else
+  REMOTE_MANIFEST=$(curl -fsSL "$MANIFEST_URL" || true)
 fi
-REMOTE_MANIFEST=$(curl -fsSL "${CURL_AUTH[@]}" "$MANIFEST_URL" || true)
 if [[ -z "$REMOTE_MANIFEST" ]]; then
   echo "error: could not fetch remote manifest from $MANIFEST_URL" >&2
   echo "" >&2
@@ -82,7 +82,7 @@ if [[ -z "$REMOTE_MANIFEST" ]]; then
   exit 1
 fi
 
-REMOTE_VERSION=$(echo "$REMOTE_MANIFEST" | grep -E '"version"\s*:' | head -1 | sed -E 's/.*"version"\s*:\s*"([^"]+)".*/\1/')
+REMOTE_VERSION=$(echo "$REMOTE_MANIFEST" | grep -E '"version"[[:space:]]*:' | head -1 | sed -E 's/.*"version"[[:space:]]*:[[:space:]]*"([^"]+)".*/\1/')
 if [[ -z "$REMOTE_VERSION" ]]; then
   echo "error: could not parse remote version from manifest" >&2
   exit 1
