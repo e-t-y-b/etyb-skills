@@ -128,6 +128,25 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 /plugin install etyb-verticals@etyb-skills
 ```
 
+## Updating
+
+ETYB-Skills uses semver and publishes a machine-readable manifest at the repo root. To stay current without silent surprises:
+
+```bash
+./scripts/update.sh --check   # is there a newer version?
+./scripts/update.sh           # interactive update (shows before/after)
+./scripts/update.sh --force   # skip confirmation prompts
+```
+
+The script:
+- fetches `manifest.json` from `main` and compares `bundle.version` to your local `VERSION`
+- preserves `.etyb/plans/`, `.claude/plans/`, and `.claude/settings.local.json` (never modified)
+- warns on local uncommitted changes before applying
+- uses `git merge --ff-only` — no destructive operations
+- prints the changelog URL for what's new
+
+See [CHANGELOG.md](CHANGELOG.md) for the full version history.
+
 ## How skills load (token efficiency)
 
 Skills use progressive disclosure — a markdown-based RAG pattern:
