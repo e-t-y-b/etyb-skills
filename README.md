@@ -22,16 +22,15 @@ An AI coding agent that works like a 100-person engineering org:
 - **Covers the full SDLC** — from research through production operations
 - **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems, and more
 
-## How it's different from other skill packages
+## Why it works
 
-| | obra/superpowers | etyb-skills |
-|---|---|---|
-| **Skills** | 14 process primitives | 29 skills (process + domain depth) |
-| **Domain knowledge** | None | 20 domain experts with 100+ deep references |
-| **Vertical expertise** | None | Fintech, Healthcare, E-commerce, SaaS, Real-time, Social |
-| **Enforcement** | LLM instructions only | Deterministic hooks + LLM instructions |
-| **Architecture** | Independent skills | Orchestrator-centric with always-on protocols |
-| **SDLC coverage** | Plan → Code → Review → Merge | Research → Architecture → Code → Test → Deploy → Operate |
+Most skill packages give you a list of independent instructions. etyb-skills is different:
+
+- **29 skills** — process discipline AND deep domain expertise in one package
+- **20 domain experts with 100+ deep references** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems, and more
+- **Deterministic enforcement** — shell hooks fire outside the LLM, so TDD gates and merge checks can't be talked around
+- **Orchestrator-centric architecture** — a CTO routes every request through the right experts with always-on protocols
+- **Full SDLC coverage** — Research, Architecture, Code, Test, Deploy, Operate (not just plan-to-merge)
 
 ## Architecture
 
@@ -112,7 +111,7 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 /plugin install etyb-full@etyb-skills
 ```
 
-### Just process discipline (competes with superpowers)
+### Just process discipline
 ```bash
 /plugin install etyb-process-protocols@etyb-skills
 ```

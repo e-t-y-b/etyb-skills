@@ -6,7 +6,7 @@ description: >
 license: MIT
 compatibility: Designed for Claude Code and compatible AI coding agents
 metadata:
-  author: re-labs
+  author: e-t-y-b
   version: "1.0.0"
   category: orchestrator
 ---
