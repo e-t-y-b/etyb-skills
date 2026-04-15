@@ -67,9 +67,18 @@ fi
 
 # -------- fetch remote manifest --------
 echo "→ checking $MANIFEST_URL ..."
-REMOTE_MANIFEST=$(curl -fsSL "$MANIFEST_URL" || true)
+CURL_AUTH=()
+if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+  CURL_AUTH=(-H "Authorization: token $GITHUB_TOKEN")
+fi
+REMOTE_MANIFEST=$(curl -fsSL "${CURL_AUTH[@]}" "$MANIFEST_URL" || true)
 if [[ -z "$REMOTE_MANIFEST" ]]; then
-  echo "error: could not fetch remote manifest" >&2
+  echo "error: could not fetch remote manifest from $MANIFEST_URL" >&2
+  echo "" >&2
+  echo "possible causes:" >&2
+  echo "  - repo is private → set GITHUB_TOKEN and retry, or use 'git pull' directly" >&2
+  echo "  - network / proxy blocking raw.githubusercontent.com" >&2
+  echo "  - canonical URL moved → check https://github.com/e-t-y-b/etyb-skills" >&2
   exit 1
 fi
 
