@@ -1,6 +1,6 @@
 # ETYB Skills — Virtual Engineering Company
 
-This is a collection of 29 AI agent skills organized as a virtual engineering team.
+This is a collection of 31 AI agent skills organized as a virtual engineering team.
 
 ## Entry Point
 
@@ -10,8 +10,8 @@ This is a collection of 29 AI agent skills organized as a virtual engineering te
 
 - **ETYB** (1) — CTO-level routing, gate enforcement, plan management
 - **Domain Experts** (20) — 14 core teams + 6 vertical specialists (WHO/WHAT)
-- **Process Protocols** (7) — Always-on engineering disciplines (HOW)
-- **ETYB References** (3) — Verification, debugging, process architecture (WHEN/WHERE)
+- **Process Protocols** (9) — Always-on engineering disciplines (HOW)
+- **ETYB References** (1) — Process architecture (plan artifact format, gate definitions, mandating rules). Verification and debugging are now standalone peer protocol skills.
 
 ## Always-On Engineering Culture
 

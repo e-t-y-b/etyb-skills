@@ -51,8 +51,8 @@ Deep protocol details loaded on demand when you need them:
 | Reference | Consult When |
 |-----------|--------------|
 | [`references/process-architecture.md`](references/process-architecture.md) | Plan artifact format, gate definitions, expert mandating rules, scale calibration |
-| [`references/verification-protocol.md`](references/verification-protocol.md) | Completion checklists, done criteria per gate, code review gates, verification evidence standards |
-| [`references/debugging-protocol.md`](references/debugging-protocol.md) | Root cause methodology, hypothesis-driven debugging, 3-failure escalation, debugging state tracking |
+| `skills/verification-protocol/` | Peer skill. Completion checklists, done criteria per gate, code review gates, verification evidence standards |
+| `skills/debugging-protocol/` | Peer skill. Root cause methodology, hypothesis-driven debugging, 3-failure escalation |
 
 ## First Action On Any Request
 

@@ -2,7 +2,7 @@
 
 **A virtual engineering company for your AI coding agent.**
 
-29 skills organized as a coordinated engineering team — not just a list of experts, but an operating system for engineering work with process discipline, quality gates, and domain depth.
+31 skills organized as a coordinated engineering team — not just a list of experts, but an operating system for engineering work with process discipline, quality gates, and domain depth.
 
 ```
 /plugin marketplace add e-t-y-b/etyb-skills
@@ -26,7 +26,7 @@ An AI coding agent that works like a 100-person engineering org:
 
 Most skill packages give you a list of independent instructions. etyb-skills is different:
 
-- **29 skills** — process discipline AND deep domain expertise in one package
+- **31 skills** — process discipline AND deep domain expertise in one package
 - **20 domain experts with 100+ deep references** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems, and more
 - **Deterministic enforcement** — shell hooks fire outside the LLM, so TDD gates and merge checks can't be talked around
 - **ETYB-centric architecture** — a CTO routes every request through the right experts with always-on protocols
@@ -91,7 +91,7 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 | `real-time-architect` | WebSockets, CRDTs, collaboration, gaming backends, live streaming |
 | `healthcare-architect` | HIPAA, HL7/FHIR, EHR integration, patient data, audit trails |
 
-### Process Protocols (7 skills)
+### Process Protocols (9 skills)
 
 | Skill | Always On | Hooks |
 |-------|----------|-------|
@@ -102,6 +102,8 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 | `plan-execution-protocol` | Active plans | `post-edit-log` |
 | `brainstorm-protocol` | Ambiguous requests | — |
 | `skill-evolution-protocol` | Skill improvements | — |
+| `verification-protocol` | Every completion claim | — |
+| `debugging-protocol` | Active troubleshooting | — |
 
 ## Install
 

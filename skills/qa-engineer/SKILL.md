@@ -394,7 +394,7 @@ QA produces one of two outputs for ETYB's gate decision:
 
 ## Verification Protocol (QA)
 
-QA-specific verification checklist that plugs into the universal verification protocol from `skills/etyb/references/verification-protocol.md`. Use this when verifying your own work or reviewing test-related deliverables.
+QA-specific verification checklist that plugs into the universal verification protocol from `skills/verification-protocol/references/verification-methodology.md`. Use this when verifying your own work or reviewing test-related deliverables.
 
 ### QA Completion Report
 
@@ -422,9 +422,9 @@ When QA completes any task (test strategy definition, test review, verification)
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Universal Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
+| Universal Verification Protocol | `skills/verification-protocol/references/verification-methodology.md` | For completion report format, five verification questions, evidence standards |
 | Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
-| QA Verification Role Expectations | `skills/etyb/references/verification-protocol.md` §3 | For QA-specific verification expectations in the cross-skill matrix |
+| QA Verification Role Expectations | `skills/verification-protocol/references/verification-methodology.md` §3 | For QA-specific verification expectations in the cross-skill matrix |
 
 ## Response Format
 

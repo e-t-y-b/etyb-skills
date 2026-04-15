@@ -2,7 +2,7 @@
 
 ## Overview
 
-ETYB Skills is a virtual engineering company implemented as a system of 29 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and a ETYB that enforces engineering discipline at every stage.
+ETYB Skills is a virtual engineering company implemented as a system of 31 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and a ETYB that enforces engineering discipline at every stage.
 
 ## System Architecture
 
@@ -340,7 +340,7 @@ Specialized teams activated when building specific types of products. They compl
 
 ## Process Protocols
 
-Seven always-on engineering disciplines govern how work gets done. Their principles are embedded in ETYB; deep reference knowledge is loaded on demand.
+Nine always-on engineering disciplines govern how work gets done. Their principles are embedded in ETYB; deep reference knowledge is loaded on demand.
 
 | Protocol | Folder | Scope | Description |
 |----------|--------|-------|-------------|
@@ -351,6 +351,8 @@ Seven always-on engineering disciplines govern how work gets done. Their princip
 | Brainstorm Protocol | `skills/brainstorm-protocol/` | Ambiguous or exploratory requests | Exploration techniques, convergence patterns, design brief templates. |
 | Review Protocol | `skills/review-protocol/` | Code review lifecycle | Review dispatch, feedback evaluation, review integration. Hooks: `pre-commit-review-check` verifies review before commit. |
 | Skill Evolution Protocol | `skills/skill-evolution-protocol/` | Skill creation and improvement | Skill creation, eval engineering, improvement loop, institutional memory. |
+| Verification Protocol | `skills/verification-protocol/` | Every completion claim | Five verification questions, completion report format, done criteria per gate, evidence standards. |
+| Debugging Protocol | `skills/debugging-protocol/` | Active troubleshooting | Root-cause methodology, hypothesis-driven debugging, one-variable rule, 3-failure escalation. |
 
 ## Process Architecture
 

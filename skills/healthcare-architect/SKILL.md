@@ -360,7 +360,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-Healthcare-specific verification checklist — references `skills/etyb/references/verification-protocol.md`.
+Healthcare-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a healthcare perspective, verify:
 

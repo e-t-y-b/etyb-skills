@@ -339,7 +339,7 @@ The `etyb` owns the process — you own the plan content within that process:
 | Updating plan as work progresses | **You** (`project-planner`) + assigned experts |
 | Final gate pass/fail decision | `etyb` |
 
-> **Reference:** See `skills/etyb/references/process-architecture.md` for the complete plan artifact format, gate definitions, expert mandating rules, and scale calibration. See `skills/etyb/references/verification-protocol.md` for done criteria per gate.
+> **Reference:** See `skills/etyb/references/process-architecture.md` for the complete plan artifact format, gate definitions, expert mandating rules, and scale calibration. See `skills/verification-protocol/references/verification-methodology.md` for done criteria per gate.
 
 ## Response Format
 

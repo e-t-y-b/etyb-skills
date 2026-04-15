@@ -44,7 +44,7 @@ Bring these in when the user is building in their domain. They provide patterns 
 | Patient data, HIPAA, HL7/FHIR, EHR, clinical workflows | `healthcare-architect` |
 | ML models, training, inference, drift, embeddings, LLMs | `ai-ml-engineer` |
 
-## Process Protocols (7)
+## Process Protocols (9)
 
 Always-on engineering disciplines with deep reference knowledge. Principles are embedded in `core/always-on-protocols.md`. Read these skills when you need the detailed HOW.
 
@@ -57,6 +57,8 @@ Always-on engineering disciplines with deep reference knowledge. Principles are 
 | 25 | `brainstorm-protocol` | Exploration techniques, convergence patterns, design brief templates | — |
 | 26 | `review-protocol` | Review dispatch, feedback evaluation, review integration | pre-commit |
 | 27 | `skill-evolution-protocol` | Skill creation, eval engineering, improvement loops, institutional memory | — |
+| 28 | `verification-protocol` | Five verification questions, completion report format, done criteria per gate, evidence standards | — |
+| 29 | `debugging-protocol` | Root-cause methodology, hypothesis-driven debugging, one-variable rule, 3-failure escalation | — |
 
 ## Domain Overlap Resolution
 

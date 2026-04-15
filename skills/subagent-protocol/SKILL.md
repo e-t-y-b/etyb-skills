@@ -291,7 +291,7 @@ When working within an active plan (`.etyb/plans/` or Claude plan mode):
 
 ## Verification Protocol
 
-Subagent-specific verification checklist -- references `skills/etyb/references/verification-protocol.md`.
+Subagent-specific verification checklist -- references `skills/verification-protocol/references/verification-methodology.md`.
 
 Before marking any dispatch cycle as complete, verify:
 
@@ -308,7 +308,7 @@ File a completion report answering the five verification questions (what was don
 
 ## Debugging Protocol
 
-When a dispatch cycle fails, follow the systematic debugging protocol from `skills/etyb/references/debugging-protocol.md`: root cause first, one hypothesis at a time, verify before declaring fixed.
+When a dispatch cycle fails, follow the systematic debugging protocol from `skills/debugging-protocol/references/debugging-methodology.md`: root cause first, one hypothesis at a time, verify before declaring fixed.
 
 **Common dispatch failures and their root causes:**
 

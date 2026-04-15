@@ -449,7 +449,7 @@ When reviewing at the Verify gate, systematically check:
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Universal Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
+| Universal Verification Protocol | `skills/verification-protocol/references/verification-methodology.md` | For completion report format, five verification questions, evidence standards |
 | Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
 | Mandatory Expert Rules | `skills/etyb/SKILL.md` §Expert Mandating | For which changes mandate security involvement at which gates |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` §Plan-Time Test Strategy | For coordinating security test requirements with QA's test strategy |

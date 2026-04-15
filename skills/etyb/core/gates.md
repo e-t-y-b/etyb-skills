@@ -83,7 +83,7 @@ The old pattern was: produce a project brief, then "Let's Start" and invoke a sp
 
 Never jump straight to implementation. The first action after a Tier 3/4 classification is always entering the Design gate.
 
-> **Reference:** See `skills/etyb/references/process-architecture.md` §9-14 for detailed gate definitions, entry/exit criteria, and scale calibration. See `skills/etyb/references/verification-protocol.md` for done criteria per gate.
+> **Reference:** See `skills/etyb/references/process-architecture.md` §9-14 for detailed gate definitions, entry/exit criteria, and scale calibration. See `skills/verification-protocol/references/verification-methodology.md` for done criteria per gate.
 
 ## State Tracking
 

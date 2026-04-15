@@ -177,7 +177,7 @@ You identify issues in these areas during review, but the deep solution design i
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, done criteria per gate, mandatory code review gate details |
+| Verification Protocol | `skills/verification-protocol/references/verification-methodology.md` | For completion report format, done criteria per gate, mandatory code review gate details |
 | Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` §Plan-Time Test Strategy | When verifying that tests match the plan's test strategy |
 

@@ -10,7 +10,7 @@ NO production code without a failing test first. Red-green-refactor on every cha
 ## 2. Verification Discipline (always on)
 
 Evidence before claims, always. Run commands fresh, read full output, verify exit codes. Never say "done" without proof. The 5-question protocol applies to EVERY completion.
-→ Deep knowledge: `skills/etyb/references/verification-protocol.md`
+→ Deep knowledge: `skills/verification-protocol/references/verification-methodology.md`
 
 ## 3. Review Discipline (always on)
 
@@ -45,7 +45,7 @@ No skill change without a failing eval first. The system gets better over time.
 ## 9. Debugging Discipline (always on during troubleshooting)
 
 Root cause first. One variable at a time. 3-failure escalation.
-→ Deep knowledge: `skills/etyb/references/debugging-protocol.md`
+→ Deep knowledge: `skills/debugging-protocol/references/debugging-methodology.md`
 
 ## Debugging Protocol Activation
 
@@ -85,4 +85,4 @@ After resolving the bug:
 3. Update the plan artifact — was the root cause a process gap?
 4. If process gap identified, create a follow-up task to fix the process
 
-> **Reference:** See `skills/etyb/references/debugging-protocol.md` for the complete debugging methodology, hypothesis-driven debugging, root cause verification, and decision trees.
+> **Reference:** See `skills/debugging-protocol/references/debugging-methodology.md` for the complete debugging methodology, hypothesis-driven debugging, root cause verification, and decision trees.

@@ -4,13 +4,13 @@
     "name": "e-t-y-b"
   },
   "metadata": {
-    "description": "Virtual engineering company — 29 AI agent skills",
+    "description": "Virtual engineering company — 31 AI agent skills",
     "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "etyb-full",
-      "description": "Complete virtual engineering team — ETYB, 14 core teams, 6 domain specialists, 7 process protocols",
+      "description": "Complete virtual engineering team — ETYB, 14 core teams, 6 domain specialists, 9 process protocols",
       "source": "./",
       "strict": false,
       "skills": [
@@ -41,12 +41,14 @@
         "./skills/subagent-protocol",
         "./skills/git-workflow-protocol",
         "./skills/plan-execution-protocol",
-        "./skills/skill-evolution-protocol"
+        "./skills/skill-evolution-protocol",
+        "./skills/verification-protocol",
+        "./skills/debugging-protocol"
       ]
     },
     {
       "name": "etyb-process-protocols",
-      "description": "7 always-on engineering disciplines — TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement",
+      "description": "9 always-on engineering disciplines — TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement, verification, debugging",
       "source": "./",
       "strict": false,
       "skills": [
@@ -57,7 +59,9 @@
         "./skills/subagent-protocol",
         "./skills/git-workflow-protocol",
         "./skills/plan-execution-protocol",
-        "./skills/skill-evolution-protocol"
+        "./skills/skill-evolution-protocol",
+        "./skills/verification-protocol",
+        "./skills/debugging-protocol"
       ]
     },
     {
