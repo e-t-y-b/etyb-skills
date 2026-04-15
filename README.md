@@ -128,6 +128,17 @@ The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement 
 /plugin install etyb-verticals@etyb-skills
 ```
 
+For Codex, Antigravity, or manual installs:
+
+```bash
+git clone https://github.com/e-t-y-b/etyb-skills.git
+cd etyb-skills
+./scripts/install.sh               # auto-detects .agents/skills, .agent/skills, or skills/
+./scripts/install.sh --dry-run     # preview changes without writing anything
+```
+
+The install script detects conflicts with existing skills (including legacy `orchestrator/` from v1.x) and offers replace / keep-side-by-side / skip per skill. See [docs/installation.md](docs/installation.md) for the full guide.
+
 ## Updating
 
 ETYB-Skills uses semver and publishes a machine-readable manifest at the repo root. To stay current without silent surprises:
