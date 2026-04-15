@@ -1,0 +1,50 @@
+{
+  "skill_name": "saas-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "multi-tenancy-isolation-strategy",
+      "prompt": "We're building a B2B project management SaaS (think Linear competitor) targeting both SMB teams and enterprise organizations. Current state: 120 tenants on a shared PostgreSQL database with tenant_id columns on every table, running on AWS ECS. We just signed our first enterprise deal — a Fortune 500 financial services company — and they're requiring dedicated data isolation, SOC 2 Type II compliance, data residency in the EU (we're currently US-only), and the ability to use their own encryption keys (BYOK). They also want SSO via SAML with their Okta instance. Meanwhile, our SMB customers (95% of our base) are happy with the shared model and are price-sensitive. We have 15 engineers and a 3-month timeline to support this enterprise customer without disrupting our existing SMB tenants. How should we architect the isolation model to serve both segments? What's the migration path from our current shared-everything setup?",
+      "expected_output": "Should recommend a hybrid/tiered isolation model (pool for SMB, silo or bridge for enterprise), design the migration path without disrupting existing tenants, address EU data residency, BYOK encryption, and SAML SSO, and provide a phased implementation plan.",
+      "assertions": [
+        {"text": "Recommends a hybrid or tiered isolation model — pool for SMB tenants and silo or bridge for the enterprise tenant — rather than migrating everything to silo", "type": "content_check"},
+        {"text": "Designs a migration path from the current shared PostgreSQL to supporting dedicated database or schema-per-tenant for enterprise without disrupting the 120 existing SMB tenants", "type": "content_check"},
+        {"text": "Addresses EU data residency with a multi-region deployment strategy — separate database or cluster in an EU AWS region for the enterprise tenant's data", "type": "content_check"},
+        {"text": "Designs the BYOK encryption approach using AWS KMS with customer-managed keys or envelope encryption for the enterprise tenant", "type": "content_check"},
+        {"text": "Addresses SAML SSO integration with Okta and recommends an identity platform like WorkOS or Auth0 Organizations rather than building SAML from scratch", "type": "content_check"},
+        {"text": "Provides a phased plan that fits within the 3-month timeline, prioritizing what the enterprise customer needs for contract signing vs what can come later", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "billing-subscription-system",
+      "prompt": "We're redesigning the billing system for our developer tools SaaS platform. Current pricing is simple per-seat ($15/user/month), but we're adding usage-based pricing for API calls, storage, and CI/CD build minutes alongside the seat-based pricing. The new pricing model: a base platform fee ($49/month), per-seat charges ($10/user/month), API calls (first 100K free, then $0.50 per 1K calls), storage ($0.10/GB/month), and build minutes ($0.005/minute). We have 800 paying customers and process about 2M API calls/day across all tenants. We need: real-time usage dashboards for customers, automated invoice generation, proration for mid-cycle plan changes, dunning for failed payments, and the ability for customers to set spending alerts. We're currently on Stripe Billing for the per-seat model. Our backend is Python (FastAPI) with PostgreSQL. 4 engineers can work on this. Should we build the metering pipeline ourselves or use a platform like Orb or Metronome? Design the billing architecture.",
+      "expected_output": "Should evaluate build-vs-buy for the metering pipeline, recommend keeping Stripe for payment processing while adding a metering layer, design the event ingestion and aggregation pipeline, and address proration, dunning, and real-time usage dashboards.",
+      "assertions": [
+        {"text": "Evaluates metering platforms like Orb, Metronome, Lago, or Amberflo against building a custom pipeline, with a recommendation based on the 4-engineer team size and 2M API calls/day scale", "type": "content_check"},
+        {"text": "Designs the usage event ingestion pipeline — how API calls, storage, and build minutes are captured, deduplicated, and aggregated before hitting billing", "type": "content_check"},
+        {"text": "Recommends keeping Stripe as the payment processor and describes how the metering layer feeds rated usage into Stripe invoices", "type": "content_check"},
+        {"text": "Addresses proration for mid-cycle plan changes — how seat additions, plan upgrades, and downgrades are calculated and billed", "type": "content_check"},
+        {"text": "Designs the real-time usage dashboard architecture — how customers see their current consumption and spending alerts before the billing cycle ends", "type": "content_check"},
+        {"text": "Covers dunning management for failed payments including retry schedules, grace periods, and service degradation policy", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "tenant-onboarding-flow",
+      "prompt": "We're building the onboarding flow for a horizontal B2B SaaS collaboration platform (think Notion meets Airtable). We need to support two onboarding paths: (1) self-serve PLG signup where an individual signs up with email or Google OAuth, creates a workspace, invites teammates, and starts using the product within 5 minutes, and (2) enterprise onboarding where the IT admin configures SAML SSO with their IdP (Okta, Azure AD, or Google Workspace), provisions users via SCIM, sets up multiple workspaces under a single organization, configures custom data retention policies, and imports data from their existing tools (Notion, Confluence, Google Docs). Current tech stack: Next.js frontend, Go backend, PostgreSQL, deployed on AWS EKS. We have 2,200 self-serve tenants today. We're about to launch our enterprise tier and have 15 signed LOIs from companies with 500-5,000 employees each. Design the tenant onboarding architecture covering both paths. How should we model the organization/workspace/user hierarchy? What should we build vs buy for identity management?",
+      "expected_output": "Should design both onboarding paths with the organization/workspace/user data model, recommend an identity platform for SSO/SCIM, design the tenant provisioning pipeline, and address the data import architecture for enterprise customers.",
+      "assertions": [
+        {"text": "Designs the organization-workspace-user hierarchy as a data model — organization as the billing entity, workspaces as functional units, users belonging to workspaces with roles", "type": "content_check"},
+        {"text": "Recommends a specific identity platform for SSO and SCIM provisioning such as WorkOS, Clerk, Auth0 Organizations, or PropelAuth — with reasoning for the choice", "type": "content_check"},
+        {"text": "Designs the self-serve PLG onboarding flow with time-to-first-value optimization — signup, workspace creation, template selection, and team invite within minutes", "type": "content_check"},
+        {"text": "Designs the enterprise onboarding flow including SAML SSO configuration, SCIM user provisioning, and admin setup of organization-level policies", "type": "content_check"},
+        {"text": "Addresses the data import architecture for migrating from Notion, Confluence, and Google Docs — including transformation pipelines, progress tracking, and error handling", "type": "content_check"},
+        {"text": "Designs the tenant provisioning pipeline — what resources are created when a new tenant signs up (database records, storage buckets, default configurations, feature flags)", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

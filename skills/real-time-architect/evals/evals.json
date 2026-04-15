@@ -1,0 +1,50 @@
+{
+  "skill_name": "real-time-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "websocket-chat-system-design",
+      "prompt": "We're building a Slack-like team messaging app for a vertical SaaS product targeting law firms. Expected scale: 500 law firms, average 40 users per firm (20K total users), with maybe 5K concurrent connections at peak. Features needed: channels (public and private), direct messages, threaded replies, typing indicators, presence (online/offline/away), file attachments (PDFs and images up to 25MB), message search, and read receipts. Our backend is Node.js (NestJS) on AWS with PostgreSQL and Redis. Team is 4 backend engineers, none with real-time experience. We need the chat to feel instant — messages should appear within 200ms for users in the same workspace. Design the real-time architecture for this chat system. Should we build from scratch with WebSockets or use a managed service?",
+      "expected_output": "Should recommend a specific architecture (likely managed service given team inexperience, or Socket.IO/WebSocket gateway with Redis Pub/Sub), design the message flow, address presence and typing indicators, and provide a phased implementation plan.",
+      "assertions": [
+        {"text": "Makes a clear build-vs-buy recommendation given the team's lack of real-time experience and the 4-person backend team size", "type": "content_check"},
+        {"text": "Designs the message delivery flow including fan-out strategy for channels — whether fan-out-on-write or fan-out-on-read given the scale of 40 users per workspace", "type": "content_check"},
+        {"text": "Addresses presence system design including how online/offline/away status is tracked and propagated across connections", "type": "content_check"},
+        {"text": "Specifies how typing indicators should work without overwhelming the server — debouncing, TTL-based expiry, or similar patterns", "type": "content_check"},
+        {"text": "Discusses message storage architecture for PostgreSQL and whether a separate search index like Elasticsearch is needed for message search", "type": "content_check"},
+        {"text": "Addresses reconnection strategy and how clients catch up on missed messages after a disconnect", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "real-time-collaboration-tool",
+      "prompt": "We're building a Figma-like collaborative whiteboard tool where multiple users can simultaneously edit a shared canvas with shapes, sticky notes, arrows, and freehand drawing. Target scale: up to 50 concurrent editors per board, with sub-100ms latency for cursor movements and shape updates. Users are globally distributed (US, EU, APAC). We need to handle conflict resolution when two users edit the same shape simultaneously, show live cursor positions for all participants, and support offline editing with sync when reconnecting. Our frontend is React with Canvas/WebGL rendering. Backend is currently a simple Express.js server. We have 6 engineers — 2 have worked with WebSockets before but nobody has CRDT experience. What's the right architecture? Should we use CRDTs or OT? Which libraries should we evaluate? How do we handle the real-time sync layer?",
+      "expected_output": "Should recommend CRDTs over OT for this use case (offline support, distributed nature), suggest specific libraries like Yjs or Automerge, design the sync architecture with presence, and address the global latency requirement.",
+      "assertions": [
+        {"text": "Recommends CRDTs over Operational Transformation and explains why — specifically citing offline-first support, no central server requirement for conflict resolution, and better fit for distributed editing", "type": "content_check"},
+        {"text": "Evaluates specific CRDT libraries such as Yjs, Automerge, or Loro with tradeoffs relevant to a whiteboard use case (not just text editing)", "type": "content_check"},
+        {"text": "Designs the presence system for live cursor tracking with sub-100ms latency — addressing how cursor positions are broadcast efficiently to 50 concurrent editors", "type": "content_check"},
+        {"text": "Addresses the global distribution requirement — edge termination, regional servers, or WebSocket connection routing for US/EU/APAC users", "type": "content_check"},
+        {"text": "Discusses offline editing and reconnection sync — how local changes merge with remote state when a disconnected user comes back online", "type": "content_check"},
+        {"text": "Recommends a hosting or sync layer such as Liveblocks, Hocuspocus, Y-Sweet, or PartyKit rather than building raw CRDT sync infrastructure from scratch", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "live-streaming-architecture",
+      "prompt": "We're building a live streaming platform for fitness instructors — think a niche Twitch for workout classes. An instructor broadcasts a live video session to anywhere from 10 to 5,000 concurrent viewers. We need: live video with under 3-second latency (instructors give real-time cues, so 10-30 second HLS delay is too much), a live chat overlay alongside the video, viewer reactions (emoji bursts), viewer count display, and the ability to record sessions for on-demand replay after the live event. Instructors stream from their phone (iOS and Android) or webcam via a web browser. Viewers watch on web (React) and mobile (React Native). Our team is 3 backend engineers and 2 mobile engineers. We're on GCP. Budget is constrained — we're a Series A startup with $4M raised. What streaming architecture and protocols should we use? Should we build or use managed services?",
+      "expected_output": "Should recommend a managed low-latency streaming service given team size and budget, suggest specific protocols for sub-3s latency (LL-HLS, WebRTC via SFU, or WHIP/WHEP), design the chat and reactions overlay, and address the recording/VOD pipeline.",
+      "assertions": [
+        {"text": "Recommends specific streaming protocols for sub-3-second latency such as LL-HLS, WebRTC-based delivery, or WHIP/WHEP — and explains why standard HLS with 10-30s delay won't work for fitness cues", "type": "content_check"},
+        {"text": "Evaluates managed streaming services appropriate for a Series A budget — such as Mux, Amazon IVS, LiveKit, Cloudflare Stream, or Agora — with cost considerations", "type": "content_check"},
+        {"text": "Addresses the ingest side — how instructors stream from phones and browser webcams, including RTMP ingest, WebRTC, or WHIP protocol options", "type": "content_check"},
+        {"text": "Designs the live chat and emoji reactions system as a separate real-time layer from the video stream, likely WebSocket-based or via a managed chat service", "type": "content_check"},
+        {"text": "Addresses the live-to-VOD recording pipeline — how live sessions are recorded and made available for on-demand replay after the event ends", "type": "content_check"},
+        {"text": "Considers adaptive bitrate streaming for viewers on varying network conditions, especially mobile viewers on cellular data", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

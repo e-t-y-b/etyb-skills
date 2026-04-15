@@ -1,0 +1,50 @@
+{
+  "skill_name": "healthcare-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "hipaa-compliant-data-architecture-telehealth",
+      "prompt": "We're building a telehealth platform for behavioral health (therapy and psychiatry). We'll handle video sessions, clinical notes written by therapists, prescription management for psychiatric medications, and patient intake forms that include substance use history and mental health screening questionnaires (PHQ-9, GAD-7). We expect 500 providers and 15,000 active patients within the first year, growing to 3,000 providers and 100,000 patients by year three. The team is 8 engineers with web app experience but no healthcare IT background. We're on AWS. Substance use records fall under 42 CFR Part 2 which is stricter than standard HIPAA. Design the data architecture: how should we store clinical notes, what encryption approach (at rest and in transit), how do we handle 42 CFR Part 2 segmentation for substance use data, what access control model works for therapists vs psychiatrists vs admin staff, how should we handle the audit trail requirements, and what AWS services should we use that have BAA coverage? Also, how do we handle the scenario where a patient revokes consent for sharing their substance use records with a specific provider?",
+      "expected_output": "Should design a PHI storage architecture with encryption, address 42 CFR Part 2 segmentation requirements for substance use data, recommend RBAC with role-specific access, detail audit trail implementation, and list HIPAA-eligible AWS services.",
+      "assertions": [
+        {"text": "Addresses 42 CFR Part 2 requirements for substance use data with stricter-than-HIPAA consent and segmentation", "type": "content_check"},
+        {"text": "Specifies encryption requirements (AES-256 at rest, TLS 1.2+ in transit) and recommends specific AWS services (KMS, RDS encryption)", "type": "content_check"},
+        {"text": "Designs role-based access control distinguishing therapist, psychiatrist, and admin access to clinical data", "type": "content_check"},
+        {"text": "Details audit trail requirements (who accessed what PHI, when, from where) and recommends implementation approach", "type": "content_check"},
+        {"text": "Addresses consent revocation for substance use records and how the system enforces it at the data access layer", "type": "content_check"},
+        {"text": "Lists HIPAA-eligible AWS services and mentions BAA requirements for all services handling PHI", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "hl7-fhir-multi-ehr-integration",
+      "prompt": "We're a health tech company building a care coordination platform that needs to aggregate patient data from multiple EHR systems. Our initial customers use Epic (3 health systems), Cerner/Oracle Health (2 health systems), and Athenahealth (5 independent practices). We need to pull patient demographics, problem lists, medications, lab results, and care plans from all of these systems and present a unified longitudinal patient view. The challenge: Epic uses FHIR R4 via their App Orchard/Showroom marketplace, Cerner uses a mix of FHIR and proprietary Millennium APIs, and Athenahealth has its own REST API with limited FHIR support. We have 12 engineers but only 2 have healthcare integration experience. We're also required to comply with the 21st Century Cures Act information blocking rules. Should we use an integration platform like Redox or Health Gorilla, or build our own FHIR aggregation layer? How do we handle patient matching across systems that use different MRNs? What about data normalization — Epic might code a condition in SNOMED CT while Athenahealth uses ICD-10. And how do we deal with the SMART on FHIR launch sequence for the Epic embedded app use case?",
+      "expected_output": "Should compare integration platform (Redox/Health Gorilla) vs custom build, address patient matching/MPI across systems, explain terminology normalization (SNOMED to ICD-10 mapping), and cover SMART on FHIR launch for Epic.",
+      "assertions": [
+        {"text": "Compares integration platforms (Redox, Health Gorilla, 1upHealth) vs custom FHIR aggregation with tradeoffs for the multi-EHR scenario", "type": "content_check"},
+        {"text": "Addresses Master Patient Index (MPI) and patient matching across systems with different MRNs (probabilistic vs deterministic matching)", "type": "content_check"},
+        {"text": "Discusses clinical terminology normalization across coding systems (SNOMED CT, ICD-10, LOINC, RxNorm crosswalks)", "type": "content_check"},
+        {"text": "Explains SMART on FHIR launch sequence for Epic embedded app (EHR launch, standalone launch, OAuth2 scopes)", "type": "content_check"},
+        {"text": "Addresses 21st Century Cures Act information blocking compliance requirements", "type": "content_check"},
+        {"text": "Recommends a unified clinical data model for aggregating data from heterogeneous EHR sources", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "patient-portal-with-proxy-access",
+      "prompt": "We're designing a patient portal for a pediatric hospital network (4 hospitals, 200 clinics, 800 providers, 400,000 active patients). The portal needs to integrate with their Epic MyChart instance but add capabilities Epic doesn't natively support well: (1) proxy access where parents manage accounts for minor children with automatic transition to the teen's own account at age 13 (with appropriate data segmentation — teens can hide sensitive visit types from parents), (2) a secure messaging system where families can message the care team with photo/document attachments that get filed into the medical record, (3) appointment scheduling that respects provider availability, insurance eligibility, and referral requirements, and (4) a medication tracker where parents log when they administer prescribed medications with reminders. The portal must be HIPAA compliant and accessible (WCAG 2.1 AA) on both web and mobile. We need to handle the consent complexity: parents have full access for children under 13, shared access for teens 13-17 (with teen-controlled restrictions), and no parental access once the patient turns 18. How should we architect this? How does data flow between our portal and Epic? What about the consent model for the age-based access transitions?",
+      "expected_output": "Should design the proxy access and age-based consent model with specific transition logic, explain Epic MyChart integration patterns (FHIR APIs, MyChart branding requirements), and address the medication tracking and secure messaging data flows.",
+      "assertions": [
+        {"text": "Designs age-based consent model with specific transition rules at ages 13 and 18 for proxy access to minor records", "type": "content_check"},
+        {"text": "Addresses teen-controlled data segmentation (hiding sensitive visits from parental proxy access) with consent enforcement", "type": "content_check"},
+        {"text": "Explains Epic MyChart integration approach (FHIR APIs, Interconnect, data write-back for secure messages and medication logs)", "type": "content_check"},
+        {"text": "Covers secure messaging architecture with document attachments that get filed into the EHR as clinical documents", "type": "content_check"},
+        {"text": "Addresses HIPAA compliance for the portal including audit logging of all proxy access to minor records", "type": "content_check"},
+        {"text": "Discusses the medication tracking feature with data model for logging administrations and integration with the medication list from Epic", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

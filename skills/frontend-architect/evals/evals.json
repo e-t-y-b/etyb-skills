@@ -1,0 +1,35 @@
+{
+  "skill_name": "frontend-architect",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm building a content-heavy marketing site for a SaaS company. It needs to rank well in search, load fast on mobile, and support a blog with 500+ articles. My team has React experience. What frontend architecture should I use?",
+      "expected_output": "Should recommend SSG or hybrid rendering, suggest Next.js with ISR or Astro with React islands. Should ask about dynamic features, team size, and existing CMS. Should mention Core Web Vitals and SEO implications.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We're migrating a legacy jQuery dashboard to a modern framework. It's an internal tool used by 200 employees, no SEO needed. We have a mix of Angular and Vue devs on the team. The app has complex data grids and real-time updates.",
+      "expected_output": "Should ask about team preference, existing infrastructure, data grid complexity. Should recommend SPA approach since no SEO needed. Should discuss Angular vs Vue tradeoffs for enterprise dashboards. Should mention component libraries with strong data grid support (PrimeVue, AG Grid).",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I need to set up a design system for our Vue-based product. We have 3 products that need to share components but each has different branding. What's the best approach?",
+      "expected_output": "Should recommend multi-brand token architecture with 3-tier design tokens. Should discuss headless component approach (Reka UI) with brand-specific token sets. Should mention Storybook, Figma integration, and governance model. Should read ui-ux-engineer.md and vue-specialist.md references.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Our e-commerce site's Lighthouse performance score dropped from 95 to 62 after we added a new product page with lots of images and a video hero. LCP is 4.2 seconds. How do I fix this?",
+      "expected_output": "Should diagnose LCP issue systematically: check if hero video/image is LCP element, verify fetchpriority, check for render-blocking resources, verify image formats (WebP/AVIF). Should reference web-performance.md. Should mention specific fixes: preload LCP resource, use framework image component, defer non-critical JS.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "We just got a legal notice about accessibility compliance under the European Accessibility Act. Our React app has never been audited for accessibility. Where do we start?",
+      "expected_output": "Should reference EAA enforcement (June 2025), explain WCAG 2.2 AA as the target standard. Should recommend immediate axe-core audit, screen reader testing, and prioritized remediation. Should mention the accessibility-specialist.md reference. Should discuss automated vs manual testing pyramid.",
+      "files": []
+    }
+  ]
+}

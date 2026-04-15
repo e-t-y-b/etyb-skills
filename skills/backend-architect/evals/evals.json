@@ -1,0 +1,41 @@
+{
+  "skill_name": "backend-architect",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're a 4-person startup building a SaaS project management tool. Our team knows TypeScript and Python. We need to pick a backend stack — the product will have real-time collaboration features (like Notion), a REST API for integrations, and we want to move fast. We're expecting maybe 1000 users in 6 months. What do you recommend?",
+      "expected_output": "Should recommend TypeScript/Node (NestJS or Fastify) given team expertise and full-stack TS benefits. Should mention tRPC for type safety. Should suggest monolith over microservices at this stage. Should ask clarifying questions about frontend stack, deployment target, and database preference. Should NOT recommend Rust or Java — wrong fit for this team and stage.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I'm building a payment processing service that needs to handle 50,000 transactions per second with p99 latency under 5ms. We're currently running Go but hitting GC pause issues at peak load. Should we rewrite in Rust? The team has 12 engineers, 3 of whom know Rust.",
+      "expected_output": "Should engage deeply with the Rust specialist reference. Should present Rust as a viable option given the GC pause problem (Rust has no GC). Should discuss Axum vs Actix Web for this use case. Should also explore Go optimizations first (GOGC tuning, memory allocation patterns) before recommending a rewrite. Should discuss the rewrite risk — partial extraction (Rust for hot path, Go for the rest) might be safer. Should mention real-world examples (Discord's Go→Rust rewrite for similar reasons).",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "We have a modular monolith in Spring Boot serving 200 engineers across 15 product teams. Deployments are becoming a bottleneck — teams are stepping on each other. How should we approach breaking this apart? What about service mesh, event-driven patterns, and distributed tracing?",
+      "expected_output": "Should consult both the microservices-specialist and architecture-patterns references. Should recommend gradual decomposition via strangler fig pattern. Should discuss service decomposition by bounded contexts. Should recommend OpenTelemetry for distributed tracing. Should discuss Istio ambient mesh for service mesh. Should recommend Kafka for event-driven communication. Should warn against over-splitting and suggest starting with 3-5 services along the clearest team boundaries. Should discuss saga patterns for transactions that span services.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "I'm designing the auth system for a B2B SaaS platform. We need SSO for enterprise customers (some want SAML, others OIDC), RBAC with organization-level roles, MFA, and API key management for our public API. We're building on FastAPI with PostgreSQL. Should we build or buy?",
+      "expected_output": "Should consult the auth-specialist reference. Should recommend a managed provider (Auth0 or WorkOS) for SSO/SAML given complexity, but discuss Keycloak as self-hosted alternative. Should explain RBAC schema design with organization-scoped roles. Should discuss TOTP for MFA with passkey encouragement. Should explain API key best practices (hashing, prefixing, scoping). Should present build-vs-buy tradeoffs. Should reference FastAPI security patterns for middleware integration.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "We need to design a public REST API for our developer platform. It'll be consumed by thousands of third-party developers. We need versioning, rate limiting, good error responses, comprehensive docs, and we want to generate SDKs in Python, TypeScript, Go, and Java. What's the best approach?",
+      "expected_output": "Should consult the api-developer reference. Should recommend OpenAPI 3.1 spec as the foundation (design-first workflow). Should recommend URL path versioning for public APIs. Should recommend RFC 9457 Problem Details for error responses. Should discuss rate limiting with token bucket algorithm and proper response headers. Should recommend Scalar or Redocly for API docs. Should discuss SDK generation tools (openapi-generator, Fern, Kiota). Should mention Spectral for linting the API spec in CI.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "We're choosing between GraphQL and REST for our e-commerce platform. We have a React web app, React Native mobile app, and a partner integration API. The product catalog has deeply nested categories, variants, and pricing rules. We already have a Go backend.",
+      "expected_output": "Should consult both the api-developer and architecture-patterns references. Should present GraphQL as strong for this use case (multiple clients with different data needs, deeply nested data). Should discuss Apollo Federation for scaling. Should warn about GraphQL security (query depth limiting, persisted queries, cost analysis). Should also present REST + BFF as alternative (dedicated BFF per client). Should discuss DataLoader pattern for N+1 prevention. Should mention gqlgen as the Go GraphQL library. Should let the user decide based on team expertise.",
+      "files": []
+    }
+  ]
+}

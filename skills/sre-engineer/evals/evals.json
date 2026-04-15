@@ -1,0 +1,168 @@
+{
+  "skill_name": "sre-engineer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're running about 30 microservices on EKS and our alerting is a mess — we get hundreds of alerts per week and most of them are noise. The on-call engineers are burned out and ignoring pages. We use Prometheus and Grafana but I think our alert rules were written years ago and never tuned. How should we fix this?",
+      "expected_output": "Should ask clarifying questions about current alert rules, SLO definitions, and service criticality. Should recommend SLO-based burn-rate alerting, alert audit process, severity classification, and alert fatigue reduction strategies. Should reference monitoring-specialist for PromQL/alerting details.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "SLO-based alerting",
+          "check": "Response should recommend moving from threshold-based to SLO-based burn-rate alerting"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Alert audit/review",
+          "check": "Response should recommend auditing existing alerts and removing stale or noisy ones"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Severity classification",
+          "check": "Response should include alert severity/priority tiers (P1-P4 or similar)"
+        },
+        {
+          "type": "does_not_contain",
+          "text": "Dump all alert config",
+          "check": "Response should NOT dump hundreds of lines of Prometheus alert YAML without first understanding the context"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I'm a startup CTO (team of 6) and we just launched our SaaS product. We have zero monitoring right now — the app runs on AWS (ECS Fargate) with RDS Postgres. We find out about outages when customers email us. What's the minimum viable observability setup we should build? Budget is tight.",
+      "expected_output": "Should provide scale-appropriate advice (startup tier, not enterprise). Should recommend a pragmatic stack: managed observability (Grafana Cloud free tier or CloudWatch), basic health checks, structured logging from day one, simple SLOs. Should NOT recommend Prometheus federation, Thanos, or enterprise tools.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Scale-appropriate advice",
+          "check": "Recommendations should match startup stage — managed/free-tier tools, not self-hosted Prometheus clusters"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Structured logging",
+          "check": "Should recommend structured logging as a foundational practice even for small teams"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Uptime/health monitoring",
+          "check": "Should recommend basic uptime monitoring to catch outages before customers do"
+        },
+        {
+          "type": "does_not_contain",
+          "text": "Over-engineering",
+          "check": "Should NOT recommend Thanos, Mimir federation, chaos engineering, or enterprise incident management for a 6-person startup"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We had a major outage last week — our payment service was down for 2 hours and we lost about $500K in revenue. The CEO is demanding we never have this happen again. We need to set up a proper incident response process. Right now we have no runbooks, no on-call rotation, and no postmortem culture. Our team is about 40 engineers across 5 squads.",
+      "expected_output": "Should ask about the incident details and current processes. Should recommend a phased approach: start with severity definitions, on-call rotation, basic runbooks for critical services (especially payments), incident communication process, and blameless postmortem template. Should reference incident-response for templates and processes.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Incident severity levels",
+          "check": "Response should define severity levels (SEV1-SEV4 or P1-P4) with concrete criteria"
+        },
+        {
+          "type": "contains_concept",
+          "text": "On-call rotation",
+          "check": "Response should recommend establishing on-call rotation with proper tooling"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Blameless postmortems",
+          "check": "Response should emphasize blameless postmortem culture"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Runbooks",
+          "check": "Response should recommend creating runbooks starting with the most critical services"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Our Kubernetes cluster keeps having mystery performance issues — requests randomly spike to 10s response times for a few minutes, then go back to normal. We have basic Prometheus metrics but no tracing. The app is Python (FastAPI) with 12 services talking to each other via gRPC and REST, plus Kafka for async. How do we figure out what's happening?",
+      "expected_output": "Should identify this as an observability gap problem requiring distributed tracing. Should recommend OpenTelemetry for Python with auto-instrumentation, a tracing backend (Tempo or Jaeger), and correlation with existing Prometheus metrics. Should discuss sampling strategy given the intermittent nature of the issue.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Distributed tracing",
+          "check": "Response should recommend implementing distributed tracing as the primary solution"
+        },
+        {
+          "type": "contains_concept",
+          "text": "OpenTelemetry",
+          "check": "Response should recommend OpenTelemetry (not vendor-specific SDKs) for instrumentation"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Tail sampling for errors/latency",
+          "check": "Response should discuss tail-based sampling to capture the intermittent slow requests"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "We're planning our first chaos engineering game day. We run a critical e-commerce platform (50M monthly users, Kubernetes on GKE, microservices). The VP of Engineering is nervous about breaking production. How should we plan this?",
+      "expected_output": "Should provide a structured game day plan with safety emphasis. Should recommend starting in staging, defining scope and blast radius, having abort conditions, and a clear communication plan. Should recommend specific chaos tools appropriate for GKE. Should reassure about safety controls while emphasizing the value of resilience testing.",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Start in staging",
+          "check": "Response should recommend starting chaos experiments in staging/non-production first"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Steady-state hypothesis",
+          "check": "Response should explain the steady-state hypothesis concept"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Safety controls",
+          "check": "Response should emphasize blast radius containment, abort conditions, and rollback procedures"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Specific tool recommendation",
+          "check": "Response should recommend specific chaos tools (Litmus, Chaos Mesh, Gremlin, or GCP FIS)"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Our AWS bill went from $80K/month to $140K/month over the past 6 months and nobody knows why. We run EKS with about 200 pods, RDS, ElastiCache, and a bunch of Lambda functions. The CFO wants answers. How do we get visibility into what's driving the cost and bring it back down?",
+      "expected_output": "Should recommend a systematic approach to cost visibility: enable cost allocation tags, set up Kubecost/OpenCost for Kubernetes, analyze AWS Cost Explorer by service/tag, identify top cost drivers. Should recommend FinOps practices and specific optimization strategies (right-sizing, reserved/savings plans, spot instances).",
+      "files": [],
+      "assertions": [
+        {
+          "type": "contains_concept",
+          "text": "Cost visibility/tagging",
+          "check": "Response should recommend cost allocation tags and visibility tooling"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Kubernetes cost tools",
+          "check": "Response should recommend Kubecost, OpenCost, or similar for Kubernetes cost attribution"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Right-sizing",
+          "check": "Response should recommend resource right-sizing analysis"
+        },
+        {
+          "type": "contains_concept",
+          "text": "Reserved/spot strategy",
+          "check": "Response should discuss reserved instances, savings plans, and/or spot instances"
+        }
+      ]
+    }
+  ]
+}

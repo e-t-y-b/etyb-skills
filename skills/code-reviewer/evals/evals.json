@@ -1,0 +1,112 @@
+{
+  "skill_name": "code-reviewer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "django-api-endpoint-review",
+      "prompt": "Can you review this Django view I'm adding? It's a new API endpoint for our project management app. We have about 500 users and growing. Here's the code:\n\n```python\nfrom django.http import JsonResponse\nfrom django.views import View\nimport json\n\nclass TaskListView(View):\n    def get(self, request):\n        project_id = request.GET.get('project_id')\n        tasks = Task.objects.filter(project_id=project_id)\n        result = []\n        for task in tasks:\n            assignee = User.objects.get(id=task.assignee_id)\n            comments = Comment.objects.filter(task_id=task.id)\n            result.append({\n                'id': task.id,\n                'title': task.title,\n                'assignee_name': assignee.first_name + ' ' + assignee.last_name,\n                'comment_count': comments.count(),\n                'project': task.project.name,\n                'created': str(task.created_at),\n            })\n        return JsonResponse({'tasks': result})\n\n    def post(self, request):\n        data = json.loads(request.body)\n        task = Task.objects.create(\n            title=data['title'],\n            description=data['description'],\n            project_id=data['project_id'],\n            assignee_id=data['assignee_id'],\n            status=data.get('status', 'todo'),\n            priority=data.get('priority', 'medium'),\n            is_admin=data.get('is_admin', False),\n        )\n        return JsonResponse({'id': task.id, 'title': task.title}, status=201)\n```",
+      "expected_output": "Should identify multiple issues across review dimensions: (1) Performance: N+1 queries in the GET — User.objects.get and Comment.objects.filter inside the loop, plus task.project.name triggering another query. Recommend select_related/prefetch_related and annotate. (2) Security: No authentication check on either method, mass assignment vulnerability on POST (is_admin field from user input), no input validation. (3) Code quality: Missing pagination for growing dataset, no error handling for missing task/user. Should prioritize findings by severity and provide concrete fix suggestions with code examples.",
+      "assertions": [
+        {
+          "text": "Identifies N+1 query problem in the GET method (queries inside the for loop)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends select_related or prefetch_related as the fix for N+1",
+          "type": "content_check"
+        },
+        {
+          "text": "Flags the mass assignment vulnerability (is_admin field from user input in POST)",
+          "type": "content_check"
+        },
+        {
+          "text": "Notes missing authentication/authorization on the endpoints",
+          "type": "content_check"
+        },
+        {
+          "text": "Points out missing pagination for the task list",
+          "type": "content_check"
+        },
+        {
+          "text": "Categorizes findings by severity (must-fix vs should-fix vs suggestion)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Provides concrete code examples or fix suggestions, not just problem descriptions",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "react-component-performance-review",
+      "prompt": "Hey, I've got a React component that's feeling sluggish when the product list gets large (we have ~2000 products). Can you review it?\n\n```tsx\nimport React, { useState, useEffect, useContext } from 'react';\nimport { AppContext } from '../context/AppContext';\n\ninterface Product {\n  id: number;\n  name: string;\n  price: number;\n  category: string;\n  inStock: boolean;\n}\n\nexport function ProductList() {\n  const { user, theme, notifications, cart, settings } = useContext(AppContext);\n  const [products, setProducts] = useState<Product[]>([]);\n  const [search, setSearch] = useState('');\n  const [sortBy, setSortBy] = useState('name');\n\n  useEffect(() => {\n    fetch('/api/products')\n      .then(res => res.json())\n      .then(data => setProducts(data));\n  }, []);\n\n  const filteredProducts = products\n    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))\n    .sort((a, b) => {\n      if (sortBy === 'price') return a.price - b.price;\n      return a.name.localeCompare(b.name);\n    });\n\n  return (\n    <div style={{ background: theme.background }}>\n      <input\n        value={search}\n        onChange={e => setSearch(e.target.value)}\n        placeholder=\"Search products...\"\n      />\n      <select onChange={e => setSortBy(e.target.value)}>\n        <option value=\"name\">Name</option>\n        <option value=\"price\">Price</option>\n      </select>\n      <div>\n        {filteredProducts.map(product => (\n          <ProductCard\n            key={product.id}\n            product={product}\n            onAddToCart={() => cart.add(product)}\n            style={{ color: theme.textColor, padding: '16px' }}\n          />\n        ))}\n      </div>\n    </div>\n  );\n}\n```",
+      "expected_output": "Should identify multiple performance issues: (1) Giant context (AppContext with user, theme, notifications, cart, settings) — any context change re-renders this component. (2) filter+sort on every render without memoization. (3) Inline style object and inline arrow function in map creating new references every render. (4) No virtualization for 2000 items — rendering all of them to DOM. (5) No debounce on search input. Should suggest useMemo for filtered list, React.memo for ProductCard, virtualizer (react-window/tanstack-virtual), context splitting, and search debouncing. Should note that React Compiler (React 19) may handle some memoization automatically.",
+      "assertions": [
+        {
+          "text": "Identifies the oversized context (AppContext) as a re-render source",
+          "type": "content_check"
+        },
+        {
+          "text": "Flags the filter+sort computation running on every render without memoization",
+          "type": "content_check"
+        },
+        {
+          "text": "Points out inline objects/functions in JSX (style prop, onAddToCart) causing re-renders",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends virtualization for the large product list (react-window, tanstack-virtual, or similar)",
+          "type": "content_check"
+        },
+        {
+          "text": "Suggests debouncing the search input",
+          "type": "content_check"
+        },
+        {
+          "text": "Acknowledges what the component does well or provides constructive tone (not just a list of problems)",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "express-auth-security-review",
+      "prompt": "We're building a SaaS platform and I need a security review of our authentication middleware and user endpoint. This is in production with paying customers.\n\n```typescript\nimport express from 'express';\nimport jwt from 'jsonwebtoken';\nimport mysql from 'mysql2';\n\nconst JWT_SECRET = 'super-secret-key-2024';\nconst db = mysql.createConnection({ host: 'localhost', user: 'root', password: 'admin123', database: 'saas_app' });\n\nfunction authMiddleware(req: any, res: any, next: any) {\n  const token = req.headers.authorization?.split(' ')[1];\n  if (!token) return res.status(401).json({ error: 'No token' });\n  try {\n    const decoded = jwt.verify(token, JWT_SECRET);\n    req.user = decoded;\n    next();\n  } catch (err) {\n    res.status(401).json({ error: 'Invalid token', details: err.message });\n  }\n}\n\napp.get('/api/users/:id', authMiddleware, async (req, res) => {\n  const userId = req.params.id;\n  const [rows] = await db.promise().query(\n    `SELECT * FROM users WHERE id = ${userId}`\n  );\n  if (rows.length === 0) return res.status(404).json({ error: 'User not found' });\n  res.json(rows[0]);\n});\n\napp.post('/api/users/:id/password', authMiddleware, async (req, res) => {\n  const { currentPassword, newPassword } = req.body;\n  const userId = req.params.id;\n  const [rows] = await db.promise().query(\n    `SELECT password FROM users WHERE id = ${userId}`\n  );\n  if (rows[0].password === currentPassword) {\n    await db.promise().query(\n      `UPDATE users SET password = '${newPassword}' WHERE id = ${userId}`\n    );\n    res.json({ message: 'Password updated' });\n  } else {\n    res.status(403).json({ error: 'Wrong password' });\n  }\n});\n```",
+      "expected_output": "Should flag this as critical-severity with multiple urgent security issues: (1) CRITICAL: SQL injection in both queries (string interpolation in SQL). (2) CRITICAL: Plaintext password storage and comparison. (3) CRITICAL: Hardcoded JWT secret and database credentials in source code. (4) MAJOR: No authorization check (any authenticated user can access/modify any other user — IDOR). (5) MAJOR: SELECT * returning password hash and all sensitive fields. (6) MAJOR: Error details exposed (err.message in auth error). (7) SHOULD-FIX: No rate limiting on password change, no password complexity validation, single database connection (no pooling). Should recommend blocking this PR from merge and provide specific fixes for each issue.",
+      "assertions": [
+        {
+          "text": "Identifies SQL injection vulnerability (string interpolation in SQL queries)",
+          "type": "content_check"
+        },
+        {
+          "text": "Flags plaintext password storage and comparison as critical",
+          "type": "content_check"
+        },
+        {
+          "text": "Identifies hardcoded secrets (JWT_SECRET, database credentials) in source code",
+          "type": "content_check"
+        },
+        {
+          "text": "Points out missing authorization check (IDOR — any user can access any other user's data)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends blocking merge / treating as critical severity",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides concrete fix suggestions (parameterized queries, bcrypt, env vars) not just problem descriptions",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Identifies SELECT * as exposing sensitive data unnecessarily",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

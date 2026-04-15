@@ -1,0 +1,23 @@
+{
+  "skill_name": "brainstorm-protocol",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build something to manage recipes. Like a recipe app where I can save my favorite recipes and maybe share them with friends.",
+      "expected_output": "A conversational response that explores the problem space BEFORE suggesting any technology or solution. Should ask about: who the user is (personal use, food blogger, family sharing?), what pain they experience today (scattered recipes in bookmarks, screenshots, cookbooks?), what they've tried before, and what 'manage' and 'share' specifically mean to them. Should NOT mention React, Firebase, databases, or any implementation details. Should feel like a curious conversation partner, not a tech consultant.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need to build an app for my restaurant. Use React and Firebase for the backend, Stripe for payments, and make it a PWA. I want online ordering, table reservations, loyalty points, menu management, customer reviews, and delivery tracking.",
+      "expected_output": "A response that acknowledges the user's technology preferences but redirects to problem space exploration first. Should gently question the jump to implementation: 'Before we commit to the tech stack, I want to make sure we build the right thing.' Should ask about: which of these features is solving the most urgent pain (online ordering vs reservations vs loyalty), who the primary user is (customers ordering food vs restaurant staff managing operations), what exists today, and whether all features are needed for v1. Should identify scope creep signals (6+ features listed) and suggest prioritizing. Should NOT immediately validate the tech stack or start architecting.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "We've been brainstorming a tool for our sales team to track customer interactions. The main problem is that our 15 sales reps use a mix of spreadsheets, sticky notes, and memory to track who they've talked to and what was discussed. We have about 500 active customers. The team is 2 developers (both know Python and React), we have 6 weeks, and no budget for paid services. We've considered: (a) building a custom CRM, (b) using a free CRM like HubSpot free tier, (c) building a simple shared spreadsheet with scripts. We think option A is best because we can customize it exactly. Can you help us finalize this and produce a design brief?",
+      "expected_output": "A response that produces a structured design brief in the template format, since the user has already gone through exploration and is ready to converge. The brief should include: a clear problem statement about sales reps losing context on customer interactions, target user (15 sales reps), constraints table (2 devs, 6 weeks, $0 budget), chosen approach with honest assessment of all three options (should challenge assumption that custom CRM is best given the constraints — HubSpot free tier or enhanced spreadsheet might be more realistic for 2 devs in 6 weeks), explicit scope with In/Out/Later lists, unknowns, success criteria (measurable: adoption rate, reduced missed follow-ups), and next steps pointing to system-architect and project-planner.",
+      "files": []
+    }
+  ]
+}

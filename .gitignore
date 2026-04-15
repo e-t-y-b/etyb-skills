@@ -1,0 +1,8 @@
+# Eval workspaces (local testing artifacts)
+*-workspace/
+
+# OS files
+.DS_Store
+
+# Claude local files
+.claude/

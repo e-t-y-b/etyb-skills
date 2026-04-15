@@ -1,0 +1,100 @@
+{
+  "skill_name": "devops-engineer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "greenfield-startup-infrastructure",
+      "prompt": "We're a 4-person startup building a Next.js SaaS app with a PostgreSQL database. Right now we deploy manually by SSHing into an EC2 instance and running git pull. We want to set up proper CI/CD and infrastructure but we don't have a dedicated DevOps person. Budget is tight. We're on AWS. What should our infrastructure and deployment pipeline look like?",
+      "expected_output": "Should recommend simple, managed infrastructure appropriate for a startup: ECS Fargate or possibly Vercel/Railway for the frontend, RDS for PostgreSQL. GitHub Actions for CI/CD. Should NOT recommend Kubernetes at this scale. Should ask clarifying questions about current traffic, deployment frequency goals, and compliance needs. Should present 2-3 options (PaaS vs container-based vs serverless) with tradeoffs. Scale-aware — doesn't over-engineer.",
+      "assertions": [
+        {
+          "text": "Does NOT recommend Kubernetes for a 4-person startup",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends managed services (Fargate, Cloud Run, Vercel, or similar PaaS/serverless)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends GitHub Actions for CI/CD with reasoning",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses infrastructure as code (Terraform or similar) even at startup scale",
+          "type": "content_check"
+        },
+        {
+          "text": "Scale-appropriate — doesn't recommend service mesh, multi-region, or complex GitOps",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Asks clarifying questions before prescribing a full solution",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "kubernetes-migration-from-ecs",
+      "prompt": "We're running 30 microservices on ECS Fargate across 3 AWS accounts (dev, staging, prod). We have 40 engineers across 5 teams. We're hitting limitations with ECS — service mesh is hard, we need better autoscaling, and teams want more control over their deployment configs. We're considering migrating to EKS. Is this the right call? If so, how should we approach the migration?",
+      "expected_output": "Should validate the migration rationale by asking about specific ECS pain points. Should discuss EKS vs staying on ECS with improvements. If recommending EKS, should outline a phased migration strategy (strangler fig pattern — don't migrate everything at once). Should discuss Helm charts, GitOps (ArgoCD), service mesh selection, Karpenter for autoscaling, and multi-account EKS setup. Should warn about operational complexity increase.",
+      "assertions": [
+        {
+          "text": "Asks about specific ECS pain points before validating the migration decision",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Presents both 'stay on ECS with improvements' and 'migrate to EKS' as viable options",
+          "type": "content_check"
+        },
+        {
+          "text": "If recommending EKS, outlines a phased/incremental migration approach (not big-bang)",
+          "type": "content_check"
+        },
+        {
+          "text": "Discusses service mesh options (Istio ambient mesh, Linkerd, or Cilium)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses operational complexity increase and team readiness",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions GitOps (ArgoCD or Flux) for managing deployments across clusters",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "terraform-state-management-problem",
+      "prompt": "We have a monolithic Terraform codebase with a single state file that manages all our AWS infrastructure — VPCs, EKS cluster, RDS instances, S3 buckets, IAM roles, everything. The state file is 50MB and terraform plan takes 15 minutes. We have 3 teams making changes and we keep running into state locking conflicts. How do we fix this?",
+      "expected_output": "Should recommend splitting the monolithic state into smaller, domain-aligned state files using workspaces or separate root modules. Should discuss the specific splitting strategy (network layer, data layer, compute layer, per-team). Should address state migration (terraform state mv), cross-state references (terraform_remote_state or SSM Parameter Store), and how to manage the transition without downtime. Should mention Atlantis or Spacelift for PR-based workflow.",
+      "assertions": [
+        {
+          "text": "Recommends splitting the monolithic state into multiple smaller states with specific strategy",
+          "type": "content_check"
+        },
+        {
+          "text": "Discusses state migration approach (terraform state mv, import blocks) with safety precautions",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses cross-state references (remote_state data source, SSM, or similar)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends PR-based IaC workflow (Atlantis, Spacelift, or Terraform Cloud)",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides a phased migration plan (not a big-bang state split)",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

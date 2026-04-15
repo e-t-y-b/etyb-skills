@@ -1,0 +1,50 @@
+{
+  "skill_name": "mobile-architect",
+  "evals": [
+    {
+      "id": 0,
+      "name": "cross-platform-fintech-app-architecture",
+      "prompt": "We're building a consumer banking app (checking accounts, savings, P2P transfers, debit card management, transaction history with spending insights). Target markets are US and Mexico, so we need English and Spanish localization. We need to support both iOS and Android. The team is 6 engineers — 4 have React/TypeScript experience from our web app, 1 has iOS experience, 1 has Android experience. We want to ship an MVP in 3 months. Key requirements: biometric authentication (Face ID / fingerprint), push notifications for transactions, real-time balance updates, the ability to freeze/unfreeze a debit card, and a spending insights chart that shows category breakdowns with smooth animations. We also need to pass app store review and comply with financial services guidelines on both stores. Our backend is Node.js/TypeScript with GraphQL. Budget for mobile infrastructure is limited — we can't afford separate native teams. Should we go React Native with Expo, Flutter, or something else? What's the architecture? How do we handle sensitive financial data storage on device? What about the animation performance for the spending charts?",
+      "expected_output": "Should recommend a cross-platform framework with clear reasoning given team composition, address secure storage for financial data, recommend animation approach for charts, and cover biometric auth and push notification architecture.",
+      "assertions": [
+        {"text": "Recommends React Native/Expo based on the team's React/TypeScript background with clear reasoning", "type": "content_check"},
+        {"text": "Addresses secure storage for financial data on device (expo-secure-store, Keychain, EncryptedSharedPreferences)", "type": "content_check"},
+        {"text": "Recommends animation approach for spending charts (Reanimated, Skia, or a charting library with GPU-accelerated rendering)", "type": "content_check"},
+        {"text": "Covers biometric authentication implementation (Face ID, Touch ID, fingerprint) with platform-specific considerations", "type": "content_check"},
+        {"text": "Addresses push notification architecture for real-time transaction alerts", "type": "content_check"},
+        {"text": "Discusses app store compliance for financial services apps and review process considerations", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "offline-first-field-service-app",
+      "prompt": "We're building a field service management app for utility inspectors who work in rural areas with poor or no cellular connectivity. They need to complete inspection forms (with photo capture, GPS coordinates, and signature capture), sync completed inspections when back online, receive new work orders, and view historical inspection data for the properties they're visiting. There are 2,000 inspectors using a mix of iPads (60%) and Samsung Galaxy tablets (40%). Each inspector completes 15-25 inspections per day. An inspection form has about 80 fields, 5-10 photos (each 2-5MB), and a digital signature. The app must work fully offline for up to 5 days. When connectivity resumes, sync must handle conflicts — what if the dispatcher reassigned a work order while the inspector was offline? Our backend is a .NET API with SQL Server. Team is 4 mobile developers (2 React Native, 2 native iOS). We've been burned before by offline sync bugs causing data loss. How should we architect the offline-first data layer? What local database? How do we handle conflict resolution? What about the large photo files — do we store them locally and sync separately?",
+      "expected_output": "Should design an offline-first architecture with local database selection, conflict resolution strategy, separate photo sync pipeline, and address the 5-day offline requirement with storage capacity planning.",
+      "assertions": [
+        {"text": "Recommends a local database appropriate for the data volume and offline duration (WatermelonDB, SQLite with custom sync, or Realm)", "type": "content_check"},
+        {"text": "Designs conflict resolution strategy for work order reassignment during offline periods (last-write-wins, server-wins, or merge with user resolution)", "type": "content_check"},
+        {"text": "Separates photo/media sync from structured data sync with background upload queue and retry logic", "type": "content_check"},
+        {"text": "Addresses storage capacity planning for 5 days of offline data (form data + photos at 15-25 inspections/day)", "type": "content_check"},
+        {"text": "Discusses sync architecture with optimistic local writes and eventual consistency with the .NET backend", "type": "content_check"},
+        {"text": "Addresses cross-platform strategy given the iPad/Samsung tablet split and the mixed-experience team", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "app-performance-optimization-social",
+      "prompt": "We have a social media app built with React Native (Expo managed workflow, SDK 52) that's experiencing serious performance issues. The app has 380,000 MAU. Key problems: (1) The main feed (infinite scroll with images, videos, and text posts) stutters and drops to 15-20fps when scrolling fast — we're using FlatList with 50+ items rendered, (2) cold start time is 4.8 seconds on a mid-range Android device (Samsung Galaxy A54) versus our target of under 2 seconds, (3) the app binary is 87MB on iOS and 72MB on Android, which we need to get under 50MB because our user research shows 30% of users in Southeast Asia abandon downloads over 50MB, (4) memory usage spikes to 1.2GB when viewing profiles with large photo grids, causing OOM crashes on older devices. We've already enabled Hermes and the New Architecture. Our image assets are served from Cloudinary. We have 12 engineers on the mobile team. What specific optimizations should we make for each of these four issues? I need actionable steps, not general advice. What tools should we use to profile and measure each improvement?",
+      "expected_output": "Should provide specific, actionable optimization steps for each of the four performance issues: feed scrolling (FlashList, virtualization), cold start (bundle analysis, lazy loading), app size (asset optimization, code splitting), and memory (image caching, recycling).",
+      "assertions": [
+        {"text": "Recommends replacing FlatList with FlashList for the feed and explains recycling/virtualization benefits", "type": "content_check"},
+        {"text": "Provides specific cold start optimization steps (bundle analysis with metro, lazy loading screens, reducing JS bundle size, Baseline Profiles for Android)", "type": "content_check"},
+        {"text": "Addresses app size reduction with specific techniques (asset optimization, removing unused dependencies, Hermes bytecode, ProGuard/R8)", "type": "content_check"},
+        {"text": "Tackles memory issue with image caching strategy (expo-image or FastImage with cache limits, thumbnail vs full resolution loading)", "type": "content_check"},
+        {"text": "Recommends specific profiling tools for each issue (Flipper, Xcode Instruments, Android Profiler, React DevTools, Performance Monitor)", "type": "content_check"},
+        {"text": "Addresses video rendering in the feed with lazy loading, pausing off-screen videos, or thumbnail previews", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

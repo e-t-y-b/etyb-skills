@@ -1,0 +1,129 @@
+{
+  "skill_name": "review-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "dispatch-review-request-with-context",
+      "prompt": "I just finished implementing a new user registration endpoint for our Express/TypeScript API. Here's what I built:\n\n```typescript\n// src/routes/auth.ts\nimport { Router } from 'express';\nimport bcrypt from 'bcrypt';\nimport { z } from 'zod';\nimport { db } from '../db';\nimport { generateToken } from '../auth/jwt';\n\nconst registerSchema = z.object({\n  email: z.string().email(),\n  password: z.string().min(8),\n  name: z.string().min(1),\n});\n\nrouter.post('/register', async (req, res) => {\n  const parsed = registerSchema.safeParse(req.body);\n  if (!parsed.success) return res.status(400).json({ errors: parsed.error.issues });\n\n  const { email, password, name } = parsed.data;\n  const existing = await db.user.findUnique({ where: { email } });\n  if (existing) return res.status(409).json({ error: 'Email already registered' });\n\n  const hashedPassword = await bcrypt.hash(password, 10);\n  const user = await db.user.create({\n    data: { email, password: hashedPassword, name, role: 'user' },\n  });\n\n  const token = generateToken({ userId: user.id, role: user.role });\n  res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name } });\n});\n```\n\nAll 12 unit tests pass. Coverage on this file is 91%. I'm not sure about the error handling — should I be catching database errors? Also wondering if the bcrypt salt rounds (10) are sufficient. Can you help me prepare a review request for this?",
+      "expected_output": "Should construct a focused review request with all required elements: (1) Design intent explaining the registration endpoint purpose and approach, (2) The code diff/changes properly scoped, (3) Test results (12 passing, 91% coverage), (4) Specific concerns elevated from what the user mentioned (error handling for DB failures, bcrypt salt rounds), (5) Review focus set to Security as primary (auth endpoint), (6) Should mention what NOT to include (not the whole auth module, just this endpoint). Should use the review request template format from the skill.",
+      "assertions": [
+        {
+          "text": "Constructs a review request with design intent (not just forwarding the code)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Sets Security as the primary review focus (this is an auth endpoint)",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes the user's specific concerns (error handling, bcrypt salt rounds) as specific review focus areas",
+          "type": "content_check"
+        },
+        {
+          "text": "Includes test results (12 passing, 91% coverage) in the review request",
+          "type": "content_check"
+        },
+        {
+          "text": "Uses a structured review request template (not just prose)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Mentions dispatching to code-reviewer or preparing context for the reviewer",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "evaluate-mixed-findings-push-back-on-wrong",
+      "prompt": "I got review feedback on my rate limiter implementation. Here are the 5 findings:\n\n1. **MUST-FIX**: \"The rate limiter uses string concatenation for the Redis key, which is vulnerable to injection if the user ID contains special characters.\" — My code uses `rate:${userId}` where userId comes from the JWT token payload (set by our auth middleware, never from user input).\n\n2. **SHOULD-FIX**: \"The token bucket refill calculation has an off-by-one error on line 34. When tokens = maxTokens, the refill still adds one token.\" — I checked and this is correct, my code does `if (tokens < maxTokens) tokens += refillRate` but the reviewer says it should be `tokens <= maxTokens - refillRate`.\n\n3. **SHOULD-FIX**: \"You should use a sliding window algorithm instead of token bucket because token bucket allows burst traffic.\" — Token bucket is the algorithm we chose at the Design gate specifically because we WANT to allow short bursts. The plan decision log entry DL-015 documents this.\n\n4. **SUGGESTION**: \"Consider adding request weight support so different endpoints can have different costs.\" — This is planned for Sprint 14 (ticket PROJ-789).\n\n5. **NIT**: \"The variable name `tps` is unclear, rename to `tokensPerSecond`.\" — Fair point.\n\nHow should I respond to these findings?",
+      "expected_output": "Should evaluate each finding individually (not batch): (1) Finding 1 — Disagree + Explain: userId comes from JWT, not user input, so Redis key injection is not a real risk. Provide evidence (auth middleware sets userId). (2) Finding 2 — Agree + Fix: The off-by-one is a real bug, fix it. (3) Finding 3 — Disagree + Explain: Token bucket was a deliberate design decision (DL-015). Burst allowance is intentional, not a bug. Push back with the plan reference. (4) Finding 4 — Agree + Defer: Valid suggestion, already planned for Sprint 14, cite PROJ-789. (5) Finding 5 — Agree + Fix: Quick rename. Should NOT use performative agreement phrases. Should address findings 1 and 3 with evidence-based pushback.",
+      "assertions": [
+        {
+          "text": "Pushes back on Finding 1 (Redis key injection) with evidence that userId comes from JWT, not user input",
+          "type": "content_check"
+        },
+        {
+          "text": "Agrees and fixes Finding 2 (off-by-one error) — acknowledges it as a real bug",
+          "type": "content_check"
+        },
+        {
+          "text": "Pushes back on Finding 3 (sliding window suggestion) by referencing the design decision DL-015 and explaining burst allowance is intentional",
+          "type": "content_check"
+        },
+        {
+          "text": "Defers Finding 4 (request weights) with reference to PROJ-789 and Sprint 14",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses each finding individually with a clear assessment (Agree+Fix, Agree+Defer, or Disagree+Explain)",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Does NOT use performative agreement phrases like 'Great catch!' or 'Excellent point!'",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "critical-security-finding-immediate-fix",
+      "prompt": "Code review came back with this finding:\n\n**MUST-FIX (Critical Security)**: \"The `/api/admin/users` endpoint checks `req.user.role === 'admin'` but the JWT token's role claim is set from user input during registration. An attacker can register with `role: 'admin'` in the request body and gain admin access. This is a privilege escalation vulnerability.\"\n\nI checked the registration code and... the reviewer is right. The registration endpoint does `role: req.body.role || 'user'` which means anyone can set their own role. Our JWT then includes whatever role was set at registration.\n\nHow should I handle this?",
+      "expected_output": "Should treat this as an immediate Agree + Fix with zero deferral. (1) Acknowledge the finding is correct — verified against the codebase. (2) Fix immediately: hardcode role to 'user' at registration, remove role from user-controllable input, add admin role promotion as a separate admin-only endpoint. (3) Should NOT defer this — must-fix critical security findings cannot be deferred. (4) Should recommend additional actions: audit other endpoints for similar issues, check if any accounts already have escalated privileges, consider adding a migration to reset any improperly escalated roles. (5) Should mention this blocks the Verify gate until resolved.",
+      "assertions": [
+        {
+          "text": "Identifies this as Agree + Fix with no deferral option (must-fix critical cannot be deferred)",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides a concrete fix: hardcode role at registration, remove user-controllable role input",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends auditing existing data for accounts that may have been compromised",
+          "type": "content_check"
+        },
+        {
+          "text": "States this blocks the Verify gate until resolved",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT suggest deferring or downplaying the severity",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "user-wants-to-skip-review",
+      "prompt": "We're behind on the sprint deadline and the PM is pushing to ship today. I've got the feature working and all tests pass. Can we just skip the code review this time and commit directly? It's a Tier 3 task but the code looks fine to me. I'll do a review after we ship.",
+      "expected_output": "Should firmly block the skip. (1) Code review is mandatory at the Verify gate for Tier 3 work — this is a hard constraint, not a suggestion. (2) 'Looks fine to me' is not a review — self-assessment is not the same as independent review. (3) Post-ship review is not a review — it's an autopsy. The purpose of review is to catch issues BEFORE they reach users. (4) Should offer alternatives: request an expedited review (focused scope, single reviewer, tight turnaround), break the change into smaller reviewable chunks, or negotiate the deadline with evidence that review is mandatory. (5) Should NOT agree to skip, even with management pressure.",
+      "assertions": [
+        {
+          "text": "Blocks the skip — states review is mandatory for Tier 3 at the Verify gate",
+          "type": "content_check"
+        },
+        {
+          "text": "Explains why post-ship review is not a substitute for pre-ship review",
+          "type": "content_check"
+        },
+        {
+          "text": "Offers alternatives (expedited review, focused scope, smaller chunks) instead of just saying no",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT agree to skip the review under any framing",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Maintains the position despite deadline pressure — does not soften to 'well, maybe just this once'",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

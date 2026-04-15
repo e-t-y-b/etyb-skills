@@ -1,0 +1,23 @@
+{
+  "skill_name": "research-analyst",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We're building a new internal dashboard app. Team of 6, all experienced with React. Someone suggested we switch to Svelte since it's supposedly faster. Should we? We need to ship the first version in 8 weeks.",
+      "expected_output": "A conversational response that asks clarifying questions about the specific dashboard needs, then provides a recommendation grounded in context (team expertise, timeline, ecosystem) rather than generic framework comparison. Should reference decision reversibility and team familiarity.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "My PM wants us to add real-time collaborative editing (like Google Docs) to our existing note-taking app. It's a Rails monolith with a React frontend, about 50K users. Is this feasible for a team of 3 backend devs in Q3?",
+      "expected_output": "A feasibility assessment that identifies the core technical challenges (CRDTs/OT, WebSocket infrastructure, conflict resolution), assesses against the constraints (team size, timeline, existing architecture), and gives a clear feasible/not-feasible verdict with conditions.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "We're starting a new payment processing feature — users need to be able to pay with credit cards, Apple Pay, and bank transfers. I need to write up the requirements before our planning meeting next week. Can you help me structure this?",
+      "expected_output": "A structured requirements document or outline covering functional requirements (payment methods, flows), non-functional requirements (security/PCI-DSS, performance, reliability), edge cases (failed payments, refunds, currency), and acceptance criteria. Should ask about build-vs-buy (Stripe vs custom) and regulatory constraints.",
+      "files": []
+    }
+  ]
+}

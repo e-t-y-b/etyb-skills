@@ -1,0 +1,92 @@
+{
+  "skill_name": "skill-evolution-protocol",
+  "evals": [
+    {
+      "id": 0,
+      "name": "repeated-pattern-needs-new-skill",
+      "prompt": "I keep having to manually explain CI caching strategies to our agents across different projects. Every time someone sets up a new CI pipeline, I have to walk them through layer caching for Docker, dependency caching for npm/pip, and build artifact caching. None of our existing skills cover this. How should I handle this?",
+      "expected_output": "Should walk through the skill creation protocol: (1) Identify the gap — repeated manual guidance for CI caching strategies is a strong signal that a skill is needed. (2) Write a failing eval first — before creating any skill content, write an eval that tests whether the system can provide CI caching guidance. (3) Create the skill — directory structure, SKILL.md with proper anatomy, references covering Docker layer caching, dependency caching, and build artifact caching. (4) Verify — run the eval against the new skill. Should emphasize the golden rule: failing eval BEFORE the skill exists.",
+      "assertions": [
+        {
+          "text": "Identifies the repeated pattern (3+ times across projects) as a signal for skill creation",
+          "type": "content_check"
+        },
+        {
+          "text": "Insists on writing a failing eval BEFORE creating the skill content",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Walks through the skill creation lifecycle: identify gap, write eval, create skill, verify",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions checking existing skills for overlap before creating a new one",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT skip the eval step and jump straight to writing the skill",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "existing-skill-giving-poor-answers",
+      "prompt": "Our tdd-protocol skill isn't handling legacy code scenarios well. When someone has a 50,000-line codebase with zero tests and asks how to start adding TDD, the skill just says 'write a failing test first' which isn't helpful — they need guidance on where to start, how to add tests to untested code, the strangler fig pattern for test coverage, and how to prioritize which code to test first. How do I fix this?",
+      "expected_output": "Should follow the improvement loop: (1) Identify the gap — tdd-protocol lacks legacy code guidance. (2) Write a failing eval — create an eval with a prompt about adding TDD to a large untested codebase, with assertions checking for legacy-specific guidance (where to start, prioritization, strangler fig pattern). (3) Verify the eval fails with the current skill. (4) Update the skill — add legacy code TDD patterns to the appropriate reference file. (5) Verify the new eval passes and existing evals still pass. Should emphasize minimal change — just address what the eval tests, don't rewrite the whole skill.",
+      "assertions": [
+        {
+          "text": "Follows the improvement loop: identify gap, write failing eval, update skill, verify",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Proposes writing a specific eval with a legacy code prompt and assertions about prioritization, strangler fig pattern, and starting points",
+          "type": "content_check"
+        },
+        {
+          "text": "Emphasizes verifying the eval FAILS before making the skill change",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends checking that existing tdd-protocol evals still pass after the change (no regressions)",
+          "type": "content_check"
+        },
+        {
+          "text": "Applies the minimal change principle — does NOT suggest rewriting the entire tdd-protocol skill",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "new-skill-conflicts-with-existing-scope",
+      "prompt": "I want to create a new 'testing-protocol' skill that covers test strategy, test frameworks, test patterns, TDD enforcement, and test infrastructure. Can you help me set it up?",
+      "expected_output": "Should identify the significant overlap with existing skills and push back on creating a conflicting skill. Specifically: (1) TDD enforcement already lives in tdd-protocol — creating a testing-protocol with TDD enforcement would duplicate and conflict. (2) Test strategy (coverage targets, pyramid shape, framework selection) already lives in qa-engineer. (3) Should recommend either: (a) consolidating the unique parts into the existing skills, (b) creating a narrowly-scoped skill that covers only the gap (e.g., test infrastructure specifically, if that's not covered), or (c) if the overlap is too great, not creating the skill at all. Should NOT just help create the skill without addressing the overlap.",
+      "assertions": [
+        {
+          "text": "Identifies overlap with tdd-protocol (TDD enforcement) and qa-engineer (test strategy)",
+          "type": "content_check"
+        },
+        {
+          "text": "Pushes back on creating the skill as described due to scope conflicts",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Recommends alternatives: consolidate into existing skills, narrow the scope, or do not create",
+          "type": "content_check"
+        },
+        {
+          "text": "Checks existing skill triggers for overlap before approving creation",
+          "type": "behavioral_check"
+        },
+        {
+          "text": "Does NOT simply help create the testing-protocol skill without addressing the conflicts",
+          "type": "negative_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

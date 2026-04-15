@@ -1,0 +1,104 @@
+{
+  "skill_name": "qa-engineer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "greenfield-test-strategy",
+      "prompt": "We're building a new SaaS product — a project management tool. The backend is Node.js with Express and PostgreSQL, the frontend is React with Vite. Team is 6 engineers, no dedicated QA. We deploy multiple times per day via GitHub Actions. Right now we have almost zero tests — just a few unit tests someone wrote months ago. Users are starting to report bugs that we catch too late. How should we approach testing? What should our test strategy look like?",
+      "expected_output": "Should recommend a practical test strategy appropriate for a small team with no QA. Should ask clarifying questions about what types of bugs are escaping (UI? API? Data?). Should recommend Vitest for unit tests, Playwright for E2E, and suggest starting with the test trophy shape (integration-heavy). Should NOT recommend an enterprise-level testing pyramid or suggest hiring a QA team. Should provide a concrete CI pipeline structure with stage targets. Should be scale-aware for a 6-person team.",
+      "assertions": [
+        {
+          "text": "Recommends a practical test strategy appropriate for a small team (not enterprise-level)",
+          "type": "content_check"
+        },
+        {
+          "text": "Suggests specific frameworks matching the stack (Vitest for Node/Vite, Playwright for E2E)",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends starting with the highest-value tests first (not trying to do everything at once)",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides CI/CD integration guidance (what tests to run in pipeline, speed targets)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses the specific pain point (bugs escaping to production — what type of test would catch them)",
+          "type": "content_check"
+        },
+        {
+          "text": "Asks clarifying questions about what's breaking before prescribing a solution",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "flaky-e2e-tests",
+      "prompt": "Our Cypress E2E test suite is driving us crazy. We have about 80 tests and roughly 15% of our CI runs fail due to flaky tests. The tests use cy.wait() with hardcoded timeouts all over the place, they share a staging database, and we run them sequentially which takes 45 minutes. The team is losing trust in the tests and some engineers are starting to skip them. How do we fix this mess?",
+      "expected_output": "Should diagnose the root causes systematically: shared database state, hardcoded waits, slow sequential execution. Should recommend concrete fixes: replace cy.wait() with proper assertions/intercepts, isolate test data (API-driven setup + cleanup), add parallelization (Cypress Cloud or consider Playwright migration). Should address the cultural issue (trust in tests). Should provide a prioritized action plan, not try to fix everything at once.",
+      "assertions": [
+        {
+          "text": "Identifies shared database state as a key root cause of flakiness",
+          "type": "content_check"
+        },
+        {
+          "text": "Recommends replacing hardcoded waits with proper wait strategies (cy.intercept, assertions, or auto-waiting)",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses the 45-minute runtime with parallelization strategies",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides a prioritized action plan (what to fix first for maximum impact)",
+          "type": "content_check"
+        },
+        {
+          "text": "Does NOT immediately recommend rewriting everything in Playwright (addresses the existing Cypress suite first)",
+          "type": "negative_check"
+        },
+        {
+          "text": "Addresses the cultural/trust issue (how to regain team confidence in tests)",
+          "type": "content_check"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "microservice-contract-testing",
+      "prompt": "We have 12 microservices communicating via REST APIs. Each team deploys independently. We keep breaking each other's APIs — someone changes a response field name and downstream services break in production. We tried having a shared staging environment but it's always broken because someone has a half-deployed change. Integration tests take 20+ minutes because they need all services running. What testing approach would catch these API contract breaks before they reach production?",
+      "expected_output": "Should recommend consumer-driven contract testing with Pact as the primary solution. Should explain how Pact works (consumer generates contract, provider verifies it, Pact Broker tracks compatibility). Should discuss 'can-i-deploy' for deployment safety. Should address the staging environment problem (ephemeral environments or eliminate the need for full-stack staging via contracts). Should present tradeoffs between Pact and alternatives (Specmatic, schema validation).",
+      "assertions": [
+        {
+          "text": "Recommends contract testing as the primary solution (Pact or similar)",
+          "type": "content_check"
+        },
+        {
+          "text": "Explains the consumer-driven contract testing workflow (consumer generates, provider verifies)",
+          "type": "content_check"
+        },
+        {
+          "text": "Mentions can-i-deploy or similar deployment safety check",
+          "type": "content_check"
+        },
+        {
+          "text": "Addresses the shared staging environment problem",
+          "type": "content_check"
+        },
+        {
+          "text": "Provides actionable next steps for getting started (not just theory)",
+          "type": "content_check"
+        },
+        {
+          "text": "Presents tradeoffs or alternatives to Pact (not a single-tool prescription)",
+          "type": "behavioral_check"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

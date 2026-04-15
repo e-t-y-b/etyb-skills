@@ -1,0 +1,50 @@
+{
+  "skill_name": "security-engineer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "oauth2-oidc-implementation-review",
+      "prompt": "We've implemented OAuth 2.0 and OIDC for our B2B SaaS application using Auth0 as the IdP. Our setup: React SPA frontend with PKCE authorization code flow, a Node.js (Express) API backend that validates JWTs, refresh token rotation enabled with 24-hour access token expiry and 30-day refresh token expiry. We store the access token in localStorage and the refresh token in an HttpOnly cookie. We support Google and Microsoft social logins plus enterprise SAML SSO via Auth0 Organizations. Recently we added a mobile app (React Native) that shares the same Auth0 tenant. A security-conscious enterprise customer is asking us to complete a security questionnaire and they specifically flagged concerns about our token handling, session management, and SSO implementation. Review our OAuth2/OIDC implementation and identify security issues. What should we fix before responding to this enterprise customer's security questionnaire?",
+      "expected_output": "Should identify the localStorage token storage as a critical XSS vulnerability, recommend shorter access token expiry, review the PKCE implementation, assess the refresh token rotation setup, and provide specific remediation steps.",
+      "assertions": [
+        {"text": "Identifies storing access tokens in localStorage as a critical vulnerability due to XSS attack exposure and recommends alternatives such as HttpOnly cookies or a BFF pattern", "type": "content_check"},
+        {"text": "Evaluates the 24-hour access token expiry as too long and recommends a shorter lifetime (typically 5-15 minutes) with silent refresh", "type": "content_check"},
+        {"text": "Reviews the PKCE implementation for the React SPA and confirms it's using S256 challenge method, not plain", "type": "content_check"},
+        {"text": "Assesses the refresh token rotation configuration and addresses what happens on token reuse detection — whether Auth0 is configured to revoke the token family", "type": "content_check"},
+        {"text": "Addresses the React Native mobile app token storage — recommends secure storage (Keychain on iOS, Keystore on Android) rather than AsyncStorage", "type": "content_check"},
+        {"text": "Evaluates the SAML SSO implementation including session termination, single logout, and whether enterprise customers can enforce their own session policies", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "threat-model-payment-system",
+      "prompt": "We're building a payment processing feature for our e-commerce marketplace. The flow: buyers enter card details on our checkout page (React frontend), card data is tokenized via Stripe.js (never touches our servers), the token is sent to our Go backend which calls the Stripe API to create a PaymentIntent, funds are held in our Stripe Connect account, and after order fulfillment (confirmed by the seller), we trigger a payout to the seller's connected Stripe account. We also support saved payment methods for returning buyers, refund processing, and dispute handling. Our platform takes a 10% commission on each transaction. We process about $2M/month in GMV across 3,000 active sellers and 45,000 buyers. We're pursuing PCI DSS SAQ-A compliance. Infrastructure: Go services on GCP GKE, Cloud SQL PostgreSQL, Redis, behind Cloudflare. Perform a threat model for this payment system using STRIDE. Identify the top threats, their severity, and recommend specific mitigations.",
+      "expected_output": "Should produce a STRIDE threat model covering all six categories, identify high-severity threats specific to marketplace payment flows (seller fraud, refund abuse, IDOR on payment records), and recommend mitigations aligned with PCI DSS SAQ-A requirements.",
+      "assertions": [
+        {"text": "Applies the STRIDE framework systematically — covers Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege against the payment flow", "type": "content_check"},
+        {"text": "Identifies IDOR (Insecure Direct Object Reference) risks on payment records, order records, and seller payout endpoints where one user could access another's financial data", "type": "content_check"},
+        {"text": "Addresses seller fraud scenarios specific to marketplace payment flows — such as sellers confirming fulfillment without shipping, or manipulating payout amounts", "type": "content_check"},
+        {"text": "Validates PCI DSS SAQ-A eligibility given the architecture — confirms that card data never touches their servers because Stripe.js tokenizes client-side", "type": "content_check"},
+        {"text": "Identifies risks around the Stripe API key management on the Go backend — how API keys are stored, rotated, and scoped (restricted keys vs full access)", "type": "content_check"},
+        {"text": "Addresses webhook security for Stripe webhook endpoints — signature verification, replay protection, and idempotency to prevent double processing", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "dependency-vulnerability-remediation",
+      "prompt": "Our Node.js monorepo (Next.js frontend, Express API, shared libraries) just had a Snyk scan that found 47 vulnerabilities: 3 critical, 8 high, 22 medium, and 14 low. The critical ones are: (1) CVE-2024-XXXX in jsonwebtoken v8.5.1 — allows algorithm confusion attacks if the 'algorithms' option isn't explicitly set, (2) a prototype pollution vulnerability in lodash v4.17.20 used deeply in our shared utilities, and (3) a path traversal in a file upload library multer v1.4.4 that allows writing files outside the intended directory. The 8 high vulnerabilities include several transitive dependencies we don't directly control — they come through express-session, passport, and webpack. We have 340 npm packages in our lockfile. Our CI pipeline runs Snyk but it's configured to warn only, not block merges. The team is 8 engineers and we're shipping features on a weekly release cycle. We need a remediation plan — what do we fix first, how do we fix transitive dependency vulnerabilities, and how do we prevent this from getting this bad again?",
+      "expected_output": "Should provide a prioritized remediation plan starting with the 3 critical CVEs, explain how to address transitive dependency vulnerabilities, and recommend CI pipeline changes to prevent vulnerability accumulation.",
+      "assertions": [
+        {"text": "Prioritizes the 3 critical vulnerabilities and provides specific remediation for each — jsonwebtoken upgrade with algorithm allowlist, lodash upgrade or replacement, multer upgrade with path validation", "type": "content_check"},
+        {"text": "Explains how to remediate transitive dependency vulnerabilities — using npm overrides, resolutions, or forcing sub-dependency upgrades when direct dependency maintainers haven't updated", "type": "content_check"},
+        {"text": "Recommends changing CI from warn-only to blocking merges on critical and high severity findings, with a process for handling false positives and exceptions", "type": "content_check"},
+        {"text": "Addresses the jsonwebtoken algorithm confusion attack specifically — recommends explicitly setting the algorithms option to prevent none algorithm bypass", "type": "content_check"},
+        {"text": "Recommends a triage approach for the 22 medium and 14 low vulnerabilities — EPSS-based prioritization, exploitability assessment, or risk-based SLA rather than fixing all at once", "type": "content_check"},
+        {"text": "Recommends ongoing prevention measures such as automated dependency update tools (Renovate or Dependabot), SBOM generation, and a vulnerability management SLA policy", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}
