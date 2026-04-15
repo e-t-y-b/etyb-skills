@@ -1,0 +1,17 @@
+{
+  "name": "etyb-skills",
+  "description": "Virtual engineering company — 29 AI agent skills organized as a coordinated engineering team with domain expertise, process protocols, and orchestrator-centric coordination for the full SDLC",
+  "version": "1.0.0",
+  "author": {
+    "name": "re-labs"
+  },
+  "homepage": "https://github.com/re-manish/etyb-skills",
+  "repository": "https://github.com/re-manish/etyb-skills",
+  "license": "MIT",
+  "keywords": [
+    "engineering", "architecture", "tdd", "code-review", "devops", "security",
+    "full-stack", "frontend", "backend", "database", "mobile", "ai-ml",
+    "fintech", "healthcare", "e-commerce", "saas", "real-time", "social-platform",
+    "orchestrator", "process-protocols", "sdlc", "virtual-team"
+  ]
+}

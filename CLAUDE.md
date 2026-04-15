@@ -4,7 +4,7 @@ This is a collection of 29 AI agent skills organized as a virtual engineering te
 
 ## Entry Point
 
-The **orchestrator** (`orchestrator/SKILL.md`) is the main skill. It routes requests to the right domain experts and activates process protocols. Start here for any engineering work.
+The **orchestrator** (`skills/orchestrator/SKILL.md`) is the main skill. It routes requests to the right domain experts and activates process protocols. Start here for any engineering work.
 
 ## Architecture
 

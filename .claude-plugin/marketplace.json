@@ -1,0 +1,101 @@
+{
+  "name": "etyb-skills",
+  "owner": {
+    "name": "re-labs"
+  },
+  "metadata": {
+    "description": "Virtual engineering company — 29 AI agent skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "etyb-full",
+      "description": "Complete virtual engineering team — orchestrator, 14 core teams, 6 domain specialists, 7 process protocols",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/orchestrator",
+        "./skills/research-analyst",
+        "./skills/system-architect",
+        "./skills/frontend-architect",
+        "./skills/backend-architect",
+        "./skills/database-architect",
+        "./skills/mobile-architect",
+        "./skills/qa-engineer",
+        "./skills/devops-engineer",
+        "./skills/security-engineer",
+        "./skills/sre-engineer",
+        "./skills/ai-ml-engineer",
+        "./skills/technical-writer",
+        "./skills/project-planner",
+        "./skills/code-reviewer",
+        "./skills/social-platform-architect",
+        "./skills/e-commerce-architect",
+        "./skills/fintech-architect",
+        "./skills/saas-architect",
+        "./skills/real-time-architect",
+        "./skills/healthcare-architect",
+        "./skills/tdd-protocol",
+        "./skills/brainstorm-protocol",
+        "./skills/review-protocol",
+        "./skills/subagent-protocol",
+        "./skills/git-workflow-protocol",
+        "./skills/plan-execution-protocol",
+        "./skills/skill-evolution-protocol"
+      ]
+    },
+    {
+      "name": "etyb-process-protocols",
+      "description": "7 always-on engineering disciplines — TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/orchestrator",
+        "./skills/tdd-protocol",
+        "./skills/brainstorm-protocol",
+        "./skills/review-protocol",
+        "./skills/subagent-protocol",
+        "./skills/git-workflow-protocol",
+        "./skills/plan-execution-protocol",
+        "./skills/skill-evolution-protocol"
+      ]
+    },
+    {
+      "name": "etyb-core-team",
+      "description": "Orchestrator + 14 core engineering teams covering the full SDLC",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/orchestrator",
+        "./skills/research-analyst",
+        "./skills/system-architect",
+        "./skills/frontend-architect",
+        "./skills/backend-architect",
+        "./skills/database-architect",
+        "./skills/mobile-architect",
+        "./skills/qa-engineer",
+        "./skills/devops-engineer",
+        "./skills/security-engineer",
+        "./skills/sre-engineer",
+        "./skills/ai-ml-engineer",
+        "./skills/technical-writer",
+        "./skills/project-planner",
+        "./skills/code-reviewer"
+      ]
+    },
+    {
+      "name": "etyb-verticals",
+      "description": "6 domain-specific architects — fintech, healthcare, e-commerce, SaaS, real-time, social platforms",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/social-platform-architect",
+        "./skills/e-commerce-architect",
+        "./skills/fintech-architect",
+        "./skills/saas-architect",
+        "./skills/real-time-architect",
+        "./skills/healthcare-architect"
+      ]
+    }
+  ]
+}

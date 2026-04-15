@@ -74,7 +74,7 @@ Think of this as a **virtual engineering company with process discipline** — n
 
 ## Master Skill #0: Orchestrator
 
-**Folder:** `orchestrator/`
+**Folder:** `skills/orchestrator/`
 
 The top-level agent. It does NOT do work itself — it understands user intent and routes to the correct team(s). It can bring in multiple teams for cross-cutting tasks.
 
@@ -90,7 +90,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #1: Research Analyst
 
-**Folder:** `research-analyst/`
+**Folder:** `skills/research-analyst/`
 **SDLC Phase:** 0 — Research & Discovery
 **Analogy:** The team you bring in before writing a single line of code.
 
@@ -107,7 +107,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #2: System Architect
 
-**Folder:** `system-architect/`
+**Folder:** `skills/system-architect/`
 **SDLC Phase:** 2 — Design & Architecture
 **Analogy:** The chief architect who designs the big picture before any team starts building.
 
@@ -125,7 +125,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #3: Frontend Architect ✅ EXISTS
 
-**Folder:** `frontend-architect/` (already created)
+**Folder:** `skills/frontend-architect/` (already created)
 **SDLC Phase:** 2-3 — Architecture + Development
 **Status:** Exists with React, Angular, SEO, and architecture-patterns references.
 
@@ -149,7 +149,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #4: Backend Architect ✅ EXISTS
 
-**Folder:** `backend-architect/` (already created)
+**Folder:** `skills/backend-architect/` (already created)
 **SDLC Phase:** 2-3 — Architecture + Development
 **Status:** Exists with Java, TypeScript, Go, Python, and architecture-patterns references.
 
@@ -173,7 +173,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #5: Database Architect
 
-**Folder:** `database-architect/`
+**Folder:** `skills/database-architect/`
 **SDLC Phase:** 2-3 — Architecture + Development
 **Analogy:** The DBA team — they own data modeling, performance, migrations, and storage decisions.
 
@@ -192,7 +192,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #6: Mobile Architect
 
-**Folder:** `mobile-architect/`
+**Folder:** `skills/mobile-architect/`
 **SDLC Phase:** 2-3 — Architecture + Development
 **Analogy:** The mobile engineering team.
 
@@ -210,7 +210,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #7: QA Engineer
 
-**Folder:** `qa-engineer/`
+**Folder:** `skills/qa-engineer/`
 **SDLC Phase:** 4 — Testing & Quality Assurance
 **Analogy:** The QA/testing team that ensures nothing ships broken.
 
@@ -229,7 +229,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #8: DevOps Engineer
 
-**Folder:** `devops-engineer/`
+**Folder:** `skills/devops-engineer/`
 **SDLC Phase:** 5 — Build, Deploy & Release
 **Analogy:** The DevOps/platform engineering team.
 
@@ -250,7 +250,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #9: Security Engineer
 
-**Folder:** `security-engineer/`
+**Folder:** `skills/security-engineer/`
 **SDLC Phase:** Cross-cutting (all phases)
 **Analogy:** The security team — involved from design through production.
 
@@ -269,7 +269,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #10: SRE Engineer
 
-**Folder:** `sre-engineer/`
+**Folder:** `skills/sre-engineer/`
 **SDLC Phase:** 6-7 — Operations, Monitoring & Maintenance
 **Analogy:** The SRE/operations team that keeps production running.
 
@@ -288,7 +288,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #11: AI/ML Engineer
 
-**Folder:** `ai-ml-engineer/`
+**Folder:** `skills/ai-ml-engineer/`
 **SDLC Phase:** 2-3 — Architecture + Development (specialized)
 **Analogy:** The AI/ML team for intelligent features.
 
@@ -306,7 +306,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #12: Technical Writer
 
-**Folder:** `technical-writer/`
+**Folder:** `skills/technical-writer/`
 **SDLC Phase:** Cross-cutting (all phases)
 **Analogy:** The documentation team.
 
@@ -323,7 +323,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #13: Project Planner
 
-**Folder:** `project-planner/`
+**Folder:** `skills/project-planner/`
 **SDLC Phase:** 1 — Requirements & Planning
 **Analogy:** The PM/TPM team.
 
@@ -339,7 +339,7 @@ The top-level agent. It does NOT do work itself — it understands user intent a
 
 ## Master Skill #14: Code Reviewer
 
-**Folder:** `code-reviewer/`
+**Folder:** `skills/code-reviewer/`
 **SDLC Phase:** Cross-cutting (during development)
 **Analogy:** The senior engineer who reviews every PR.
 
@@ -360,12 +360,12 @@ These are brought in when building specific types of products. They complement t
 
 | Skill | Folder | Status | What It Covers |
 |-------|--------|--------|----------------|
-| `social-platform-architect` | `social-platform-architect/` | ✅ EXISTS | Feed systems, fan-out, social graphs, real-time delivery, content ranking |
-| `e-commerce-architect` | `e-commerce-architect/` | NEW | Product catalogs, cart/checkout, payments, inventory, order management |
-| `fintech-architect` | `fintech-architect/` | NEW | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
-| `saas-architect` | `saas-architect/` | DONE | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
-| `real-time-architect` | `real-time-architect/` | DONE | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
-| `healthcare-architect` | `healthcare-architect/` | DONE | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
+| `social-platform-architect` | `skills/social-platform-architect/` | ✅ EXISTS | Feed systems, fan-out, social graphs, real-time delivery, content ranking |
+| `e-commerce-architect` | `skills/e-commerce-architect/` | NEW | Product catalogs, cart/checkout, payments, inventory, order management |
+| `fintech-architect` | `skills/fintech-architect/` | NEW | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
+| `saas-architect` | `skills/saas-architect/` | DONE | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
+| `real-time-architect` | `skills/real-time-architect/` | DONE | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
+| `healthcare-architect` | `skills/healthcare-architect/` | DONE | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
 
 ---
 
@@ -498,11 +498,11 @@ Transforms etyb-skills from a roster of experts into an operating team with gate
 
 | File | Purpose |
 |------|---------|
-| `orchestrator/references/process-architecture.md` | Master process reference — plan format, gates, expert mandating, coordination patterns |
-| `orchestrator/references/verification-protocol.md` | Verification framework — 5 questions, role-specific checklists, done criteria per gate |
-| `orchestrator/references/debugging-protocol.md` | Debugging methodology — root cause first, hypothesis-driven, escalation paths |
-| `project-planner/references/plan-lifecycle.md` | Plan creation workflow, update patterns, gate readiness assessment, templates |
-| `orchestrator/evals/process-evals.json` | 10 end-to-end eval scenarios testing process-enforced workflow |
+| `skills/orchestrator/references/process-architecture.md` | Master process reference — plan format, gates, expert mandating, coordination patterns |
+| `skills/orchestrator/references/verification-protocol.md` | Verification framework — 5 questions, role-specific checklists, done criteria per gate |
+| `skills/orchestrator/references/debugging-protocol.md` | Debugging methodology — root cause first, hypothesis-driven, escalation paths |
+| `skills/project-planner/references/plan-lifecycle.md` | Plan creation workflow, update patterns, gate readiness assessment, templates |
+| `skills/orchestrator/evals/process-evals.json` | 10 end-to-end eval scenarios testing process-enforced workflow |
 
 #### All 21 SKILL.md Modifications
 
@@ -551,41 +551,41 @@ And two skills were enhanced as **process owners**:
 **Purpose:** Always-on engineering disciplines that govern HOW work gets done. These are behavioral enforcers with deep reference knowledge, not domain experts. Principles are embedded in the orchestrator; deep knowledge is loaded on demand.
 
 ### Process Protocol #21: TDD Protocol
-**Folder:** `tdd-protocol/`
+**Folder:** `skills/tdd-protocol/`
 **Always on for:** All code-producing work
 **Sub-skills:** red-green-refactor, rationalization-counters, tdd-patterns
 **Hooks:** pre-edit-check (warns if no test file), post-test-log (logs results)
 
 ### Process Protocol #22: Subagent Protocol
-**Folder:** `subagent-protocol/`
+**Folder:** `skills/subagent-protocol/`
 **Always on for:** Parallel work, delegated tasks
 **Sub-skills:** dispatch-patterns, parallel-coordination, two-stage-review, context-isolation
 
 ### Process Protocol #23: Git Workflow Protocol
-**Folder:** `git-workflow-protocol/`
+**Folder:** `skills/git-workflow-protocol/`
 **Always on for:** Branch management, parallel development
 **Sub-skills:** worktree-management, branch-finishing, parallel-development
 **Hooks:** pre-merge-verify (blocks merge if tests fail)
 
 ### Process Protocol #24: Plan Execution Protocol
-**Folder:** `plan-execution-protocol/`
+**Folder:** `skills/plan-execution-protocol/`
 **Always on for:** Any active plan
 **Sub-skills:** task-execution-cycle, blocker-management, gate-transitions
 **Hooks:** post-edit-log (traces edits to plan tasks)
 
 ### Process Protocol #25: Brainstorm Protocol
-**Folder:** `brainstorm-protocol/`
+**Folder:** `skills/brainstorm-protocol/`
 **Always on for:** Ambiguous or exploratory requests
 **Sub-skills:** exploration-techniques, convergence-patterns, design-brief-template
 
 ### Process Protocol #26: Review Protocol
-**Folder:** `review-protocol/`
+**Folder:** `skills/review-protocol/`
 **Always on for:** Code review lifecycle
 **Sub-skills:** review-dispatch, feedback-evaluation, review-integration
 **Hooks:** pre-commit-review-check (verifies review before commit)
 
 ### Process Protocol #27: Skill Evolution Protocol
-**Folder:** `skill-evolution-protocol/`
+**Folder:** `skills/skill-evolution-protocol/`
 **Always on for:** Skill creation, evaluation, improvement
 **Sub-skills:** skill-creation, eval-engineering, improvement-loop, institutional-memory
 

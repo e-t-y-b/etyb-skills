@@ -1,0 +1,16 @@
+{
+  "name": "etyb-skills",
+  "version": "1.0.0",
+  "description": "Virtual engineering company — 29 AI agent skills organized as a coordinated engineering team",
+  "author": "re-labs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/re-manish/etyb-skills"
+  },
+  "homepage": "https://github.com/re-manish/etyb-skills",
+  "keywords": [
+    "skills", "agent-skills", "claude-code", "engineering", "architecture",
+    "tdd", "devops", "security", "full-stack", "virtual-team"
+  ]
+}
