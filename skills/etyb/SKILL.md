@@ -31,6 +31,7 @@ Read these on demand. Each module is self-contained.
 | [`core/response-formats.md`](core/response-formats.md) | Tier 1-4 output templates | Producing your response |
 | [`core/scale-calibration.md`](core/scale-calibration.md) | Startup → Enterprise guidance | Every response (calibrates all advice) |
 | [`core/always-on-protocols.md`](core/always-on-protocols.md) | 9 engineering disciplines + debugging activation | Always applicable |
+| [`core/version-awareness.md`](core/version-awareness.md) | ETYB's own version, update mechanism, upgrade-path guidance | When user asks "what version", "how do I update", or mentions stale behavior |
 
 ## Platform Adapter
 
