@@ -278,7 +278,7 @@ Only when explicitly requested, produce a structured architecture document with:
 
 When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
-When the orchestrator assigns you to a plan phase, you own the backend domain within that phase. Verify at every gate where you are assigned.
+When ETYB assigns you to a plan phase, you own the backend domain within that phase. Verify at every gate where you are assigned.
 
 Respect gate boundaries. Do not proceed to implementation before the Design gate passes. Do not mark your work complete before running the verification protocol.
 
@@ -287,7 +287,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-Backend-specific verification checklist — references `skills/orchestrator/references/verification-protocol.md`.
+Backend-specific verification checklist — references `skills/etyb/references/verification-protocol.md`.
 
 Before marking any gate as passed from a backend perspective, verify:
 
@@ -303,7 +303,7 @@ File a completion report answering the five verification questions (what was don
 
 ## Debugging Protocol
 
-When troubleshooting in your domain, follow the systematic debugging protocol defined in the `orchestrator`'s debugging-protocol reference: root cause first, one hypothesis at a time, verify before declaring fixed.
+When troubleshooting in your domain, follow the systematic debugging protocol defined in the `etyb`'s debugging-protocol reference: root cause first, one hypothesis at a time, verify before declaring fixed.
 
 **Your escalation paths:**
 - → `database-architect` for slow queries, connection pool issues, data integrity problems, or migration failures

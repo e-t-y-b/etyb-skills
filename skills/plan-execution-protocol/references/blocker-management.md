@@ -160,7 +160,7 @@ The task scope has changed or is unclear, requiring a decision before proceeding
 **Response protocol:**
 1. Identify the decision needed — what are the options?
 2. Present options with tradeoffs to the user
-3. Do NOT make scope decisions unilaterally — the user or orchestrator decides
+3. Do NOT make scope decisions unilaterally — the user or ETYB decides
 4. Wait for direction before proceeding
 5. Once decided, add to the decision log and update task scope
 

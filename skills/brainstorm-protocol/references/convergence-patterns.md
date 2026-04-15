@@ -387,4 +387,4 @@ For every significant decision during convergence, capture:
 **Review date:** {when to revisit, if applicable}
 ```
 
-This becomes part of the design brief and feeds into the orchestrator's decision log.
+This becomes part of the design brief and feeds into ETYB's decision log.

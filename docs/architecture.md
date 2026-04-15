@@ -2,7 +2,7 @@
 
 ## Overview
 
-ETYB Skills is a virtual engineering company implemented as a system of 29 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and a central orchestrator that enforces engineering discipline at every stage.
+ETYB Skills is a virtual engineering company implemented as a system of 29 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and a ETYB that enforces engineering discipline at every stage.
 
 ## System Architecture
 
@@ -19,7 +19,7 @@ ETYB Skills is a virtual engineering company implemented as a system of 29 coord
 |  subagent-coordination . self-improvement . debugging                       |
 +-----------------------------------------------------------------------------+
 |                            +---------------------+                          |
-|                            |     ORCHESTRATOR     |                          |
+|                            |         ETYB         |                          |
 |                            |  (Process-Enforcing  |                          |
 |                            |   CTO / Router)      |                          |
 |                            +----------+----------+                          |
@@ -50,7 +50,7 @@ ETYB Skills is a virtual engineering company implemented as a system of 29 coord
 
 ## Core Concepts
 
-**Orchestrator** -- The process-enforcing CTO. Classifies request complexity into tiers (Tier 0-4), mandates the right domain experts, enforces phase gates, and tracks plan state. It does not perform work directly; it routes, coordinates, and enforces.
+**ETYB** -- The process-enforcing CTO. Classifies request complexity into tiers (Tier 0-4), mandates the right domain experts, enforces phase gates, and tracks plan state. It does not perform work directly; it routes, coordinates, and enforces.
 
 **Domain Experts** -- Team leads with broad domain knowledge. Each domain expert delegates to specialist sub-skills for deep, targeted work. They participate in the plan lifecycle and coordinate handoffs with other teams.
 
@@ -81,9 +81,9 @@ ETYB Skills is a virtual engineering company implemented as a system of 29 coord
 
 ## Skill Reference
 
-### Orchestrator
+### ETYB
 
-**`orchestrator`** -- `skills/orchestrator/`
+**`etyb`** -- `skills/etyb/`
 
 The top-level agent. It parses user intent, routes to the correct team (or multiple teams for cross-cutting tasks), coordinates handoffs, tracks project context across sessions, and enforces the process layer. It classifies every request by tier and mandates the appropriate experts and gates.
 
@@ -340,7 +340,7 @@ Specialized teams activated when building specific types of products. They compl
 
 ## Process Protocols
 
-Seven always-on engineering disciplines govern how work gets done. Their principles are embedded in the orchestrator; deep reference knowledge is loaded on demand.
+Seven always-on engineering disciplines govern how work gets done. Their principles are embedded in ETYB; deep reference knowledge is loaded on demand.
 
 | Protocol | Folder | Scope | Description |
 |----------|--------|-------|-------------|
@@ -366,7 +366,7 @@ Every non-trivial project passes through five gates, each with defined entry and
 
 ### Tier Classification
 
-The orchestrator classifies every request by complexity:
+ETYB classifies every request by complexity:
 
 - **Tier 0** -- Direct answer, no code involved.
 - **Tier 1** -- Single-file change, one domain expert.
@@ -390,7 +390,7 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 
 | Role | Behavior |
 |------|----------|
-| Orchestrator | Classifies tiers, mandates experts, enforces gates, blocks progression without exit criteria |
+| ETYB | Classifies tiers, mandates experts, enforces gates, blocks progression without exit criteria |
 | QA Engineer | Blocks Ship without test coverage, enforces TDD at Plan gate |
 | Security Engineer | Auto-consulted on auth, PII, payments, infrastructure; blocks Ship without security sign-off |
 | Code Reviewer | Mandatory review before Ship gate passes |
@@ -410,10 +410,10 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 
 ## Inventory Summary
 
-- **1** orchestrator (process-enforcing CTO and router)
+- **1** ETYB (process-enforcing CTO and router)
 - **14** core domain expert teams with approximately 80 specialist sub-skills
 - **6** domain-specific architects for vertical product categories
 - **7** process protocols with hook enforcement
 - **3** mandatory quality gates (TDD, security, code review)
 - **5-gate lifecycle** covering Design through Ship
-- **9** always-on engineering disciplines embedded in the orchestrator
+- **9** always-on engineering disciplines embedded in ETYB

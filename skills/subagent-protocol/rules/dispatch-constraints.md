@@ -40,5 +40,5 @@ These rules are non-negotiable. They apply to every subagent dispatch regardless
 ## Iteration Limits
 
 - Maximum 2 re-dispatches per agent (3 total attempts including the original)
-- After max iterations, ESCALATE to the orchestrator -- do not continue re-dispatching
+- After max iterations, ESCALATE to ETYB -- do not continue re-dispatching
 - Every re-dispatch MUST include the previous failure reason and specific corrections required

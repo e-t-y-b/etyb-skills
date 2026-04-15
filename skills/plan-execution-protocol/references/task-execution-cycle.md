@@ -104,7 +104,7 @@ The plan specifies which expert skill to use. Common mappings:
 | React component | `frontend-architect` | `qa-engineer` (component testing) |
 | Database schema change | `database-architect` | `backend-architect` (migration code) |
 | CI/CD pipeline | `devops-engineer` | `sre-engineer` (monitoring hooks) |
-| Authentication flow | `backend-architect` + `security-engineer` | mandatory per orchestrator rules |
+| Authentication flow | `backend-architect` + `security-engineer` | mandatory per ETYB rules |
 | Mobile screen | `mobile-architect` | `frontend-architect` (shared patterns) |
 | ML model integration | `ai-ml-engineer` | `backend-architect` (serving layer) |
 
@@ -122,7 +122,7 @@ To "load the expert" means:
 If the task row has no assigned expert:
 
 1. Classify the task by type (frontend, backend, database, infrastructure, etc.)
-2. Consult the orchestrator's team registry for the appropriate skill
+2. Consult ETYB's team registry for the appropriate skill
 3. Check mandatory expert rules — does this change type require specific experts?
 4. Assign the expert and update the plan artifact
 

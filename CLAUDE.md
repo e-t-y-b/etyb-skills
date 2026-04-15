@@ -4,18 +4,18 @@ This is a collection of 29 AI agent skills organized as a virtual engineering te
 
 ## Entry Point
 
-The **orchestrator** (`skills/orchestrator/SKILL.md`) is the main skill. It routes requests to the right domain experts and activates process protocols. Start here for any engineering work.
+**ETYB** (`skills/etyb/SKILL.md`) is the main skill — your virtual CTO. It routes requests to the right domain experts and activates process protocols. Start here for any engineering work.
 
 ## Architecture
 
-- **Orchestrator** (1) — CTO-level routing, gate enforcement, plan management
+- **ETYB** (1) — CTO-level routing, gate enforcement, plan management
 - **Domain Experts** (20) — 14 core teams + 6 vertical specialists (WHO/WHAT)
 - **Process Protocols** (7) — Always-on engineering disciplines (HOW)
-- **Orchestrator References** (3) — Verification, debugging, process architecture (WHEN/WHERE)
+- **ETYB References** (3) — Verification, debugging, process architecture (WHEN/WHERE)
 
 ## Always-On Engineering Culture
 
-These disciplines are embedded in the orchestrator and enforced by hooks:
+These disciplines are embedded in ETYB and enforced by hooks:
 
 1. **TDD** — No code without a failing test first
 2. **Verification** — Evidence before claims, always

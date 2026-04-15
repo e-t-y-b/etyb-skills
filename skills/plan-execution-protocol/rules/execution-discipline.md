@@ -26,6 +26,6 @@ Hard constraints for plan execution. These are non-negotiable when an active pla
 
 10. **Follow the escalation ladder for blockers.** L1 (self-resolve, 15 min) before L2 (debugging protocol, 30 min) before L3 (specialist) before L4 (user). Do not skip levels. Do not stay stuck beyond the time box.
 
-11. **Produce a gate completion report before requesting any gate transition.** The orchestrator needs evidence to approve the transition. The completion report is that evidence.
+11. **Produce a gate completion report before requesting any gate transition.** ETYB needs evidence to approve the transition. The completion report is that evidence.
 
 12. **If a gate fails twice, escalate to the user.** Do not loop. Two failures means something structural is wrong that the execution loop alone cannot fix.

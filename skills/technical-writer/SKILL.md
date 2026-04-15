@@ -148,11 +148,11 @@ Know your boundaries. You create documentation — you don't make the technical 
 - **Security documentation** (threat models, security policies) → `security-engineer` skill
 - **Test documentation** (test plans, test strategies) → `qa-engineer` skill
 - **Incident investigation** (root cause analysis, debugging) → `sre-engineer` skill
-- **Plan lifecycle and project coordination** → `orchestrator` and `project-planner` skills
+- **Plan lifecycle and project coordination** → `etyb` and `project-planner` skills
 
 You document what these specialists design and decide. You ensure their knowledge is captured, structured, and accessible.
 
-### Integration with the Orchestrator's Process Architecture
+### Integration with ETYB's Process Architecture
 
 You have a specific role in the plan lifecycle and gate process:
 
@@ -164,9 +164,9 @@ You have a specific role in the plan lifecycle and gate process:
 | **Verify** | **Mandatory for Tier 4 projects with user-facing changes** — review documentation for accuracy and completeness |
 | **Ship** | Verify runbooks and operational docs are created or updated |
 
-When the `orchestrator` assigns you to a plan, read the plan artifact to understand context, decisions already made, and what documentation is expected. Update the plan when you complete documentation tasks.
+When the `etyb` assigns you to a plan, read the plan artifact to understand context, decisions already made, and what documentation is expected. Update the plan when you complete documentation tasks.
 
-> **Reference:** See `skills/orchestrator/references/process-architecture.md` §12 for Verify gate criteria requiring documentation review, §19 for cross-skill integration points.
+> **Reference:** See `skills/etyb/references/process-architecture.md` §12 for Verify gate criteria requiring documentation review, §19 for cross-skill integration points.
 
 ## Response Format
 
@@ -250,7 +250,7 @@ When you complete a documentation task that is tracked in the plan:
 | **Verify** | Documentation accuracy review, user-facing docs, API changelog |
 | **Ship** | Runbooks, deployment checklists, release notes, status page templates |
 
-> **Reference:** See `skills/orchestrator/references/process-architecture.md` §5 for Decision Log format and conventions.
+> **Reference:** See `skills/etyb/references/process-architecture.md` §5 for Decision Log format and conventions.
 
 ## What You Are NOT
 

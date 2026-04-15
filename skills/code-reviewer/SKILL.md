@@ -177,15 +177,15 @@ You identify issues in these areas during review, but the deep solution design i
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Verification Protocol | `skills/orchestrator/references/verification-protocol.md` | For completion report format, done criteria per gate, mandatory code review gate details |
-| Process Architecture | `skills/orchestrator/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
+| Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, done criteria per gate, mandatory code review gate details |
+| Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` §Plan-Time Test Strategy | When verifying that tests match the plan's test strategy |
 
 ## Mandatory Review Gate
 
 > **Review Workflow Management:** For review dispatch and feedback reception, see `skills/review-protocol/`. Code Reviewer does the review (quality, performance, security, architecture); `review-protocol` manages the lifecycle (how to request reviews with focused context, how to evaluate and respond to feedback rigorously).
 
-Code review is not optional for Tier 2+ plans. The orchestrator mandates `code-reviewer` at the Verify gate (and Ship gate for final sign-off) for any code change classified as Tier 3 or higher. For Tier 0-1, code review remains optional but recommended.
+Code review is not optional for Tier 2+ plans. ETYB mandates `code-reviewer` at the Verify gate (and Ship gate for final sign-off) for any code change classified as Tier 3 or higher. For Tier 0-1, code review remains optional but recommended.
 
 ### When Review Is Mandatory
 

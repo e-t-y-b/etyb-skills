@@ -1,10 +1,10 @@
 {
-  "skill_name": "orchestrator",
+  "skill_name": "etyb",
   "evals": [
     {
       "id": 1,
       "prompt": "I want to build a real-time collaborative document editor like Google Docs. It needs to support 10k concurrent users, have offline mode, and work on web and mobile. Where do I even start?",
-      "expected_output": "The orchestrator should identify this as a complex multi-team greenfield project requiring: (1) real-time-architect for real-time collaboration patterns (CRDTs, OT), (2) system-architect for overall system design, (3) frontend-architect for the web editor, (4) mobile-architect for mobile clients, (5) backend-architect for the collaboration server, (6) database-architect for document storage. It should propose a sequential-then-parallel execution plan: start with real-time-architect + system-architect for architecture, then parallel frontend/mobile/backend development, then QA and DevOps. Should NOT attempt to design the system itself.",
+      "expected_output": "ETYB should identify this as a complex multi-team greenfield project requiring: (1) real-time-architect for real-time collaboration patterns (CRDTs, OT), (2) system-architect for overall system design, (3) frontend-architect for the web editor, (4) mobile-architect for mobile clients, (5) backend-architect for the collaboration server, (6) database-architect for document storage. It should propose a sequential-then-parallel execution plan: start with real-time-architect + system-architect for architecture, then parallel frontend/mobile/backend development, then QA and DevOps. Should NOT attempt to design the system itself.",
       "files": [],
       "assertions": [
         {"name": "identifies-real-time-architect", "type": "contains_keyword", "keywords": ["real-time-architect"]},

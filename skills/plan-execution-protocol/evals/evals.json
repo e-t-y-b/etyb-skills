@@ -34,7 +34,7 @@
       "id": 1,
       "name": "gate-exit-verification",
       "prompt": "All 6 tasks in the Implement gate are marked done. Let's move on to the Verify gate and start the code review.",
-      "expected_output": "Should NOT immediately jump to the Verify gate. Should trigger the gate exit verification checklist first: verify all tasks have 5-question verification reports, all tests pass, no unresolved blockers, decision log is current, risk register is current, mandatory expert reviews for Implement gate are complete. Should produce a gate completion report for the orchestrator. Only after the checklist passes should it recommend advancing.",
+      "expected_output": "Should NOT immediately jump to the Verify gate. Should trigger the gate exit verification checklist first: verify all tasks have 5-question verification reports, all tests pass, no unresolved blockers, decision log is current, risk register is current, mandatory expert reviews for Implement gate are complete. Should produce a gate completion report for ETYB. Only after the checklist passes should it recommend advancing.",
       "assertions": [
         {
           "text": "Does NOT immediately start the Verify gate or code review",
@@ -53,7 +53,7 @@
           "type": "content_check"
         },
         {
-          "text": "Produces or references a gate completion report for the orchestrator",
+          "text": "Produces or references a gate completion report for ETYB",
           "type": "content_check"
         }
       ],

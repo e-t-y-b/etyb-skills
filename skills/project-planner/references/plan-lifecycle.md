@@ -71,11 +71,11 @@ Active → Abandoned
 
 | Status | Meaning | Who Sets It |
 |--------|---------|-------------|
-| **Draft** | Plan skeleton created, not yet populated with tasks | `orchestrator` creates, `project-planner` transitions to Active after population |
-| **Active** | Work is in progress across one or more gates | `project-planner` or `orchestrator` |
+| **Draft** | Plan skeleton created, not yet populated with tasks | `etyb` creates, `project-planner` transitions to Active after population |
+| **Active** | Work is in progress across one or more gates | `project-planner` or `etyb` |
 | **Blocked** | Work stopped due to unresolved issues — requires intervention | Any expert who encounters a blocker |
-| **Complete** | All gates passed, work shipped and verified | `orchestrator` after Ship gate passes |
-| **Abandoned** | Work intentionally stopped — reason must be logged in Decision Log | `orchestrator` with user agreement |
+| **Complete** | All gates passed, work shipped and verified | `etyb` after Ship gate passes |
+| **Abandoned** | Work intentionally stopped — reason must be logged in Decision Log | `etyb` with user agreement |
 
 ### Context Section
 
@@ -199,19 +199,19 @@ When a task requires collaboration, designate a lead and supporting expert(s):
 **Impact:** Low (hours delay), Medium (days delay), High (weeks delay or critical incident)
 **Status:** `open`, `mitigating`, `mitigated`, `occurred`, `closed`
 
-> **Reference:** See `skills/orchestrator/references/process-architecture.md` §6 for the full risk assessment framework, priority matrix, and domain-specific risk templates.
+> **Reference:** See `skills/etyb/references/process-architecture.md` §6 for the full risk assessment framework, priority matrix, and domain-specific risk templates.
 
 ---
 
 ## 2. Plan Creation Workflow
 
-### Step-by-Step: From Orchestrator Handoff to Complete Plan
+### Step-by-Step: From ETYB Handoff to Complete Plan
 
-The orchestrator creates the plan skeleton. You fill it with substance. Here is the exact workflow:
+ETYB creates the plan skeleton. You fill it with substance. Here is the exact workflow:
 
 ### Step 1: Receive the Skeleton
 
-The orchestrator provides:
+ETYB provides:
 - Tier classification (3 or 4)
 - Scale classification (Startup / Growth / Scale / Enterprise)
 - Domain (if applicable)
@@ -286,7 +286,7 @@ For each task, assign:
 1. **Assigned Expert** — the skill that does the work
 2. **Verified By** — the skill that checks the work (never the same as Assigned for critical tasks)
 
-Follow the orchestrator's expert assignment conventions:
+Follow ETYB's expert assignment conventions:
 
 | Work Type | Assigned To | Verified By |
 |-----------|------------|-------------|
@@ -298,12 +298,12 @@ Follow the orchestrator's expert assignment conventions:
 | Infrastructure | `devops-engineer` | `sre-engineer` |
 | Documentation | `technical-writer` | Assigned domain expert |
 
-**Mandatory experts** (from orchestrator's rules) are non-negotiable assignments. If the orchestrator mandated `security-engineer` at the Design gate, they must be assigned to relevant Design tasks.
+**Mandatory experts** (from ETYB's rules) are non-negotiable assignments. If ETYB mandated `security-engineer` at the Design gate, they must be assigned to relevant Design tasks.
 
 ### Step 7: Populate the Risk Register
 
 Identify risks using these sources:
-1. **Domain-specific risk templates** from `skills/orchestrator/references/process-architecture.md` §6
+1. **Domain-specific risk templates** from `skills/etyb/references/process-architecture.md` §6
 2. **Dependency risks** — external APIs, third-party services, team availability
 3. **Technical risks** — unfamiliar technology, complex migrations, performance unknowns
 4. **Scope risks** — unclear requirements, shifting priorities
@@ -339,7 +339,7 @@ Once all sections are filled:
 1. Set the plan Status to `Active`
 2. Set the first appropriate gate to `in-progress` with an entry date
 3. Produce the Plan Population Complete summary (see SKILL.md Response Format)
-4. The orchestrator reviews your work against gate requirements
+4. ETYB reviews your work against gate requirements
 
 ---
 
@@ -357,9 +357,9 @@ The plan is a living document. It changes whenever the project reality changes.
 | Dependency changed | `project-planner` | Dependency column updated, critical path reassessed |
 | Risk materialized | Any expert | Risk status → `occurred`, mitigation activated |
 | Risk identified | Any expert | New Risk Register entry |
-| Scope change | `orchestrator` + `project-planner` | Tasks added/removed, Decision Log entry, milestone impact assessed |
+| Scope change | `etyb` + `project-planner` | Tasks added/removed, Decision Log entry, milestone impact assessed |
 | Blocker found | Affected expert | Task status → `blocked`, Blocking Issues column updated |
-| Gate transition | `orchestrator` | Gate status updated, entry/exit dates set |
+| Gate transition | `etyb` | Gate status updated, entry/exit dates set |
 | Sprint boundary | `project-planner` | Progress snapshot, velocity update, forecast revision |
 
 ### How to Update Without Disrupting Flow
@@ -369,7 +369,7 @@ Plan updates should be **lightweight and atomic** — change what needs to chang
 1. **Task status update:** Change one cell in the task table. No ceremony needed.
 2. **New task discovered:** Add a row to the correct phase table. Estimate if possible, mark `pending`.
 3. **Estimate revision:** Update the effort cell. If the revision is significant (>50% change), add a Decision Log entry explaining why.
-4. **Scope change:** This is the only update that requires coordination with the `orchestrator`. Add/remove tasks, add a Decision Log entry, reassess milestones.
+4. **Scope change:** This is the only update that requires coordination with the `etyb`. Add/remove tasks, add a Decision Log entry, reassess milestones.
 
 ### Update Frequency
 
@@ -485,11 +485,11 @@ If both a Claude plan and `.etyb/plans/` artifact exist:
 
 ### Assessment Process
 
-Before any gate transition, the `project-planner` produces a gate readiness report. This is the evidence the `orchestrator` uses to pass or fail the gate.
+Before any gate transition, the `project-planner` produces a gate readiness report. This is the evidence the `etyb` uses to pass or fail the gate.
 
 ### Step 1: Gather Evidence
 
-For each exit criterion of the current gate (from `skills/orchestrator/references/process-architecture.md` §9-13):
+For each exit criterion of the current gate (from `skills/etyb/references/process-architecture.md` §9-13):
 
 1. **Check the artifact** — does it exist? Is it complete?
 2. **Check the sign-off** — has the mandatory expert reviewed and approved?
@@ -653,7 +653,7 @@ At any point, you should be able to produce this snapshot:
 
 ### When to Escalate
 
-Escalate to the `orchestrator` when any of these conditions are met:
+Escalate to the `etyb` when any of these conditions are met:
 
 | Condition | Escalation Priority |
 |-----------|-------------------|
@@ -672,13 +672,13 @@ Escalate to the `orchestrator` when any of these conditions are met:
 2. **Assess impact** — what gates, tasks, and milestones are affected
 3. **Propose options** — 2-3 possible actions with tradeoffs
 4. **Produce the Risk Escalation report** (see SKILL.md Response Format)
-5. **Wait for orchestrator decision** — do not proceed past the affected gate
+5. **Wait for ETYB decision** — do not proceed past the affected gate
 
 ### Escalation Response Expectations
 
 | Priority | Expected Response Time |
 |----------|----------------------|
-| Immediate | Same interaction — orchestrator must decide before work continues |
+| Immediate | Same interaction — ETYB must decide before work continues |
 | High | Within 1 sprint — may proceed with workaround if available |
 | Medium | Next gate transition — reassess when gate readiness is evaluated |
 
@@ -697,7 +697,7 @@ Escalate to the `orchestrator` when any of these conditions are met:
 - **Tier:** 3
 - **Scale:** Growth
 - **Status:** Active
-- **Owner:** orchestrator
+- **Owner:** etyb
 - **Domain:** —
 
 ## Context
@@ -726,7 +726,7 @@ to reduce time-to-awareness from minutes to seconds.
 ### Phase: Plan
 | # | Task | Assigned Expert | Status | Deliverable | Verified By |
 |---|------|----------------|--------|-------------|-------------|
-| P1 | Break down implementation tasks | `project-planner` | done | Task breakdown (below) | `orchestrator` |
+| P1 | Break down implementation tasks | `project-planner` | done | Task breakdown (below) | `etyb` |
 | P2 | Define test strategy for real-time features | `qa-engineer` | in-progress | Test strategy document | `project-planner` |
 
 ### Phase: Implement
@@ -826,6 +826,6 @@ The full Tier 4 template extends the Tier 3 example with these additional sectio
 | Plan abandoned mid-project | Too heavy for the tier, or team never bought in | Match plan depth to tier. Get team agreement on process at kickoff |
 | Plan contradicts reality | Not updated as work progresses | Update task status as it changes. Review plan at every gate |
 | Estimation consistently wrong | Using gut feel instead of data | Track actuals. Calibrate estimates against historical velocity |
-| Gate transitions are rubber stamps | No one actually checks exit criteria | Produce gate readiness reports. Orchestrator enforces |
+| Gate transitions are rubber stamps | No one actually checks exit criteria | Produce gate readiness reports. ETYB enforces |
 | Experts assigned but never consulted | Expert assignment is ceremonial | Expert continuity protocol — experts verify at every relevant gate |
 | Risk register is fiction | Filled once at plan creation, never updated | Review risks at every gate transition. Update when reality changes |

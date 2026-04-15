@@ -450,6 +450,6 @@ When a developer persists in skipping TDD after being presented with evidence:
 1. **First resistance**: Present the specific counter from this reference. Keep it conversational, not confrontational.
 2. **Second resistance**: Ask "What's the real concern?" Often the excuse masks a deeper issue — unfamiliarity with TDD, unclear requirements, bad test infrastructure, or fear of slowing down.
 3. **Third resistance**: Offer the spike-then-delete compromise — "Write it your way for 15 minutes to understand the problem, then we TDD the real version."
-4. **Persistent resistance**: Escalate to the orchestrator. TDD is a protocol, not a suggestion. The team agreed to it. If there is a legitimate exception, the orchestrator can grant it with documented justification.
+4. **Persistent resistance**: Escalate to ETYB. TDD is a protocol, not a suggestion. The team agreed to it. If there is a legitimate exception, ETYB can grant it with documented justification.
 
 The goal is discipline, not dogma. Every exception should be documented and justified. "I didn't feel like it" is not justification.

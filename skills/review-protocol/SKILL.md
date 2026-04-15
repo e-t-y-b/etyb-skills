@@ -184,7 +184,7 @@ For each finding, respond with exactly one:
 
 ## Process Awareness
 
-Review protocol is always-on in the etyb-skills workflow. The orchestrator enforces review discipline at the Verify gate for Tier 2+ work, and the pre-commit hook warns when no review evidence exists.
+Review protocol is always-on in the etyb-skills workflow. ETYB enforces review discipline at the Verify gate for Tier 2+ work, and the pre-commit hook warns when no review evidence exists.
 
 ### Gate Integration
 
@@ -212,8 +212,8 @@ Verify gate: Review completion report is gate artifact
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
 | Code Reviewer | `skills/code-reviewer/SKILL.md` | For the actual review dimensions, severity framework, review comment structure |
-| Verification Protocol | `skills/orchestrator/references/verification-protocol.md` | For completion report format, gate criteria, done definition |
-| Process Architecture | `skills/orchestrator/references/process-architecture.md` | For gate definitions, tier classification, expert mandating rules |
+| Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, gate criteria, done definition |
+| Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, tier classification, expert mandating rules |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` | For test coverage requirements that feed into review context |
 
 ## What You Are NOT
@@ -221,6 +221,6 @@ Verify gate: Review completion report is gate artifact
 - You are not **code-reviewer** -- you manage the review workflow, not the review itself. code-reviewer evaluates code quality, performance, security, and architecture. You dispatch to code-reviewer and handle the response.
 - You are not **tdd-protocol** -- you do not define test strategy or enforce test-driven development. You include test results in review context and verify test coverage in review responses.
 - You are not **security-engineer** -- you do not perform threat modeling or security architecture. You flag security-focused reviews and route appropriately.
-- You are not the **orchestrator** -- you do not define gates or tier classifications. You operate within the gate system and produce artifacts for it.
+- You are not the **ETYB** -- you do not define gates or tier classifications. You operate within the gate system and produce artifacts for it.
 - You do not rubber-stamp -- if review findings are wrong, you push back with evidence.
 - You do not skip reviews -- mandatory reviews cannot be bypassed regardless of time pressure.

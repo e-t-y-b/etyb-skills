@@ -30,7 +30,7 @@ Before requesting a gate transition, verify ALL of the following:
 | 2 | All `done` tasks have verification reports | Each task has 5-question answers | Run verification for unverified tasks |
 | 3 | All tests pass | Run the full test suite | Fix failing tests |
 | 4 | No unresolved blockers in this gate | Check the blockers section | Resolve or escalate blockers |
-| 5 | Mandatory expert reviews complete | Check orchestrator's mandatory expert rules | Request missing reviews |
+| 5 | Mandatory expert reviews complete | Check ETYB's mandatory expert rules | Request missing reviews |
 | 6 | Decision log is current | All decisions made during execution are logged | Document missing decisions |
 | 7 | Risk register is current | All risks discovered during execution are logged | Document missing risks |
 | 8 | No scope items deferred without documentation | All `dropped` tasks have decision log entries | Document or reinstate |
@@ -79,7 +79,7 @@ Each gate has specific exit criteria beyond the universal checklist:
 
 ## 2. Gate Completion Report
 
-When requesting a gate transition, produce a completion report for the orchestrator.
+When requesting a gate transition, produce a completion report for ETYB.
 
 ### Report Format
 
@@ -140,9 +140,9 @@ When requesting a gate transition, produce a completion report for the orchestra
 
 ### Who Reviews the Report
 
-The gate completion report goes to the `orchestrator`, which makes the final pass/fail decision. The execution protocol produces the evidence; the orchestrator evaluates it.
+The gate completion report goes to the `etyb`, which makes the final pass/fail decision. The execution protocol produces the evidence; ETYB evaluates it.
 
-| Your Role | Orchestrator's Role |
+| Your Role | ETYB's Role |
 |-----------|-------------------|
 | Produce the completion report | Review the report against gate criteria |
 | Verify all tasks are done | Verify mandatory experts have signed off |
@@ -162,7 +162,7 @@ Conditions that MUST prevent gate advancement. These are non-negotiable.
 | Tasks with status `in-progress` | Incomplete work in the gate | Complete or move to `blocked`/`dropped` |
 | Tasks with status `blocked` and no workaround | Unresolved impediments | Resolve blocker or drop task with justification |
 | Failing tests | Broken functionality | Fix tests before advancing |
-| Missing mandatory expert review | Orchestrator requires it | Request the review |
+| Missing mandatory expert review | ETYB requires it | Request the review |
 | `dropped` task without decision log entry | Unexplained scope reduction | Document why it was dropped |
 | Unresolved P1 risk | High-impact risk without mitigation | Address or accept with documented justification |
 
@@ -311,11 +311,11 @@ Split into:
 
 ## 6. Gate Failure Handling
 
-Sometimes a gate transition is requested but the orchestrator rejects it. Handle this gracefully.
+Sometimes a gate transition is requested but ETYB rejects it. Handle this gracefully.
 
 ### When a Gate Fails
 
-1. **Identify which criteria failed** — the orchestrator will specify
+1. **Identify which criteria failed** — ETYB will specify
 2. **Create remediation tasks** — specific tasks to address each failure
 3. **Add remediation tasks to the current gate** — not the next gate
 4. **Execute the remediation tasks** using the normal execution loop
@@ -386,14 +386,14 @@ Gate transitions scale with project complexity:
 - **All 5 gates active** but transitions are lightweight
 - **Completion report:** Standard format with all sections but brief entries
 - **Transition speed:** Within the same day. Reviews can be async.
-- **Mandatory reviews:** Per orchestrator rules. Code review at Verify is mandatory.
+- **Mandatory reviews:** Per ETYB rules. Code review at Verify is mandatory.
 
 ### Scale
 
 - **All 5 gates active** with formal transitions
 - **Completion report:** Full format with detailed evidence
 - **Transition speed:** May take 1-2 days for reviews to complete
-- **Mandatory reviews:** All per orchestrator rules. Multiple reviewers may be needed.
+- **Mandatory reviews:** All per ETYB rules. Multiple reviewers may be needed.
 - **Parallel gate work:** Subteams may be in different gates on different tasks
 
 ### Enterprise Scale
@@ -401,7 +401,7 @@ Gate transitions scale with project complexity:
 - **All 5 gates active** with audited transitions
 - **Completion report:** Full format with compliance evidence
 - **Transition speed:** Scheduled transition reviews (e.g., weekly gate review meeting)
-- **Mandatory reviews:** All per orchestrator rules plus compliance checks
+- **Mandatory reviews:** All per ETYB rules plus compliance checks
 - **Approval workflow:** Gate transitions require documented approval
 
 ---
@@ -424,7 +424,7 @@ Use this checklist when preparing to request a gate transition:
 - [ ] All tests pass (full suite, not just new tests)
 
 ### Reviews
-- [ ] Mandatory expert reviews complete (per orchestrator rules)
+- [ ] Mandatory expert reviews complete (per ETYB rules)
 - [ ] Review findings addressed or documented as accepted risks
 
 ### Documentation
@@ -523,7 +523,7 @@ first Verify task.
 
 ```
 Gate Transition Request: Implement → Verify
-Orchestrator Response: REJECTED
+ETYB Response: REJECTED
 
 Reasons:
 1. Task #6 integration test is flaky (fails 1 in 5 runs)

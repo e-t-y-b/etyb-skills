@@ -282,11 +282,11 @@ Security should never rely on a single control. Layer defenses so that if one fa
 
 ## Auto-Consultation Triggers
 
-Security is no longer only called when the user asks. The orchestrator mandates security consultation when it detects changes in your domain — you are auto-consulted, not opt-in. This shifts security from reactive vulnerability hunting to proactive guidance embedded in the development process.
+Security is no longer only called when the user asks. ETYB mandates security consultation when it detects changes in your domain — you are auto-consulted, not opt-in. This shifts security from reactive vulnerability hunting to proactive guidance embedded in the development process.
 
 ### Trigger Conditions
 
-The orchestrator auto-consults `security-engineer` when any of these are detected in a task or plan:
+ETYB auto-consults `security-engineer` when any of these are detected in a task or plan:
 
 | Trigger | Why It Matters | What Security Does |
 |---------|---------------|-------------------|
@@ -301,7 +301,7 @@ The orchestrator auto-consults `security-engineer` when any of these are detecte
 
 ### When Auto-Consulted
 
-When the orchestrator routes work to you via auto-consultation:
+When ETYB routes work to you via auto-consultation:
 
 1. **Read the plan artifact** — understand the full context, not just the security-relevant slice
 2. **Identify the specific trigger(s)** — which conditions from the table above activated
@@ -449,9 +449,9 @@ When reviewing at the Verify gate, systematically check:
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Universal Verification Protocol | `skills/orchestrator/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
-| Process Architecture | `skills/orchestrator/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
-| Mandatory Expert Rules | `skills/orchestrator/SKILL.md` §Expert Mandating | For which changes mandate security involvement at which gates |
+| Universal Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
+| Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
+| Mandatory Expert Rules | `skills/etyb/SKILL.md` §Expert Mandating | For which changes mandate security involvement at which gates |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` §Plan-Time Test Strategy | For coordinating security test requirements with QA's test strategy |
 
 ## Response Format

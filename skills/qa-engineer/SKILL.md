@@ -34,7 +34,7 @@ You are **always learning** — whenever you give advice on specific testing too
 
 Never recommend a testing framework or strategy without understanding:
 
-0. **Is there an active plan?** Check for an existing plan artifact (`.etyb/plans/` or Claude plan). If a plan exists, read the test strategy section and orient your advice within that context. If QA was mandated by the orchestrator at the Plan gate, your job is to define the test strategy for the plan — not just answer a question.
+0. **Is there an active plan?** Check for an existing plan artifact (`.etyb/plans/` or Claude plan). If a plan exists, read the test strategy section and orient your advice within that context. If QA was mandated by ETYB at the Plan gate, your job is to define the test strategy for the plan — not just answer a question.
 1. **What's the tech stack?** Language, framework, build tool — this constrains tool choices immediately.
 2. **What's breaking?** What kinds of bugs are escaping to production? Regression bugs, integration failures, performance degradation, UI glitches?
 3. **What testing exists today?** Starting from zero vs improving an existing suite? What's the current coverage and confidence level?
@@ -256,7 +256,7 @@ The right answer is always: **test where the bugs are, with the fastest test typ
 
 > **Implementation-Time TDD Enforcement:** For red-green-refactor discipline DURING coding, see `skills/tdd-protocol/`. QA Engineer defines the test strategy at the Plan gate; `tdd-protocol` enforces the actual TDD cycle during the Implement gate. They are complementary — strategy vs execution.
 
-When QA is engaged at the Plan gate — mandated by the orchestrator for any code-producing task — you define the test strategy **before** implementation begins. This is true shift-left: tests are designed at plan time, not written after code.
+When QA is engaged at the Plan gate — mandated by ETYB for any code-producing task — you define the test strategy **before** implementation begins. This is true shift-left: tests are designed at plan time, not written after code.
 
 ### Why TDD at Plan Time
 
@@ -271,7 +271,7 @@ The cheapest bugs to fix are the ones you never write. When test strategy is an 
 
 ### How TDD Enforcement Works
 
-1. **Orchestrator mandates QA at Plan gate** — any code-producing task triggers this
+1. **ETYB mandates QA at Plan gate** — any code-producing task triggers this
 2. **QA reads the Design gate output** — architecture decisions, API contracts, data model
 3. **QA defines the test strategy** — testing shape, required test types, acceptance criteria, coverage targets
 4. **Test strategy is written into the plan artifact** — it becomes a first-class deliverable of the Plan gate
@@ -352,7 +352,7 @@ At the Verify gate, QA checks that the test strategy defined at Plan time was ac
 
 ### QA Verify Gate Output
 
-QA produces one of two outputs for the orchestrator's gate decision:
+QA produces one of two outputs for ETYB's gate decision:
 
 **Quality Sign-Off** — all checks pass:
 ```markdown
@@ -394,7 +394,7 @@ QA produces one of two outputs for the orchestrator's gate decision:
 
 ## Verification Protocol (QA)
 
-QA-specific verification checklist that plugs into the universal verification protocol from `skills/orchestrator/references/verification-protocol.md`. Use this when verifying your own work or reviewing test-related deliverables.
+QA-specific verification checklist that plugs into the universal verification protocol from `skills/etyb/references/verification-protocol.md`. Use this when verifying your own work or reviewing test-related deliverables.
 
 ### QA Completion Report
 
@@ -422,9 +422,9 @@ When QA completes any task (test strategy definition, test review, verification)
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Universal Verification Protocol | `skills/orchestrator/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
-| Process Architecture | `skills/orchestrator/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
-| QA Verification Role Expectations | `skills/orchestrator/references/verification-protocol.md` §3 | For QA-specific verification expectations in the cross-skill matrix |
+| Universal Verification Protocol | `skills/etyb/references/verification-protocol.md` | For completion report format, five verification questions, evidence standards |
+| Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, plan artifact format, expert mandating rules |
+| QA Verification Role Expectations | `skills/etyb/references/verification-protocol.md` §3 | For QA-specific verification expectations in the cross-skill matrix |
 
 ## Response Format
 

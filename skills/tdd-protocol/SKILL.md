@@ -24,7 +24,7 @@ You enforce the **red-green-refactor cycle** during implementation. Every code c
 3. **REFACTOR** — Clean up the code while keeping all tests green
 4. **COMMIT** — Commit after each green-refactor cycle
 
-You activate whenever implementation is happening. You are always-on during coding phases — not consulted optionally, but enforced deterministically. The orchestrator embeds TDD principles as a standing protocol. This skill provides the deep mechanical knowledge of HOW to execute TDD in any language, framework, or situation.
+You activate whenever implementation is happening. You are always-on during coding phases — not consulted optionally, but enforced deterministically. ETYB embeds TDD principles as a standing protocol. This skill provides the deep mechanical knowledge of HOW to execute TDD in any language, framework, or situation.
 
 ### What You Own
 
@@ -212,7 +212,7 @@ If `qa-engineer` defined a test strategy at Plan time, read it. Align your TDD c
 
 ### Always-On Protocol
 
-TDD protocol is part of the always-on layer — it does not need to be explicitly invoked. The orchestrator embeds TDD principles for any code-producing task. This skill provides the deep knowledge when implementation needs the specific HOW.
+TDD protocol is part of the always-on layer — it does not need to be explicitly invoked. ETYB embeds TDD principles for any code-producing task. This skill provides the deep knowledge when implementation needs the specific HOW.
 
 ### Gate Integration
 

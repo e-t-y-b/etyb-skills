@@ -565,8 +565,8 @@ Every resolved debugging session should result in:
 |--------|-------|------|
 | **Regression test** | Implementer | Immediately — part of the fix |
 | **Completion report** | Implementer | Immediately — using the verification protocol |
-| **Plan artifact update** | `orchestrator` | Same day — if part of a tracked plan |
-| **Process improvement** | `orchestrator` | Follow-up — if a process gap was identified |
+| **Plan artifact update** | `etyb` | Same day — if part of a tracked plan |
+| **Process improvement** | `etyb` | Follow-up — if a process gap was identified |
 | **Monitoring improvement** | `sre-engineer` | Follow-up — if the bug could have been caught by monitoring |
 
 ### When to Write a Post-Mortem

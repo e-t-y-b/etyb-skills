@@ -1,6 +1,6 @@
 # Design Brief Template
 
-The design brief is the primary output of the brainstorm protocol. It's the structured artifact that feeds into the orchestrator's Design gate and gives architects, planners, and specialist skills a clear target. This reference covers the template, examples, anti-patterns, and tier mapping.
+The design brief is the primary output of the brainstorm protocol. It's the structured artifact that feeds into ETYB's Design gate and gives architects, planners, and specialist skills a clear target. This reference covers the template, examples, anti-patterns, and tier mapping.
 
 ---
 
@@ -447,9 +447,9 @@ None — this is the obvious approach.
 
 ---
 
-## 4. How the Brief Maps to Orchestrator Tier Classification
+## 4. How the Brief Maps to ETYB Tier Classification
 
-The design brief provides signals that help the orchestrator classify the project tier. Understanding these signals helps you produce briefs that give the orchestrator clear classification input.
+The design brief provides signals that help ETYB classify the project tier. Understanding these signals helps you produce briefs that give ETYB clear classification input.
 
 ### Tier Signal Matrix
 
@@ -470,13 +470,13 @@ The design brief provides signals that help the orchestrator classify the projec
 
 The single strongest signal for tier classification is scope complexity:
 
-- **Tier 1-2**: The brief is so simple it barely needs a brief. A clear problem, one approach, minimal scope. The orchestrator might not even invoke brainstorm-protocol for these.
+- **Tier 1-2**: The brief is so simple it barely needs a brief. A clear problem, one approach, minimal scope. ETYB might not even invoke brainstorm-protocol for these.
 - **Tier 3**: The brief has meaningful scope definition with clear in/out boundaries, several unknowns, and a tradeoff analysis. This is the sweet spot for brainstorm-protocol.
 - **Tier 4**: The brief is a substantial document with multiple stakeholders, regulatory constraints, significant unknowns, and a complex scope. Multiple brainstorming sessions may be needed. The brief might have an appendix.
 
-### What the Orchestrator Looks For
+### What ETYB Looks For
 
-When the orchestrator reviews your design brief at the Design gate, they check:
+When ETYB reviews your design brief at the Design gate, they check:
 
 1. **Is the problem clear?** — Can downstream skills understand what we're building and why?
 2. **Is the scope bounded?** — Are there explicit in/out boundaries, or is this open-ended?
@@ -489,7 +489,7 @@ A brief that answers all six questions well is ready for the Design gate. A brie
 
 ### Feedback Loop
 
-If the orchestrator returns the brief with questions or concerns:
+If ETYB returns the brief with questions or concerns:
 
 1. Read their feedback carefully — what specific gaps are they seeing?
 2. Return to the relevant step (1-8) and gather more information

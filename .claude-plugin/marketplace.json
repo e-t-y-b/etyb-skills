@@ -10,11 +10,11 @@
   "plugins": [
     {
       "name": "etyb-full",
-      "description": "Complete virtual engineering team — orchestrator, 14 core teams, 6 domain specialists, 7 process protocols",
+      "description": "Complete virtual engineering team — ETYB, 14 core teams, 6 domain specialists, 7 process protocols",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/orchestrator",
+        "./skills/etyb",
         "./skills/research-analyst",
         "./skills/system-architect",
         "./skills/frontend-architect",
@@ -50,7 +50,7 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/orchestrator",
+        "./skills/etyb",
         "./skills/tdd-protocol",
         "./skills/brainstorm-protocol",
         "./skills/review-protocol",
@@ -62,11 +62,11 @@
     },
     {
       "name": "etyb-core-team",
-      "description": "Orchestrator + 14 core engineering teams covering the full SDLC",
+      "description": "ETYB + 14 core engineering teams covering the full SDLC",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/orchestrator",
+        "./skills/etyb",
         "./skills/research-analyst",
         "./skills/system-architect",
         "./skills/frontend-architect",

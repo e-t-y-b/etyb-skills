@@ -29,7 +29,7 @@
 
 ## 1. Plan Artifact Format
 
-Every non-trivial task tracked by the orchestrator produces a **plan artifact** — a living document that captures intent, decisions, assignments, risks, and verification status across the project lifecycle.
+Every non-trivial task tracked by ETYB produces a **plan artifact** — a living document that captures intent, decisions, assignments, risks, and verification status across the project lifecycle.
 
 ### File Location
 
@@ -138,7 +138,7 @@ Every non-trivial task tracked by the orchestrator produces a **plan artifact** 
 
 ### Scale Definitions
 
-These correspond directly to the orchestrator's scale-aware guidance:
+These correspond directly to ETYB's scale-aware guidance:
 
 | Scale | Team Size | Process Intensity | Gate Formality |
 |-------|-----------|-------------------|---------------|
@@ -518,9 +518,9 @@ The Design gate ensures that the team understands **what** they're building and 
 
 | Criterion | Verified By |
 |-----------|-------------|
-| User's request is understood and restated | `orchestrator` |
-| Request complexity tier is classified (Tier 3 or 4) | `orchestrator` |
-| Relevant domain identified (if applicable) | `orchestrator` |
+| User's request is understood and restated | `etyb` |
+| Request complexity tier is classified (Tier 3 or 4) | `etyb` |
+| Relevant domain identified (if applicable) | `etyb` |
 | Existing system context gathered (if brownfield) | Relevant architect |
 
 ### Exit Criteria
@@ -564,18 +564,18 @@ The Plan gate translates the architecture into **concrete, estimable, assignable
 
 | Criterion | Verified By |
 |-----------|-------------|
-| Design gate passed | `orchestrator` |
+| Design gate passed | `etyb` |
 | Architecture artifacts available and reviewed | Lead architect |
 
 ### Exit Criteria
 
 | Criterion | Verified By |
 |-----------|-------------|
-| All implementation tasks identified with clear deliverables | `orchestrator` |
-| Each task assigned to a specific expert | `orchestrator` |
-| Task dependencies mapped (what blocks what) | `orchestrator` |
+| All implementation tasks identified with clear deliverables | `etyb` |
+| Each task assigned to a specific expert | `etyb` |
+| Task dependencies mapped (what blocks what) | `etyb` |
 | Test strategy defined | `qa-engineer` |
-| Risk register populated with top risks and mitigations | `orchestrator` |
+| Risk register populated with top risks and mitigations | `etyb` |
 | Rollback strategy defined for high-risk changes | `devops-engineer` or `sre-engineer` |
 | Infrastructure requirements identified | `devops-engineer` (if applicable) |
 
@@ -584,7 +584,7 @@ The Plan gate translates the architecture into **concrete, estimable, assignable
 | Expert | Condition |
 |--------|-----------|
 | `qa-engineer` | Always — must define test strategy for any code-producing plan |
-| `orchestrator` | Always — owns the task breakdown |
+| `etyb` | Always — owns the task breakdown |
 | `devops-engineer` | If infrastructure changes are needed |
 | `security-engineer` | If security review was flagged at Design gate |
 
@@ -608,7 +608,7 @@ The Implement gate is where working code is produced. It ensures code meets qual
 
 | Criterion | Verified By |
 |-----------|-------------|
-| Plan gate passed | `orchestrator` |
+| Plan gate passed | `etyb` |
 | Task assignments accepted by assigned experts | Assigned experts |
 | Development environment ready | `devops-engineer` (if applicable) |
 
@@ -653,7 +653,7 @@ The Verify gate ensures the implementation actually works correctly, performs ad
 
 | Criterion | Verified By |
 |-----------|-------------|
-| Implement gate passed | `orchestrator` |
+| Implement gate passed | `etyb` |
 | All unit tests passing | `qa-engineer` |
 | Code is in a reviewable state (no WIP commits) | Assigned experts |
 
@@ -700,7 +700,7 @@ The Ship gate covers deployment to production and post-deployment verification. 
 
 | Criterion | Verified By |
 |-----------|-------------|
-| Verify gate passed | `orchestrator` |
+| Verify gate passed | `etyb` |
 | All review comments resolved | Assigned experts |
 | Staging deployment successful (if applicable) | `devops-engineer` |
 
@@ -715,7 +715,7 @@ The Ship gate covers deployment to production and post-deployment verification. 
 | Canary metrics healthy (if canary deployment) | `sre-engineer` |
 | Runbook created or updated | `technical-writer` or `sre-engineer` |
 | Rollback tested or rollback path verified | `devops-engineer` + `sre-engineer` |
-| Stakeholders notified | `orchestrator` |
+| Stakeholders notified | `etyb` |
 
 ### Mandatory Experts
 
@@ -836,7 +836,7 @@ Flow:
 
 ### Automatic Expert Assignment
 
-Certain types of changes **always** require specific experts, regardless of who the orchestrator would normally assign.
+Certain types of changes **always** require specific experts, regardless of who ETYB would normally assign.
 
 ### Mandatory Expert Matrix
 
@@ -874,7 +874,7 @@ Mandatory experts:
 Mandatory experts can only be exempted when:
 1. The expert explicitly confirms the change doesn't require their review
 2. The exemption is logged in the Decision Log with rationale
-3. The `orchestrator` approves the exemption
+3. The `etyb` approves the exemption
 
 **No silent skipping.** If a mandatory expert is not available, the gate blocks until they review.
 
@@ -924,7 +924,7 @@ To maintain expert context across gate transitions:
 
 ## 17. Coordination Patterns with Gate Checkpoints
 
-These extend the five coordination patterns from the orchestrator SKILL.md with explicit gate checkpoints.
+These extend the five coordination patterns from ETYB SKILL.md with explicit gate checkpoints.
 
 ### Sequential Pipeline (with Gates)
 
@@ -934,7 +934,7 @@ Research → [DESIGN GATE] → Architecture → [PLAN GATE] → Development → 
 
 Gate Owners:
   DESIGN GATE:    system-architect + security-engineer (if applicable)
-  PLAN GATE:      orchestrator + qa-engineer
+  PLAN GATE:      ETYB + qa-engineer
   IMPLEMENT GATE: assigned experts + qa-engineer
   VERIFY GATE:    code-reviewer + security-engineer (if applicable)
   SHIP GATE:      devops-engineer + sre-engineer
@@ -1046,12 +1046,12 @@ Post-Incident (when stable):
 
 | Step | Action | Owner |
 |------|--------|-------|
-| 1 | User request received | `orchestrator` |
-| 2 | Request classified as Tier 3 or 4 | `orchestrator` |
-| 3 | Plan artifact created with metadata and context | `orchestrator` |
-| 4 | Relevant skills read and synthesized | `orchestrator` |
-| 5 | Initial task breakdown drafted | `orchestrator` |
-| 6 | Mandatory experts identified and notified | `orchestrator` |
+| 1 | User request received | `etyb` |
+| 2 | Request classified as Tier 3 or 4 | `etyb` |
+| 3 | Plan artifact created with metadata and context | `etyb` |
+| 4 | Relevant skills read and synthesized | `etyb` |
+| 5 | Initial task breakdown drafted | `etyb` |
+| 6 | Mandatory experts identified and notified | `etyb` |
 
 ### Plan Updates
 
@@ -1059,11 +1059,11 @@ The plan artifact is a living document. Updates happen at:
 
 | Trigger | Who Updates | What Changes |
 |---------|-------------|-------------|
-| Gate transition | `orchestrator` | Gate status, entry/exit dates |
+| Gate transition | `etyb` | Gate status, entry/exit dates |
 | Task completion | Assigned expert | Task status, verification notes |
 | Decision made | Decision maker | Decision log entry |
 | Risk identified | Any expert | Risk register entry |
-| Scope change | `orchestrator` | Tasks added/removed, decision log entry |
+| Scope change | `etyb` | Tasks added/removed, decision log entry |
 | Blocker encountered | Affected expert | Task status → blocked, blocking issues column |
 
 ### Plan Archival
@@ -1091,7 +1091,7 @@ When a plan reaches `Complete` or `Abandoned`:
 | `devops-engineer` | Mandatory at Ship gate for deployment; contributes to Plan gate for infrastructure |
 | `sre-engineer` | Mandatory at Ship gate for production verification; reviews SLO requirements at Design |
 | `technical-writer` | Contributes at Verify gate for documentation accuracy |
-| `project-planner` | Can supplement orchestrator for detailed sprint planning and estimation |
+| `project-planner` | Can supplement ETYB for detailed sprint planning and estimation |
 | `research-analyst` | Produces feasibility analysis and technology evaluation before Design gate |
 | Domain architects | Mandatory at Design and Verify gates for domain-specific projects |
 
@@ -1142,7 +1142,7 @@ Domain-Augmented:
 
 ### How Process Protocols Fit the Gate System
 
-Process protocols are always-on engineering disciplines with deep reference knowledge. Their principles are embedded in the orchestrator's Engineering Culture section. Their deep knowledge lives in dedicated skill directories loaded on demand.
+Process protocols are always-on engineering disciplines with deep reference knowledge. Their principles are embedded in ETYB's Engineering Culture section. Their deep knowledge lives in dedicated skill directories loaded on demand.
 
 | Gate | Protocols Active | What They Enforce |
 |------|-----------------|-------------------|

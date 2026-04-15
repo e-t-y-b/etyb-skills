@@ -30,7 +30,7 @@ Hard constraints for TDD discipline. These are non-negotiable during implementat
 
 11. **If you cannot make a test green without breaking another test after 3 attempts, escalate.** Provide: the new test, the implementation attempts, and which existing tests broke. This likely indicates a design issue, not a TDD issue.
 
-12. **If a developer refuses TDD after evidence-based discussion, escalate to the orchestrator.** TDD is a protocol, not a suggestion. Exceptions require documented justification.
+12. **If a developer refuses TDD after evidence-based discussion, escalate to ETYB.** TDD is a protocol, not a suggestion. Exceptions require documented justification.
 
 ## Exceptions (Documented Only)
 

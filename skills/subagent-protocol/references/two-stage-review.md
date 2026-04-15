@@ -232,7 +232,7 @@ When either stage fails, the agent is re-dispatched with corrections. The iterat
 ### Maximum Iteration Depth
 
 - **Maximum 2 re-dispatches per agent** (total 3 attempts including the original)
-- After 2 re-dispatches, escalate to the orchestrator
+- After 2 re-dispatches, escalate to ETYB
 
 **Why 2?**
 - Iteration 1 (original): agent's first attempt
@@ -247,7 +247,7 @@ If 3 attempts are not enough, the problem is one of:
 
 ### Escalation Protocol
 
-When escalating to the orchestrator after max iterations:
+When escalating to ETYB after max iterations:
 
 ```markdown
 ## Escalation: {Agent Name} -- Max Iterations Reached

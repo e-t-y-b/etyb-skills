@@ -30,8 +30,8 @@ The Verify gate cannot pass until all blocking criteria are resolved. Review pro
 If a hard block cannot be resolved:
 
 1. **Identify the blocking finding** and why it cannot be resolved
-2. **Escalate to the orchestrator** with the specific block and what has been tried
-3. **The orchestrator determines next action:** rework the implementation, adjust the plan, or bring in a specialist
+2. **Escalate to ETYB** with the specific block and what has been tried
+3. **ETYB determines next action:** rework the implementation, adjust the plan, or bring in a specialist
 4. **Never bypass a hard block.** If it cannot be resolved, the work is not done.
 
 ## Review Completion Report
@@ -163,7 +163,7 @@ Please verify:
 
 ### Maximum Iteration Count
 
-- **Normal reviews:** 3 rounds maximum. If the review has not converged after 3 rounds, escalate to the orchestrator. Something is fundamentally wrong (unclear requirements, mismatched design intent, or wrong reviewer).
+- **Normal reviews:** 3 rounds maximum. If the review has not converged after 3 rounds, escalate to ETYB. Something is fundamentally wrong (unclear requirements, mismatched design intent, or wrong reviewer).
 - **Security reviews:** No maximum. Security findings iterate until resolved. Critical security issues do not have a "we've been going back and forth too long" escape valve.
 - **Architecture reviews:** 2 rounds maximum for structural concerns. If the architecture is not right after 2 rounds, the issue is at the Design gate, not the review.
 
@@ -308,8 +308,8 @@ If debt is growing, the team is not addressing review feedback effectively. This
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
 | Code Reviewer | `skills/code-reviewer/SKILL.md` | For review dimensions, severity framework, two-stage protocol |
-| Verification Protocol | `skills/orchestrator/references/verification-protocol.md` | For universal gate criteria and completion report format |
-| Process Architecture | `skills/orchestrator/references/process-architecture.md` | For gate definitions, tier classification |
+| Verification Protocol | `skills/etyb/references/verification-protocol.md` | For universal gate criteria and completion report format |
+| Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, tier classification |
 | QA Test Strategy | `skills/qa-engineer/SKILL.md` | For test coverage requirements at the Verify gate |
 | Review Dispatch | `review-protocol/references/review-dispatch.md` | For constructing re-review requests |
 | Feedback Evaluation | `review-protocol/references/feedback-evaluation.md` | For evaluating findings from re-reviews |

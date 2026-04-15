@@ -369,7 +369,7 @@ Build a rationalization table for any skill that:
 - [ ] SKILL.md frontmatter updated with `deprecated: true` and `replacement`
 - [ ] Deprecation notice added to top of SKILL.md
 - [ ] All other skills' cross-references updated
-- [ ] Orchestrator routing updated (if applicable)
+- [ ] ETYB routing updated (if applicable)
 - [ ] Evals migrated to replacement skill (or archived)
 
 ---

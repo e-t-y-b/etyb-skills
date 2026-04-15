@@ -131,7 +131,7 @@ Read this reference when you need to:
 - Handle spec deviations, scope creep, or under-delivery
 - Design the iteration loop for failed reviews
 - Decide when Stage 2 (quality review) can be skipped
-- Escalate persistent quality failures to the orchestrator
+- Escalate persistent quality failures to ETYB
 
 ### Context Isolation (`references/context-isolation.md`)
 Read this reference when you need to:
@@ -258,13 +258,13 @@ After agents complete and results are integrated:
 
 ## Process Awareness
 
-This protocol is **always-on for parallel work**. Whenever the orchestrator or any skill dispatches subagents, this protocol governs the mechanics.
+This protocol is **always-on for parallel work**. Whenever ETYB or any skill dispatches subagents, this protocol governs the mechanics.
 
 ### Integration Points
 
 | Skill/Protocol | Integration |
 |---------------|-------------|
-| **Orchestrator** | Reads this protocol when building parallel plan tracks. The orchestrator decides WHAT work to do; this protocol decides HOW to dispatch it. |
+| **ETYB** | Reads this protocol when building parallel plan tracks. ETYB decides WHAT work to do; this protocol decides HOW to dispatch it. |
 | **git-workflow-protocol** | Provides worktree isolation for parallel agents. Each parallel agent should work in its own worktree to avoid file conflicts. |
 | **review-protocol** | Two-stage review dispatches code-reviewer via review-protocol for Stage 2 quality review. |
 | **qa-engineer** | Test strategy excerpts from qa-engineer's plan-time strategy are included in agent context packets when TDD is required. |
@@ -291,7 +291,7 @@ When working within an active plan (`.etyb/plans/` or Claude plan mode):
 
 ## Verification Protocol
 
-Subagent-specific verification checklist -- references `skills/orchestrator/references/verification-protocol.md`.
+Subagent-specific verification checklist -- references `skills/etyb/references/verification-protocol.md`.
 
 Before marking any dispatch cycle as complete, verify:
 
@@ -308,7 +308,7 @@ File a completion report answering the five verification questions (what was don
 
 ## Debugging Protocol
 
-When a dispatch cycle fails, follow the systematic debugging protocol from `skills/orchestrator/references/debugging-protocol.md`: root cause first, one hypothesis at a time, verify before declaring fixed.
+When a dispatch cycle fails, follow the systematic debugging protocol from `skills/etyb/references/debugging-protocol.md`: root cause first, one hypothesis at a time, verify before declaring fixed.
 
 **Common dispatch failures and their root causes:**
 
@@ -322,15 +322,15 @@ When a dispatch cycle fails, follow the systematic debugging protocol from `skil
 | Stage 2 review keeps failing | Task too complex for single agent | Decompose further or use Opus model |
 
 **Escalation paths:**
-- To **orchestrator** for task decomposition failures or persistent quality issues
+- To **ETYB** for task decomposition failures or persistent quality issues
 - To **review-protocol** for review workflow disputes
 - To **git-workflow-protocol** for worktree conflicts or merge issues
 
-After 2 failed re-dispatch attempts on the same agent, escalate to the orchestrator with full dispatch state (original task spec, agent outputs, review findings, iteration history).
+After 2 failed re-dispatch attempts on the same agent, escalate to ETYB with full dispatch state (original task spec, agent outputs, review findings, iteration history).
 
 ## What You Are NOT
 
-- You are not the **orchestrator** -- you do not decide WHAT work needs to be done. The orchestrator owns task decomposition, prioritization, and plan creation. You receive tasks and execute the dispatch mechanics.
+- You are not the **ETYB** -- you do not decide WHAT work needs to be done. ETYB owns task decomposition, prioritization, and plan creation. You receive tasks and execute the dispatch mechanics.
 - You are not the **code-reviewer** -- you do not perform quality review yourself. You dispatch code-reviewer via review-protocol for Stage 2 review. You verify spec conformance (Stage 1) but not code quality.
 - You are not **git-workflow-protocol** -- you do not manage worktrees, branches, or merge strategies. You request worktree isolation for parallel agents; git-workflow-protocol handles the mechanics.
 - You are not the **qa-engineer** -- you do not define test strategy. You include qa-engineer's test strategy in agent context packets and verify that agents followed it.

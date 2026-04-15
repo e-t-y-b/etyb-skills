@@ -214,7 +214,7 @@ Subagents can fail in several ways. Each failure mode has a specific recovery st
 **Recovery**:
 1. Read the agent's output carefully -- it should explain what's missing
 2. If NEEDS_CONTEXT: add the missing files, types, or context to the packet and re-dispatch
-3. If BLOCKED: resolve the blocker externally (e.g., get a decision from the orchestrator, fix a broken dependency) then re-dispatch
+3. If BLOCKED: resolve the blocker externally (e.g., get a decision from ETYB, fix a broken dependency) then re-dispatch
 4. On re-dispatch, include the agent's previous output as additional context ("You previously attempted this task and reported: {previous output}. The missing context is now provided below.")
 
 ### Agent Diverges from Spec
@@ -255,7 +255,7 @@ Subagents can fail in several ways. Each failure mode has a specific recovery st
 
 - **Maximum 2 re-dispatches per agent per task**
 - After 2 failed attempts, the task is too complex or ambiguous for the current approach
-- Escalate to the orchestrator with:
+- Escalate to ETYB with:
   - Original task specification
   - All agent outputs (including failed attempts)
   - Identified failure patterns
@@ -326,7 +326,7 @@ Done when:
 ## Dispatch Lifecycle Summary
 
 ```
-1. RECEIVE task from orchestrator or plan
+1. RECEIVE task from ETYB or plan
 2. EVALUATE: independence, complexity, domain isolation
 3. DECIDE: inline, single dispatch, parallel, or pipeline
 4. CONSTRUCT context packet (template above)
@@ -336,5 +336,5 @@ Done when:
 8. MONITOR agent status signal
 9. REVIEW output (Stage 1: spec conformance)
 10. INTEGRATE or RE-DISPATCH based on review
-11. REPORT results to orchestrator/plan
+11. REPORT results to ETYB/plan
 ```

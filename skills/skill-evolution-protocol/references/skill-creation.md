@@ -22,7 +22,7 @@ Every SKILL.md follows a precise structure. Each section serves a specific purpo
 
 ### 1.1 YAML Frontmatter
 
-The frontmatter is the skill's identity card. It determines when the skill is activated by the orchestrator.
+The frontmatter is the skill's identity card. It determines when the skill is activated by ETYB.
 
 ```yaml
 ---
@@ -264,7 +264,7 @@ Before marking any [domain work] as complete, verify:
 **Key principles:**
 - Use checkbox format for scannable verification
 - Each check should be binary (pass/fail) — no ambiguous "mostly done"
-- Reference the orchestrator's verification protocol for the general framework
+- Reference ETYB's verification protocol for the general framework
 - Include both technical checks and process checks
 
 ### 1.10 Debugging Protocol Section
@@ -465,7 +465,7 @@ expert-name/
 | Analyst suffix | `-analyst` | `research-analyst` |
 | Writer suffix | `-writer` | `technical-writer` |
 | Planner suffix | `-planner` | `project-planner` |
-| Special | `orchestrator` has no suffix | `orchestrator` |
+| Special | `etyb` has no suffix | `etyb` |
 | Abbreviations | Only universally understood | `tdd`, `sre`, `qa`, `ai-ml` |
 | Length | 2-4 words | `e-commerce-architect`, not `enterprise-e-commerce-and-marketplace-architect` |
 

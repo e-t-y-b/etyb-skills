@@ -29,7 +29,7 @@ Most skill packages give you a list of independent instructions. etyb-skills is 
 - **29 skills** — process discipline AND deep domain expertise in one package
 - **20 domain experts with 100+ deep references** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems, and more
 - **Deterministic enforcement** — shell hooks fire outside the LLM, so TDD gates and merge checks can't be talked around
-- **Orchestrator-centric architecture** — a CTO routes every request through the right experts with always-on protocols
+- **ETYB-centric architecture** — a CTO routes every request through the right experts with always-on protocols
 - **Full SDLC coverage** — Research, Architecture, Code, Test, Deploy, Operate (not just plan-to-merge)
 
 ## Architecture
@@ -37,7 +37,7 @@ Most skill packages give you a list of independent instructions. etyb-skills is 
 ```
 USER REQUEST
      ↓
-ORCHESTRATOR (CTO — routes, enforces gates, tracks plans)
+ETYB (CTO — routes, enforces gates, tracks plans)
      │
      │  ALWAYS-ON PROTOCOL LAYER
      │  ├── TDD — no code without failing test
@@ -58,7 +58,7 @@ DEEP REFERENCES (100+ files, loaded on demand)
 
 ## The 29 Skills
 
-### Orchestrator
+### ETYB
 The CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement → Verify → Ship), mandates experts, tracks living plans.
 
 ### Core Team (14 skills)
@@ -132,12 +132,12 @@ Skills use progressive disclosure — a markdown-based RAG pattern:
 
 ```
 Layer 0: Hooks fire deterministically (0 tokens — shell scripts, outside LLM)
-Layer 1: Orchestrator always loaded (~3,500 tokens — the culture)
+Layer 1: ETYB always loaded (~3,500 tokens — the culture)
 Layer 2: Relevant skill SKILL.md loads on demand (~2,500 tokens — the router)
 Layer 3: Single reference loads on demand (~4,000 tokens — deep knowledge)
 
 Per-activation: ~6,000-10,000 tokens (not the whole system)
-Tier 0-1 requests: 0 extra tokens (orchestrator handles directly)
+Tier 0-1 requests: 0 extra tokens (ETYB handles directly)
 ```
 
 ## Evidence: with vs without skills
