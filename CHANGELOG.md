@@ -2,6 +2,25 @@
 
 All notable changes to ETYB Skills are documented here. Format is loosely based on [Keep a Changelog](https://keepachangelog.com/). Versions follow [SemVer](https://semver.org/).
 
+## [2.1.0] — 2026-04-16
+
+The Codex runtime release. ETYB now ships with full OpenAI Codex runtime support — lifecycle hooks, custom agents, and per-skill metadata — upgrading Codex from model-trusted to partial runtime-enforced.
+
+### Added
+
+- **Codex lifecycle hooks** (`.codex/hooks/`). 4 Python hooks — `UserPromptSubmit` (blocks gate-skipping prompts), `PreToolUse` (guards merge/commit without tests), `PostToolUse` (captures test pass/fail signals), `Stop` (blocks completion claims without verification evidence).
+- **Codex custom agents** (`.codex/agents/`). 4 TOML-defined agents — explorer, planner, reviewer, docs researcher — providing Codex-native parallel dispatch.
+- **Per-skill Codex metadata** (`agents/openai.yaml`). All 30 skills now ship with `interface` + `policy` metadata for Codex skill discovery.
+- **Codex runtime installer** (`scripts/install-codex-runtime.sh`). Installs `.codex/` config, hooks, and agents into any project with conflict detection and backup.
+- **Codex runtime evals** (`skills/etyb/evals/codex-runtime-evals.json`). Eval suite for verifying hook behavior on a real Codex instance.
+- **Portability linter** (`scripts/lint-portability.sh`). Cross-platform compliance checker — validates skill count, Codex metadata, plan path portability, and doc consistency.
+
+### Changed
+
+- **Codex enforcement upgraded.** Platform status changed from "model-trusted" to "partial runtime-enforced + model-trusted gaps." Edit-before-test remains model-trusted; all other gates now have hook support.
+- **README overhauled.** OG image banner, platform badges, dedicated platform support table, restructured install section with Codex runtime details.
+- **`.gitignore` updated.** Added `.etyb/` (runtime plan artifacts) and `__pycache__/` (Codex hook bytecode).
+
 ## [2.0.0] — 2026-04-15
 
 The portability release. ETYB is now a cross-platform virtual engineering team with adapters for Claude Code, OpenAI Codex, and Google Antigravity. Skills are reorganized for independent use on any agentskills.io-compliant platform.

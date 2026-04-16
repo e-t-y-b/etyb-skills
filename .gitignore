@@ -11,3 +11,10 @@
 MARKETPLACE.md
 docs/plan-*.md
 .internal/
+
+# ETYB runtime artifacts (created during usage)
+.etyb/
+
+# Python bytecode from Codex hook execution
+__pycache__/
+*.pyc

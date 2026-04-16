@@ -1,8 +1,8 @@
 {
   "bundle": {
     "name": "etyb-skills",
-    "version": "2.0.0",
-    "published_at": "2026-04-15",
+    "version": "2.1.0",
+    "published_at": "2026-04-16",
     "manifest_url": "https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/manifest.json",
     "repository": "https://github.com/e-t-y-b/etyb-skills",
     "homepage": "https://etyb.ai",
@@ -10,7 +10,7 @@
     "license": "MIT"
   },
   "skills": {
-    "etyb": "2.0.0",
+    "etyb": "2.1.0",
     "research-analyst": "1.0.0",
     "system-architect": "1.0.0",
     "frontend-architect": "1.0.0",
