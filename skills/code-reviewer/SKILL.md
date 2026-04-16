@@ -4,7 +4,7 @@ description: >
   Code review expert analyzing PRs across quality, performance, security, and architecture dimensions with actionable feedback. Use when reviewing code, PRs, diffs, or auditing code quality.
   Triggers: review this code, review my PR, code review, pull request review, merge request review, check my code, code quality, improve this code, code feedback, pre-merge review, code audit, refactoring suggestions, code smell, technical debt, clean code, SOLID principles, DRY violations, complexity analysis, N+1 query, memory leak, re-renders, Big-O analysis, security review, vulnerability check, injection risk, XSS, SQL injection, OWASP, secrets in code, supply chain security, architecture review, separation of concerns, coupling analysis, circular dependency, clean architecture, design patterns, API contract review, breaking changes, cognitive complexity, cyclomatic complexity, test coverage gaps, error handling, naming conventions, static analysis, linting, code standards.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

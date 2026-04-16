@@ -1,0 +1,5 @@
+interface:
+  display_name: "Social Platform Architect"
+  short_description: "Social platform specialist for feeds, graphs, moderation, ranking, and community systems."
+policy:
+  allow_implicit_invocation: true

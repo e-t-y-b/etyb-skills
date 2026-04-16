@@ -1,0 +1,5 @@
+interface:
+  display_name: "Real-Time Architect"
+  short_description: "Real-time systems specialist for WebSockets, collaboration, chat, streaming, and scale."
+policy:
+  allow_implicit_invocation: true

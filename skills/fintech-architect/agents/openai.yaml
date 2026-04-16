@@ -1,0 +1,5 @@
+interface:
+  display_name: "Fintech Architect"
+  short_description: "Fintech specialist for ledgers, payment flows, compliance, fraud, and money movement."
+policy:
+  allow_implicit_invocation: true

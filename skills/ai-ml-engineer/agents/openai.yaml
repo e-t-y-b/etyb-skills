@@ -1,0 +1,5 @@
+interface:
+  display_name: "AI/ML Engineer"
+  short_description: "AI/ML specialist for model development, MLOps, GenAI, and production ML systems."
+policy:
+  allow_implicit_invocation: true

@@ -4,7 +4,7 @@ description: >
   DevOps and platform engineering expert covering CI/CD (GitHub Actions, GitLab CI, Jenkins, ArgoCD), containers (Docker, Podman), Kubernetes, cloud platforms (AWS, GCP, Azure), IaC (Terraform, Pulumi, CDK), and release engineering. Use when building pipelines, containerizing apps, deploying to K8s, provisioning infrastructure, or planning deployments.
   Triggers: CI/CD, pipeline, GitHub Actions, GitLab CI, Jenkins, ArgoCD, Flux, GitOps, Docker, container, Podman, Buildah, Kubernetes, K8s, Helm, operator, service mesh, Istio, Linkerd, Cilium, Karpenter, KEDA, HPA, Gateway API, AWS, EC2, ECS, EKS, Lambda, S3, GCP, GKE, Cloud Run, Azure, AKS, Bicep, Terraform, OpenTofu, Pulumi, IaC, CloudFormation, CDK, deploy, blue-green, canary, feature flag, LaunchDarkly, rollback, SemVer, Argo Rollouts, Flagger, SLSA, SBOM, Sigstore, serverless, Fargate, autoscaling, Trivy, Grype, Kyverno, OPA, FinOps, cost optimization, Crossplane, platform engineering, golden path.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -311,7 +311,7 @@ Only when explicitly requested ("write the pipeline", "give me the Terraform", "
 
 > **Git Worktree Management:** For git worktree creation, branch finishing, and parallel development workflows, see `skills/git-workflow-protocol/`. DevOps Engineer owns CI/CD and infrastructure; `git-workflow-protocol` owns the local git workflow for isolated development.
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the CI/CD and infrastructure domain within that phase. Verify at every gate where you are assigned.
 

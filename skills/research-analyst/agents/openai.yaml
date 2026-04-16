@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Analyst"
+  short_description: "Research specialist for technology evaluation, feasibility, tradeoffs, and requirements discovery."
+policy:
+  allow_implicit_invocation: true

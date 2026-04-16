@@ -1,0 +1,5 @@
+interface:
+  display_name: "Backend Architect"
+  short_description: "Backend specialist for APIs, microservices, auth, and distributed service architecture."
+policy:
+  allow_implicit_invocation: true

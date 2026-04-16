@@ -4,7 +4,7 @@ description: >
   Technical writing expert producing API references, ADRs, user guides, and operational runbooks using docs-as-code practices and information architecture frameworks. Use when creating, reviewing, improving, or structuring any technical documentation.
   Triggers: write documentation, document this, create docs, API documentation, API reference, OpenAPI docs, Swagger docs, developer portal, SDK documentation, ADR, architecture decision record, design doc, RFC, C4 diagram, runbook, playbook, troubleshooting guide, postmortem template, user guide, quickstart, tutorial, how-to guide, knowledge base, README, changelog, migration guide, release notes, docs-as-code, Docusaurus, MkDocs, Mintlify, GitBook, Redocly, Nextra, VitePress, Starlight, Diataxis, information architecture, Vale, Spectral, documentation CI/CD, SLO documentation, production readiness review, deployment checklist, rollback procedure, compliance documentation, llms.txt, AI-ready documentation.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -193,7 +193,7 @@ Only when explicitly requested, produce a structured documentation strategy:
 
 ## Decision Logs and ADRs as Plan Artifacts
 
-When a plan is active (`.etyb/plans/` or Claude plan mode), significant technical decisions don't just become standalone ADRs — they also get captured in the plan's **Decision Log** section. This extends your existing architecture documentation expertise (see `references/architecture-doc.md`) with plan-integrated decision capture.
+When a plan is active (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), significant technical decisions don't just become standalone ADRs — they also get captured in the plan's **Decision Log** section. This extends your existing architecture documentation expertise (see `references/architecture-doc.md`) with plan-integrated decision capture.
 
 ### When to Create a Plan-Integrated Decision Entry
 
@@ -227,7 +227,7 @@ When an active plan exists, your documentation work should be coordinated with t
 
 ### Before Creating Documentation
 
-1. **Check for an active plan** — look for `.etyb/plans/` artifacts or an active Claude plan
+1. **Check for an active plan** — use the portable default at `.etyb/plans/`, unless a platform adapter explicitly says a native plan override is active
 2. **Read the plan** — understand the current gate, what documentation tasks are assigned, and what decisions have been made
 3. **Orient your work within the plan** — your documentation should reflect the plan's decisions, architecture, and context
 4. **Check if a documentation task exists** — if your work corresponds to a plan task, you'll mark it complete when done

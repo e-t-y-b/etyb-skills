@@ -4,7 +4,7 @@ description: >
   Database architecture expert covering SQL (PostgreSQL, MySQL), NoSQL (MongoDB, DynamoDB, Cassandra), caching (Redis, Valkey), search (Elasticsearch, Meilisearch, Typesense), data pipelines (Kafka, Flink, Spark), and zero-downtime migrations. Use when designing schemas, choosing databases, optimizing queries, or building data pipelines.
   Triggers: database, schema design, data model, ERD, SQL, PostgreSQL, MySQL, MongoDB, DynamoDB, Cassandra, ScyllaDB, Redis, cache, Elasticsearch, OpenSearch, Meilisearch, Typesense, full-text search, Kafka, data pipeline, ETL, ELT, CDC, Debezium, Flink, Spark, stream processing, schema migration, zero-downtime migration, Flyway, Liquibase, Alembic, Atlas, Prisma Migrate, indexing, query optimization, EXPLAIN ANALYZE, partitioning, replication, sharding, PgBouncer, materialized view, cache invalidation, event sourcing, CQRS, data lakehouse, Iceberg, Delta Lake, dbt, N+1 query, pgvector, vector database, graph database, gh-ost, faceted search.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -265,7 +265,7 @@ Only when explicitly requested ("write it up", "give me a data model", "design t
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the data architecture domain within that phase. Verify at every gate where you are assigned.
 

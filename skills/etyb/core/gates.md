@@ -10,7 +10,7 @@ Plans are required for Tier 3+ requests (see `core/charter.md` Step 1). Addition
 
 ### Where to Create the Plan
 
-By default, plans live at `.etyb/plans/{plan-name}.md`. If a platform adapter overrides this (e.g. Claude Code has native plan mode at `.claude/plans/`), follow its guidance — see `adapters/{platform}/plan-mode.md` if present.
+By default, plans live at `.etyb/plans/{plan-name}.md`. This is the portable location across Codex, Antigravity, and generic installs. If a platform adapter explicitly overrides storage (today that is Claude Code native plan mode at `.claude/plans/`), follow its guidance.
 
 ### Plan Population
 
@@ -126,6 +126,6 @@ When the user asks about project status, report from the plan artifact:
 
 ## Platform Plan Integration
 
-Some platforms have their own plan primitives (Claude Code has `.claude/plans/`). When an adapter is present, it defines how ETYB interacts with the platform's native plan rather than creating a parallel `.etyb/plans/` artifact.
+Portable default is `.etyb/plans/{plan-name}.md`. Some platforms may expose their own plan primitive. Today only the Claude adapter overrides storage to `.claude/plans/` when native plan mode is active.
 
-See `adapters/{platform}/plan-mode.md` if present for platform-specific detection, annotation, and dual-plan resolution. When no adapter provides plan integration, use `.etyb/plans/{plan-name}.md` exclusively.
+When no adapter explicitly overrides plan storage, use `.etyb/plans/{plan-name}.md` exclusively.

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Security Engineer"
+  short_description: "Security specialist for app security, IAM, compliance, secrets, and threat modeling."
+policy:
+  allow_implicit_invocation: true

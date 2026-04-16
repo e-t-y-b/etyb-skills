@@ -1,0 +1,5 @@
+interface:
+  display_name: "SRE Engineer"
+  short_description: "SRE specialist for observability, incident response, reliability engineering, and capacity planning."
+policy:
+  allow_implicit_invocation: true

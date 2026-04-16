@@ -4,7 +4,7 @@ description: >
   Backend architecture expert across Java, TypeScript/Node.js, Go, Python, and Rust with deep expertise in API design (REST/GraphQL/gRPC), microservices, and auth systems. Use when building backends, designing APIs, choosing frameworks, or architecting distributed services.
   Triggers: backend, API, REST, GraphQL, gRPC, tRPC, microservices, monolith, middleware, server-side, Spring Boot, NestJS, Fastify, Quarkus, Express, Django, FastAPI, Flask, Gin, Echo, Fiber, Axum, Actix, Tokio, API gateway, service mesh, JWT, OAuth, OIDC, passkeys, RBAC, ABAC, SSO, MFA, authentication, authorization, ORM, connection pooling, goroutines, async Python, Celery, GORM, sqlc, SQLAlchemy, Pydantic, saga pattern, circuit breaker, distributed tracing, service discovery, API versioning, rate limiting, OpenAPI, protobuf, Istio, Linkerd, Temporal, event sourcing, CQRS, outbox pattern.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -276,7 +276,7 @@ Only when explicitly requested, produce a structured architecture document with:
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the backend domain within that phase. Verify at every gate where you are assigned.
 

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Debugging Protocol"
+  short_description: "Root-cause-first debugging discipline for reproduction, hypothesis testing, and escalation."
+policy:
+  allow_implicit_invocation: true

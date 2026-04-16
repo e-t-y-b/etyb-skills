@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Protocol"
+  short_description: "Workflow discipline for requesting reviews, evaluating findings, and closing review loops."
+policy:
+  allow_implicit_invocation: true

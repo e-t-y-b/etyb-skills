@@ -4,7 +4,7 @@ description: >
   Plan execution runtime — drives task-by-task implementation with per-task verification, blocker management, and gate transitions. One task at a time, verified before advancing, plan updated after every task. Use when executing, resuming, or checking status of an active plan.
   Triggers: execute plan, run plan, start implementation, next task, continue plan, implement plan, plan execution, resume plan, what's next in the plan, advance to next task, execute next task, pick up where we left off, continue where we left off, work on the plan, follow the plan, plan progress, task execution, run the next step, begin implementation, start building, execute the roadmap, work through the plan, advance the plan, move to next task, what task is next, which task should I do, pick the next task, plan runtime, execution loop, task loop, implementation loop, blocked task, gate transition, plan status.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -65,7 +65,7 @@ If a task is blocked, skip it (see blocker management) and pick the next unblock
 Before doing anything, read the active plan artifact:
 
 1. **Check `.etyb/plans/`** — look for active plan files
-2. **Check `.claude/plans/`** — look for Claude plan mode artifacts
+2. **If a platform adapter explicitly overrides plan storage, use that artifact** — today that means Claude native plan mode
 3. **Identify the current gate** — which phase is active (Design, Plan, Implement, Verify, Ship)?
 4. **Find the next pending task** — scan the task breakdown for tasks with status `pending` in the current gate
 5. **Check for blocked tasks** — note any tasks marked `blocked` and their blocking reasons
@@ -155,7 +155,7 @@ Plans live in two possible locations:
 | Location | Format | When Used |
 |----------|--------|-----------|
 | `.etyb/plans/{plan-name}.md` | Markdown with structured sections | Default plan storage |
-| `.claude/plans/{plan-name}.md` | Claude plan mode format | When Claude plan mode is active |
+| Adapter override (for example Claude native plan mode) | Platform-native format | Only when the active adapter explicitly overrides `.etyb/plans/` |
 
 Both contain: metadata, phase gates table, task breakdown, decision log, risk register.
 
@@ -255,9 +255,9 @@ This protocol activates automatically whenever an active plan artifact exists. Y
 2. Activate TDD discipline: every code change follows red-green-refactor
 3. The verification step (question c) must cite specific tests that prove the work
 
-### Hook Integration
+### Runtime Integration
 
-The `post-edit-log.sh` hook fires after Edit tool use to log which files were edited, when, and in what task context. This creates a traceability trail from plan task to code change.
+Some platforms add runtime help around execution. Claude logs post-edit context deterministically. Codex can add prompt/Bash/stop guardrails through `.codex/hooks.json`. When a platform does not provide edit-trace runtime support, update the plan manually after each meaningful edit.
 
 ### Cross-Skill Coordination
 

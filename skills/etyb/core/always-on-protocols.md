@@ -4,7 +4,7 @@ These are non-negotiable engineering disciplines. They apply to ALL work, ALL ti
 
 ## 1. TDD Discipline (always on)
 
-NO production code without a failing test first. Red-green-refactor on every change. If a platform adapter provides hook enforcement, this is deterministic; otherwise model-trusted (see `adapters/{platform}/hooks.md`).
+NO production code without a failing test first. Red-green-refactor on every change. If a platform adapter provides runtime guardrails, enforcement becomes deterministic or partially runtime-enforced; otherwise it remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
 → Deep knowledge: `skills/tdd-protocol/SKILL.md` + `skills/tdd-protocol/references/`
 
 ## 2. Verification Discipline (always on)
@@ -14,7 +14,7 @@ Evidence before claims, always. Run commands fresh, read full output, verify exi
 
 ## 3. Review Discipline (always on)
 
-No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context. Platforms with hook support enforce review-before-commit deterministically (see `adapters/{platform}/hooks.md`); otherwise model-trusted.
+No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context. Platforms with runtime support may enforce or remind review-before-commit; otherwise this remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
 → Deep knowledge: `skills/review-protocol/SKILL.md` + `skills/review-protocol/references/`
 
 ## 4. Plan Execution Discipline (always on when a plan exists)
@@ -29,7 +29,7 @@ Explore the problem space before the solution space. Never jump to implementatio
 
 ## 6. Branch Safety Discipline (always on)
 
-Never merge or PR without green tests compared against baseline. Platforms with hook support enforce test-before-merge deterministically (see `adapters/{platform}/hooks.md`); otherwise model-trusted.
+Never merge or PR without green tests compared against baseline. Platforms with runtime support may enforce or guard merge behavior; otherwise this remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
 → Deep knowledge: `skills/git-workflow-protocol/SKILL.md` + references
 
 ## 7. Subagent Coordination Discipline (always on for parallel work)

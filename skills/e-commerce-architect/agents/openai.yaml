@@ -1,0 +1,5 @@
+interface:
+  display_name: "E-Commerce Architect"
+  short_description: "Commerce specialist for catalogs, checkout, payments, inventory, and order workflows."
+policy:
+  allow_implicit_invocation: true

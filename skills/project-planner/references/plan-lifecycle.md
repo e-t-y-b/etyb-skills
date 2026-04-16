@@ -6,7 +6,7 @@
 1. [Plan Artifact Format Specification](#1-plan-artifact-format-specification)
 2. [Plan Creation Workflow](#2-plan-creation-workflow)
 3. [Plan Update Patterns](#3-plan-update-patterns)
-4. [Claude Plan Mode Integration](#4-claude-plan-mode-integration)
+4. [Portable Plan Storage and Platform Overrides](#4-portable-plan-storage-and-platform-overrides)
 5. [Gate Readiness Assessment Methodology](#5-gate-readiness-assessment-methodology)
 6. [Progress Tracking Metrics](#6-progress-tracking-metrics)
 7. [Risk Escalation Criteria and Process](#7-risk-escalation-criteria-and-process)
@@ -395,23 +395,25 @@ A stale plan is worse than no plan — it creates false confidence. Watch for th
 
 ---
 
-## 4. Claude Plan Mode Integration
+## 4. Portable Plan Storage and Platform Overrides
 
-### Detection
+### Default Rule
 
-Claude Code has a built-in plan mode that creates plan files in `.claude/plans/`. When active, you annotate Claude's plan rather than creating a separate `.etyb/plans/` file.
+Portable ETYB plans live in:
 
-**Detection signals (check in order):**
-1. Claude explicitly states it is in plan mode
-2. The conversation context shows plan mode was entered
-3. A plan file exists in `.claude/plans/`
+```text
+.etyb/plans/{plan-name}.md
+```
 
-If **any** signal is detected → annotate Claude's plan
-If **no** signals detected → create `.etyb/plans/` artifact
+That is the default for Codex, Antigravity, and generic installs. Only use a different plan location when a platform adapter explicitly overrides it.
 
-### Annotating a Claude Plan
+### Current Override
 
-When Claude plan mode is active, add process architecture sections as annotations within the Claude plan:
+Today, the only shipped override is Claude Code native plan mode. When the Claude adapter says native plan mode is active, annotate `.claude/plans/` instead of creating a second canonical plan file.
+
+### What Portable Sections Look Like
+
+Whether you are updating `.etyb/plans/` or a platform-native override, maintain the same ETYB sections:
 
 ```markdown
 ## Process Architecture Annotations
@@ -441,9 +443,9 @@ When Claude plan mode is active, add process architecture sections as annotation
 {Use the same format}
 ```
 
-### Mapping Gate Status to Plan Checkboxes
+### Adapter-Specific Rendering
 
-Claude plan mode uses checkboxes (`- [ ]` / `- [x]`). Map gate concepts to checkboxes:
+If a platform-native plan artifact uses a different rendering model (for example, Claude plan-mode checkboxes), map the same ETYB gate concepts into that native format:
 
 ```markdown
 ## Implementation Plan
@@ -471,13 +473,13 @@ Claude plan mode uses checkboxes (`- [ ]` / `- [x]`). Map gate concepts to check
 
 ### Dual Plan Resolution
 
-If both a Claude plan and `.etyb/plans/` artifact exist:
+If both a platform-native plan and `.etyb/plans/` artifact exist:
 
 | Situation | Action |
 |-----------|--------|
-| Claude plan is canonical | Merge `.etyb/plans/` content into Claude plan annotations, delete `.etyb/plans/` file |
-| `.etyb/plans/` created before Claude plan mode | Migrate key content to Claude plan annotations, keep `.etyb/plans/` as archive |
-| User explicitly wants `.etyb/plans/` | Honor user preference, add a note in Claude plan pointing to `.etyb/plans/` file |
+| Native plan is canonical | Merge `.etyb/plans/` content into the native plan annotations and archive the duplicate |
+| `.etyb/plans/` existed before the native override was activated | Migrate key content to the native plan, keep `.etyb/plans/` as archive |
+| User explicitly wants `.etyb/plans/` | Honor user preference, add a note in the native plan pointing to `.etyb/plans/` |
 
 ---
 

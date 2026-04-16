@@ -4,7 +4,7 @@ description: >
   Meta-protocol for creating, evaluating, and improving etyb skills via TDD for documentation — no skill change without a failing eval first. Use when creating, improving, or governing skills.
   Triggers: create skill, new skill, improve skill, skill not working, write skill, eval, evaluation, skill quality, how do skills work, skill template, skill anatomy, skill format, skill structure, add a skill, build a skill, design a skill, skill lifecycle, skill creation, skill improvement, skill evolution, skill deprecation, merge skills, split skill, skill overlap, skill scope, skill triggers, trigger keywords, skill frontmatter, reference file, eval engineering, write eval, failing eval, eval format, eval assertions, behavioral check, content check, eval JSON, run evals, TDD for docs, institutional memory, cross-session learning, skill gap, skill regression, skill architecture, meta-protocol, self-improvement, etyb skills, rationalization table, skill naming, improvement loop, knowledge accumulation.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

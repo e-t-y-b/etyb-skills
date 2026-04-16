@@ -4,7 +4,7 @@ description: >
   Design-first exploration protocol for ambiguous or greenfield requests. Produces a design brief through structured dialogue before planning or implementation begins. Use when the user has a vague idea or needs structured thinking before building.
   Triggers: brainstorm, explore idea, what should we build, I want to build, I have an idea, not sure what to build, help me think, help me figure out, greenfield, new project idea, from scratch, should we build, let's explore, talk through this, think through this, where do I start, how should I approach, what's the right approach, early stage, concept phase, ideation, explore options, explore alternatives, design brief, before we plan, before we build, scope this out, scope definition, MVP scope, what's in v1, narrow this down, too many ideas, which direction, tradeoff, trade-off, pros and cons, divergent thinking, convergent thinking, problem space, solution space.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -222,7 +222,7 @@ Your output feeds directly into ETYB's process:
 - **Tier Classification**: The scope and complexity surfaced in the design brief helps ETYB classify the project tier (Tier 1-4). A well-scoped design brief with clear constraints tends toward lower tiers. Ambiguous scope with many unknowns signals higher tiers.
 - **Expert Routing**: Constraints and approach choices in the brief determine which specialist skills ETYB mandates. A brief that mentions HIPAA triggers security-engineer. A brief that mentions real-time features triggers real-time-architect.
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. If the plan already has a Design gate with requirements, orient your exploration around filling gaps in those requirements rather than starting from scratch.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. If the plan already has a Design gate with requirements, orient your exploration around filling gaps in those requirements rather than starting from scratch.
 
 ## Verification Protocol
 

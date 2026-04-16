@@ -4,7 +4,7 @@ description: >
   Manages the code review lifecycle — dispatching focused review requests and receiving feedback with intellectual rigor. Handles the workflow, NOT the review itself (that is code-reviewer). Use when requesting reviews, responding to feedback, or integrating reviews into gates.
   Triggers: request review, review request, review dispatch, send for review, prepare for review, review context, review feedback, respond to review, address review comments, push back on review, disagree with reviewer, review findings, review response, review iteration, re-review, review cycle, review completion, review sign-off, review gate, review approval, code review workflow, review process, review protocol, performative agreement, review debt, review evidence, multi-reviewer, reviewer disagreement, review severity, must-fix, should-fix, defer finding, review before merge, mandatory review, skip review, review checklist, focused review, security review request, architecture review request.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -49,9 +49,9 @@ Before requesting a review, construct focused context:
 3. **Include test results** -- what passed, current coverage, any failures
 4. **Flag specific concerns** -- areas where you want focused attention
 5. **Set the review focus** -- security, performance, correctness, or architecture
-6. **Dispatch to code-reviewer** -- as a subagent with isolated context
+6. **Dispatch to code-reviewer** -- using the strongest independent review mechanism the platform supports (subagent, custom agent, or isolated review pass)
 
-Read `references/review-dispatch.md` for the full dispatch framework, templates, and subagent setup.
+Read `references/review-dispatch.md` for the full dispatch framework, templates, and isolated-review setup.
 
 ### Phase 2: Receiving Feedback (Reception)
 
@@ -84,14 +84,14 @@ Read `references/review-integration.md` for gate criteria, completion report for
 | Stage | Review Workflow |
 |-------|----------------|
 | **Startup** | Lightweight -- single reviewer, informal request, focus on correctness and security basics. No ceremony. Review turnaround under 1 hour. Self-review acceptable for Tier 0-1. |
-| **Growth** | Structured -- review request template used, specific concerns flagged, code-reviewer dispatched as subagent for Tier 2+. One reviewer for most changes, two for critical paths. |
+| **Growth** | Structured -- review request template used, specific concerns flagged, code-reviewer dispatched through an independent review mechanism for Tier 2+. One reviewer for most changes, two for critical paths. |
 | **Scale** | Multi-reviewer -- CODEOWNERS routing, tiered review depth, review SLAs. Architecture reviewer for structural changes, security reviewer for auth/data flows. Formal completion reports. |
 | **Enterprise** | Review boards -- domain-specific reviewers, formal review templates, audit trails. Multiple approval requirements. Review metrics tracked (time-to-review, iteration count). |
 
 ## When to Use Each Sub-Skill
 
 ### Review Dispatch (`references/review-dispatch.md`)
-Read this reference when preparing a review request: constructing context, writing the dispatch prompt, setting the review focus, choosing severity guidance, or dispatching code-reviewer as a subagent. Also when you need the review request template or want to avoid common dispatch mistakes (too much context, no context, no specific concerns).
+Read this reference when preparing a review request: constructing context, writing the dispatch prompt, setting the review focus, choosing severity guidance, or dispatching code-reviewer through an independent review mechanism. Also when you need the review request template or want to avoid common dispatch mistakes (too much context, no context, no specific concerns).
 
 ### Feedback Evaluation (`references/feedback-evaluation.md`)
 Read this reference when receiving review feedback: evaluating individual findings, deciding whether to agree or push back, handling different reviewer types (human, subagent, external), composing multi-finding responses, or avoiding performative agreement. Also when you need the response template or pushback evidence framework.
@@ -184,7 +184,7 @@ For each finding, respond with exactly one:
 
 ## Process Awareness
 
-Review protocol is always-on in the etyb-skills workflow. ETYB enforces review discipline at the Verify gate for Tier 2+ work, and the pre-commit hook warns when no review evidence exists.
+Review protocol is always-on in the etyb-skills workflow. ETYB enforces review discipline at the Verify gate for Tier 2+ work. Claude can warn via pre-commit hook, Codex can remind around commit flows, and other runtimes stay model-trusted.
 
 ### Gate Integration
 
@@ -192,7 +192,7 @@ Review protocol is always-on in the etyb-skills workflow. ETYB enforces review d
 Implement gate
   |
   v
-review-protocol: Dispatch review request --> code-reviewer (subagent)
+review-protocol: Dispatch review request --> code-reviewer (independent review runtime)
   |
   v
 code-reviewer: Returns findings

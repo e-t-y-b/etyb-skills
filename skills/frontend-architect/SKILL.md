@@ -4,7 +4,7 @@ description: >
   Web frontend architecture expert across React, Angular, Vue, and Svelte ecosystems with deep expertise in SEO, web performance, accessibility, design systems, and rendering strategies. Use when building web apps, choosing frameworks, optimizing performance, or implementing design systems.
   Triggers: frontend, web app, React, Next.js, Angular, Remix, Vue, Nuxt, Svelte, SvelteKit, Astro, Vite, component, design system, design tokens, SEO, Core Web Vitals, SSR, SSG, SPA, ISR, hydration, server components, Lighthouse, a11y, WCAG, ARIA, screen reader, Tailwind, CSS, state management, Redux, Zustand, Pinia, signals, runes, NgRx, code splitting, lazy loading, structured data, Open Graph, Turbopack, PWA, micro-frontend, bundle size, LCP, INP, CLS, Storybook, Figma, Radix, shadcn, headless components, view transitions, animation, dark mode, form validation, Svelte 5, Vapor mode, Analog, focus management, APCA contrast, prefers-reduced-motion.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -250,7 +250,7 @@ Only when explicitly requested, produce a structured architecture document with:
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the frontend domain within that phase. Verify at every gate where you are assigned.
 

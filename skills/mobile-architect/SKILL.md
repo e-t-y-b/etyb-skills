@@ -4,7 +4,7 @@ description: >
   Mobile architecture expert across React Native/Expo, Flutter/Dart, iOS (Swift/SwiftUI), and Android (Kotlin/Jetpack Compose) with deep expertise in performance, offline-first patterns, and cross-platform strategy. Use when building mobile apps, choosing frameworks, or optimizing mobile performance.
   Triggers: mobile app, React Native, Expo, Flutter, Dart, iOS, Swift, SwiftUI, Android, Kotlin, Jetpack Compose, cross-platform, native app, Expo Router, Hermes, TurboModules, New Architecture, Impeller, Riverpod, Bloc, SwiftData, Core Data, Room, Hilt, Detox, Maestro, XCTest, Espresso, Fastlane, CodePush, OTA updates, EAS Build, NativeWind, Tamagui, Reanimated, Skia, FlashList, Material You, offline-first, SQLite, MMKV, WatermelonDB, Lottie, Rive, VoiceOver, TalkBack, KMP, Kotlin Multiplatform, Compose Multiplatform, JSI, FFI, Baseline Profiles, Firebase, Crashlytics, app signing, deep linking, push notifications, mobile CI/CD.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -248,7 +248,7 @@ Only when explicitly requested, produce a structured mobile architecture documen
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the mobile client domain within that phase. Verify at every gate where you are assigned.
 

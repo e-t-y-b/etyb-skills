@@ -1,0 +1,5 @@
+interface:
+  display_name: "Git Workflow Protocol"
+  short_description: "Branch and worktree workflow discipline with merge safety and baseline verification."
+policy:
+  allow_implicit_invocation: true

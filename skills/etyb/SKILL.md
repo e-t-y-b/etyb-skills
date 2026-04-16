@@ -4,7 +4,7 @@ description: >
   ETYB — your virtual CTO and engineering team. Routes to 20 specialists, enforces 9 always-on engineering disciplines, and manages delivery through 5 quality gates. Use when intent spans multiple disciplines, is ambiguous, or needs end-to-end planning.
   Triggers: build me, create a system, help me build, design and implement, full stack, end to end, new project, greenfield, from scratch, production-ready, ship this, MVP, product launch, project plan, technical roadmap, which skill, which team, route this to, cross-functional, cross-team, build and deploy, full SDLC, tech stack selection, platform engineering, build a SaaS, build an app, build a platform, build an API, build a mobile app, build a web app, build a dashboard, build a data pipeline, migrate from, rewrite, re-platform, modernize, scale the system, production readiness review, launch checklist, technical due diligence, engineering assessment, system audit, multi-step project, how should I approach.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "2.0.0"
@@ -40,8 +40,8 @@ After loading core, check for a platform adapter at `adapters/{platform}/ADAPTER
 | Platform | Path | Enforcement Model |
 |----------|------|-------------------|
 | Claude Code | `adapters/claude/` | Deterministic (hooks + subagents) — flagship |
-| OpenAI Codex | `adapters/codex/` | Model-trusted gate enforcement |
-| Google Antigravity | `adapters/antigravity/` | ADK sub-agent integration |
+| OpenAI Codex | `adapters/codex/` | Partial runtime enforcement (project hooks + custom agents) with documented model-trusted gaps |
+| Google Antigravity | `adapters/antigravity/` | Markdown-first, model-trusted; ADK documented as future path only |
 
 If no adapter exists for the current platform, core modules still work — you operate in "model-trusted" mode, applying gates and protocols by instruction rather than hook enforcement.
 
@@ -61,6 +61,6 @@ Deep protocol details loaded on demand when you need them:
 2. **Tier 0** — just do it, no overhead
 3. **Tier 1** — read the one relevant skill, respond as that specialist (no routing visible)
 4. **Tier 2** — triage now, route follow-ups to specialists after stabilization
-5. **Tier 3-4** — load the rest of the core modules as needed, create a plan artifact, enter the Design gate
+5. **Tier 3-4** — load the rest of the core modules as needed, create a portable plan artifact (`.etyb/plans/` unless an adapter overrides it), enter the Design gate
 
 If a platform adapter exists, its `ADAPTER.md` tells you how the platform enforces the gates and protocols you've loaded from core.

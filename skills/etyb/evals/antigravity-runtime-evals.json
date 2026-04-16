@@ -1,0 +1,38 @@
+{
+  "skill_name": "etyb",
+  "platform": "google-antigravity",
+  "evals": [
+    {
+      "id": 1,
+      "name": "antigravity-no-hook-overclaim",
+      "prompt": "I'm using Antigravity. Which hooks in this repo will stop me from skipping the Design gate and auto-block unsafe commands?",
+      "expected_output": "Should explain that Antigravity is markdown-first and model-trusted in this repo today, and should not claim that shipped hooks already enforce the process.",
+      "assertions": [
+        { "name": "mentions-markdown-first", "type": "contains_keyword", "keywords": ["markdown-first"] },
+        { "name": "mentions-model-trusted", "type": "contains_keyword", "keywords": ["model-trusted"] },
+        { "name": "does-not-claim-hooks", "type": "semantic", "description": "Should not claim Antigravity hooks are currently shipped in this repo" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "antigravity-portable-plan-storage",
+      "prompt": "I'm in Antigravity and need you to create the implementation plan for a new analytics dashboard. Where does the plan live?",
+      "expected_output": "Should use the portable .etyb/plans/ location and should not imply there is a native Antigravity plan artifact in this repo.",
+      "assertions": [
+        { "name": "uses-portable-plan-path", "type": "contains_keyword", "keywords": [".etyb/plans/"] },
+        { "name": "avoids-native-plan-claim", "type": "semantic", "description": "Should not claim there is an Antigravity-native plan file integration" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "antigravity-markdown-parallel-coordination",
+      "prompt": "We're on Antigravity and want to split discovery, planning, and review in parallel. What runtime should we use here?",
+      "expected_output": "Should describe parallel work as markdown-first coordination in this repo and clearly defer any ADK runtime implementation to future work.",
+      "assertions": [
+        { "name": "mentions-markdown-coordination", "type": "contains_keyword", "keywords": ["markdown-first"] },
+        { "name": "mentions-adk-deferral", "type": "contains_keyword", "keywords": ["ADK"] },
+        { "name": "adk-is-future-path", "type": "semantic", "description": "Should frame ADK as deferred or future-path work, not a current shipped runtime" }
+      ]
+    }
+  ]
+}

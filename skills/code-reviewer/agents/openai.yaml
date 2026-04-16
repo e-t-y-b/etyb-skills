@@ -1,0 +1,5 @@
+interface:
+  display_name: "Code Reviewer"
+  short_description: "Code review specialist for quality, performance, security, and architecture feedback."
+policy:
+  allow_implicit_invocation: true

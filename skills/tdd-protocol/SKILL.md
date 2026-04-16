@@ -4,7 +4,7 @@ description: >
   Enforces red-green-refactor discipline on every code change — no production code without a failing test first. Use when implementation is happening and TDD cycle mechanics must be maintained.
   Triggers: TDD, test-driven development, test first, red green refactor, failing test, write test before code, minimal implementation, green bar, red bar, refactor step, TDD cycle, outside-in TDD, inside-out TDD, London school TDD, Chicago school TDD, classical TDD, mockist TDD, spike and delete, spike then TDD, failing test first, make it green, make it pass, test-drive, red phase, green phase, refactor phase, commit rhythm, small commits, test-code-refactor, I'll add tests later, too simple to test, no time for tests, skip tests, tests slow us down, test after, manual testing is enough, prototype no tests, test discipline, TDD enforcement, TDD protocol.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

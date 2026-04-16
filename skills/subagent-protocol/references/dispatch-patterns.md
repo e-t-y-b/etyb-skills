@@ -58,12 +58,12 @@ Before dispatching, verify the context packet against this checklist:
 | **Test expectations** | Does the agent know what tests to write or run? | Include test strategy excerpt from qa-engineer |
 | **Output format** | Does the agent know what to report back? | Add expected output section |
 
-## Agent Tool Invocation Template
+## Agent Runtime Invocation Template
 
-When using Claude Code's Agent tool, structure the invocation as follows:
+When using a platform's subagent or custom-agent runtime, structure the invocation as follows:
 
 ```
-Use the Agent tool to dispatch a subagent with the following context:
+Dispatch a subagent with the following context:
 
 Task: {objective}
 
@@ -100,13 +100,13 @@ When complete, report:
 - **State the negative** -- "Do NOT modify the database schema" is as important as "implement the endpoint." Agents optimize for completion and may change more than intended.
 - **One task per agent** -- if you find yourself writing "also do X" in the context packet, consider whether X should be a separate dispatch.
 
-## Model Selection Guide
+## Reasoning Tier Guide
 
-### Haiku: Mechanical Tasks (1-2 files)
+### Fast Tier: Mechanical Tasks (1-2 files)
 
-Use Haiku for tasks that are well-defined, low-ambiguity, and require no architectural judgment:
+Use the Fast tier for tasks that are well-defined, low-ambiguity, and require no architectural judgment:
 
-**Good Haiku tasks:**
+**Good Fast-tier tasks:**
 - Rename a function or variable across a file
 - Apply a consistent formatting change
 - Update import paths after a module is moved
@@ -116,22 +116,22 @@ Use Haiku for tasks that are well-defined, low-ambiguity, and require no archite
 - Add JSDoc/docstring comments to existing functions
 - Simple type narrowing or type annotation additions
 
-**Haiku context packet characteristics:**
+**Fast-tier context packet characteristics:**
 - Very specific instructions ("rename `getUserById` to `findUserById` in `/src/users/service.ts`")
 - 1-2 files in scope
 - No ambiguity in what "done" looks like
 - No architectural decisions required
 
-**Haiku limitations:**
+**Fast-tier limitations:**
 - Poor at tasks requiring understanding of broader system context
 - May not correctly handle edge cases in complex refactoring
 - Should not be used for tasks where a wrong answer is expensive to fix
 
-### Sonnet: Standard Implementation (3-10 files)
+### Balanced Tier: Standard Implementation (3-10 files)
 
-Use Sonnet for the majority of implementation work -- feature development, bug fixes, test writing, and module-scoped refactoring:
+Use the Balanced tier for the majority of implementation work -- feature development, bug fixes, test writing, and module-scoped refactoring:
 
-**Good Sonnet tasks:**
+**Good Balanced-tier tasks:**
 - Implement a new API endpoint with validation, business logic, and error handling
 - Write a comprehensive test suite for an existing module
 - Fix a bug that requires understanding call chains across several files
@@ -140,22 +140,22 @@ Use Sonnet for the majority of implementation work -- feature development, bug f
 - Add error handling and edge case coverage to existing code
 - Migrate a module from one dependency to another
 
-**Sonnet context packet characteristics:**
+**Balanced-tier context packet characteristics:**
 - Clear objective with 3-5 success criteria
 - 3-10 files in scope (source + tests + interfaces)
 - Some judgment required but within a bounded domain
 - Test strategy included for TDD-enforced work
 
-**Sonnet limitations:**
+**Balanced-tier limitations:**
 - May struggle with tasks requiring understanding of the full system architecture
 - Not ideal for security-sensitive review where subtle vulnerabilities matter
 - Should not make architectural decisions that affect other modules
 
-### Opus: Architecture and Review (10+ files or cross-cutting)
+### Deep Tier: Architecture and Review (10+ files or cross-cutting)
 
-Use Opus for tasks that require deep reasoning, cross-cutting understanding, or where mistakes are expensive:
+Use the Deep tier for tasks that require deep reasoning, cross-cutting understanding, or where mistakes are expensive:
 
-**Good Opus tasks:**
+**Good Deep-tier tasks:**
 - Review a proposed architecture change for risks and tradeoffs
 - Security review of authentication/authorization code
 - Complex refactoring that changes patterns across multiple modules
@@ -164,14 +164,14 @@ Use Opus for tasks that require deep reasoning, cross-cutting understanding, or 
 - Evaluate whether a proposed design meets non-functional requirements
 - Code review of critical-path changes (payments, auth, data integrity)
 
-**Opus context packet characteristics:**
+**Deep-tier context packet characteristics:**
 - High-level objective with nuanced success criteria
 - 10+ files or cross-cutting concerns
 - Requires weighing tradeoffs and making judgment calls
 - Output is analysis/recommendations, not just code changes
 
-**Opus limitations:**
-- Higher cost and latency -- do not use for tasks Sonnet can handle
+**Deep-tier limitations:**
+- Higher cost and latency -- do not use for tasks Balanced can handle
 - Overkill for mechanical changes or well-defined implementation tasks
 
 ### Model Selection Decision Tree
@@ -179,18 +179,18 @@ Use Opus for tasks that require deep reasoning, cross-cutting understanding, or 
 ```
 Is the task mechanical with no ambiguity?
   |
-  yes --> Is it 1-2 files? --> Haiku
-  |       Is it 3+ files? --> Sonnet (mechanical but broad)
+  yes --> Is it 1-2 files? --> Fast
+  |       Is it 3+ files? --> Balanced (mechanical but broad)
   |
   no --> Does it require architectural judgment?
            |
-           yes --> Opus
+           yes --> Deep
            |
            no --> Does it touch 10+ files or cross-cutting concerns?
                     |
-                    yes --> Opus
+                    yes --> Deep
                     |
-                    no --> Sonnet
+                    no --> Balanced
 ```
 
 ### Cost-Awareness Heuristic
@@ -199,9 +199,9 @@ When choosing between models, consider the cost of getting it wrong:
 
 | Risk Level | Model Choice | Reasoning |
 |------------|-------------|-----------|
-| **Low** (formatting, renames, config) | Haiku | Wrong output is trivially detectable and fixable |
-| **Medium** (feature implementation, tests) | Sonnet | Wrong output caught by tests and Stage 1 review |
-| **High** (security, architecture, data integrity) | Opus | Wrong output is expensive to detect and fix |
+| **Low** (formatting, renames, config) | Fast | Wrong output is trivially detectable and fixable |
+| **Medium** (feature implementation, tests) | Balanced | Wrong output caught by tests and Stage 1 review |
+| **High** (security, architecture, data integrity) | Deep | Wrong output is expensive to detect and fix |
 
 ## Error Handling
 
@@ -236,7 +236,7 @@ Subagents can fail in several ways. Each failure mode has a specific recovery st
 1. Run tests to identify specific failures
 2. Include the test failure output in the re-dispatch context
 3. Narrow the scope if the original task was too broad
-4. Consider upgrading the model (Haiku to Sonnet, Sonnet to Opus)
+4. Consider upgrading the reasoning tier (Fast to Balanced, Balanced to Deep)
 5. If still failing after 1 re-dispatch: decompose the task into smaller pieces
 
 ### Agent Produces Output with Concerns
@@ -303,7 +303,7 @@ Done when:
 4. Code is cleaner/simpler by {specific metric: fewer lines, fewer dependencies, clearer naming}
 ```
 
-**For review tasks (Opus):**
+**For review tasks (Deep tier):**
 ```
 Done when:
 1. All files in {scope} have been reviewed
@@ -330,9 +330,9 @@ Done when:
 2. EVALUATE: independence, complexity, domain isolation
 3. DECIDE: inline, single dispatch, parallel, or pipeline
 4. CONSTRUCT context packet (template above)
-5. SELECT model (haiku/sonnet/opus decision tree)
+5. SELECT reasoning tier (fast / balanced / deep decision tree)
 6. VALIDATE context packet (quality checklist)
-7. DISPATCH via Agent tool
+7. DISPATCH via the platform's agent runtime
 8. MONITOR agent status signal
 9. REVIEW output (Stage 1: spec conformance)
 10. INTEGRATE or RE-DISPATCH based on review

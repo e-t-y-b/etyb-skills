@@ -1,0 +1,5 @@
+interface:
+  display_name: "TDD Protocol"
+  short_description: "Red-green-refactor discipline for test-first implementation and small safe changes."
+policy:
+  allow_implicit_invocation: true

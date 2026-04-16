@@ -1,0 +1,5 @@
+interface:
+  display_name: "Brainstorm Protocol"
+  short_description: "Design-first exploration protocol for shaping vague ideas into a clear design brief."
+policy:
+  allow_implicit_invocation: true

@@ -4,7 +4,7 @@ description: >
   Enforces root-cause-first debugging discipline — reproduce, hypothesize, test ONE variable, verify. No symptom masking, no shotgun fixes, and escalation after three failed hypotheses. Use when tests fail repeatedly, bugs resist reproduction, or fix attempts aren't converging on the cause.
   Triggers: debug, debugging, bug, won't reproduce, flaky test, intermittent failure, race condition, works on my machine, works in staging not prod, memory leak, performance regression, after the deploy, what changed, root cause, root cause analysis, RCA, post-mortem, symptom vs cause, stack trace, stuck, blocked on bug, debugging loop, hypothesis-driven, one variable at a time, three-failure escalation.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

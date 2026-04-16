@@ -4,7 +4,7 @@ description: >
   Enforces evidence-before-claims discipline on every task completion — no "done" without a structured completion report, the five verification questions, and proof that tests prove the work. Use when verifying any task, gate transition, or delivered artifact across any scale or domain.
   Triggers: verification, verify, completion report, done criteria, gate readiness, exit criteria, proof, evidence, how do I know it works, is this actually done, quality gate, task completion, acceptance criteria, what tests prove, what edge cases, what could go wrong, five questions, verification evidence, rubber-stamp review, works on my machine, verification anti-patterns, verification standards.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

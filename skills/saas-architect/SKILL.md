@@ -4,7 +4,7 @@ description: >
   Architects multi-tenant SaaS platforms from startups to enterprise with billing, isolation, and compliance. Use when designing tenancy models, billing, onboarding, metering, or tenant isolation.
   Triggers: SaaS, software as a service, multi-tenant, multi-tenancy, tenancy model, tenant isolation, tenant provisioning, subdomain routing, white-label, subscription billing, usage-based billing, per-seat pricing, tiered pricing, freemium, Stripe Billing, Chargebee, Recurly, Paddle, LemonSqueezy, Lago, Orb, Metronome, Amberflo, m3ter, entitlements, feature flags, dunning, proration, usage metering, API metering, rate limiting, quota management, overage billing, SSO, SCIM, SAML, WorkOS, Clerk, Auth0 Organizations, PropelAuth, row-level security, RLS, schema-per-tenant, database-per-tenant, noisy neighbor, BYOK, Nile, Citus, Turso, Neon, PLG, product-led growth, B2B SaaS, enterprise SaaS, MRR, ARR, churn, SOC 2, ISO 27001, data residency, vCluster, AWS SaaS Factory.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -333,7 +333,7 @@ Only when explicitly requested ("design the architecture", "write up the tenancy
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the SaaS architecture domain within that phase. Verify at every gate where you are assigned.
 

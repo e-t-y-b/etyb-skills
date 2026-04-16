@@ -1,0 +1,5 @@
+interface:
+  display_name: "Web Frontend Architect"
+  short_description: "Frontend specialist for web apps, performance, accessibility, and design systems."
+policy:
+  allow_implicit_invocation: true

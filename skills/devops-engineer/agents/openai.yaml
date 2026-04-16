@@ -1,0 +1,5 @@
+interface:
+  display_name: "DevOps Engineer"
+  short_description: "DevOps specialist for CI/CD, containers, cloud platforms, Kubernetes, and release engineering."
+policy:
+  allow_implicit_invocation: true

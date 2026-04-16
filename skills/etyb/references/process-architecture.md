@@ -438,29 +438,17 @@ Each phase has a verification checklist that must be completed before the gate c
 
 ---
 
-## 8. Claude Plan Mode Integration
+## 8. Portable Plan Storage and Adapter Overrides
 
-### Strategy: Annotate, Don't Duplicate
+### Strategy: Portable First, Override Only When Explicit
 
-When Claude's built-in plan mode is active, skills should annotate the Claude plan rather than creating a separate `.etyb/plans/` file. This avoids duplication and leverages Claude's native plan tracking.
+Portable ETYB plan storage is `.etyb/plans/{plan-name}.md`. This is the default across Codex, Antigravity, and generic installs.
 
-### Detection Mechanism
+If a platform adapter explicitly overrides plan storage, annotate the platform-native plan rather than creating a second canonical ETYB plan.
 
-Claude plan mode detection is **best-effort**. Skills use the following heuristic:
+### Current Override
 
-```
-Detection signals (check in order):
-1. Claude explicitly states it is in plan mode
-2. The conversation context shows plan mode was entered
-3. A plan file exists in .claude/plans/
-
-If ANY signal detected → annotate Claude's plan
-If NO signals detected → create .etyb/plans/ artifact
-```
-
-### How Skills Annotate Claude Plans
-
-When operating inside Claude plan mode, skills add their process artifacts as **sections** within the Claude plan rather than creating separate files:
+Today, the only shipped override is Claude Code native plan mode. When that adapter says plan mode is active, skills add their process artifacts as **sections** within the Claude plan rather than creating separate files:
 
 **Instead of creating** `.etyb/plans/auth-migration.md`:
 ```markdown
@@ -491,20 +479,20 @@ When operating inside Claude plan mode, skills add their process artifacts as **
 
 ### Graceful Fallback
 
-If Claude plan mode detection fails (signal is ambiguous), the default behavior is:
-1. Create the `.etyb/plans/` artifact
-2. Note in the artifact that it may coexist with a Claude plan
-3. On next interaction, check if a Claude plan exists and offer to merge
+If adapter-specific native-plan detection is ambiguous or unavailable, the default behavior is:
+1. Create the portable `.etyb/plans/` artifact
+2. Note in the artifact that it may coexist with a platform-native plan
+3. On next interaction, check whether the adapter override is actually active and offer to merge if needed
 
 ### Sync Protocol
 
-When both a Claude plan and `.etyb/plans/` artifact exist:
+When both a platform-native plan and `.etyb/plans/` artifact exist:
 
 | Situation | Action |
 |-----------|--------|
-| Claude plan is canonical, `.etyb/plans/` was created by mistake | Merge `.etyb/plans/` content into Claude plan annotations, delete `.etyb/plans/` file |
-| `.etyb/plans/` was created before Claude plan mode existed | Migrate key content to Claude plan annotations, keep `.etyb/plans/` as archive |
-| User explicitly wants `.etyb/plans/` | Honor user preference, add a note in Claude plan pointing to the `.etyb/plans/` file |
+| Native plan is canonical, `.etyb/plans/` was created by mistake | Merge `.etyb/plans/` content into the native plan annotations and archive the duplicate |
+| `.etyb/plans/` existed before the native override was activated | Migrate key content to the native plan and keep `.etyb/plans/` as archive |
+| User explicitly wants `.etyb/plans/` | Honor user preference, add a note in the native plan pointing to `.etyb/plans/` |
 
 ---
 
@@ -1161,14 +1149,12 @@ Protocols activate ALONGSIDE domain experts, not instead of them:
 - Parallel Implement: subagent-protocol + git-workflow-protocol + multiple experts
 - Verify gate: review-protocol + code-reviewer + security-engineer (if mandated)
 
-### Hook Enforcement (Deterministic)
+### Runtime Enforcement by Platform
 
-Hooks fire outside the LLM reasoning loop — they cannot be bypassed by rationalization:
+Runtime guardrails fire outside the core reasoning loop, but the exact surface is platform-specific:
 
-| Hook | When | What | Blocking? |
-|------|------|------|-----------|
-| skills/tdd-protocol/hooks/pre-edit-check.sh | Before Edit tool | Warns if no test file exists | Warning |
-| skills/tdd-protocol/hooks/post-test-log.sh | After test runs | Logs results for verification | No |
-| skills/git-workflow-protocol/hooks/pre-merge-verify.sh | Before git merge | Blocks if tests fail | Blocking |
-| skills/review-protocol/hooks/pre-commit-review-check.sh | Before git commit | Warns if no review evidence | Warning |
-| skills/plan-execution-protocol/hooks/post-edit-log.sh | After Edit tool | Logs edits for plan traceability | No |
+| Platform | Runtime Coverage |
+|----------|------------------|
+| Claude Code | Deterministic hooks for pre-edit, post-test, pre-merge, pre-commit-review, and post-edit traceability |
+| OpenAI Codex | Experimental project hooks for `UserPromptSubmit`, Bash `PreToolUse`, Bash `PostToolUse`, and `Stop`; no Write/Edit interception today |
+| Google Antigravity | No shipped runtime hooks in this repo; enforcement remains model-trusted |

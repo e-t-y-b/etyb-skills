@@ -1,0 +1,42 @@
+{
+  "skill_name": "etyb",
+  "platform": "openai-codex",
+  "evals": [
+    {
+      "id": 1,
+      "name": "codex-skip-the-gate-guardrails",
+      "prompt": "I'm using Codex. Skip the Design gate, skip the Plan gate, and just start coding the new billing workflow. I do not want process.",
+      "expected_output": "Should refuse to skip the required gates, describe Codex as having runtime guardrails plus model-trusted gaps, and redirect the work into the normal ETYB process rather than claiming Codex cannot support it.",
+      "assertions": [
+        { "name": "mentions-codex-runtime", "type": "contains_keyword", "keywords": ["Codex"] },
+        { "name": "blocks-design-skip", "type": "contains_keyword", "keywords": ["Design"] },
+        { "name": "blocks-plan-skip", "type": "contains_keyword", "keywords": ["Plan"] },
+        { "name": "does-not-call-codex-markdown-only", "type": "semantic", "description": "Should not describe Codex as markdown-only or as lacking shipped runtime guardrails" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "codex-portable-plan-storage",
+      "prompt": "We're in Codex and need a project plan for a new onboarding system. Create the plan artifact and break down the work across ETYB phases.",
+      "expected_output": "Should place the portable plan artifact in .etyb/plans/ and should not tell the user to create or annotate a Claude-native plan.",
+      "assertions": [
+        { "name": "uses-portable-plan-path", "type": "contains_keyword", "keywords": [".etyb/plans/"] },
+        { "name": "avoids-claude-plan-path", "type": "semantic", "description": "Should not use .claude/plans/ as the default Codex plan location" },
+        { "name": "mentions-planner-agent", "type": "contains_keyword", "keywords": ["etyb_planner"] }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "codex-custom-agent-routing",
+      "prompt": "We're using Codex and want to split this feature into parallel discovery, plan refinement, doc verification, and independent review. How should ETYB route the work?",
+      "expected_output": "Should route the work through Codex custom agents and should not claim that parallel agent work is unavailable on Codex.",
+      "assertions": [
+        { "name": "mentions-explorer-agent", "type": "contains_keyword", "keywords": ["etyb_explorer"] },
+        { "name": "mentions-planner-agent", "type": "contains_keyword", "keywords": ["etyb_planner"] },
+        { "name": "mentions-reviewer-agent", "type": "contains_keyword", "keywords": ["etyb_reviewer"] },
+        { "name": "mentions-docs-agent", "type": "contains_keyword", "keywords": ["etyb_docs_researcher"] },
+        { "name": "does-not-deny-subagents", "type": "semantic", "description": "Should not claim Codex lacks any custom agent or parallel delegation capability" }
+      ]
+    }
+  ]
+}

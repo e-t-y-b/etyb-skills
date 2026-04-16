@@ -1,0 +1,5 @@
+interface:
+  display_name: "Verification Protocol"
+  short_description: "Evidence-first completion discipline for proof, tests, risks, and done criteria."
+policy:
+  allow_implicit_invocation: true
