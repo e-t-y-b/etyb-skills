@@ -4,7 +4,7 @@ description: >
   End-to-end system design expert covering solution architecture, domain modeling (DDD), API design, integration patterns, and data architecture. Use when designing systems, evaluating architecture tradeoffs, modeling domains, or planning integrations.
   Triggers: system design, architecture, solution design, technical design, HLD, LLD, domain model, bounded context, DDD, domain-driven design, event storming, aggregate, API design, OpenAPI, API-first, API contract, schema design, data model, ERD, entity relationship, integration, event-driven, event bus, message queue, ETL, data pipeline, webhook, API gateway, service mesh, C4 model, ADR, NFR, scalability, availability, CAP theorem, distributed system, microservices vs monolith, modular monolith, cell-based architecture, data flow, deployment topology, cloud architecture, multi-region, disaster recovery, data migration, SQL vs NoSQL, polyglot persistence.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -236,7 +236,7 @@ Only when explicitly requested ("write it up", "give me an architecture doc", "c
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the system design domain within that phase. Verify at every gate where you are assigned.
 

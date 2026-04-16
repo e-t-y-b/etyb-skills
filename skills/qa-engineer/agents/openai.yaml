@@ -1,0 +1,5 @@
+interface:
+  display_name: "QA Engineer"
+  short_description: "QA specialist for test strategy, automation, reliability, and confidence-building coverage."
+policy:
+  allow_implicit_invocation: true

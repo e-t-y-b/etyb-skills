@@ -1,0 +1,5 @@
+interface:
+  display_name: "Healthcare Architect"
+  short_description: "Healthcare specialist for HIPAA systems, clinical data, EHR integration, and FHIR APIs."
+policy:
+  allow_implicit_invocation: true

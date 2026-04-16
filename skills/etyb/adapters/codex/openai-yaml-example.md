@@ -4,6 +4,8 @@ Codex supports an optional `agents/openai.yaml` file inside a skill for Codex-sp
 
 ETYB does not require this file to work on Codex — the portable SKILL.md is sufficient. Adding `agents/openai.yaml` gives you a nicer Codex-native surface (better display in the skill picker, control over implicit invocation, explicit tool declarations).
 
+This repo now ships `agents/openai.yaml` for every installable skill. Keep SKILL frontmatter as the source of truth and use this file as additive Codex-specific metadata only.
+
 ## Reference — ETYB Skill
 
 Drop this at `skills/etyb/agents/openai.yaml` (or `.agents/skills/etyb/agents/openai.yaml` once installed) if you want Codex-specific polish:

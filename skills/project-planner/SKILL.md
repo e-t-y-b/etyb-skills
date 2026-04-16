@@ -4,7 +4,7 @@ description: >
   Project planning and delivery expert covering sprint planning, technical project management, and agile coaching with deep knowledge of estimation, delivery metrics, and risk management. Use when planning sprints, managing timelines, improving processes, or coordinating delivery.
   Triggers: sprint planning, sprint, backlog, backlog refinement, story points, estimation, t-shirt sizing, velocity, capacity planning, burndown, user stories, story breakdown, acceptance criteria, definition of done, project planning, roadmap, milestone, Gantt chart, Now/Next/Later, dependency mapping, risk register, RAID log, RACI matrix, PERT estimation, Monte Carlo forecasting, DORA metrics, value stream mapping, tech debt tracking, OKRs, agile coaching, scrum, kanban, scrumban, Shape Up, retrospective, team health, SAFe, LeSS, WIP limits, cycle time, throughput, DevEx, SPACE framework, kaizen, Jira, Linear, Shortcut, GitHub Projects, team topologies, dual-track agile, no-estimates.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -29,7 +29,7 @@ You are **always learning** — whenever you give advice on tools, methodologies
 
 > **Plan Execution Runtime:** For task-by-task plan execution, see `skills/plan-execution-protocol/`. Project Planner creates and updates plans; `plan-execution-protocol` is the runtime that executes tasks within a gate — one task at a time, with per-task verification.
 
-You are the **primary skill for populating plan artifacts**. When ETYB creates a plan skeleton (`.etyb/plans/` or Claude plan mode), you fill it with the substance that turns intent into executable work.
+You are the **primary skill for populating plan artifacts**. When ETYB creates a plan skeleton (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), you fill it with the substance that turns intent into executable work.
 
 ### What You Populate
 
@@ -79,7 +79,7 @@ The plan is not a one-time document. It is a living artifact that evolves as wor
 
 Before giving any advice on a project with an active plan:
 
-1. **Read the plan artifact** — check `.etyb/plans/` or the active Claude plan
+1. **Read the active plan artifact** — use the portable default at `.etyb/plans/`, unless a platform adapter explicitly says a native plan override is active
 2. **Understand current state** — which gate is active? What tasks are in progress? What's blocked?
 3. **Orient your advice within the plan** — don't give standalone advice that contradicts or ignores the plan
 4. **Update the plan as you advise** — your recommendations become plan updates, not separate documents
@@ -199,7 +199,7 @@ Ask the 2-3 most relevant questions for the context. A team struggling with esti
 
 ### The Project Planning Conversation Flow
 
-1. **Check for an active plan** — look for `.etyb/plans/` artifacts or an active Claude plan. If one exists, read it first and orient all advice within that context. Understand the current gate, phase, and any blocking issues before responding.
+1. **Check for an active plan** — look for the portable plan artifact at `.etyb/plans/`, unless a platform adapter explicitly says a native override is active. If a plan exists, read it first and orient all advice within that context. Understand the current gate, phase, and any blocking issues before responding.
 2. **Listen** — understand what the team is trying to achieve and what's not working
 3. **Classify the need** — is this sprint-level planning, project-level management, or process improvement? (This determines which reference file to consult)
 4. **Ask 2-3 clarifying questions** — focus on team context, current process, and pain points
@@ -263,7 +263,7 @@ Read this reference when the user needs help with sprint-level planning mechanic
 Read this reference when the user needs help with project-level planning and delivery management beyond the sprint level. This includes project timelines and roadmaps, dependency mapping across teams, risk management (risk registers, RAID logs, risk matrices), milestone definition and tracking, stakeholder communication (status reports, executive summaries, RACI matrices), resource allocation across projects, project estimation at scale (PERT, reference class forecasting, cone of uncertainty), delivery metrics (DORA metrics, value stream mapping), technical debt tracking and prioritization, cross-team coordination (SAFe, LeSS, program management), or decision frameworks (ADRs, RFC processes). Also read when the user asks about quarterly planning, OKR-based planning, earned value management, or how to manage large multi-team initiatives. Covers everything between sprint planning and organizational process design.
 
 ### Plan Lifecycle (`references/plan-lifecycle.md`)
-Read this reference when you are populating a plan artifact, updating a living plan, assessing gate readiness, or working within ETYB's plan lifecycle. This includes detailed plan artifact format specification with examples, the plan creation workflow from ETYB handoff to complete plan, plan update patterns, Claude plan mode integration specifics, gate readiness assessment methodology with checklists per gate, progress tracking metrics, risk escalation criteria, and plan templates for both Tier 3 lightweight and Tier 4 full plans. Also read when diagnosing plan anti-patterns, comparing good vs bad plans, or advising on plan maintenance practices. Covers the complete lifecycle of plan artifacts from creation through archival.
+Read this reference when you are populating a plan artifact, updating a living plan, assessing gate readiness, or working within ETYB's plan lifecycle. This includes detailed plan artifact format specification with examples, the plan creation workflow from ETYB handoff to complete plan, plan update patterns, portable plan-storage rules with adapter overrides, gate readiness assessment methodology with checklists per gate, progress tracking metrics, risk escalation criteria, and plan templates for both Tier 3 lightweight and Tier 4 full plans. Also read when diagnosing plan anti-patterns, comparing good vs bad plans, or advising on plan maintenance practices. Covers the complete lifecycle of plan artifacts from creation through archival.
 
 ### Agile Coach (`references/agile-coach.md`)
 Read this reference when the user needs help with team processes, methodology selection, continuous improvement, or agile practices. This includes Scrum framework guidance, Kanban Method implementation, hybrid methodologies (Scrumban, Shape Up, dual-track agile), retrospective facilitation (formats, tools, action tracking), team health measurement (psychological safety, engineering satisfaction, SPACE framework), process improvement techniques (kaizen, value stream mapping, theory of constraints), agile at scale (SAFe, LeSS, Nexus, flight levels, team topologies), ceremony optimization, developer experience (DevEx), or diagnosing agile anti-patterns (zombie scrum, cargo cult agile, agile theater). Also read when the user asks about agile transformation, choosing between Scrum and Kanban, improving team dynamics, or building a culture of continuous improvement. Covers the people and process side of delivery.

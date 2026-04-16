@@ -4,7 +4,7 @@ You are running ETYB on **OpenAI Codex**. The core modules (`core/*.md`) define 
 
 ## The Honest Trade-Off
 
-Codex has no hooks, no lifecycle events, and no skill-to-skill orchestration primitive. Skills are pure instructions + optional metadata.
+Codex now gives ETYB more than markdown alone: project config, lifecycle hooks, custom agents, and per-skill `agents/openai.yaml` metadata. But the enforcement surface is still narrower than Claude Code: hooks are experimental, `PreToolUse` and `PostToolUse` are currently Bash-only, and there is still no edit-before-test interception.
 
 | ETYB capability | Claude Code | Codex |
 |-----------------|-------------|-------|
@@ -13,13 +13,16 @@ Codex has no hooks, no lifecycle events, and no skill-to-skill orchestration pri
 | Team Registry & domain routing | Full support | Full support |
 | Tier classification + response formats | Full support | Full support |
 | Scale-aware calibration | Full support | Full support |
-| TDD / Review / Branch Safety gates | **Hook-enforced** | **Model-trusted only** |
+| Project config | Full support | Full support via `.codex/config.toml` |
+| Lifecycle hooks | Full support | `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop` via `.codex/hooks.json` |
+| TDD / Review / Branch Safety gates | **Hook-enforced** | **Partially runtime-enforced, with model-trusted gaps** |
 | Plan mode integration | Claude Plan Mode at `.claude/plans/` | Not applicable — use `.etyb/plans/` |
-| Parallel subagent dispatch | Agent tool | See `enforcement-notes.md` |
+| Parallel subagent dispatch | Claude subagent runtime | Custom agents in `.codex/agents/` |
+| Skill metadata | Plugin metadata | `agents/openai.yaml` shipped for every installable skill |
 
-**What this means:** on Codex, ETYB's gates and protocols still apply, but compliance is *model-trusted*. A determined user can route around model-trusted gates (e.g., "just commit anyway"). They cannot route around a Claude Code hook.
+**What this means:** on Codex, ETYB's gates and protocols still apply, and several now have real runtime help. Prompt hooks can block obvious gate-skipping. Bash hooks can guard merge attempts and record test evidence. Stop hooks can force one more verification pass. The remaining gaps — especially edit-before-test and non-Bash tool calls — are still model-trusted.
 
-This is the honest trade-off of portability. It is not a bug; it is the cost of running on a platform without deterministic enforcement primitives.
+This is the honest trade-off of portability. It is not a bug; it is the cost of running on a platform with partial deterministic surfaces rather than Claude's broader runtime controls.
 
 ## Installation
 
@@ -29,6 +32,11 @@ For ETYB, the expected layout on a project using Codex:
 
 ```
 your-project/
+├── .codex/
+│   ├── config.toml
+│   ├── hooks.json
+│   ├── hooks/
+│   └── agents/
 └── .agents/
     └── skills/
         └── etyb/                  # this skill
@@ -41,22 +49,22 @@ your-project/
         └── <each specialist>/     # the 20+ specialists, each independent
 ```
 
-The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. Distribution scripts should copy or symlink into `.agents/skills/` on installation.
+The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. Distribution scripts should copy or symlink skills into `.agents/skills/` and install the project-scoped `.codex/` runtime into the workspace root.
 
 ## Load These On Top Of Core
 
 | File | Purpose |
 |------|---------|
-| [`enforcement-notes.md`](enforcement-notes.md) | Exactly what is model-trusted vs. what cannot be enforced. Subagent limitations. Practical guidance for gate discipline without hooks. |
-| [`openai-yaml-example.md`](openai-yaml-example.md) | Reference `agents/openai.yaml` — interface metadata, invocation policy, tool declarations. Adopt per skill. |
+| [`enforcement-notes.md`](enforcement-notes.md) | Exactly what is partially runtime-enforced vs. still model-trusted. Custom-agent expectations and Codex-specific gaps. |
+| [`openai-yaml-example.md`](openai-yaml-example.md) | Reference `agents/openai.yaml` — interface metadata, invocation policy, tool declarations. The repo now ships this file for every installable skill. |
 
 ## Key Differences From Claude Code
 
-- **No pre-commit review hook.** You must remember to invoke `code-reviewer` before commits on Tier 3+ code changes. The `core/always-on-protocols.md` §3 discipline still applies — you enforce it by instruction.
-- **No pre-merge test hook.** You must verify tests pass before merging. The `core/always-on-protocols.md` §6 discipline still applies by instruction.
-- **No pre-edit TDD check.** TDD remains required by `core/always-on-protocols.md` §1 — but Codex won't warn if you edit source before writing the test.
-- **No native plan mode.** Always use `.etyb/plans/{name}.md`. Ignore `core/gates.md`'s pointer to `adapters/{platform}/plan-mode.md` — there is none for Codex.
-- **Subagents are not skill-integrated.** Codex has a subagent concept, but it is separate from skills. See `enforcement-notes.md` for how to handle parallel tracks.
+- **Hooks are real but scoped.** Codex can run `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and `Stop`, but tool interception is currently Bash-only.
+- **No pre-edit TDD check.** TDD remains required by `core/always-on-protocols.md` §1, but Codex still cannot intercept file edits before they happen.
+- **No native plan mode.** Default to `.etyb/plans/{name}.md`. This plan deliberately does not add a Codex-native plan artifact layer.
+- **Custom agents are project-scoped, not skill-embedded.** ETYB ships `.codex/agents/etyb_explorer.toml`, `etyb_planner.toml`, `etyb_reviewer.toml`, and `etyb_docs_researcher.toml` for bounded parallel work and independent review.
+- **Windows is currently excluded for hooks.** Codex hooks are still experimental and disabled on Windows per the current OpenAI docs.
 
 ## When To Recommend Claude Code Instead
 

@@ -1,6 +1,6 @@
 # Review Dispatch: How to Request a Code Review
 
-This reference covers the complete workflow for requesting a code review -- constructing focused context, dispatching code-reviewer as a subagent, and avoiding common dispatch mistakes.
+This reference covers the complete workflow for requesting a code review -- constructing focused context, dispatching code-reviewer through an independent review runtime, and avoiding common dispatch mistakes.
 
 ## Context Construction
 
@@ -18,7 +18,7 @@ The reviewer needs to see exactly what changed. Provide one of:
 - **Specific SHAs**: `git diff abc123..def456` for a targeted range
 - **File list with changes**: When the diff is too large, summarize what changed in each file
 
-For subagent dispatch, include the actual diff content in the prompt. Do not tell the reviewer to "look at the latest changes" -- they have no persistent state.
+For isolated review dispatch, include the actual diff content in the prompt. Do not tell the reviewer to "look at the latest changes" -- they have no persistent state.
 
 ```bash
 # Generate a focused diff for the review request
@@ -114,9 +114,9 @@ Before dispatching a review, verify:
 - [ ] Excluded noise (unrelated files, generated code, boilerplate)
 - [ ] Review focus is set (security, performance, correctness, architecture)
 
-## Subagent Setup: Dispatching code-reviewer
+## Independent Reviewer Setup: Dispatching code-reviewer
 
-When operating in the etyb-skills workflow, code-reviewer is dispatched as a subagent with isolated context. This means the reviewer has ONLY what you give it -- no access to prior conversation, no implicit project knowledge.
+When operating in the etyb-skills workflow, code-reviewer should run with isolated context. This means the reviewer has ONLY what you give it -- no access to prior conversation, no implicit project knowledge.
 
 ### Dispatch Prompt Template
 
@@ -150,15 +150,15 @@ were made deliberately.]
 - Do not comment on formatting or style -- those are handled by automation
 ```
 
-### Subagent Dispatch Considerations
+### Independent Review Dispatch Considerations
 
 **Context window management:**
-- The subagent has a fresh context window. Include all necessary information.
+- The reviewer runtime has a fresh context window. Include all necessary information.
 - Do not reference "the file we discussed earlier" -- include the code.
 - If the project has conventions (naming, patterns, architecture rules), state them explicitly.
 
 **Reviewer state:**
-- The subagent does not retain state between reviews. Each dispatch is independent.
+- The reviewer does not retain state between reviews. Each dispatch is independent.
 - For re-reviews after fixes, include the original findings AND the changes made.
 - Do not say "fix the issues from last review" -- restate what was found.
 

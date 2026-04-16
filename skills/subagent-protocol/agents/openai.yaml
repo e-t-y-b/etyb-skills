@@ -1,0 +1,5 @@
+interface:
+  display_name: "Subagent Protocol"
+  short_description: "Delegation discipline for bounded agents, parallel work, and two-stage review."
+policy:
+  allow_implicit_invocation: true

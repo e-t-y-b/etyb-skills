@@ -4,7 +4,7 @@ description: >
   Technology evaluation, competitive analysis, feasibility assessment, and requirements engineering expert for pre-development research. Use when evaluating technologies, comparing frameworks, assessing feasibility, or translating business requirements into technical specs.
   Triggers: evaluate, compare, which framework, which library, should we use, technology selection, tech stack, technology radar, proof of concept, PoC, spike, prototype, benchmark, TCO, vendor evaluation, open source, migration cost, ADR, RFC, competitive analysis, competitor, market research, feature comparison, feasibility, risk assessment, complexity estimation, build vs buy, go/no-go, technical risk, BRD, TRD, user story, story mapping, requirements elicitation, NFR, acceptance criteria, domain modeling, event storming, INVEST criteria, FURPS+, ISO 25010, decision matrix, tradeoff analysis, pros and cons, landscape analysis, tool selection, framework selection, AWS vs GCP vs Azure, REST vs GraphQL vs gRPC, monolith vs microservices.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -279,7 +279,7 @@ These deliverables should use the same skeleton above but expanded to full depth
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the research and analysis domain within that phase. Verify at every gate where you are assigned.
 

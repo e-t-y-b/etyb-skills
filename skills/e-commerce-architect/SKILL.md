@@ -4,7 +4,7 @@ description: >
   Architects e-commerce platforms from DTC storefronts to multi-vendor marketplaces. Use when designing catalogs, carts, checkout, payments, inventory, or order fulfillment.
   Triggers: e-commerce, ecommerce, online store, shopping cart, checkout, product catalog, product variants, SKU, inventory, order management, order fulfillment, payment gateway, Stripe, Adyen, Braintree, PCI DSS, marketplace, multi-vendor, Shopify, Medusa, Saleor, Commercetools, BigCommerce, WooCommerce, Magento, headless commerce, composable commerce, MACH architecture, cart abandonment, checkout conversion, shipping rates, tax calculation, promotions engine, coupon codes, B2B commerce, subscription commerce, recurring billing, drop shipping, warehouse management, RMA, refunds, chargebacks, fraud prevention, 3D Secure, BNPL, Klarna, Affirm, Algolia, Typesense, flash sale, overselling prevention, multi-currency, cross-border commerce, Avalara, distributed order management, faceted search.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -305,7 +305,7 @@ Only when explicitly requested ("design the architecture", "write up the data mo
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the e-commerce domain within that phase. Verify at every gate where you are assigned.
 

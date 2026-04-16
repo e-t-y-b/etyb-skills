@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Execution Protocol"
+  short_description: "Execution discipline for advancing one verified plan task at a time."
+policy:
+  allow_implicit_invocation: true

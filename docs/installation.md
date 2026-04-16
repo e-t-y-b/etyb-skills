@@ -1,13 +1,13 @@
 # Installation Guide
 
-ETYB-Skills is distributed as a bundle of 31 coordinated skills. This guide covers how to install, update, and resolve conflicts across Claude Code, OpenAI Codex, and Google Antigravity.
+ETYB-Skills is distributed as a bundle of 30 coordinated skills. This guide covers how to install, update, and resolve conflicts across Claude Code, OpenAI Codex, and Google Antigravity.
 
 ## Picking Your Install Method
 
 | You are using… | Recommended install |
 |----------------|---------------------|
 | Claude Code | `/plugin marketplace add` (native, handles discovery + install) |
-| OpenAI Codex | Clone + `scripts/install.sh --target .agents/skills` |
+| OpenAI Codex | Clone + `scripts/install.sh --target .agents/skills` + `scripts/install-codex-runtime.sh --target <project-root>` |
 | Google Antigravity | Clone + `scripts/install.sh --target .agent/skills` |
 | Generic (any agentskills.io-compliant agent) | `npx skills add e-t-y-b/etyb-skills` or manual clone |
 | Developing ETYB itself | Clone + work in `skills/` directly |
@@ -16,7 +16,7 @@ ETYB-Skills is distributed as a bundle of 31 coordinated skills. This guide cove
 
 ```bash
 /plugin marketplace add e-t-y-b/etyb-skills
-/plugin install etyb-full@etyb-skills             # all 31 skills
+/plugin install etyb-full@etyb-skills             # all 30 skills
 # or pick a subset:
 /plugin install etyb-process-protocols@etyb-skills  # 9 protocols + etyb
 /plugin install etyb-core-team@etyb-skills          # 14 core teams + etyb
@@ -27,17 +27,24 @@ Plugin bundles are defined in `.claude-plugin/marketplace.json`.
 
 ## OpenAI Codex
 
-Codex discovers skills from `.agents/skills/` at the workspace root and up to the git repo root, plus `~/.agents/skills/` globally.
+Codex discovers skills from `.agents/skills/` at the workspace root and up to the git repo root, plus `~/.agents/skills/` globally. Project-scoped runtime hooks and custom agents live in `.codex/`.
 
 ```bash
 git clone https://github.com/e-t-y-b/etyb-skills.git
 cd etyb-skills
 ./scripts/install.sh --target /path/to/your-project/.agents/skills
+./scripts/install-codex-runtime.sh --target /path/to/your-project
 ```
 
-The script handles conflicts interactively. See [Conflict Resolution](#conflict-resolution) below.
+`install.sh` handles skill conflicts interactively. `install-codex-runtime.sh` installs:
+- `.codex/config.toml`
+- `.codex/hooks.json`
+- `.codex/hooks/*`
+- `.codex/agents/*`
 
-See also: [`skills/etyb/adapters/codex/ADAPTER.md`](../skills/etyb/adapters/codex/ADAPTER.md) for enforcement model and `agents/openai.yaml` options.
+This gives Codex a real ETYB runtime surface: prompt guardrails, Bash-based verification checks, stop-time verification reminders, and project-scoped ETYB custom agents.
+
+See also: [`skills/etyb/adapters/codex/ADAPTER.md`](../skills/etyb/adapters/codex/ADAPTER.md) for the platform contract and `agents/openai.yaml` options shipped with every installable skill.
 
 ## Google Antigravity
 
@@ -49,7 +56,7 @@ cd etyb-skills
 ./scripts/install.sh --target /path/to/your-workspace/.agent/skills
 ```
 
-For elevation to ADK-backed skill with live sub-agent dispatch, see [`skills/etyb/adapters/antigravity/adk-integration.md`](../skills/etyb/adapters/antigravity/adk-integration.md).
+Antigravity remains markdown-first in this repo. The ADK path is documented for future work only; this bundle does not ship ADK code, Python agents, or tool wiring. See [`skills/etyb/adapters/antigravity/adk-integration.md`](../skills/etyb/adapters/antigravity/adk-integration.md) for the future-path note.
 
 ## Generic / Manual Install
 
@@ -108,13 +115,20 @@ See [Updating section in README](../README.md#updating) and [CHANGELOG.md](../CH
 After installation:
 
 ```bash
-ls <target>/                 # should list 31 skills including etyb/
+ls <target>/                 # should list 30 skills including etyb/
 cat <target>/etyb/VERSION    # if VERSION was shipped
 ```
 
 On Claude Code, verify hooks are wired:
 ```bash
 cat .claude/settings.json | grep -c "hook"    # should be 5
+```
+
+On Codex, verify runtime assets are present:
+
+```bash
+ls /path/to/your-project/.codex
+cat /path/to/your-project/.codex/hooks.json
 ```
 
 On Codex or Antigravity, verify SKILL.md discovery by asking the agent to list available skills — ETYB and specialists should appear.
@@ -143,3 +157,6 @@ The repo may be private or the network may be blocking raw.githubusercontent.com
 
 **Skill doesn't activate on Codex/Antigravity**
 Check that the skill directory is at `.agents/skills/<name>/` (Codex) or `.agent/skills/<name>/` (Antigravity) — not nested deeper. The `name:` in SKILL.md frontmatter must match the parent directory name exactly.
+
+**Codex hooks are not firing**
+Confirm `/path/to/project/.codex/config.toml` has `codex_hooks = true`, `/path/to/project/.codex/hooks.json` exists, and you are running on a Codex build that supports hooks. Codex hooks are still experimental and currently disabled on Windows.

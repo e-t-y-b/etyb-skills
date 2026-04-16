@@ -4,7 +4,7 @@ description: >
   Architects real-time systems from live features to millions of concurrent connections. Use when designing WebSocket infrastructure, chat, collaboration, gaming, or streaming.
   Triggers: real-time, realtime, WebSocket, Socket.IO, WebTransport, WebRTC, SSE, pub/sub, Ably, Pusher, PubNub, Supabase Realtime, Convex, LiveKit, Liveblocks, PartyKit, Cloudflare Durable Objects, NATS, Redis Pub/Sub, Centrifugo, multiplayer, game server, netcode, Colyseus, Nakama, Agones, GameLift, client-side prediction, rollback netcode, tick rate, matchmaking, CRDT, Yjs, Automerge, Loro, collaborative editing, presence, cursor tracking, local-first, sync engine, Tiptap Collaboration, Hocuspocus, RTMP, HLS, LL-HLS, WHIP, WHEP, SFU, MediaSoup, Janus, Pion, Jitsi, Mux, Agora, video conferencing, chat system, Stream Chat, Sendbird, XMPP, Matrix protocol, E2EE, Signal Protocol, Slack-like, Discord-like, WhatsApp-like, concurrent connections, heartbeat, reconnection, IoT telemetry.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -402,7 +402,7 @@ Only when explicitly requested ("design the architecture", "give me the WebSocke
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the real-time communication domain within that phase. Verify at every gate where you are assigned.
 

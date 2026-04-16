@@ -4,7 +4,7 @@ description: >
   AI/ML engineering expert covering model development, MLOps, LLM/GenAI systems, data science, and AI product integration across PyTorch, JAX, scikit-learn, and HuggingFace. Use when building ML models, designing pipelines, implementing LLM features, building RAG, deploying models, or integrating AI into products.
   Triggers: machine learning, ML, deep learning, neural network, model training, model serving, inference, MLOps, ML pipeline, experiment tracking, feature store, model registry, data drift, LLM, GenAI, prompt engineering, RAG, vector database, embeddings, fine-tuning, LoRA, QLoRA, PEFT, RLHF, DPO, AI agent, tool use, function calling, data science, A/B testing, recommendation system, NLP, computer vision, PyTorch, TensorFlow, JAX, scikit-learn, XGBoost, HuggingFace, MLflow, W&B, Kubeflow, Ray, vLLM, Triton, BentoML, ONNX, TensorRT, quantization, Pinecone, Weaviate, Qdrant, Chroma, LangChain, LangGraph, Claude API, Anthropic SDK, Langfuse, SHAP, Optuna, DeepSpeed, FSDP, GPU, AI safety, EU AI Act.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -193,7 +193,7 @@ AI systems can cause real harm. Address these proactively:
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the AI/ML domain within that phase. Verify at every gate where you are assigned.
 

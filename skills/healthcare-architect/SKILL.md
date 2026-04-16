@@ -4,7 +4,7 @@ description: >
   Architects healthcare technology systems under HIPAA compliance, from digital health startups to large health systems. Use when designing clinical data pipelines, EHR integrations, FHIR APIs, or PHI-handling infrastructure.
   Triggers: healthcare, healthtech, digital health, telehealth, telemedicine, RPM, HIPAA, PHI, ePHI, de-identification, BAA, HITECH Act, HL7, HL7 v2, FHIR, FHIR R4, FHIR R5, US Core, SMART on FHIR, CDS Hooks, Bulk FHIR, HAPI FHIR, C-CDA, Mirth Connect, Rhapsody, HIE, interoperability, EHR, EMR, Epic, Cerner, Oracle Health, Athenahealth, MEDITECH, CPOE, patient matching, Master Patient Index, MPI, OMOP CDM, i2b2, SNOMED CT, LOINC, RxNorm, ICD-10, CPT codes, 21st Century Cures Act, TEFCA, ONC, audit trail, break-the-glass, consent management, AWS HealthLake, Google Cloud Healthcare API, Azure Health Data Services, PACS, DICOM, HEDIS, eCQM, SaMD, IEC 62304, clinical AI, population health, revenue cycle management.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -349,7 +349,7 @@ Only when explicitly requested ("design the architecture", "write up the FHIR AP
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the healthcare systems domain within that phase. Verify at every gate where you are assigned.
 

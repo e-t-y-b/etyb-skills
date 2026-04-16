@@ -4,7 +4,7 @@ description: >
   SRE expert covering monitoring/alerting, structured logging, distributed tracing, incident response, capacity planning/FinOps, and chaos engineering. Use when designing observability, defining SLOs, tuning alerts, writing runbooks/postmortems, planning capacity, or running chaos experiments.
   Triggers: SRE, site reliability, observability, monitoring, alerting, dashboard, Prometheus, PromQL, Grafana, Mimir, Thanos, VictoriaMetrics, Datadog, New Relic, Dynatrace, CloudWatch, PagerDuty, Opsgenie, on-call, SLO, SLI, SLA, error budget, burn rate, golden signals, RED method, USE method, ELK, Loki, Fluentd, Vector, LogQL, Splunk, OpenTelemetry, OTel, Jaeger, Zipkin, Tempo, X-Ray, distributed tracing, incident response, postmortem, runbook, escalation, incident.io, Rootly, FireHydrant, capacity planning, autoscaling, KEDA, Karpenter, Kubecost, FinOps, chaos engineering, Chaos Monkey, Litmus Chaos, Chaos Mesh, Gremlin, game day, fault injection, MTTR, MTTD, toil, reliability, Alertmanager.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -357,7 +357,7 @@ Only when explicitly requested ("design the monitoring", "write the SLO", "creat
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the reliability and observability domain within that phase. Verify at every gate where you are assigned.
 

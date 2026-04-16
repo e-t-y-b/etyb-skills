@@ -4,7 +4,7 @@ description: >
   Manages git worktree lifecycle and the 4-option branch finishing protocol (merge, PR, keep, discard) with baseline test comparison. Ensures isolated development and safe code integration. Use when creating worktrees, finishing branches, or coordinating parallel development.
   Triggers: worktree, git worktree, branch, parallel branch, isolated work, merge, PR, pull request, finish branch, clean up branch, merge to main, branch strategy, feature branch, branch naming, git merge, branch cleanup, worktree cleanup, discard branch, keep branch, branch finishing, integration branch, parallel features, isolated workspace, baseline test, pre-merge check, branch safety, worktree add, worktree remove, worktree list, branch lifecycle, development isolation, agent isolation, spike branch, experiment branch, throwaway branch.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -230,13 +230,13 @@ BRANCH FINISHING — OPTION <N>: <MERGE|PR|KEEP|DISCARD>
 
 This protocol is **always-on**. It is not consulted optionally — it is enforced as standing discipline during any git workflow operation.
 
-- **Hook enforcement**: The pre-merge-verify hook (`hooks/pre-merge-verify.sh`) runs the test suite before allowing any merge. If tests fail, the merge is blocked.
+- **Runtime enforcement**: Claude can block merges with `pre-merge-verify`. Codex can guard merge attempts through Bash hooks after recent test evidence. Other runtimes stay model-trusted.
 - **Subagent isolation**: Used by `subagent-protocol` to create isolated workspaces for agent tasks. Every agent worktree follows the same creation protocol with baseline testing.
 - **Ship gate**: Referenced at the Ship gate in plan execution. Branch finishing is the final step before code reaches the integration target.
 - **TDD integration**: Works alongside `tdd-protocol`. TDD ensures tests exist and are meaningful. This protocol ensures those tests are green before integration.
 - **Review integration**: Works alongside `code-reviewer` and `review-protocol`. This protocol gates on test results; review protocols gate on code quality.
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. The branch finishing decision should align with the plan's current phase.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. The branch finishing decision should align with the plan's current phase.
 
 ## Verification Protocol
 

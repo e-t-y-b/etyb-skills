@@ -50,12 +50,12 @@
     "openai-codex": {
       "supported": true,
       "adapter": "skills/etyb/adapters/codex/",
-      "enforcement": "model-trusted"
+      "enforcement": "partial runtime-enforced + model-trusted gaps"
     },
     "google-antigravity": {
       "supported": true,
       "adapter": "skills/etyb/adapters/antigravity/",
-      "enforcement": "model-trusted (optional ADK sub-agent elevation)"
+      "enforcement": "markdown-first, model-trusted (ADK deferred)"
     }
   }
 }

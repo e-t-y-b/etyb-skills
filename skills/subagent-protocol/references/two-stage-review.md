@@ -278,7 +278,7 @@ Stage 2 (quality review) adds overhead. For some tasks, Stage 1 (spec conformanc
 | Condition | Rationale |
 |-----------|-----------|
 | **Mechanical changes** (renames, formatting, import updates) | No quality judgment needed -- either it compiles or it doesn't |
-| **Haiku-level tasks** (1-2 files, no ambiguity) | Too simple for quality review to find issues |
+| **Fast-tier tasks** (1-2 files, no ambiguity) | Too simple for quality review to find issues |
 | **Test-only changes** (adding tests, not modifying production code) | Tests are self-verifying -- if they pass and test the right things, they're correct |
 | **Configuration changes** (env vars, build config, CI pipeline) | Correctness is binary -- configuration works or it doesn't |
 | **Documentation changes** (comments, READMEs, docstrings) | Low risk, no production impact |
@@ -291,7 +291,7 @@ Stage 2 (quality review) adds overhead. For some tasks, Stage 1 (spec conformanc
 | **Cross-cutting changes** (shared libraries, utility functions) | Impacts many consumers, mistakes are amplified |
 | **Performance-critical code** (hot paths, data processing) | Performance issues are invisible without expert review |
 | **Architecture-level changes** (new patterns, structural changes) | Bad patterns propagate across the codebase |
-| **Any Opus-level task** | If it needed Opus, it needs quality review |
+| **Any Deep-tier task** | If it needed Deep reasoning, it needs quality review |
 | **Agent reported DONE_WITH_CONCERNS** | The agent itself identified risks |
 
 ### Stage 2 Skip Documentation
@@ -300,7 +300,7 @@ When skipping Stage 2, document the reason:
 
 ```markdown
 ## Stage 2: SKIPPED
-**Reason**: {mechanical change | haiku-level task | test-only | config change}
+**Reason**: {mechanical change | fast-tier task | test-only | config change}
 **Confidence**: Stage 1 PASS provides sufficient confidence for this change type
 **Risk**: {Low -- incorrect output is immediately detectable via compilation/tests}
 ```

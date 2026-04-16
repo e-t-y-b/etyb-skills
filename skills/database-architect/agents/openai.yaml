@@ -1,0 +1,5 @@
+interface:
+  display_name: "Database Architect"
+  short_description: "Database specialist for schema design, query tuning, data platforms, and migrations."
+policy:
+  allow_implicit_invocation: true

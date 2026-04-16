@@ -1,0 +1,5 @@
+interface:
+  display_name: "System Architect"
+  short_description: "System design specialist for architecture, domains, APIs, integrations, and data models."
+policy:
+  allow_implicit_invocation: true

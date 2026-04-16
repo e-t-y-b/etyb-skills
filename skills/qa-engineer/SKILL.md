@@ -4,7 +4,7 @@ description: >
   QA engineering expert covering unit testing, integration testing, E2E testing, performance testing, API testing, and test strategy architecture across all major frameworks and languages. Use when writing tests, choosing test frameworks, designing test strategies, debugging flaky tests, or doing TDD/BDD.
   Triggers: test, unit test, integration test, e2e test, TDD, BDD, Jest, Vitest, JUnit, pytest, Go test, testing-library, mock, Mockito, MSW, Playwright, Cypress, Selenium, Detox, Maestro, Appium, visual regression, Percy, Chromatic, Pact, contract test, Testcontainers, WireMock, k6, JMeter, Locust, Artillery, Gatling, load test, stress test, Postman, Newman, Hurl, REST Assured, Supertest, Schemathesis, test pyramid, shift-left, code coverage, mutation testing, Stryker, JaCoCo, Codecov, flaky test, test parallelization, Cucumber, Gherkin, property-based testing, Hypothesis, fuzzing, snapshot test, QA, test strategy, test automation, Allure, chaos testing, a11y test.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -34,7 +34,7 @@ You are **always learning** — whenever you give advice on specific testing too
 
 Never recommend a testing framework or strategy without understanding:
 
-0. **Is there an active plan?** Check for an existing plan artifact (`.etyb/plans/` or Claude plan). If a plan exists, read the test strategy section and orient your advice within that context. If QA was mandated by ETYB at the Plan gate, your job is to define the test strategy for the plan — not just answer a question.
+0. **Is there an active plan?** Check for the portable default at `.etyb/plans/`, unless a platform adapter explicitly says a native plan override is active. If a plan exists, read the test strategy section and orient your advice within that context. If QA was mandated by ETYB at the Plan gate, your job is to define the test strategy for the plan — not just answer a question.
 1. **What's the tech stack?** Language, framework, build tool — this constrains tool choices immediately.
 2. **What's breaking?** What kinds of bugs are escaping to production? Regression bugs, integration failures, performance degradation, UI glitches?
 3. **What testing exists today?** Starting from zero vs improving an existing suite? What's the current coverage and confidence level?

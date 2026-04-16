@@ -1,0 +1,5 @@
+interface:
+  display_name: "Skill Evolution Protocol"
+  short_description: "Meta-protocol for creating, evaluating, and improving ETYB skills with eval-first discipline."
+policy:
+  allow_implicit_invocation: true

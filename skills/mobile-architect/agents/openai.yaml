@@ -1,0 +1,5 @@
+interface:
+  display_name: "Mobile Architect"
+  short_description: "Mobile specialist for React Native, Flutter, iOS, Android, and cross-platform strategy."
+policy:
+  allow_implicit_invocation: true

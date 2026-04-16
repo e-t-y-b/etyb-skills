@@ -1,0 +1,5 @@
+interface:
+  display_name: "Project Planner"
+  short_description: "Planning specialist for roadmaps, task breakdowns, estimation, and delivery coordination."
+policy:
+  allow_implicit_invocation: true

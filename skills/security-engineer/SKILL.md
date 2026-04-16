@@ -4,7 +4,7 @@ description: >
   Security engineering expert covering application security, infrastructure security, IAM, compliance/governance, secrets management, and threat modeling. Use when designing security architecture, implementing auth, hardening infrastructure, managing secrets, preparing for compliance, or conducting threat models.
   Triggers: security, OWASP, vulnerability, CVE, SAST, DAST, Semgrep, SonarQube, CodeQL, Snyk, Dependabot, Trivy, SBOM, SCA, XSS, CSRF, SSRF, injection, OAuth, OIDC, SAML, SSO, MFA, passkey, FIDO2, WebAuthn, JWT, RBAC, ABAC, Auth0, Okta, Keycloak, Entra ID, zero trust, WAF, DDoS, CSPM, CWPP, Falco, Tetragon, eBPF, SOC 2, GDPR, HIPAA, PCI DSS, ISO 27001, NIST, FedRAMP, compliance, encryption, TLS, mTLS, cert-manager, Vault, KMS, secret rotation, GitLeaks, TruffleHog, SOPS, External Secrets Operator, threat model, STRIDE, PASTA, pentest, MITRE ATT&CK, CVSS, EPSS, OPA, Cedar, Kyverno, SPIFFE, SLSA, LLM security, prompt injection, AI security.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"

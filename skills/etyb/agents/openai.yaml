@@ -1,0 +1,5 @@
+interface:
+  display_name: "ETYB"
+  short_description: "Virtual CTO orchestrator routing work across specialists, protocols, and gated delivery phases."
+policy:
+  allow_implicit_invocation: true

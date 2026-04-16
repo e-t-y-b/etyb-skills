@@ -4,7 +4,7 @@
 
 🌐 **Live at [etyb.ai](https://etyb.ai)** — v2.0.0 shipped • [Release notes](https://github.com/e-t-y-b/etyb-skills/releases/tag/v2.0.0) • [Changelog](CHANGELOG.md)
 
-31 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done."
+30 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done."
 
 ```bash
 # Claude Code — native plugin
@@ -13,10 +13,12 @@
 
 # OpenAI Codex, Google Antigravity, or manual install
 git clone https://github.com/e-t-y-b/etyb-skills.git
-./etyb-skills/scripts/install.sh   # auto-detects .agents/skills, .agent/skills, or skills/
+./etyb-skills/scripts/install.sh   # installs skills into .agents/skills, .agent/skills, or skills/
+# For Codex project runtime guardrails (hooks + custom agents):
+./etyb-skills/scripts/install-codex-runtime.sh --target /path/to/your-project
 ```
 
-Works on **Claude Code** (flagship — hook-enforced gates), **OpenAI Codex** (model-trusted), **Google Antigravity** (model-trusted + optional ADK sub-agents). See [docs/installation.md](docs/installation.md) for the full platform guide.
+Works on **Claude Code** (flagship — hook-enforced gates), **OpenAI Codex** (project hooks + custom agents, with documented model-trusted gaps), and **Google Antigravity** (markdown-first, model-trusted; ADK still deferred). See [docs/installation.md](docs/installation.md) for the full platform guide.
 
 ---
 
@@ -42,9 +44,9 @@ An AI coding agent that works like a 100-person engineering org:
 
 Most skill packages give you a list of independent instructions. etyb-skills is different:
 
-- **31 skills** — process discipline AND deep domain expertise in one package
+- **30 skills** — process discipline AND deep domain expertise in one package
 - **20 domain experts with 100+ deep references** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems, and more
-- **Deterministic enforcement** — shell hooks fire outside the LLM, so TDD gates and merge checks can't be talked around
+- **Runtime guardrails where platforms support them** — Claude is deterministic, Codex adds prompt/Bash/stop hooks, Antigravity stays markdown-first
 - **ETYB-centric architecture** — a CTO routes every request through the right experts with always-on protocols
 - **Full SDLC coverage** — Research, Architecture, Code, Test, Deploy, Operate (not just plan-to-merge)
 
@@ -63,7 +65,8 @@ ETYB (CTO — routes, enforces gates, tracks plans)
      │  ├── Brainstorm-first — explore before solving
      │  ├── Branch safety — never merge without green tests
      │  ├── Subagent coordination — parallel dispatch + review
-     │  └── Self-improvement — failing eval before skill changes
+     │  ├── Self-improvement — failing eval before skill changes
+     │  └── Debugging — root-cause-first after repeated failures
      │
      ↓
 DOMAIN EXPERTS (14 core teams + 6 vertical specialists)
@@ -72,10 +75,10 @@ DOMAIN EXPERTS (14 core teams + 6 vertical specialists)
 DEEP REFERENCES (100+ files, loaded on demand)
 ```
 
-## The 31 Skills
+## The 30 Skills
 
 ### ETYB (1)
-Your virtual CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement → Verify → Ship), mandates experts, tracks living plans. Works standalone, or as the conductor that pulls the other 30 skills into a coordinated team.
+Your virtual CTO. Routes requests, enforces 5-phase gates (Design → Plan → Implement → Verify → Ship), mandates experts, tracks living plans. Works standalone, or as the conductor that pulls the other 29 skills into a coordinated team.
 
 ### Core Team (14 skills)
 
@@ -109,17 +112,17 @@ Your virtual CTO. Routes requests, enforces 5-phase gates (Design → Plan → I
 
 ### Process Protocols (9 skills)
 
-| Skill | Always On | Hooks |
-|-------|----------|-------|
-| `tdd-protocol` | Every code change | `pre-edit-check`, `post-test-log` |
-| `review-protocol` | Every review cycle | `pre-commit-review-check` |
-| `subagent-protocol` | Parallel work | — |
-| `git-workflow-protocol` | Branch management | `pre-merge-verify` |
-| `plan-execution-protocol` | Active plans | `post-edit-log` |
-| `brainstorm-protocol` | Ambiguous requests | — |
-| `skill-evolution-protocol` | Skill improvements | — |
-| `verification-protocol` | Every completion claim | — |
-| `debugging-protocol` | Active troubleshooting | — |
+| Skill | Always On | Runtime Support |
+|-------|----------|-----------------|
+| `tdd-protocol` | Every code change | Claude hooks, Codex prompt/Bash guardrails, Antigravity model-trusted |
+| `review-protocol` | Every review cycle | Claude pre-commit hook, Codex reviewer agent + commit reminder, Antigravity model-trusted |
+| `subagent-protocol` | Parallel work | Claude isolated subagents, Codex custom agents, Antigravity markdown-first (ADK deferred) |
+| `git-workflow-protocol` | Branch management | Claude pre-merge hook, Codex merge guard via Bash hooks, Antigravity model-trusted |
+| `plan-execution-protocol` | Active plans | Claude native plan mode + post-edit hook, Codex `.etyb/plans/`, Antigravity `.etyb/plans/` |
+| `brainstorm-protocol` | Ambiguous requests | Platform-neutral |
+| `skill-evolution-protocol` | Skill improvements | Platform-neutral |
+| `verification-protocol` | Every completion claim | Claude deterministic, Codex stop hook assist, Antigravity model-trusted |
+| `debugging-protocol` | Active troubleshooting | Platform-neutral |
 
 ## Install
 
@@ -149,11 +152,17 @@ For Codex, Antigravity, or manual installs:
 ```bash
 git clone https://github.com/e-t-y-b/etyb-skills.git
 cd etyb-skills
-./scripts/install.sh               # auto-detects .agents/skills, .agent/skills, or skills/
+./scripts/install.sh               # installs skills into .agents/skills, .agent/skills, or skills/
 ./scripts/install.sh --dry-run     # preview changes without writing anything
 ```
 
-The install script detects conflicts with existing skills (including legacy `orchestrator/` from v1.x) and offers replace / keep-side-by-side / skip per skill. See [docs/installation.md](docs/installation.md) for the full guide.
+For project-scoped Codex runtime hooks and ETYB custom agents:
+
+```bash
+./scripts/install-codex-runtime.sh --target /path/to/your-project
+```
+
+The install scripts detect conflicts with existing skills or `.codex/` runtime assets (including legacy `orchestrator/` from v1.x for skill installs) and offer replace / keep-side-by-side / skip flows where appropriate. See [docs/installation.md](docs/installation.md) for the full guide.
 
 ## Updating
 
@@ -179,7 +188,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 Skills use progressive disclosure — a markdown-based RAG pattern:
 
 ```
-Layer 0: Hooks fire deterministically (0 tokens — shell scripts, outside LLM)
+Layer 0: Runtime guardrails fire when the platform supports them (0 tokens — scripts outside the LLM)
 Layer 1: ETYB always loaded (~3,500 tokens — the culture)
 Layer 2: Relevant skill SKILL.md loads on demand (~2,500 tokens — the router)
 Layer 3: Single reference loads on demand (~4,000 tokens — deep knowledge)
@@ -187,6 +196,11 @@ Layer 3: Single reference loads on demand (~4,000 tokens — deep knowledge)
 Per-activation: ~6,000-10,000 tokens (not the whole system)
 Tier 0-1 requests: 0 extra tokens (ETYB handles directly)
 ```
+
+Layer 0 is platform-aware:
+- Claude Code: deterministic hook enforcement
+- OpenAI Codex: project hooks for prompts, Bash commands, and stop; edit-before-test is still model-trusted
+- Google Antigravity: markdown-first, no shipped runtime hooks
 
 ## Evidence: with vs without skills
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-ETYB Skills is a virtual engineering company implemented as a system of 31 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and a ETYB that enforces engineering discipline at every stage.
+ETYB Skills is a virtual engineering company implemented as a system of 30 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and ETYB enforcing engineering discipline at every stage.
 
 ## System Architecture
 
@@ -61,7 +61,7 @@ ETYB Skills is a virtual engineering company implemented as a system of 31 coord
 - **Security Engineer** auto-consults on authentication, PII, payments, infrastructure, database, and healthcare work.
 - **Code Reviewer** blocks the Ship gate until review is complete.
 
-**Process Layer** -- A 5-gate lifecycle (Design, Plan, Implement, Verify, Ship) that wraps every non-trivial project. Living plan artifacts are maintained in `.etyb/plans/`, with gate readiness assessments, verification protocols, and debugging escalation paths.
+**Process Layer** -- A 5-gate lifecycle (Design, Plan, Implement, Verify, Ship) that wraps every non-trivial project. Living plan artifacts default to `.etyb/plans/`, with Claude-specific plan-mode overrides handled by its adapter.
 
 ## SDLC Phase Coverage
 
@@ -344,10 +344,10 @@ Nine always-on engineering disciplines govern how work gets done. Their principl
 
 | Protocol | Folder | Scope | Description |
 |----------|--------|-------|-------------|
-| TDD Protocol | `skills/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Hooks: `pre-edit-check` warns if no test file exists. |
-| Subagent Protocol | `skills/subagent-protocol/` | Parallel and delegated work | Dispatch patterns, parallel coordination, two-stage review, context isolation. |
-| Git Workflow Protocol | `skills/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Hooks: `pre-merge-verify` blocks merge if tests fail. |
-| Plan Execution Protocol | `skills/plan-execution-protocol/` | Any active plan | Task execution cycle, blocker management, gate transitions. Hooks: `post-edit-log` traces edits to plan tasks. |
+| TDD Protocol | `skills/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Claude has deterministic hooks; Codex adds prompt/Bash guardrails; Antigravity stays model-trusted. |
+| Subagent Protocol | `skills/subagent-protocol/` | Parallel and delegated work | Dispatch patterns, parallel coordination, two-stage review, context isolation. Platform mechanics come from adapters or project runtime, not the protocol itself. |
+| Git Workflow Protocol | `skills/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Claude blocks merges with a hook; Codex adds Bash merge guards; Antigravity is model-trusted. |
+| Plan Execution Protocol | `skills/plan-execution-protocol/` | Any active plan | Task execution cycle, blocker management, gate transitions. Portable default is `.etyb/plans/`; Claude may override through native plan mode. |
 | Brainstorm Protocol | `skills/brainstorm-protocol/` | Ambiguous or exploratory requests | Exploration techniques, convergence patterns, design brief templates. |
 | Review Protocol | `skills/review-protocol/` | Code review lifecycle | Review dispatch, feedback evaluation, review integration. Hooks: `pre-commit-review-check` verifies review before commit. |
 | Skill Evolution Protocol | `skills/skill-evolution-protocol/` | Skill creation and improvement | Skill creation, eval engineering, improvement loop, institutional memory. |
@@ -361,7 +361,7 @@ Nine always-on engineering disciplines govern how work gets done. Their principl
 Every non-trivial project passes through five gates, each with defined entry and exit criteria:
 
 1. **Design Gate** -- Problem understood, constraints identified, approach selected. Mandatory experts consulted for sensitive domains.
-2. **Plan Gate** -- Tasks decomposed, dependencies mapped, test strategy defined. Living plan artifact created in `.etyb/plans/`.
+2. **Plan Gate** -- Tasks decomposed, dependencies mapped, test strategy defined. Living plan artifact created in `.etyb/plans/` unless a platform adapter explicitly overrides it.
 3. **Implement Gate** -- Code written test-first, plan tracked task-by-task, blockers surfaced immediately.
 4. **Verify Gate** -- All tests green, verification protocol completed, experts re-consulted. Evidence collected for every claim.
 5. **Ship Gate** -- Code reviewed, security signed off, documentation updated. No merge without green tests.
@@ -400,6 +400,14 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 | Technical Writer | Decision logs, ADRs as plan artifacts, documentation assigned per gate |
 | All other skills | Read active plan, respect gate boundaries, follow verification protocol, use debugging protocol |
 
+## Platform Runtime Surface
+
+| Platform | Runtime Contract |
+|----------|------------------|
+| Claude Code | Flagship. Deterministic hooks, native `.claude/plans/` integration, isolated subagent runtime support. |
+| OpenAI Codex | Project-scoped `.codex/` config, lifecycle hooks (`UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`), custom agents in `.codex/agents/`, portable plans at `.etyb/plans/`. |
+| Google Antigravity | Markdown-first and model-trusted. Portable plans at `.etyb/plans/`. ADK remains a documented future path, not a shipped runtime in this repo. |
+
 ## Design Principles
 
 1. **Conversational first** -- Skills ask questions before giving answers. No prescriptive dumps.
@@ -415,7 +423,8 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 - **1** ETYB (process-enforcing CTO and router)
 - **14** core domain expert teams with approximately 80 specialist sub-skills
 - **6** domain-specific architects for vertical product categories
-- **7** process protocols with hook enforcement
+- **9** process protocols
 - **3** mandatory quality gates (TDD, security, code review)
 - **5-gate lifecycle** covering Design through Ship
 - **9** always-on engineering disciplines embedded in ETYB
+- **3 platform modes**: Claude flagship, Codex partial runtime-enforced, Antigravity markdown-first

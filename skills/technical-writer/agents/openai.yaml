@@ -1,0 +1,5 @@
+interface:
+  display_name: "Technical Writer"
+  short_description: "Documentation specialist for ADRs, APIs, guides, runbooks, and docs-as-code systems."
+policy:
+  allow_implicit_invocation: true

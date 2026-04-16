@@ -4,7 +4,7 @@ description: >
   Architects fintech systems from neobanks to large-scale banking platforms. Use when designing ledgers, payment processing, fraud detection, compliance, or money movement.
   Triggers: fintech, neobank, digital bank, payment processing, payment orchestration, PSP, Stripe, Adyen, Checkout.com, Primer, Spreedly, ledger, double-entry, general ledger, chart of accounts, event-sourced ledger, TigerBeetle, Formance, Modern Treasury, Blnk, Moov, core banking, Thought Machine, Mambu, Temenos, 10x Banking, card issuing, Marqeta, Lithic, BaaS, embedded finance, PCI DSS, PSD2, PSD3, SCA, open banking, AML, KYC, KYB, SOX, DORA, AMLA, MiCA, fraud detection, transaction monitoring, chargeback, risk scoring, velocity checks, Sardine, Alloy, Unit21, Featurespace, ACH, SWIFT, RTP, FedNow, SEPA, PIX, UPI, real-time payments, reconciliation, settlement, tokenization, multi-currency, cross-border payments, treasury management, lending platform, loan origination, credit scoring, BNPL.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -321,7 +321,7 @@ Only when explicitly requested ("design the architecture", "write up the ledger 
 
 ## Process Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
 When ETYB assigns you to a plan phase, you own the financial systems domain within that phase. Verify at every gate where you are assigned.
 

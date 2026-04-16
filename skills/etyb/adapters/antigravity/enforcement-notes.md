@@ -1,6 +1,6 @@
 # Enforcement Notes — Model-Trusted Gates on Antigravity
 
-Antigravity, like Codex, has no hooks or pre/post tool-use interceptors. The always-on protocols from `core/always-on-protocols.md` apply identically, but compliance is model-trusted rather than runtime-enforced.
+Antigravity, like Codex, has no shipped hook surface in this repo. The always-on protocols from `core/always-on-protocols.md` apply identically, but compliance is model-trusted rather than runtime-enforced.
 
 ## Per-Protocol Fallback
 
@@ -23,17 +23,17 @@ Before declaring any Tier 3+ task complete:
 
 The 5-question verification protocol in `references/verification-protocol.md` applies verbatim.
 
-## Where Antigravity Is Stronger Than Codex
+## What Stays True On Antigravity
 
-**Sub-agents via ADK.** If ETYB is elevated to an ADK-backed skill (see `adk-integration.md`), the Parallel Tracks coordination pattern works natively — sub-agents can be dispatched from inside the skill with their own tools and multi-turn reasoning. On Codex, this is not possible.
+**Portable plans.** Keep plan artifacts in `.etyb/plans/`. This repo does not add an Antigravity-native plan integration layer.
 
-**MCP integration.** Antigravity's MCP support lets specialists in ETYB's team registry bind to platform-specific tools (databases, cloud providers, issue trackers) without ETYB needing to know about them.
+**Markdown-first parallel work.** Decompose the work, document the track boundaries, and execute sequentially in one session or across multiple human-coordinated sessions.
 
-These do not substitute for hook enforcement — they don't make a gate deterministic. But they reduce the "parallel work" pain point that Codex suffers from.
+**MCP is optional.** If the user's Antigravity environment exposes MCP tools, ETYB can use them. ETYB does not require them.
 
 ## Subagents Without ADK
 
-If you are running markdown-only ETYB on Antigravity (no ADK elevation), parallel tracks work the same way as on Codex:
+If you are running ETYB on Antigravity as shipped in this repo, parallel tracks work the same way as the markdown-first path on Codex:
 - Sequential execution within the session, or
 - User runs multiple Antigravity sessions and ETYB drafts the coordination plan
 
@@ -48,5 +48,5 @@ Same response template as the Codex adapter:
 ## What You Cannot Do
 
 - You cannot make Antigravity strictly equivalent to Claude Code for gate enforcement. No hooks means no deterministic enforcement.
-- You cannot claim ADK sub-agents enforce anything. They enable parallelism; they don't enforce discipline.
+- You cannot claim ADK sub-agents are available in this repo's shipped runtime. They are documented as a future path only.
 - Be honest about the enforcement ceiling. It's model-trusted on Antigravity, full stop.

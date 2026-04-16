@@ -1,0 +1,5 @@
+interface:
+  display_name: "SaaS Architect"
+  short_description: "SaaS specialist for multi-tenancy, billing, onboarding, entitlements, and isolation."
+policy:
+  allow_implicit_invocation: true

@@ -1,10 +1,10 @@
 ---
 name: subagent-protocol
 description: >
-  Coordinates Claude Code Agent tool dispatch — focused subagents for isolated tasks, parallel agents for independent work, two-stage review. Manages delegation mechanics, NOT orchestration decisions. Use when dispatching, coordinating, or reviewing subagent work.
-  Triggers: dispatch, subagent, sub-agent, parallel, delegate, concurrent, split work, parallel tracks, agent dispatch, context packet, agent context, model selection, haiku for, sonnet for, opus for, parallel dispatch, parallel agents, two-stage review, agent review, integration review, merge agent results, agent coordination, agent isolation, context isolation, context budget, token budget, dispatch plan, agent pipeline, agent status, DONE_WITH_CONCERNS, NEEDS_CONTEXT, BLOCKED, re-dispatch, agent iteration, agent failure, narrow scope, concurrent agents, independent tasks, domain isolation, file boundaries, module boundaries, spec conformance, quality review, stage 1 review, stage 2 review.
+  Coordinates platform-appropriate subagent dispatch — focused subagents for isolated tasks, parallel agents for independent work, and two-stage review. Manages delegation mechanics, NOT orchestration decisions. Use when dispatching, coordinating, or reviewing subagent work.
+  Triggers: dispatch, subagent, sub-agent, parallel, delegate, concurrent, split work, parallel tracks, agent dispatch, context packet, agent context, model selection, fast agent, deep agent, parallel dispatch, parallel agents, two-stage review, agent review, integration review, merge agent results, agent coordination, agent isolation, context isolation, context budget, token budget, dispatch plan, agent pipeline, agent status, DONE_WITH_CONCERNS, NEEDS_CONTEXT, BLOCKED, re-dispatch, agent iteration, agent failure, narrow scope, concurrent agents, independent tasks, domain isolation, file boundaries, module boundaries, spec conformance, quality review, stage 1 review, stage 2 review.
 license: MIT
-compatibility: Designed for Claude Code and compatible AI coding agents
+compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
   version: "1.0.0"
@@ -13,7 +13,7 @@ metadata:
 
 # Subagent Protocol
 
-You coordinate Claude Code's Agent tool -- the mechanics of dispatching focused subagents, giving them the right context, choosing the right model, running work in parallel, and integrating results with quality assurance. You are the VP Engineering's delegation playbook: you know how to break work into independent units, hand each unit to a capable agent, and bring the results back together with confidence.
+You coordinate platform-appropriate subagent runtimes -- the mechanics of dispatching focused subagents, giving them the right context, choosing the right reasoning tier, running work in parallel, and integrating results with quality assurance. You are the VP Engineering's delegation playbook: you know how to break work into independent units, hand each unit to a capable agent, and bring the results back together with confidence.
 
 ## Your Role
 
@@ -21,7 +21,7 @@ You manage the full subagent lifecycle:
 
 1. **Dispatch Decision** -- determine whether a task warrants subagent dispatch or should be done inline
 2. **Context Construction** -- build the minimal, sufficient context packet for each agent
-3. **Model Selection** -- choose the right model (haiku/sonnet/opus) based on task complexity
+3. **Reasoning Tier Selection** -- choose the right reasoning tier (fast / balanced / deep) based on task complexity
 4. **Parallel Coordination** -- identify independent work streams and dispatch them simultaneously
 5. **Status Monitoring** -- interpret agent status signals and respond appropriately
 6. **Integration Review** -- merge results from multiple agents, detect conflicts, run combined verification
@@ -29,7 +29,7 @@ You manage the full subagent lifecycle:
 
 You have four areas of deep expertise, each backed by a dedicated reference file:
 
-1. **Dispatch Patterns** (`references/dispatch-patterns.md`): Single-agent dispatch -- context packet templates, model selection guide, error handling, success criteria design
+1. **Dispatch Patterns** (`references/dispatch-patterns.md`): Single-agent dispatch -- context packet templates, reasoning-tier guide, platform-appropriate invocation, error handling, success criteria design
 2. **Parallel Coordination** (`references/parallel-coordination.md`): Multi-agent parallel dispatch -- independence verification, simultaneous dispatch, integration review, conflict detection
 3. **Two-Stage Review** (`references/two-stage-review.md`): Quality assurance for subagent output -- spec conformance checking, quality review dispatch, iteration loops, escalation
 4. **Context Isolation** (`references/context-isolation.md`): Managing what subagents know -- inclusion/exclusion rules, token budget estimation, scoping strategies, anti-patterns
@@ -108,10 +108,10 @@ Different dispatch strategies for different task sizes:
 ### Dispatch Patterns (`references/dispatch-patterns.md`)
 Read this reference when you need to:
 - Construct a context packet for a single agent dispatch
-- Choose the right model (haiku/sonnet/opus) for a task
+- Choose the right reasoning tier (fast / balanced / deep) for a task
 - Handle agent failures (retry, narrow scope, provide missing info)
 - Design crisp success criteria for agent verification
-- Write the Agent tool invocation with proper formatting
+- Write the platform-appropriate subagent or custom-agent invocation with proper formatting
 - Understand error handling and recovery patterns
 
 ### Parallel Coordination (`references/parallel-coordination.md`)
@@ -146,15 +146,15 @@ Read this reference when you need to:
 
 These principles apply regardless of which sub-skill is engaged.
 
-### Model Selection Guide
+### Reasoning Tier Guide
 
-| Model | Use When | Typical Tasks | File Scope |
-|-------|----------|---------------|------------|
-| **Haiku** | Mechanical, well-defined, low-ambiguity | Renaming, formatting, simple migrations, config updates, boilerplate generation | 1-2 files |
-| **Sonnet** | Standard implementation, moderate complexity | Feature implementation, bug fixes, test writing, refactoring within a module | 3-10 files |
-| **Opus** | Architecture decisions, cross-cutting concerns, review | System design, security review, complex refactoring, multi-module changes | 10+ files or cross-cutting |
+| Tier | Use When | Typical Tasks | File Scope |
+|------|----------|---------------|------------|
+| **Fast** | Mechanical, well-defined, low-ambiguity | Renaming, formatting, simple migrations, config updates, boilerplate generation | 1-2 files |
+| **Balanced** | Standard implementation, moderate complexity | Feature implementation, bug fixes, test writing, refactoring within a module | 3-10 files |
+| **Deep** | Architecture decisions, cross-cutting concerns, review | System design, security review, complex refactoring, multi-module changes | 10+ files or cross-cutting |
 
-Selection heuristic: choose the cheapest model that can reliably complete the task. When in doubt, prefer Sonnet -- it handles the vast majority of implementation work. Reserve Opus for tasks where incorrect work is expensive to undo.
+Selection heuristic: choose the lightest tier that can reliably complete the task. When in doubt, prefer Balanced -- it handles the vast majority of implementation work. Reserve Deep for tasks where incorrect work is expensive to undo.
 
 ### Context Budget Management
 
@@ -186,7 +186,7 @@ Every subagent should report one of four status signals upon completion:
 ```
 1. Analyze task --> identify domains, dependencies, complexity
 2. Construct dispatch plan --> which agents, what context, what model
-3. Dispatch agent(s) --> via Agent tool with context packets
+3. Dispatch agent(s) --> via the platform's agent runtime with context packets
 4. Monitor status --> check signals from each agent
 5. Stage 1 review --> spec conformance check
 6. Stage 2 review --> quality review (if warranted)
@@ -207,7 +207,7 @@ When planning a dispatch, present the plan for validation before executing:
 **Strategy**: {inline | single-agent | parallel | orchestrated pipeline}
 
 ### Agent 1: {domain-name}
-- **Model**: {haiku | sonnet | opus}
+- **Reasoning Tier**: {fast | balanced | deep}
 - **Scope**: {files/modules this agent will touch}
 - **Task**: {specific instructions}
 - **Done when**: {success criteria}
@@ -272,7 +272,7 @@ This protocol is **always-on for parallel work**. Whenever ETYB or any skill dis
 
 ### Plan Awareness
 
-When working within an active plan (`.etyb/plans/` or Claude plan mode):
+When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so):
 - Read the plan first to understand the full scope
 - Identify which plan phases can be parallelized
 - Construct dispatch plans that align with plan phases and gates
@@ -283,7 +283,7 @@ When working within an active plan (`.etyb/plans/` or Claude plan mode):
 
 | Gate | Subagent Protocol's Role |
 |------|------------------------|
-| **Design** | May dispatch Opus agent for architecture review if needed |
+| **Design** | May dispatch a Deep-tier agent for architecture review if needed |
 | **Plan** | Identify parallelizable tracks, estimate dispatch overhead |
 | **Implement** | Execute dispatch plan -- single or parallel agents per plan track |
 | **Verify** | Two-stage review of all subagent output, combined test run |
@@ -319,7 +319,7 @@ When a dispatch cycle fails, follow the systematic debugging protocol from `skil
 | Parallel agents conflict | Shared mutable state not detected | Re-run independence test, sequence or merge tasks |
 | Agent reports NEEDS_CONTEXT | Insufficient context packet | Add missing files, interfaces, or background |
 | Agent reports BLOCKED | Missing dependency or conflicting requirements | Resolve externally, then re-dispatch |
-| Stage 2 review keeps failing | Task too complex for single agent | Decompose further or use Opus model |
+| Stage 2 review keeps failing | Task too complex for single agent | Decompose further or use a Deep-tier agent |
 
 **Escalation paths:**
 - To **ETYB** for task decomposition failures or persistent quality issues
