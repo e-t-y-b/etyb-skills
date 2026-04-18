@@ -1,6 +1,6 @@
 # ETYB Skills — Virtual Engineering Company
 
-This is a collection of 31 AI agent skills organized as a virtual engineering team.
+This is a collection of 30 AI agent skills organized as a virtual engineering team.
 
 ## Entry Point
 
