@@ -35,7 +35,7 @@ if ! $review_found; then
     if echo "$staged_files" | grep -qi "review\|review-completion\|review-response" 2>/dev/null; then
         review_found=true
     fi
-done
+fi
 
 # Also check recent git log messages for review evidence
 if ! $review_found; then
@@ -43,7 +43,7 @@ if ! $review_found; then
     if echo "$recent_messages" | grep -qi "review\|reviewed\|code review\|review complete" 2>/dev/null; then
         review_found=true
     fi
-done
+fi
 
 if $review_found; then
     echo -e "${GREEN}[review-protocol]${NC} Review evidence found. Proceeding with commit."
