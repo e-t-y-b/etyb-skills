@@ -1,0 +1,15 @@
+etyb
+research-analyst
+system-architect
+frontend-architect
+backend-architect
+database-architect
+mobile-architect
+qa-engineer
+devops-engineer
+security-engineer
+sre-engineer
+ai-ml-engineer
+technical-writer
+project-planner
+code-reviewer
