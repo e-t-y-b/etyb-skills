@@ -2,6 +2,31 @@
 
 All notable changes to ETYB Skills are documented here. Format is loosely based on [Keep a Changelog](https://keepachangelog.com/). Versions follow [SemVer](https://semver.org/).
 
+## [2.2.0] — 2026-04-18
+
+The install-parity and hardening release. Bundle-aware installs reach every platform (not just Claude Code's native marketplace), hook scripts get a ShellCheck-clean CI gate, and a JSON-injection bug in the plan-execution edit log is fixed.
+
+### Added
+
+- **Bundle-aware `install.sh`.** New flags `--bundle NAME`, `--skills a,b,c`, and `--list-bundles` bring Codex / Antigravity / manual installs to parity with Claude's plugin marketplace. `--bundle` accepts short (`process-protocols`) and long (`etyb-process-protocols`) forms. Default behaviour (no flag) is unchanged — every skill on disk is installed.
+- **Bundle generator** (`scripts/generate-bundles.py`). Reads `.claude-plugin/marketplace.json` and emits `bundles/<plugin>.txt` so `install.sh` stays dependency-free. `--check` mode is wired into CI to enforce that generated manifests never drift from the marketplace definition.
+- **CI workflow** (`.github/workflows/ci.yml`). ShellCheck across every `.sh` with no severity exclusions, hook regression tests, bundle drift check, and installer tests — all on every PR and push to main.
+- **Regression test for the hook JSON-injection fix** (`tests/hooks/test-post-edit-log-json-escaping.sh`). Fires `post-edit-log.sh` with hostile payloads and asserts the log stays well-formed.
+- **Installer tests** (`tests/install/test-install-flags.sh`). Happy paths for each new flag, all three error paths, and one real non-dry-run install to confirm bundles copy exactly the expected directories.
+
+### Fixed
+
+- **Log injection in `post-edit-log.sh`.** The hook previously splatted file paths, task IDs, and plan names straight into a JSON heredoc. A filename containing a quote, backslash, or newline corrupted `edit-log.jsonl` or let an attacker forge log entries. Fields are now JSON-escaped before write. Flagged as High Risk by Gen on skills.sh; Socket and Snyk had passed.
+- **`pre-commit-review-check.sh` failed to parse.** Two `if` blocks were closed with `done` instead of `fi`. With `set -euo pipefail` at the top the script errored on every invocation — meaning the pre-commit review reminder never fired since it shipped.
+- **Silent glob shadowing in `pre-edit-check.sh`.** Earlier glob patterns in the config-file skip list (`*.config.*`, `*.mod`, `*.sum`) shadowed later explicit entries (`jest.config.*`, `vitest.config.*`, `go.mod`, `go.sum`). Collapsed into a single arm that reflects real coverage.
+- **Unquoted pattern expansion** in `post-edit-log.sh`'s `${FILE_PATH#$PROJECT_ROOT/}` — stripping failed when the path contained glob metacharacters.
+- **Version drift.** `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` had been stuck at `2.0.0` through the `2.1.0` release; skill counts said "31" in two places and "30" elsewhere. All version fields now track `VERSION` and all skill counts read `30`.
+
+### Changed
+
+- **Docs updated.** README and `docs/installation.md` document the new `--bundle`, `--skills`, `--list-bundles` flags and list the four bundles (`full`, `process-protocols`, `core-team`, `verticals`) with skill counts.
+- **`install-codex-runtime.sh` cleanup.** Dropped an unused `FORCE` variable; `--force` effect is carried by `ON_CONFLICT="replace"` alone.
+
 ## [2.1.0] — 2026-04-16
 
 The Codex runtime release. ETYB now ships with full OpenAI Codex runtime support — lifecycle hooks, custom agents, and per-skill metadata — upgrading Codex from model-trusted to partial runtime-enforced.

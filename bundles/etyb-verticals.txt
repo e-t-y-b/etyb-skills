@@ -1,0 +1,6 @@
+social-platform-architect
+e-commerce-architect
+fintech-architect
+saas-architect
+real-time-architect
+healthcare-architect
