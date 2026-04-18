@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Lint all shell scripts (error + warning + style, no exclusions)
+        run: |
+          shopt -s globstar nullglob
+          mapfile -t scripts < <(
+            find . -type f \( -name "*.sh" -o -name "*.bash" \) \
+              -not -path "./.git/*" \
+              -not -path "./node_modules/*" \
+              | sort
+          )
+          if [[ ${#scripts[@]} -eq 0 ]]; then
+            echo "no shell scripts found"
+            exit 1
+          fi
+          printf 'linting %d scripts:\n' "${#scripts[@]}"
+          printf '  %s\n' "${scripts[@]}"
+          shellcheck -x "${scripts[@]}"
+
+  hook-tests:
+    name: hook regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run hook regression tests
+        run: |
+          shopt -s globstar nullglob
+          failed=0
+          for test in tests/hooks/test-*.sh; do
+            echo "=== running $test ==="
+            if ! bash "$test"; then
+              failed=$((failed + 1))
+              echo "FAIL: $test"
+            fi
+          done
+          if [[ $failed -gt 0 ]]; then
+            echo "$failed test(s) failed"
+            exit 1
+          fi

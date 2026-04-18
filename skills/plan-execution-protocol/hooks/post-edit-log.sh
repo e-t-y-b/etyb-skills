@@ -57,7 +57,7 @@ mkdir -p "$LOG_DIR" 2>/dev/null || true
 # Make file path relative to project root for cleaner logs
 RELATIVE_PATH="${FILE_PATH}"
 if [[ "$FILE_PATH" == "$PROJECT_ROOT"* ]]; then
-  RELATIVE_PATH="${FILE_PATH#$PROJECT_ROOT/}"
+  RELATIVE_PATH="${FILE_PATH#"$PROJECT_ROOT"/}"
 fi
 
 # Append log entry (JSON Lines format). All attacker-controllable fields

@@ -23,14 +23,13 @@ set -euo pipefail
 
 TARGET_ROOT=""
 DRY_RUN=false
-FORCE=false
 ON_CONFLICT="prompt"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --target) TARGET_ROOT="$2"; shift 2 ;;
     --dry-run) DRY_RUN=true; shift ;;
-    --force) FORCE=true; ON_CONFLICT="replace"; shift ;;
+    --force) ON_CONFLICT="replace"; shift ;;
     --on-conflict) ON_CONFLICT="$2"; shift 2 ;;
     -h|--help)
       sed -n '2,20p' "$0"

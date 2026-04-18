@@ -47,18 +47,15 @@ case "$FILE_PATH" in
     ;;
 esac
 
-# Skip config/setup files
+# Skip config/setup files. Patterns collapsed into one arm because every
+# arm exits 0 — earlier glob entries (like *.config.*) were silently
+# shadowing later explicit entries (jest.config.*, vitest.config.*).
 case "$FILENAME" in
-  *.config.* | *.setup.* | *.d.ts | Dockerfile* | Makefile | *.mod | *.sum)
-    exit 0
-    ;;
-  package.json | tsconfig.json | jest.config.* | vitest.config.* | .eslintrc*)
-    exit 0
-    ;;
-  conftest.py | setup.py | setup.cfg | pyproject.toml | go.mod | go.sum)
-    exit 0
-    ;;
-  Cargo.toml | Cargo.lock | pom.xml | build.gradle* | settings.gradle*)
+  *.config.* | *.setup.* | *.d.ts | Dockerfile* | Makefile \
+  | package.json | tsconfig.json | .eslintrc* \
+  | conftest.py | setup.py | setup.cfg | pyproject.toml \
+  | *.mod | *.sum \
+  | Cargo.toml | Cargo.lock | pom.xml | build.gradle* | settings.gradle*)
     exit 0
     ;;
 esac
@@ -104,8 +101,8 @@ case "$EXTENSION" in
   java|kt)
     # Java/Kotlin: look for *Test.java in parallel test directory
     # src/main/java/... -> src/test/java/...
-    TEST_PATH=$(echo "$FILE_PATH" | sed 's|src/main/|src/test/|')
-    TEST_FILE=$(echo "$TEST_PATH" | sed "s|${BASENAME}\.${EXTENSION}|${BASENAME}Test.${EXTENSION}|")
+    TEST_PATH="${FILE_PATH//src\/main\//src\/test\/}"
+    TEST_FILE="${TEST_PATH/${BASENAME}.${EXTENSION}/${BASENAME}Test.${EXTENSION}}"
     if [ -f "$TEST_FILE" ]; then
       TEST_EXISTS=true
     fi
@@ -116,7 +113,7 @@ case "$EXTENSION" in
       TEST_EXISTS=true
     fi
     # Also check tests/ directory for integration tests
-    PROJECT_ROOT=$(echo "$FILE_PATH" | sed 's|/src/.*||')
+    PROJECT_ROOT="${FILE_PATH%%/src/*}"
     if [ -d "${PROJECT_ROOT}/tests" ]; then
       TEST_EXISTS=true
     fi
