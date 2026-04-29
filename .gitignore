@@ -13,6 +13,9 @@
 .claude/skills/*
 !.claude/skills/etyb-oss-maintainer/
 !.claude/skills/etyb-oss-maintainer/**
+!.claude/commands/
+.claude/commands/*
+!.claude/commands/etyb-oss-maintainer.md
 
 # Internal documents (not for public distribution)
 MARKETPLACE.md
