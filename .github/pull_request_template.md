@@ -2,6 +2,8 @@
 
 <!-- What does this PR change and why? Link related issues. -->
 
+> **Pre-flight:** run `./scripts/maintainer/validate-pr.sh` locally before pushing — CI runs the same checks.
+
 ## Type
 
 - [ ] Bug fix

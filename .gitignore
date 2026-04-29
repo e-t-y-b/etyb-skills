@@ -6,6 +6,13 @@
 
 # Claude local files
 .claude/
+# Allow the maintainer skill (internal tooling, committed)
+!.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/etyb-oss-maintainer/
+!.claude/skills/etyb-oss-maintainer/**
 
 # Internal documents (not for public distribution)
 MARKETPLACE.md
