@@ -1,0 +1,23 @@
+# TOC drift baseline — pre-existing failures the validator
+# tolerates so CI can ship. Each line is `relpath:line:anchor`.
+# When you fix a TOC, delete its line here. Add new lines only
+# when consciously deferring a fix; the validator will then warn
+# instead of failing.
+skills/devops-engineer/references/ci-cd-engineer.md:14:9-gitops--flux-cd-vs-argocd
+skills/e-commerce-architect/references/order-management.md:15:10-distributed-order-management
+skills/etyb/references/process-architecture.md:13:8-claude-plan-mode-integration
+skills/fintech-architect/references/fraud-detection.md:11:6-account-takeover-prevention
+skills/frontend-architect/references/accessibility-specialist.md:19:14-media-accessibility
+skills/frontend-architect/references/angular-stack.md:13:8-component-libraries
+skills/frontend-architect/references/angular-stack.md:14:9-forms
+skills/frontend-architect/references/angular-stack.md:15:10-testing
+skills/frontend-architect/references/angular-stack.md:16:11-performance
+skills/frontend-architect/references/angular-stack.md:17:12-build-tools
+skills/frontend-architect/references/angular-stack.md:18:13-routing
+skills/frontend-architect/references/angular-stack.md:19:14-analogjs
+skills/frontend-architect/references/angular-stack.md:20:15-rxjs-vs-signals
+skills/frontend-architect/references/seo-specialist.md:13:8-ai-and-seo
+skills/frontend-architect/references/web-performance.md:6:1-core-web-vitals-2025
+skills/mobile-architect/references/flutter-specialist.md:24:19-firebase-integration
+skills/social-platform-architect/references/twitter-architecture.md:11:8-post-acquisition-changes
+skills/social-platform-architect/references/twitter-architecture.md:14:11-key-open-source-projects
