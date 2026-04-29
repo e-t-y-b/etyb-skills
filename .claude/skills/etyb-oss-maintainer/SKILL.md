@@ -1,13 +1,13 @@
 ---
 name: etyb-oss-maintainer
 description: >
-  Internal maintainer skill for the etyb-skills OSS repo. Activates when working in this repository on PR review, releases, manifest/version coordination, or cross-repo sync with etyb-dot-ai.
-  Triggers: review PR, validate skill, frontmatter, version bump, release, CHANGELOG, manifest, marketplace, maintainer, etyb-dot-ai sync, website drift, agentskills spec.
+  Internal maintainer skill for the etyb-skills OSS repo. Activates when working in this repository on PR review, releases, manifest/version coordination, repo health audits, branch cleanup, internal/external boundary checks, or cross-repo sync with etyb-dot-ai.
+  Triggers: review PR, validate skill, frontmatter, version bump, release, CHANGELOG, manifest, marketplace, maintainer, etyb-dot-ai sync, website drift, agentskills spec, audit repo, repo health, gaps, stale PR, stale branch, branch cleanup, tag drift, untagged release, OSS hygiene, internal vs external, leaked plan, public repo discipline.
 license: MIT
 compatibility: Internal tooling — Claude Code only, not for end-user installation.
 metadata:
   author: e-t-y-b
-  version: "0.1.0"
+  version: "0.2.0"
   category: internal-tooling
   scope: project-local
 ---
@@ -29,6 +29,17 @@ These are non-negotiable. Flag any change that would violate one.
 - Three-platform parity: every skill ships `SKILL.md` plus `agents/openai.yaml` with an `interface:` block and `allow_implicit_invocation: true`.
 
 ## When you activate
+
+You can be invoked three ways: a natural-language prompt that hits one of the trigger words, the `/etyb-oss-maintainer` slash command (defined in `.claude/commands/etyb-oss-maintainer.md`), or implicit auto-activation when description matches.
+
+Default mode (no specific intent given) is **audit** — run `scripts/maintainer/audit-repo.sh` and apply `references/repo-audit.md`.
+
+### "audit", "repo health", "gaps", or no specific intent
+
+1. Run `scripts/maintainer/validate-pr.sh` to capture deterministic correctness checks.
+2. Run `scripts/maintainer/audit-repo.sh` to capture state-of-the-world findings (open PRs, stale branches, tag drift, internal-leak risk, OSS hygiene gaps).
+3. Apply `references/repo-audit.md` to interpret the output. Reply in three sections — **Hard fails**, **Gaps**, **Recommendations** — with one-line "why" per recommendation. Cite the script section that produced each finding.
+4. Do not invent items the scripts did not report.
 
 ### "review PR <N>" or general PR review
 
