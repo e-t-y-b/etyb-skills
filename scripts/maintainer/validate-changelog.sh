@@ -24,13 +24,9 @@ if ! git rev-parse --verify "$BASE" >/dev/null 2>&1; then
   exit 0
 fi
 
-merge_base="$(git merge-base "$BASE" HEAD 2>/dev/null || true)"
-if [[ -z "$merge_base" ]]; then
-  echo "⚠ validate-changelog: no merge-base with '$BASE', skipping"
-  exit 0
-fi
-
-changed="$(git diff --name-only "$merge_base"...HEAD || true)"
+# Tip-vs-tip diff (two-arg, not three-dot) so a merge from BASE that
+# brings paths in net-unchanged does not trigger this check.
+changed="$(git diff --name-only "$BASE" HEAD || true)"
 if [[ -z "$changed" ]]; then
   echo "✓ validate-changelog: no diff vs $BASE"
   exit 0
