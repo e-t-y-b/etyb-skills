@@ -2,6 +2,60 @@
 
 All notable changes to ETYB Skills are documented here. Format is loosely based on [Keep a Changelog](https://keepachangelog.com/). Versions follow [SemVer](https://semver.org/).
 
+## [3.0.0] — 2026-05-12
+
+**Stack Packs are here. Salesforce is live.** ETYB now ships tech-stack expertise alongside the engineering team — knowledge overlays that load on top of the existing 20 specialists whenever the work involves a specific platform. The first pack ships full Salesforce coverage current to Spring '26, capturing the 2025–2026 platform reset (Agentforce, Data 360, MCP-native dev, Apex Cursors, ECA migration, MFA mandate) that pre-2025 training data misses. Same pattern will land for AWS, GCP, Azure, Vercel, Supabase, Snowflake, Databricks, Stripe, Shopify, SAP, and ServiceNow.
+
+### Why this is a major release
+
+This adds a **new artifact type** to ETYB. Until now, ETYB was specialists + protocols — two orthogonal axes. Now it's specialists + protocols + stack expertise — three orthogonal axes. Stack Packs sit alongside the team without bloating it: a Salesforce engagement still routes to backend-architect, frontend-architect, security-engineer, and ai-ml-engineer — but each one picks up the platform overlay for that engagement. When the work changes stack, the overlay rotates; the team doesn't. The architecture scales by adding folders, not roles.
+
+This release also adopts **single-version semantics**. Every skill, every stack, every artifact tracks the bundle version on every release. No more per-skill version drift (which had silently put etyb at 2.0.0 in SKILL.md and 2.1.0 in the manifest before this release).
+
+### Added
+
+- **Stack Packs** — new top-level artifact type. Each pack lives under `stacks/<name>/` with a `SKILL.md` orchestrator briefing and per-role overlays at `references/<role>.md`. ETYB's router loads them via the new `skills/etyb/core/stack-registry.md` when stack signals match the user's request. Packs compose across roles, defer to vertical specialists on compliance, and always-on protocols still apply unchanged.
+- **Salesforce Stack Pack** — full 11-role coverage current to Spring '26 (API v66.0), Dreamforce '25, and TrailblazerDX 2026. Each role gets a focused overlay:
+  - `system-architect` — primitive selection (Flow vs Apex vs Agentforce vs MuleSoft vs external), Headless 360 patterns, org-strategy decisions, integration-boundary calls.
+  - `backend-architect` — modern Apex (Cursors, user-mode SOQL, transaction finalizers, Queueable patterns), Pub/Sub API, MCP authoring + Apex-as-Agent-Action plumbing, Named & External Credentials, bulkification and the trigger handler pattern.
+  - `frontend-architect` — LWC 2026 (TypeScript types, `lightning/graphql`, reactive screen flows, LWR for Experience Cloud, Lightning Out 2.0), wire-first data, Aura → LWC migration, LWC Jest testing.
+  - `ai-ml-engineer` — Agentforce design (Topics / Actions / Guardrails / Atlas Reasoning Engine), Prompt Builder, Agent Script for deterministic flow, BYOM via Einstein Studio, Data 360 grounding with vector search, MCP-native development, Voice agents, the three Agentforce pricing models.
+  - `database-architect` — Data 360, Zero Copy with Snowflake / Databricks / BigQuery, BYOM data plumbing, Big Objects vs Data 360, calculated insights, sharing-aware data modeling, LDV patterns.
+  - `devops-engineer` — `sf` CLI (replaces deprecated `sfdx` alias), scratch orgs, 2GP unlocked / managed packaging, source format, DevOps Center vs Copado / Gearset / AutoRABIT, **smart test selection (Spring '26)**, Agentforce Vibes IDE.
+  - `security-engineer` — Einstein Trust Layer (deep architecture), **External Client Apps migration mandate (May 11, 2026)**, **MFA enforcement (phased June–August 2026)**, Shield (Platform Encryption / Event Monitoring / Field Audit Trail), permission sets and PSGs, FLS / CRUD code-layer enforcement (`WITH USER_MODE`), AppExchange Security Review prep.
+  - `qa-engineer` — Apex tests with meaningful assertions (≥85% target), bulk path testing, LWC Jest, Salesforce Code Analyzer + Graph Engine for SOQL injection and FLS gap detection, ApexGuru for runtime performance, smart test selection (Spring '26), UTAM / Provar for E2E.
+  - `saas-architect` — multi-tenant patterns on the platform, ISV distribution shapes (2GP managed, OEM, Embedded Apps, Internal SaaS), AppExchange Checkout 2.0, Salesforce Marketplace, License Management App.
+  - `healthcare-architect` — Health Cloud data model, Industries FHIR R4 + HL7 v2 adapters, OmniStudio for clinical workflows, Agentforce Health agents. Thin overlay — defers to healthcare-architect for HIPAA / FHIR semantics / audit retention policy.
+  - `fintech-architect` — Financial Services Cloud data model, MuleSoft Banking Accelerator, Pub/Sub for transaction events, Open Banking adapters, Agentforce Financial Services agents with deterministic money-movement gates. Thin overlay — defers to fintech-architect for ledger / PCI / PSD2 / AML interpretation. Salesforce is NOT the ledger.
+- **2025–2026 platform reset captured.** Every overlay reflects the renames, retirements, and additions that an LLM with a pre-2025 cutoff will get wrong: Einstein Copilot → Agentforce (Jan 2025), Data Cloud → Data 360 (Dreamforce '25), Apex Cursors (Spring '26), LWC `lightning/graphql` + TypeScript types (Spring '26), Salesforce-Hosted MCP Servers (GA April 2026), Headless 360 (TDX 2026), External Client Apps mandatory by May 11 2026, MFA mandate phased June–August 2026, Flow Orchestration going free (Feb 2026), Heroku end-of-new-enterprise-sales (Feb 2026), Salesforce Functions retirement (Jan 2025).
+- **`STACKS.md`** — top-level registry of available Stack Packs with version, last-verified release, status, and authoring conventions for the next pack.
+- **`skills/etyb/core/stack-registry.md`** — ETYB router cue layer for tech-stack detection. Sits alongside `team-registry.md`. Includes positive signals (Salesforce / Apex / LWC / Agentforce / `sfdx` / Trailhead / Dreamforce / TDX / 60+ keywords) and negative signals so migrating *off* a stack doesn't falsely activate the overlay.
+- **`manifest.json` `stacks` section** — first-class versioned registration of stacks alongside `skills`, with `last_verified_release`, `verified_on`, and `applies_to_roles` per stack.
+- **MARKETPLACE.md Stack Packs section** — new lane in the marketplace copy that introduces Stack Packs alongside the existing 30 skills.
+
+### Changed
+
+- **Single-version semantics.** The bundle version is now THE version. Every skill (30), every stack (1), every artifact tracks it on every release — including `manifest.json .skills.*`, `manifest.json .stacks.*.version`, and every `SKILL.md` frontmatter `metadata.version`. `scripts/maintainer/validate-version-sync.sh` is extended to enforce this; the validator now fails the release if any per-skill or per-stack version drifts from `VERSION`. The 5 historical bundle files (`VERSION`, `package.json`, `manifest.json .bundle.version`, `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json`) plus all per-artifact locations move together.
+- **`skills/etyb/SKILL.md` core modules table** — adds `core/stack-registry.md`. ETYB reads it after `team-registry.md` to detect tech-stack signals and load the matching pack.
+
+### Roadmap
+
+Future Stack Packs on the candidate list, in rough priority order based on common ETYB use cases:
+
+- **AWS** — Bedrock, Lambda, EventBridge, ECS, IAM, S3, RDS / Aurora
+- **GCP** — Vertex AI, Cloud Run, Pub/Sub, Firestore, BigQuery
+- **Azure** — OpenAI Service, Functions, AKS, Entra ID, Cosmos DB
+- **Vercel** — Next.js patterns, Edge Functions, Vercel AI SDK
+- **Supabase** — Postgres + Auth + Realtime + Storage + Edge Functions
+- **Snowflake** — Warehouse architecture, Native Apps, Cortex
+- **Databricks** — Lakehouse, Mosaic AI, Delta Live Tables
+- **Stripe** — Payment intents, Billing, Connect, fraud
+- **Shopify** — Storefront API, Hydrogen, app development
+- **SAP S/4HANA** — Integration patterns, BTP
+- **ServiceNow** — Now Platform, Flow Designer, integration patterns
+
+The pattern is set — adding a new stack adds a folder, not a roster slot.
+
 ## [2.2.0] — 2026-04-18
 
 The install-parity and hardening release. Bundle-aware installs reach every platform (not just Claude Code's native marketplace), hook scripts get a ShellCheck-clean CI gate, and a JSON-injection bug in the plan-execution edit log is fixed.

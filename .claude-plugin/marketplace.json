@@ -4,13 +4,13 @@
     "name": "e-t-y-b"
   },
   "metadata": {
-    "description": "Virtual engineering company — 30 AI agent skills",
-    "version": "2.2.0"
+    "description": "Virtual engineering company \u2014 30 AI agent skills",
+    "version": "3.0.0"
   },
   "plugins": [
     {
       "name": "etyb-full",
-      "description": "Complete virtual engineering team — ETYB, 14 core teams, 6 domain specialists, 9 process protocols",
+      "description": "Complete virtual engineering team \u2014 ETYB, 14 core teams, 6 domain specialists, 9 process protocols",
       "source": "./",
       "strict": false,
       "skills": [
@@ -48,7 +48,7 @@
     },
     {
       "name": "etyb-process-protocols",
-      "description": "9 always-on engineering disciplines — TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement, verification, debugging",
+      "description": "9 always-on engineering disciplines \u2014 TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement, verification, debugging",
       "source": "./",
       "strict": false,
       "skills": [
@@ -89,7 +89,7 @@
     },
     {
       "name": "etyb-verticals",
-      "description": "6 domain-specific architects — fintech, healthcare, e-commerce, SaaS, real-time, social platforms",
+      "description": "6 domain-specific architects \u2014 fintech, healthcare, e-commerce, SaaS, real-time, social platforms",
       "source": "./",
       "strict": false,
       "skills": [

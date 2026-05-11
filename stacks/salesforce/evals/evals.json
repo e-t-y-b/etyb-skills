@@ -1,0 +1,104 @@
+{
+  "skill_name": "stack-salesforce",
+  "evals": [
+    {
+      "id": 0,
+      "name": "apex-async-large-volume",
+      "prompt": "We have a B2B Salesforce org with ~3M Account records. A new business requirement: every night, we need to enrich every active Account (~800K) with data from a vendor API (Clearbit-like). The vendor's API limits us to 50 requests/sec and supports batched lookups of up to 100 domains per request. We're on Spring '26. The current implementation is a single batch Apex class with a 200-row scope size, hitting the vendor one Account at a time — it's hitting governor limits and taking 18 hours to finish. The team is two Salesforce devs, one fairly senior (5 years on the platform, last touched async Apex in 2022). What's the right architecture for this in 2026, and what code would you actually write to make it work?",
+      "expected_output": "Should recommend a modern async pattern (Apex Cursors / Batch with larger scope and batched callouts / Queueable chains), batch the vendor calls to ~100 per request, throttle to respect 50 req/sec, use Named Credentials, and address governor limits explicitly. Should NOT propose Salesforce Functions (retired) or new Heroku (no new enterprise sales). Should mention transaction finalizers for failure handling.",
+      "assertions": [
+        {"text": "Mentions Apex Cursors (Spring '26) or Batch Apex with scope size optimization as the streaming primitive; does not propose @future for primary path", "type": "content_check"},
+        {"text": "Batches vendor API calls (up to 100 domains/request) instead of one-call-per-Account", "type": "content_check"},
+        {"text": "Throttles to respect the vendor's 50 req/sec limit (queueable spacing, scheduled execution, or platform event pacing)", "type": "content_check"},
+        {"text": "Uses Named Credentials (or External Credentials) for the vendor API auth, not hard-coded endpoint", "type": "content_check"},
+        {"text": "Discusses transaction finalizers or compensating logic for failure handling on Queueable / Batch", "type": "content_check"},
+        {"text": "Addresses governor limits explicitly with specific numbers (sync vs async, 100 callouts per transaction, etc.)", "type": "content_check"},
+        {"text": "Does NOT recommend Salesforce Functions (retired Jan 2025) or new Heroku Enterprise (sales ended Feb 2026)", "type": "negative_check"},
+        {"text": "Uses WITH USER_MODE or otherwise enforces FLS/sharing in any SOQL shown", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "lwc-modern-account-cases-panel",
+      "prompt": "Build me an LWC for the Account record page that shows: the account name and industry, the 5 most recent Cases (subject + priority + status), the 3 most recent Opportunities (name + amount + stage), and a button that opens a modal for the user to log a quick activity (call/email/meeting note) which becomes a Task record. It should be production-quality — accessible, mobile-friendly, dark-mode-correct, uses modern 2026 patterns. The team has built LWCs since 2022 but the lead asked specifically: 'use whatever 2026 LWC patterns make this faster and more maintainable than what we did last year.' Show me the component structure, the data fetch approach, and the actual code.",
+      "expected_output": "Should use wire-first data with lightning/uiRecordApi for the account and/or lightning/graphql (Spring '26) for the related lists, lightning/modal for the activity logger, lightning/recordEditForm or lightning/recordForm for the new Task, base components throughout (lightning-card, lightning-datatable, lightning-button), and address accessibility/dark mode via SLDS. Should mention or use TypeScript types (Spring '26 GA) at least as an option. Should NOT propose imperative Apex for the data fetch when wires work.",
+      "assertions": [
+        {"text": "Uses wire-first data access (lightning/uiRecordApi getRecord, getRelatedListRecords, or lightning/graphql) rather than imperative Apex for read-only data", "type": "content_check"},
+        {"text": "References lightning/graphql (GA Spring '26) as an option for the related-list queries, not the deprecated lightning/uiGraphQLApi", "type": "content_check"},
+        {"text": "Uses lightning/modal (or LightningModal class) for the activity logger dialog, not custom modal markup", "type": "content_check"},
+        {"text": "Uses base components (lightning-card, lightning-button, lightning-datatable, lightning-recordForm or recordEditForm) rather than custom HTML primitives", "type": "content_check"},
+        {"text": "Addresses accessibility via SLDS classes and base-component defaults, not just custom CSS", "type": "content_check"},
+        {"text": "Mentions LWC TypeScript types (Spring '26 GA) at least as an option for the component file", "type": "content_check"},
+        {"text": "Does not propose Aura components for any part of the build", "type": "negative_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "agentforce-returns-agent-design",
+      "prompt": "Customer Service VP wants an AI agent that handles order returns for our DTC ecommerce business on Service Cloud. About 4000 return requests/week, currently handled by 12 agents. The CS leadership wants the agent to: identify the order, verify return eligibility (within 30 days of delivery, item not marked final-sale, customer is in good standing), explain the refund timeline and options, create the return record + RMA, and trigger the refund. Hand off to a human when: order is outside policy, customer escalates emotionally, or anything ambiguous. We're on Sales/Service Cloud Enterprise, just upgraded to Agentforce 1 Edition. What's the right agent architecture? How should Topics/Actions be designed? Where does deterministic logic vs LLM reasoning live? How do we keep this from refunding things it shouldn't?",
+      "expected_output": "Should design 3-5 narrow Topics with deterministic Actions, use Agent Script (Dreamforce '25) for the deterministic refund/eligibility flow, configure Einstein Trust Layer for PII masking (customer email/phone/SSN), ground on Order/Return knowledge plus customer history, define explicit Guardrails for the human-handoff cases, address pricing model (Flex Credits vs Conversations), and stress that the Action methods (not the LLM) execute the refund. Should NOT propose calling OpenAI directly or bypassing Trust Layer.",
+      "assertions": [
+        {"text": "Designs 3-7 narrow, mutually-exclusive Topics (e.g., Order Lookup, Eligibility Check, Return Creation, Refund Processing, Human Handoff)", "type": "content_check"},
+        {"text": "Recommends Agent Script (or explicit deterministic dispatch) for the eligibility and refund flow, not relying on LLM judgment for the actual refund decision", "type": "content_check"},
+        {"text": "Each Action is implemented as Apex @InvocableMethod (or Flow) returning deterministic output, not LLM-generated state changes", "type": "content_check"},
+        {"text": "Einstein Trust Layer is explicitly mentioned for PII masking (customer data) and zero-retention/audit guarantees", "type": "content_check"},
+        {"text": "Defines explicit Guardrails and human-handoff triggers (out-of-policy, emotional escalation, ambiguity)", "type": "content_check"},
+        {"text": "Addresses grounding sources (order data, return policy knowledge base, customer history) — does not assume the LLM 'just knows' the policy", "type": "content_check"},
+        {"text": "Uses the current name 'Agentforce' (not 'Einstein Copilot') and 'Atlas Reasoning Engine'", "type": "content_check"},
+        {"text": "Mentions pricing model (Flex Credits / Conversations / per-user) given the 4000 returns/week volume", "type": "content_check"},
+        {"text": "Does NOT propose calling OpenAI / Claude / Gemini directly from Apex bypassing Trust Layer", "type": "negative_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "renewal-process-primitive-selection",
+      "prompt": "Our Sales Ops team is asking for a guided renewal workflow. The shape they described: pull customer accounts up for renewal in the next 60 days, present each rep with the renewal pricing for that customer (which depends on usage data we hold in a separate Snowflake warehouse), let the rep adjust quantity and discount, route discounts above 15% to the rep's manager for approval, generate a quote in CPQ, send for DocuSign signature, then mark the opportunity Closed Won when signed. We've got Sales Cloud Enterprise, Salesforce CPQ, and Data 360 with Zero Copy to Snowflake. The eng director is asking: 'should this be a Flow, an Agentforce agent, or custom Apex+LWC?' Help me think about this and pick. Reasoning matters more than the answer.",
+      "expected_output": "Should reason through the primitive decision frame from system-architect overlay: Flow Orchestration is likely the right primary primitive (multi-step, multi-user handoff with approval routing), with Data 360 Zero Copy for the Snowflake pricing data, Apex Invocable for the CPQ quote generation, DocuSign integration (Apex callout via Named Credentials or existing AppExchange app), and explicit reasoning for why Agentforce is NOT the right shape here (linear deterministic flow, not conversational, exact pricing matters). Should mention Flow Orchestration is free since Feb 2026.",
+      "assertions": [
+        {"text": "Recommends Flow Orchestration as the primary primitive (multi-step, multi-user workflow with approval routing) and mentions it became free in Feb 2026 as a standard Flow type", "type": "content_check"},
+        {"text": "Argues against Agentforce as the wrong shape here, citing linear/deterministic flow, money/commitments needing exact behavior, and approval routing not being a natural-language interaction", "type": "content_check"},
+        {"text": "Uses Data 360 + Zero Copy to query the Snowflake pricing data without ETL or duplication", "type": "content_check"},
+        {"text": "Identifies which steps need Apex (e.g., CPQ quote generation invocable, DocuSign callout) vs Flow (orchestration, screens, approval routing)", "type": "content_check"},
+        {"text": "Addresses the >15% discount approval as a Flow Approval step (or Flow Orchestration approval stage), not a separate Apex workflow", "type": "content_check"},
+        {"text": "Uses Named Credentials for the DocuSign integration if mentioning it, or notes existence of DocuSign managed package on AppExchange", "type": "content_check"},
+        {"text": "Provides explicit reasoning for the primitive choice, not just 'use Flow' — the user asked for reasoning over answer", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "name": "mcp-headless-360-claude-code",
+      "prompt": "Our dev team uses Claude Code daily and we'd like Claude (and our other dev tooling like Cursor) to be able to query our Salesforce production org — read Account/Contact/Case data, create new Cases on behalf of users, and run Apex anonymous for one-off scripts. The security team is nervous: 'how is this auth'd, how do we prevent it from doing something stupid, how do we audit it?' We're on Enterprise Edition with Agentforce add-on. What's the right architecture for this in 2026? Walk me through the wire-up, the security model, and the limits we should configure.",
+      "expected_output": "Should center on Salesforce-Hosted MCP Servers (GA April 2026, Enterprise+) as the integration path, External Client Apps (ECA) for OAuth with scoped tokens, MFA enforcement for the connecting user, Einstein Trust Layer for any LLM-mediated calls, the 60+ MCP tools shipped at TDX 2026, Apex @InvocableMethod / @AuraEnabled to expose custom actions, audit trail via Event Monitoring (Shield). Should NOT propose Connected Apps for new auth (ECA mandate May 11 2026) or skip the Trust Layer.",
+      "assertions": [
+        {"text": "Salesforce-Hosted MCP Servers (GA April 2026 at TDX 2026) is the recommended integration path for Enterprise+ orgs", "type": "content_check"},
+        {"text": "External Client Apps (ECA) is the auth model — NOT Connected Apps (those cannot be created new after May 11, 2026)", "type": "content_check"},
+        {"text": "OAuth with scoped/short-lived tokens, refresh-token rotation, and MFA enforcement is described", "type": "content_check"},
+        {"text": "Trust Layer / Einstein Trust Layer is mentioned for any LLM-mediated interaction with customer data (zero retention, masking, audit)", "type": "content_check"},
+        {"text": "Custom capabilities are exposed via Apex @InvocableMethod (or @RestResource / @AuraEnabled with OpenAPI spec generation) rather than ad-hoc REST endpoints", "type": "content_check"},
+        {"text": "Audit / observability is addressed: Event Monitoring (Shield) for action logs, audit trail of MCP tool calls", "type": "content_check"},
+        {"text": "Permission-set-based access control (PSGs) rather than profile-level for the MCP-connecting user", "type": "content_check"},
+        {"text": "Does NOT propose creating new Connected Apps (deadline May 11 2026 for ECA migration)", "type": "negative_check"},
+        {"text": "Uses correct 2026 names: Salesforce-Hosted MCP Servers, External Client Apps, Einstein Trust Layer (not 'Salesforce API', 'Connected App', 'Einstein Copilot')", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "name": "negative-test-postgres-crm-build",
+      "prompt": "We're moving off Salesforce to a custom CRM built on Postgres + Node.js. I need help designing the data migration strategy from Salesforce — we have ~12 custom objects, ~2M Account records, ~8M Contact records, custom workflows in Process Builder I need to translate to Temporal workflows, and a Slack integration I want to keep working through the cutover. Where should I start, and what's the migration architecture?",
+      "expected_output": "Should NOT activate the Salesforce stack pack's full overlay — the work isn't ON Salesforce, it's OFF of it. The mention of Salesforce is purely as the source system being migrated away from. The correct routing is to system-architect (for migration architecture) and likely database-architect (for the Postgres target). The Salesforce knowledge needed is minimal: how to extract data (Bulk API 2.0 / Data Loader / Workbench), how to interpret metadata (custom objects, Process Builder definitions). Should warn that Process Builder is retired (replaced by Flow), so old Process Builder XML may need re-interpretation.",
+      "assertions": [
+        {"text": "Does NOT dump full Salesforce platform guidance (Apex modern patterns, LWC, Agentforce) into the response — the work is migrating AWAY from Salesforce", "type": "negative_check"},
+        {"text": "Routes primarily to system-architect (migration architecture) and database-architect (Postgres data modeling), with Salesforce knowledge as supporting context only", "type": "content_check"},
+        {"text": "Addresses Salesforce data extraction (Bulk API 2.0 or Data Loader) without going into governor limits, modern Apex idioms, or LWC patterns", "type": "content_check"},
+        {"text": "Notes that Process Builder is retired (replaced by Flow), so old Process Builder definitions may need re-interpretation during migration", "type": "content_check"},
+        {"text": "Either explicitly notes the pack was detected but limited in scope for this migration-OUT context, OR cleanly answers without forcing Salesforce platform depth", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

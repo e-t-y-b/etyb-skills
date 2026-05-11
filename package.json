@@ -1,7 +1,7 @@
 {
   "name": "etyb-skills",
-  "version": "2.2.0",
-  "description": "ETYB — virtual engineering company for AI coding agents. 30 coordinated skills: CTO + 20 specialists + 9 always-on engineering disciplines. Works on Claude Code, OpenAI Codex, and Google Antigravity.",
+  "version": "3.0.0",
+  "description": "ETYB \u2014 virtual engineering company for AI coding agents. 30 coordinated skills: CTO + 20 specialists + 9 always-on engineering disciplines. Works on Claude Code, OpenAI Codex, and Google Antigravity.",
   "scripts": {
     "lint:portability": "./scripts/lint-portability.sh"
   },
@@ -16,10 +16,36 @@
     "url": "https://github.com/e-t-y-b/etyb-skills/issues"
   },
   "keywords": [
-    "skills", "agent-skills", "agentskills", "claude-code", "openai-codex", "google-antigravity",
-    "ai-agent", "virtual-team", "cto", "engineering", "architecture", "sdlc",
-    "tdd", "code-review", "devops", "sre", "security", "backend", "frontend",
-    "database", "mobile", "ai-ml", "fintech", "healthcare", "e-commerce", "saas",
-    "real-time", "social-platform", "verification", "debugging", "quality-gates"
+    "skills",
+    "agent-skills",
+    "agentskills",
+    "claude-code",
+    "openai-codex",
+    "google-antigravity",
+    "ai-agent",
+    "virtual-team",
+    "cto",
+    "engineering",
+    "architecture",
+    "sdlc",
+    "tdd",
+    "code-review",
+    "devops",
+    "sre",
+    "security",
+    "backend",
+    "frontend",
+    "database",
+    "mobile",
+    "ai-ml",
+    "fintech",
+    "healthcare",
+    "e-commerce",
+    "saas",
+    "real-time",
+    "social-platform",
+    "verification",
+    "debugging",
+    "quality-gates"
   ]
 }

@@ -7,7 +7,7 @@ license: MIT
 compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "1.0.0"
+  version: "3.0.0"
   category: domain-specialist
 ---
 
