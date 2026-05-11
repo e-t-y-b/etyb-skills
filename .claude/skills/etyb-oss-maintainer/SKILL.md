@@ -7,7 +7,7 @@ license: MIT
 compatibility: Internal tooling — Claude Code only, not for end-user installation.
 metadata:
   author: e-t-y-b
-  version: "0.2.0"
+  version: "0.3.0"
   category: internal-tooling
   scope: project-local
 ---
@@ -53,7 +53,7 @@ Follow `references/release-runbook.md` step by step. Do not skip the CHANGELOG s
 
 ### "announce to website" or post-release sync
 
-Apply `references/website-impact-mapping.md` to the new CHANGELOG section, then create a tracking issue on `e-t-y-b/etyb-dot-ai` via local `gh` auth. This step is local-only — never attempted from CI.
+The website update is **your responsibility**, not a hand-off. After a release tag lands on `main`, you implement and ship the website-side changes as a PR on `e-t-y-b/etyb-dot-ai` — same workflow you just ran for `etyb-skills`. Apply `references/website-impact-mapping.md` to derive what needs to change, then clone the website repo, branch, implement the pages, and open the PR via local `gh` auth. Filing an issue without a PR is a fallback for when you genuinely cannot implement (timing, missing context) — not the default. This step is local-only — never attempted from CI.
 
 ### "drift check"
 
@@ -72,3 +72,4 @@ Compare the latest `etyb-skills` release tag with the version `etyb-dot-ai` thin
 - Anything that lands on user machines — installers, manifests, marketplace entries.
 - Cross-repo writes from CI. Anything reaching into `etyb-dot-ai` is run locally by the maintainer with their `gh` auth.
 - Auto-merging or auto-tagging without human signoff. The release workflow only fires after `VERSION` lands on `main`.
+- Direct pushes to the website's `main` branch. Website changes always go through a PR on `e-t-y-b/etyb-dot-ai`.
