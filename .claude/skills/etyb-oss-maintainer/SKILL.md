@@ -7,7 +7,7 @@ license: MIT
 compatibility: Internal tooling — Claude Code only, not for end-user installation.
 metadata:
   author: e-t-y-b
-  version: "0.3.0"
+  version: "0.4.0"
   category: internal-tooling
   scope: project-local
 ---
@@ -49,7 +49,7 @@ Default mode (no specific intent given) is **audit** — run `scripts/maintainer
 
 ### "bump to vX.Y.Z" or release prep
 
-Follow `references/release-runbook.md` step by step. Do not skip the CHANGELOG step. After merge, push the tag — the `release.yml` workflow handles the GitHub Release.
+Follow `references/release-runbook.md` step by step. Do not skip the CHANGELOG step, and do not skip the README / user-facing docs review (step 3b) — both are the most common silent drift on a release. After merge, push the tag — the `release.yml` workflow handles the GitHub Release. After the tag lands, file the website PR per the "announce to website" step below.
 
 ### "announce to website" or post-release sync
 

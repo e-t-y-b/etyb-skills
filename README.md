@@ -6,7 +6,8 @@
 
 <p align="center">
   <a href="https://etyb.ai"><strong>etyb.ai</strong></a> &nbsp;·&nbsp;
-  <a href="https://github.com/e-t-y-b/etyb-skills/releases/tag/v2.1.0">v2.1.0</a> &nbsp;·&nbsp;
+  <a href="https://github.com/e-t-y-b/etyb-skills/releases/tag/v3.0.0">v3.0.0</a> &nbsp;·&nbsp;
+  <a href="STACKS.md">Stacks</a> &nbsp;·&nbsp;
   <a href="CHANGELOG.md">Changelog</a> &nbsp;·&nbsp;
   <a href="docs/installation.md">Install Guide</a> &nbsp;·&nbsp;
   <a href="docs/architecture.md">Architecture</a>
@@ -18,15 +19,16 @@
   <img src="https://img.shields.io/badge/Google_Antigravity-model--trusted-888?style=flat-square" alt="Google Antigravity" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
   <img src="https://img.shields.io/badge/skills-30-black?style=flat-square" alt="30 skills" />
+  <img src="https://img.shields.io/badge/stack--packs-Salesforce-00cc66?style=flat-square" alt="Stack Packs: Salesforce" />
 </p>
 
 ---
 
 # etyb-skills
 
-**Install a virtual engineering company.** Your AI agent gets a CTO, 20 specialists, and 9 always-on engineering disciplines — out of the box.
+**Install a virtual engineering company.** Your AI agent gets a CTO, 20 specialists, 9 always-on engineering disciplines, and platform-specific [Stack Packs](STACKS.md) — out of the box.
 
-30 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done."
+30 coordinated skills that turn any [agentskills.io](https://agentskills.io)-compliant agent into a team that ships features methodically: brainstorming before architecture, tests before code, reviews before commits, evidence before "done." As of v3.0.0, **Stack Packs** add platform expertise on top of the team — the first pack ships full [Salesforce](stacks/salesforce/SKILL.md) coverage current to Spring '26, with AWS, GCP, Stripe, Shopify, SAP, and ServiceNow on the roadmap.
 
 ## Quick Start
 
@@ -72,6 +74,7 @@ An AI coding agent that works like a 100-person engineering org:
 - **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
 - **Covers the full SDLC** — from research through production operations
 - **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems
+- **Speaks your platform** — Stack Packs load on top of the team when work involves a specific stack. [Salesforce](stacks/salesforce/SKILL.md) is live; AWS, GCP, Stripe, Shopify, SAP, ServiceNow on the way
 
 ---
 
@@ -93,10 +96,16 @@ ETYB (CTO — routes, enforces gates, tracks plans)
      |  |-- Self-improvement — failing eval before skill changes
      |  +-- Debugging — root-cause-first after repeated failures
      |
+     |  STACK PACK OVERLAYS (new in v3.0.0 — load when platform signals match)
+     |  +-- Salesforce — Apex, LWC, Data 360, Agentforce, MCP-native dev
+     |  +-- (roadmap: AWS, GCP, Azure, Vercel, Supabase, Snowflake, Stripe, Shopify, SAP, ServiceNow)
+     |
 DOMAIN EXPERTS (14 core teams + 6 vertical specialists)
      |
 DEEP REFERENCES (100+ files, loaded on demand)
 ```
+
+Three orthogonal axes: **specialists** (the roles), **protocols** (the disciplines), **Stack Packs** (the platforms). Specialists and protocols are always there; Stack Packs load when the work involves their platform. Adding a new stack adds a folder, not a roster slot.
 
 ---
 
@@ -149,6 +158,17 @@ Your virtual CTO. Routes requests, enforces 5-phase gates (Design > Plan > Imple
 | `skill-evolution-protocol` | Skill improvements | Platform-neutral |
 | `verification-protocol` | Every completion claim | Claude deterministic, Codex stop hook assist, Antigravity model-trusted |
 | `debugging-protocol` | Active troubleshooting | Platform-neutral |
+
+### Stack Packs (new in v3.0.0)
+
+Platform-specific knowledge overlays that load across the existing 20 specialists when work involves a specific tech stack. The team doesn't grow — it learns the platform.
+
+| Stack | Version | Coverage | Status |
+|-------|---------|----------|--------|
+| [Salesforce](stacks/salesforce/SKILL.md) | 3.0.0 (Spring '26) | 11 role overlays — Apex, LWC, Flow, Data 360, Agentforce, MCP-native development, ECA migration, MFA mandate, Health Cloud, FSC | Live |
+| AWS, GCP, Azure, Vercel, Supabase, Snowflake, Databricks, Stripe, Shopify, SAP, ServiceNow | — | — | Roadmap |
+
+See [STACKS.md](STACKS.md) for the full registry and authoring conventions.
 
 ---
 
@@ -245,7 +265,7 @@ Tier 0-1 requests: 0 extra tokens (ETYB handles directly)
 
 - Website: [etyb.ai](https://etyb.ai)
 - Repo: [github.com/e-t-y-b/etyb-skills](https://github.com/e-t-y-b/etyb-skills)
-- Latest release: [v2.1.0](https://github.com/e-t-y-b/etyb-skills/releases/tag/v2.1.0)
+- Latest release: [v3.0.0](https://github.com/e-t-y-b/etyb-skills/releases/tag/v3.0.0)
 - Changelog: [CHANGELOG.md](CHANGELOG.md)
 - Install guide: [docs/installation.md](docs/installation.md)
 - Architecture: [docs/architecture.md](docs/architecture.md)

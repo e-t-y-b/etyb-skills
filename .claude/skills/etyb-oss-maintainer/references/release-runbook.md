@@ -54,6 +54,27 @@ One-paragraph framing of the release.
 
 Drop sections that have nothing in them. Do not list internal-tooling changes (e.g. updates to `.claude/skills/etyb-oss-maintainer/`) — they are not user-visible.
 
+## 3b. Update README.md and other user-facing docs
+
+The CHANGELOG records what changed. The README tells a first-time visitor what `etyb-skills` *is*. They drift apart silently — every release, walk the user-facing docs and update what's stale.
+
+Mandatory check for every release:
+
+- **Top banner version link** (`<a href="...releases/tag/vX.Y.Z">vX.Y.Z</a>`) — bump.
+- **Badges** — skill count, platform support, any new "Stack Packs: X" or similar marker.
+- **Latest release link** at the bottom of README.
+- **Intro paragraph** — does it still describe the system accurately? New artifact types (Stack Packs, new vertical, new platform support) usually want a line.
+- **Architecture diagram** — does it reflect the current layer count? Add new layers when they ship.
+- **Skills tables / Stacks tables** — add new rows; update counts.
+- **"What You Get"** bullets — major capability adds get a bullet.
+
+Mandatory check, also:
+
+- **`docs/installation.md`** if install steps changed.
+- **`docs/architecture.md`** if the layer model changed.
+
+Run a final scan: `grep -rn "v<previous-version>" README.md docs/ STACKS.md MARKETPLACE.md 2>/dev/null` — anything still pointing at the old version is drift.
+
 ## 4. Run the full validator
 
 ```
