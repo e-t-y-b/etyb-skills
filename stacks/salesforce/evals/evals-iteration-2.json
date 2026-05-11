@@ -1,0 +1,132 @@
+{
+  "skill_name": "stack-salesforce",
+  "iteration": 2,
+  "evals": [
+    {
+      "id": 6,
+      "name": "database-data-360-zero-copy-snowflake",
+      "prompt": "We're a Sales Cloud + Service Cloud customer (Enterprise Edition + Data 360 included via Agentforce 1 Edition). Our analytics team owns a Snowflake warehouse with three years of usage telemetry (~2.5B rows), customer support ticket history archived from before we used Service Cloud (~40M rows), and product event data from our app. The CTO wants Agentforce agents and dashboards in Tableau to be able to ground on this data. The lazy answer is 'ETL it all into Data 360,' but our data eng lead is pushing back hard — cost, ownership, freshness lag. What's the right architecture in 2026, and where exactly does the boundary between Data 360 and Snowflake sit? We need to be specific about freshness, query latency, BYOM if relevant, and what the data-architect-on-Salesforce should own vs the warehouse team.",
+      "expected_output": "Should center on Data 360 Zero Copy as the primary primitive — federate to Snowflake rather than duplicate. Should address Live Query Federation latency tradeoffs, when ingest is still preferable (low-latency activation, segmentation against hot data), calculated insights vs warehouse-side aggregation, BYOM via Einstein Studio if predictive scoring is in scope, and the Tableau Semantics layer (Dreamforce '25). Should NOT propose nightly ETL to Data 360 as the default. Should distinguish what stays in Snowflake (raw events, historical archives) vs what lands in Data 360 (calculated insights, segmentation activation, agent grounding).",
+      "assertions": [
+        {"text": "Recommends Data 360 Zero Copy (Live Query Federation) as the primary path for the Snowflake data, NOT full duplication via ETL", "type": "content_check"},
+        {"text": "Addresses Live Query Federation latency tradeoffs explicitly — Zero Copy isn't always right (hot segmentation may need ingest)", "type": "content_check"},
+        {"text": "Mentions Tableau Semantics (Dreamforce '25) for how Tableau metrics surface as structured retrieval for agents", "type": "content_check"},
+        {"text": "Distinguishes data that should live in Data 360 (calculated insights, activation, agent grounding) vs stay in Snowflake (raw events, historical archive)", "type": "content_check"},
+        {"text": "Addresses BYOM via Einstein Studio if predictive/ML scoring is part of the use case (SageMaker / Databricks / Vertex AI as connected model hosts)", "type": "content_check"},
+        {"text": "Names current term 'Data 360' (not 'Data Cloud' or 'CDP') throughout", "type": "content_check"},
+        {"text": "Does NOT propose nightly ETL to Data 360 as the default architecture", "type": "negative_check"},
+        {"text": "Specifies ownership boundary: data-architect-on-Salesforce vs warehouse-team responsibilities", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 7,
+      "name": "devops-cicd-smart-test-selection",
+      "prompt": "We're a 40-person Salesforce dev team — 12 devs working on customer-facing experience cloud + service console + CPQ integrations, plus 3 admins. Current state: change sets between sandboxes, lots of manual deployment errors, no CI, no static analysis, no formal release process. Last quarter we had two prod incidents traced to deploys. Leadership wants a modern Salesforce DevOps setup. Walk me through: what tooling, what pipeline shape, what gates, and how do we adopt Spring '26's smart test selection without burning everyone's quarter on rewrites? Realistic phased plan, please.",
+      "expected_output": "Should propose sf CLI + source format + scratch orgs + 2GP unlocked packages + DevOps Center or third-party (Gearset/Copado/AutoRABIT). CI pipeline with Salesforce Code Analyzer (Graph Engine) + LWC Jest + Apex tests, smart test selection (Spring '26) for incremental, full suite on release candidates. Phased rollout: source-format migration, then CI on PR, then scratch-org-validation pre-merge, then deploy pipelines. Should mention DevOps Center vs third-party tradeoffs honestly. Should NOT propose sfdx (deprecated alias) as the current CLI naming or change sets as a long-term answer.",
+      "assertions": [
+        {"text": "Uses 'sf' CLI (current) not 'sfdx' (deprecated alias) throughout", "type": "content_check"},
+        {"text": "Includes source format migration from change sets / MDAPI as a foundational step", "type": "content_check"},
+        {"text": "Specifies scratch orgs for feature dev and 2GP unlocked packages for modular deployment", "type": "content_check"},
+        {"text": "Includes Salesforce Code Analyzer (PMD + ESLint + RetireJS + Graph Engine) in CI for static analysis and security checks", "type": "content_check"},
+        {"text": "Includes LWC Jest tests and Apex tests in CI", "type": "content_check"},
+        {"text": "Addresses smart test selection (Spring '26) — incremental in CI, full suite on RCs", "type": "content_check"},
+        {"text": "Compares DevOps Center vs third-party (Gearset / Copado / AutoRABIT) honestly with team-size context", "type": "content_check"},
+        {"text": "Presents a phased plan, not big-bang", "type": "content_check"},
+        {"text": "Does NOT recommend change sets as a long-term release path", "type": "negative_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 8,
+      "name": "security-eca-migration-plan",
+      "prompt": "Our security team just got the urgent escalation from Salesforce — May 11, 2026 is the deadline to migrate all our Connected Apps to External Client Apps, and no new Connected Apps can be created after that date. We have ~80 Connected Apps in production across our two prod orgs (B2B and consumer). Some are Salesforce-published (managed packages), some are home-grown, some are 3rd-party integrations (Slack, DocuSign, Marketo, Zoom). The CSO wants a complete migration plan with risk assessment by the end of next week. What's the right approach? What's at stake if we miss the deadline? What auth hardening (MFA enforcement, scoped tokens, refresh rotation) should we layer in as part of the migration?",
+      "expected_output": "Should anchor on May 11, 2026 deadline and what specifically happens (no new Connected Apps; existing ones still work but cannot be created or fully edited). Should map the 80 apps into categories: ISV/managed package (vendor migrates), home-grown (you migrate), 3rd-party (vendor + you coordinate). Should specify ECA's auth model — OAuth with scoped/short-lived tokens, refresh token rotation, External Credentials + Named Principal. Should layer MFA enforcement (phasing June-Aug 2026) into the migration plan, especially phishing-resistant MFA for admins/high-privilege. Should propose Event Monitoring (Shield) for audit of auth flows. Should propose a risk-tiered phased migration (high-risk apps first, dependencies mapped, rollback plan).",
+      "assertions": [
+        {"text": "Cites May 11, 2026 deadline specifically", "type": "content_check"},
+        {"text": "Explains what changes at the deadline: no NEW Connected Apps can be created; existing ones still function but cannot be edited fully", "type": "content_check"},
+        {"text": "Categorizes the 80 apps by ownership (ISV/managed package, home-grown, 3rd-party) and assigns migration responsibility accordingly", "type": "content_check"},
+        {"text": "Names External Client Apps (ECA) and External Credentials as the destination auth model with OAuth 2.0 + scoped/short-lived tokens + refresh rotation", "type": "content_check"},
+        {"text": "Layers MFA mandate (phased June–Aug 2026) into the plan, especially phishing-resistant MFA for admins / Modify All / View All / Author Apex users", "type": "content_check"},
+        {"text": "Proposes Event Monitoring (Shield) or Real-Time Event Monitoring for audit of the migration's auth flows", "type": "content_check"},
+        {"text": "Proposes a risk-tiered phased migration with dependency mapping, NOT a big-bang", "type": "content_check"},
+        {"text": "Uses correct 2026 terminology — External Client App (not Connected App for net-new), Einstein Trust Layer (if AI is touched)", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 9,
+      "name": "qa-test-strategy-apex-lwc",
+      "prompt": "QA lead question. We're a Salesforce shop with 220K lines of Apex, 180+ LWC components, ~15 integration callouts. Current state: 73% Apex coverage, many tests just exercise lines without asserting anything real ('System.assertNotEquals(null, x)' style), no LWC tests at all, no static analysis in CI. We've had two production bugs in the last 6 months that automated tests should have caught. Leadership wants me to design a Salesforce-appropriate test strategy with concrete tools, targets, and rollout plan. We've heard of Salesforce Code Analyzer and ApexGuru but haven't used either. What's the right plan?",
+      "expected_output": "Should target ≥85% Apex coverage with meaningful assertions, propose @TestSetup + factory pattern, eliminate seeAllData=true. Should include bulk path testing as non-negotiable. Should propose LWC Jest setup via sf force lightning lwc test create. Should bring in Salesforce Code Analyzer (PMD/ESLint/RetireJS/Graph Engine) in CI on every PR for static analysis including SOQL injection / FLS gaps. Should propose ApexGuru for runtime performance hotspot detection (if on Einstein 1/Agentforce). Should use smart test selection (Spring '26) for incremental CI runs. Should include HttpCalloutMock pattern for the 15 callouts. Should propose UTAM or Provar for E2E. Phased plan: hygiene first (no more seeAllData), then LWC Jest, then Code Analyzer in CI, then meaningful assertion uplift on existing tests, then E2E.",
+      "assertions": [
+        {"text": "Targets ≥85% Apex coverage with MEANINGFUL assertions (not just System.assertNotEquals(null, x) line-exercise style)", "type": "content_check"},
+        {"text": "Eliminates seeAllData=true; proposes @TestSetup + test data factory pattern", "type": "content_check"},
+        {"text": "Includes bulk path testing as non-negotiable (200-record test for every trigger-callable method)", "type": "content_check"},
+        {"text": "Proposes LWC Jest setup via @salesforce/sfdx-lwc-jest, with test discipline (public API, not internal)", "type": "content_check"},
+        {"text": "Includes Salesforce Code Analyzer (PMD + ESLint + RetireJS + Graph Engine) in CI for every PR", "type": "content_check"},
+        {"text": "Includes Graph Engine specifically for SOQL injection and FLS gap detection", "type": "content_check"},
+        {"text": "Mentions ApexGuru for runtime / production hotspot analysis (Einstein 1 / Agentforce add-on)", "type": "content_check"},
+        {"text": "Mentions smart test selection (Spring '26) for incremental CI", "type": "content_check"},
+        {"text": "Includes HttpCalloutMock or similar for the 15 callouts", "type": "content_check"},
+        {"text": "Proposes UTAM, Provar, Tricentis, or similar for E2E (or Selenium/Playwright as DIY fallback)", "type": "content_check"},
+        {"text": "Presents a phased rollout, not big-bang", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 10,
+      "name": "saas-architect-isv-2gp-managed-package",
+      "prompt": "We're building a vertical SaaS product for restaurant chains — staff scheduling, shift swapping, tip pooling, daily-close reconciliation. Current architecture is Postgres + Node, ~80 customers, $5M ARR. Some customers asked if we can integrate with their Salesforce orgs (they use SF for managing franchisee relationships). Our CEO asked: 'what if we also shipped it as a Salesforce-native app on AppExchange instead?' Walk me through the decision frame. If we did go AppExchange, what's the architecture — managed package shape, 2GP vs 1GP, namespace, Security Review prep, billing? Don't gloss over the painful parts.",
+      "expected_output": "Should walk through the four ISV distribution shapes (Managed Package, OEM, Embedded App, Internal SaaS) and which fits. Should recommend 2GP managed package (1GP is legacy). Should explain namespace = permanent decision (per-org). Should detail Security Review prep — WITH USER_MODE, FLS/CRUD/sharing enforced, Named Credentials, Code Analyzer Graph Engine clean, ≥75% coverage with assertions; 4-5 week review cycle. Should address AppExchange Checkout 2.0 + License Management App (LMA) for billing, vs custom billing for usage-based. Should NOT propose 1GP for net-new. Should acknowledge governor limits run inside customer org. Should honestly compare 'stay Node + integrate' vs 'rewrite native' as a real tradeoff — not just rubber-stamp the AppExchange path.",
+      "assertions": [
+        {"text": "Walks through the four ISV distribution shapes (Managed Package, OEM, Embedded App, Internal SaaS) with framing for which fits the restaurant-scheduling product", "type": "content_check"},
+        {"text": "Recommends 2GP managed package for ISV distribution, explicitly NOT 1GP (legacy)", "type": "content_check"},
+        {"text": "Explains namespace registration is a permanent per-org decision", "type": "content_check"},
+        {"text": "Details Security Review prep with specifics: WITH USER_MODE, FLS/CRUD/sharing enforcement, Named Credentials, no hard-coded creds, Code Analyzer Graph Engine clean, no seeAllData=true, ≥75% coverage with meaningful assertions", "type": "content_check"},
+        {"text": "Notes Security Review timeline (4-5 weeks typical, second submission usually passes)", "type": "content_check"},
+        {"text": "Addresses billing: AppExchange Checkout 2.0 + LMA for seat-based, custom billing for usage-based", "type": "content_check"},
+        {"text": "Honestly compares 'stay Node + integrate via API' vs 'rewrite as managed package' — not auto-recommending AppExchange path", "type": "content_check"},
+        {"text": "Notes governor limits run inside customer org for managed package code", "type": "content_check"},
+        {"text": "Does NOT propose 1GP managed package for net-new development", "type": "negative_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 11,
+      "name": "healthcare-health-cloud-fhir-care-plan",
+      "prompt": "We're a healthcare technology vendor selling a care-coordination platform to mid-size health systems (10K–50K bed equivalents). We've been told we have to be on Health Cloud to win the next deal. Current state: zero Salesforce, custom-built on Postgres + Node. We have 18 months. Specifically: we need to support patient onboarding from Epic via FHIR R4, generate care plans for chronic-condition patients based on their conditions + insurance coverage, route assessments to care coordinators, and surface AI-generated next-best-action suggestions for the coordinators. HIPAA is in scope (we have a BAA). What's the right Health Cloud architecture, and what's the realistic 18-month build path? Be honest about what Health Cloud gives us out of the box vs what we have to build.",
+      "expected_output": "Should anchor on Health Cloud data model (Patient as Person Account / Account, CarePlan / CarePlanGoal / CarePlanProblem, EncounterParticipant, Practitioner, Coverage). Should propose Industries FHIR R4 adapter for the Epic integration, with Data Mapper for FHIR → Health Cloud object mapping. Should propose OmniStudio for the assessment workflow (OmniScripts + FlexCards + Integration Procedures). Should propose Agentforce Health agents for next-best-action suggestions with Trust Layer for PHI masking, deterministic Actions gated for any patient-affecting decisions. Should EXPLICITLY DEFER HIPAA compliance specifics (BAA scope, FHIR semantics interpretation, audit retention, minimum necessary access) to healthcare-architect — should not restate HIPAA rules in detail. Should give a realistic phased plan that lets the team learn the platform.",
+      "assertions": [
+        {"text": "Uses Health Cloud data model: Patient (Person Account / Account record type), CarePlan / CarePlanGoal / CarePlanProblem, EncounterParticipant, Practitioner, Coverage", "type": "content_check"},
+        {"text": "Proposes Industries FHIR R4 adapter + Data Mapper for Epic integration, NOT custom Apex FHIR parsing", "type": "content_check"},
+        {"text": "Proposes OmniStudio (OmniScripts + FlexCards + Integration Procedures) for the assessment / care-coordinator workflows", "type": "content_check"},
+        {"text": "Proposes Agentforce Health agents for next-best-action suggestions, with Einstein Trust Layer for PHI masking", "type": "content_check"},
+        {"text": "Stipulates deterministic Apex/Flow Actions (or Agent Script) for any patient-affecting state changes — not LLM judgment", "type": "content_check"},
+        {"text": "EXPLICITLY DEFERS HIPAA interpretation, BAA scope details, FHIR semantics, audit retention policy to healthcare-architect core skill — does NOT restate HIPAA rules in detail", "type": "content_check"},
+        {"text": "Mentions Shield Platform Encryption for PHI at rest as a Salesforce-specific platform capability (without restating HIPAA)", "type": "content_check"},
+        {"text": "Provides a realistic phased 18-month plan that includes platform-learning time, NOT a big-bang go-live", "type": "content_check"},
+        {"text": "Uses current name 'Agentforce Health' (not 'Einstein Health Cloud' or other legacy names)", "type": "content_check"}
+      ],
+      "files": []
+    },
+    {
+      "id": 12,
+      "name": "fintech-fsc-money-movement-agent",
+      "prompt": "We're a digital-first wealth advisor (think Wealthfront-but-with-humans). 200 advisors, $4B AUM. Today our advisors use a homegrown advisor portal on top of our core systems (Apex Clearing for brokerage, custom Postgres for client data). We're moving to Financial Services Cloud over the next 12 months. Specifically: advisors need an FSC-native portal with client profile + portfolio + financial goals + interactions; we want Agentforce agents to help with portfolio review prep, draft client emails, and (carefully) execute deterministic actions like creating rebalance orders pending advisor approval. What's the FSC + Agentforce architecture? Where exactly do we draw the line between LLM and deterministic? Compliance (SEC, FINRA, state reg) is in scope.",
+      "expected_output": "Should anchor on FSC data model (FinancialAccount, FinancialAccountRole, Securities/SecuritiesHolding, InvestmentAccount, FinancialGoal). Should propose MuleSoft Banking Accelerator or Pub/Sub API + custom adapter for Apex Clearing integration. Should propose OmniStudio for advisor flows. Should propose Agentforce FSC agents with EXPLICIT money-movement deterministic gate: agents propose rebalance orders, Apex Action creates the proposal record, advisor approves, deterministic execution triggers. Agent Script for the deterministic flow. Should EXPLICITLY state Salesforce is NOT the ledger / system of record — Apex Clearing is. Salesforce holds derived state and customer-facing context. Should EXPLICITLY DEFER SEC/FINRA/state regulation interpretation to fintech-architect — not restate compliance details. Should layer Einstein Trust Layer (PII masking, zero retention, audit) for any client data in agent flows.",
+      "assertions": [
+        {"text": "Uses FSC data model: FinancialAccount, FinancialAccountRole, Securities / SecuritiesHolding, InvestmentAccount, FinancialGoal", "type": "content_check"},
+        {"text": "Proposes MuleSoft Banking Accelerator or Pub/Sub API for Apex Clearing integration (not custom REST)", "type": "content_check"},
+        {"text": "Proposes OmniStudio (OmniScripts + FlexCards + Integration Procedures) for the advisor portal workflows", "type": "content_check"},
+        {"text": "EXPLICITLY states Salesforce is NOT the ledger / system of record for transactions — Apex Clearing is. Salesforce holds derived state and customer-facing context.", "type": "content_check"},
+        {"text": "Proposes Agentforce FSC agents with explicit deterministic money-movement gate: agent proposes, Apex deterministic Action creates record, advisor approves, deterministic execution", "type": "content_check"},
+        {"text": "Recommends Agent Script (or explicit deterministic dispatch) for the rebalance / order execution flow — not LLM judgment", "type": "content_check"},
+        {"text": "EXPLICITLY DEFERS SEC/FINRA/state regulation interpretation to fintech-architect core skill — does NOT restate financial compliance rules in detail", "type": "content_check"},
+        {"text": "Layers Einstein Trust Layer (PII masking, zero retention, audit) for client data in agent flows", "type": "content_check"},
+        {"text": "Uses current name 'Agentforce Financial Services' (not 'Einstein FSC' or other legacy)", "type": "content_check"}
+      ],
+      "files": []
+    }
+  ]
+}

@@ -7,7 +7,7 @@ license: MIT
 compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "2.0.0"
+  version: "3.0.0"
   category: etyb
 ---
 
@@ -25,6 +25,7 @@ Read these on demand. Each module is self-contained.
 |--------|---------|-----------|
 | [`core/charter.md`](core/charter.md) | CTO identity, Tier 0-4 classification, value proposition, anti-patterns | **Always read first** |
 | [`core/team-registry.md`](core/team-registry.md) | 20 specialists, domain detection, overlap resolution rules | Classifying which skill(s) to read |
+| [`core/stack-registry.md`](core/stack-registry.md) | Tech-stack overlays (Salesforce, etc.), detection signals, role-overlay loading | After team-registry; check whenever request mentions a tech platform |
 | [`core/gates.md`](core/gates.md) | 5-gate sequence, enforcement actions, plan lifecycle, state tracking | Tier 3+ requests; when a plan exists |
 | [`core/expert-mandating.md`](core/expert-mandating.md) | Mandatory expert matrix, continuity rules | Tier 3+ requests |
 | [`core/coordination-patterns.md`](core/coordination-patterns.md) | Sequential / parallel / hub-spoke / domain-augmented / incident | Multi-team work |
