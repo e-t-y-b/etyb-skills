@@ -155,6 +155,31 @@ if [[ -d "$TARGET_DIR/orchestrator" ]]; then
   echo ""
 fi
 
+# -------- v3.x → v4.x migration: rewrite stale hook paths in .claude/settings.json --------
+SETTINGS=".claude/settings.json"
+if [[ -f "$SETTINGS" ]] && grep -qE 'skills/(tdd|review|git-workflow|plan-execution)-protocol/hooks/' "$SETTINGS"; then
+  echo "⚠ found v3.x hook paths in $SETTINGS"
+  echo "  in 4.0.0 protocol hooks moved to skills/etyb/references/protocols/<name>/hooks/."
+  echo "  Stale paths mean hooks silently stop firing."
+  REPLY="n"
+  if $FORCE || [[ "$ON_CONFLICT" == "replace" ]]; then
+    REPLY="y"
+  elif [[ "$ON_CONFLICT" != "keep" && "$ON_CONFLICT" != "skip" ]]; then
+    read -r -p "  rewrite hook paths in $SETTINGS? [y/N] " REPLY
+  fi
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+    if $DRY_RUN; then
+      echo "  [DRY-RUN] would rewrite skills/<protocol>-protocol/hooks/ → skills/etyb/references/protocols/<protocol>-protocol/hooks/"
+    else
+      cp "$SETTINGS" "$SETTINGS.bak.$(date +%s)"
+      sed -i.tmp -E 's|skills/(tdd|review|git-workflow|plan-execution)-protocol/hooks/|skills/etyb/references/protocols/\1-protocol/hooks/|g' "$SETTINGS"
+      rm -f "$SETTINGS.tmp"
+      echo "  ✓ rewrote $SETTINGS (backup preserved)"
+    fi
+  fi
+  echo ""
+fi
+
 # -------- v3.x → v4.x migration: sibling skills → references --------
 V3_SIBLINGS=()
 for s in "${CORE_SPECIALISTS[@]}" "${ALL_PROTOCOLS[@]}" "${ALL_VERTICALS[@]}"; do

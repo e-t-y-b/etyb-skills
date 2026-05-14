@@ -13,7 +13,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-HOOK="$REPO_ROOT/skills/plan-execution-protocol/hooks/post-edit-log.sh"
+HOOK="$REPO_ROOT/skills/etyb/references/protocols/plan-execution-protocol/hooks/post-edit-log.sh"
 
 if [[ ! -x "$HOOK" ]]; then
   echo "FAIL: hook script not executable at $HOOK" >&2
