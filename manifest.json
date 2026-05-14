@@ -1,49 +1,44 @@
 {
   "bundle": {
     "name": "etyb-skills",
-    "version": "3.0.0",
-    "published_at": "2026-05-12",
+    "version": "4.0.0",
+    "published_at": "2026-05-14",
     "manifest_url": "https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/manifest.json",
     "repository": "https://github.com/e-t-y-b/etyb-skills",
     "homepage": "https://etyb.ai",
-    "changelog": "https://github.com/e-t-y-b/etyb-skills/blob/main/CHANGELOG.md",
+    "changelog": "https://etyb.ai/changelog",
     "license": "MIT"
   },
-  "skills": {
-    "etyb": "3.0.0",
-    "research-analyst": "3.0.0",
-    "system-architect": "3.0.0",
-    "frontend-architect": "3.0.0",
-    "backend-architect": "3.0.0",
-    "database-architect": "3.0.0",
-    "mobile-architect": "3.0.0",
-    "qa-engineer": "3.0.0",
-    "devops-engineer": "3.0.0",
-    "security-engineer": "3.0.0",
-    "sre-engineer": "3.0.0",
-    "ai-ml-engineer": "3.0.0",
-    "technical-writer": "3.0.0",
-    "project-planner": "3.0.0",
-    "code-reviewer": "3.0.0",
-    "social-platform-architect": "3.0.0",
-    "e-commerce-architect": "3.0.0",
-    "fintech-architect": "3.0.0",
-    "saas-architect": "3.0.0",
-    "real-time-architect": "3.0.0",
-    "healthcare-architect": "3.0.0",
-    "tdd-protocol": "3.0.0",
-    "brainstorm-protocol": "3.0.0",
-    "review-protocol": "3.0.0",
-    "subagent-protocol": "3.0.0",
-    "git-workflow-protocol": "3.0.0",
-    "plan-execution-protocol": "3.0.0",
-    "skill-evolution-protocol": "3.0.0",
-    "verification-protocol": "3.0.0",
-    "debugging-protocol": "3.0.0"
+  "skill": {
+    "etyb": "4.0.0"
+  },
+  "tiers": {
+    "lite": {
+      "description": "ETYB CTO + 9 always-on protocols + 3 essential specialists. Solo devs, students, and anyone exploring.",
+      "specialists": [
+        "system-architect",
+        "backend-architect",
+        "frontend-architect"
+      ],
+      "protocols": "all",
+      "verticals": []
+    },
+    "core": {
+      "description": "ETYB CTO + 9 always-on protocols + 14 core specialists. Most teams shipping production software.",
+      "specialists": "all",
+      "protocols": "all",
+      "verticals": []
+    },
+    "pro": {
+      "description": "Everything in Core + 6 vertical-domain specialists (saas, fintech, healthcare, e-commerce, real-time, social). Domain-specific shops and platforms.",
+      "specialists": "all",
+      "protocols": "all",
+      "verticals": "all"
+    }
   },
   "stacks": {
     "salesforce": {
-      "version": "3.0.0",
+      "version": "4.0.0",
       "last_verified_release": "Spring '26",
       "verified_on": "2026-05-12",
       "applies_to_roles": [
@@ -59,7 +54,8 @@
         "healthcare-architect",
         "fintech-architect"
       ],
-      "deferred_roles": []
+      "deferred_roles": [],
+      "available_on_tiers": ["core", "pro"]
     }
   },
   "platforms": {

@@ -4,101 +4,17 @@
     "name": "e-t-y-b"
   },
   "metadata": {
-    "description": "Virtual engineering company \u2014 30 AI agent skills",
-    "version": "3.0.0"
+    "description": "ETYB — your virtual CTO and engineering team, as one coordinated skill",
+    "version": "4.0.0"
   },
   "plugins": [
     {
-      "name": "etyb-full",
-      "description": "Complete virtual engineering team \u2014 ETYB, 14 core teams, 6 domain specialists, 9 process protocols",
+      "name": "etyb",
+      "description": "ETYB — virtual CTO + 20 specialists + 9 protocols + 6 verticals. Full Pro installation. Use scripts/install.sh --tier lite|core to install a smaller subset.",
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/etyb",
-        "./skills/research-analyst",
-        "./skills/system-architect",
-        "./skills/frontend-architect",
-        "./skills/backend-architect",
-        "./skills/database-architect",
-        "./skills/mobile-architect",
-        "./skills/qa-engineer",
-        "./skills/devops-engineer",
-        "./skills/security-engineer",
-        "./skills/sre-engineer",
-        "./skills/ai-ml-engineer",
-        "./skills/technical-writer",
-        "./skills/project-planner",
-        "./skills/code-reviewer",
-        "./skills/social-platform-architect",
-        "./skills/e-commerce-architect",
-        "./skills/fintech-architect",
-        "./skills/saas-architect",
-        "./skills/real-time-architect",
-        "./skills/healthcare-architect",
-        "./skills/tdd-protocol",
-        "./skills/brainstorm-protocol",
-        "./skills/review-protocol",
-        "./skills/subagent-protocol",
-        "./skills/git-workflow-protocol",
-        "./skills/plan-execution-protocol",
-        "./skills/skill-evolution-protocol",
-        "./skills/verification-protocol",
-        "./skills/debugging-protocol"
-      ]
-    },
-    {
-      "name": "etyb-process-protocols",
-      "description": "9 always-on engineering disciplines \u2014 TDD, review, subagents, git workflow, plan execution, brainstorming, self-improvement, verification, debugging",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/etyb",
-        "./skills/tdd-protocol",
-        "./skills/brainstorm-protocol",
-        "./skills/review-protocol",
-        "./skills/subagent-protocol",
-        "./skills/git-workflow-protocol",
-        "./skills/plan-execution-protocol",
-        "./skills/skill-evolution-protocol",
-        "./skills/verification-protocol",
-        "./skills/debugging-protocol"
-      ]
-    },
-    {
-      "name": "etyb-core-team",
-      "description": "ETYB + 14 core engineering teams covering the full SDLC",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/etyb",
-        "./skills/research-analyst",
-        "./skills/system-architect",
-        "./skills/frontend-architect",
-        "./skills/backend-architect",
-        "./skills/database-architect",
-        "./skills/mobile-architect",
-        "./skills/qa-engineer",
-        "./skills/devops-engineer",
-        "./skills/security-engineer",
-        "./skills/sre-engineer",
-        "./skills/ai-ml-engineer",
-        "./skills/technical-writer",
-        "./skills/project-planner",
-        "./skills/code-reviewer"
-      ]
-    },
-    {
-      "name": "etyb-verticals",
-      "description": "6 domain-specific architects \u2014 fintech, healthcare, e-commerce, SaaS, real-time, social platforms",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/social-platform-architect",
-        "./skills/e-commerce-architect",
-        "./skills/fintech-architect",
-        "./skills/saas-architect",
-        "./skills/real-time-architect",
-        "./skills/healthcare-architect"
+        "./skills/etyb"
       ]
     }
   ]
