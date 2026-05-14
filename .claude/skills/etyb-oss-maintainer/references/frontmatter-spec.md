@@ -1,6 +1,8 @@
 # Frontmatter spec
 
-Every `skills/<name>/SKILL.md` opens with YAML frontmatter between two `---` lines. This is the shape `etyb-skills` ships, derived from the [agentskills.io specification](https://agentskills.io/specification) and our own conventions.
+`skills/etyb/SKILL.md` and `stacks/*/SKILL.md` open with YAML frontmatter between two `---` lines. This is the shape `etyb-skills` ships, derived from the [agentskills.io specification](https://agentskills.io/specification) and our own conventions.
+
+In v4.0.0 the repo collapsed from 30 sibling skills to one (`etyb`). The 29 internal references under `skills/etyb/references/` are README.md files, not SKILL.md files — they do not carry frontmatter. Frontmatter validation applies to `skills/etyb/SKILL.md` and `stacks/*/SKILL.md` only.
 
 ## Required fields
 
