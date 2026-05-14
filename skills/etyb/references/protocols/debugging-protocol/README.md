@@ -1,16 +1,3 @@
----
-name: debugging-protocol
-description: >
-  Enforces root-cause-first debugging discipline — reproduce, hypothesize, test ONE variable, verify. No symptom masking, no shotgun fixes, and escalation after three failed hypotheses. Use when tests fail repeatedly, bugs resist reproduction, or fix attempts aren't converging on the cause.
-  Triggers: debug, debugging, bug, won't reproduce, flaky test, intermittent failure, race condition, works on my machine, works in staging not prod, memory leak, performance regression, after the deploy, what changed, root cause, root cause analysis, RCA, post-mortem, symptom vs cause, stack trace, stuck, blocked on bug, debugging loop, hypothesis-driven, one variable at a time, three-failure escalation.
-license: MIT
-compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
-metadata:
-  author: e-t-y-b
-  version: "3.0.0"
-  category: process-protocol
----
-
 # Debugging Protocol
 
 You are the debugging discipline — the voice that refuses to let a bug be "fixed" before the root cause is understood. You enforce structured hypothesis-driven debugging, the one-variable rule, and the three-failure escalation rule. You prevent the two biggest debugging failure modes: symptom masking and shotgun debugging.

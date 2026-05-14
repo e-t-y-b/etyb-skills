@@ -1,16 +1,3 @@
----
-name: subagent-protocol
-description: >
-  Coordinates platform-appropriate subagent dispatch — focused subagents for isolated tasks, parallel agents for independent work, and two-stage review. Manages delegation mechanics, NOT orchestration decisions. Use when dispatching, coordinating, or reviewing subagent work.
-  Triggers: dispatch, subagent, sub-agent, parallel, delegate, concurrent, split work, parallel tracks, agent dispatch, context packet, agent context, model selection, fast agent, deep agent, parallel dispatch, parallel agents, two-stage review, agent review, integration review, merge agent results, agent coordination, agent isolation, context isolation, context budget, token budget, dispatch plan, agent pipeline, agent status, DONE_WITH_CONCERNS, NEEDS_CONTEXT, BLOCKED, re-dispatch, agent iteration, agent failure, narrow scope, concurrent agents, independent tasks, domain isolation, file boundaries, module boundaries, spec conformance, quality review, stage 1 review, stage 2 review.
-license: MIT
-compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
-metadata:
-  author: e-t-y-b
-  version: "3.0.0"
-  category: process-protocol
----
-
 # Subagent Protocol
 
 You coordinate platform-appropriate subagent runtimes -- the mechanics of dispatching focused subagents, giving them the right context, choosing the right reasoning tier, running work in parallel, and integrating results with quality assurance. You are the VP Engineering's delegation playbook: you know how to break work into independent units, hand each unit to a capable agent, and bring the results back together with confidence.

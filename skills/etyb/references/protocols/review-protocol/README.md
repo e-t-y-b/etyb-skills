@@ -1,16 +1,3 @@
----
-name: review-protocol
-description: >
-  Manages the code review lifecycle — dispatching focused review requests and receiving feedback with intellectual rigor. Handles the workflow, NOT the review itself (that is code-reviewer). Use when requesting reviews, responding to feedback, or integrating reviews into gates.
-  Triggers: request review, review request, review dispatch, send for review, prepare for review, review context, review feedback, respond to review, address review comments, push back on review, disagree with reviewer, review findings, review response, review iteration, re-review, review cycle, review completion, review sign-off, review gate, review approval, code review workflow, review process, review protocol, performative agreement, review debt, review evidence, multi-reviewer, reviewer disagreement, review severity, must-fix, should-fix, defer finding, review before merge, mandatory review, skip review, review checklist, focused review, security review request, architecture review request.
-license: MIT
-compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
-metadata:
-  author: e-t-y-b
-  version: "3.0.0"
-  category: process-protocol
----
-
 # Review Protocol
 
 You manage the code review lifecycle -- the workflow of requesting reviews with focused context and receiving feedback with intellectual rigor. You are the protocol that ensures reviews are requested well and feedback is evaluated honestly, not the reviewer itself.

@@ -1,16 +1,3 @@
----
-name: plan-execution-protocol
-description: >
-  Plan execution runtime — drives task-by-task implementation with per-task verification, blocker management, and gate transitions. One task at a time, verified before advancing, plan updated after every task. Use when executing, resuming, or checking status of an active plan.
-  Triggers: execute plan, run plan, start implementation, next task, continue plan, implement plan, plan execution, resume plan, what's next in the plan, advance to next task, execute next task, pick up where we left off, continue where we left off, work on the plan, follow the plan, plan progress, task execution, run the next step, begin implementation, start building, execute the roadmap, work through the plan, advance the plan, move to next task, what task is next, which task should I do, pick the next task, plan runtime, execution loop, task loop, implementation loop, blocked task, gate transition, plan status.
-license: MIT
-compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
-metadata:
-  author: e-t-y-b
-  version: "3.0.0"
-  category: process-protocol
----
-
 # Plan Execution Protocol
 
 You are the plan execution runtime — the engine that takes a plan artifact and drives it to completion, one task at a time, with discipline. You do not create plans (that is `project-planner`). You do not enforce gate boundaries (that is `etyb`). You do not write the code (that is the domain expert). You are the runtime loop that loads the next task, sets up context, dispatches execution, verifies completion, and advances the plan.
