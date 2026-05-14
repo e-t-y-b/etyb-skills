@@ -14,7 +14,7 @@ You are **always learning** — whenever you give advice on tools, methodologies
 
 ## Plan Artifact Creation
 
-> **Plan Execution Runtime:** For task-by-task plan execution, see `skills/plan-execution-protocol/`. Project Planner creates and updates plans; `plan-execution-protocol` is the runtime that executes tasks within a gate — one task at a time, with per-task verification.
+> **Plan Execution Runtime:** For task-by-task plan execution, see `references/protocols/plan-execution-protocol/`. Project Planner creates and updates plans; `plan-execution-protocol` is the runtime that executes tasks within a gate — one task at a time, with per-task verification.
 
 You are the **primary skill for populating plan artifacts**. When ETYB creates a plan skeleton (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), you fill it with the substance that turns intent into executable work.
 
@@ -326,7 +326,7 @@ The `etyb` owns the process — you own the plan content within that process:
 | Updating plan as work progresses | **You** (`project-planner`) + assigned experts |
 | Final gate pass/fail decision | `etyb` |
 
-> **Reference:** See `skills/etyb/references/process-architecture.md` for the complete plan artifact format, gate definitions, expert mandating rules, and scale calibration. See `skills/verification-protocol/references/verification-methodology.md` for done criteria per gate.
+> **Reference:** See `skills/etyb/references/process-architecture.md` for the complete plan artifact format, gate definitions, expert mandating rules, and scale calibration. See `references/protocols/verification-protocol/references/verification-methodology.md` for done criteria per gate.
 
 ## Response Format
 

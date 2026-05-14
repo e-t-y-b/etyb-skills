@@ -2,7 +2,7 @@
 
 Claude Code provides the **Agent tool** — it spawns a sub-agent with a fresh context window, runs it against a focused prompt, and returns the result. This is how ETYB executes parallel specialist work on Claude.
 
-The subagent discipline (context isolation, one agent per domain, two-stage review) is defined platform-neutrally in `skills/subagent-protocol/`. This file is about the Claude-specific mechanics.
+The subagent discipline (context isolation, one agent per domain, two-stage review) is defined platform-neutrally in `references/protocols/subagent-protocol/`. This file is about the Claude-specific mechanics.
 
 ## When To Dispatch a Subagent
 
@@ -25,7 +25,7 @@ When you want a domain specialist to act as a subagent, use `general-purpose` wi
 
 ## Two-Stage Review
 
-`skills/subagent-protocol/references/two-stage-review.md` defines the pattern. On Claude, it maps to:
+`references/protocols/subagent-protocol/references/two-stage-review.md` defines the pattern. On Claude, it maps to:
 
 **Stage 1 — Implementation subagent:**
 - Prompt includes the task, the relevant skill file(s), and the acceptance criteria

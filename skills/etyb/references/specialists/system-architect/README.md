@@ -234,7 +234,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-System architect verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+System architect verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a system architecture perspective, verify:
 

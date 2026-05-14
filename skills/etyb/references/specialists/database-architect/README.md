@@ -263,7 +263,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-Database-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+Database-specific verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a database perspective, verify:
 

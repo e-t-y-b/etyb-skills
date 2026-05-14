@@ -303,7 +303,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-E-commerce-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+E-commerce-specific verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from an e-commerce perspective, verify:
 

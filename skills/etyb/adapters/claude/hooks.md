@@ -8,13 +8,13 @@ ETYB's process protocols wire up five hooks to enforce the always-on disciplines
 
 | Hook | Fires On | Enforces | Protocol Skill |
 |------|----------|----------|----------------|
-| `pre-edit-check` | `PreToolUse` — `Edit`, `Write` | **TDD** — warns if editing source code without a corresponding test file | `skills/tdd-protocol/` |
-| `post-test-log` | `PostToolUse` — `Bash` | **TDD** — logs test results for verification evidence | `skills/tdd-protocol/` |
-| `pre-commit-review-check` | `PreToolUse` — `Bash` (git commit) | **Review** — warns if committing without review evidence | `skills/review-protocol/` |
-| `pre-merge-verify` | `PreToolUse` — `Bash` (git merge) | **Branch Safety** — blocks merge if tests fail | `skills/git-workflow-protocol/` |
-| `post-edit-log` | `PostToolUse` — `Edit`, `Write` | **Plan Execution** — logs edits for plan traceability | `skills/plan-execution-protocol/` |
+| `pre-edit-check` | `PreToolUse` — `Edit`, `Write` | **TDD** — warns if editing source code without a corresponding test file | `references/protocols/tdd-protocol/` |
+| `post-test-log` | `PostToolUse` — `Bash` | **TDD** — logs test results for verification evidence | `references/protocols/tdd-protocol/` |
+| `pre-commit-review-check` | `PreToolUse` — `Bash` (git commit) | **Review** — warns if committing without review evidence | `references/protocols/review-protocol/` |
+| `pre-merge-verify` | `PreToolUse` — `Bash` (git merge) | **Branch Safety** — blocks merge if tests fail | `references/protocols/git-workflow-protocol/` |
+| `post-edit-log` | `PostToolUse` — `Edit`, `Write` | **Plan Execution** — logs edits for plan traceability | `references/protocols/plan-execution-protocol/` |
 
-Hook scripts live alongside the protocol skills they enforce, e.g. `skills/tdd-protocol/hooks/pre-edit-check.sh`.
+Hook scripts live alongside the protocol skills they enforce, e.g. `references/protocols/tdd-protocol/hooks/pre-edit-check.sh`.
 
 ## Current `.claude/settings.json` Wiring
 
@@ -22,13 +22,13 @@ Hook scripts live alongside the protocol skills they enforce, e.g. `skills/tdd-p
 {
   "hooks": {
     "PreToolUse": [
-      { "matcher": "Edit|Write", "hook": "skills/tdd-protocol/hooks/pre-edit-check.sh" },
-      { "matcher": "Bash", "hook": "skills/git-workflow-protocol/hooks/pre-merge-verify.sh" },
-      { "matcher": "Bash", "hook": "skills/review-protocol/hooks/pre-commit-review-check.sh" }
+      { "matcher": "Edit|Write", "hook": "references/protocols/tdd-protocol/hooks/pre-edit-check.sh" },
+      { "matcher": "Bash", "hook": "references/protocols/git-workflow-protocol/hooks/pre-merge-verify.sh" },
+      { "matcher": "Bash", "hook": "references/protocols/review-protocol/hooks/pre-commit-review-check.sh" }
     ],
     "PostToolUse": [
-      { "matcher": "Bash", "hook": "skills/tdd-protocol/hooks/post-test-log.sh" },
-      { "matcher": "Edit|Write", "hook": "skills/plan-execution-protocol/hooks/post-edit-log.sh" }
+      { "matcher": "Bash", "hook": "references/protocols/tdd-protocol/hooks/post-test-log.sh" },
+      { "matcher": "Edit|Write", "hook": "references/protocols/plan-execution-protocol/hooks/post-edit-log.sh" }
     ]
   }
 }

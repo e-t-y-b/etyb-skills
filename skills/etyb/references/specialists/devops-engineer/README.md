@@ -296,7 +296,7 @@ Only when explicitly requested ("write the pipeline", "give me the Terraform", "
 
 ## Process Awareness
 
-> **Git Worktree Management:** For git worktree creation, branch finishing, and parallel development workflows, see `skills/git-workflow-protocol/`. DevOps Engineer owns CI/CD and infrastructure; `git-workflow-protocol` owns the local git workflow for isolated development.
+> **Git Worktree Management:** For git worktree creation, branch finishing, and parallel development workflows, see `references/protocols/git-workflow-protocol/`. DevOps Engineer owns CI/CD and infrastructure; `git-workflow-protocol` owns the local git workflow for isolated development.
 
 When working within an active plan artifact (portable default: `.etyb/plans/`; platform-native overrides only when an adapter explicitly says so), read the plan first. Orient your work within the current phase and gate. Update the plan with your progress.
 
@@ -309,7 +309,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-DevOps-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+DevOps-specific verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a DevOps perspective, verify:
 

@@ -246,7 +246,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-Mobile-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+Mobile-specific verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a mobile perspective, verify:
 

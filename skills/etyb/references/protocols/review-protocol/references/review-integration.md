@@ -307,9 +307,9 @@ If debt is growing, the team is not addressing review feedback effectively. This
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Code Reviewer | `skills/code-reviewer/SKILL.md` | For review dimensions, severity framework, two-stage protocol |
-| Verification Protocol | `skills/verification-protocol/references/verification-methodology.md` | For universal gate criteria and completion report format |
+| Code Reviewer | `references/specialists/code-reviewer/README.md` | For review dimensions, severity framework, two-stage protocol |
+| Verification Protocol | `references/protocols/verification-protocol/references/verification-methodology.md` | For universal gate criteria and completion report format |
 | Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, tier classification |
-| QA Test Strategy | `skills/qa-engineer/SKILL.md` | For test coverage requirements at the Verify gate |
+| QA Test Strategy | `references/specialists/qa-engineer/README.md` | For test coverage requirements at the Verify gate |
 | Review Dispatch | `review-protocol/references/review-dispatch.md` | For constructing re-review requests |
 | Feedback Evaluation | `review-protocol/references/feedback-evaluation.md` | For evaluating findings from re-reviews |

@@ -1,51 +1,51 @@
 # Engineering Culture — Always-On Protocols
 
-These are non-negotiable engineering disciplines. They apply to ALL work, ALL tiers, ALL gates. They are your organization's culture, not optional tools. When you need the detailed HOW, read the protocol's SKILL.md and references.
+These are non-negotiable engineering disciplines. They apply to ALL work, ALL tiers, ALL gates. They are your organization's culture, not optional tools. When you need the detailed HOW, read the protocol's `README.md` and helper files under `references/protocols/<name>/`.
 
 ## 1. TDD Discipline (always on)
 
 NO production code without a failing test first. Red-green-refactor on every change. If a platform adapter provides runtime guardrails, enforcement becomes deterministic or partially runtime-enforced; otherwise it remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
-→ Deep knowledge: `skills/tdd-protocol/SKILL.md` + `skills/tdd-protocol/references/`
+→ Deep knowledge: `references/protocols/tdd-protocol/README.md` + `references/protocols/tdd-protocol/references/`
 
 ## 2. Verification Discipline (always on)
 
 Evidence before claims, always. Run commands fresh, read full output, verify exit codes. Never say "done" without proof. The 5-question protocol applies to EVERY completion.
-→ Deep knowledge: `skills/verification-protocol/references/verification-methodology.md`
+→ Deep knowledge: `references/protocols/verification-protocol/references/verification-methodology.md`
 
 ## 3. Review Discipline (always on)
 
 No performative agreement. Evaluate every finding on its merits. Push back with evidence when the reviewer is wrong. Request reviews with focused context. Platforms with runtime support may enforce or remind review-before-commit; otherwise this remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
-→ Deep knowledge: `skills/review-protocol/SKILL.md` + `skills/review-protocol/references/`
+→ Deep knowledge: `references/protocols/review-protocol/README.md` + `references/protocols/review-protocol/references/`
 
 ## 4. Plan Execution Discipline (always on when a plan exists)
 
 One task at a time. Verify before advancing. Update the plan after every task. Never skip tasks or jump gates.
-→ Deep knowledge: `skills/plan-execution-protocol/SKILL.md` + references
+→ Deep knowledge: `references/protocols/plan-execution-protocol/README.md` + references
 
 ## 5. Brainstorm-First Discipline (always on for ambiguous requests)
 
 Explore the problem space before the solution space. Never jump to implementation on an ambiguous request. Produce a design brief before entering the Design gate.
-→ Deep knowledge: `skills/brainstorm-protocol/SKILL.md` + references
+→ Deep knowledge: `references/protocols/brainstorm-protocol/README.md` + references
 
 ## 6. Branch Safety Discipline (always on)
 
 Never merge or PR without green tests compared against baseline. Platforms with runtime support may enforce or guard merge behavior; otherwise this remains model-trusted (see `adapters/{platform}/ADAPTER.md` and `enforcement-notes.md` if present).
-→ Deep knowledge: `skills/git-workflow-protocol/SKILL.md` + references
+→ Deep knowledge: `references/protocols/git-workflow-protocol/README.md` + references
 
 ## 7. Subagent Coordination Discipline (always on for parallel work)
 
 One agent per independent domain. No shared mutable state. Two-stage review for all subagent output.
-→ Deep knowledge: `skills/subagent-protocol/SKILL.md` + references
+→ Deep knowledge: `references/protocols/subagent-protocol/README.md` + references
 
 ## 8. Self-Improvement Discipline (always on)
 
 No skill change without a failing eval first. The system gets better over time.
-→ Deep knowledge: `skills/skill-evolution-protocol/SKILL.md` + references
+→ Deep knowledge: `references/protocols/skill-evolution-protocol/README.md` + references
 
 ## 9. Debugging Discipline (always on during troubleshooting)
 
 Root cause first. One variable at a time. 3-failure escalation.
-→ Deep knowledge: `skills/debugging-protocol/references/debugging-methodology.md`
+→ Deep knowledge: `references/protocols/debugging-protocol/references/debugging-methodology.md`
 
 ## Debugging Protocol Activation
 
@@ -85,4 +85,4 @@ After resolving the bug:
 3. Update the plan artifact — was the root cause a process gap?
 4. If process gap identified, create a follow-up task to fix the process
 
-> **Reference:** See `skills/debugging-protocol/references/debugging-methodology.md` for the complete debugging methodology, hypothesis-driven debugging, root cause verification, and decision trees.
+> **Reference:** See `references/protocols/debugging-protocol/references/debugging-methodology.md` for the complete debugging methodology, hypothesis-driven debugging, root cause verification, and decision trees.

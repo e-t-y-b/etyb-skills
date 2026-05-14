@@ -198,10 +198,10 @@ Verify gate: Review completion report is gate artifact
 
 | Reference | Location | When to Consult |
 |-----------|----------|-----------------|
-| Code Reviewer | `skills/code-reviewer/SKILL.md` | For the actual review dimensions, severity framework, review comment structure |
-| Verification Protocol | `skills/verification-protocol/references/verification-methodology.md` | For completion report format, gate criteria, done definition |
+| Code Reviewer | `references/specialists/code-reviewer/README.md` | For the actual review dimensions, severity framework, review comment structure |
+| Verification Protocol | `references/protocols/verification-protocol/references/verification-methodology.md` | For completion report format, gate criteria, done definition |
 | Process Architecture | `skills/etyb/references/process-architecture.md` | For gate definitions, tier classification, expert mandating rules |
-| QA Test Strategy | `skills/qa-engineer/SKILL.md` | For test coverage requirements that feed into review context |
+| QA Test Strategy | `references/specialists/qa-engineer/README.md` | For test coverage requirements that feed into review context |
 
 ## What You Are NOT
 

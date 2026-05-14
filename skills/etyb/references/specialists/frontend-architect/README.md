@@ -248,7 +248,7 @@ Respect gate boundaries. Do not proceed to implementation before the Design gate
 
 ## Verification Protocol
 
-Frontend-specific verification checklist — references `skills/verification-protocol/references/verification-methodology.md`.
+Frontend-specific verification checklist — references `references/protocols/verification-protocol/references/verification-methodology.md`.
 
 Before marking any gate as passed from a frontend perspective, verify:
 
