@@ -2,6 +2,56 @@
 
 All notable changes to ETYB Skills are documented here. Format is loosely based on [Keep a Changelog](https://keepachangelog.com/). Versions follow [SemVer](https://semver.org/).
 
+The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB response links there.
+
+## [4.0.0] — 2026-05-14
+
+**One brand, one channel. 30 skills collapse into one — `/etyb`.** v4 is a structural rewrite of how ETYB ships. Where v3 surfaced 30 separate slash commands (one per specialist + protocol + vertical), v4 ships a single coordinated skill that holds all 29 of those as internal references. The user always talks to `/etyb`; ETYB silently routes to the right expertise. Every Tier 1-4 response is signed (`ETYB · <role-engaged>`) and links the public changelog — so the brand becomes the single channel for both expertise and updates.
+
+### Why this is a major release
+
+- **Slash-command pollution gone.** v3 had 30 trigger surfaces competing at activation time. v4 has one. The router becomes ETYB's responsibility, not Claude's.
+- **Tier-based installs.** Three install tiers (`lite`, `core`, `pro`) ship different subsets of internal references. Solo devs get a small footprint; domain shops get verticals. Same `/etyb`, different breadth.
+- **Brand consolidation.** Every response now identifies as ETYB and links to `etyb.ai/changelog`. Users don't have to remember 30 names; they remember one.
+- **Skill-creator-compliant.** This aligns the repo with Anthropic's Domain Organization guidance: one skill with internal `references/<variant>/` files, rather than 30 sibling skills.
+
+### Added
+
+- **`skills/etyb/references/specialists/`** — 14 core specialist READMEs (was: `skills/<name>/SKILL.md`).
+- **`skills/etyb/references/protocols/`** — 9 always-on protocol READMEs.
+- **`skills/etyb/references/verticals/`** — 6 vertical-domain READMEs (Pro tier only).
+- **`skills/etyb/core/signature.md`** — output template appended to every Tier 1-4 response: a divider line, `ETYB · <role-engaged>`, and `What's new — etyb.ai/changelog`. Tier 0 skips the signature; Tier 2 incidents skip the changelog line to keep firefighting output lean.
+- **Tier system in `manifest.json`** — declares which references each tier installs. Replaces the v3 bundle system.
+- **v3→v4 migration check in `scripts/install.sh`** — detects sibling skills from v3.x installs (`research-analyst/`, `tdd-protocol/`, etc.) and offers to back them up so they don't compete with `/etyb` at trigger time.
+- **`scripts/maintainer/v4-migrate-skill.sh`** — the migration helper used to move the 29 sibling skills into internal references. Kept in the repo for future similar restructures.
+
+### Changed
+
+- **`skills/etyb/SKILL.md`** — new description optimized for v4 collapsed routing (~210 words, category-level triggers rather than enumerated keywords from 29 deleted skills). New "Internal References" section documenting the three reference libraries and tier-dependent availability.
+- **`skills/etyb/core/team-registry.md`, `core/charter.md`, `core/always-on-protocols.md`, all other core files** — references rewritten from `skills/<name>/` paths to `references/<library>/<name>/` paths.
+- **`scripts/install.sh`** — rewritten around `--tier <lite|core|pro>`. Always copies `skills/etyb/`, prunes references not in the chosen tier.
+- **`.claude-plugin/marketplace.json`** — one plugin (`etyb`) that installs the full Pro version. Tier selection is a CLI-installer concern, not a marketplace concern.
+- **`manifest.json`** — `skills: {...}` map collapses to `skill: {etyb: 4.0.0}`. New `tiers` block. Stack `available_on_tiers` field added.
+- **`README.md`, `CLAUDE.md`, `STACKS.md`** — rewritten around the one-skill-three-tiers model.
+
+### Removed
+
+- **29 sibling skill directories** (`skills/research-analyst/`, `skills/tdd-protocol/`, `skills/fintech-architect/`, etc.) — content lives under `skills/etyb/references/`.
+- **`bundles/`** — 4 plain-text bundle files. Replaced by `manifest.json`'s `tiers` block.
+- **`scripts/generate-bundles.py`** — no longer needed.
+- **Per-sibling `evals/`** — each sibling shipped its own eval set. Those targeted the deleted shape; we'll rebuild a single eval set for `/etyb` once the description is empirically tuned.
+
+### Migration notes for v3 users
+
+- `/plugin install etyb-full@etyb-skills` → `/plugin install etyb@etyb-skills`
+- `./scripts/install.sh --bundle process-protocols` → `./scripts/install.sh --tier lite`
+- `./scripts/install.sh --bundle core-team` → `./scripts/install.sh --tier core`
+- `./scripts/install.sh --bundle verticals` → `./scripts/install.sh --tier pro`
+- `./scripts/install.sh --skills X,Y,Z` (à la carte) — removed. The CLI installer is now tier-based. Drop to `--tier lite` for the smallest footprint, or fork the repo if you need a custom slice.
+- Old slash commands like `/backend-architect` no longer exist. Use `/etyb` and describe your task; ETYB will route to the backend-architect reference internally.
+
+v3 remains installable for one release cycle (deprecation banner on `main`); plan to migrate before the v3 EOL date in the [public changelog](https://etyb.ai/changelog).
+
 ## [3.0.0] — 2026-05-12
 
 **Stack Packs are here. Salesforce is live.** ETYB now ships tech-stack expertise alongside the engineering team — knowledge overlays that load on top of the existing 20 specialists whenever the work involves a specific platform. The first pack ships full Salesforce coverage current to Spring '26, capturing the 2025–2026 platform reset (Agentforce, Data 360, MCP-native dev, Apex Cursors, ECA migration, MFA mandate) that pre-2025 training data misses. Same pattern will land for AWS, GCP, Azure, Vercel, Supabase, Snowflake, Databricks, Stripe, Shopify, SAP, and ServiceNow.

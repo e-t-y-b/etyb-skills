@@ -225,25 +225,36 @@ else
 fi
 
 # -------- prune references based on tier --------
+# When DRY_RUN, the destination has nothing to iterate (we skipped the copy),
+# so iterate the source directory and report what would be removed once the
+# real install happens. When not DRY_RUN, iterate the destination and actually
+# delete.
 prune_dir() {
   local subdir=$1; shift
   local -a keep=("$@")
-  local dir="$DST_SKILL/references/$subdir"
-  [[ -d "$dir" ]] || return 0
+  local scan_dir
+  if $DRY_RUN; then
+    scan_dir="$SOURCE_SKILL/references/$subdir"
+  else
+    scan_dir="$DST_SKILL/references/$subdir"
+  fi
+  [[ -d "$scan_dir" ]] || return 0
   local removed=0
-  for entry in "$dir"/*/; do
+  for entry in "$scan_dir"/*/; do
     [[ -d "$entry" ]] || continue
     local name
     name=$(basename "$entry")
     local found=0
-    for k in "${keep[@]}"; do
-      if [[ "$k" == "$name" ]]; then found=1; break; fi
-    done
+    if [[ ${#keep[@]} -gt 0 ]]; then
+      for k in "${keep[@]}"; do
+        if [[ "$k" == "$name" ]]; then found=1; break; fi
+      done
+    fi
     if [[ $found -eq 0 ]]; then
       if $DRY_RUN; then
         echo "    [DRY-RUN] would remove $subdir/$name (not in $TIER tier)"
       else
-        rm -rf "$entry"
+        rm -rf "$DST_SKILL/references/$subdir/$name"
       fi
       removed=$((removed + 1))
     fi

@@ -6,16 +6,18 @@ ETYB is organized by **engineering role + business domain** (the 20 specialists 
 
 1. **Detection.** ETYB's router (`skills/etyb/core/stack-registry.md`) watches the user's request for stack signals — keywords, product names, file extensions, error messages.
 2. **Load briefing.** On a match, ETYB loads the stack's `SKILL.md` — a short orchestrator briefing for the whole team.
-3. **Load role overlay.** When ETYB routes to a specific role, it also loads `stacks/<stack>/references/<role>.md` if one exists for that role.
+3. **Load role overlay.** When ETYB routes to a specific role (under `skills/etyb/references/specialists/<role>/` or `references/verticals/<role>/`), it also loads `stacks/<stack>/references/<role>.md` if one exists for that role.
 4. **Compose with protocols and verticals.** Stack Packs do not replace the 9 always-on protocols (TDD, verification, debugging, etc.) — those still apply unchanged. They also defer to business-domain verticals (fintech, healthcare, etc.) for compliance and domain expertise; the pack only adds the *platform-specific* slice.
 
-This means adding a new tech stack to ETYB does not bloat the roster. The team stays at 20 specialists; the knowledge surface grows by adding overlay folders.
+This means adding a new tech stack to ETYB does not bloat the roster — and never adds a new slash command. The trigger surface stays at `/etyb`; the knowledge surface grows by adding overlay folders.
+
+Signature note: when a Stack Pack overlay is in play, ETYB signs responses as `ETYB · <role> · <stack>` (e.g., `ETYB · backend-architect · salesforce`) so the user knows which platform context shaped the answer.
 
 ## Available Stack Packs
 
-| Stack | Version | Last Verified Release | Verified On | Status |
-|-------|---------|-----------------------|-------------|--------|
-| [Salesforce](stacks/salesforce/SKILL.md) | 1.1.0 | Spring '26 | 2026-05-12 | Active — full coverage across all 11 roles (system / backend / frontend / ai-ml / database / devops / security / qa / saas / healthcare / fintech) |
+| Stack | Version | Last Verified Release | Verified On | Tiers | Status |
+|-------|---------|-----------------------|-------------|-------|--------|
+| [Salesforce](stacks/salesforce/SKILL.md) | 4.0.0 | Spring '26 | 2026-05-12 | Core, Pro | Active — full coverage across all 11 roles (system / backend / frontend / ai-ml / database / devops / security / qa / saas / healthcare / fintech) |
 
 ## Roadmap (not yet shipped)
 
