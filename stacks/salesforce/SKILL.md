@@ -10,7 +10,7 @@ metadata:
   version: "4.0.0"
   category: stack-pack
   last_verified_release: "Spring '26"
-  verified_on: "2026-05-12"
+  last_verified_on: "2026-05-12"
   applies_to_roles:
     - system-architect
     - backend-architect
@@ -23,6 +23,40 @@ metadata:
     - saas-architect
     - healthcare-architect
     - fintech-architect
+authoritative_sources:
+  primary:
+    - { name: "Salesforce Developer Docs",      url: "https://developer.salesforce.com/docs",                                   type: official_docs }
+    - { name: "Spring '26 Release Notes",        url: "https://help.salesforce.com/s/articleView?id=release-notes.salesforce_release_notes.htm", type: release_notes }
+    - { name: "sf CLI Command Reference",        url: "https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/", type: cli_reference }
+    - { name: "Apex Developer Guide",            url: "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/",  type: api_reference }
+    - { name: "Lightning Web Components Dev",    url: "https://developer.salesforce.com/docs/component-library/documentation/en/lwc", type: official_docs }
+    - { name: "Agentforce Developer Docs",       url: "https://developer.salesforce.com/docs/einstein/genai/overview",            type: official_docs }
+    - { name: "Data 360 (Data Cloud) Docs",      url: "https://developer.salesforce.com/docs/data/data-cloud-int/guide/",         type: official_docs }
+    - { name: "Salesforce Architects",           url: "https://architect.salesforce.com/",                                        type: official_docs }
+    - { name: "Trailblazer Community Releases",  url: "https://trailhead.salesforce.com/trailblazer-community",                   type: community }
+    - { name: "External Client Apps Migration",  url: "https://help.salesforce.com/s/articleView?id=sf.connected_apps_eca_migration.htm", type: official_docs }
+delegate_to_skills:
+  # No first-party Salesforce-hosted MCP server is generally available as of last_verified_on.
+  # Salesforce-Hosted MCP Servers GA'd April 2026 — when an MCP client surface ships in users'
+  # environments, add it here.
+  []
+products_covered:
+  - { name: "Agentforce",              drift_risk: high,   notes: "Renamed from Einstein Copilot Jan 2025; Atlas Reasoning Engine + Topics + Actions + Guardrails; pricing model shifted twice in 2025-2026" }
+  - { name: "Data 360",                drift_risk: high,   notes: "Renamed from Data Cloud at Dreamforce '25; Zero Copy adapters expanded TDX 2026" }
+  - { name: "Apex",                    drift_risk: medium, notes: "Spring '26 added Cursors and user-mode SOQL; transaction finalizers GA'd 2025" }
+  - { name: "Lightning Web Components", drift_risk: medium, notes: "Spring '26: TypeScript types, lightning/graphql, reactive screen flows" }
+  - { name: "Flow",                    drift_risk: medium, notes: "Flow Orchestration went free Feb 2026" }
+  - { name: "Salesforce-Hosted MCP",   drift_risk: high,   notes: "GA April 2026; surface is new and changing" }
+  - { name: "External Client Apps",    drift_risk: high,   notes: "Mandatory migration deadline May 11 2026; old Connected Apps deprecated" }
+  - { name: "MFA Enforcement",         drift_risk: high,   notes: "Phased enforcement June-August 2026" }
+  - { name: "sf CLI",                  drift_risk: medium, notes: "Replaces deprecated sfdx alias; smart test selection added Spring '26" }
+  - { name: "Einstein Trust Layer",    drift_risk: medium, notes: "Architecture documented; provider list expands per Agentforce model gateway updates" }
+  - { name: "Health Cloud",            drift_risk: low,    notes: "FHIR R4 + HL7 v2 stable; OmniStudio integration steady" }
+  - { name: "Financial Services Cloud", drift_risk: low,   notes: "Data model stable; defers to fintech-architect for ledger/PCI/PSD2" }
+  - { name: "Hyperforce",              drift_risk: low,    notes: "Regional infrastructure; deployment topology stable" }
+  - { name: "AppExchange + Marketplace", drift_risk: medium, notes: "Checkout 2.0 + Salesforce Marketplace shift in 2026" }
+  - { name: "Heroku",                  drift_risk: high,   notes: "End-of-new-enterprise-sales Feb 2026; recommend off-platform for new builds" }
+  - { name: "Salesforce Functions",    drift_risk: high,   notes: "Retired Jan 2025 — flag immediately if user mentions" }
 ---
 
 # Salesforce Stack Pack — Team Briefing

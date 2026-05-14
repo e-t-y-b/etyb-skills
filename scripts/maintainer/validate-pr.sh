@@ -20,6 +20,7 @@ CHECKS=(
   "scripts/maintainer/validate-version-sync.sh"
   "scripts/maintainer/validate-skill-manifest-sync.sh"
   "scripts/maintainer/validate-changelog.sh"
+  "scripts/maintainer/check-currency.sh"
 )
 
 failed=0

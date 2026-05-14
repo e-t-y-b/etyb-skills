@@ -75,13 +75,29 @@ Mandatory check, also:
 
 Run a final scan: `grep -rn "v<previous-version>" README.md docs/ STACKS.md MARKETPLACE.md 2>/dev/null` — anything still pointing at the old version is drift.
 
+## 3c. Stack currency review
+
+`scripts/maintainer/validate-pr.sh` runs `check-currency.sh` automatically. If any Stack is flagged as stale, that's a release blocker. Options:
+
+- **Refresh the flagged Stack** — open a `currency/<stack>-refresh-YYYY-MM` branch, verify against the Stack's `authoritative_sources.primary` URLs, update content where vendor changes shift recommendations, bump `last_verified_on`. See `references/currency-spec.md` for the full workflow.
+- **Defer the release** — if a refresh PR is in flight but not yet merged, defer the bundle release until the Stack ships fresh.
+
+Also run `CHECK_CURRENCY_FETCH=1 scripts/maintainer/check-currency.sh` periodically (once per release at minimum) to catch `authoritative_sources` URLs that have 404'd or moved.
+
 ## 4. Run the full validator
 
 ```
 scripts/maintainer/validate-pr.sh
 ```
 
-Everything must be green before you push.
+Everything must be green before you push. The umbrella validator includes:
+
+- `validate-frontmatter.sh` — SKILL.md frontmatter shape
+- `validate-toc.py` — markdown TOC freshness
+- `validate-version-sync.sh` — VERSION aligned across the 5 bundle files + frontmatter
+- `validate-skill-manifest-sync.sh` — v4 single-skill layout + tier integrity
+- `validate-changelog.sh` — CHANGELOG.md updated for user-visible changes
+- `check-currency.sh` — Stacks within drift-risk thresholds
 
 ## 5. Open the PR
 

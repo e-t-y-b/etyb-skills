@@ -35,6 +35,7 @@ Read these on demand. Each module is self-contained.
 | [`core/scale-calibration.md`](core/scale-calibration.md) | Startup → Enterprise guidance | Every response (calibrates all advice) |
 | [`core/always-on-protocols.md`](core/always-on-protocols.md) | 9 engineering disciplines + debugging activation | Always applicable |
 | [`core/version-awareness.md`](core/version-awareness.md) | ETYB's own version, update mechanism, upgrade-path guidance | When user asks "what version", "how do I update", or mentions stale behavior |
+| [`core/knowledge-currency.md`](core/knowledge-currency.md) | Drift-check protocol — when Stack-sourced knowledge is stale, how to defer to vendor skills/MCPs or WebFetch authoritative sources | Whenever a Stack overlay is active, before committing to vendor-specific specifics |
 
 ## Platform Adapter
 
