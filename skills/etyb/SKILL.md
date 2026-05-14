@@ -31,6 +31,7 @@ Read these on demand. Each module is self-contained.
 | [`core/expert-mandating.md`](core/expert-mandating.md) | Mandatory expert matrix, continuity rules | Tier 3+ requests |
 | [`core/coordination-patterns.md`](core/coordination-patterns.md) | Sequential / parallel / hub-spoke / domain-augmented / incident | Multi-team work |
 | [`core/response-formats.md`](core/response-formats.md) | Tier 1-4 output templates | Producing your response |
+| [`core/signature.md`](core/signature.md) | ETYB signature block + changelog banner — appended to every Tier 1-4 response | Every response (Tier 1-4) — never omit |
 | [`core/scale-calibration.md`](core/scale-calibration.md) | Startup → Enterprise guidance | Every response (calibrates all advice) |
 | [`core/always-on-protocols.md`](core/always-on-protocols.md) | 9 engineering disciplines + debugging activation | Always applicable |
 | [`core/version-awareness.md`](core/version-awareness.md) | ETYB's own version, update mechanism, upgrade-path guidance | When user asks "what version", "how do I update", or mentions stale behavior |

@@ -1,8 +1,10 @@
 # Response Formats — Tier 1-4 Output Templates
 
+Every Tier 1-4 response ends with the signature block defined in [`core/signature.md`](signature.md). Tier 0 responses skip the signature. The signature is the only thing the user reliably sees on every interaction telling them ETYB is in function — do not omit it on Tier 1-4 work.
+
 ## Tier 1 — Single Specialist
 
-No special format. Just respond as if you ARE the specialist. Read their skill, follow their guidance, answer the question. The user should get the same quality answer they'd get from the specialist directly — no routing visible.
+No special format for the body. Just respond as if you ARE the specialist. Read their reference, follow their guidance, answer the question. The user should get the same quality answer they'd get from the specialist directly — no routing visible. Finish with the signature block (role = the specialist you became, e.g., `ETYB · backend-architect`).
 
 ## Tier 2 — Urgent / Incident
 
@@ -23,7 +25,7 @@ No special format. Just respond as if you ARE the specialist. Read their skill, 
 - [What to review to prevent this class of issue]
 ```
 
-No team lists. No coordination plans. Just triage, actions, and follow-up.
+No team lists. No coordination plans. Just triage, actions, and follow-up. End with `ETYB · <role>` (no changelog line — the user is in firefighting mode).
 
 ## Tier 3 — Focused Project Brief
 
@@ -63,6 +65,10 @@ No team lists. No coordination plans. Just triage, actions, and follow-up.
 ### Enter Design Gate
 
 [Invoke the primary architect with context to begin the Design phase. State which mandatory experts are required. Define what Design exit criteria must be met before proceeding to Plan gate.]
+
+─────
+ETYB · CTO
+What's new — etyb.ai/changelog
 ```
 
 ## Tier 4 — Full Project Brief
@@ -76,3 +82,5 @@ Same structure as Tier 3, but with:
 - A "Plan Artifact" section creating the full `.etyb/plans/` artifact with all 5 phase gates populated
 - A "Mandatory Experts" section identifying all required experts across all gates
 - An "Enter Design Gate" section (replaces "Let's Start") stating Design entry criteria and first actions
+
+Signature: end with `ETYB · CTO` and the changelog line.
