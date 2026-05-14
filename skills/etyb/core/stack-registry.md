@@ -75,6 +75,204 @@ This list is informational. The authoritative declaration of which delegates a S
 
 When the signal is ambiguous, **ask** before loading the pack — loading it on a non-Salesforce request will inject 1000+ lines of Salesforce-specific guidance that distorts your response.
 
+### AWS (`stacks/aws/`)
+
+**Pack:** `stacks/aws/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet (no first-party AWS MCP GA; revisit when Amazon Q Developer / AWS-hosted MCPs ship installable surfaces)
+**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, fintech-architect
+
+**Detection signals:**
+- AWS naming: aws, amazon web services, amazon (in cloud context)
+- Compute: ec2, ecs, eks, fargate, lambda, lambda@edge, graviton, app runner, batch, lightsail, beanstalk, cloud9
+- Storage/data: s3, ebs, efs, fsx, glacier, rds, aurora, aurora dsql, dynamodb, elasticache (when AWS-context), redshift, athena, glue, lake formation, opensearch
+- AI/ML: bedrock, agentcore, strands agents, sagemaker, comprehend, rekognition, polly, transcribe, textract, trainium, inferentia
+- Networking: vpc, route53, cloudfront, api gateway, app sync, transit gateway, vpc lattice, privatelink, direct connect, global accelerator
+- Security/IAM: iam, sts, scp, permission boundary, kms, secrets manager, certificate manager, guardduty, security hub, cognito, waf (when AWS-context), shield
+- IaC/CI/CD: cdk, cloudformation, sam, codebuild, codepipeline, codedeploy, copilot cli (AWS), eb cli
+- Observability: cloudwatch, x-ray, cloudtrail, application signals, fis (fault injection)
+- Misc: well-architected, control tower, organizations, sso (when AWS-context), karpenter (when AWS-context)
+
+**Negative signals:** generic "aws" in non-cloud context, "amazon" without cloud verbs/products, Amazon retail/Prime references.
+
+### GCP (`stacks/gcp/`)
+
+**Pack:** `stacks/gcp/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet (revisit when GCP MCP server installable surface ships)
+**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect
+
+**Detection signals:**
+- GCP naming: gcp, google cloud, google cloud platform
+- Compute: gke, gke autopilot, cloud run, cloud functions, cloud run functions, app engine, compute engine, gce, anthos
+- Storage/data: cloud sql, alloydb, alloydb ai, spanner, firestore (when GCP-context, not Firebase), bigtable, memorystore, bigquery, bigquery ml, looker, looker studio, dataflow, dataproc, dataform, biglake, cloud storage
+- AI/ML: vertex ai, gemini (when GCP-context, not consumer), gemini code assist, agent builder (vertex), agentspace, imagen, veo, model garden, tpu, ironwood
+- Networking: vpc-sc, cloud load balancing, cloud cdn, cloud armor, cloud dns, network connectivity center
+- Security/IAM: workload identity federation, wif (when GCP), cloud iam, cloud kms, secret manager (when GCP-context), security command center, scc
+- IaC: terraform google provider, config connector, infrastructure manager, deployment manager (deprecated)
+- Observability: cloud monitoring, cloud logging, cloud trace, cloud profiler, ops agent, managed prometheus, managed otel
+- Tooling: gcloud cli, gsutil, bq cli
+
+**Negative signals:** generic "google" without cloud verbs, "google search", Google Workspace references.
+
+### Azure (`stacks/azure/`)
+
+**Pack:** `stacks/azure/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet
+**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, healthcare-architect
+
+**Detection signals:**
+- Azure naming: azure, microsoft azure
+- Compute: aks, container apps, container instances, azure functions, app service, app service environment, static web apps, virtual machines (when Azure-context)
+- Storage/data: cosmos db, cosmos diskann, azure sql, azure sql hyperscale, postgresql flexible server (azure), azure managed redis, azure cache for redis, blob storage, files (azure), queues (azure), tables (azure)
+- AI/ML: ai foundry, foundry agents, azure openai, ai search (azure), cognitive search (legacy), azure ml, copilot studio, microsoft fabric, synapse analytics, entra agent id, maia 100
+- Networking: front door, application gateway, vwan, private link, azure firewall
+- Security/IAM: entra id, entra external id, azure ad (legacy → entra), azure ad b2c (legacy → entra external id), pim, managed identity, workload identity federation (azure), key vault, managed hsm, defender for cloud, sentinel, microsoft purview, azure policy
+- IaC/CI/CD: bicep, avm, deployment stacks, azure verified modules, terraform azurerm, azd, azure developer cli, azure devops, github actions on azure
+- Observability: azure monitor, log analytics, application insights, managed grafana (azure)
+- Misc: azure arc, azure local, azure vmware solution
+
+**Negative signals:** generic "microsoft" without Azure context, M365 / Office references.
+
+### Anthropic Claude (`stacks/anthropic-claude/`)
+
+**Pack:** `stacks/anthropic-claude/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** `claude-api` (Anthropic SDK / API helper skill)
+**Per-role overlays:** backend-architect, ai-ml-engineer, system-architect, security-engineer
+
+**Detection signals:**
+- Vendor: anthropic, claude
+- Products: claude api, messages api (when anthropic-context), claude code, claude agent sdk, claude opus, claude sonnet, claude haiku, anthropic sdk
+- Features: prompt caching, tool use (anthropic-context), extended thinking, interleaved thinking, computer use (anthropic-context), claude memory, citations api
+- Ecosystem: mcp, model context protocol, mcp servers, anthropic console, workbench (anthropic), claude code skills, claude code hooks
+
+**Negative signals:** "claude" used as a personal name in non-AI context; references to consumer Claude.ai chat (the consumer product is informed by but distinct from this Stack — this Stack covers the developer surface).
+
+### OpenAI (`stacks/openai/`)
+
+**Pack:** `stacks/openai/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet (OpenAI ecosystem is API-first; revisit if OpenAI ships an official MCP)
+**Per-role overlays:** ai-ml-engineer, backend-architect, system-architect, security-engineer
+
+**Detection signals:**
+- Vendor: openai, gpt
+- Models: gpt-5, gpt-4.1, gpt-4o, o3, o4 (when openai-context), gpt-image-1, dall-e, whisper, tts (when openai-context)
+- APIs: responses api (openai), assistants api (legacy), chat completions, realtime api (openai), batch api (openai), embeddings (text-embedding-3-large/small), moderation api, files api
+- Features: structured outputs (openai-context), function calling (openai-context), computer use (openai operator), agents sdk (openai, formerly swarm), realtime agents, codex (openai 2025 agent)
+- Tooling: openai-python, openai-node, openai cli, openai platform
+
+**Negative signals:** "gpt" used in unrelated contexts (e.g., disk partitions: "gpt partition"); references to non-OpenAI GPT-style models.
+
+### Cloudflare (`stacks/cloudflare/`)
+
+**Pack:** `stacks/cloudflare/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** `cloudflare:cloudflare-mcp` (Cloudflare MCP — covers Workers, D1, R2, KV, Hyperdrive, Pages, accounts)
+**Per-role overlays:** backend-architect, system-architect, devops-engineer, ai-ml-engineer, database-architect, security-engineer
+
+**Detection signals:**
+- Vendor: cloudflare
+- Compute: workers, cloudflare workers, durable objects, workers for platforms
+- Tooling: wrangler, miniflare, `wrangler deploy`, compatibility-date
+- Storage/data: d1, r2, kv (when cloudflare-context), hyperdrive, vectorize
+- Networking: cloudflare tunnel, cloudflare access, zero trust (cloudflare-context), magic transit, magic wan, argo, cloudflare cdn, page rules (legacy)
+- Security: cloudflare waf, rate limiting (cloudflare), cloudflare ddos, turnstile, cloudflare casb
+- AI: workers ai, ai gateway (cloudflare), ai search (formerly autorag), browser rendering
+- Media/comms: stream (cloudflare), images (cloudflare), realtime (cloudflare turn/sfu), email routing, email workers
+- Other: pages (cloudflare → migrating to workers static assets), workflows (cloudflare durable execution), queues (cloudflare), cron triggers (cloudflare)
+
+**Negative signals:** generic "edge" without cloudflare context; "workers" in non-CF context (Web Workers in browser, K8s workers).
+
+### Vercel (`stacks/vercel/`)
+
+**Pack:** `stacks/vercel/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** heavy — see `stacks/vercel/SKILL.md` frontmatter for the 18 vercel:* delegates
+**Per-role overlays:** frontend-architect, backend-architect, devops-engineer, ai-ml-engineer, system-architect
+
+**Detection signals:**
+- Vendor: vercel, vercel.app, vercel.com
+- Framework (Vercel-deployed): next.js, nextjs, app router, server components, server actions, partial prerendering, ppr, cache components, `'use cache'`, after()
+- Vercel products: vercel functions, vercel edge functions, fluid compute, vercel cron, vercel queues, vercel workflow, vercel kv, vercel postgres (now neon-backed), vercel blob, vercel edge config, vercel sandbox
+- AI: vercel ai sdk, ai sdk (when vercel-context), chat sdk, vercel ai gateway, vercel agent, ai elements
+- Tooling: vercel cli, vercel.json, turbopack, v0, v0.app
+- Deployment: preview urls, vercel deployments, fluid compute, speed insights, web analytics (vercel)
+
+**Negative signals:** Next.js used outside Vercel context (self-hosted Next.js → still partial trigger but bias toward platform-neutral specialist guidance).
+
+### Supabase (`stacks/supabase/`)
+
+**Pack:** `stacks/supabase/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** `supabase:supabase` and `supabase:supabase-postgres-best-practices`
+**Per-role overlays:** backend-architect, database-architect, frontend-architect, security-engineer, ai-ml-engineer, saas-architect
+
+**Detection signals:**
+- Vendor: supabase
+- Products: supabase auth, supabase storage, supabase realtime, edge functions (supabase), supabase queues, supabase cron, supabase studio, supabase branching
+- Postgres-on-Supabase: supabase postgres, rls (when supabase-context), supavisor, pgbouncer (when supabase-context), `@supabase/ssr`, supabase-js
+- Extensions context: pgvector (when supabase-context), pg_graphql, pg_cron (when supabase), pg_net, pgsodium, pgmq, foreign data wrappers (supabase)
+- Tooling: `supabase` cli, supabase mcp
+
+**Negative signals:** RLS in Postgres without Supabase context (still applies — load database-architect).
+
+### Firebase (`stacks/firebase/`)
+
+**Pack:** `stacks/firebase/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** heavy — see `stacks/firebase/SKILL.md` frontmatter for the 12 firebase:* delegates
+**Per-role overlays:** backend-architect, frontend-architect, mobile-architect, ai-ml-engineer, security-engineer
+
+**Detection signals:**
+- Vendor: firebase
+- Products: firebase auth, identity platform (when firebase-context), firestore, realtime database (firebase rtdb), firebase storage, cloud functions for firebase, firebase hosting, firebase app hosting, fcm, cloud messaging (when firebase), remote config, crashlytics, app distribution, firebase analytics, test lab (firebase), app check, firebase studio (formerly project idx)
+- AI: firebase ai logic (formerly vertex ai in firebase), genkit, `@firebase/ai`
+- Tooling: firebase cli, firebase emulator suite, security rules (when firebase-context), firebase data connect
+
+**Negative signals:** "firebase" in non-Google context (legacy uses).
+
+### Expo (`stacks/expo/`)
+
+**Pack:** `stacks/expo/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** heavy — see `stacks/expo/SKILL.md` frontmatter for the 10 expo-* and related delegates
+**Per-role overlays:** mobile-architect, frontend-architect, devops-engineer, qa-engineer
+
+**Detection signals:**
+- Vendor: expo (when mobile/RN context), expo.dev
+- Products: expo sdk, expo router, expo go, eas, eas build, eas update, eas submit, eas workflows, eas hosting, custom dev client, expo modules, expo-* npm packages (expo-router, expo-image, expo-secure-store, etc.)
+- Architecture: continuous native generation, cng, prebuild (expo), `app.json` (expo-context), config plugins, expo dom components
+- Tooling: `expo` cli, expo-doctor, snack, expo prebuild
+
+**Negative signals:** "expo" in non-RN context (a tradeshow, Microsoft Expo product if any).
+
+### Stripe (`stacks/stripe/`)
+
+**Pack:** `stacks/stripe/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet (Stripe ships an MCP server; add when installed in user environments)
+**Per-role overlays:** backend-architect, security-engineer, saas-architect, e-commerce-architect, fintech-architect
+
+**Detection signals:**
+- Vendor: stripe
+- Products: stripe payments, payment intents, setup intents, stripe checkout, stripe elements, payment element, express checkout element, stripe billing, stripe connect, stripe treasury, stripe issuing, stripe identity, stripe tax, stripe radar, stripe terminal, stripe sigma, stripe data pipeline, stripe atlas, stripe climate, stripe apps, stripe capital
+- Concepts: webhook (stripe-context), idempotency-key (stripe-context), restricted api keys (stripe), api version (stripe), meter api, optimized checkout suite, adaptive pricing, stripe link, tap to pay (stripe)
+- Tooling: stripe cli, stripe workbench, stripe-node, stripe-python, stripe.js, stripe react native sdk
+
+**Negative signals:** "stripe" in non-payment context (Stripe colors, design "stripe", DNA stripe).
+
+### Observability (`stacks/observability/`) — multi-vendor
+
+**Pack:** `stacks/observability/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Delegates:** none yet (Datadog, New Relic, Splunk MCPs in development)
+**Per-role overlays:** sre-engineer, devops-engineer, backend-architect, security-engineer
+
+**Detection signals:**
+- Vendors: datadog, new relic, newrelic, grafana, prometheus, splunk, honeycomb, sentry, dynatrace
+- Datadog: dd-agent, dd-trace, datadog sds, watchdog ai, bits ai, datadog cspm, datadog ci visibility, datadog llm observability
+- New Relic: nrql, nrdb, pixie, errors inbox, new relic ai monitoring
+- Grafana stack: mimir, loki, tempo, pyroscope, faro, beyla, alloy (grafana), grafana cloud, grafana enterprise, k6 (load testing)
+- Prometheus: alertmanager, promql, recording rules, remote_write, prometheus exporters, thanos, victoriametrics
+- Splunk: spl (splunk query), splunk cloud, splunk observability cloud (formerly signalfx), splunk itsi
+- Honeycomb: refinery, beelines, bubbleup, triggers (honeycomb)
+- Sentry: sentry sdk, debug ids (sentry), release health (sentry), session replay (sentry)
+- Dynatrace: oneagent, davis ai, smartscape, purepath, grail (dynatrace), dql
+- OpenTelemetry: otel, opentelemetry, otlp, otel collector, otel auto-instrumentation, otel genai, semantic conventions
+
+**Negative signals:** generic "logging" / "monitoring" without vendor signal (load sre-engineer specialist alone for principles).
+
 ## Authoring a new entry
 
 When a new Stack Pack ships, add a section under "Active Stack Packs" above. Required fields:

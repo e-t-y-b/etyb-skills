@@ -163,14 +163,27 @@ Three orthogonal axes: **specialists** (the roles), **protocols** (the disciplin
 
 ### Stack Packs
 
-Platform-specific knowledge overlays that load across the existing specialists when work involves a specific tech stack. The team doesn't grow — it learns the platform.
+Platform-specific knowledge overlays with **knowledge-currency timestamps**, authoritative-source URLs, per-product drift-risk ratings, and **vendor-skill delegation** — when a vendor MCP/skill is installed in your environment, ETYB defers to it rather than answering from baked knowledge. The team doesn't grow — it learns the platform.
 
-| Stack | Version | Coverage | Status | Tiers |
-|-------|---------|----------|--------|-------|
-| [Salesforce](stacks/salesforce/SKILL.md) | 4.0.0 (Spring '26) | 11 role overlays — Apex, LWC, Flow, Data 360, Agentforce, MCP-native development, ECA migration, MFA mandate, Health Cloud, FSC | Live | Core, Pro |
-| AWS, GCP, Azure, Vercel, Supabase, Snowflake, Databricks, Stripe, Shopify, SAP, ServiceNow | — | — | Roadmap | — |
+| Stack | Last Verified | Coverage | Tiers |
+|-------|---------------|----------|-------|
+| [Salesforce](stacks/salesforce/SKILL.md) | 2026-05-12 (Spring '26) | 11 role overlays — Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration, MFA mandate | Core, Pro |
+| [AWS](stacks/aws/SKILL.md) | 2026-05-14 | 9 role overlays — Lambda+SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore + Strands Agents SDK, Karpenter v1 | Core, Pro |
+| [GCP](stacks/gcp/SKILL.md) | 2026-05-14 | 8 role overlays — Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder + Agentspace, TPU v7 | Core, Pro |
+| [Azure](stacks/azure/SKILL.md) | 2026-05-14 | 9 role overlays — AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry + Foundry Agents, Microsoft Fabric | Core, Pro |
+| [Anthropic Claude](stacks/anthropic-claude/SKILL.md) | 2026-05-14 | 4 role overlays — Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring, Claude Code patterns | Lite, Core, Pro |
+| [OpenAI](stacks/openai/SKILL.md) | 2026-05-14 | 4 role overlays — GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs, Computer Use | Core, Pro |
+| [Cloudflare](stacks/cloudflare/SKILL.md) | 2026-05-14 | 6 role overlays — Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search, Workflows | Core, Pro |
+| [Vercel](stacks/vercel/SKILL.md) | 2026-05-14 | 5 role overlays — Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox, Workflow | Core, Pro |
+| [Supabase](stacks/supabase/SKILL.md) | 2026-05-14 | 6 role overlays — Postgres + RLS, Supabase Auth, Edge Functions, Realtime, Storage, pgvector, Supavisor, branching | Core, Pro |
+| [Firebase](stacks/firebase/SKILL.md) | 2026-05-14 | 5 role overlays — Firebase Auth, Firestore + multi-database, App Hosting, Cloud Functions gen 2, Firebase AI Logic, Genkit, Data Connect | Core, Pro |
+| [Expo](stacks/expo/SKILL.md) | 2026-05-14 | 4 role overlays — Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG, dev clients | Core, Pro |
+| [Stripe](stacks/stripe/SKILL.md) | 2026-05-14 | 5 role overlays — Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Express Checkout, Tax, Radar | Core, Pro |
+| [Observability](stacks/observability/SKILL.md) | 2026-05-14 | 4 role overlays — multi-vendor: Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry | Core, Pro |
 
-See [STACKS.md](STACKS.md) for the full registry and authoring conventions.
+**13 Stacks shipping in v4.0.0** with a unified knowledge-currency framework. See [STACKS.md](STACKS.md) for the full registry, drift-risk model, and authoring conventions.
+
+**Roadmap:** Snowflake, Databricks, dbt, Shopify, SAP, ServiceNow, Twilio, Auth0/Okta/Clerk/WorkOS as separate Stacks.
 
 ---
 

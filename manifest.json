@@ -40,22 +40,140 @@
     "salesforce": {
       "version": "4.0.0",
       "last_verified_release": "Spring '26",
-      "verified_on": "2026-05-12",
+      "last_verified_on": "2026-05-12",
       "applies_to_roles": [
-        "system-architect",
-        "backend-architect",
-        "frontend-architect",
-        "ai-ml-engineer",
-        "database-architect",
-        "devops-engineer",
-        "security-engineer",
-        "qa-engineer",
-        "saas-architect",
-        "healthcare-architect",
-        "fintech-architect"
+        "system-architect", "backend-architect", "frontend-architect",
+        "ai-ml-engineer", "database-architect", "devops-engineer",
+        "security-engineer", "qa-engineer",
+        "saas-architect", "healthcare-architect", "fintech-architect"
       ],
       "deferred_roles": [],
       "available_on_tiers": ["core", "pro"]
+    },
+    "aws": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "system-architect", "backend-architect", "database-architect",
+        "devops-engineer", "security-engineer", "sre-engineer",
+        "ai-ml-engineer", "saas-architect", "fintech-architect"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "technical-writer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "gcp": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "system-architect", "backend-architect", "database-architect",
+        "devops-engineer", "security-engineer", "sre-engineer",
+        "ai-ml-engineer", "saas-architect"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect", "healthcare-architect"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "azure": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "system-architect", "backend-architect", "database-architect",
+        "devops-engineer", "security-engineer", "sre-engineer",
+        "ai-ml-engineer", "saas-architect", "healthcare-architect"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "anthropic-claude": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "backend-architect", "ai-ml-engineer",
+        "system-architect", "security-engineer"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
+      "available_on_tiers": ["lite", "core", "pro"]
+    },
+    "openai": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "ai-ml-engineer", "backend-architect",
+        "system-architect", "security-engineer"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "cloudflare": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "backend-architect", "system-architect", "devops-engineer",
+        "ai-ml-engineer", "database-architect", "security-engineer"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "sre-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "vercel": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "frontend-architect", "backend-architect", "devops-engineer",
+        "ai-ml-engineer", "system-architect"
+      ],
+      "deferred_roles": ["mobile-architect", "database-architect", "security-engineer", "sre-engineer", "qa-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "supabase": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "backend-architect", "database-architect", "frontend-architect",
+        "security-engineer", "ai-ml-engineer", "saas-architect"
+      ],
+      "deferred_roles": ["mobile-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "firebase": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "backend-architect", "frontend-architect", "mobile-architect",
+        "ai-ml-engineer", "security-engineer"
+      ],
+      "deferred_roles": ["database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "expo": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "mobile-architect", "frontend-architect",
+        "devops-engineer", "qa-engineer"
+      ],
+      "deferred_roles": ["backend-architect", "database-architect", "security-engineer", "sre-engineer", "ai-ml-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "stripe": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "backend-architect", "security-engineer",
+        "saas-architect", "e-commerce-architect", "fintech-architect"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer", "ai-ml-engineer"],
+      "available_on_tiers": ["core", "pro"]
+    },
+    "observability": {
+      "version": "4.0.0",
+      "last_verified_on": "2026-05-14",
+      "applies_to_roles": [
+        "sre-engineer", "devops-engineer",
+        "backend-architect", "security-engineer"
+      ],
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "ai-ml-engineer", "qa-engineer"],
+      "available_on_tiers": ["core", "pro"],
+      "multi_vendor": true,
+      "vendors": ["Datadog", "New Relic", "Grafana", "Prometheus", "Splunk", "Honeycomb", "Sentry", "Dynatrace", "OpenTelemetry"]
     }
   },
   "platforms": {
