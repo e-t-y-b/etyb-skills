@@ -10,14 +10,14 @@
 5. [SSR and Hydration](#5-ssr-and-hydration)
 6. [State Management](#6-state-management)
 7. [Styling](#7-styling)
-8. [Component Libraries](#8-component-libraries)
-9. [Forms](#9-forms)
-10. [Testing](#10-testing)
-11. [Performance](#11-performance)
-12. [Build Tools](#12-build-tools)
-13. [Routing](#13-routing)
-14. [Analog.js](#14-analogjs)
-15. [RxJS vs Signals](#15-rxjs-vs-signals)
+8. [Forms](#9-forms)
+9. [Testing](#10-testing)
+10. [Performance](#11-performance)
+11. [Build Tools](#12-build-tools)
+12. [Routing](#13-routing)
+13. [Analog.js](#14-analogjs)
+14. [RxJS vs Signals](#15-rxjs-vs-signals)
+15. [Angular File Structure Enforcement](#16-angular-file-structure-enforcement)
 
 ---
 
@@ -487,6 +487,87 @@ const count$ = toObservable(this.count);
 - New code: signals for state, RxJS for async streams
 - Existing code: gradually convert `BehaviorSubject` patterns to signals
 - `HttpClient` will likely get signal-based alternative in future Angular versions
+
+## 15. Angular File Structure Enforcement
+
+### Component Rules
+
+* Always create:
+
+  * `.component.ts`
+  * `.component.html`
+  * `.component.scss`
+  * `.component.spec.ts`
+* Never use inline templates
+* Never use inline styles
+* One component per folder
+* Standalone by default
+* SCSS preferred
+
+### Example
+
+```txt
+user-profile/
+ ┣ user-profile.component.ts
+ ┣ user-profile.component.html
+ ┣ user-profile.component.scss
+ ┗ user-profile.component.spec.ts
+```
+
+### Service Rules
+
+* Always create:
+
+  * `.service.ts`
+  * `.service.spec.ts`
+
+---
+
+### Angular CLI Defaults
+
+```json
+"schematics": {
+  "@schematics/angular:component": {
+    "standalone": true,
+    "inlineTemplate": false,
+    "inlineStyle": false,
+    "style": "scss",
+    "skipTests": false
+  }
+}
+```
+
+---
+
+### Folder Placement
+
+```txt
+features/
+ ┗ users/
+    ┗ components/
+       ┗ user-profile/
+```
+
+---
+
+### MUST
+
+* Separate logic/template/style
+* Co-locate related files
+* Maintain domain-driven structure
+
+### MUST NOT
+
+* Inline HTML/CSS
+* Shared dumping grounds
+* Multiple components in one folder
+
+---
+
+### Golden Rule
+
+> Every Angular component must follow isolated folder architecture with explicit TS, HTML, SCSS, and test separation.
+
 
 ---
 
