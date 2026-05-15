@@ -115,7 +115,9 @@ The loop is in the skill-creator skill's `scripts/` directory; run from there. I
 
 **Pass bar:** test-set recall ≥ 70% on should-trigger queries while keeping should-not-trigger queries at ≥ 90%. The loop reports `best_description` (test-score-optimized, anti-overfit). Replace SKILL.md's `description:` with that value, re-run the umbrella validator, and only then cut the tag.
 
-If the loop cannot run for environmental reasons, the description should at minimum be reviewed against the failure cases in `.eval-workspace/run.log` to confirm it would now plausibly trigger on the previously-failed queries. The shipped v4 description was hand-tuned from the iteration-1 failure pattern (188 → 405 words, situational framing rather than identity framing); record any further tuning in the commit message.
+If the loop cannot run for environmental reasons, run the **subagent-based fallback**: spawn 3 parallel subagents, give each one the description text from `skills/etyb/SKILL.md` and a third of the eval queries, ask each to decide yes/no per query as Claude would at trigger time, and aggregate. This is an optimistic upper bound on production recall (subagents reason deliberately; real trigger decisions happen mid-conversation with less deliberation) but is sufficient as a smoke test. Save the aggregate to `.eval-workspace/iteration-N-subagent-eval/results.json`. The v4.0.0 description was validated this way (23 TP / 10 TN / 0 FP / 0 FN against 33-query eval set) after `claude -p` returned 401 for the canonical loop.
+
+The shipped v4 description was hand-tuned from the iteration-1 failure pattern (188 → 405 words, situational framing rather than identity framing); record any further tuning in the commit message.
 
 ## 4. Run the full validator
 
