@@ -96,6 +96,27 @@ Since v4, vendor depth lives at docs.etyb.ai, not on disk. The slim local Stack 
 
 If you're shipping an etyb-skills release that adds a new Stack pointer, the docs.etyb.ai PR for that Stack's content ships in the same maintainer session — it's the precondition, not a follow-up.
 
+## 3e. Trigger-recall gate (v4+)
+
+`/etyb` is the **only** trigger surface in v4 — there are no peer slash commands to catch work if ETYB fails to activate. A description that scores low on recall (true-positives that don't fire) silently degrades the whole product. Before tagging, the description must be empirically validated.
+
+The eval set lives at `skills/etyb/evals/trigger-eval-v4.json` — currently 33 queries (23 should-trigger across all the specialist + vertical lanes, 10 should-not-trigger near-misses). Run the optimization loop against it:
+
+```
+python -m scripts.run_loop \
+  --eval-set skills/etyb/evals/trigger-eval-v4.json \
+  --skill-path skills/etyb \
+  --model <model-id-from-current-session> \
+  --max-iterations 5 \
+  --verbose
+```
+
+The loop is in the skill-creator skill's `scripts/` directory; run from there. It uses `claude -p` as a subprocess, so the running user must have valid Claude credentials. A previous attempt (`.eval-workspace/run.log`) crashed at iteration 1→2 because `claude -p` returned a 401 — diagnose credentials before retrying.
+
+**Pass bar:** test-set recall ≥ 70% on should-trigger queries while keeping should-not-trigger queries at ≥ 90%. The loop reports `best_description` (test-score-optimized, anti-overfit). Replace SKILL.md's `description:` with that value, re-run the umbrella validator, and only then cut the tag.
+
+If the loop cannot run for environmental reasons, the description should at minimum be reviewed against the failure cases in `.eval-workspace/run.log` to confirm it would now plausibly trigger on the previously-failed queries. The shipped v4 description was hand-tuned from the iteration-1 failure pattern (188 → 405 words, situational framing rather than identity framing); record any further tuning in the commit message.
+
 ## 4. Run the full validator
 
 ```
