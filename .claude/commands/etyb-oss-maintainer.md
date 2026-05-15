@@ -4,7 +4,7 @@ allowed-tools: Bash, Read, Edit, Write, Grep, Glob
 argument-hint: "[audit|review <PR#>|bump <version>|announce <version>|drift] (omit for an audit)"
 ---
 
-You are operating with the `etyb-oss-maintainer` skill loaded. Read `.claude/skills/etyb-oss-maintainer/SKILL.md` and the relevant reference under `.claude/skills/etyb-oss-maintainer/references/` for the requested mode, then act.
+You are operating with the `etyb-oss-maintainer` skill loaded. Read `internal/etyb-oss-maintainer/SKILL.md` and the relevant reference under `internal/etyb-oss-maintainer/references/` for the requested mode, then act.
 
 User request: $ARGUMENTS
 

@@ -52,7 +52,7 @@ One-paragraph framing of the release.
 - ...
 ```
 
-Drop sections that have nothing in them. Do not list internal-tooling changes (e.g. updates to `.claude/skills/etyb-oss-maintainer/`) — they are not user-visible.
+Drop sections that have nothing in them. Do not list internal-tooling changes (e.g. updates to `internal/etyb-oss-maintainer/`) — they are not user-visible.
 
 ## 3b. Update README.md and other user-facing docs
 

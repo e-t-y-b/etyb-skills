@@ -4,13 +4,13 @@
     "name": "e-t-y-b"
   },
   "metadata": {
-    "description": "ETYB — your virtual CTO and engineering team, as one coordinated skill",
-    "version": "4.0.0"
+    "description": "ETYB \u2014 your virtual CTO and engineering team, as one coordinated skill",
+    "version": "4.0.1"
   },
   "plugins": [
     {
       "name": "etyb",
-      "description": "ETYB — virtual CTO + 20 specialists + 9 protocols + 6 verticals. Vendor knowledge for 13 platforms ships in-repo under stacks/<vendor>/.",
+      "description": "ETYB \u2014 virtual CTO + 20 specialists + 9 protocols + 6 verticals. Vendor knowledge for 13 platforms ships in-repo under stacks/<vendor>/.",
       "source": "./",
       "strict": false,
       "skills": [

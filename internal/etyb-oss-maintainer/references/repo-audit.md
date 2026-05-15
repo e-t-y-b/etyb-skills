@@ -49,7 +49,7 @@ The repo has no protection on branch deletion, so cleanup is cheap. The discipli
 
 - **Public** — everything not ignored.
 - **Internal** — `MARKETPLACE.md`, `.internal/`, `.etyb/`, `.claude/plans/*`, `docs/plan-*.md`, `.claude/settings.local.json`. Never to be tracked.
-- **Internal-but-committed exception** — `.claude/skills/etyb-oss-maintainer/` and `.claude/commands/etyb-oss-maintainer.md` (this skill). Allowed via explicit `!` negation in `.gitignore`. Must not be referenced from `manifest.json`, `marketplace.json`, or any installer.
+- **Internal-but-committed exception** — `internal/etyb-oss-maintainer/` and `.claude/commands/etyb-oss-maintainer.md` (this skill). Lives outside `.claude/skills/` so the agentskills.io / npx skills CLI does not surface it to end users. Must not be referenced from `manifest.json`, `marketplace.json`, or any installer.
 
 If the audit reports an internal item leaking into git, treat it as a security concern — strategy notes, draft pitches, customer names, or plan documents may contain non-public detail. Recommend: `git rm --cached <path>` and ensure the gitignore rule is correct. If the leak has already been pushed, weigh whether to history-rewrite (rare, disruptive) or simply remove going forward.
 
