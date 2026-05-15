@@ -4,6 +4,17 @@ All notable changes to ETYB Skills are documented here. Format is loosely based 
 
 The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB response links there.
 
+## [4.0.2] — 2026-05-15
+
+### Removed
+
+- **etyb-oss-maintainer skill is no longer in this repo at all.** v4.0.1 moved it from `.claude/skills/` to `internal/` to keep it out of the npx skills CLI listing. v4.0.2 takes the next step: the skill is maintainer-personal tooling, not project artifact, and now lives in the maintainer's home directory (`~/Utility/SKILLS/ETYB`, symlinked to `~/.claude/skills/etyb-oss-maintainer`). The slash command moved to `~/.claude/commands/etyb-oss-maintainer.md`. Public clones of `etyb-skills` carry zero trace of it.
+- `.gitignore` simplified — the `.claude/` directory is now ignored wholesale (no exceptions needed for the maintainer skill or its slash command, since both moved out of the repo).
+
+### Changed
+
+- `scripts/maintainer/audit-repo.sh` — the maintainer-skill regression check now treats *any* in-repo trace of `etyb-oss-maintainer` as a leak (previously only flagged `.claude/skills/`). This catches the case where the skill could re-creep back via `internal/` or anywhere else.
+
 ## [4.0.1] — 2026-05-15
 
 ### Fixed

@@ -38,7 +38,7 @@ license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.1"
+  version: "4.0.2"
   category: stack-pack
   last_verified_on: "2026-05-14"
   applies_to_roles:

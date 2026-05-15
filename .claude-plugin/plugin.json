@@ -1,7 +1,7 @@
 {
   "name": "etyb-skills",
   "description": "Virtual engineering company \u2014 one coordinated skill (/etyb) with internal references for 20 specialists, 9 process protocols, and 6 vertical-domain architects. Installed in lite/core/pro tiers; signed responses link to etyb.ai/changelog.",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "author": {
     "name": "e-t-y-b"
   },
