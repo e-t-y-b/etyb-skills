@@ -35,9 +35,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SOURCE_SKILL="$REPO_ROOT/skills/etyb"
-MANIFEST="$REPO_ROOT/manifest.json"
 
-SOURCE_DIR=""
 TARGET_DIR=""
 DRY_RUN=false
 FORCE=false
@@ -62,7 +60,6 @@ while [[ $# -gt 0 ]]; do
     --dry-run) DRY_RUN=true; shift ;;
     --force) FORCE=true; ON_CONFLICT="replace"; shift ;;
     --target) TARGET_DIR="$2"; shift 2 ;;
-    --source) SOURCE_DIR="$2"; shift 2 ;;
     --on-conflict) ON_CONFLICT="$2"; shift 2 ;;
     -h|--help)
       sed -n '2,33p' "$0"
