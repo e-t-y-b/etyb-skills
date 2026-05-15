@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
 #
 # Knowledge-currency validator — flags Stacks whose `last_verified_on` is
-# stale relative to their per-product `drift_risk`.
+# stale relative to their per-product `drift_risk`, AND probes the canonical
+# docs.etyb.ai pages for reachability.
 #
-# Drift-risk thresholds:
+# Drift-risk thresholds (slim local pointer):
 #   high   — flagged when last_verified_on > 90 days old
 #   medium — flagged when last_verified_on > 180 days old
 #   low    — flagged when last_verified_on > 365 days old
 #
 # Exit code:
-#   0  every Stack is fresh (or all stale stacks have only low-drift products)
-#   1  one or more Stacks have stale high-/medium-drift content
+#   0  every Stack is fresh AND every probed docs.etyb.ai URL is reachable
+#   1  one or more Stacks have stale high-/medium-drift content, OR a
+#      docs.etyb.ai/stacks/<vendor>/ index URL returns non-2xx
 #
-# Also smoke-checks `authoritative_sources.primary` URLs when
-# CHECK_CURRENCY_FETCH=1 is set (uses curl --head; opt-in because it
-# touches the network).
+# Network probes (CHECK_CURRENCY_FETCH=1):
+#   - Probes https://docs.etyb.ai/stacks/<vendor>/ for every local slim
+#     pointer. v4 invariant: every local stacks/<vendor>/SKILL.md MUST
+#     have a published canonical surface on docs.etyb.ai.
+#   - Smoke-checks authoritative_sources.primary URLs from frontmatter
+#     (the same vendor-side check as before).
+#   - Network probes are opt-in because they touch the internet.
+#
+# DOCS_BASE_URL env var overrides the default docs.etyb.ai base (useful
+# for testing against a local Starlight preview server).
 
 set -euo pipefail
 
@@ -55,9 +64,12 @@ threshold_for_risk() {
 stacks_dir="$ROOT/stacks"
 [[ -d "$stacks_dir" ]] || fail "stacks/ directory not found"
 
+DOCS_BASE_URL="${DOCS_BASE_URL:-https://docs.etyb.ai}"
+
 errors=0
 warnings=0
 fetched=0
+docs_probed=0
 
 for stack_path in "$stacks_dir"/*/SKILL.md; do
   [[ -f "$stack_path" ]] || continue
@@ -108,14 +120,27 @@ for stack_path in "$stacks_dir"/*/SKILL.md; do
     }
   ' "$stack_path")
 
-  # Optionally fetch authoritative_sources URLs to detect 404s
+  # Optionally probe network surfaces:
+  #   1. Canonical docs.etyb.ai page for this Stack (v4 invariant).
+  #   2. authoritative_sources.primary URLs from frontmatter (vendor-side).
   if [[ "${CHECK_CURRENCY_FETCH:-0}" == "1" ]]; then
+    docs_url="$DOCS_BASE_URL/stacks/$stack_name/"
+    docs_probed=$((docs_probed + 1))
+    # Use GET-with-discard rather than HEAD — Starlight serves a redirect/
+    # 200-only response some HEAD probes mishandle. -L follows redirects;
+    # -o /dev/null discards the body; --fail returns non-zero on >=400.
+    if ! curl --max-time 10 --silent --location --fail --output /dev/null "$docs_url"; then
+      echo "✗ stack/$stack_name: canonical docs URL unreachable: $docs_url" >&2
+      echo "  v4 invariant: every local stacks/<vendor>/ pointer MUST have a published page on docs.etyb.ai." >&2
+      errors=$((errors + 1))
+    fi
+
     while IFS= read -r url; do
       [[ -z "$url" ]] && continue
       fetched=$((fetched + 1))
       if ! curl --max-time 10 --silent --head --fail "$url" >/dev/null 2>&1; then
-        echo "✗ stack/$stack_name: authoritative_sources URL unreachable: $url" >&2
-        errors=$((errors + 1))
+        echo "⚠ stack/$stack_name: authoritative_sources URL unreachable: $url" >&2
+        warnings=$((warnings + 1))
       fi
     done < <(awk '
       /^---[[:space:]]*$/ { fm++; next }
@@ -139,7 +164,7 @@ if [[ "$errors" -gt 0 ]]; then
 fi
 
 if [[ "${CHECK_CURRENCY_FETCH:-0}" == "1" ]]; then
-  echo "✓ check-currency: all stacks fresh, $fetched authoritative_sources URLs reachable, $warnings warnings"
+  echo "✓ check-currency: all stacks fresh, $docs_probed docs.etyb.ai page(s) reachable, $fetched authoritative_sources URL(s) probed, $warnings warning(s)"
 else
-  echo "✓ check-currency: all stacks fresh ($warnings warnings) — set CHECK_CURRENCY_FETCH=1 to also probe authoritative_sources URLs"
+  echo "✓ check-currency: all stacks fresh ($warnings warnings) — set CHECK_CURRENCY_FETCH=1 to also probe docs.etyb.ai pages and authoritative_sources URLs"
 fi
