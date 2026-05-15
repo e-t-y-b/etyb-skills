@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Tests for scripts/install.sh tier selection (v4).
+# Tests for scripts/install.sh flag handling (v4 — tier system removed).
 #
-# Exercises --tier (lite/core/pro), --list-tiers, default behaviour, and the
-# error paths (unknown tier). Uses --dry-run against a throwaway target so
-# nothing touches the repo working tree.
+# Exercises: default install, --dry-run, --target, --on-conflict, and the
+# error paths (unknown flag, removed --tier flag returns helpful message).
+# Uses --dry-run against a throwaway target so nothing touches the working tree.
 
 set -euo pipefail
 
@@ -26,45 +26,43 @@ fail() {
   exit 1
 }
 
-# -------- --list-tiers prints every tier --------
-out=$("$INSTALL" --list-tiers)
-for tier in lite core pro; do
-  grep -qE "^  $tier" <<< "$out" || fail "--list-tiers omitted $tier"
+# -------- default install (no tier flag): copies skills/etyb/ verbatim --------
+out=$("$INSTALL" --target "$TARGET" --dry-run)
+grep -q "would install skills/etyb/" <<< "$out" || fail "default should install skills/etyb/"
+grep -q "DRY-RUN" <<< "$out" || fail "dry-run mode not reported"
+# v4: there is no tier, so the output must NOT contain "tier:" or "would remove"
+if grep -q "^tier:" <<< "$out"; then
+  fail "v4 install output should not advertise a tier"
+fi
+if grep -q "would remove" <<< "$out"; then
+  fail "v4 install must not prune any references (tier system removed)"
+fi
+
+# -------- removed --tier flag returns a helpful error --------
+if "$INSTALL" --tier lite --target "$TARGET" --dry-run >/dev/null 2>&1; then
+  fail "--tier should be rejected (removed in v4.0.0)"
+fi
+err=$("$INSTALL" --tier lite --target "$TARGET" --dry-run 2>&1 || true)
+grep -q "removed in v4" <<< "$err" || fail "--tier error should mention v4 removal, got: $err"
+
+# -------- removed --list-tiers flag returns the same error --------
+if "$INSTALL" --list-tiers >/dev/null 2>&1; then
+  fail "--list-tiers should be rejected (removed in v4.0.0)"
+fi
+
+# -------- unknown flag rejected --------
+if "$INSTALL" --bogus --target "$TARGET" --dry-run >/dev/null 2>&1; then
+  fail "should reject unknown --bogus flag"
+fi
+
+# -------- --on-conflict accepts valid modes --------
+for mode in prompt replace keep skip; do
+  "$INSTALL" --target "$TARGET" --on-conflict "$mode" --dry-run >/dev/null \
+    || fail "--on-conflict $mode should be accepted"
 done
 
-# -------- default install (no --tier) selects pro --------
-out=$("$INSTALL" --target "$TARGET" --dry-run)
-grep -q "tier:   pro" <<< "$out" || fail "default tier should be pro"
-grep -q "would install skills/etyb/" <<< "$out" || fail "default should install skills/etyb/"
-
-# -------- --tier lite: would prune verticals + 11 specialists --------
-rm -rf "$TARGET" && mkdir -p "$TARGET"
-out=$("$INSTALL" --tier lite --target "$TARGET" --dry-run)
-grep -q "tier:   lite" <<< "$out" || fail "tier should be lite"
-# Lite keeps 3 specialists, prunes 11
-pruned_specialists=$(grep -c "would remove specialists/" <<< "$out" || true)
-[[ "$pruned_specialists" == "11" ]] || fail "lite should prune 11 specialists (got $pruned_specialists)"
-pruned_verticals=$(grep -c "would remove verticals/" <<< "$out" || true)
-[[ "$pruned_verticals" == "6" ]] || fail "lite should prune 6 verticals (got $pruned_verticals)"
-
-# -------- --tier core: prunes verticals only --------
-rm -rf "$TARGET" && mkdir -p "$TARGET"
-out=$("$INSTALL" --tier core --target "$TARGET" --dry-run)
-grep -q "tier:   core" <<< "$out" || fail "tier should be core"
-pruned_specialists=$(grep -c "would remove specialists/" <<< "$out" || true)
-[[ "$pruned_specialists" == "0" ]] || fail "core should not prune specialists (got $pruned_specialists)"
-pruned_verticals=$(grep -c "would remove verticals/" <<< "$out" || true)
-[[ "$pruned_verticals" == "6" ]] || fail "core should prune 6 verticals (got $pruned_verticals)"
-
-# -------- --tier pro: prunes nothing --------
-rm -rf "$TARGET" && mkdir -p "$TARGET"
-out=$("$INSTALL" --tier pro --target "$TARGET" --dry-run)
-pruned=$(grep -c "would remove" <<< "$out" || true)
-[[ "$pruned" == "0" ]] || fail "pro should prune nothing (got $pruned)"
-
-# -------- unknown tier rejected --------
-if "$INSTALL" --tier bogus --target "$TARGET" --dry-run >/dev/null 2>&1; then
-  fail "should reject --tier bogus"
+if "$INSTALL" --target "$TARGET" --on-conflict bogus --dry-run >/dev/null 2>&1; then
+  fail "--on-conflict bogus should be rejected"
 fi
 
 echo "PASS: $(basename "$0")"

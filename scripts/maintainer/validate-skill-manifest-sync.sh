@@ -4,9 +4,8 @@
 #   skills/etyb/                            (only one installable skill)
 #   manifest.json .skill                    (declares it)
 #   .claude-plugin/marketplace.json         (one plugin "etyb")
-#   manifest.json .tiers                    (lite, core, pro)
 # Also spot-checks that every reference under skills/etyb/references/
-# directly correlates to the tier composition.
+# directly correlates to the canonical 14+9+6 contract.
 
 set -euo pipefail
 
@@ -38,10 +37,14 @@ marketplace_plugins="$(jq -r '.plugins[].name' .claude-plugin/marketplace.json |
 marketplace_skills="$(jq -r '.plugins[0].skills[]' .claude-plugin/marketplace.json | sort)"
 [[ "$marketplace_skills" == "./skills/etyb" ]] || fail "marketplace plugin must install only ./skills/etyb, found: $marketplace_skills"
 
-# 4. manifest.json .tiers has lite, core, pro.
-tier_keys="$(jq -r '.tiers | keys[]' manifest.json | sort)"
-expected_tiers=$'core\nlite\npro'
-[[ "$tier_keys" == "$expected_tiers" ]] || fail "manifest.json .tiers must be {lite, core, pro}, found: $tier_keys"
+# 4. v4.0 — tier system removed. The manifest must NOT carry a .tiers block,
+#    and stack entries must NOT carry available_on_tiers.
+if jq -e '.tiers' manifest.json >/dev/null 2>&1; then
+  fail "manifest.json .tiers block must not exist (tier system removed in v4.0.0)"
+fi
+if jq -e '[.stacks[] | select(has("available_on_tiers"))] | length > 0' manifest.json >/dev/null; then
+  fail "manifest.json .stacks must not carry available_on_tiers (tier system removed in v4.0.0)"
+fi
 
 # 5. Reference counts match the v4 contract.
 specialist_count=$(find skills/etyb/references/specialists -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
@@ -52,11 +55,4 @@ vertical_count=$(find skills/etyb/references/verticals -mindepth 1 -maxdepth 1 -
 [[ "$protocol_count" == "9" ]] || fail "expected 9 protocol references, found $protocol_count"
 [[ "$vertical_count" == "6" ]] || fail "expected 6 vertical references, found $vertical_count"
 
-# 6. The Lite tier specialist list in manifest must reference real directories.
-lite_specialists="$(jq -r '.tiers.lite.specialists[]' manifest.json)"
-while IFS= read -r s; do
-  [[ -d "skills/etyb/references/specialists/$s" ]] \
-    || fail "manifest .tiers.lite.specialists references missing dir: $s"
-done <<<"$lite_specialists"
-
-echo "✓ validate-skill-manifest-sync: v4 layout aligned (1 skill, 3 tiers, 14+9+6 references)"
+echo "✓ validate-skill-manifest-sync: v4 layout aligned (1 skill, 14+9+6 references, no tiers)"

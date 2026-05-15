@@ -34,7 +34,7 @@ skills/etyb/
 
 ## Always-On Engineering Culture
 
-These disciplines apply to ALL work, ALL tiers, ALL gates:
+These disciplines apply to ALL work and ALL gates:
 
 1. **TDD** — No code without a failing test first
 2. **Verification** — Evidence before claims, always
@@ -55,15 +55,9 @@ Hooks in `.claude/settings.json` fire deterministically, outside the LLM:
 
 The hooks live at `skills/etyb/references/protocols/<protocol>/hooks/` (e.g., `tdd-protocol/hooks/pre-edit-check.sh`). Claude Code's adapter (`skills/etyb/adapters/claude/`) wires them in.
 
-## Install Tiers
+## Install
 
-| Tier | Contents | Audience |
-|------|----------|----------|
-| `lite` | ETYB + 9 protocols + 3 essential specialists | Solo devs, students |
-| `core` | + 11 more specialists (14 total) | Most teams |
-| `pro` | + 6 verticals | Domain-specific shops |
-
-Install with `scripts/install.sh --tier lite|core|pro`. Default is `pro`.
+`scripts/install.sh` always installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals. Vendor knowledge is **not** bundled; ETYB fetches it from [docs.etyb.ai](https://docs.etyb.ai/stacks/) at runtime per the `core/knowledge-currency.md` fetch contract.
 
 ## Signature
 

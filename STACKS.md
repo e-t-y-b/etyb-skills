@@ -17,21 +17,21 @@ Signature note: when a Stack Pack overlay is in play, ETYB signs responses as `E
 
 ## Available Stack Packs
 
-| Stack | Version | Last Verified | Drift Risk | Tiers | Status |
-|-------|---------|---------------|------------|-------|--------|
-| [Salesforce](stacks/salesforce/SKILL.md) | 4.0.0 | Spring '26 (2026-05-12) | High on Agentforce/Data 360; low on Hyperforce/Health Cloud | Core, Pro | Active — 11 role overlays |
-| [AWS](stacks/aws/SKILL.md) | 4.0.0 | 2026-05-14 | High on Bedrock; medium on Lambda/ECS/Aurora | Core, Pro | New in v4.0.0 |
-| [GCP](stacks/gcp/SKILL.md) | 4.0.0 | 2026-05-14 | High on Vertex AI; medium on Cloud Run/BigQuery | Core, Pro | New in v4.0.0 |
-| [Azure](stacks/azure/SKILL.md) | 4.0.0 | 2026-05-14 | High on Azure OpenAI; medium on AKS/Entra | Core, Pro | New in v4.0.0 |
-| [Anthropic Claude](stacks/anthropic-claude/SKILL.md) | 4.0.0 | 2026-05-14 | High on Agent SDK + Claude API features | Lite, Core, Pro | New in v4.0.0 |
-| [OpenAI](stacks/openai/SKILL.md) | 4.0.0 | 2026-05-14 | High across Assistants + Responses API | Core, Pro | New in v4.0.0 |
-| [Cloudflare](stacks/cloudflare/SKILL.md) | 4.0.0 | 2026-05-14 | High on Workers/Vectorize/AI Gateway; low on KV | Core, Pro | New in v4.0.0 |
-| [Vercel](stacks/vercel/SKILL.md) | 4.0.0 | 2026-05-14 | High on AI Gateway + Next.js | Core, Pro | New in v4.0.0 |
-| [Supabase](stacks/supabase/SKILL.md) | 4.0.0 | 2026-05-14 | Medium across products | Core, Pro | New in v4.0.0 |
-| [Firebase](stacks/firebase/SKILL.md) | 4.0.0 | 2026-05-14 | High on Genkit + AI Logic; medium elsewhere | Core, Pro | New in v4.0.0 |
-| [Expo](stacks/expo/SKILL.md) | 4.0.0 | 2026-05-14 | High on EAS + New Architecture | Core, Pro | New in v4.0.0 |
-| [Stripe](stacks/stripe/SKILL.md) | 4.0.0 | 2026-05-14 | Medium across products | Core, Pro | New in v4.0.0 |
-| [Observability](stacks/observability/SKILL.md) | 4.0.0 | 2026-05-14 | Medium per-vendor | Core, Pro | New in v4.0.0 (multi-vendor: Datadog, New Relic, Grafana, Prometheus, Splunk) |
+| Stack | Version | Last Verified | Drift Risk | Status |
+|-------|---------|---------------|------------|--------|
+| [Salesforce](stacks/salesforce/SKILL.md) | 4.0.0 | Spring '26 (2026-05-12) | High on Agentforce/Data 360; low on Hyperforce/Health Cloud | Active |
+| [AWS](stacks/aws/SKILL.md) | 4.0.0 | 2026-05-14 | High on Bedrock; medium on Lambda/ECS/Aurora | New in v4.0.0 |
+| [GCP](stacks/gcp/SKILL.md) | 4.0.0 | 2026-05-14 | High on Vertex AI; medium on Cloud Run/BigQuery | New in v4.0.0 |
+| [Azure](stacks/azure/SKILL.md) | 4.0.0 | 2026-05-14 | High on Azure OpenAI; medium on AKS/Entra | New in v4.0.0 |
+| [Anthropic Claude](stacks/anthropic-claude/SKILL.md) | 4.0.0 | 2026-05-14 | High on Agent SDK + Claude API features | New in v4.0.0 |
+| [OpenAI](stacks/openai/SKILL.md) | 4.0.0 | 2026-05-14 | High across Assistants + Responses API | New in v4.0.0 |
+| [Cloudflare](stacks/cloudflare/SKILL.md) | 4.0.0 | 2026-05-14 | High on Workers/Vectorize/AI Gateway; low on KV | New in v4.0.0 |
+| [Vercel](stacks/vercel/SKILL.md) | 4.0.0 | 2026-05-14 | High on AI Gateway + Next.js | New in v4.0.0 |
+| [Supabase](stacks/supabase/SKILL.md) | 4.0.0 | 2026-05-14 | Medium across products | New in v4.0.0 |
+| [Firebase](stacks/firebase/SKILL.md) | 4.0.0 | 2026-05-14 | High on Genkit + AI Logic; medium elsewhere | New in v4.0.0 |
+| [Expo](stacks/expo/SKILL.md) | 4.0.0 | 2026-05-14 | High on EAS + New Architecture | New in v4.0.0 |
+| [Stripe](stacks/stripe/SKILL.md) | 4.0.0 | 2026-05-14 | Medium across products | New in v4.0.0 |
+| [Observability](stacks/observability/SKILL.md) | 4.0.0 | 2026-05-14 | Medium per-vendor | New in v4.0.0 (multi-vendor: Datadog, New Relic, Grafana, Prometheus, Splunk) |
 
 ## Roadmap (not yet shipped)
 
@@ -68,7 +68,7 @@ The Salesforce, AWS, and Cloudflare packs are the reference implementations. To 
      - { name: <Product>, drift_risk: high|medium|low, notes: "..." }
    ```
 
-3. **Add the stack to `manifest.json`** under the `stacks` section with `version`, `last_verified_on`, `applies_to_roles`, `deferred_roles`, `available_on_tiers`.
+3. **Add the stack to `manifest.json`** under the `stacks` section with `version`, `last_verified_on`, `applies_to_roles`, `deferred_roles`.
 
 4. **Add a router entry** to `skills/etyb/core/stack-registry.md` with the stack's detection signals (positive + negative).
 

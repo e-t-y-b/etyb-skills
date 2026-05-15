@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "etyb",
-      "description": "ETYB — virtual CTO + 20 specialists + 9 protocols + 6 verticals. Full Pro installation. Use scripts/install.sh --tier lite|core to install a smaller subset.",
+      "description": "ETYB — virtual CTO + 20 specialists + 9 protocols + 6 verticals. Vendor knowledge fetched live from docs.etyb.ai.",
       "source": "./",
       "strict": false,
       "skills": [

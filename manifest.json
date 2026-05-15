@@ -12,30 +12,6 @@
   "skill": {
     "etyb": "4.0.0"
   },
-  "tiers": {
-    "lite": {
-      "description": "ETYB CTO + 9 always-on protocols + 3 essential specialists. Solo devs, students, and anyone exploring.",
-      "specialists": [
-        "system-architect",
-        "backend-architect",
-        "frontend-architect"
-      ],
-      "protocols": "all",
-      "verticals": []
-    },
-    "core": {
-      "description": "ETYB CTO + 9 always-on protocols + 14 core specialists. Most teams shipping production software.",
-      "specialists": "all",
-      "protocols": "all",
-      "verticals": []
-    },
-    "pro": {
-      "description": "Everything in Core + 6 vertical-domain specialists (saas, fintech, healthcare, e-commerce, real-time, social). Domain-specific shops and platforms.",
-      "specialists": "all",
-      "protocols": "all",
-      "verticals": "all"
-    }
-  },
   "stacks": {
     "salesforce": {
       "version": "4.0.0",
@@ -47,8 +23,7 @@
         "security-engineer", "qa-engineer",
         "saas-architect", "healthcare-architect", "fintech-architect"
       ],
-      "deferred_roles": [],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": []
     },
     "aws": {
       "version": "4.0.0",
@@ -58,8 +33,7 @@
         "devops-engineer", "security-engineer", "sre-engineer",
         "ai-ml-engineer", "saas-architect", "fintech-architect"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "technical-writer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "technical-writer"]
     },
     "gcp": {
       "version": "4.0.0",
@@ -69,8 +43,7 @@
         "devops-engineer", "security-engineer", "sre-engineer",
         "ai-ml-engineer", "saas-architect"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect", "healthcare-architect"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect", "healthcare-architect"]
     },
     "azure": {
       "version": "4.0.0",
@@ -80,8 +53,7 @@
         "devops-engineer", "security-engineer", "sre-engineer",
         "ai-ml-engineer", "saas-architect", "healthcare-architect"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "fintech-architect"]
     },
     "anthropic-claude": {
       "version": "4.0.0",
@@ -90,8 +62,7 @@
         "backend-architect", "ai-ml-engineer",
         "system-architect", "security-engineer"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
-      "available_on_tiers": ["lite", "core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"]
     },
     "openai": {
       "version": "4.0.0",
@@ -100,8 +71,7 @@
         "ai-ml-engineer", "backend-architect",
         "system-architect", "security-engineer"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer"]
     },
     "cloudflare": {
       "version": "4.0.0",
@@ -110,8 +80,7 @@
         "backend-architect", "system-architect", "devops-engineer",
         "ai-ml-engineer", "database-architect", "security-engineer"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "sre-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "qa-engineer", "sre-engineer"]
     },
     "vercel": {
       "version": "4.0.0",
@@ -120,8 +89,7 @@
         "frontend-architect", "backend-architect", "devops-engineer",
         "ai-ml-engineer", "system-architect"
       ],
-      "deferred_roles": ["mobile-architect", "database-architect", "security-engineer", "sre-engineer", "qa-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["mobile-architect", "database-architect", "security-engineer", "sre-engineer", "qa-engineer"]
     },
     "supabase": {
       "version": "4.0.0",
@@ -130,8 +98,7 @@
         "backend-architect", "database-architect", "frontend-architect",
         "security-engineer", "ai-ml-engineer", "saas-architect"
       ],
-      "deferred_roles": ["mobile-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["mobile-architect", "devops-engineer", "sre-engineer", "qa-engineer"]
     },
     "firebase": {
       "version": "4.0.0",
@@ -140,8 +107,7 @@
         "backend-architect", "frontend-architect", "mobile-architect",
         "ai-ml-engineer", "security-engineer"
       ],
-      "deferred_roles": ["database-architect", "devops-engineer", "sre-engineer", "qa-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["database-architect", "devops-engineer", "sre-engineer", "qa-engineer"]
     },
     "expo": {
       "version": "4.0.0",
@@ -150,8 +116,7 @@
         "mobile-architect", "frontend-architect",
         "devops-engineer", "qa-engineer"
       ],
-      "deferred_roles": ["backend-architect", "database-architect", "security-engineer", "sre-engineer", "ai-ml-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["backend-architect", "database-architect", "security-engineer", "sre-engineer", "ai-ml-engineer"]
     },
     "stripe": {
       "version": "4.0.0",
@@ -160,8 +125,7 @@
         "backend-architect", "security-engineer",
         "saas-architect", "e-commerce-architect", "fintech-architect"
       ],
-      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer", "ai-ml-engineer"],
-      "available_on_tiers": ["core", "pro"]
+      "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "devops-engineer", "sre-engineer", "qa-engineer", "ai-ml-engineer"]
     },
     "observability": {
       "version": "4.0.0",
@@ -171,7 +135,6 @@
         "backend-architect", "security-engineer"
       ],
       "deferred_roles": ["frontend-architect", "mobile-architect", "database-architect", "ai-ml-engineer", "qa-engineer"],
-      "available_on_tiers": ["core", "pro"],
       "multi_vendor": true,
       "vendors": ["Datadog", "New Relic", "Grafana", "Prometheus", "Splunk", "Honeycomb", "Sentry", "Dynatrace", "OpenTelemetry"]
     }

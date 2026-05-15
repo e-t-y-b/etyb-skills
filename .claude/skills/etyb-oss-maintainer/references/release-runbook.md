@@ -95,7 +95,7 @@ Everything must be green before you push. The umbrella validator includes:
 - `validate-frontmatter.sh` — SKILL.md frontmatter shape
 - `validate-toc.py` — markdown TOC freshness
 - `validate-version-sync.sh` — VERSION aligned across the 5 bundle files + frontmatter
-- `validate-skill-manifest-sync.sh` — v4 single-skill layout + tier integrity
+- `validate-skill-manifest-sync.sh` — v4 single-skill layout (1 skill + 14/9/6 references)
 - `validate-changelog.sh` — CHANGELOG.md updated for user-visible changes
 - `check-currency.sh` — Stacks within drift-risk thresholds
 

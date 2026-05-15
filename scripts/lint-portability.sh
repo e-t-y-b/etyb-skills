@@ -120,11 +120,13 @@ fi
 grep -q "partial runtime-enforced" manifest.json || fail "manifest.json missing Codex partial runtime-enforced wording"
 grep -q "markdown-first" manifest.json || fail "manifest.json missing Antigravity markdown-first wording"
 
-# v4 tier system must be declared in manifest.
-grep -q '"tiers"' manifest.json || fail "manifest.json missing v4 tiers block"
-for tier in lite core pro; do
-  grep -q "\"$tier\"" manifest.json || fail "manifest.json missing tier: $tier"
-done
+# v4.0 — tier system removed. Manifest must NOT carry tiers.
+if grep -q '"tiers"' manifest.json; then
+  fail "manifest.json still has v4-pre tiers block (removed in v4.0.0 final)"
+fi
+if grep -q "available_on_tiers" manifest.json; then
+  fail "manifest.json stack entries still carry available_on_tiers (removed in v4.0.0 final)"
+fi
 
 # The five Claude hooks must point at the v4 reference paths.
 hook_paths=(

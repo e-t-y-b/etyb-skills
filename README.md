@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/Google_Antigravity-model--trusted-888?style=flat-square" alt="Google Antigravity" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
   <img src="https://img.shields.io/badge/skill-1_command-black?style=flat-square" alt="One skill, /etyb" />
-  <img src="https://img.shields.io/badge/tiers-lite_·_core_·_pro-00cc66?style=flat-square" alt="Three tiers" />
+  <img src="https://img.shields.io/badge/docs-docs.etyb.ai-00cc66?style=flat-square" alt="Vendor knowledge on docs.etyb.ai" />
 </p>
 
 ---
@@ -27,18 +27,18 @@
 
 **Install a virtual engineering company.** One slash command — `/etyb` — gives your AI agent a CTO, 20 specialists, 9 always-on engineering disciplines, and platform-specific [Stack Packs](STACKS.md).
 
-v4 collapses what used to be 30 separate skills into **one coordinated skill with three install tiers**. The user only ever invokes `/etyb`. ETYB silently routes the work to the right internal specialist, applies the right protocols, and signs every response so you know which expertise is in play. New: the [public changelog](https://etyb.ai/changelog) is linked under every response — one channel, no slash-command pollution.
+v4 collapses what used to be 30 separate skills into **one coordinated skill** — and moves vendor-specific knowledge out of the install onto a live, currency-stamped docs site at [docs.etyb.ai](https://docs.etyb.ai). The user only ever invokes `/etyb`. ETYB silently routes the work to the right internal specialist, applies the right protocols, fetches the relevant Stack page from docs.etyb.ai when the work involves a vendor, and signs every response. New: the [public changelog](https://etyb.ai/changelog) is linked under every response — one channel, no slash-command pollution.
 
 ## Quick Start
 
 ```bash
-# Claude Code — native plugin (full Pro install)
+# Claude Code — native plugin
 /plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb@etyb-skills
 
-# OpenAI Codex, Google Antigravity, or manual install — choose a tier
+# OpenAI Codex, Google Antigravity, or manual install
 git clone https://github.com/e-t-y-b/etyb-skills.git
-./etyb-skills/scripts/install.sh --tier core   # lite | core | pro (default: pro)
+./etyb-skills/scripts/install.sh
 
 # Codex projects — add runtime hooks + custom agents
 ./etyb-skills/scripts/install-codex-runtime.sh --target /path/to/your-project
@@ -63,7 +63,7 @@ Once installed, every request goes through `/etyb`. Specialist expertise is load
 - **Teams shipping real software** — your AI agent works like a disciplined team member, not a solo cowboy
 - **Engineers tired of AI "yes-and" behavior** — agents that skip tests, rubber-stamp reviews, or chase symptoms
 - **Regulated or high-stakes codebases** (fintech, healthcare, e-commerce) — traceable decisions, gated releases, evidence-backed claims
-- **Solo developers** — the Lite tier ships ETYB + protocols + 3 essential specialists, plenty for one person
+- **Solo developers** — `/etyb` is one slash command and works the same regardless of project size
 
 ## What You Get
 
@@ -74,7 +74,7 @@ An AI coding agent that works like a 100-person engineering org — through a si
 - **Pushes back on bad review feedback** — evaluates findings on merit, no performative agreement
 - **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
 - **Covers the full SDLC** — from research through production operations
-- **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems (Pro tier)
+- **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems
 - **Speaks your platform** — Stack Packs load across all roles when work involves a specific stack. [Salesforce](stacks/salesforce/SKILL.md) is live; AWS, GCP, Stripe, Shopify, SAP, ServiceNow on the way
 - **Identifies itself** — every Tier 1-4 response ends with `ETYB · <role-engaged>` and a `What's new — etyb.ai/changelog` line. One brand, transparent expertise.
 
@@ -91,7 +91,7 @@ ETYB CTO core ── reads internal references on demand:
      │
      ├── references/specialists/  (14 core engineering team READMEs)
      ├── references/protocols/    (9 always-on engineering disciplines)
-     ├── references/verticals/    (6 business-domain architects — Pro only)
+     ├── references/verticals/    (6 business-domain architects)
      │
      │  ALWAYS-ON PROTOCOL LAYER (loaded into every response)
      │  ├── TDD — no code without failing test
@@ -136,7 +136,7 @@ Three orthogonal axes: **specialists** (the roles), **protocols** (the disciplin
 | `technical-writer` | Cross-cutting | API docs, architecture docs, runbooks, user guides |
 | `code-reviewer` | Cross-cutting | Code quality, performance, security, architecture review |
 
-### Verticals (6, under `references/verticals/` — Pro tier)
+### Verticals (6, under `references/verticals/`)
 
 | Reference | Domain |
 |-----------|--------|
@@ -165,23 +165,23 @@ Three orthogonal axes: **specialists** (the roles), **protocols** (the disciplin
 
 Platform-specific knowledge overlays with **knowledge-currency timestamps**, authoritative-source URLs, per-product drift-risk ratings, and **vendor-skill delegation** — when a vendor MCP/skill is installed in your environment, ETYB defers to it rather than answering from baked knowledge. The team doesn't grow — it learns the platform.
 
-| Stack | Last Verified | Coverage | Tiers |
-|-------|---------------|----------|-------|
-| [Salesforce](stacks/salesforce/SKILL.md) | 2026-05-12 (Spring '26) | 11 role overlays — Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration, MFA mandate | Core, Pro |
-| [AWS](stacks/aws/SKILL.md) | 2026-05-14 | 9 role overlays — Lambda+SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore + Strands Agents SDK, Karpenter v1 | Core, Pro |
-| [GCP](stacks/gcp/SKILL.md) | 2026-05-14 | 8 role overlays — Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder + Agentspace, TPU v7 | Core, Pro |
-| [Azure](stacks/azure/SKILL.md) | 2026-05-14 | 9 role overlays — AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry + Foundry Agents, Microsoft Fabric | Core, Pro |
-| [Anthropic Claude](stacks/anthropic-claude/SKILL.md) | 2026-05-14 | 4 role overlays — Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring, Claude Code patterns | Lite, Core, Pro |
-| [OpenAI](stacks/openai/SKILL.md) | 2026-05-14 | 4 role overlays — GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs, Computer Use | Core, Pro |
-| [Cloudflare](stacks/cloudflare/SKILL.md) | 2026-05-14 | 6 role overlays — Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search, Workflows | Core, Pro |
-| [Vercel](stacks/vercel/SKILL.md) | 2026-05-14 | 5 role overlays — Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox, Workflow | Core, Pro |
-| [Supabase](stacks/supabase/SKILL.md) | 2026-05-14 | 6 role overlays — Postgres + RLS, Supabase Auth, Edge Functions, Realtime, Storage, pgvector, Supavisor, branching | Core, Pro |
-| [Firebase](stacks/firebase/SKILL.md) | 2026-05-14 | 5 role overlays — Firebase Auth, Firestore + multi-database, App Hosting, Cloud Functions gen 2, Firebase AI Logic, Genkit, Data Connect | Core, Pro |
-| [Expo](stacks/expo/SKILL.md) | 2026-05-14 | 4 role overlays — Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG, dev clients | Core, Pro |
-| [Stripe](stacks/stripe/SKILL.md) | 2026-05-14 | 5 role overlays — Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Express Checkout, Tax, Radar | Core, Pro |
-| [Observability](stacks/observability/SKILL.md) | 2026-05-14 | 4 role overlays — multi-vendor: Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry | Core, Pro |
+| Stack | Last Verified | Coverage |
+|-------|---------------|----------|
+| [Salesforce](https://docs.etyb.ai/stacks/salesforce/) | 2026-05-12 (Spring '26) | Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration, MFA mandate |
+| [AWS](https://docs.etyb.ai/stacks/aws/) | 2026-05-14 | Lambda + SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore + Strands Agents SDK, Karpenter v1 |
+| [GCP](https://docs.etyb.ai/stacks/gcp/) | 2026-05-14 | Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder + Agentspace, TPU v7 |
+| [Azure](https://docs.etyb.ai/stacks/azure/) | 2026-05-14 | AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry + Foundry Agents, Microsoft Fabric |
+| [Anthropic Claude](https://docs.etyb.ai/stacks/anthropic-claude/) | 2026-05-14 | Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring, Claude Code patterns |
+| [OpenAI](https://docs.etyb.ai/stacks/openai/) | 2026-05-14 | GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs, Computer Use |
+| [Cloudflare](https://docs.etyb.ai/stacks/cloudflare/) | 2026-05-14 | Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search, Workflows |
+| [Vercel](https://docs.etyb.ai/stacks/vercel/) | 2026-05-14 | Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox, Workflow |
+| [Supabase](https://docs.etyb.ai/stacks/supabase/) | 2026-05-14 | Postgres + RLS, Supabase Auth, Edge Functions, Realtime, Storage, pgvector, Supavisor, branching |
+| [Firebase](https://docs.etyb.ai/stacks/firebase/) | 2026-05-14 | Firebase Auth, Firestore + multi-database, App Hosting, Cloud Functions gen 2, Firebase AI Logic, Genkit, Data Connect |
+| [Expo](https://docs.etyb.ai/stacks/expo/) | 2026-05-14 | Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG, dev clients |
+| [Stripe](https://docs.etyb.ai/stacks/stripe/) | 2026-05-14 | Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Express Checkout, Tax, Radar |
+| [Observability](https://docs.etyb.ai/stacks/observability/) | 2026-05-14 | multi-vendor: Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry |
 
-**13 Stacks shipping in v4.0.0** with a unified knowledge-currency framework. See [STACKS.md](STACKS.md) for the full registry, drift-risk model, and authoring conventions.
+**13 Stacks live on [docs.etyb.ai](https://docs.etyb.ai/stacks/)** with a unified knowledge-currency framework. ETYB fetches per-product and per-role pages at runtime — local install carries detection signals only, not the content. See [STACKS.md](STACKS.md) for the full registry, drift-risk model, and authoring conventions.
 
 **Roadmap:** Snowflake, Databricks, dbt, Shopify, SAP, ServiceNow, Twilio, Auth0/Okta/Clerk/WorkOS as separate Stacks.
 
@@ -196,20 +196,17 @@ Platform-specific knowledge overlays with **knowledge-currency timestamps**, aut
 /plugin install etyb@etyb-skills
 ```
 
-Marketplace plugins are atomic units, so the Claude Code plugin installs the **Pro** tier (everything). To install Lite or Core, use the CLI installer below — it prunes references after copying.
+Installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals.
 
-### Codex, Antigravity, or Manual (CLI installer — tier selection)
+### Codex, Antigravity, or Manual (CLI installer)
 
 ```bash
 git clone https://github.com/e-t-y-b/etyb-skills.git
 cd etyb-skills
 
-./scripts/install.sh --tier lite    # ETYB + 9 protocols + 3 essential specialists
-./scripts/install.sh --tier core    # + 11 more specialists (14 total)
-./scripts/install.sh --tier pro     # + 6 verticals (default)
-
-./scripts/install.sh --list-tiers   # describe each tier
-./scripts/install.sh --dry-run      # change nothing, show plan
+./scripts/install.sh                 # default — copies skills/etyb/ to your skills dir
+./scripts/install.sh --dry-run       # change nothing, show plan
+./scripts/install.sh --target DIR    # install into DIR (overrides auto-detect)
 ```
 
 The installer auto-detects target directories (`.claude/skills/`, `.agents/skills/`, `.agent/skills/`, `skills/`) and offers to back up legacy v3 sibling skills if it finds them.

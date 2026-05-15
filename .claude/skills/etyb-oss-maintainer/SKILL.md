@@ -23,8 +23,8 @@ You are not installed onto end-user machines. You live under `.claude/skills/ety
 These are non-negotiable. Flag any change that would violate one.
 
 - `/etyb` is the only trigger surface. No peer slash commands. New specialist / protocol / vertical material lands as an internal reference under `skills/etyb/references/{specialists,protocols,verticals}/<name>/`, never as a sibling skill.
-- Internal references address each other by name and capability, not by absolute file path that assumes a tier. A `lite`-tier install will have only 3 of 14 specialists on disk, so anything pinning to a missing specialist's path will fail silently — references that consult another reference should check existence first.
-- Tier composition is declared in `manifest.json .tiers` and enforced by `scripts/install.sh`. Adding a new specialist requires a tier-assignment decision (Lite/Core/Pro); adding a new vertical defaults to Pro.
+- Internal references address each other by name and capability, not by absolute file path. Every install carries the full reference set (14 specialists + 9 protocols + 6 verticals); the tier system was removed in v4.0.0.
+- Vendor knowledge does **not** live in the install. Each `stacks/<vendor>/SKILL.md` is a slim pointer at `docs.etyb.ai/stacks/<vendor>/`; per-product + per-role content is fetched at runtime via the WebFetch contract in `skills/etyb/core/knowledge-currency.md`. Adding a new Stack means publishing on docs.etyb.ai and registering detection signals in `core/stack-registry.md` + the `stacks/` slim pointer.
 - Install scripts never touch `.etyb/plans/`, `.claude/plans/`, or `.claude/settings.local.json`.
 - The version strings stay aligned across all locations (see `references/version-sync.md`). Single-version policy: VERSION is the only version that exists.
 - Three-platform parity: `skills/etyb/SKILL.md` carries frontmatter; every reference under `skills/etyb/references/<lib>/<name>/` ships `README.md` + `agents/openai.yaml` with an `interface:` block and `allow_implicit_invocation: true` so Codex can implicit-invoke the right material.

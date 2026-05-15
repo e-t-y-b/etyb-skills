@@ -27,7 +27,7 @@ Plus structural rules:
 - `manifest.json .skill` must contain exactly one key (`etyb`) — v4 ships one installable skill.
 - `manifest.json .stacks` keys must match `stacks/*/` directory names exactly.
 - `marketplace.json` must contain exactly one plugin (`etyb`) listing only `./skills/etyb`.
-- `manifest.json .tiers` must contain `lite`, `core`, `pro`.
+- `manifest.json` must NOT contain a `.tiers` block, and no stack entry may carry `available_on_tiers` — the tier system was removed in v4.0.0.
 
 ## What does NOT count as a version
 
