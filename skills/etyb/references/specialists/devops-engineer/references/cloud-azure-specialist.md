@@ -1,21 +1,21 @@
 # Azure Cloud Engineering — Pointer
 
-As of v4.0.0 (2026-05-14), all Azure-specific guidance — compute (AKS Auto/LTS, Container Apps, Functions Flex), data (Cosmos DB with DiskANN, Azure SQL Hyperscale, PostgreSQL Flexible Server, Azure Managed Redis), Entra ID + External ID (rebranded from Azure AD / B2C in 2023-2024), Defender for Cloud + Sentinel + Purview, Bicep + AVM + Deployment Stacks, AI Foundry (rebranded from Azure AI Studio in 2025) + Azure OpenAI, Microsoft Fabric, and 2025-2026 platform shifts — lives across two layers: the slim local detection pointer at [`stacks/azure/SKILL.md`](../../../../../../stacks/azure/SKILL.md) and the canonical per-product + per-role pages at **<https://docs.etyb.ai/stacks/azure/>**, fetched at runtime per `skills/etyb/core/knowledge-currency.md`.
+As of v4.0.0 (2026-05-14), all Azure-specific guidance — compute (AKS Auto/LTS, Container Apps, Functions Flex), data (Cosmos DB with DiskANN, Azure SQL Hyperscale, PostgreSQL Flexible Server, Azure Managed Redis), Entra ID + External ID (rebranded from Azure AD / B2C in 2023-2024), Defender for Cloud + Sentinel + Purview, Bicep + AVM + Deployment Stacks, AI Foundry (rebranded from Azure AI Studio in 2025) + Azure OpenAI, Microsoft Fabric, and 2025-2026 platform shifts — lives in this repo under `stacks/<vendor>/`: a slim trigger pointer at the SKILL.md plus per-product canonical pages and per-role composed views as siblings. ETYB reads these directly when installed.
 
 ## Where that content lives now
 
-| Topic | Canonical location on docs.etyb.ai |
+| Topic | In-repo location |
 |-------|------------------------------------|
-| Compute selection (VM series, AKS Auto/LTS/Karpenter, Container Apps Workload Profiles, Functions Flex) | <https://docs.etyb.ai/stacks/azure/system-architect/>, <https://docs.etyb.ai/stacks/azure/devops-engineer/> |
-| Networking — Front Door, Application Gateway, VWAN, Private Link | <https://docs.etyb.ai/stacks/azure/system-architect/>, <https://docs.etyb.ai/stacks/azure/security-engineer/> |
-| Databases — Cosmos DB (NoSQL + Mongo vCore + PostgreSQL retirement), Azure SQL, PostgreSQL Flexible Server, Azure Managed Redis | <https://docs.etyb.ai/stacks/azure/database-architect/> |
-| Entra ID / External ID / PIM / Workload Identity Federation, Defender for Cloud, Sentinel, Purview | <https://docs.etyb.ai/stacks/azure/security-engineer/> |
-| IaC — Bicep + Azure Verified Modules + Deployment Stacks, Terraform AzureRM v4, azd | <https://docs.etyb.ai/stacks/azure/devops-engineer/> |
-| Observability — Azure Monitor + OTel Distro + Managed Prometheus/Grafana | <https://docs.etyb.ai/stacks/azure/sre-engineer/> |
-| AI — AI Foundry, Azure OpenAI deployment types, Foundry Agents, Entra Agent ID | <https://docs.etyb.ai/stacks/azure/ai-ml-engineer/> |
-| Multi-tenant SaaS on Azure (subscription vending, B2C → External ID migration) | <https://docs.etyb.ai/stacks/azure/saas-architect/> |
-| Healthcare APIs (FHIR R4 service, healthcare workload patterns) | <https://docs.etyb.ai/stacks/azure/healthcare-architect/> |
-| Hybrid + Azure Arc + Azure Local | <https://docs.etyb.ai/stacks/azure/system-architect/> |
+| Compute selection (VM series, AKS Auto/LTS/Karpenter, Container Apps Workload Profiles, Functions Flex) | `stacks/azure/system-architect.md`, `stacks/azure/devops-engineer.md` |
+| Networking — Front Door, Application Gateway, VWAN, Private Link | `stacks/azure/system-architect.md`, `stacks/azure/security-engineer.md` |
+| Databases — Cosmos DB (NoSQL + Mongo vCore + PostgreSQL retirement), Azure SQL, PostgreSQL Flexible Server, Azure Managed Redis | `stacks/azure/database-architect.md` |
+| Entra ID / External ID / PIM / Workload Identity Federation, Defender for Cloud, Sentinel, Purview | `stacks/azure/security-engineer.md` |
+| IaC — Bicep + Azure Verified Modules + Deployment Stacks, Terraform AzureRM v4, azd | `stacks/azure/devops-engineer.md` |
+| Observability — Azure Monitor + OTel Distro + Managed Prometheus/Grafana | `stacks/azure/sre-engineer.md` |
+| AI — AI Foundry, Azure OpenAI deployment types, Foundry Agents, Entra Agent ID | `stacks/azure/ai-ml-engineer.md` |
+| Multi-tenant SaaS on Azure (subscription vending, B2C → External ID migration) | `stacks/azure/saas-architect.md` |
+| Healthcare APIs (FHIR R4 service, healthcare workload patterns) | `stacks/azure/healthcare-architect.md` |
+| Hybrid + Azure Arc + Azure Local | `stacks/azure/system-architect.md` |
 
 ## Why the move
 

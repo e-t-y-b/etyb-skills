@@ -125,14 +125,15 @@ This is a **knowledge overlay**, not a new specialist. The existing ETYB team do
 
 ## Where the full briefing lives
 
-Per-product and per-role pages are maintained at **[docs.etyb.ai/stacks/aws](https://docs.etyb.ai/stacks/aws/)** with `last_verified_on` stamps and authoritative-source URLs. ETYB fetches from those URLs at runtime — see `skills/etyb/core/knowledge-currency.md` for the fetch contract.
+The full Stack briefing lives in this same folder. Per-product and per-role pages are siblings of this `SKILL.md`. Every page carries `last_verified_on` stamps and authoritative-source URLs in its frontmatter; see `skills/etyb/core/knowledge-currency.md` for the drift-check protocol that uses them.
 
-- **Stack index:** <https://docs.etyb.ai/stacks/aws/>
-- **Per-product pages:** `https://docs.etyb.ai/stacks/aws/<product>/`
-- **Per-role views:** `https://docs.etyb.ai/stacks/aws/<role>/` — composed views for each role in `applies_to_roles` above
+- **Stack briefing:** [`stacks/aws/index.md`](index.md)
+- **Per-product pages:** `stacks/aws/<product>.md` — one per entry in `products_covered` above
+- **Per-role views:** `stacks/aws/<role>.md` — one per role in `applies_to_roles` above
 
-When `delegate_to_skills` (frontmatter above) lists a first-party vendor MCP/skill that's installed in the user's environment, ETYB defers to it first; docs.etyb.ai is the curated fallback.
+When ETYB is installed locally these are read directly from disk. For third-party agents without the install, the same content is reachable as raw markdown at `https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/stacks/aws/<page>.md`.
 
+When `delegate_to_skills` (frontmatter above) lists a first-party vendor MCP/skill that's installed in the user's environment, ETYB defers to it first. The in-repo Stack content is the curated fallback.
 ## What changed in 2025-2026 that older training data misses
 
 Critical context — an LLM with a 2024 cutoff will get these wrong:
@@ -149,11 +150,11 @@ Critical context — an LLM with a 2024 cutoff will get these wrong:
 - **Amazon Linux 2 (AL2) reached end of standard support June 2025; maintenance support ends June 2026.** New AMIs and base images should target AL2023.
 - **Step Functions JSONata + Variables** (re:Invent 2024) replace the ResultPath/InputPath dance for new state machines. **TestState API** GA Mar 2026 — test states in isolation before deploy.
 
-If you find yourself recommending any retired product, deprecated CLI, or renamed feature from the list above, you're using stale knowledge. Fetch the current page from docs.etyb.ai before continuing.
+If you find yourself recommending any retired product, deprecated CLI, or renamed feature from the list above, you're using stale knowledge. Read the relevant sibling file in this folder before continuing.
 
 ## Standing instructions for every role on an AWS engagement
 
-1. **Anchor to currency.** Before recommending API shapes, syntax, product names, or pricing, fetch the relevant docs.etyb.ai page and check its `last_verified_on`. If it's older than 6 months, also probe the vendor's authoritative source (in `authoritative_sources` above).
+1. **Anchor to currency.** Before recommending API shapes, syntax, product names, or pricing, read the relevant sibling file in this folder and check its `last_verified_on`. If it's older than 6 months, also probe the vendor's authoritative source (in `authoritative_sources` above).
 
 2. **Defer to verticals on domain compliance.** This pack covers platform mechanics. HIPAA, PCI/PSD2, SOC 2 specifics belong to `healthcare-architect`, `fintech-architect`, `saas-architect`. Route to the vertical; don't restate compliance content from this pack.
 

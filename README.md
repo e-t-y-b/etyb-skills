@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/Google_Antigravity-model--trusted-888?style=flat-square" alt="Google Antigravity" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
   <img src="https://img.shields.io/badge/skill-1_command-black?style=flat-square" alt="One skill, /etyb" />
-  <img src="https://img.shields.io/badge/docs-docs.etyb.ai-00cc66?style=flat-square" alt="Vendor knowledge on docs.etyb.ai" />
+  <img src="https://img.shields.io/badge/content-in_repo-00cc66?style=flat-square" alt="Vendor knowledge in-repo" />
 </p>
 
 ---
@@ -27,7 +27,7 @@
 
 **Install a virtual engineering company.** One slash command — `/etyb` — gives your AI agent a CTO, 20 specialists, 9 always-on engineering disciplines, and platform-specific [Stack Packs](STACKS.md).
 
-v4 collapses what used to be 30 separate skills into **one coordinated skill** — and moves vendor-specific knowledge out of the install onto a live, currency-stamped docs site at [docs.etyb.ai](https://docs.etyb.ai). The user only ever invokes `/etyb`. ETYB silently routes the work to the right internal specialist, applies the right protocols, fetches the relevant Stack page from docs.etyb.ai when the work involves a vendor, and signs every response. New: the [public changelog](https://etyb.ai/changelog) is linked under every response — one channel, no slash-command pollution.
+v4 collapses what used to be 30 separate skills into **one coordinated skill** with currency-stamped vendor knowledge living inside the repo at `stacks/<vendor>/`. The user only ever invokes `/etyb`. ETYB silently routes the work to the right internal specialist, applies the right protocols, reads the relevant Stack page directly when the work involves a vendor, and signs every response. New: the [public changelog](https://etyb.ai/changelog) is linked under every response — one channel, no slash-command pollution.
 
 ## Quick Start
 
@@ -167,21 +167,21 @@ Platform-specific knowledge overlays with **knowledge-currency timestamps**, aut
 
 | Stack | Last Verified | Coverage |
 |-------|---------------|----------|
-| [Salesforce](https://docs.etyb.ai/stacks/salesforce/) | 2026-05-12 (Spring '26) | Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration, MFA mandate |
-| [AWS](https://docs.etyb.ai/stacks/aws/) | 2026-05-14 | Lambda + SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore + Strands Agents SDK, Karpenter v1 |
-| [GCP](https://docs.etyb.ai/stacks/gcp/) | 2026-05-14 | Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder + Agentspace, TPU v7 |
-| [Azure](https://docs.etyb.ai/stacks/azure/) | 2026-05-14 | AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry + Foundry Agents, Microsoft Fabric |
-| [Anthropic Claude](https://docs.etyb.ai/stacks/anthropic-claude/) | 2026-05-14 | Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring, Claude Code patterns |
-| [OpenAI](https://docs.etyb.ai/stacks/openai/) | 2026-05-14 | GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs, Computer Use |
-| [Cloudflare](https://docs.etyb.ai/stacks/cloudflare/) | 2026-05-14 | Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search, Workflows |
-| [Vercel](https://docs.etyb.ai/stacks/vercel/) | 2026-05-14 | Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox, Workflow |
-| [Supabase](https://docs.etyb.ai/stacks/supabase/) | 2026-05-14 | Postgres + RLS, Supabase Auth, Edge Functions, Realtime, Storage, pgvector, Supavisor, branching |
-| [Firebase](https://docs.etyb.ai/stacks/firebase/) | 2026-05-14 | Firebase Auth, Firestore + multi-database, App Hosting, Cloud Functions gen 2, Firebase AI Logic, Genkit, Data Connect |
-| [Expo](https://docs.etyb.ai/stacks/expo/) | 2026-05-14 | Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG, dev clients |
-| [Stripe](https://docs.etyb.ai/stacks/stripe/) | 2026-05-14 | Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Express Checkout, Tax, Radar |
-| [Observability](https://docs.etyb.ai/stacks/observability/) | 2026-05-14 | multi-vendor: Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry |
+| [Salesforce](stacks/salesforce/) | 2026-05-12 (Spring '26) | Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration, MFA mandate |
+| [AWS](stacks/aws/) | 2026-05-14 | Lambda + SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore + Strands Agents SDK, Karpenter v1 |
+| [GCP](stacks/gcp/) | 2026-05-14 | Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder + Agentspace, TPU v7 |
+| [Azure](stacks/azure/) | 2026-05-14 | AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry + Foundry Agents, Microsoft Fabric |
+| [Anthropic Claude](stacks/anthropic-claude/) | 2026-05-14 | Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring, Claude Code patterns |
+| [OpenAI](stacks/openai/) | 2026-05-14 | GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs, Computer Use |
+| [Cloudflare](stacks/cloudflare/) | 2026-05-14 | Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search, Workflows |
+| [Vercel](stacks/vercel/) | 2026-05-14 | Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox, Workflow |
+| [Supabase](stacks/supabase/) | 2026-05-14 | Postgres + RLS, Supabase Auth, Edge Functions, Realtime, Storage, pgvector, Supavisor, branching |
+| [Firebase](stacks/firebase/) | 2026-05-14 | Firebase Auth, Firestore + multi-database, App Hosting, Cloud Functions gen 2, Firebase AI Logic, Genkit, Data Connect |
+| [Expo](stacks/expo/) | 2026-05-14 | Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG, dev clients |
+| [Stripe](stacks/stripe/) | 2026-05-14 | Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Express Checkout, Tax, Radar |
+| [Observability](stacks/observability/) | 2026-05-14 | multi-vendor: Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry |
 
-**13 Stacks live on [docs.etyb.ai](https://docs.etyb.ai/stacks/)** with a unified knowledge-currency framework. ETYB fetches per-product and per-role pages at runtime — local install carries detection signals only, not the content. See [STACKS.md](STACKS.md) for the full registry, drift-risk model, and authoring conventions.
+**13 Stacks live in this repo under [`stacks/`](stacks/)** with a unified knowledge-currency framework. ETYB reads per-product and per-role pages directly when the install is on disk. Third-party agents without the install can fetch the same content as raw markdown from `https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/stacks/<vendor>/<page>.md`. See [STACKS.md](STACKS.md) for the full registry, drift-risk model, and authoring conventions.
 
 **Roadmap:** Snowflake, Databricks, dbt, Shopify, SAP, ServiceNow, Twilio, Auth0/Okta/Clerk/WorkOS as separate Stacks.
 

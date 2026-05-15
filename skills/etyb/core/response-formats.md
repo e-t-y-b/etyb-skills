@@ -88,7 +88,7 @@ No team lists. No coordination plans. Just triage, actions, and follow-up. End w
 
 ## Tier 3 — Focused Project Brief
 
-Produce this **after** the Step 0 block above has been delivered and the user has confirmed or redirected. Emit progress markers as you read each specialist reference / Stack page ("Reading database-architect…", "Pulling docs.etyb.ai/stacks/aws/devops-engineer…") so the user knows the work is happening.
+Produce this **after** the Step 0 block above has been delivered and the user has confirmed or redirected. Emit progress markers as you read each specialist reference / Stack page ("Reading database-architect…", "Pulling stacks/aws/devops-engineer…") so the user knows the work is happening.
 
 ```
 ## Project Brief: [What We're Building/Doing]

@@ -4,7 +4,7 @@ This file used to be a 660-line single-specialist reference covering React Nativ
 
 ## Expo content lives in the Expo Stack
 
-The slim local pointer [`stacks/expo/SKILL.md`](../../../../../../stacks/expo/SKILL.md) and the canonical role view at <https://docs.etyb.ai/stacks/expo/mobile-architect/> cover:
+The slim local pointer [`stacks/expo/SKILL.md`](../../../../../../stacks/expo/SKILL.md) and the canonical role view at `stacks/expo/mobile-architect.md` cover:
 
 - **Expo SDK** (current major version) and the SDK version → React Native version → JS engine version mapping
 - **Expo Router** — file-based routing for native + web with shared route definitions

@@ -15,7 +15,7 @@ skills/etyb/                          ← the installed skill (everything below 
 │   ├── charter.md                    ← Tier 0-4 classification, CTO identity
 │   ├── team-registry.md              ← 20 specialists, domain detection
 │   ├── always-on-protocols.md        ← 9 engineering disciplines
-│   ├── stack-registry.md             ← Stack detection signals + docs.etyb.ai fetch contract
+│   ├── stack-registry.md             ← Stack detection signals + in-repo content layout
 │   ├── knowledge-currency.md         ← drift-check protocol (soft / strict / degraded paths)
 │   ├── gates.md                      ← 5-gate sequence, plan lifecycle
 │   ├── expert-mandating.md           ← mandatory expert matrix
@@ -38,13 +38,13 @@ stacks/                               ← slim local pointers (detection + deleg
 ├── ... (13 vendors total)
 └── observability/SKILL.md
 
-https://docs.etyb.ai/stacks/<vendor>/  ← canonical Stack content (fetched at runtime)
-├── index                             ← Stack briefing
-├── <product>/                        ← per-product canonical pages with last_verified_on
-└── <role>/                           ← per-role composed views that stitch products
+  └── (each Stack folder also holds:)
+      ├── index.md             ← Stack briefing
+      ├── <product>.md          ← per-product canonical pages with last_verified_on
+      └── <role>.md             ← per-role composed views that stitch products
 ```
 
-**Two-layer Stack model.** Detection lives locally — when a slim `stacks/<vendor>/SKILL.md` matches the user's request, ETYB loads it for the gotchas + delegation map. Depth lives remotely — ETYB WebFetches the most-specific docs.etyb.ai URL (product → role → stack index) per the contract in `core/knowledge-currency.md`. Vendor content stops sitting on disk going stale between releases.
+**Stack model.** Detection happens via `SKILL.md` — when its trigger matches, ETYB loads it for the gotchas + delegation map. Depth comes from sibling files in the same `stacks/<vendor>/` folder — ETYB reads the most-specific in-repo file (product → role → stack index) per the contract in `core/knowledge-currency.md`.
 
 ## Always-On Engineering Culture
 
@@ -71,7 +71,7 @@ The hooks live at `skills/etyb/references/protocols/<protocol>/hooks/` (e.g., `t
 
 ## Install
 
-`scripts/install.sh` always installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals. Vendor knowledge is **not** bundled; ETYB fetches it from [docs.etyb.ai](https://docs.etyb.ai/stacks/) at runtime per the `core/knowledge-currency.md` fetch contract.
+`scripts/install.sh` always installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals. Vendor knowledge ships **in-repo** under `stacks/<vendor>/` — 13 currency-stamped Stacks read directly from disk per the `core/knowledge-currency.md` drift-check protocol.
 
 ## Signature
 

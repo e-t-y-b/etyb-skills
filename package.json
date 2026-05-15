@@ -1,7 +1,7 @@
 {
   "name": "etyb-skills",
   "version": "4.0.0",
-  "description": "ETYB \u2014 virtual engineering company for AI coding agents. One coordinated skill (/etyb) with internal references for 20 specialists + 9 always-on engineering disciplines + 6 vertical-domain architects. Vendor knowledge fetched live from docs.etyb.ai. Works on Claude Code, OpenAI Codex, and Google Antigravity.",
+  "description": "ETYB \u2014 virtual engineering company for AI coding agents. One coordinated skill (/etyb) with internal references for 20 specialists + 9 always-on engineering disciplines + 6 vertical-domain architects. Vendor knowledge for 13 platforms (AWS, GCP, Azure, Salesforce, Cloudflare, Vercel, etc.) ships in-repo under stacks/. Works on Claude Code, OpenAI Codex, and Google Antigravity.",
   "scripts": {
     "lint:portability": "./scripts/lint-portability.sh"
   },

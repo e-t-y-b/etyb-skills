@@ -17,7 +17,7 @@ This file used to be a 1635-line single-specialist reference — the largest in 
 - **OpenTelemetry** — the vendor-neutral instrumentation standard, OTel Collector tiered topologies (agent + gateway), OTLP, semantic conventions 1.28+, OTel Auto-Instrumentation, OTel GenAI conventions for LLM/agent observability
 - **eBPF auto-instrumentation** — Beyla, Pixie, Datadog Universal Service Monitoring
 
-Each is covered in the canonical role views at <https://docs.etyb.ai/stacks/observability/<role>/> (e.g., `/sre-engineer/`, `/devops-engineer/`, `/backend-architect/`, `/security-engineer/`) with vendor-pick decision frameworks, instrumentation patterns, alerting topologies, cost models, and 2025-2026 currency anchors (Grafana Agent EOL, Sentry Debug-ID source maps mandatory, OTel semconv migration, Splunk-Cisco acquisition implications, etc.).
+Each is covered in the canonical role views at `stacks/observability/<role`/> (e.g., `/sre-engineer/`, `/devops-engineer/`, `/backend-architect/`, `/security-engineer/`) with vendor-pick decision frameworks, instrumentation patterns, alerting topologies, cost models, and 2025-2026 currency anchors (Grafana Agent EOL, Sentry Debug-ID source maps mandatory, OTel semconv migration, Splunk-Cisco acquisition implications, etc.).
 
 ## What stays in the platform-neutral surface (this file)
 

@@ -2,19 +2,19 @@
 
 This file used to be a 569-line single-specialist reference. As of v4.0.0 (2026-05-14), **vendor-specific SDK and integration content has migrated to Stacks**; this file retains the platform-neutral integration principles.
 
-## Vendor-specific SDK + integration patterns live in Stacks (canonical pages on docs.etyb.ai)
+## Vendor-specific SDK + integration patterns live in Stacks (canonical pages on in-repo stacks)
 
-| Topic | Canonical location on docs.etyb.ai |
+| Topic | In-repo location |
 |---|---|
-| Anthropic SDK (Python/TS), streaming, prompt-caching strategy, AnthropicBedrock + AnthropicVertex provider clients | <https://docs.etyb.ai/stacks/anthropic-claude/backend-architect/> |
-| OpenAI SDK, Responses API, Realtime API, Agents SDK with handoffs/guardrails/tracing, Batch API, streaming with `stream_options.include_usage` | <https://docs.etyb.ai/stacks/openai/backend-architect/>, <https://docs.etyb.ai/stacks/openai/ai-ml-engineer/> |
-| Vercel AI SDK + AI Elements + AI Gateway routing + Chat SDK + Vercel Agent | <https://docs.etyb.ai/stacks/vercel/ai-ml-engineer/> |
-| Cloudflare AI Gateway + Workers AI + AI Search (formerly AutoRAG) + Vectorize | <https://docs.etyb.ai/stacks/cloudflare/ai-ml-engineer/> |
-| Firebase AI Logic (formerly Vertex AI in Firebase) + Genkit (JS/Python/Go/Dart) | <https://docs.etyb.ai/stacks/firebase/ai-ml-engineer/> |
-| AWS Bedrock SDK + AgentCore + Strands | <https://docs.etyb.ai/stacks/aws/ai-ml-engineer/> |
-| GCP Vertex AI SDK + Agent Builder + Gemini integration | <https://docs.etyb.ai/stacks/gcp/ai-ml-engineer/> |
-| Azure OpenAI SDK + AI Foundry + Foundry Agents | <https://docs.etyb.ai/stacks/azure/ai-ml-engineer/> |
-| LLM observability (Datadog LLM Observability, New Relic AI Monitoring, Langfuse, Helicone, Honeycomb AI) | <https://docs.etyb.ai/stacks/observability/sre-engineer/>, <https://docs.etyb.ai/stacks/observability/backend-architect/> (OTel GenAI semantic conventions) |
+| Anthropic SDK (Python/TS), streaming, prompt-caching strategy, AnthropicBedrock + AnthropicVertex provider clients | `stacks/anthropic-claude/backend-architect.md` |
+| OpenAI SDK, Responses API, Realtime API, Agents SDK with handoffs/guardrails/tracing, Batch API, streaming with `stream_options.include_usage` | `stacks/openai/backend-architect.md`, `stacks/openai/ai-ml-engineer.md` |
+| Vercel AI SDK + AI Elements + AI Gateway routing + Chat SDK + Vercel Agent | `stacks/vercel/ai-ml-engineer.md` |
+| Cloudflare AI Gateway + Workers AI + AI Search (formerly AutoRAG) + Vectorize | `stacks/cloudflare/ai-ml-engineer.md` |
+| Firebase AI Logic (formerly Vertex AI in Firebase) + Genkit (JS/Python/Go/Dart) | `stacks/firebase/ai-ml-engineer.md` |
+| AWS Bedrock SDK + AgentCore + Strands | `stacks/aws/ai-ml-engineer.md` |
+| GCP Vertex AI SDK + Agent Builder + Gemini integration | `stacks/gcp/ai-ml-engineer.md` |
+| Azure OpenAI SDK + AI Foundry + Foundry Agents | `stacks/azure/ai-ml-engineer.md` |
+| LLM observability (Datadog LLM Observability, New Relic AI Monitoring, Langfuse, Helicone, Honeycomb AI) | `stacks/observability/sre-engineer.md`, `stacks/observability/backend-architect.md` (OTel GenAI semantic conventions) |
 
 ## What stays in the platform-neutral surface
 
@@ -29,9 +29,9 @@ The AI/ML Engineer specialist still owns these integration principles, applicabl
 - **A/B testing for LLM features** — feature flags + per-arm metrics, prompt-A vs prompt-B + model-A vs model-B factorial design, evaluator-LLM-as-judge for offline eval
 - **Edge inference** — when to run small models at the edge (latency-critical, privacy-sensitive, offline-capable use cases) vs centralized large-model calls. Workers AI, Vercel Edge, Cloudflare AI fit here
 - **Webhook + async patterns** — long-running batch jobs (OpenAI Batch API, Anthropic Batch, Vertex AI batch prediction) with webhook delivery vs polling vs Server-Sent Events for in-progress reporting
-- **OpenTelemetry GenAI semantic conventions** — vendor-neutral instrumentation for spans (`gen_ai.system`, `gen_ai.request.model`, `gen_ai.usage.input_tokens`, etc.); see <https://docs.etyb.ai/stacks/observability/> for vendor-side ingestion
-- **EU AI Act compliance framing** — risk-tier classification (unacceptable, high, limited, minimal), GPAI provider obligations, transparency requirements, post-market monitoring. Compliance lives in the specialist; vendor-specific operator notes live in each Stack's `security-engineer` view on docs.etyb.ai
-- **Sensitive-data scrubbing** — PII / PHI / PAN detection and redaction before the LLM call. Tool selection (Presidio, Datadog SDS, vendor-specific) lives at <https://docs.etyb.ai/stacks/observability/security-engineer/>
+- **OpenTelemetry GenAI semantic conventions** — vendor-neutral instrumentation for spans (`gen_ai.system`, `gen_ai.request.model`, `gen_ai.usage.input_tokens`, etc.); see `stacks/observability/` for vendor-side ingestion
+- **EU AI Act compliance framing** — risk-tier classification (unacceptable, high, limited, minimal), GPAI provider obligations, transparency requirements, post-market monitoring. Compliance lives in the specialist; vendor-specific operator notes live in each Stack's `security-engineer` view on in-repo stacks
+- **Sensitive-data scrubbing** — PII / PHI / PAN detection and redaction before the LLM call. Tool selection (Presidio, Datadog SDS, vendor-specific) lives at `stacks/observability/security-engineer.md`
 
 ## How ETYB uses both layers
 

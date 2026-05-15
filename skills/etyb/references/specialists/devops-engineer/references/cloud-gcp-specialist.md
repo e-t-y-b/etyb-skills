@@ -1,21 +1,21 @@
 # GCP Cloud Engineering — Pointer
 
-As of v4.0.0 (2026-05-14), all GCP-specific guidance — compute (Cloud Run, GKE Autopilot, Functions), data (BigQuery, AlloyDB, Spanner, Firestore), networking, IAM, observability, AI/ML (Vertex AI, Gemini, Agent Builder, Agentspace, TPU v7 Ironwood), and 2025-2026 platform shifts — lives across two layers: the slim local detection pointer at [`stacks/gcp/SKILL.md`](../../../../../../stacks/gcp/SKILL.md) and the canonical per-product + per-role pages at **<https://docs.etyb.ai/stacks/gcp/>**, fetched at runtime per `skills/etyb/core/knowledge-currency.md`.
+As of v4.0.0 (2026-05-14), all GCP-specific guidance — compute (Cloud Run, GKE Autopilot, Functions), data (BigQuery, AlloyDB, Spanner, Firestore), networking, IAM, observability, AI/ML (Vertex AI, Gemini, Agent Builder, Agentspace, TPU v7 Ironwood), and 2025-2026 platform shifts — lives in this repo under `stacks/<vendor>/`: a slim trigger pointer at the SKILL.md plus per-product canonical pages and per-role composed views as siblings. ETYB reads these directly when installed.
 
 ## Where that content lives now
 
-| Topic | Canonical location on docs.etyb.ai |
+| Topic | In-repo location |
 |-------|------------------------------------|
-| Compute selection (Cloud Run gen2, GKE, Cloud Functions, App Engine) | <https://docs.etyb.ai/stacks/gcp/system-architect/>, <https://docs.etyb.ai/stacks/gcp/backend-architect/> |
-| Networking, Cloud Armor, Cloud CDN, VPC | <https://docs.etyb.ai/stacks/gcp/system-architect/>, <https://docs.etyb.ai/stacks/gcp/security-engineer/> |
-| Databases — Cloud SQL, AlloyDB (incl. AI), Spanner (incl. GraphQL), Firestore, Bigtable, BigQuery | <https://docs.etyb.ai/stacks/gcp/database-architect/> |
-| IAM, Workload Identity Federation, VPC-SC, Secret Manager, Cloud KMS | <https://docs.etyb.ai/stacks/gcp/security-engineer/> |
-| Serverless + Eventarc + Workflows + Cloud Tasks | <https://docs.etyb.ai/stacks/gcp/backend-architect/> |
-| IaC — Terraform google provider, Config Connector, Infrastructure Manager | <https://docs.etyb.ai/stacks/gcp/devops-engineer/> |
-| Observability — Cloud Ops, Managed OTel, Managed Prometheus | <https://docs.etyb.ai/stacks/gcp/sre-engineer/> |
-| AI/ML — Vertex AI, Gemini Code Assist, Agent Builder, Agentspace, TPUs, Model Garden, AlloyDB AI | <https://docs.etyb.ai/stacks/gcp/ai-ml-engineer/> |
+| Compute selection (Cloud Run gen2, GKE, Cloud Functions, App Engine) | `stacks/gcp/system-architect.md`, `stacks/gcp/backend-architect.md` |
+| Networking, Cloud Armor, Cloud CDN, VPC | `stacks/gcp/system-architect.md`, `stacks/gcp/security-engineer.md` |
+| Databases — Cloud SQL, AlloyDB (incl. AI), Spanner (incl. GraphQL), Firestore, Bigtable, BigQuery | `stacks/gcp/database-architect.md` |
+| IAM, Workload Identity Federation, VPC-SC, Secret Manager, Cloud KMS | `stacks/gcp/security-engineer.md` |
+| Serverless + Eventarc + Workflows + Cloud Tasks | `stacks/gcp/backend-architect.md` |
+| IaC — Terraform google provider, Config Connector, Infrastructure Manager | `stacks/gcp/devops-engineer.md` |
+| Observability — Cloud Ops, Managed OTel, Managed Prometheus | `stacks/gcp/sre-engineer.md` |
+| AI/ML — Vertex AI, Gemini Code Assist, Agent Builder, Agentspace, TPUs, Model Garden, AlloyDB AI | `stacks/gcp/ai-ml-engineer.md` |
 | Cost optimization — CUDs, Spot, FinOps Hub | distributed across the system-architect, devops-engineer, sre-engineer role views |
-| Multi-cloud — Anthos, BigLake, BigQuery Omni | <https://docs.etyb.ai/stacks/gcp/system-architect/>, <https://docs.etyb.ai/stacks/gcp/saas-architect/> |
+| Multi-cloud — Anthos, BigLake, BigQuery Omni | `stacks/gcp/system-architect.md`, `stacks/gcp/saas-architect.md` |
 
 ## Why the move
 

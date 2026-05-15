@@ -13,7 +13,7 @@
 #   The /etyb slash command is the only triggering surface. All 20 specialists,
 #   9 protocols, and 6 verticals live INSIDE skills/etyb/references/ as internal
 #   reference files. Install copies skills/etyb/ to the target — no tier
-#   selection, no pruning. Vendor knowledge lives at docs.etyb.ai and is fetched
+#   selection, no pruning. Vendor knowledge lives at stacks/<vendor>/ and is fetched
 #   at runtime; no Stack content ships with the install.
 #
 # Auto-detected target directories (first match wins):
@@ -235,7 +235,7 @@ fi
 # -------- summary --------
 echo ""
 echo "install complete: /etyb skill installed (full — 14 specialists + 9 protocols + 6 verticals)"
-echo "vendor knowledge lives at https://docs.etyb.ai/stacks/ and is fetched at runtime"
+echo "vendor knowledge ships in-repo under stacks/<vendor>/ and is read from disk at runtime"
 echo ""
 echo "what's new: https://etyb.ai/changelog"
 

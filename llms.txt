@@ -1,0 +1,61 @@
+# docs.etyb.ai
+
+> Vendor knowledge for ETYB (the [virtual AI engineering team at etyb.ai](https://etyb.ai)) — currency-stamped per-product and per-role pages across 13 vendor Stacks. Consumed by the `/etyb` skill (and any third-party agent) at runtime; readable by humans too.
+
+## What this site is
+
+- **Vendor knowledge repository.** ETYB itself ships *who* and *how* (the team, decision frameworks, principles — time-invariant) at [github.com/e-t-y-b/etyb-skills](https://github.com/e-t-y-b/etyb-skills). docs.etyb.ai ships *what*: 525 Markdown pages of platform-specific knowledge each team member needs when their work touches a vendor's surface.
+- **Currency-stamped.** Every page carries `last_verified_on` and `drift_risk` in YAML frontmatter. Stale pages get a refresh PR; the [knowledge-currency model](/conventions/knowledge-currency/) explains the SLA.
+- **Open contract.** Anyone can build agents against this site. The fetch + interpret rules live at [/introduction/for-agents](/introduction/for-agents/).
+
+## How to consume (for agents)
+
+Two entry points at the root:
+
+- **`/llms.txt`** — this file. Compact, human-curated index pointing at the deeper indexes and the canonical pages.
+- **`/llms-small.txt`** — auto-generated abridged Markdown of every page. Use as a sitemap with the page titles + descriptions for ~17K lines.
+- **`/llms-full.txt`** — auto-generated full text of every page concatenated (~80K lines). Use only when you need everything in context.
+
+Most agents should fetch `/llms.txt`, identify the Stack and product they need, then WebFetch the specific page directly:
+
+- Per-product canonical: `https://docs.etyb.ai/stacks/<vendor>/<product>/`
+- Per-role composed view: `https://docs.etyb.ai/stacks/<vendor>/<role>/`
+- Stack index: `https://docs.etyb.ai/stacks/<vendor>/`
+
+Pick the most-specific URL that exists; fall back to broader on 404.
+
+## 13 Stacks (currency-stamped 2026-05-12 to 2026-05-14)
+
+| Stack | Index | Coverage |
+|-------|-------|----------|
+| Salesforce | [/stacks/salesforce/](/stacks/salesforce/) | Apex, LWC, Flow, Data 360, Agentforce, MCP-native dev, ECA migration |
+| AWS | [/stacks/aws/](/stacks/aws/) | Lambda + SnapStart, EKS Auto Mode, Aurora DSQL, Bedrock + AgentCore, Karpenter v1 |
+| GCP | [/stacks/gcp/](/stacks/gcp/) | Cloud Run gen2, GKE Autopilot, AlloyDB AI, Vertex AI + Gemini, Agent Builder, TPU v7 |
+| Azure | [/stacks/azure/](/stacks/azure/) | AKS Auto/LTS, Container Apps, Cosmos DiskANN, Entra ID, AI Foundry, Microsoft Fabric |
+| Anthropic Claude | [/stacks/anthropic-claude/](/stacks/anthropic-claude/) | Claude 4.x API, prompt caching, tool use, Claude Agent SDK, MCP authoring |
+| OpenAI | [/stacks/openai/](/stacks/openai/) | GPT-5 family, Responses API, Realtime API, Agents SDK, Structured Outputs |
+| Cloudflare | [/stacks/cloudflare/](/stacks/cloudflare/) | Workers + RPC, Durable Objects (SQLite), D1, R2, Hyperdrive, Vectorize, AI Gateway, AI Search |
+| Vercel | [/stacks/vercel/](/stacks/vercel/) | Next.js + PPR + Cache Components, Fluid Compute, AI SDK, AI Gateway, Vercel Sandbox |
+| Supabase | [/stacks/supabase/](/stacks/supabase/) | Postgres + RLS, Supabase Auth, Edge Functions, Realtime, pgvector, Supavisor |
+| Firebase | [/stacks/firebase/](/stacks/firebase/) | Firebase Auth, Firestore + multi-database, App Hosting, Firebase AI Logic, Genkit, Data Connect |
+| Expo | [/stacks/expo/](/stacks/expo/) | Expo SDK + Router, EAS Build/Update/Submit/Workflows/Hosting, New Architecture, CNG |
+| Stripe | [/stacks/stripe/](/stacks/stripe/) | Payment Intents, Checkout, Billing, Connect, Treasury, Issuing, Meter API, Tax, Radar |
+| Observability | [/stacks/observability/](/stacks/observability/) | Datadog, New Relic, Grafana stack, Prometheus, Splunk, Honeycomb, Sentry, Dynatrace, OpenTelemetry |
+
+## Conventions and protocols
+
+- [Knowledge Currency Model](/conventions/knowledge-currency/) — per-product `drift_risk`, `last_verified_on` SLAs, soft / strict path
+- [How to Read These Docs (Agents)](/introduction/for-agents/) — the fetch + interpret contract
+- [Contributing](/conventions/contributing/) — currency refresh PRs, new product pages, new Stacks
+
+## Vendor-skill delegation
+
+Some vendors ship their own MCP servers or agent skills. When those are installed in the user's environment, ETYB defers to them rather than fetching from this site — the vendor's own surface knows current state better. Stack `delegate_to_skills` blocks declare which delegates each Stack prefers; the slim local pointer in [`e-t-y-b/etyb-skills`](https://github.com/e-t-y-b/etyb-skills) is the source of truth for that mapping.
+
+## Resources
+
+- **Marketing site / install:** [etyb.ai](https://etyb.ai)
+- **Open-source skills bundle:** [github.com/e-t-y-b/etyb-skills](https://github.com/e-t-y-b/etyb-skills) — MIT-licensed
+- **This site's source:** [github.com/e-t-y-b/etyb-dot-ai](https://github.com/e-t-y-b/etyb-dot-ai)
+- **Changelog:** [etyb.ai/changelog](https://etyb.ai/changelog)
+- **Contact:** hello@etyb.ai
