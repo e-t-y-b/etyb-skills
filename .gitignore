@@ -4,16 +4,10 @@
 # OS files
 .DS_Store
 
-# Claude local files
+# Claude local files — entirely user-private. The maintainer skill and
+# its slash command live under the maintainer's home directory
+# (~/Utility/SKILLS/ETYB and ~/.claude/commands/), not in this repo.
 .claude/
-# Allow only the maintainer slash command — the skill itself lives under
-# internal/etyb-oss-maintainer/ explicitly outside .claude/skills/ so the
-# agentskills.io / npx skills CLI does not surface it to end users.
-!.claude/
-.claude/*
-!.claude/commands/
-.claude/commands/*
-!.claude/commands/etyb-oss-maintainer.md
 
 # Internal documents (not for public distribution)
 MARKETPLACE.md

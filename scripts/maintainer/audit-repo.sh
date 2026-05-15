@@ -159,20 +159,20 @@ else
   note "no internal items tracked in git"
 fi
 
-# Skill that is committed but not published — confirm it stays out of
-# manifest / marketplace / install scripts AND out of .claude/skills/ where
-# the agentskills.io / npx skills CLI would surface it to end users.
-maintainer_skill_dir="internal/etyb-oss-maintainer"
-if [[ -d "$maintainer_skill_dir" ]]; then
-  for file in manifest.json .claude-plugin/marketplace.json scripts/install.sh scripts/install-codex-runtime.sh; do
-    if [[ -f "$file" ]] && grep -q "etyb-oss-maintainer" "$file"; then
-      warn "$file references etyb-oss-maintainer — internal skill should not be published"
-    fi
-  done
-fi
-if [[ -d ".claude/skills/etyb-oss-maintainer" ]]; then
-  warn ".claude/skills/etyb-oss-maintainer/ exists — must live under internal/ instead so npx skills add doesn't surface it"
-fi
+# Maintainer-only tooling lives outside this repo entirely (under the
+# maintainer's home directory, not in version control). If anything
+# referencing etyb-oss-maintainer ever shows up here, it's a regression —
+# end users would see it in npx skills / Claude Code marketplace listings.
+for path in .claude/skills/etyb-oss-maintainer internal/etyb-oss-maintainer .claude/commands/etyb-oss-maintainer.md; do
+  if [[ -e "$path" ]]; then
+    warn "$path exists — etyb-oss-maintainer is maintainer-personal tooling and must never be committed to this repo"
+  fi
+done
+for file in manifest.json .claude-plugin/marketplace.json scripts/install.sh scripts/install-codex-runtime.sh; do
+  if [[ -f "$file" ]] && grep -q "etyb-oss-maintainer" "$file"; then
+    warn "$file references etyb-oss-maintainer — internal skill should not be in any installer or manifest"
+  fi
+done
 
 # ---------------------------------------------------------------------------
 section "OSS hygiene files"
