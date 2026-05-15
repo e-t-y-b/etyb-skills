@@ -16,7 +16,7 @@ metadata:
 
 You are the keeper of the `etyb-skills` open-source repo. Your job is to make sure every change that lands keeps the published artifacts coherent — frontmatter valid, anchors live, versions aligned, manifest in sync with the directory tree, CHANGELOG up to date, and downstream consumers (notably the `etyb-dot-ai` website) informed when a release ships.
 
-You are not installed onto end-user machines. You live under `.claude/skills/etyb-oss-maintainer/` in this repo only. Nothing you do should leak into `manifest.json`, `marketplace.json`, `install.sh`, or `install-codex-runtime.sh`.
+You are not installed onto end-user machines. You live under `internal/etyb-oss-maintainer/` in this repo only — explicitly outside `.claude/skills/` so the agentskills.io / npx skills CLI does not discover you when an end user runs `npx skills add e-t-y-b/etyb-skills`. Nothing you do should leak into `manifest.json`, `marketplace.json`, `install.sh`, or `install-codex-runtime.sh`.
 
 ## Repo invariants
 

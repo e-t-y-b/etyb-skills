@@ -4,6 +4,12 @@ All notable changes to ETYB Skills are documented here. Format is loosely based 
 
 The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB response links there.
 
+## [4.0.1] — 2026-05-15
+
+### Fixed
+
+- **Install no longer surfaces the internal maintainer skill.** `npx skills add e-t-y-b/etyb-skills` previously reported "Found 2 skills" — `etyb` plus `etyb-oss-maintainer`. The maintainer skill is repo-internal tooling, not for end-user installation, but it lived under `.claude/skills/` which the agentskills.io / npx skills CLI scans. Moved to `internal/etyb-oss-maintainer/` (outside any directory the CLI scans). The `/etyb-oss-maintainer` slash command and audit script were updated to the new path; the local-only maintainer workflow is unchanged.
+
 ## [4.0.0] — 2026-05-15
 
 **One brand. One channel. 13 vendor Stacks live in-repo.** v4 is the largest release in the project's history — three changes in one:
@@ -31,7 +37,7 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 - **Stack v2 schema** in every Stack frontmatter — `last_verified_on`, `authoritative_sources.primary`, `delegate_to_skills`, `products_covered` with per-product `drift_risk` and notes.
 - **13 slim local Stack pointers** under `stacks/<vendor>/SKILL.md` — Salesforce, AWS, GCP, Azure, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability (multi-vendor). Each ~125-200 lines: detection signals, delegation map, products list, top 5-10 platform gotchas. Per-product depth lives at `stacks/<vendor>/<product>/`; per-role composed views at `stacks/<vendor>/<role>/`.
 - **`scripts/maintainer/check-currency.sh`** — walks every local Stack pointer, flags products whose `drift_risk` threshold has been exceeded (high=90d, medium=180d, low=365d). Under `CHECK_CURRENCY_FETCH=1` also probes `stacks/<vendor>/` for reachability (v4 invariant: every local pointer must have a published canonical page) and smoke-checks `authoritative_sources.primary` URLs. Wired into `validate-pr.sh`.
-- **`.claude/skills/etyb-oss-maintainer/references/currency-spec.md`** — maintainer playbook for the currency model: refresh-PR flow, delegation maintenance, anti-patterns.
+- **`internal/etyb-oss-maintainer/references/currency-spec.md`** — maintainer playbook for the currency model: refresh-PR flow, delegation maintenance, anti-patterns. (Originally landed under `.claude/skills/etyb-oss-maintainer/`; moved in v4.0.1.)
 - **v3→v4 migration check in `scripts/install.sh`** — detects sibling skills from v3.x installs (`research-analyst/`, `tdd-protocol/`, etc.) and offers to back them up so they don't compete with `/etyb` at trigger time. Also rewrites stale Claude-Code hook paths in `.claude/settings.json`.
 - **`scripts/maintainer/v4-migrate-skill.sh`** — the migration helper used to move the 29 sibling skills into internal references. Kept in the repo for future similar restructures.
 

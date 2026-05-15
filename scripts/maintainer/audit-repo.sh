@@ -160,14 +160,18 @@ else
 fi
 
 # Skill that is committed but not published — confirm it stays out of
-# manifest / marketplace / install scripts.
-maintainer_skill_dir=".claude/skills/etyb-oss-maintainer"
+# manifest / marketplace / install scripts AND out of .claude/skills/ where
+# the agentskills.io / npx skills CLI would surface it to end users.
+maintainer_skill_dir="internal/etyb-oss-maintainer"
 if [[ -d "$maintainer_skill_dir" ]]; then
   for file in manifest.json .claude-plugin/marketplace.json scripts/install.sh scripts/install-codex-runtime.sh; do
     if [[ -f "$file" ]] && grep -q "etyb-oss-maintainer" "$file"; then
       warn "$file references etyb-oss-maintainer — internal skill should not be published"
     fi
   done
+fi
+if [[ -d ".claude/skills/etyb-oss-maintainer" ]]; then
+  warn ".claude/skills/etyb-oss-maintainer/ exists — must live under internal/ instead so npx skills add doesn't surface it"
 fi
 
 # ---------------------------------------------------------------------------

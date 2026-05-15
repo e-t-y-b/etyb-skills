@@ -6,13 +6,11 @@
 
 # Claude local files
 .claude/
-# Allow the maintainer skill (internal tooling, committed)
+# Allow only the maintainer slash command — the skill itself lives under
+# internal/etyb-oss-maintainer/ explicitly outside .claude/skills/ so the
+# agentskills.io / npx skills CLI does not surface it to end users.
 !.claude/
 .claude/*
-!.claude/skills/
-.claude/skills/*
-!.claude/skills/etyb-oss-maintainer/
-!.claude/skills/etyb-oss-maintainer/**
 !.claude/commands/
 .claude/commands/*
 !.claude/commands/etyb-oss-maintainer.md
