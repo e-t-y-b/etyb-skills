@@ -1,0 +1,167 @@
+[
+  {
+    "query": "my React app is doing 6 round-trips before first paint and Lighthouse is screaming about LCP, where do I even start optimizing — this is a marketing landing page, not an SPA",
+    "should_trigger": true,
+    "category": "specialist:frontend-architect"
+  },
+  {
+    "query": "I need to design the auth flow for a B2B SaaS with SCIM provisioning, SAML SSO, and per-org API keys. Backend is Spring Boot, we have Auth0 today but considering moving to WorkOS",
+    "should_trigger": true,
+    "category": "specialist:backend-architect"
+  },
+  {
+    "query": "thinking about postgres vs DynamoDB for a transactions table doing ~5k writes/sec at peak, multi-region eventually, we already use RDS for everything else but I'm worried about hot partitions",
+    "should_trigger": true,
+    "category": "specialist:database-architect"
+  },
+  {
+    "query": "we got an email from a customer asking about SOC 2 readiness, what do we actually need to have in place before we can engage an auditor — small team, 12 engineers, no compliance person yet",
+    "should_trigger": true,
+    "category": "specialist:security-engineer"
+  },
+  {
+    "query": "set up a GitHub Actions pipeline that deploys our Next.js app to Fly.io on tag push, with preview environments for every PR — currently doing it manually from a laptop",
+    "should_trigger": true,
+    "category": "specialist:devops-engineer"
+  },
+  {
+    "query": "building a RAG pipeline over 50k Zendesk support tickets, planning Postgres + pgvector since we're already on RDS — but I'm not sure about chunking strategy or whether I should fine-tune at all",
+    "should_trigger": true,
+    "category": "specialist:ai-ml-engineer"
+  },
+  {
+    "query": "Expo app crashes on Android 14 only, can't repro on the iOS simulator or our test Pixel running Android 13. Sentry shows it's in the JS bridge during a fetch. Where do I look",
+    "should_trigger": true,
+    "category": "specialist:mobile-architect"
+  },
+  {
+    "query": "our p99 latency on the checkout API spiked 4x at 3am every night for the last 3 days, only on the us-east-1 cluster, eu-west-1 is fine. CloudWatch shows nothing obvious. how do I track this down",
+    "should_trigger": true,
+    "category": "specialist:sre-engineer"
+  },
+  {
+    "query": "what's the right testing strategy for a payment service that integrates with Stripe Connect and writes to our internal ledger — unit tests are easy, but I'm stuck on the integration boundary",
+    "should_trigger": true,
+    "category": "specialist:qa-engineer"
+  },
+  {
+    "query": "can you audit this PR — it adds a new endpoint to our customer-facing API that lets external integrators bulk-update order metadata. about 400 lines of Go. I want a real review, not approval theater",
+    "should_trigger": true,
+    "category": "specialist:code-reviewer"
+  },
+  {
+    "query": "I need to add JWT refresh-token rotation to this auth handler and I'm going to skip writing tests for it — demo is tomorrow morning and the existing tests are passing anyway",
+    "should_trigger": true,
+    "category": "protocol:tdd-protocol"
+  },
+  {
+    "query": "this race condition only happens in CI, never locally, I've tried 4 different fixes (mutex, channel, retry, await), none of them stick. tests are flaky 1 in 5 runs. I'm stuck",
+    "should_trigger": true,
+    "category": "protocol:debugging-protocol"
+  },
+  {
+    "query": "I have an idea for a notes app that does something with AI but I don't really know where to start, my cofounder thinks we should just start building, I'm not sure that's right",
+    "should_trigger": true,
+    "category": "protocol:brainstorm-protocol"
+  },
+  {
+    "query": "designing the ledger for our prop trading book — double-entry, want exactly-once semantics on settlement, intraday positions need to be queryable at sub-second latency. we're a 4-person team trading our own capital",
+    "should_trigger": true,
+    "category": "vertical:fintech-architect"
+  },
+  {
+    "query": "build me a multi-tenant invoicing platform — Stripe Connect for the money, usage-based billing per tenant, immutable audit log for every state transition, tenants must be isolated from each other at the database level",
+    "should_trigger": true,
+    "category": "vertical:saas-architect+multi-skill"
+  },
+  {
+    "query": "EHR integration project — we receive HL7 v2 ADT messages from a partner hospital and need to translate to FHIR R4 patient resources for our system. there are around 30 ADT segments we care about. what's the right architecture",
+    "should_trigger": true,
+    "category": "vertical:healthcare-architect"
+  },
+  {
+    "query": "writing an Apex trigger on Opportunity that updates related OpportunityLineItem records and rolls up totals to Account — bulkified for 200-record batches, want to follow the trigger handler pattern, Spring '26 features OK",
+    "should_trigger": true,
+    "category": "stack:salesforce-backend"
+  },
+  {
+    "query": "designing an Agentforce agent that grounds on Data 360 for our service org — should I use Topics with Actions, or just use Prompt Builder with retrieval? we have about 200k knowledge articles indexed",
+    "should_trigger": true,
+    "category": "stack:salesforce-ai"
+  },
+  {
+    "query": "the ECA migration deadline is May 11 and our org has 14 Connected Apps doing OAuth — what's the actual migration path, what breaks, and how do I prioritize the apps",
+    "should_trigger": true,
+    "category": "stack:salesforce-security"
+  },
+  {
+    "query": "add real-time collaborative editing to our SaaS doc tool — like Notion or Google Docs. Currently it's a single-writer system. need to handle cursor presence, conflict resolution, offline edits",
+    "should_trigger": true,
+    "category": "multi-skill:tier3-real-time"
+  },
+  {
+    "query": "we're migrating off Heroku to AWS, about 12 Node services, a Postgres database, and a Redis cache. need to do it without downtime and the team has no AWS experience. what's the right sequence",
+    "should_trigger": true,
+    "category": "multi-skill:tier3-migration"
+  },
+  {
+    "query": "I want to build a HIPAA-compliant telehealth platform — video visits, scheduling, EHR integration, billing through Stripe, patient portal. greenfield, 6-month deadline, 4 engineers. where do we start",
+    "should_trigger": true,
+    "category": "multi-skill:tier4-greenfield"
+  },
+  {
+    "query": "we're at 8 engineers and planning to grow to 25 over the next 12 months. what infrastructure investments should we make now to not regret it later — currently a monolith on Render, postgres, no CI to speak of",
+    "should_trigger": true,
+    "category": "multi-skill:cto-strategic"
+  },
+  {
+    "query": "build me a deck for the all-hands tomorrow on Q4 results — 12 slides, include the customer growth chart and the revenue split by segment. I have the data in a spreadsheet",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "can you review this lease agreement my landlord sent — I want to know what to push back on before I sign. it's a 12-page rent renewal",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "design a logo for my coffee shop — modern, minimalist, with a small leaf motif somewhere. shop name is Northvale Roasters",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "debug why my espresso machine keeps shutting off after 30 seconds of pumping water — it's a Gaggia Classic, about 4 years old, I've descaled it twice this month",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "scale this risotto recipe from 4 servings to 12 — I'm hosting a dinner party Saturday and need quantities for arborio, broth, parmesan, and saffron",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "ship this birthday gift to my sister in Berlin from NYC — what's the fastest carrier, customs implications, and rough cost for a 2kg package",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "test if I'm allergic to gluten — I've been bloated for 3 weeks after eating bread but I'm not sure if it's the wheat or something else. should I ask my doctor for a specific test",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "what's the architecture of the Roman aqueducts — I'm preparing a talk for my kid's middle school history club and want to understand how the gradient calculations actually worked",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "deploy a Marie Kondo cleanup on my closet — I have way too many shirts and can't decide what to keep. what's the protocol",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  },
+  {
+    "query": "review my marathon training plan for the next 16 weeks — currently 30 miles/week base, target sub-3:30 in October, no injuries but my left knee gets sore on long runs",
+    "should_trigger": false,
+    "category": "near-miss:not-software"
+  }
+]

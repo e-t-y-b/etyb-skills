@@ -1,7 +1,7 @@
 {
   "name": "etyb-skills",
-  "description": "Virtual engineering company \u2014 30 AI agent skills organized as a coordinated engineering team with domain expertise, process protocols, and ETYB-centric coordination for the full SDLC",
-  "version": "3.0.0",
+  "description": "Virtual engineering company \u2014 one coordinated skill (/etyb) with internal references for 20 specialists, 9 process protocols, and 6 vertical-domain architects. Installed in lite/core/pro tiers; signed responses link to etyb.ai/changelog.",
+  "version": "4.0.0",
   "author": {
     "name": "e-t-y-b"
   },

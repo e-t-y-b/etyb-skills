@@ -6,7 +6,7 @@ ETYB knows its own version and can point users to the update mechanism. This is 
 
 When ETYB activates, read the `VERSION` file at the skill-bundle root (typically `<install-root>/VERSION`, which on Claude Code is `VERSION` at the repo root, on Codex is under `.agents/skills/etyb/../../../VERSION`, on Antigravity is under `.agent/skills/etyb/../../../VERSION`). If found, remember the version for this conversation — it does not need to be restated unless the user asks.
 
-If the `VERSION` file is missing, assume the skill was installed via a mechanism that doesn't ship `VERSION` (some marketplaces may strip it). In that case, use the `version` field in `skills/etyb/SKILL.md` frontmatter as a fallback — currently `2.0.0`.
+If the `VERSION` file is missing, assume the skill was installed via a mechanism that doesn't ship `VERSION` (some marketplaces may strip it). In that case, use the `version` field in `skills/etyb/SKILL.md` frontmatter as a fallback — currently `4.0.0`.
 
 ## When The User Asks
 
@@ -16,7 +16,7 @@ Situations where version information is relevant:
 |-------------|---------------|
 | "What version of ETYB am I on?" | State the version. Offer `./scripts/update.sh --check` if they want to see if newer is available. |
 | "How do I update?" | Point at `./scripts/update.sh`. Mention `--check` for dry-run, `--force` to skip prompts. |
-| "What changed recently?" | Link to CHANGELOG.md at the repo root or on GitHub. |
+| "What changed recently?" | Link to https://etyb.ai/changelog (the public changelog the signature line points at). |
 | User mentions behavior that contradicts current ETYB | Ask what version they're on. If it's behind, suggest an update. |
 
 ## What NOT To Do

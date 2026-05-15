@@ -15,15 +15,15 @@
 #     .claude-plugin/marketplace.json    .metadata.version
 #     .claude-plugin/plugin.json         .version
 #
-#   Per-skill manifest entries:
-#     manifest.json .skills.* (every value must equal VERSION)
+#   v4 manifest entries:
+#     manifest.json .skill.etyb       (must equal VERSION; v4 only ships one skill)
 #
 #   Per-stack manifest entries:
 #     manifest.json .stacks.*.version (every value must equal VERSION)
 #
 #   Per-SKILL.md frontmatter:
-#     skills/*/SKILL.md  metadata.version  (every value must equal VERSION)
-#     stacks/*/SKILL.md  metadata.version  (every value must equal VERSION)
+#     skills/etyb/SKILL.md   metadata.version  (must equal VERSION)
+#     stacks/*/SKILL.md      metadata.version  (every value must equal VERSION)
 
 set -euo pipefail
 
@@ -88,11 +88,12 @@ from pathlib import Path
 canonical = sys.argv[1]
 problems = []
 
-# Per-skill manifest entries
+# v4 manifest .skill entry (single coordinated skill)
 mf = json.loads(Path("manifest.json").read_text())
-for name, ver in mf.get("skills", {}).items():
+skill_block = mf.get("skill") or mf.get("skills") or {}
+for name, ver in skill_block.items():
     if ver != canonical:
-        problems.append(f"manifest.json .skills.{name} = '{ver}', expected '{canonical}'")
+        problems.append(f"manifest.json .skill.{name} = '{ver}', expected '{canonical}'")
 
 # Per-stack manifest entries
 for name, entry in mf.get("stacks", {}).items():
@@ -100,8 +101,12 @@ for name, entry in mf.get("stacks", {}).items():
     if ver != canonical:
         problems.append(f"manifest.json .stacks.{name}.version = '{ver}', expected '{canonical}'")
 
-# Per-SKILL.md frontmatter — scan skills/ and stacks/
-for p in sorted(Path("skills").glob("*/SKILL.md")) + sorted(Path("stacks").glob("*/SKILL.md")):
+# Per-SKILL.md frontmatter — only skills/etyb/SKILL.md and stacks/*/SKILL.md
+# now (the 29 internal references no longer carry frontmatter).
+candidates = [Path("skills/etyb/SKILL.md")] + sorted(Path("stacks").glob("*/SKILL.md"))
+for p in candidates:
+    if not p.exists():
+        continue
     text = p.read_text()
     m = re.search(r'^\s*version:\s*"([^"]+)"', text, re.MULTILINE)
     if not m:
@@ -137,4 +142,4 @@ if [[ ${#mismatches[@]} -gt 0 ]]; then
   exit 1
 fi
 
-echo "✓ validate-version-sync: VERSION=$canonical aligned across bundle (5), skills ($(jq -r '.skills | length' manifest.json)), stacks ($(jq -r '.stacks | length' manifest.json)), and all SKILL.md frontmatter"
+echo "✓ validate-version-sync: VERSION=$canonical aligned across bundle (5), skill ($(jq -r '.skill | length' manifest.json)), stacks ($(jq -r '.stacks | length' manifest.json)), and all SKILL.md frontmatter"

@@ -54,19 +54,6 @@ jobs:
             exit 1
           fi
 
-  bundles:
-    name: bundle manifests in sync
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Check bundles/ matches marketplace.json
-        run: scripts/generate-bundles.py --check
-
   installer-tests:
     name: installer tests
     runs-on: ubuntu-latest

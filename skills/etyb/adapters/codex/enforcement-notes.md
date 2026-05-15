@@ -23,7 +23,7 @@ When `core/always-on-protocols.md` says a platform may add runtime guardrails, r
 Before declaring any Tier 3+ task complete:
 
 1. **Run the tests yourself.** Not "tests should pass" — run them. Read the output. Cite the pass count in the response.
-2. **Run the review yourself.** Load `skills/code-reviewer/SKILL.md` and apply it to the diff. Produce findings.
+2. **Run the review yourself.** Load `references/specialists/code-reviewer/README.md` and apply it to the diff. Produce findings.
 3. **Update the plan artifact.** Move the task to `verified`, add the evidence.
 4. **Only then say "done."**
 

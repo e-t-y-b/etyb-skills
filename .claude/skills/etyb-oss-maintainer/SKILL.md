@@ -7,7 +7,7 @@ license: MIT
 compatibility: Internal tooling — Claude Code only, not for end-user installation.
 metadata:
   author: e-t-y-b
-  version: "0.4.0"
+  version: "0.5.0"
   category: internal-tooling
   scope: project-local
 ---
@@ -22,11 +22,13 @@ You are not installed onto end-user machines. You live under `.claude/skills/ety
 
 These are non-negotiable. Flag any change that would violate one.
 
-- Uninstall ETYB and the specialists still work. Specialists never hard-depend on `skills/etyb/`.
-- Specialists reference each other by name and capability, not by file path.
+- `/etyb` is the only trigger surface. No peer slash commands. New specialist / protocol / vertical material lands as an internal reference under `skills/etyb/references/{specialists,protocols,verticals}/<name>/`, never as a sibling skill.
+- Internal references address each other by name and capability, not by absolute file path. Every install carries the full reference set (14 specialists + 9 protocols + 6 verticals); the tier system was removed in v4.0.0.
+- Vendor knowledge does **not** live in the install. Each `stacks/<vendor>/` folder ships everything the team needs: the slim `SKILL.md` trigger pointer + sibling `index.md` + per-product canonical pages + per-role composed views, all read from disk per the contract in `skills/etyb/core/knowledge-currency.md`. Adding a new Stack means creating the folder with these files and registering detection signals in `core/stack-registry.md`.
 - Install scripts never touch `.etyb/plans/`, `.claude/plans/`, or `.claude/settings.local.json`.
-- The five version strings stay aligned (see `references/version-sync.md`).
-- Three-platform parity: every skill ships `SKILL.md` plus `agents/openai.yaml` with an `interface:` block and `allow_implicit_invocation: true`.
+- The version strings stay aligned across all locations (see `references/version-sync.md`). Single-version policy: VERSION is the only version that exists.
+- Three-platform parity: `skills/etyb/SKILL.md` carries frontmatter; every reference under `skills/etyb/references/<lib>/<name>/` ships `README.md` + `agents/openai.yaml` with an `interface:` block and `allow_implicit_invocation: true` so Codex can implicit-invoke the right material.
+- Claude hook paths in `.claude/settings.json` point at `skills/etyb/references/protocols/<name>/hooks/<hook>.sh`, never at the pre-v4 sibling-skill location. `scripts/install.sh`'s v3→v4 migration rewrites stale ones automatically — but new hook wirings must use the v4 paths from the start.
 
 ## When you activate
 

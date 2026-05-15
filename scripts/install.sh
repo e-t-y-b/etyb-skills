@@ -1,33 +1,32 @@
 #!/usr/bin/env bash
 #
-# etyb-skills install script
-# Installs ETYB skills into a target directory with collision detection.
+# etyb-skills install script (v4 — single skill, full install)
 #
 # Usage:
-#   ./scripts/install.sh                         # install everything, auto-detect target
-#   ./scripts/install.sh --bundle NAME           # install a named bundle (see --list-bundles)
-#   ./scripts/install.sh --skills a,b,c          # install specific skills by name
-#   ./scripts/install.sh --list-bundles          # print available bundles and exit
-#   ./scripts/install.sh --dry-run               # show what would happen, change nothing
-#   ./scripts/install.sh --target DIR            # install into DIR instead of auto-detect
-#   ./scripts/install.sh --force                 # replace existing skills without prompting
-#   ./scripts/install.sh --on-conflict MODE      # prompt | replace | keep | skip (default: prompt)
+#   ./scripts/install.sh                          # install ETYB, auto-detect target
+#   ./scripts/install.sh --dry-run                # show what would happen, change nothing
+#   ./scripts/install.sh --target DIR             # install into DIR instead of auto-detect
+#   ./scripts/install.sh --force                  # replace existing skill without prompting
+#   ./scripts/install.sh --on-conflict MODE       # prompt | replace | keep | skip (default: prompt)
 #
-# Bundle names (short forms work without the etyb- prefix):
-#   full                  # all 30 skills (default)
-#   process-protocols     # ETYB + 9 always-on protocols
-#   core-team             # ETYB + 14 core engineering teams
-#   verticals             # 6 domain specialists
+# How v4 install works:
+#   The /etyb slash command is the only triggering surface. All 20 specialists,
+#   9 protocols, and 6 verticals live INSIDE skills/etyb/references/ as internal
+#   reference files. Install copies skills/etyb/ to the target — no tier
+#   selection, no pruning. Vendor knowledge lives at stacks/<vendor>/ and is fetched
+#   at runtime; no Stack content ships with the install.
 #
 # Auto-detected target directories (first match wins):
-#   ./.claude/skills/          # Claude Code project-scoped (legacy, uncommon)
+#   ./.claude/skills/          # Claude Code project-scoped
 #   ./.agents/skills/          # OpenAI Codex convention
 #   ./.agent/skills/           # Google Antigravity convention (note: singular)
-#   ./skills/                  # this repo's own layout
+#   ./skills/                  # generic
 #
-# Handles v1.x → v2.x migration:
-#   - Detects existing `orchestrator/` folder from v1.x and prompts to remove it
-#     (skill was renamed to `etyb` in 2.0.0)
+# Handles v3.x → v4.x migration:
+#   - Detects sibling skill directories from v3.x (research-analyst/,
+#     tdd-protocol/, etc.) and offers to remove them — those are now internal
+#     references inside skills/etyb/.
+#   - v1.x → v2.x orchestrator/ migration still handled.
 #
 # Never silently overwrites; never touches .etyb/plans/, .claude/plans/, or
 # .claude/settings.local.json.
@@ -35,16 +34,25 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-BUNDLE_DIR="$REPO_ROOT/bundles"
+SOURCE_SKILL="$REPO_ROOT/skills/etyb"
 
-SOURCE_DIR=""
 TARGET_DIR=""
 DRY_RUN=false
 FORCE=false
 ON_CONFLICT="prompt"
-BUNDLE=""
-SKILL_LIST=""
-LIST_BUNDLES=false
+
+# v3 sibling-skill names — used to detect legacy installs from before the v4 collapse.
+V3_SIBLINGS_ALL=(
+  research-analyst system-architect frontend-architect backend-architect
+  database-architect mobile-architect qa-engineer devops-engineer
+  security-engineer sre-engineer ai-ml-engineer technical-writer
+  project-planner code-reviewer
+  tdd-protocol brainstorm-protocol review-protocol subagent-protocol
+  git-workflow-protocol plan-execution-protocol skill-evolution-protocol
+  verification-protocol debugging-protocol
+  social-platform-architect e-commerce-architect fintech-architect
+  saas-architect real-time-architect healthcare-architect
+)
 
 # -------- argument parsing --------
 while [[ $# -gt 0 ]]; do
@@ -52,14 +60,15 @@ while [[ $# -gt 0 ]]; do
     --dry-run) DRY_RUN=true; shift ;;
     --force) FORCE=true; ON_CONFLICT="replace"; shift ;;
     --target) TARGET_DIR="$2"; shift 2 ;;
-    --source) SOURCE_DIR="$2"; shift 2 ;;
     --on-conflict) ON_CONFLICT="$2"; shift 2 ;;
-    --bundle) BUNDLE="$2"; shift 2 ;;
-    --skills) SKILL_LIST="$2"; shift 2 ;;
-    --list-bundles) LIST_BUNDLES=true; shift ;;
     -h|--help)
       sed -n '2,33p' "$0"
       exit 0
+      ;;
+    --tier|--list-tiers)
+      echo "error: --tier and --list-tiers were removed in v4.0.0. Install always copies the full /etyb skill." >&2
+      echo "       Run without flags." >&2
+      exit 1
       ;;
     *) echo "Unknown arg: $1" >&2; exit 1 ;;
   esac
@@ -70,100 +79,9 @@ case "$ON_CONFLICT" in
   *) echo "error: --on-conflict must be one of: prompt, replace, keep, skip" >&2; exit 1 ;;
 esac
 
-if [[ -n "$BUNDLE" && -n "$SKILL_LIST" ]]; then
-  echo "error: --bundle and --skills are mutually exclusive" >&2
-  exit 1
-fi
-
-# -------- bundle helpers --------
-# Resolve a user-supplied bundle name to an existing bundle manifest. Accepts
-# both short ("process-protocols") and full ("etyb-process-protocols") names.
-resolve_bundle_path() {
-  local name=$1
-  local path="$BUNDLE_DIR/$name.txt"
-  if [[ -f "$path" ]]; then
-    printf '%s' "$path"
-    return 0
-  fi
-  local prefixed="$BUNDLE_DIR/etyb-$name.txt"
-  if [[ -f "$prefixed" ]]; then
-    printf '%s' "$prefixed"
-    return 0
-  fi
-  return 1
-}
-
-list_bundles() {
-  if [[ ! -d "$BUNDLE_DIR" ]]; then
-    echo "error: bundles/ not found — run scripts/generate-bundles.py first" >&2
-    exit 1
-  fi
-  echo "available bundles:"
-  echo ""
-  local path name count
-  for path in "$BUNDLE_DIR"/*.txt; do
-    [[ -f "$path" ]] || continue
-    name=$(basename "$path" .txt)
-    count=$(grep -c . "$path" || true)
-    printf "  %-28s %d skills\n" "$name" "$count"
-  done
-  echo ""
-  echo "pass with --bundle NAME (the etyb- prefix is optional)."
-}
-
-if $LIST_BUNDLES; then
-  list_bundles
-  exit 0
-fi
-
 # -------- preflight --------
-if [[ -z "$SOURCE_DIR" ]]; then
-  SOURCE_DIR="$REPO_ROOT/skills"
-fi
-
-if [[ ! -d "$SOURCE_DIR" ]]; then
-  echo "error: source dir not found: $SOURCE_DIR" >&2
-  exit 1
-fi
-
-# -------- build skill selection --------
-# SKILLS is the ordered list of skill directory names to install.
-declare -a SKILLS=()
-
-if [[ -n "$BUNDLE" ]]; then
-  if ! bundle_path=$(resolve_bundle_path "$BUNDLE"); then
-    echo "error: unknown bundle '$BUNDLE'" >&2
-    echo "" >&2
-    list_bundles >&2
-    exit 1
-  fi
-  while IFS= read -r line; do
-    [[ -n "$line" ]] || continue
-    SKILLS+=("$line")
-  done < "$bundle_path"
-  SELECTION_LABEL="bundle=$(basename "$bundle_path" .txt)"
-elif [[ -n "$SKILL_LIST" ]]; then
-  IFS=',' read -r -a requested <<< "$SKILL_LIST"
-  for name in "${requested[@]}"; do
-    name="${name// /}"
-    [[ -n "$name" ]] || continue
-    if [[ ! -d "$SOURCE_DIR/$name" ]]; then
-      echo "error: unknown skill '$name' (no such directory: $SOURCE_DIR/$name)" >&2
-      exit 1
-    fi
-    SKILLS+=("$name")
-  done
-  SELECTION_LABEL="skills=$SKILL_LIST"
-else
-  # No selection flag: install every skill present on disk (current default).
-  for src in "$SOURCE_DIR"/*/; do
-    SKILLS+=("$(basename "$src")")
-  done
-  SELECTION_LABEL="all (${#SKILLS[@]} skills)"
-fi
-
-if [[ ${#SKILLS[@]} -eq 0 ]]; then
-  echo "error: no skills selected" >&2
+if [[ ! -d "$SOURCE_SKILL" ]]; then
+  echo "error: source skill not found: $SOURCE_SKILL" >&2
   exit 1
 fi
 
@@ -187,119 +105,136 @@ if [[ -z "$TARGET_DIR" ]]; then
   exit 1
 fi
 
-echo "source:    $SOURCE_DIR"
-echo "target:    $TARGET_DIR"
-echo "selection: $SELECTION_LABEL"
-echo "mode:      $($DRY_RUN && echo DRY-RUN || echo APPLY) / on-conflict=$ON_CONFLICT"
+DST_SKILL="$TARGET_DIR/etyb"
+
+echo "source: $SOURCE_SKILL"
+echo "target: $DST_SKILL"
+echo "mode:   $($DRY_RUN && echo DRY-RUN || echo APPLY) / on-conflict=$ON_CONFLICT"
 echo ""
 
 mkdir -p "$TARGET_DIR"
 
-# -------- v1.x migration check: orchestrator → etyb --------
+# -------- v1.x → v2.x migration: orchestrator → etyb --------
 if [[ -d "$TARGET_DIR/orchestrator" ]]; then
   echo "⚠ found legacy 'orchestrator/' skill from v1.x"
   echo "  in 2.0.0 it was renamed to 'etyb'"
-  if $FORCE; then
+  REPLY="n"
+  if $FORCE || [[ "$ON_CONFLICT" == "replace" ]]; then
     REPLY="y"
-  elif [[ "$ON_CONFLICT" == "keep" ]]; then
-    echo "  keeping legacy folder (on-conflict=keep)"
-    REPLY="n"
-  elif [[ "$ON_CONFLICT" == "skip" ]]; then
-    echo "  keeping legacy folder (on-conflict=skip)"
-    REPLY="n"
-  elif [[ "$ON_CONFLICT" == "replace" ]]; then
-    REPLY="y"
-  else
+  elif [[ "$ON_CONFLICT" != "keep" && "$ON_CONFLICT" != "skip" ]]; then
     read -r -p "  remove $TARGET_DIR/orchestrator/ ? [y/N] " REPLY
   fi
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     if $DRY_RUN; then
-      echo "  [DRY-RUN] would remove $TARGET_DIR/orchestrator/"
+      echo "  [DRY-RUN] would back up $TARGET_DIR/orchestrator/"
     else
-      BACKUP="$TARGET_DIR/orchestrator.bak.$(date +%s)"
-      mv "$TARGET_DIR/orchestrator" "$BACKUP"
-      echo "  moved to $BACKUP (not deleted)"
+      mv "$TARGET_DIR/orchestrator" "$TARGET_DIR/orchestrator.bak.$(date +%s)"
+      echo "  moved to backup (not deleted)"
     fi
   fi
   echo ""
 fi
 
-# -------- install each selected skill --------
-INSTALLED=0
-SKIPPED=0
-REPLACED=0
-KEPT=0
-
-for name in "${SKILLS[@]}"; do
-  src="$SOURCE_DIR/$name"
-  dst="$TARGET_DIR/$name"
-
-  if [[ ! -d "$src" ]]; then
-    echo "  — missing source for $name (skipping)"
-    SKIPPED=$((SKIPPED + 1))
-    continue
+# -------- v3.x → v4.x migration: rewrite stale hook paths in .claude/settings.json --------
+SETTINGS=".claude/settings.json"
+if [[ -f "$SETTINGS" ]] && grep -qE 'skills/(tdd|review|git-workflow|plan-execution)-protocol/hooks/' "$SETTINGS"; then
+  echo "⚠ found v3.x hook paths in $SETTINGS"
+  echo "  in 4.0.0 protocol hooks moved to skills/etyb/references/protocols/<name>/hooks/."
+  echo "  Stale paths mean hooks silently stop firing."
+  REPLY="n"
+  if $FORCE || [[ "$ON_CONFLICT" == "replace" ]]; then
+    REPLY="y"
+  elif [[ "$ON_CONFLICT" != "keep" && "$ON_CONFLICT" != "skip" ]]; then
+    read -r -p "  rewrite hook paths in $SETTINGS? [y/N] " REPLY
   fi
-
-  if [[ -e "$dst" ]]; then
-    # conflict
-    CHOICE=""
-    case "$ON_CONFLICT" in
-      replace) CHOICE="r" ;;
-      keep)    CHOICE="k" ;;
-      skip)    CHOICE="s" ;;
-      prompt)
-        echo "⚠ conflict: $dst already exists"
-        echo "  [r] replace (backup to $dst.bak.TIMESTAMP)"
-        echo "  [k] keep as $name.etyb (install side-by-side)"
-        echo "  [s] skip this skill"
-        read -r -p "  choice? [r/k/s] " CHOICE
-        ;;
-    esac
-
-    case "$CHOICE" in
-      r|R)
-        if $DRY_RUN; then
-          echo "  [DRY-RUN] would backup $dst and install fresh"
-        else
-          mv "$dst" "$dst.bak.$(date +%s)"
-          cp -R "$src" "$dst"
-          echo "  ✓ replaced $name (backup preserved)"
-        fi
-        REPLACED=$((REPLACED + 1))
-        ;;
-      k|K)
-        alt="$TARGET_DIR/$name.etyb"
-        if $DRY_RUN; then
-          echo "  [DRY-RUN] would install as $alt (side-by-side)"
-        else
-          cp -R "$src" "$alt"
-          echo "  ✓ installed side-by-side as $name.etyb"
-        fi
-        KEPT=$((KEPT + 1))
-        ;;
-      s|S|*)
-        echo "  — skipped $name"
-        SKIPPED=$((SKIPPED + 1))
-        ;;
-    esac
-  else
-    # no conflict
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     if $DRY_RUN; then
-      echo "  [DRY-RUN] would install $name"
+      echo "  [DRY-RUN] would rewrite skills/<protocol>-protocol/hooks/ → skills/etyb/references/protocols/<protocol>-protocol/hooks/"
     else
-      cp -R "$src" "$dst"
-      echo "  ✓ installed $name"
+      cp "$SETTINGS" "$SETTINGS.bak.$(date +%s)"
+      sed -i.tmp -E 's|skills/(tdd|review|git-workflow|plan-execution)-protocol/hooks/|skills/etyb/references/protocols/\1-protocol/hooks/|g' "$SETTINGS"
+      rm -f "$SETTINGS.tmp"
+      echo "  ✓ rewrote $SETTINGS (backup preserved)"
     fi
-    INSTALLED=$((INSTALLED + 1))
   fi
+  echo ""
+fi
+
+# -------- v3.x → v4.x migration: sibling skills → references --------
+V3_SIBLINGS=()
+for s in "${V3_SIBLINGS_ALL[@]}"; do
+  [[ -d "$TARGET_DIR/$s" ]] && V3_SIBLINGS+=("$s")
 done
+
+if [[ ${#V3_SIBLINGS[@]} -gt 0 ]]; then
+  echo "⚠ found ${#V3_SIBLINGS[@]} legacy v3.x sibling skill(s) in $TARGET_DIR/"
+  echo "  in 4.0.0 these became internal references inside skills/etyb/."
+  echo "  Leaving them in place will cause /etyb to compete with them at trigger time."
+  REPLY="n"
+  if $FORCE || [[ "$ON_CONFLICT" == "replace" ]]; then
+    REPLY="y"
+  elif [[ "$ON_CONFLICT" != "keep" && "$ON_CONFLICT" != "skip" ]]; then
+    read -r -p "  back up and remove these v3 siblings? [y/N] " REPLY
+  fi
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+    ts=$(date +%s)
+    for s in "${V3_SIBLINGS[@]}"; do
+      if $DRY_RUN; then
+        echo "  [DRY-RUN] would back up $TARGET_DIR/$s/"
+      else
+        mv "$TARGET_DIR/$s" "$TARGET_DIR/$s.bak.$ts"
+      fi
+    done
+    echo "  ${#V3_SIBLINGS[@]} sibling(s) moved to *.bak.$ts"
+  fi
+  echo ""
+fi
+
+# -------- install skills/etyb/ --------
+if [[ -e "$DST_SKILL" ]]; then
+  CHOICE=""
+  case "$ON_CONFLICT" in
+    replace) CHOICE="r" ;;
+    keep)    CHOICE="k" ;;
+    skip)    CHOICE="s" ;;
+    prompt)
+      echo "⚠ conflict: $DST_SKILL already exists"
+      echo "  [r] replace (backup to $DST_SKILL.bak.TIMESTAMP)"
+      echo "  [k] keep as etyb.bak.TIMESTAMP, install fresh"
+      echo "  [s] skip — abort install"
+      read -r -p "  choice? [r/k/s] " CHOICE
+      ;;
+  esac
+  case "$CHOICE" in
+    r|R|k|K)
+      if $DRY_RUN; then
+        echo "  [DRY-RUN] would back up existing etyb/ and install fresh"
+      else
+        mv "$DST_SKILL" "$DST_SKILL.bak.$(date +%s)"
+        cp -R "$SOURCE_SKILL" "$DST_SKILL"
+        echo "  ✓ replaced etyb (backup preserved)"
+      fi
+      ;;
+    s|S|*)
+      echo "  — aborted (skill not installed)"
+      exit 0
+      ;;
+  esac
+else
+  if $DRY_RUN; then
+    echo "  [DRY-RUN] would install skills/etyb/"
+  else
+    cp -R "$SOURCE_SKILL" "$DST_SKILL"
+    echo "  ✓ installed skills/etyb/"
+  fi
+fi
 
 # -------- summary --------
 echo ""
-echo "installed:  $INSTALLED"
-echo "replaced:   $REPLACED"
-echo "kept:       $KEPT (installed side-by-side as *.etyb)"
-echo "skipped:    $SKIPPED"
+echo "install complete: /etyb skill installed (full — 14 specialists + 9 protocols + 6 verticals)"
+echo "vendor knowledge ships in-repo under stacks/<vendor>/ and is read from disk at runtime"
+echo ""
+echo "what's new: https://etyb.ai/changelog"
 
 if $DRY_RUN; then
   echo ""

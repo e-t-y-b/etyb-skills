@@ -17,7 +17,7 @@ Antigravity, like Codex, has no shipped hook surface in this repo. The always-on
 Before declaring any Tier 3+ task complete:
 
 1. **Run the tests.** Cite the pass count in the response.
-2. **Run the review.** Load `skills/code-reviewer/SKILL.md` and apply it to the diff.
+2. **Run the review.** Load `references/specialists/code-reviewer/README.md` and apply it to the diff.
 3. **Update the plan artifact.** Move the task to `verified`, add the evidence.
 4. **Only then say "done."**
 

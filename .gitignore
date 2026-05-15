@@ -28,3 +28,10 @@ docs/plan-*.md
 # Python bytecode from Codex hook execution
 __pycache__/
 *.pyc
+
+# Local install artifacts (created by scripts/install.sh / install-codex-runtime.sh
+# when run with this repo as both source and target during development)
+.agents/
+
+# Upstream-skill lockfile from external tooling, not part of etyb-skills
+skills-lock.json

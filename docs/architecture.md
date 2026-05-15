@@ -91,7 +91,7 @@ The top-level agent. It parses user intent, routes to the correct team (or multi
 
 ### Research and Discovery
 
-**`research-analyst`** -- `skills/research-analyst/`
+**`research-analyst`** -- `skills/etyb/references/specialists/research-analyst/`
 
 Phase: Research and Discovery
 
@@ -106,7 +106,7 @@ Phase: Research and Discovery
 
 ### Design and Architecture
 
-**`system-architect`** -- `skills/system-architect/`
+**`system-architect`** -- `skills/etyb/references/specialists/system-architect/`
 
 Phase: Design and Architecture
 
@@ -122,7 +122,7 @@ Phase: Design and Architecture
 
 ### Frontend Engineering
 
-**`frontend-architect`** -- `skills/frontend-architect/`
+**`frontend-architect`** -- `skills/etyb/references/specialists/frontend-architect/`
 
 Phase: Architecture and Development
 
@@ -142,7 +142,7 @@ Phase: Architecture and Development
 
 ### Backend Engineering
 
-**`backend-architect`** -- `skills/backend-architect/`
+**`backend-architect`** -- `skills/etyb/references/specialists/backend-architect/`
 
 Phase: Architecture and Development
 
@@ -162,7 +162,7 @@ Phase: Architecture and Development
 
 ### Database Engineering
 
-**`database-architect`** -- `skills/database-architect/`
+**`database-architect`** -- `skills/etyb/references/specialists/database-architect/`
 
 Phase: Architecture and Development
 
@@ -179,7 +179,7 @@ Phase: Architecture and Development
 
 ### Mobile Engineering
 
-**`mobile-architect`** -- `skills/mobile-architect/`
+**`mobile-architect`** -- `skills/etyb/references/specialists/mobile-architect/`
 
 Phase: Architecture and Development
 
@@ -195,7 +195,7 @@ Phase: Architecture and Development
 
 ### AI and Machine Learning
 
-**`ai-ml-engineer`** -- `skills/ai-ml-engineer/`
+**`ai-ml-engineer`** -- `skills/etyb/references/specialists/ai-ml-engineer/`
 
 Phase: Architecture and Development (specialized)
 
@@ -211,7 +211,7 @@ Phase: Architecture and Development (specialized)
 
 ### Testing and Quality Assurance
 
-**`qa-engineer`** -- `skills/qa-engineer/`
+**`qa-engineer`** -- `skills/etyb/references/specialists/qa-engineer/`
 
 Phase: Testing and QA | Quality Gate: TDD Enforcement
 
@@ -228,7 +228,7 @@ Phase: Testing and QA | Quality Gate: TDD Enforcement
 
 ### DevOps and Infrastructure
 
-**`devops-engineer`** -- `skills/devops-engineer/`
+**`devops-engineer`** -- `skills/etyb/references/specialists/devops-engineer/`
 
 Phase: Build, Deploy, and Release
 
@@ -247,7 +247,7 @@ Phase: Build, Deploy, and Release
 
 ### Security
 
-**`security-engineer`** -- `skills/security-engineer/`
+**`security-engineer`** -- `skills/etyb/references/specialists/security-engineer/`
 
 Phase: Cross-cutting (all phases) | Quality Gate: Auto-consultation
 
@@ -264,7 +264,7 @@ Phase: Cross-cutting (all phases) | Quality Gate: Auto-consultation
 
 ### Site Reliability Engineering
 
-**`sre-engineer`** -- `skills/sre-engineer/`
+**`sre-engineer`** -- `skills/etyb/references/specialists/sre-engineer/`
 
 Phase: Operations, Monitoring, and Maintenance
 
@@ -281,7 +281,7 @@ Phase: Operations, Monitoring, and Maintenance
 
 ### Technical Writing
 
-**`technical-writer`** -- `skills/technical-writer/`
+**`technical-writer`** -- `skills/etyb/references/specialists/technical-writer/`
 
 Phase: Cross-cutting (all phases)
 
@@ -296,7 +296,7 @@ Phase: Cross-cutting (all phases)
 
 ### Project Planning
 
-**`project-planner`** -- `skills/project-planner/`
+**`project-planner`** -- `skills/etyb/references/specialists/project-planner/`
 
 Phase: Requirements and Planning
 
@@ -310,7 +310,7 @@ Phase: Requirements and Planning
 
 ### Code Review
 
-**`code-reviewer`** -- `skills/code-reviewer/`
+**`code-reviewer`** -- `skills/etyb/references/specialists/code-reviewer/`
 
 Phase: Cross-cutting (during development) | Quality Gate: Mandatory Review
 
@@ -329,12 +329,12 @@ Specialized teams activated when building specific types of products. They compl
 
 | Skill | Folder | Coverage |
 |-------|--------|----------|
-| `social-platform-architect` | `skills/social-platform-architect/` | Feed systems, fan-out, social graphs, real-time delivery, content ranking |
-| `e-commerce-architect` | `skills/e-commerce-architect/` | Product catalogs, cart/checkout, payments, inventory, order management |
-| `fintech-architect` | `skills/fintech-architect/` | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
-| `saas-architect` | `skills/saas-architect/` | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
-| `real-time-architect` | `skills/real-time-architect/` | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
-| `healthcare-architect` | `skills/healthcare-architect/` | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
+| `social-platform-architect` | `skills/etyb/references/verticals/social-platform-architect/` | Feed systems, fan-out, social graphs, real-time delivery, content ranking |
+| `e-commerce-architect` | `skills/etyb/references/verticals/e-commerce-architect/` | Product catalogs, cart/checkout, payments, inventory, order management |
+| `fintech-architect` | `skills/etyb/references/verticals/fintech-architect/` | Ledger systems, payment processing, compliance (PCI/PSD2), fraud detection |
+| `saas-architect` | `skills/etyb/references/verticals/saas-architect/` | Multi-tenancy, billing/subscriptions, onboarding, usage metering, tenant isolation |
+| `real-time-architect` | `skills/etyb/references/verticals/real-time-architect/` | WebSocket systems, gaming backends, collaboration tools, live streaming, chat |
+| `healthcare-architect` | `skills/etyb/references/verticals/healthcare-architect/` | HIPAA compliance, HL7/FHIR, EHR integration, patient data, audit trails |
 
 ---
 
@@ -344,15 +344,15 @@ Nine always-on engineering disciplines govern how work gets done. Their principl
 
 | Protocol | Folder | Scope | Description |
 |----------|--------|-------|-------------|
-| TDD Protocol | `skills/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Claude has deterministic hooks; Codex adds prompt/Bash guardrails; Antigravity stays model-trusted. |
-| Subagent Protocol | `skills/subagent-protocol/` | Parallel and delegated work | Dispatch patterns, parallel coordination, two-stage review, context isolation. Platform mechanics come from adapters or project runtime, not the protocol itself. |
-| Git Workflow Protocol | `skills/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Claude blocks merges with a hook; Codex adds Bash merge guards; Antigravity is model-trusted. |
-| Plan Execution Protocol | `skills/plan-execution-protocol/` | Any active plan | Task execution cycle, blocker management, gate transitions. Portable default is `.etyb/plans/`; Claude may override through native plan mode. |
-| Brainstorm Protocol | `skills/brainstorm-protocol/` | Ambiguous or exploratory requests | Exploration techniques, convergence patterns, design brief templates. |
-| Review Protocol | `skills/review-protocol/` | Code review lifecycle | Review dispatch, feedback evaluation, review integration. Hooks: `pre-commit-review-check` verifies review before commit. |
-| Skill Evolution Protocol | `skills/skill-evolution-protocol/` | Skill creation and improvement | Skill creation, eval engineering, improvement loop, institutional memory. |
-| Verification Protocol | `skills/verification-protocol/` | Every completion claim | Five verification questions, completion report format, done criteria per gate, evidence standards. |
-| Debugging Protocol | `skills/debugging-protocol/` | Active troubleshooting | Root-cause methodology, hypothesis-driven debugging, one-variable rule, 3-failure escalation. |
+| TDD Protocol | `skills/etyb/references/protocols/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Claude has deterministic hooks; Codex adds prompt/Bash guardrails; Antigravity stays model-trusted. |
+| Subagent Protocol | `skills/etyb/references/protocols/subagent-protocol/` | Parallel and delegated work | Dispatch patterns, parallel coordination, two-stage review, context isolation. Platform mechanics come from adapters or project runtime, not the protocol itself. |
+| Git Workflow Protocol | `skills/etyb/references/protocols/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Claude blocks merges with a hook; Codex adds Bash merge guards; Antigravity is model-trusted. |
+| Plan Execution Protocol | `skills/etyb/references/protocols/plan-execution-protocol/` | Any active plan | Task execution cycle, blocker management, gate transitions. Portable default is `.etyb/plans/`; Claude may override through native plan mode. |
+| Brainstorm Protocol | `skills/etyb/references/protocols/brainstorm-protocol/` | Ambiguous or exploratory requests | Exploration techniques, convergence patterns, design brief templates. |
+| Review Protocol | `skills/etyb/references/protocols/review-protocol/` | Code review lifecycle | Review dispatch, feedback evaluation, review integration. Hooks: `pre-commit-review-check` verifies review before commit. |
+| Skill Evolution Protocol | `skills/etyb/references/protocols/skill-evolution-protocol/` | Skill creation and improvement | Skill creation, eval engineering, improvement loop, institutional memory. |
+| Verification Protocol | `skills/etyb/references/protocols/verification-protocol/` | Every completion claim | Five verification questions, completion report format, done criteria per gate, evidence standards. |
+| Debugging Protocol | `skills/etyb/references/protocols/debugging-protocol/` | Active troubleshooting | Root-cause methodology, hypothesis-driven debugging, one-variable rule, 3-failure escalation. |
 
 ## Process Architecture
 
