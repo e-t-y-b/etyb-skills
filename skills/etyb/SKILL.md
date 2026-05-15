@@ -26,7 +26,7 @@ Read these on demand. Each module is self-contained.
 |--------|---------|-----------|
 | [`core/charter.md`](core/charter.md) | CTO identity, Tier 0-4 classification, value proposition, anti-patterns | **Always read first** |
 | [`core/team-registry.md`](core/team-registry.md) | 20 specialists, domain detection, overlap resolution rules | Classifying which skill(s) to read |
-| [`core/stack-registry.md`](core/stack-registry.md) | Tech-stack overlays (Salesforce, etc.), detection signals, role-overlay loading | After team-registry; check whenever request mentions a tech platform |
+| [`core/stack-registry.md`](core/stack-registry.md) | Tech-stack overlays (Salesforce, AWS, GCP, Azure, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability), detection signals, and the docs.etyb.ai fetch contract for vendor depth | After team-registry; check whenever request mentions a tech platform |
 | [`core/gates.md`](core/gates.md) | 5-gate sequence, enforcement actions, plan lifecycle, state tracking | Tier 3+ requests; when a plan exists |
 | [`core/expert-mandating.md`](core/expert-mandating.md) | Mandatory expert matrix, continuity rules | Tier 3+ requests |
 | [`core/coordination-patterns.md`](core/coordination-patterns.md) | Sequential / parallel / hub-spoke / domain-augmented / incident | Multi-team work |
@@ -35,7 +35,7 @@ Read these on demand. Each module is self-contained.
 | [`core/scale-calibration.md`](core/scale-calibration.md) | Startup → Enterprise guidance | Every response (calibrates all advice) |
 | [`core/always-on-protocols.md`](core/always-on-protocols.md) | 9 engineering disciplines + debugging activation | Always applicable |
 | [`core/version-awareness.md`](core/version-awareness.md) | ETYB's own version, update mechanism, upgrade-path guidance | When user asks "what version", "how do I update", or mentions stale behavior |
-| [`core/knowledge-currency.md`](core/knowledge-currency.md) | Drift-check protocol — when Stack-sourced knowledge is stale, how to defer to vendor skills/MCPs or WebFetch authoritative sources | Whenever a Stack overlay is active, before committing to vendor-specific specifics |
+| [`core/knowledge-currency.md`](core/knowledge-currency.md) | Two-layer Stack architecture (slim local pointer + canonical docs.etyb.ai pages) and the drift-check protocol — when to WebFetch docs.etyb.ai, when to defer to a vendor MCP/skill, when to fall back to the vendor's authoritative URL | Whenever a Stack overlay is active, before committing to vendor-specific specifics |
 
 ## Platform Adapter
 
@@ -57,12 +57,12 @@ You are a single coordinated skill backed by three internal reference libraries.
 |---------|------|----------|
 | Specialists | [`references/specialists/`](references/specialists/) | 14 core engineering team READMEs (system-architect, backend-architect, frontend-architect, database-architect, mobile-architect, ai-ml-engineer, qa-engineer, devops-engineer, sre-engineer, security-engineer, technical-writer, project-planner, code-reviewer, research-analyst) plus their own deeper references under each |
 | Protocols | [`references/protocols/`](references/protocols/) | 9 always-on engineering disciplines (tdd-protocol, verification-protocol, review-protocol, subagent-protocol, git-workflow-protocol, plan-execution-protocol, brainstorm-protocol, skill-evolution-protocol, debugging-protocol) |
-| Verticals | [`references/verticals/`](references/verticals/) | 6 business-domain architects (saas-architect, fintech-architect, healthcare-architect, e-commerce-architect, real-time-architect, social-platform-architect) — installed only on Pro tier |
+| Verticals | [`references/verticals/`](references/verticals/) | 6 business-domain architects (saas-architect, fintech-architect, healthcare-architect, e-commerce-architect, real-time-architect, social-platform-architect) |
 | Process | [`references/process-architecture.md`](references/process-architecture.md) | Plan artifact format, gate definitions, expert mandating, scale calibration |
 
 Each specialist / protocol / vertical lives at `references/<library>/<name>/README.md` with optional helper material under `references/<library>/<name>/references/`, `agents/`, `rules/`, `hooks/`. Read the README first — only descend into helpers when you need the deeper material.
 
-**Availability is tier-dependent.** Lite tier installs ETYB + protocols + 3 essential specialists; Core tier adds the remaining 11 specialists; Pro tier adds the 6 verticals. Check that a reference file exists before assuming you can read it — if it's missing, the user is on a tier that doesn't include it, and you should suggest the upgrade rather than fabricate guidance.
+**Vendor knowledge is remote, not bundled.** The 13 Stack pointers under `stacks/<vendor>/SKILL.md` are slim trigger surfaces only. When a Stack matches, ETYB fetches per-product and per-role depth from `https://docs.etyb.ai/stacks/<vendor>/...` per the contract in `core/knowledge-currency.md`. Local references (specialists, protocols, verticals) are time-invariant; vendor content drifts and is refreshed on docs.etyb.ai without re-installing.
 
 ## First Action On Any Request
 

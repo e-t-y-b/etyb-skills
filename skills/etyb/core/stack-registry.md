@@ -2,17 +2,39 @@
 
 This is the routing layer for **Stack Packs** — knowledge overlays that load when work involves a specific tech stack (Salesforce, AWS, Cloudflare, Vercel, etc.). Read this after `team-registry.md` whenever you're routing a request.
 
-Stack Packs are not new specialists. They are context overlays applied across the existing 20 internal references. See `STACKS.md` at the repo root for the registry of available stacks and the authoring conventions; this file is the detection/loading layer used by ETYB at runtime. See `core/knowledge-currency.md` for the drift-check protocol that governs how Stack knowledge gets used.
+Stack Packs are not new specialists. They are context overlays applied across the existing 20 internal references. See `STACKS.md` at the repo root for the public registry of available stacks; see `core/knowledge-currency.md` for the drift-check protocol that governs how Stack knowledge gets used.
 
-## Detection workflow (v2)
+## v4 architecture — local detection, remote knowledge
+
+The shape changed in v4.0.0. **The install no longer carries vendor content.** Each `stacks/<vendor>/SKILL.md` is a slim pointer (~125-200 lines) holding:
+
+- Frontmatter trigger description + keyword list (Claude / Codex / Antigravity load this for detection)
+- `applies_to_roles`, `delegate_to_skills`, `products_covered` (routing + delegation metadata)
+- Top 5-10 platform gotchas (so the team has the highest-LLM-value currency anchors at hand without a fetch)
+- A standing-instructions block + escalation map
+
+The depth — per-product canonical pages and per-role composed views — lives at **[docs.etyb.ai/stacks/<vendor>/](https://docs.etyb.ai/stacks/)**, each page currency-stamped with its own `last_verified_on`, `drift_risk`, and `authoritative_url`. ETYB fetches these at runtime when work needs depth that the slim pointer doesn't carry.
+
+## Detection workflow
 
 1. **After classifying the request tier** (per `charter.md`) and identifying which specialist(s) to route to (per `team-registry.md`), scan the user's request for stack signals using the tables below.
-2. **On a match,** load the stack's `SKILL.md` (orchestrator briefing — applies to the whole team).
-3. **Check `delegate_to_skills`** in the Stack's frontmatter. If a listed vendor skill or MCP is available in the user's environment (visible in `<available_skills>`), prefer it for the matching product. The vendor's own surface knows current state better than the Stack overlay.
-4. **When no delegate is installed or the question is broader than what the delegate covers,** load `stacks/<stack>/references/<role>.md` for the engaged role. The role uses the overlay *in addition to* its own README, not in place of it.
-5. **Apply the drift-check protocol** (per `core/knowledge-currency.md`) before committing to specifics. High-stakes claims and stale high-drift products must use WebFetch on `authoritative_sources.primary` or defer to a delegate.
-6. **Multiple stacks may match.** Load all matching SKILL.md briefings; load the appropriate per-role reference from each. They compose — each pack handles its own platform-side, neither pretends to know the other.
-7. **If a stack signal matches but the corresponding role overlay does not exist yet,** proceed with the role's general knowledge plus the stack SKILL.md context; tell the user explicitly that the role-specific overlay is a gap in the current Stack Pack version.
+
+2. **On a match,** the slim local `stacks/<vendor>/SKILL.md` is already loaded (its frontmatter description matched). It carries the team briefing + top gotchas — that's enough for many soft-path responses without a fetch.
+
+3. **Check `delegate_to_skills`** in the local Stack's frontmatter. If a listed vendor skill or MCP is available in the user's environment (visible in `<available_skills>`), prefer it for the matching product. The vendor's own surface knows current state better than the curated docs.
+
+4. **For depth beyond the slim briefing, WebFetch the most-specific docs.etyb.ai URL** that matches the work:
+   - Product-specific question → `https://docs.etyb.ai/stacks/<vendor>/<product>/`
+   - Role-shaped question → `https://docs.etyb.ai/stacks/<vendor>/<role>/` (composed view that stitches the products that role touches)
+   - Stack-wide overview → `https://docs.etyb.ai/stacks/<vendor>/` (index)
+
+   If the most-specific URL 404s, fall back to the next-broadest. Don't load the entire Stack unless the user really needs the breadth.
+
+5. **Apply the drift-check protocol** (per `core/knowledge-currency.md`) using the fetched page's frontmatter (`last_verified_on`, `drift_risk`, `authoritative_url`). High-stakes claims and stale high-drift products must either defer to a delegate or WebFetch the page's `authoritative_url` directly.
+
+6. **Multiple stacks may match.** Their slim briefings load in parallel; fetch from each Stack's docs.etyb.ai surface independently. They compose — each pack handles its own platform-side, neither pretends to know the other.
+
+7. **If the docs.etyb.ai page is unreachable** (network failure, 404 on the entire Stack tree), tell the user explicitly, proceed with the slim briefing's gotchas + the specialist's general knowledge, and mark the answer as cache-only. Don't fabricate depth.
 
 ## Composition with protocols and verticals
 
@@ -22,7 +44,7 @@ Stack Packs **defer to business-domain verticals** for compliance and domain exp
 
 ## Vendor-skill delegation — how it works
 
-Several Stacks declare `delegate_to_skills` entries that point at vendor-provided skills or MCP servers. When those are installed in the user's environment, ETYB defers rather than answering from the Stack overlay. Detection is done by inspecting the `<available_skills>` list:
+Several Stacks declare `delegate_to_skills` entries that point at vendor-provided skills or MCP servers. When those are installed in the user's environment, ETYB defers rather than fetching from docs.etyb.ai or answering from the slim briefing. Detection is done by inspecting the `<available_skills>` list:
 
 | Stack | Delegate candidates (when installed) |
 |-------|--------------------------------------|
@@ -33,24 +55,20 @@ Several Stacks declare `delegate_to_skills` entries that point at vendor-provide
 | Anthropic Claude | `claude-api`, Anthropic SDK tooling |
 | Expo / React Native | `expo-*` skill suite, `vercel-react-native-skills`, `building-native-ui` |
 | Salesforce | (no first-party MCP GA yet; check delegate_to_skills periodically) |
-| AWS / GCP / Azure | (no first-party MCPs yet; built-in cloud CLIs covered in Stack) |
+| AWS / GCP / Azure | (no first-party MCPs yet; built-in cloud CLIs covered in the Stack) |
 | Stripe | Stripe MCP (when installed) |
 
-This list is informational. The authoritative declaration of which delegates a Stack prefers lives in that Stack's `SKILL.md` frontmatter `delegate_to_skills:` block.
-
-## Active Stack Packs
+This list is informational. The authoritative declaration of which delegates a Stack prefers lives in that Stack's local slim `SKILL.md` frontmatter `delegate_to_skills:` block.
 
 ## Active Stack Packs
 
 ### Salesforce (`stacks/salesforce/`)
 
-**Pack:** [`stacks/salesforce/SKILL.md`](../../../stacks/salesforce/SKILL.md)
-**Version:** 4.0.0 (v2 schema)
-**Last verified release:** Spring '26
-**Last verified on:** 2026-05-12
+**Slim local pointer:** [`stacks/salesforce/SKILL.md`](../../../stacks/salesforce/SKILL.md)
+**Canonical docs:** <https://docs.etyb.ai/stacks/salesforce/>
+**Version:** 4.0.0 • **Last verified release:** Spring '26 • **Last verified on:** 2026-05-12
 **Delegate skills:** none yet (Salesforce-Hosted MCP Servers GA'd April 2026; add when an MCP surface ships in users' environments)
-**Per-role overlays available:** system-architect, backend-architect, frontend-architect, ai-ml-engineer, database-architect, devops-engineer, security-engineer, qa-engineer, saas-architect, healthcare-architect, fintech-architect (full coverage)
-**Per-role overlays deferred:** _none_ — all 11 roles have overlays
+**Roles overlaid:** system-architect, backend-architect, frontend-architect, ai-ml-engineer, database-architect, devops-engineer, security-engineer, qa-engineer, saas-architect, healthcare-architect, fintech-architect
 
 **Detection signals** (case-insensitive; match anywhere in user's message):
 
@@ -67,19 +85,20 @@ This list is informational. The authoritative declaration of which delegates a S
 | Roles / certs | salesforce admin, salesforce architect, ctas, certified technical architect, agentforce specialist, platform developer (when adjacent to Salesforce) |
 
 **Negative signals** — DO NOT activate the pack when these dominate without Salesforce context:
-- "Salesforce" used as a generic synonym for "CRM" without specific platform mention (rare but happens)
+- "Salesforce" used as a generic synonym for "CRM" without specific platform mention
 - Generic "lightning" references not about Salesforce (Bitcoin Lightning Network, Lightning McQueen, etc.)
 - Generic "flow" without "builder" / "orchestration" / Salesforce neighborhood
 - "Apex" used in non-Salesforce context (Apex Legends, Apex programming language references in academic context)
-- Pure Slack / Tableau questions with no Salesforce platform involvement (those may get their own packs eventually)
+- Pure Slack / Tableau questions with no Salesforce platform involvement
 
-When the signal is ambiguous, **ask** before loading the pack — loading it on a non-Salesforce request will inject 1000+ lines of Salesforce-specific guidance that distorts your response.
+When the signal is ambiguous, **ask** before fetching — fetching docs.etyb.ai/stacks/salesforce/ on a non-Salesforce request injects Salesforce-specific guidance that distorts your response.
 
 ### AWS (`stacks/aws/`)
 
-**Pack:** `stacks/aws/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/aws/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/aws/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet (no first-party AWS MCP GA; revisit when Amazon Q Developer / AWS-hosted MCPs ship installable surfaces)
-**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, fintech-architect
+**Roles overlaid:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, fintech-architect
 
 **Detection signals:**
 - AWS naming: aws, amazon web services, amazon (in cloud context)
@@ -96,9 +115,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### GCP (`stacks/gcp/`)
 
-**Pack:** `stacks/gcp/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/gcp/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/gcp/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet (revisit when GCP MCP server installable surface ships)
-**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect
+**Roles overlaid:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect
 
 **Detection signals:**
 - GCP naming: gcp, google cloud, google cloud platform
@@ -115,9 +135,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Azure (`stacks/azure/`)
 
-**Pack:** `stacks/azure/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/azure/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/azure/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet
-**Per-role overlays:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, healthcare-architect
+**Roles overlaid:** system-architect, backend-architect, database-architect, devops-engineer, security-engineer, sre-engineer, ai-ml-engineer, saas-architect, healthcare-architect
 
 **Detection signals:**
 - Azure naming: azure, microsoft azure
@@ -134,9 +155,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Anthropic Claude (`stacks/anthropic-claude/`)
 
-**Pack:** `stacks/anthropic-claude/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/anthropic-claude/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/anthropic-claude/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** `claude-api` (Anthropic SDK / API helper skill)
-**Per-role overlays:** backend-architect, ai-ml-engineer, system-architect, security-engineer
+**Roles overlaid:** backend-architect, ai-ml-engineer, system-architect, security-engineer
 
 **Detection signals:**
 - Vendor: anthropic, claude
@@ -148,9 +170,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### OpenAI (`stacks/openai/`)
 
-**Pack:** `stacks/openai/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/openai/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/openai/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet (OpenAI ecosystem is API-first; revisit if OpenAI ships an official MCP)
-**Per-role overlays:** ai-ml-engineer, backend-architect, system-architect, security-engineer
+**Roles overlaid:** ai-ml-engineer, backend-architect, system-architect, security-engineer
 
 **Detection signals:**
 - Vendor: openai, gpt
@@ -163,9 +186,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Cloudflare (`stacks/cloudflare/`)
 
-**Pack:** `stacks/cloudflare/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/cloudflare/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/cloudflare/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** `cloudflare:cloudflare-mcp` (Cloudflare MCP — covers Workers, D1, R2, KV, Hyperdrive, Pages, accounts)
-**Per-role overlays:** backend-architect, system-architect, devops-engineer, ai-ml-engineer, database-architect, security-engineer
+**Roles overlaid:** backend-architect, system-architect, devops-engineer, ai-ml-engineer, database-architect, security-engineer
 
 **Detection signals:**
 - Vendor: cloudflare
@@ -182,9 +206,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Vercel (`stacks/vercel/`)
 
-**Pack:** `stacks/vercel/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/vercel/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/vercel/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** heavy — see `stacks/vercel/SKILL.md` frontmatter for the 18 vercel:* delegates
-**Per-role overlays:** frontend-architect, backend-architect, devops-engineer, ai-ml-engineer, system-architect
+**Roles overlaid:** frontend-architect, backend-architect, devops-engineer, ai-ml-engineer, system-architect
 
 **Detection signals:**
 - Vendor: vercel, vercel.app, vercel.com
@@ -198,9 +223,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Supabase (`stacks/supabase/`)
 
-**Pack:** `stacks/supabase/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/supabase/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/supabase/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** `supabase:supabase` and `supabase:supabase-postgres-best-practices`
-**Per-role overlays:** backend-architect, database-architect, frontend-architect, security-engineer, ai-ml-engineer, saas-architect
+**Roles overlaid:** backend-architect, database-architect, frontend-architect, security-engineer, ai-ml-engineer, saas-architect
 
 **Detection signals:**
 - Vendor: supabase
@@ -213,9 +239,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Firebase (`stacks/firebase/`)
 
-**Pack:** `stacks/firebase/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/firebase/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/firebase/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** heavy — see `stacks/firebase/SKILL.md` frontmatter for the 12 firebase:* delegates
-**Per-role overlays:** backend-architect, frontend-architect, mobile-architect, ai-ml-engineer, security-engineer
+**Roles overlaid:** backend-architect, frontend-architect, mobile-architect, ai-ml-engineer, security-engineer
 
 **Detection signals:**
 - Vendor: firebase
@@ -227,9 +254,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Expo (`stacks/expo/`)
 
-**Pack:** `stacks/expo/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/expo/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/expo/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** heavy — see `stacks/expo/SKILL.md` frontmatter for the 10 expo-* and related delegates
-**Per-role overlays:** mobile-architect, frontend-architect, devops-engineer, qa-engineer
+**Roles overlaid:** mobile-architect, frontend-architect, devops-engineer, qa-engineer
 
 **Detection signals:**
 - Vendor: expo (when mobile/RN context), expo.dev
@@ -241,9 +269,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Stripe (`stacks/stripe/`)
 
-**Pack:** `stacks/stripe/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/stripe/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/stripe/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet (Stripe ships an MCP server; add when installed in user environments)
-**Per-role overlays:** backend-architect, security-engineer, saas-architect, e-commerce-architect, fintech-architect
+**Roles overlaid:** backend-architect, security-engineer, saas-architect, e-commerce-architect, fintech-architect
 
 **Detection signals:**
 - Vendor: stripe
@@ -255,9 +284,10 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ### Observability (`stacks/observability/`) — multi-vendor
 
-**Pack:** `stacks/observability/SKILL.md` • **Version:** 4.0.0 • **Last verified on:** 2026-05-14
+**Slim local pointer:** `stacks/observability/SKILL.md` • **Canonical docs:** <https://docs.etyb.ai/stacks/observability/>
+**Version:** 4.0.0 • **Last verified on:** 2026-05-14
 **Delegates:** none yet (Datadog, New Relic, Splunk MCPs in development)
-**Per-role overlays:** sre-engineer, devops-engineer, backend-architect, security-engineer
+**Roles overlaid:** sre-engineer, devops-engineer, backend-architect, security-engineer
 
 **Detection signals:**
 - Vendors: datadog, new relic, newrelic, grafana, prometheus, splunk, honeycomb, sentry, dynatrace
@@ -275,13 +305,12 @@ When the signal is ambiguous, **ask** before loading the pack — loading it on 
 
 ## Authoring a new entry
 
-When a new Stack Pack ships, add a section under "Active Stack Packs" above. Required fields:
+When a new Stack ships, the order of operations is:
 
-- **Pack** — path to the SKILL.md
-- **Last verified release** — what platform release the content is current to
-- **Per-role overlays available** — list role names with reference files
-- **Per-role overlays deferred** — roles where the pack hasn't yet added an overlay
-- **Detection signals** — positive signals (product names, features, surfaces, tooling, ecosystem)
-- **Negative signals** — disambiguation cases where a positive keyword appears outside the stack's actual context
+1. **Publish on docs.etyb.ai first.** Create the Stack index page, per-product canonical pages, and per-role composed views in `e-t-y-b/etyb-dot-ai` under `src/content/docs/stacks/<vendor>/`. The publish must precede the slim pointer because the slim pointer's `## Where the full briefing lives` section links into docs.etyb.ai URLs.
+2. **Add the slim local pointer** `stacks/<vendor>/SKILL.md` with the standard template (frontmatter detection signals + delegate_to_skills + products_covered + top gotchas).
+3. **Register the Stack in `manifest.json`** under `.stacks` with `version`, `last_verified_on`, `applies_to_roles`, `deferred_roles`.
+4. **Add a section under "Active Stack Packs" above** with detection signals + negative signals.
+5. **Add a row to `STACKS.md`** at repo root.
 
 Stack registration in `manifest.json` is the source of truth for installed stacks; this file is the *router's view* of how to load and detect them at runtime.
