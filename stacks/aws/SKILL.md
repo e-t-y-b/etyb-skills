@@ -119,15 +119,23 @@ products_covered:
   - { name: "Glacier vault APIs (legacy)",      drift_risk: high,   notes: "Glacier vault (vault locks aside) is in retirement track — S3 Glacier storage classes via S3 API are the supported path; flag if user wires `glacier:*` for new code" }
 ---
 
-# AWS Stack Pack — Team Briefing
+# AWS Stack — Team Briefing
 
-You're working on AWS. This is a **knowledge overlay**, not a new specialist. The existing ETYB team is doing the work — backend-architect writes the Lambda handlers, devops-engineer authors the CDK + pipeline, security-engineer designs the IAM + KMS posture, ai-ml-engineer wires Bedrock agents, sre-engineer defines the SLOs and CloudWatch alarms. This pack teaches each role what AWS expects in 2026-Q2.
+This is a **knowledge overlay**, not a new specialist. The existing ETYB team does the work — backend-architect writes the backend code, devops-engineer wires the deploys, security-engineer enforces the boundary. This pack tells each role where the current AWS knowledge lives.
 
-**Currency stamp:** verified against AWS as of **2026-05-14**, covering re:Invent 2024 (Dec 2024) and re:Invent 2025 (Dec 2025) announcements plus the steady cadence of "What's New" through April-May 2026. If today's date is more than 6 months past `last_verified_on`, the pack is stale — warn the user and consult [AWS What's New](https://aws.amazon.com/about-aws/whats-new/recent/) and [the AWS News Blog](https://aws.amazon.com/blogs/aws/) before asserting service-specific specifics.
+## Where the full briefing lives
+
+Per-product and per-role pages are maintained at **[docs.etyb.ai/stacks/aws](https://docs.etyb.ai/stacks/aws/)** with `last_verified_on` stamps and authoritative-source URLs. ETYB fetches from those URLs at runtime — see `skills/etyb/core/knowledge-currency.md` for the fetch contract.
+
+- **Stack index:** <https://docs.etyb.ai/stacks/aws/>
+- **Per-product pages:** `https://docs.etyb.ai/stacks/aws/<product>/`
+- **Per-role views:** `https://docs.etyb.ai/stacks/aws/<role>/` — composed views for each role in `applies_to_roles` above
+
+When `delegate_to_skills` (frontmatter above) lists a first-party vendor MCP/skill that's installed in the user's environment, ETYB defers to it first; docs.etyb.ai is the curated fallback.
 
 ## What changed in 2025-2026 that older training data misses
 
-An LLM with a 2024 cutoff (or earlier) will get these wrong unless explicitly corrected. Treat the following as non-negotiable corrections:
+Critical context — an LLM with a 2024 cutoff will get these wrong:
 
 - **Bedrock now ships AgentCore** — the runtime layer for production agents. **AgentCore Runtime, AgentCore Browser, AgentCore Memory** GA'd through 2025-2026. Don't propose "raw Bedrock agents" as the deployment surface for new agentic workloads; AgentCore is the surface (see ai-ml-engineer overlay).
 - **Strands Agents SDK** was open-sourced May 2025. It's the AWS-blessed agent authoring kit and pairs with AgentCore Runtime. Older guidance pointing at LangChain-only as the agent framework is incomplete.
@@ -138,138 +146,29 @@ An LLM with a 2024 cutoff (or earlier) will get these wrong unless explicitly co
 - **ECS Express Mode** launched Nov 2025. **AWS Copilot CLI** is end-of-support **June 2026**. **App Runner** is in maintenance mode. Propose ECS Express Mode for "deploy a container to HTTPS in one step" — don't propose Copilot or App Runner for net-new.
 - **CDK v1 is fully EOL.** **CDK v2 (`aws-cdk-lib`) is the only supported track.** Mixins, ECS deployment strategies (built-in Linear/Canary), EKS Hybrid Nodes constructs, and `cdk --revert-drift` are 2025-2026 additions.
 - **AWS Copilot/CodeWhisperer renamed to Amazon Q Developer.** **Amazon Q Business** is the enterprise RAG/search tier. The "CodeWhisperer" name is dead.
-- **External Connected Apps... is Salesforce, not AWS** — but the equivalent AWS gotcha is **Amazon Linux 2 (AL2) reached end of standard support June 2025; maintenance support ends June 2026.** New AMIs and base images should target AL2023.
-- **Glacier vault APIs (`glacier:*`)** are on retirement track. S3 Glacier storage classes accessed via the S3 API are the supported pattern. Don't wire `glacier:UploadArchive` into new pipelines.
+- **Amazon Linux 2 (AL2) reached end of standard support June 2025; maintenance support ends June 2026.** New AMIs and base images should target AL2023.
 - **Step Functions JSONata + Variables** (re:Invent 2024) replace the ResultPath/InputPath dance for new state machines. **TestState API** GA Mar 2026 — test states in isolation before deploy.
-- **Security Hub** got a major overhaul at re:Invent 2025 — near-real-time risk analytics, auto-aggregation across GuardDuty/Inspector/Macie/CSPM, one year of historical trends.
-- **Aurora Serverless v1 reached EOL** Dec 2024. Migrate to Aurora Serverless v2 (or DSQL for new builds).
-- **Salesforce Functions and Heroku Enterprise are dead/dying** — irrelevant on this pack, but worth flagging when users propose hybrid Salesforce+AWS architectures.
-- **Graviton4 is the default.** ARM-first is now the AWS posture across Lambda, Fargate, RDS, ElastiCache, EC2, MemoryDB. x86 is the exception you justify, not the default you pick. **Graviton5 (M9g)** is in preview as of Dec 2025.
 
-If you find yourself recommending CDK v1, Copilot CLI for new deployments, App Runner for new services, Aurora Serverless v1, the "Einstein Copilot"... wait, wrong pack — but the principle holds: **if you're naming a service that retired or got renamed in 2024-2026, you're using stale knowledge.** Read the references below.
-
-## How this pack plugs in
-
-ETYB's router detects AWS signals via the trigger keywords above and loads this SKILL.md as the team briefing. When the router dispatches to a specific role, it also loads `references/<role>.md`.
-
-**Always-on protocols still apply unchanged.** TDD, verification, debugging, review, plan execution, brainstorm-first, branch safety, subagent coordination, self-improvement. The AWS overlay does not relax engineering discipline; it shapes how the discipline is applied on this platform (e.g., TDD on Lambda = `pytest`/`vitest` against handler functions with mocked AWS SDK clients via `moto`/`aws-sdk-client-mock`; TDD on CDK = `aws-cdk-lib/assertions` snapshot + fine-grained assertions before `cdk deploy`).
-
-## Reference Map — what each role reads
-
-| Role | Reference | Owns |
-|------|-----------|------|
-| `system-architect` | [`references/system-architect.md`](references/system-architect.md) | **The architectural decision** — Lambda vs ECS vs EKS vs EC2; serverless vs containers vs IaaS; event-driven vs request-response; multi-region vs single-region with DR; multi-account strategy; well-architected pillar tradeoffs; when AWS is *not* the answer |
-| `backend-architect` | [`references/backend-architect.md`](references/backend-architect.md) | Lambda idioms (SnapStart, Lambda Web Adapter, container images, layers, ephemeral storage); API Gateway vs Lambda URLs vs AppSync; EventBridge Pipes + Step Functions JSONata; SQS/SNS/Kinesis/MSK choice; idempotency, retries, DLQ patterns; ECS Express Mode + Fargate; signing with SigV4; SDK v3 patterns |
-| `database-architect` | [`references/database-architect.md`](references/database-architect.md) | **Aurora DSQL** vs Aurora Serverless v2 vs Aurora Limitless vs RDS; DynamoDB design (single-table, GSI strategy, zero-ETL to OpenSearch/Redshift); ElastiCache (Valkey) vs MemoryDB; Redshift vs Athena+S3 Tables vs OpenSearch; pgvector on Aurora vs OpenSearch vector vs Bedrock Knowledge Bases |
-| `devops-engineer` | [`references/devops-engineer.md`](references/devops-engineer.md) | **CDK v2 patterns** (mixins, L1/L2/L3 constructs, deployment strategies); CodePipeline + CodeBuild + CodeDeploy; Terraform on AWS; multi-account release; ECR + image signing; SAM for serverless-only; **Karpenter v1** node pool design; cost monitoring; **don't propose Copilot CLI or App Runner for net-new** |
-| `security-engineer` | [`references/security-engineer.md`](references/security-engineer.md) | IAM Identity Center, **permission boundaries**, SCPs, IAM Access Analyzer, KMS (multi-Region keys, key policies, grants), Secrets Manager rotation, GuardDuty + Security Hub (next-gen), WAF, Shield, mTLS via ACM PCA, IRSA + EKS Pod Identity, **least-privilege via Access Analyzer policy generation** |
-| `sre-engineer` | [`references/sre-engineer.md`](references/sre-engineer.md) | CloudWatch Application Signals + Container Insights + Internet Monitor; **native OTel via OTLP** (preview Apr 2026); X-Ray cross-account tracing; alarms + composite alarms; SLO definition with Application Signals; incident response runbook patterns; chaos engineering with FIS |
-| `ai-ml-engineer` | [`references/ai-ml-engineer.md`](references/ai-ml-engineer.md) | **AgentCore Runtime + AgentCore Browser + AgentCore Memory**; Strands Agents SDK; Bedrock model gateway (Claude, Nova, Llama, Mistral, DeepSeek as available); Bedrock Guardrails; Bedrock Knowledge Bases vs OpenSearch vector; SageMaker AI Studio (unified) + HyperPod; Trainium2/3 vs Blackwell tradeoffs; pgvector vs OpenSearch vector vs OpenSearch Serverless for retrieval |
-| `saas-architect` | [`references/saas-architect.md`](references/saas-architect.md) | **Multi-tenant patterns on AWS** — silo vs pool vs bridge; tenant isolation via IAM ABAC, KMS grants, separate VPCs/accounts; Cognito + Identity Pools for tenant auth; AWS SaaS Factory + Control Tower account vending; tier-based pool sharding; cost-per-tenant via CUR + tags |
-| `fintech-architect` | [`references/fintech-architect.md`](references/fintech-architect.md) | **Thin overlay.** AWS PCI DSS scope reduction patterns, FedRAMP/SOC posture, KMS for tokenization, Aurora DSQL for ledger-adjacent multi-region writes (**not** the ledger itself), Bedrock for fraud analytics within Trust constraints. Defers to fintech-architect for ledger/PCI/PSD2/AML semantics |
-
-## Top platform gotchas the team must know
-
-Opinionated, named, with consequences. These cost real money or real reputation when missed.
-
-1. **AL2 is dying.** Amazon Linux 2 end-of-life cadence: standard support ended June 2025, maintenance support ends June 2026. ParallelCluster 3.15 is the last release supporting AL2. New AMIs target AL2023. Consequence of missing this: a Lambda runtime upgrade or an AMI rebuild forced on you at the worst possible moment.
-
-2. **Lambda payload limits cliff.** 6 MB sync invocation, 256 KB async (SQS, EventBridge, etc.). Hitting either silently fails or truncates in ways application code rarely handles. Default pattern: drop the payload to S3, pass a reference. Don't argue with the limit; design around it.
-
-3. **Governor-cliff: 1,000 default Lambda concurrency, 10 TPS Bedrock model invocations per model+region by default.** Both are quota-bumpable but ship as defaults that surprise teams under load. Request increase **before** launch, not at 2am when the launch is live.
-
-4. **DynamoDB single-table design or you'll regret it.** Multi-table-per-entity is the relational-modeling reflex. It's wrong on DynamoDB. Design access patterns first, derive a single (or 2-3) tables with GSI strategy. If the team can't enumerate the top-5 access patterns up front, they're not ready to model.
-
-5. **VPC + NAT Gateway cost.** NAT Gateways are ~$0.045/hr + $0.045/GB processed. Multi-AZ HA = 3x. Cross-AZ data transfer ($0.01/GB each way) compounds. For Lambda-only or container-only architectures with no need for outbound internet, **put resources in private subnets without NAT** and use VPC endpoints (interface or gateway) for AWS service traffic. The "default VPC with NAT in every AZ" cookie-cutter has eaten more startup runway than any other AWS line item.
-
-6. **CloudWatch Logs Insights ingestion is the silent budget killer.** Per-GB ingestion is cheap until it isn't. Multi-line stack traces blown up by debug logging in production = >$10K/mo bills routinely. Default retention is "Never Expire" — change it. Use log group-level retention, log groups per service, and route only INFO+ to CloudWatch; debug logs go to S3 via Kinesis Firehose at a 10x lower cost.
-
-7. **IAM is the actual security boundary.** Network controls (VPC, SGs, NACLs) are belt; IAM is the buckle. A leaked credential with `AdministratorAccess` bypasses every VPC control you wrote. Permission boundaries on every IAM principal created by app teams; SCPs at the OU level for org-wide guardrails. IAM Access Analyzer **continuous** monitoring of cross-account access. Treat IAM Identity Center as the only path for human access — no IAM users, no long-lived access keys.
-
-8. **Multi-Region is not active-active by default.** Most regional services are exactly that: regional. Cross-region replication for S3, DynamoDB Global Tables, Aurora Global Database, RDS read replicas — each has its own RPO/RTO contract and operational shape. Don't claim "multi-region resilience" until each tier of the stack has a documented replication strategy and you've tested cutover in game-day. Aurora DSQL with 99.999% multi-region active-active is genuinely new and worth picking specifically when you need it.
-
-9. **Spot interruption is real.** 2-minute warning. On EC2 + ASG, mixed-instance policies with 3+ families and capacity-optimized allocation strategy. On EKS, Karpenter v1 handles spot well with consolidation. On Fargate Spot, task interruption signal arrives via SIGTERM 2 minutes before. Stateful workloads (databases, single-instance services, anything that holds session state) — never Spot. Stateless batch/CI/EKS worker — Spot first, on-demand fallback.
-
-10. **CDK assets get expensive at scale.** Every `lambda.Code.fromAsset()` builds and uploads an asset bundle to S3 + ECR. In monorepos with 100+ Lambdas, this can take 10+ minutes per `cdk deploy` and rack up S3 storage you forget about. Use **CodeBuild project references**, monorepo asset deduplication, and `cdk deploy --hotswap` for dev loops. Set lifecycle policies on the CDK asset buckets.
-
-11. **`re:Invent` announcements ≠ GA.** "Coming soon," "preview," "private preview," "limited availability" all mean *don't bet a production architecture on it yet*. Always check the official "What's New" page (not a re:Invent recap blog) for the exact GA date and the regional rollout map. Some 2024 announcements (Aurora DSQL, EKS Auto Mode) GA'd within months; some are still preview a year later.
-
-12. **Region selection is a compliance + cost decision, not a latency decision alone.** us-east-1 is cheapest and has every service first, but **every multi-region failure of the last decade has started or peaked there**. For new architecture without us-east-1-specific dependencies, default to a different primary region (us-east-2 or us-west-2) and replicate to us-east-1 if you need it. Costs are higher in some regions (Stockholm, Sao Paulo, Hyderabad), data residency may force the region, and not every service is in every region — confirm before designing.
-
-## Compliance composition — when AWS work touches a vertical
-
-When the user's request hits a regulated vertical (fintech, healthcare, public sector), the AWS pack handles AWS-side patterns; the vertical's specialist owns the compliance semantics. Examples:
-
-- **Healthcare on AWS (HIPAA):** AWS is HIPAA-eligible across most services with a BAA. The pack covers AWS BAA scope, eligible-services lists, KMS for PHI encryption, CloudTrail for audit. `healthcare-architect` (vertical) owns the HIPAA controls, PHI minimization, breach notification posture, FHIR semantics on AWS HealthLake.
-- **Fintech on AWS (PCI DSS, SOX, PSD2):** The pack covers PCI DSS scope reduction via tokenization (KMS, Macie for PII discovery, Verified Permissions for fine-grained auth), reference architectures (CDE in a separate account with locked-down SCPs), audit trails (CloudTrail + Config + Audit Manager). `fintech-architect` (vertical) owns ledger design (AWS is not your ledger of record — see the fintech-architect overlay), PSD2 SCA, AML workflows.
-- **Public sector / FedRAMP:** GovCloud (US-East, US-West), ITAR-controlled, separate account family. Most services GA in GovCloud lag 6-12 months. Treat as a distinct deployment shape. The pack flags GovCloud feature gaps; the public-sector vertical owns the compliance evidence.
-- **EU data residency / GDPR:** eu-central-1 (Frankfurt), eu-west-1 (Ireland), eu-west-2 (London), eu-west-3 (Paris), eu-north-1 (Stockholm), eu-south-1 (Milan), eu-south-2 (Spain), eu-central-2 (Zurich). **AWS European Sovereign Cloud** (EUSC) is the new sovereign offering for highest-bar EU workloads — GA targeted late 2025/2026. Pack covers regional service availability + KMS-key-region constraints; security-engineer + the vertical own transfer impact assessments and DPA reviews.
-
-If a user's AWS request collides with a vertical AND the vertical's specialist file exists in `references/specialists/`, route to both: AWS overlay for the AWS-shaped questions, vertical for the compliance/domain shape.
-
-## Stack composition — when AWS isn't alone
-
-If the user is on AWS **plus** another platform with a registered pack:
-
-| Composition | AWS pack covers | Other pack covers |
-|-------------|-----------------|-------------------|
-| AWS + Salesforce | Named Credentials destination (API Gateway endpoint), Pub/Sub API receivers (EventBridge + Lambda), AWS Bedrock for non-Trust-Layer LLM workloads called from Salesforce | Salesforce-side Apex callouts, Trust Layer, External Client App config |
-| AWS + Snowflake | DataLake source (S3 + Iceberg + Glue), Kinesis → Snowpipe Streaming, Aurora DSQL → Snowflake CDC | Snowflake compute, warehouses, materialized views, ML on Snowpark |
-| AWS + Databricks | S3 + Unity Catalog source, Glue → Databricks, EKS-hosted custom workloads | Databricks workspace, MLflow, Delta Live Tables |
-| AWS + Stripe | Webhook receiver (API Gateway + Lambda + Secrets Manager for signing secret), Eventbridge schema registry for Stripe events | Stripe API mechanics, billing logic, dunning |
-| AWS + Vercel/Netlify | Backend (Lambda + API Gateway + Aurora DSQL); EventBridge for backend triggers | Frontend hosting, edge functions, CDN |
-| AWS + Cloudflare | Origin (CloudFront → ALB), API origin, Workers KV vs DynamoDB tradeoffs | Cloudflare Workers, Workers AI, R2, Pages |
-
-When the other stack lacks a registered pack, the AWS pack handles its side only — say so explicitly and don't fake the other side.
+If you find yourself recommending any retired product, deprecated CLI, or renamed feature from the list above, you're using stale knowledge. Fetch the current page from docs.etyb.ai before continuing.
 
 ## Standing instructions for every role on an AWS engagement
 
-1. **Anchor to currency.** Before recommending an API shape, service feature, or default behavior, check whether the overlay covers it. If yes, follow the overlay; do not pattern-match from 2023 muscle memory. If no, say so explicitly and verify against [AWS What's New](https://aws.amazon.com/about-aws/whats-new/recent/) before asserting specifics. Service GA dates and quota defaults are particularly easy to get wrong.
+1. **Anchor to currency.** Before recommending API shapes, syntax, product names, or pricing, fetch the relevant docs.etyb.ai page and check its `last_verified_on`. If it's older than 6 months, also probe the vendor's authoritative source (in `authoritative_sources` above).
 
-2. **Defer to verticals on compliance.** AWS supplies the controls; the vertical owns the compliance interpretation. AWS doesn't make a system HIPAA-compliant — your design does, on top of HIPAA-eligible AWS services with a BAA in place.
+2. **Defer to verticals on domain compliance.** This pack covers platform mechanics. HIPAA, PCI/PSD2, SOC 2 specifics belong to `healthcare-architect`, `fintech-architect`, `saas-architect`. Route to the vertical; don't restate compliance content from this pack.
 
-3. **Quotas before code.** Every AWS recommendation that involves Lambda concurrency, Bedrock TPS, DynamoDB WCU/RCU, API Gateway throttling, Step Functions execution rate, EC2 instance limits, or S3 PUT/GET request rates **must consider the default quota**. State the quota, the request rate the design implies, and whether a Service Quota increase is needed pre-launch. "We'll request more concurrency if we hit limits" is an outage waiting to happen.
+3. **Respect platform-specific limits.** Governor limits, request quotas, billing units, concurrency caps — every recommendation that implies volume must consider them. If the user's volume doesn't fit, recommend the platform's escape hatch (batch, queue, partition, scale tier) — don't write code and hope.
 
-4. **Least privilege via Access Analyzer.** Default to IAM Access Analyzer's policy-generation feature: deploy the workload with permissive-but-bounded IAM, capture CloudTrail activity, generate the least-privilege policy, then tighten. Don't write IAM policies by hand from memory; you'll either over-grant or break the workload.
-
-5. **Account topology is a design decision.** "Production, staging, dev" accounts is the minimum. Real teams have Security OU (Log Archive + Security Tooling), Infrastructure OU (Networking + Shared Services), Workloads OU (per-env or per-app), Sandbox OU. Multi-account from day one is cheaper than splitting a monolithic account at year two.
-
-6. **Region selection isn't a default.** Don't just pick us-east-1. Choose deliberately based on (a) data residency, (b) service availability for what you're deploying, (c) cost, (d) latency to users, (e) blast-radius separation from us-east-1's gravitational misfortunes.
-
-7. **Cost as a non-functional requirement.** Every architecture must include a cost estimate (Cost Explorer historical baseline if migrating; Pricing Calculator if greenfield), a tagging strategy enforced via SCPs, and budget alerts via AWS Budgets. "We'll right-size later" is how teams burn 50% of their cloud spend on idle capacity.
+4. **Least privilege via IAM Access Analyzer.** Default to Access Analyzer's policy-generation feature: deploy permissive-but-bounded IAM, capture CloudTrail activity, generate the least-privilege policy, then tighten. Don't write IAM policies by hand from memory.
 
 ## When to escalate out of this pack
 
 | Situation | Escalate to |
 |-----------|-------------|
-| Compliance specifics for healthcare (HIPAA/HITRUST/FHIR semantics) | `healthcare-architect` |
-| Compliance specifics for fintech (PCI DSS scope, PSD2 SCA, AML, ledger semantics) | `fintech-architect` |
-| ISV / multi-tenant SaaS on AWS (tenant isolation, billing, tier economics) | `saas-architect` (with this pack) |
-| External system architecture beyond AWS | `system-architect` (without the pack overlay) |
-| Frontend not deployed on AWS Amplify/CloudFront/S3 | `frontend-architect` (without the pack overlay) |
-| Mobile app on AWS (Amplify Gen 2, AppSync, Cognito) | `mobile-architect` (with this pack) |
-| Non-AWS backend service that AWS calls into | `backend-architect` (without the pack overlay) |
+| Compliance specifics (HIPAA, PCI, SOC 2) | `healthcare-architect` / `fintech-architect` / `saas-architect` |
+| Multi-stack architecture spanning vendors | `system-architect` (without the pack overlay) |
+| Vendor-agnostic work that happens to touch AWS | the relevant specialist (without the pack overlay) |
 
-## Currency — when this pack is stale
+## Stack composition
 
-If `today - last_verified_on > 6 months`, this pack is stale. Behavior:
-
-1. **Warn the user.** "Pack last verified 2026-05-14; AWS ships ~3,000 What's New items per year, so version-specific guidance may be outdated."
-2. **Triangulate before asserting.** Before claiming a service has a feature, check the [What's New search](https://aws.amazon.com/about-aws/whats-new/recent/) for the service name. Before claiming a quota, check Service Quotas console / AWS docs.
-3. **Verify retirement dates.** [AWS deprecation pages](https://docs.aws.amazon.com/) and the [AWS Health Dashboard](https://health.aws.amazon.com/health/status) — runtime retirements (Lambda, AL2) hit quarterly.
-4. **Trigger refresh.** Owner: stack maintainer. Cadence: every 3 months minimum, every re:Invent (early Dec) mandatory.
-
-## Open gaps in v4.0.0
-
-Explicit so future iterations know what's missing:
-
-- No deep coverage of **IoT Core / Greengrass / Sitewise** — edge/IoT-specific workloads are a separate stack candidate.
-- No **Game Tech (GameLift, GameSparks)** depth — niche, defer to game-specialist stack if demand arises.
-- No **HPC depth beyond ParallelCluster reference** — HPC, scientific computing, weather/genomics workloads warrant their own overlay if demand justifies.
-- **Quantum (Braket)** — preview/early-GA surface, low signal, skipped.
-- **Snowmobile / Snowball Edge / Snowcone** — physical data transfer, niche, skipped.
-- **Direct Connect / Cloud WAN deep design** — covered at the system-architect level, not exhaustively.
-- **Outposts / Local Zones / Wavelength** — covered as boundary cases in system-architect, not exhaustively.
-- **AWS Marketplace ISV publishing** — for product-led AWS distribution, separate from this pack's "consume AWS" framing.
-
-If a user's request hits any of these gaps, say so explicitly and proceed with general-purpose knowledge plus current-release validation against authoritative sources above.
+If the user is running AWS alongside another stack that has its own pack registered, both overlays load. Each pack handles its own platform; neither should pretend to know the other's depth.

@@ -75,147 +75,56 @@ products_covered:
   - { name: "GPT Store + Custom GPTs",       drift_risk: medium, notes: "Consumer-side surface (ChatGPT); API integrators rarely touch it directly; included for completeness when teams ship GPTs alongside API products" }
 ---
 
-# OpenAI Stack Pack — Team Briefing
+# OpenAI Stack — Team Briefing
 
-You're working on the OpenAI platform. This is a **knowledge overlay**, not a new specialist. The existing ETYB team is doing the work — ai-ml-engineer designs the agent and picks the model, backend-architect plumbs the SDK into services, system-architect chooses Responses vs Chat Completions vs Realtime, security-engineer locks down keys + Trust + ZDR + Moderation. This pack teaches each role what the platform expects in 2026.
+This is a **knowledge overlay**, not a new specialist. The existing ETYB team does the work — backend-architect writes the backend code, devops-engineer wires the deploys, security-engineer enforces the boundary. This pack tells each role where the current OpenAI knowledge lives.
 
-**Currency stamp:** verified against the OpenAI platform surface as of **2026-05-14** — GPT-5 family (Pro / Standard / Mini / Nano + thinking variants), GPT-4.1, o3 / o4 reasoning models, Responses API as the unified surface, Assistants API on the deprecation glide path, Realtime API GA + Realtime Agents, Agents SDK (rebranded from Swarm), OpenAI Codex agent product + Codex CLI, Computer Use Preview, automatic Prompt Caching, Predicted Outputs, Stored Completions, Eval Platform, Distillation Platform, gpt-image-1, omni-moderation. If today's date is more than **6 months past** `last_verified_on`, this pack is stale — warn the user and consult the [OpenAI changelog](https://platform.openai.com/docs/changelog) before recommending model IDs, pricing, or API shapes.
+## Where the full briefing lives
+
+Per-product and per-role pages are maintained at **[docs.etyb.ai/stacks/openai](https://docs.etyb.ai/stacks/openai/)** with `last_verified_on` stamps and authoritative-source URLs. ETYB fetches from those URLs at runtime — see `skills/etyb/core/knowledge-currency.md` for the fetch contract.
+
+- **Stack index:** <https://docs.etyb.ai/stacks/openai/>
+- **Per-product pages:** `https://docs.etyb.ai/stacks/openai/<product>/`
+- **Per-role views:** `https://docs.etyb.ai/stacks/openai/<role>/` — composed views for each role in `applies_to_roles` above
+
+When `delegate_to_skills` (frontmatter above) lists a first-party vendor MCP/skill that's installed in the user's environment, ETYB defers to it first; docs.etyb.ai is the curated fallback.
 
 ## What changed in 2025-2026 that older training data misses
 
-Critical context. An LLM with a 2023-or-earlier cutoff will get most of these wrong. Even a mid-2024 cutoff will miss the most recent reshuffles.
+Critical context — an LLM with a 2024 cutoff will get these wrong:
 
 - **GPT-5 launched (2025) and replaced GPT-4 as the default recommendation.** Tiers are **GPT-5 Pro**, **GPT-5 Standard**, **GPT-5 Mini**, **GPT-5 Nano** — plus **thinking variants** for the Pro/Standard tier. If a user types "use GPT-4 / gpt-4-turbo / gpt-4o" for a new feature, that is a legacy default; offer GPT-5 Standard or GPT-4.1 with a one-line rationale.
 - **The Responses API is the new unified surface** (`/v1/responses`). It replaces Assistants and is the *only* surface that supports built-in tools (`web_search`, `file_search`, `code_interpreter`, `computer_use_preview`) + remote MCP servers. Chat Completions is still supported long-term, but Responses is the right default for new agentic builds.
-- **Assistants API is being deprecated.** OpenAI announced the migration glide path in 2025; the sunset is scheduled in the first-half-2026 window. **Do not greenfield on Assistants.** Migrate threads → conversations, tools → built-in tools or function tools, vector stores stay (Files + Vector Store APIs are now shared with Responses).
-- **OpenAI Codex (2025) is an AGENT PRODUCT, not the retired code model.** The 2023 `code-davinci-002` "Codex" was retired in March 2023. The 2025 "OpenAI Codex" is a cloud + IDE coding agent (`codex.openai.com` + `codex` CLI) powered by GPT-5 family / o-series. If a user says "Codex," confirm which they mean before assuming.
-- **The Codex CLI** (`npm i -g @openai/codex` / `brew install codex`) is open-source and pairs with the cloud Codex product. It is a peer to Claude Code, not a successor to anything from 2023.
-- **Computer Use Preview** (consumer surface: **Operator**) lets the model drive a browser or desktop via screenshots + click/type tool calls. The API exposes it as the `computer_use_preview` tool on Responses + the `computer-use-preview` model. **The safety surface is large** — sandboxing, allowlists, human-in-loop confirmation are required, not optional.
-- **Prompt Caching is automatic on the OpenAI platform.** No manual `cache_control` breakpoints (this is distinct from Anthropic). Prompts ≥ **1,024 tokens** that share a prefix with a recent prompt get cached; cached input is billed at **50% off**. Architect for cacheability by keeping the system prompt + few-shot examples + tool definitions stable at the prefix, and varying the user message at the tail.
-- **The Agents SDK (Python + TypeScript) is the rebranded + hardened Swarm.** It is the OpenAI-native answer to multi-agent orchestration: handoffs, guardrails, tracing, deterministic tool routing. `openai-agents-python` is the import path. It is the right default if you are OpenAI-only; if you need to swap providers, stay on direct SDK + LangGraph.
-- **Realtime API is GA and now ships Realtime Agents.** Speech-to-speech with `gpt-realtime` / `gpt-4o-realtime`, WebRTC for low-latency in-browser, WebSocket for server-side. Realtime Agents wrap the Realtime API with handoff + tool-call + transcript primitives.
-- **Structured Outputs with `strict: true`** is the production default for any JSON. It enforces the JSON schema at decode time — no parsing failures, no malformed JSON. Use it on tool definitions (`"strict": true`) and on response format (`response_format: { type: "json_schema", strict: true }`).
-- **Predicted Outputs** ship pre-supplied expected output along with the request to accelerate generation. The model treats the prediction as a strong hint and skips ahead on matching tokens. Use for code-edit / diff / refactor pipelines where most of the output is unchanged.
-- **Stored Completions + Eval Platform + Distillation Platform** are three coupled console products. Turn on `store: true` on a completion → query it in the Eval platform → distill into a fine-tuned smaller model. This is now the OpenAI-native loop for "GPT-5 in dev → fine-tuned 4o-mini in prod."
-- **Embeddings have a `dimensions` parameter** (Matryoshka representation). `text-embedding-3-large` defaults to 3072 dimensions, but you can truncate to 1024 / 512 / 256 without retraining. Smaller dims = lower storage + faster ANN + slightly lower recall.
-- **Moderation API is now `omni-moderation`** — multimodal (text + image). Old `text-moderation-latest` still works but `omni-moderation-latest` is the default for new pipelines.
-- **Batch API is 50% off with a 24-hour SLA.** Available for Chat Completions, Embeddings, and Responses (Responses-batch went GA late 2025). The default home for evals, classification jobs, content generation, embedding refreshes.
-- **Project-scoped API keys** (`sk-proj-…`) replace user-scoped keys as the production pattern. Every production deployment should use a project key with a model allowlist, a per-project rate limit, and the project's own service account / audit log scope. **User keys (`sk-…` legacy) leaking is a much bigger blast radius** — flag if you see them in code.
-- **Usage tiers ladder from Tier 1 → Tier 5.** Auto-promotion on cumulative spend + age. Each tier raises rate limits + unlocks specific models. **GPT-5 / o-series / Realtime / Computer Use are tier-gated** — a project on Tier 1 cannot access them even with a valid key.
-- **Scale Tier / Priority Processing** is OpenAI's commit-and-burst enterprise contract — pay for guaranteed throughput, burst above commit at a premium. Mention it only at enterprise scale.
-- **GPT-image-1 is the new native multimodal image model.** DALL·E 3 is legacy. gpt-image-1 supports generation + editing + variations + transparent background in one surface.
+- **Assistants API is being deprecated.** OpenAI announced the migration glide path in 2025; the sunset is scheduled in the first-half-2026 window. **Do not greenfield on Assistants.** Migrate threads → conversations, tools → built-in tools or function tools.
+- **OpenAI Codex (2025) is an AGENT PRODUCT, not the retired code model.** The 2023 `code-davinci-002` "Codex" was retired in March 2023. The 2025 "OpenAI Codex" is a cloud + IDE coding agent (`codex.openai.com` + `codex` CLI) powered by GPT-5 family / o-series.
+- **Computer Use Preview** (consumer surface: **Operator**) lets the model drive a browser or desktop via screenshots + click/type tool calls. The API exposes it as the `computer_use_preview` tool on Responses + the `computer-use-preview` model. The safety surface is large — sandboxing, allowlists, human-in-loop confirmation are required.
+- **Prompt Caching is automatic on the OpenAI platform.** No manual `cache_control` breakpoints (this is distinct from Anthropic). Prompts ≥ **1,024 tokens** that share a prefix with a recent prompt get cached; cached input is billed at **50% off**.
+- **The Agents SDK (Python + TypeScript) is the rebranded + hardened Swarm.** It is the OpenAI-native answer to multi-agent orchestration: handoffs, guardrails, tracing, deterministic tool routing. `openai-agents-python` is the import path.
+- **Realtime API is GA and now ships Realtime Agents.** Speech-to-speech with `gpt-realtime` / `gpt-4o-realtime`, WebRTC for low-latency in-browser, WebSocket for server-side.
+- **Structured Outputs with `strict: true`** is the production default for any JSON. It enforces the JSON schema at decode time — no parsing failures, no malformed JSON.
+- **Stored Completions + Eval Platform + Distillation Platform** are three coupled console products. Turn on `store: true` on a completion → query it in the Eval platform → distill into a fine-tuned smaller model.
+- **Project-scoped API keys** (`sk-proj-…`) replace user-scoped keys as the production pattern. Every production deployment should use a project key with a model allowlist, a per-project rate limit, and the project's own service account / audit log scope.
 
-If you find yourself recommending GPT-4 by default, the Assistants API for a greenfield project, `code-davinci-002`, DALL·E 3 for new work, the legacy Moderation API, or user-scoped API keys — you're working from stale knowledge. Read the references below.
-
-## How this pack plugs in
-
-ETYB's router detects OpenAI signals via `skills/etyb/core/stack-registry.md` and loads this SKILL.md as the team briefing. When the router dispatches to a specific role, it also loads `references/<role>.md` if one exists.
-
-**Always-on protocols still apply unchanged.** TDD, verification, debugging, review, plan execution, brainstorm-first, branch safety, subagent coordination, self-improvement. The OpenAI overlay does not relax engineering discipline; it shapes how the discipline is applied on this platform:
-
-- **TDD on agents** = unit tests on the function tool implementations + Eval Platform datasets gating CI for the full agent loop.
-- **Verification** = log the full `(request, response, tool_calls, usage)` tuple in a tracing platform (Langfuse / Helicone / Braintrust / OpenAI Platform Logs) and assert on cost + latency + structured-output validity per call.
-- **Debugging** = always grab `request_id` from response headers (`x-request-id`); OpenAI support will not engage without it. Reproduce with `temperature=0` + identical prompt before assuming a bug is non-deterministic.
-
-## Reference Map — what each role reads
-
-| Role | Reference | Owns |
-|------|-----------|------|
-| `ai-ml-engineer` | [`references/ai-ml-engineer.md`](references/ai-ml-engineer.md) | **The model + agent decision** — GPT-5 vs GPT-4.1 vs o3/o4 vs realtime; Responses vs Chat Completions vs Assistants; Agents SDK orchestration; built-in tools; Structured Outputs + tool design; embeddings + vector stores; fine-tuning + distillation; eval + observability |
-| `backend-architect` | [`references/backend-architect.md`](references/backend-architect.md) | SDK plumbing (Python + TypeScript); streaming (SSE) wiring through services; idempotency keys + retries + circuit breakers; webhook + Batch API integration; Realtime API on the server (WebSocket); function-tool implementation discipline; cost + token accounting in app code |
-| `system-architect` | [`references/system-architect.md`](references/system-architect.md) | API-surface selection (Responses vs Chat Completions vs Realtime vs Batch); multi-provider abstraction tradeoffs (direct SDK vs LangGraph vs Vercel AI SDK vs gateway); caching + routing topology; org-project-key topology; Scale Tier vs default capacity; ZDR + residency posture |
-| `security-engineer` | [`references/security-engineer.md`](references/security-engineer.md) | Project-scoped keys + key rotation + scope-down posture; RBAC + audit logs; ZDR + DPA + retention; Moderation API placement; prompt-injection defense for Responses + Built-in Tools + Computer Use; PII handling; OWASP LLM Top 10 mapped to OpenAI primitives; abuse + content policy posture |
-
-## Top platform gotchas the team must know
-
-These are the failure patterns we see repeatedly. Memorize them.
-
-1. **Don't conflate "Codex" 2023 and "Codex" 2025.** The 2023 model `code-davinci-002` was retired in March 2023. The 2025 OpenAI Codex is a coding agent product. Same brand, totally different artifact. Confirm intent before answering.
-
-2. **Don't greenfield on Assistants API.** It is on the deprecation glide path. Responses API is the answer. If you see `client.beta.threads.create(...)` in 2026 code, the team is building tech debt.
-
-3. **Responses API is required for built-in tools.** `web_search`, `file_search`, `code_interpreter`, `computer_use_preview` only exist on Responses. Chat Completions can't call them. If a user wants "an agent that can browse the web" in 2026, that's Responses (or Agents SDK on top), not Chat Completions.
-
-4. **Prompt Caching is automatic but order-sensitive.** Cache key is the *prefix* of the prompt up to the first divergence. Put the stable parts at the top (system message → tool definitions → few-shot examples → retrieved context) and put the user message at the bottom. Reorder and you blow the cache for every old request.
-
-5. **Structured Outputs `strict: true` does NOT auto-parse JSON for you on Chat Completions function tools.** The tool-call `arguments` field is still a JSON-encoded string — you must `JSON.parse()` it. The `strict: true` guarantee is *schema compliance*, not *Python/JS object return*. The Responses API returns the object pre-parsed; Chat Completions does not.
-
-6. **`temperature` does not exist on o-series.** o3, o4 are reasoning models with built-in chain-of-thought. Pass `reasoning.effort` (`low` / `medium` / `high`) instead. Passing `temperature` is silently ignored (or errors, depending on SDK version).
-
-7. **Reasoning tokens are billed as output tokens but invisible by default.** o-series models emit reasoning tokens before the visible answer. They count against your output token budget AND your output cost. Plan for 2-10x output token usage when switching from GPT-5 to o3/o4.
-
-8. **Tier-gating bites at deploy time.** A new project starts at Tier 1, which doesn't have access to GPT-5 family / Realtime / Computer Use. Auto-promotion needs spend + age. **Always confirm the project tier before promising a feature works.**
-
-9. **Project-scoped keys (`sk-proj-…`) are the only safe production pattern.** User keys (`sk-…` legacy) tie to a human; if that human leaves, the key is a security incident, not a deletion. Project keys are scoped by org admin, can be model-allowlisted, can be rotated independently. **Flag user keys in production code.**
-
-10. **Realtime API audio tokens are NOT chat tokens.** Audio input + output have separate per-minute pricing, separate caching rules, and separate context limits. Reading "Realtime is the same price as Chat Completions" is wrong. Always check the dedicated Realtime pricing page.
-
-11. **Computer Use requires explicit human-in-the-loop on irreversible actions.** OpenAI documents this as a safety requirement, not a recommendation. Form submits, purchases, destructive deletes — all require confirmation in your application loop. Failing to enforce this is the path to PR-disaster headlines.
-
-12. **Default Data Retention is 30 days for abuse monitoring.** Even with `store: false`. Enterprise customers can negotiate ZDR (zero data retention) via the DPA. If a user says "we can't have data go to OpenAI at all," that is a contract conversation (`sales@openai.com`), not a code conversation — escalate to procurement.
-
-## Compliance composition
-
-When OpenAI work composes with a vertical Stack (fintech, healthcare, e-commerce, SaaS), the vertical owns compliance discipline and this pack owns the OpenAI mechanism:
-
-- **Healthcare** — OpenAI is **not HIPAA-covered by default**. ChatGPT Enterprise / API on the BAA path is required for PHI. Defer all HIPAA semantics to `healthcare-architect`; this pack tells you which API surfaces are eligible (Enterprise API + ZDR + signed BAA), not what HIPAA actually requires.
-- **Fintech** — OpenAI is not the system of record for transactions or balances. Use OpenAI for understanding (intent classification, document extraction, agent assistance), not for moving money. Defer ledger / PCI / PSD2 / AML to `fintech-architect`.
-- **EU AI Act / GDPR** — EU residency for OpenAI requires explicit configuration. Defer GDPR semantics to `security-engineer` general practice; this pack tells you what data classes flow through what endpoints and what ZDR + DPA buys you.
-- **Education / public sector** — FERPA, FedRAMP, IL5 surfaces exist as enterprise contract paths (Microsoft Azure OpenAI Service is the typical FedRAMP path, not OpenAI direct). Flag explicitly when scope demands them.
-
-## Currency — when this pack is stale
-
-This pack is stale if **any** of these is true:
-
-- `last_verified_on` is more than 6 months old (today's date is past 2026-11-14).
-- A new major GPT model (GPT-6, o5, equivalent) has shipped and isn't named in this pack.
-- The Assistants API has fully sunset and we still describe it as "deprecating."
-- The Responses API has shipped a new top-level concept not named in this pack.
-- A new built-in tool has shipped (e.g., a generally-available `image_generation` tool, a new `database_query` tool) and isn't named in `products_covered`.
-
-**To refresh:** read [the OpenAI changelog](https://platform.openai.com/docs/changelog) end-to-end since `last_verified_on`, the [models catalog](https://platform.openai.com/docs/models), and the latest two OpenAI keynote / DevDay summaries. Bump `metadata.last_verified_on` and add a `last_verified_release` line if a named DevDay anchored the refresh.
-
-## Stack composition with other ETYB Stacks
-
-If the user is on OpenAI **plus** another stack, both overlays load:
-
-- **`stack-anthropic-claude`** — When a team runs Claude AND OpenAI (multi-provider routing, A/B between Sonnet and GPT-5 Standard, agent built on Claude with OpenAI moderation, etc.). Both packs apply; let each handle its side. Don't pretend either is the other.
-- **`stack-aws`** (Bedrock) / **`stack-azure`** (Azure OpenAI Service) — OpenAI models are also accessible through hyperscaler-hosted surfaces. **Azure OpenAI is a different product** from OpenAI direct — different model versioning cadence, different rate limits, different compliance (FedRAMP, HIPAA out of the box), different SDK calls (`AzureOpenAI` class). When the user is on Azure OpenAI, this pack still applies for prompting + model behavior, but routing + auth + region semantics defer to `stack-azure`.
-- **`stack-vercel`** — Vercel AI SDK + AI Gateway sit on top of OpenAI (and others). Vercel pack owns the SDK wiring + Edge runtime; this pack owns the OpenAI-specific behavior the SDK is calling into.
-- **`stack-supabase`** / **`stack-cloudflare`** — When OpenAI calls run through Supabase Edge Functions or Cloudflare Workers (common for cost + auth offload). Both packs apply.
+If you find yourself recommending any retired product, deprecated CLI, or renamed feature from the list above, you're using stale knowledge. Fetch the current page from docs.etyb.ai before continuing.
 
 ## Standing instructions for every role on an OpenAI engagement
 
-1. **Pick the API surface before the model.** Responses API for agentic / tool-using / built-in-tools workloads. Chat Completions for vanilla generation + classification + extraction. Realtime for speech. Batch for non-interactive. Picking model first ("we'll use GPT-5") and then surface ("how do I add a web-search tool?") leads to API surface re-architecture mid-build.
+1. **Anchor to currency.** Before recommending API shapes, syntax, product names, or pricing, fetch the relevant docs.etyb.ai page and check its `last_verified_on`. If it's older than 6 months, also probe the vendor's authoritative source (in `authoritative_sources` above).
 
-2. **Default to GPT-5 Standard, not GPT-5 Pro.** Pro is for the hardest reasoning, longest-context, and highest-stakes workloads. Standard is the production default. Mini and Nano exist for cost-sensitive tiers — route deliberately, don't default low.
+2. **Defer to verticals on domain compliance.** This pack covers platform mechanics. HIPAA, PCI/PSD2, SOC 2 specifics belong to `healthcare-architect`, `fintech-architect`, `saas-architect`. Route to the vertical; don't restate compliance content from this pack.
 
-3. **Use Structured Outputs by default for any JSON.** `strict: true`. Defining a Pydantic / Zod schema and feeding it into `response_format` or the tool definition is cheaper, more reliable, and faster to debug than parsing free-form JSON.
+3. **Respect platform-specific limits.** Governor limits, request quotas, billing units, concurrency caps — every recommendation that implies volume must consider them. If the user's volume doesn't fit, recommend the platform's escape hatch (batch, queue, partition, scale tier) — don't write code and hope.
 
-4. **Wire observability before the second feature ships.** Even with OpenAI Platform Logs, you want app-level tracing. `request_id` on every response. Token + cost per request stamped on every trace. Cost-by-feature dashboards before scale.
-
-5. **Read the pricing page before quoting a budget.** OpenAI reshuffles pricing twice a year on average. The numbers in your training data are wrong. Verify against [openai.com/api/pricing](https://openai.com/api/pricing) every quote.
-
-6. **Never put OpenAI keys in the browser.** Even Realtime browser sessions use **ephemeral tokens** (created server-side, short TTL, scoped to that session). Frontend code does not see the long-lived key. Direct browser → OpenAI with a real key is an immediate findings-letter security issue.
+4. **Pick the API surface before the model.** Responses API for agentic / tool-using / built-in-tools workloads. Chat Completions for vanilla generation. Realtime for speech. Batch for non-interactive. Picking model first and then surface leads to API-surface re-architecture mid-build.
 
 ## When to escalate out of this pack
 
 | Situation | Escalate to |
 |-----------|-------------|
-| Vertical compliance (HIPAA, PCI, PSD2, FERPA) | `healthcare-architect` / `fintech-architect` / vertical pack |
-| Hyperscaler-hosted OpenAI (Azure OpenAI, Bedrock GPT family) | `stack-azure` / `stack-aws` (plus this pack for the OpenAI behavior surface) |
-| Non-OpenAI providers in a multi-provider system | `stack-anthropic-claude` (or other provider stack) for *that* provider's behavior surface |
-| Pure web frontend / SSE-rendering issues | `frontend-architect` (no OpenAI overlay needed) |
-| Pure infrastructure questions (Kubernetes, IaC) outside of OpenAI deployment | `devops-engineer` / hyperscaler stack |
+| Compliance specifics (HIPAA, PCI, SOC 2) | `healthcare-architect` / `fintech-architect` / `saas-architect` |
+| Multi-stack architecture spanning vendors | `system-architect` (without the pack overlay) |
+| Vendor-agnostic work that happens to touch OpenAI | the relevant specialist (without the pack overlay) |
 
-## Open gaps in v4.0.0
+## Stack composition
 
-Explicit so future iterations know what's missing:
-
-- **GPT Store / Custom GPTs deep coverage.** These are consumer-side (ChatGPT) artifacts. API integrators rarely touch them; we keep coverage thin and flag if the team is shipping Custom GPTs as a deployment vehicle.
-- **Azure OpenAI Service deep coverage.** That's the `stack-azure` pack's territory; we describe it as a compose point, not the primary surface.
-- **Sora / video generation.** Coverage will land when the API surface stabilizes. As of 2026-Q2, Sora is the consumer surface and the public API for video generation is still early.
-- **OpenAI o-series for tools beyond text** (multimodal o-series reasoning). Pricing + capability is moving; coverage is flagged at the high level and deferred for a 4.x release.
-- **OpenAI MCP server.** No first-party MCP server from OpenAI yet. The Responses API *consumes* remote MCP servers as a tool surface, but does not *publish* an MCP server you can plug into Claude Code / Cursor / Codex CLI. Revisit `delegate_to_skills` when that ships.
-
-If a user's request hits any of these gaps, say so explicitly and proceed with general-purpose knowledge plus current-release validation.
+If the user is running OpenAI alongside another stack that has its own pack registered, both overlays load. Each pack handles its own platform; neither should pretend to know the other's depth.
