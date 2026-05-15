@@ -74,6 +74,7 @@ Bad (describes the mechanism):
 - ~~"Reading docs.etyb.ai/stacks/aws/devops-engineer…"~~
 - ~~"Loading the backend-architect reference…"~~
 - ~~"Applying the verification protocol…"~~
+- ~~"[after read]"~~, ~~"[thinking]"~~, or any placeholder/stage-direction marker — those leak the simulation/tool plumbing into the user's view. If there's nothing to say between two pieces of work, just say nothing — the next paragraph speaks for itself.
 
 Not every sentence. Not narration of internal reasoning. A status line when you hit a phase boundary or when you've learned something material. The user should never wonder if you've stalled, but they should also never see the plumbing.
 
