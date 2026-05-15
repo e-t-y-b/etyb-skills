@@ -4,20 +4,20 @@ All notable changes to ETYB Skills are documented here. Format is loosely based 
 
 The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB response links there.
 
-## [4.0.0] — 2026-05-14
+## [4.0.0] — 2026-05-15
 
-**One brand. One channel. 13 vendor Stacks. Future-ready.** v4 is the largest release in the project's history — three changes in one:
+**One brand. One channel. 13 vendor Stacks live on docs.etyb.ai.** v4 is the largest release in the project's history — three changes in one:
 
 1. **Structural collapse 30 → 1.** Where v3 surfaced 30 separate slash commands (one per specialist + protocol + vertical), v4 ships a single coordinated skill (`/etyb`) holding all 29 as internal references. The user always talks to `/etyb`; ETYB silently routes to the right expertise. Every Tier 1-4 response is signed (`ETYB · <role-engaged>`) and links the public changelog.
 
-2. **Knowledge-currency framework.** Every Stack now carries `last_verified_on`, `authoritative_sources.primary` URLs, `delegate_to_skills` (vendor MCPs/skills ETYB defers to when installed), and `products_covered` with per-product `drift_risk`. A new tiered drift-check protocol (`core/knowledge-currency.md`) governs when ETYB answers from baked knowledge, when it discloses currency, and when it must defer to a vendor surface or WebFetch the authoritative source. The maintainer-side validator `scripts/maintainer/check-currency.sh` flags stale Stacks before release.
+2. **Vendor knowledge moves to docs.etyb.ai.** v4 ships a new docs site at [docs.etyb.ai](https://docs.etyb.ai/stacks/) holding 525 currency-stamped pages — one per product, plus composed per-role views, across 13 vendor Stacks. The local install carries only slim trigger pointers (~125-200 lines per Stack: keywords, delegation map, top gotchas). When a user's request hits a Stack, ETYB WebFetches the canonical page from docs.etyb.ai. Knowledge updates ship without re-installing; the install footprint stays tiny; stale-on-disk content stops being a class of bug.
 
-3. **12 new Stacks shipping with v4.** Built in parallel, all current as of 2026-05-14. AWS, GCP, Azure, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, and a multi-vendor Observability Stack. Combined with the v2-retrofitted Salesforce Stack, v4 ships **13 vendor knowledge overlays** out of the box covering ~350 distinct products across infrastructure, AI, data, payments, mobile, and observability.
+3. **Knowledge-currency framework.** Every docs.etyb.ai page carries `last_verified_on`, `drift_risk`, and `authoritative_url` in YAML frontmatter. The drift-check protocol in `core/knowledge-currency.md` governs the soft path (disclose currency + source) vs. strict path (defer to vendor MCP/skill, or WebFetch the authoritative URL) keyed off the fetched page's metadata. The maintainer-side validator `scripts/maintainer/check-currency.sh` probes the local pointer freshness AND the canonical docs.etyb.ai page reachability under `CHECK_CURRENCY_FETCH=1`.
 
 ### Why this is a major release
 
 - **Slash-command pollution gone.** v3 had 30 trigger surfaces competing at activation time. v4 has one. The router becomes ETYB's responsibility, not Claude's.
-- **Tier-based installs.** Three install tiers (`lite`, `core`, `pro`) ship different subsets of internal references. Solo devs get a small footprint; domain shops get verticals. Same `/etyb`, different breadth.
+- **Vendor content stops shipping in the install.** Pre-v4 had ~57K lines of role-overlay markdown sitting on every user's disk going stale between releases. v4 fetches it live; the install carries detection + delegation + gotchas only.
 - **Brand consolidation.** Every response now identifies as ETYB and links to `etyb.ai/changelog`. Users don't have to remember 30 names; they remember one.
 - **Skill-creator-compliant.** This aligns the repo with Anthropic's Domain Organization guidance: one skill with internal `references/<variant>/` files, rather than 30 sibling skills.
 
@@ -25,49 +25,57 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 
 - **`skills/etyb/references/specialists/`** — 14 core specialist READMEs (was: `skills/<name>/SKILL.md`).
 - **`skills/etyb/references/protocols/`** — 9 always-on protocol READMEs.
-- **`skills/etyb/references/verticals/`** — 6 vertical-domain READMEs (Pro tier only).
+- **`skills/etyb/references/verticals/`** — 6 vertical-domain READMEs.
 - **`skills/etyb/core/signature.md`** — output template appended to every Tier 1-4 response: a divider line, `ETYB · <role-engaged>`, and `What's new — etyb.ai/changelog`. Tier 0 skips the signature; Tier 2 incidents skip the changelog line to keep firefighting output lean.
-- **`skills/etyb/core/knowledge-currency.md`** — tiered drift-check protocol (soft default disclosing currency + source; strict for high-stakes/stale-high-drift claims). Tells ETYB when to defer to vendor MCPs/skills, when to WebFetch authoritative sources, and how to surface currency to the user.
-- **Tier system in `manifest.json`** — declares which references each tier installs. Replaces the v3 bundle system.
+- **`skills/etyb/core/knowledge-currency.md`** — two-layer Stack architecture (slim local pointer + canonical docs.etyb.ai pages) with the tiered drift-check protocol. Soft path discloses currency; strict path defers to a vendor MCP/skill or WebFetches the authoritative URL. Includes degraded-mode handling for 404 / network failure / stale-high-drift content.
 - **Stack v2 schema** in every Stack frontmatter — `last_verified_on`, `authoritative_sources.primary`, `delegate_to_skills`, `products_covered` with per-product `drift_risk` and notes.
-- **12 new vendor Stacks** — AWS, GCP, Azure, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability (multi-vendor). ~47K lines across ~81 files. Every Stack ships role overlays for the specialists that touch its surface, with `delegate_to_skills` entries naming the vendor MCPs/skills users should expect to coexist with.
-- **`scripts/maintainer/check-currency.sh`** — walks every Stack's frontmatter, flags products whose `drift_risk` threshold has been exceeded (high=90d, medium=180d, low=365d). Optional URL probe with `CHECK_CURRENCY_FETCH=1`. Wired into `validate-pr.sh`.
+- **13 slim local Stack pointers** under `stacks/<vendor>/SKILL.md` — Salesforce, AWS, GCP, Azure, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability (multi-vendor). Each ~125-200 lines: detection signals, delegation map, products list, top 5-10 platform gotchas. Per-product depth lives at `https://docs.etyb.ai/stacks/<vendor>/<product>/`; per-role composed views at `https://docs.etyb.ai/stacks/<vendor>/<role>/`.
+- **`scripts/maintainer/check-currency.sh`** — walks every local Stack pointer, flags products whose `drift_risk` threshold has been exceeded (high=90d, medium=180d, low=365d). Under `CHECK_CURRENCY_FETCH=1` also probes `docs.etyb.ai/stacks/<vendor>/` for reachability (v4 invariant: every local pointer must have a published canonical page) and smoke-checks `authoritative_sources.primary` URLs. Wired into `validate-pr.sh`.
 - **`.claude/skills/etyb-oss-maintainer/references/currency-spec.md`** — maintainer playbook for the currency model: refresh-PR flow, delegation maintenance, anti-patterns.
 - **v3→v4 migration check in `scripts/install.sh`** — detects sibling skills from v3.x installs (`research-analyst/`, `tdd-protocol/`, etc.) and offers to back them up so they don't compete with `/etyb` at trigger time. Also rewrites stale Claude-Code hook paths in `.claude/settings.json`.
 - **`scripts/maintainer/v4-migrate-skill.sh`** — the migration helper used to move the 29 sibling skills into internal references. Kept in the repo for future similar restructures.
 
 ### Changed
 
-- **`skills/etyb/SKILL.md`** — new description optimized for v4 collapsed routing (~210 words, category-level triggers rather than enumerated keywords from 29 deleted skills). New "Internal References" section documenting the three reference libraries and tier-dependent availability.
+- **`skills/etyb/SKILL.md`** — new description optimized for v4 collapsed routing (~210 words, category-level triggers rather than enumerated keywords from 29 deleted skills). "Internal References" section now states that vendor knowledge is remote (fetched from docs.etyb.ai), not bundled.
 - **`skills/etyb/core/team-registry.md`, `core/charter.md`, `core/always-on-protocols.md`, all other core files** — references rewritten from `skills/<name>/` paths to `references/<library>/<name>/` paths.
-- **`skills/etyb/core/stack-registry.md`** — extended with v2 routing (delegate_to_skills probing + drift-check protocol entry-point); detection signals added for the 12 new Stacks.
-- **`stacks/salesforce/SKILL.md`** — retrofitted to v2 schema (authoritative_sources, delegate_to_skills, products_covered with 16 products' drift_risk). `verified_on` renamed to `last_verified_on` for schema consistency.
+- **`skills/etyb/core/stack-registry.md`** — detection workflow rewritten around the docs.etyb.ai fetch contract. Per-Stack sections now show both the slim local pointer and the canonical docs.etyb.ai URL. Authoring section: publish on docs.etyb.ai first, then register the slim pointer locally.
+- **`stacks/salesforce/SKILL.md`** — retrofitted to v2 schema and slimmed (149 → 115 lines).
+- **All 13 `stacks/<vendor>/SKILL.md` files slimmed** — body collapsed from per-role overlays + extensive briefing into a thin pointer template (~125-200 lines): detection frontmatter (preserved verbatim), where-the-briefing-lives section pointing at docs.etyb.ai, top 5-10 currency-anchor gotchas verbatim from the prior body, standing instructions, escalation map. Net: 1,981 lines removed across the 13 SKILL.md files.
 - **7 vendor-heavy specialist files migrated to pointer + platform-neutral summary** — `cloud-aws-specialist.md`, `cloud-gcp-specialist.md`, `cloud-azure-specialist.md`, `llm-specialist.md`, `ai-integration.md`, `monitoring-specialist.md`, `react-native-specialist.md`. Each one's vendor-specific content moved into the matching Stack(s); each one now retains the role's platform-neutral principles and points at the Stack(s) for vendor specifics. Net: -6,209 lines / +218 lines across these 7 files.
-- **`scripts/install.sh`** — rewritten around `--tier <lite|core|pro>`. Always copies `skills/etyb/`, prunes references not in the chosen tier.
-- **`.claude-plugin/marketplace.json`** — one plugin (`etyb`) that installs the full Pro version. Tier selection is a CLI-installer concern, not a marketplace concern.
-- **`manifest.json`** — `skills: {...}` map collapses to `skill: {etyb: 4.0.0}`. New `tiers` block. Stack `available_on_tiers` field added. 13 Stacks declared (Salesforce + 12 new), each with `applies_to_roles`, `deferred_roles`, `last_verified_on`, `available_on_tiers`.
-- **`STACKS.md`** — public-doc v2 schema. New Available Stack Packs table includes all 13. Authoring conventions updated, currency-check section added, maintainer responsibilities section added.
+- **`scripts/install.sh`** — single-mode install. Always copies `skills/etyb/`. The `--tier` and `--list-tiers` flags from the v4-pre prototype are explicitly rejected with an error message pointing at the no-flag flow.
+- **`.claude-plugin/marketplace.json`** — one plugin (`etyb`) that installs the full skill (14 specialists + 9 protocols + 6 verticals).
+- **`manifest.json`** — `skills: {...}` map collapses to `skill: {etyb: 4.0.0}`. 13 Stacks declared, each with `applies_to_roles` and `deferred_roles`. No tier block, no `available_on_tiers` per stack.
+- **`STACKS.md`** — public-doc v2 schema; Tiers column dropped from the Available Stack Packs table; authoring conventions updated for the docs-first ordering.
 - **`scripts/maintainer/validate-pr.sh`** — now includes `check-currency.sh` in the umbrella suite.
-- **`scripts/maintainer/validate-skill-manifest-sync.sh`** — rewritten for v4 single-skill layout + tier integrity check.
+- **`scripts/maintainer/validate-skill-manifest-sync.sh`** — rewritten for v4 single-skill layout. Now FAILS if a `.tiers` block or any `available_on_tiers` reappears in the manifest.
 - **`scripts/maintainer/validate-version-sync.sh`** — updated for the v4 `manifest.json .skill` shape (was `.skills`) and frontmatter consolidation.
-- **`scripts/lint-portability.sh`** — rewritten around v4 (1 installable skill, 14+9+6 references, Claude hook paths at v4 locations).
-- **README.md, CLAUDE.md** — rewritten around the one-skill-three-tiers model + Stack table refresh.
+- **`scripts/lint-portability.sh`** — rewritten around v4 (1 installable skill, 14+9+6 references, Claude hook paths at v4 locations, no tiers).
+- **`tests/install/test-install-flags.sh`** — rewritten to verify the new single-install behaviour and that removed flags (`--tier`, `--list-tiers`) are rejected with the v4 error.
+- **README.md, CLAUDE.md** — rewritten around the one-skill model + docs.etyb.ai pointer table.
 
 ### Removed
 
 - **29 sibling skill directories** (`skills/research-analyst/`, `skills/tdd-protocol/`, `skills/fintech-architect/`, etc.) — content lives under `skills/etyb/references/`.
-- **`bundles/`** — 4 plain-text bundle files. Replaced by `manifest.json`'s `tiers` block.
+- **13 `stacks/<vendor>/references/` directories** — ~67 role-overlay files (~57K lines) deleted from the install. Equivalent content republished at `docs.etyb.ai/stacks/<vendor>/<role>/` and fetched at runtime.
+- **Tier system** — `--tier` / `--list-tiers` flags from `scripts/install.sh`, `.tiers` block from `manifest.json`, `available_on_tiers` field from every stack entry, the tier badge from README, and the install-tier table from CLAUDE.md. Install always copies the full skill; vendor knowledge breadth is governed by what's on docs.etyb.ai, not by what's on disk.
+- **`bundles/`** — 4 plain-text bundle files. Replaced by the single full install.
 - **`scripts/generate-bundles.py`** — no longer needed.
 - **Per-sibling `evals/`** — each sibling shipped its own eval set. Those targeted the deleted shape; we'll rebuild a single eval set for `/etyb` once the description is empirically tuned.
+
+### Release ordering note
+
+The docs.etyb.ai site (in [`e-t-y-b/etyb-dot-ai`](https://github.com/e-t-y-b/etyb-dot-ai)) MUST be deployed before this release tag is cut. The slim local Stack pointers reference `https://docs.etyb.ai/stacks/<vendor>/...` URLs; cutting v4.0.0 before the docs site is live ships pointers at 404 destinations. `CHECK_CURRENCY_FETCH=1 scripts/maintainer/check-currency.sh` is the gate — it MUST pass against production docs.etyb.ai before tagging.
 
 ### Migration notes for v3 users
 
 - `/plugin install etyb-full@etyb-skills` → `/plugin install etyb@etyb-skills`
-- `./scripts/install.sh --bundle process-protocols` → `./scripts/install.sh --tier lite`
-- `./scripts/install.sh --bundle core-team` → `./scripts/install.sh --tier core`
-- `./scripts/install.sh --bundle verticals` → `./scripts/install.sh --tier pro`
-- `./scripts/install.sh --skills X,Y,Z` (à la carte) — removed. The CLI installer is now tier-based. Drop to `--tier lite` for the smallest footprint, or fork the repo if you need a custom slice.
+- `./scripts/install.sh --bundle process-protocols` → `./scripts/install.sh` (no flags; the full skill installs)
+- `./scripts/install.sh --bundle core-team` → `./scripts/install.sh`
+- `./scripts/install.sh --bundle verticals` → `./scripts/install.sh`
+- `./scripts/install.sh --skills X,Y,Z` (à la carte) — removed. The full skill is small (no vendor content on disk); fork the repo if you genuinely need a custom slice.
 - Old slash commands like `/backend-architect` no longer exist. Use `/etyb` and describe your task; ETYB will route to the backend-architect reference internally.
+- Old `stacks/<vendor>/references/<role>.md` paths no longer exist. ETYB now fetches `https://docs.etyb.ai/stacks/<vendor>/<role>/` at runtime; nothing to migrate on the user side.
 
 v3 remains installable for one release cycle (deprecation banner on `main`); plan to migrate before the v3 EOL date in the [public changelog](https://etyb.ai/changelog).
 

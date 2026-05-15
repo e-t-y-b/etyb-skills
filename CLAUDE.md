@@ -9,13 +9,14 @@ This is **one coordinated skill** (`/etyb`) backed by 29 internal references tha
 ## Architecture (v4)
 
 ```
-skills/etyb/
+skills/etyb/                          ← the installed skill (everything below ships on disk)
 ├── SKILL.md                          ← the only trigger surface (/etyb)
 ├── core/                             ← orchestration modules
 │   ├── charter.md                    ← Tier 0-4 classification, CTO identity
 │   ├── team-registry.md              ← 20 specialists, domain detection
 │   ├── always-on-protocols.md        ← 9 engineering disciplines
-│   ├── stack-registry.md             ← Stack Pack overlays (Salesforce, etc.)
+│   ├── stack-registry.md             ← Stack detection signals + docs.etyb.ai fetch contract
+│   ├── knowledge-currency.md         ← drift-check protocol (soft / strict / degraded paths)
 │   ├── gates.md                      ← 5-gate sequence, plan lifecycle
 │   ├── expert-mandating.md           ← mandatory expert matrix
 │   ├── coordination-patterns.md      ← multi-team patterns
@@ -24,13 +25,26 @@ skills/etyb/
 │   ├── version-awareness.md          ← version & update guidance
 │   └── signature.md                  ← ETYB signature + changelog banner
 ├── references/
-│   ├── specialists/                  ← 14 core team READMEs
-│   ├── protocols/                    ← 9 always-on protocols
-│   ├── verticals/                    ← 6 business-domain architects
+│   ├── specialists/                  ← 14 core team READMEs (time-invariant principles)
+│   ├── protocols/                    ← 9 always-on protocols (time-invariant)
+│   ├── verticals/                    ← 6 business-domain architects (time-invariant)
 │   └── process-architecture.md       ← plan artifact format
 ├── adapters/                         ← claude / codex / antigravity
 └── ...
+
+stacks/                               ← slim local pointers (detection + delegation only)
+├── salesforce/SKILL.md               ← ~125-200 lines: triggers + delegate_to_skills + top gotchas
+├── aws/SKILL.md
+├── ... (13 vendors total)
+└── observability/SKILL.md
+
+https://docs.etyb.ai/stacks/<vendor>/  ← canonical Stack content (fetched at runtime)
+├── index                             ← Stack briefing
+├── <product>/                        ← per-product canonical pages with last_verified_on
+└── <role>/                           ← per-role composed views that stitch products
 ```
+
+**Two-layer Stack model.** Detection lives locally — when a slim `stacks/<vendor>/SKILL.md` matches the user's request, ETYB loads it for the gotchas + delegation map. Depth lives remotely — ETYB WebFetches the most-specific docs.etyb.ai URL (product → role → stack index) per the contract in `core/knowledge-currency.md`. Vendor content stops sitting on disk going stale between releases.
 
 ## Always-On Engineering Culture
 

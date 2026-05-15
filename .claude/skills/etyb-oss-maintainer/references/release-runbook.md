@@ -82,7 +82,19 @@ Run a final scan: `grep -rn "v<previous-version>" README.md docs/ STACKS.md MARK
 - **Refresh the flagged Stack** — open a `currency/<stack>-refresh-YYYY-MM` branch, verify against the Stack's `authoritative_sources.primary` URLs, update content where vendor changes shift recommendations, bump `last_verified_on`. See `references/currency-spec.md` for the full workflow.
 - **Defer the release** — if a refresh PR is in flight but not yet merged, defer the bundle release until the Stack ships fresh.
 
-Also run `CHECK_CURRENCY_FETCH=1 scripts/maintainer/check-currency.sh` periodically (once per release at minimum) to catch `authoritative_sources` URLs that have 404'd or moved.
+## 3d. docs.etyb.ai deploy gate (v4+)
+
+Since v4, vendor depth lives at docs.etyb.ai, not on disk. The slim local Stack pointers reference `https://docs.etyb.ai/stacks/<vendor>/...` URLs. **Cutting a release tag before the docs site is live ships pointers at 404 destinations.** Order of operations:
+
+1. **Land the docs.etyb.ai PR first.** Any Stack content (new pages, refreshes, schema fixes) that is referenced by this release ships in `e-t-y-b/etyb-dot-ai` and goes live on production docs.etyb.ai.
+2. **Run the live probe locally** before opening the etyb-skills release PR:
+   ```
+   CHECK_CURRENCY_FETCH=1 scripts/maintainer/check-currency.sh
+   ```
+   Every `https://docs.etyb.ai/stacks/<vendor>/` URL must return 2xx. A single 404 on a Stack the local pointer references is a release-blocker — fix the docs deploy first, then re-run.
+3. **Only then cut the etyb-skills release tag.** The website-impact PR (post-release) updates the website's `.upstream-version` marker; the docs themselves are already live.
+
+If you're shipping an etyb-skills release that adds a new Stack pointer, the docs.etyb.ai PR for that Stack's content ships in the same maintainer session — it's the precondition, not a follow-up.
 
 ## 4. Run the full validator
 
