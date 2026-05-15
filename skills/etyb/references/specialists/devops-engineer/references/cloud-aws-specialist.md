@@ -1,22 +1,22 @@
 # AWS Cloud Engineering — Pointer
 
-As of v4.0.0 (2026-05-14), all AWS-specific guidance — products, services, decision frameworks, 2025-2026 platform shifts, IAM patterns, IaC discipline, observability wiring, AI/ML infrastructure — lives in the **AWS Stack Pack** at [`stacks/aws/SKILL.md`](../../../../../../stacks/aws/SKILL.md). The Stack carries currency timestamps, authoritative-source URLs, per-product drift-risk ratings, and per-role overlays for every specialist that touches AWS work.
+As of v4.0.0 (2026-05-14), all AWS-specific guidance — products, services, decision frameworks, 2025-2026 platform shifts, IAM patterns, IaC discipline, observability wiring, AI/ML infrastructure — lives across two layers: the slim local detection pointer at [`stacks/aws/SKILL.md`](../../../../../../stacks/aws/SKILL.md) (currency stamps, `delegate_to_skills`, products covered, top gotchas) and the canonical per-product + per-role pages at **<https://docs.etyb.ai/stacks/aws/>**, fetched at runtime per the contract in `skills/etyb/core/knowledge-currency.md`.
 
 ## Where that content lives now
 
-| Topic | New location |
-|-------|--------------|
-| Compute selection (Graviton, Trainium, EKS Auto Mode, ECS Express, Karpenter v1) | `stacks/aws/references/system-architect.md`, `stacks/aws/references/devops-engineer.md` |
-| Networking, VPC, Transit Gateway, CloudFront | `stacks/aws/references/system-architect.md`, `stacks/aws/references/security-engineer.md` |
-| Storage, S3 Tables, EBS, FSx | `stacks/aws/references/database-architect.md` |
-| Databases — Aurora (incl. DSQL), DynamoDB, ElastiCache/Valkey | `stacks/aws/references/database-architect.md` |
-| Security & IAM (SCPs, permission boundaries, Security Hub overhaul, EKS Pod Identity) | `stacks/aws/references/security-engineer.md` |
-| Serverless — Lambda + SnapStart, Step Functions, EventBridge | `stacks/aws/references/backend-architect.md` |
-| IaC — CDK v2, SAM, multi-account pipeline shape | `stacks/aws/references/devops-engineer.md` |
-| Observability — Application Signals, OTel preview, FIS chaos | `stacks/aws/references/sre-engineer.md` |
-| AI/ML — Bedrock, AgentCore (Runtime/Browser/Memory), Strands Agents SDK, SageMaker | `stacks/aws/references/ai-ml-engineer.md` |
-| Multi-account strategy + SaaS account-vending | `stacks/aws/references/system-architect.md`, `stacks/aws/references/saas-architect.md` |
-| Fintech-specific Aurora DSQL + ledger separation | `stacks/aws/references/fintech-architect.md` |
+| Topic | Canonical location on docs.etyb.ai |
+|-------|------------------------------------|
+| Compute selection (Graviton, Trainium, EKS Auto Mode, ECS Express, Karpenter v1) | <https://docs.etyb.ai/stacks/aws/system-architect/>, <https://docs.etyb.ai/stacks/aws/devops-engineer/> |
+| Networking, VPC, Transit Gateway, CloudFront | <https://docs.etyb.ai/stacks/aws/system-architect/>, <https://docs.etyb.ai/stacks/aws/security-engineer/> |
+| Storage, S3 Tables, EBS, FSx | <https://docs.etyb.ai/stacks/aws/database-architect/> |
+| Databases — Aurora (incl. DSQL), DynamoDB, ElastiCache/Valkey | <https://docs.etyb.ai/stacks/aws/database-architect/> |
+| Security & IAM (SCPs, permission boundaries, Security Hub overhaul, EKS Pod Identity) | <https://docs.etyb.ai/stacks/aws/security-engineer/> |
+| Serverless — Lambda + SnapStart, Step Functions, EventBridge | <https://docs.etyb.ai/stacks/aws/backend-architect/> |
+| IaC — CDK v2, SAM, multi-account pipeline shape | <https://docs.etyb.ai/stacks/aws/devops-engineer/> |
+| Observability — Application Signals, OTel preview, FIS chaos | <https://docs.etyb.ai/stacks/aws/sre-engineer/> |
+| AI/ML — Bedrock, AgentCore (Runtime/Browser/Memory), Strands Agents SDK, SageMaker | <https://docs.etyb.ai/stacks/aws/ai-ml-engineer/> |
+| Multi-account strategy + SaaS account-vending | <https://docs.etyb.ai/stacks/aws/system-architect/>, <https://docs.etyb.ai/stacks/aws/saas-architect/> |
+| Fintech-specific Aurora DSQL + ledger separation | <https://docs.etyb.ai/stacks/aws/fintech-architect/> |
 
 ## Why the move
 

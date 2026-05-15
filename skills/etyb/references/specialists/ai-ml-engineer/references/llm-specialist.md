@@ -2,21 +2,23 @@
 
 This file used to be a 544-line single-specialist reference. As of v4.0.0 (2026-05-14), **vendor-specific LLM content has migrated to dedicated Stacks**; this file now carries the platform-neutral principles that apply across providers.
 
-## Vendor-specific guidance lives in Stacks
+## Vendor-specific guidance lives in Stacks (two-layer: local pointer + docs.etyb.ai)
 
-| Vendor | Stack |
-|---|---|
-| Anthropic Claude — Messages API, Claude 4.x family, prompt caching, tool use, Agent SDK, MCP authoring, Claude Code | [`stacks/anthropic-claude/SKILL.md`](../../../../../../stacks/anthropic-claude/SKILL.md) and `stacks/anthropic-claude/references/ai-ml-engineer.md` |
-| OpenAI — GPT-5 family, Responses API (replaces Assistants), o-series reasoning, Realtime API, Agents SDK, Structured Outputs, Computer Use | [`stacks/openai/SKILL.md`](../../../../../../stacks/openai/SKILL.md) and `stacks/openai/references/ai-ml-engineer.md` |
-| AWS Bedrock — model catalog, AgentCore (Runtime/Browser/Memory), Strands Agents SDK, Bedrock Knowledge Bases, Trainium | [`stacks/aws/references/ai-ml-engineer.md`](../../../../../../stacks/aws/references/ai-ml-engineer.md) |
-| GCP Vertex AI — Gemini 2.5 family, Vertex AI Agent Builder, Agentspace, TPU v7, Gemini Code Assist | [`stacks/gcp/references/ai-ml-engineer.md`](../../../../../../stacks/gcp/references/ai-ml-engineer.md) |
-| Azure AI Foundry — Azure OpenAI deployment types, Foundry Agents, Entra Agent ID | [`stacks/azure/references/ai-ml-engineer.md`](../../../../../../stacks/azure/references/ai-ml-engineer.md) |
-| Cloudflare Workers AI + AI Gateway + AI Search + Vectorize | [`stacks/cloudflare/references/ai-ml-engineer.md`](../../../../../../stacks/cloudflare/references/ai-ml-engineer.md) |
-| Vercel AI Gateway + AI SDK + Chat SDK | [`stacks/vercel/references/ai-ml-engineer.md`](../../../../../../stacks/vercel/references/ai-ml-engineer.md) |
-| Supabase pgvector + Edge Functions for AI | [`stacks/supabase/references/ai-ml-engineer.md`](../../../../../../stacks/supabase/references/ai-ml-engineer.md) |
-| Firebase AI Logic + Genkit (JS/Python/Go/Dart) | [`stacks/firebase/references/ai-ml-engineer.md`](../../../../../../stacks/firebase/references/ai-ml-engineer.md) |
+Each Stack ships as a slim local pointer (`stacks/<vendor>/SKILL.md` — detection + delegation + gotchas) plus canonical per-role pages on docs.etyb.ai (fetched at runtime).
 
-For ANY provider-specific question (model IDs, API surface, pricing, feature availability, SDK patterns), consult the relevant Stack. The Stack carries the `last_verified_on` timestamp and authoritative-source URLs needed to apply the drift-check protocol (`skills/etyb/core/knowledge-currency.md`).
+| Vendor | Slim local pointer | Canonical per-role view (AI/ML) |
+|---|---|---|
+| Anthropic Claude — Messages API, Claude 4.x family, prompt caching, tool use, Agent SDK, MCP authoring, Claude Code | [`stacks/anthropic-claude/SKILL.md`](../../../../../../stacks/anthropic-claude/SKILL.md) | <https://docs.etyb.ai/stacks/anthropic-claude/ai-ml-engineer/> |
+| OpenAI — GPT-5 family, Responses API (replaces Assistants), o-series reasoning, Realtime API, Agents SDK, Structured Outputs, Computer Use | [`stacks/openai/SKILL.md`](../../../../../../stacks/openai/SKILL.md) | <https://docs.etyb.ai/stacks/openai/ai-ml-engineer/> |
+| AWS Bedrock — model catalog, AgentCore (Runtime/Browser/Memory), Strands Agents SDK, Bedrock Knowledge Bases, Trainium | [`stacks/aws/SKILL.md`](../../../../../../stacks/aws/SKILL.md) | <https://docs.etyb.ai/stacks/aws/ai-ml-engineer/> |
+| GCP Vertex AI — Gemini 2.5 family, Vertex AI Agent Builder, Agentspace, TPU v7, Gemini Code Assist | [`stacks/gcp/SKILL.md`](../../../../../../stacks/gcp/SKILL.md) | <https://docs.etyb.ai/stacks/gcp/ai-ml-engineer/> |
+| Azure AI Foundry — Azure OpenAI deployment types, Foundry Agents, Entra Agent ID | [`stacks/azure/SKILL.md`](../../../../../../stacks/azure/SKILL.md) | <https://docs.etyb.ai/stacks/azure/ai-ml-engineer/> |
+| Cloudflare Workers AI + AI Gateway + AI Search + Vectorize | [`stacks/cloudflare/SKILL.md`](../../../../../../stacks/cloudflare/SKILL.md) | <https://docs.etyb.ai/stacks/cloudflare/ai-ml-engineer/> |
+| Vercel AI Gateway + AI SDK + Chat SDK | [`stacks/vercel/SKILL.md`](../../../../../../stacks/vercel/SKILL.md) | <https://docs.etyb.ai/stacks/vercel/ai-ml-engineer/> |
+| Supabase pgvector + Edge Functions for AI | [`stacks/supabase/SKILL.md`](../../../../../../stacks/supabase/SKILL.md) | <https://docs.etyb.ai/stacks/supabase/ai-ml-engineer/> |
+| Firebase AI Logic + Genkit (JS/Python/Go/Dart) | [`stacks/firebase/SKILL.md`](../../../../../../stacks/firebase/SKILL.md) | <https://docs.etyb.ai/stacks/firebase/ai-ml-engineer/> |
+
+For ANY provider-specific question (model IDs, API surface, pricing, feature availability, SDK patterns), apply the docs.etyb.ai fetch contract from `skills/etyb/core/knowledge-currency.md` — the fetched page carries the `last_verified_on` timestamp and `authoritative_url` needed for the drift-check protocol.
 
 ## What stays in the platform-neutral surface
 
