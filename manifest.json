@@ -285,5 +285,3123 @@
       "adapter": "skills/etyb/adapters/antigravity/",
       "enforcement": "markdown-first, model-trusted (ADK deferred)"
     }
-  }
+  },
+  "stacks_pages": [
+    {
+      "path": "stacks/anthropic-claude/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/admin-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/api/admin-api"
+    },
+    {
+      "path": "stacks/anthropic-claude/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/anthropic-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/api/client-sdks"
+    },
+    {
+      "path": "stacks/anthropic-claude/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/batches-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.anthropic.com/en/api/creating-message-batches"
+    },
+    {
+      "path": "stacks/anthropic-claude/bedrock-provider.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/api/claude-on-amazon-bedrock"
+    },
+    {
+      "path": "stacks/anthropic-claude/citations.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/citations"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-agent-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/api/claude-code-sdk"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/api/"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-code.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/claude-code/overview"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-haiku.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-opus.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
+    },
+    {
+      "path": "stacks/anthropic-claude/claude-sonnet.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
+    },
+    {
+      "path": "stacks/anthropic-claude/computer-use.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/agents-and-tools/computer-use"
+    },
+    {
+      "path": "stacks/anthropic-claude/extended-thinking.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking"
+    },
+    {
+      "path": "stacks/anthropic-claude/files-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/api/files"
+    },
+    {
+      "path": "stacks/anthropic-claude/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/mcp.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://modelcontextprotocol.io/"
+    },
+    {
+      "path": "stacks/anthropic-claude/memory.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/memory"
+    },
+    {
+      "path": "stacks/anthropic-claude/pdf-input.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/pdf-support"
+    },
+    {
+      "path": "stacks/anthropic-claude/prompt-caching.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching"
+    },
+    {
+      "path": "stacks/anthropic-claude/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/skills.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/claude-code/skills"
+    },
+    {
+      "path": "stacks/anthropic-claude/sub-agents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/claude-code/sub-agents"
+    },
+    {
+      "path": "stacks/anthropic-claude/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high"
+    },
+    {
+      "path": "stacks/anthropic-claude/tool-use.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use"
+    },
+    {
+      "path": "stacks/anthropic-claude/vertex-ai-provider.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.anthropic.com/en/api/claude-on-vertex-ai"
+    },
+    {
+      "path": "stacks/anthropic-claude/vision.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/vision"
+    },
+    {
+      "path": "stacks/anthropic-claude/workbench-console.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://console.anthropic.com/"
+    },
+    {
+      "path": "stacks/aws/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/agentcore.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/"
+    },
+    {
+      "path": "stacks/aws/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/api-gateway.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/apigateway/"
+    },
+    {
+      "path": "stacks/aws/aurora.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/aurora/"
+    },
+    {
+      "path": "stacks/aws/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/bedrock.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/bedrock/latest/userguide/"
+    },
+    {
+      "path": "stacks/aws/cdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/cdk/v2/guide/"
+    },
+    {
+      "path": "stacks/aws/cloudformation.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/cloudformation/"
+    },
+    {
+      "path": "stacks/aws/cloudfront.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/cloudfront/"
+    },
+    {
+      "path": "stacks/aws/cloudtrail.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/cloudtrail/"
+    },
+    {
+      "path": "stacks/aws/cloudwatch.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/cloudwatch/"
+    },
+    {
+      "path": "stacks/aws/cognito.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/cognito/"
+    },
+    {
+      "path": "stacks/aws/database-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/dynamodb.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/dynamodb/"
+    },
+    {
+      "path": "stacks/aws/ec2.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/ec2/"
+    },
+    {
+      "path": "stacks/aws/ecs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/ecs/"
+    },
+    {
+      "path": "stacks/aws/eks.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/eks/"
+    },
+    {
+      "path": "stacks/aws/elasticache.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/elasticache/"
+    },
+    {
+      "path": "stacks/aws/eventbridge.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/eventbridge/"
+    },
+    {
+      "path": "stacks/aws/fargate.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html"
+    },
+    {
+      "path": "stacks/aws/fintech-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/glue.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/glue/"
+    },
+    {
+      "path": "stacks/aws/guardduty.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/guardduty/"
+    },
+    {
+      "path": "stacks/aws/iam.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/iam/"
+    },
+    {
+      "path": "stacks/aws/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/karpenter.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://karpenter.sh/"
+    },
+    {
+      "path": "stacks/aws/kms.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/kms/"
+    },
+    {
+      "path": "stacks/aws/lambda.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html"
+    },
+    {
+      "path": "stacks/aws/opensearch.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/opensearch-service/"
+    },
+    {
+      "path": "stacks/aws/rds.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/rds/"
+    },
+    {
+      "path": "stacks/aws/redshift.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/redshift/"
+    },
+    {
+      "path": "stacks/aws/route-53.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/route53/"
+    },
+    {
+      "path": "stacks/aws/s3.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/s3/"
+    },
+    {
+      "path": "stacks/aws/saas-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/sagemaker.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/sagemaker/"
+    },
+    {
+      "path": "stacks/aws/sam.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/serverless-application-model/"
+    },
+    {
+      "path": "stacks/aws/secrets-manager.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/secretsmanager/"
+    },
+    {
+      "path": "stacks/aws/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/security-hub.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.aws.amazon.com/securityhub/"
+    },
+    {
+      "path": "stacks/aws/sqs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/sqs/"
+    },
+    {
+      "path": "stacks/aws/sre-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/step-functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/step-functions/"
+    },
+    {
+      "path": "stacks/aws/strands-agents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://strandsagents.com/"
+    },
+    {
+      "path": "stacks/aws/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/aws/vpc.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.aws.amazon.com/vpc/"
+    },
+    {
+      "path": "stacks/aws/x-ray.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.aws.amazon.com/xray/"
+    },
+    {
+      "path": "stacks/azure/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/ai-foundry.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/ai-foundry/"
+    },
+    {
+      "path": "stacks/azure/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/ai-search.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/search/"
+    },
+    {
+      "path": "stacks/azure/aks.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/aks/"
+    },
+    {
+      "path": "stacks/azure/api-management.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/api-management/"
+    },
+    {
+      "path": "stacks/azure/app-service.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/app-service/"
+    },
+    {
+      "path": "stacks/azure/application-gateway.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/application-gateway/"
+    },
+    {
+      "path": "stacks/azure/application-insights.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview"
+    },
+    {
+      "path": "stacks/azure/azd.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/developer/azure-developer-cli/"
+    },
+    {
+      "path": "stacks/azure/azure-arc.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-arc/"
+    },
+    {
+      "path": "stacks/azure/azure-managed-redis.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-managed-redis/"
+    },
+    {
+      "path": "stacks/azure/azure-monitor.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-monitor/"
+    },
+    {
+      "path": "stacks/azure/azure-openai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/ai-services/openai/"
+    },
+    {
+      "path": "stacks/azure/azure-sql.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-sql/"
+    },
+    {
+      "path": "stacks/azure/azure-vmware-solution.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-vmware/"
+    },
+    {
+      "path": "stacks/azure/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/bicep.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-resource-manager/bicep/"
+    },
+    {
+      "path": "stacks/azure/container-apps.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/container-apps/"
+    },
+    {
+      "path": "stacks/azure/container-instances.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/container-instances/"
+    },
+    {
+      "path": "stacks/azure/cosmos-db.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/cosmos-db/"
+    },
+    {
+      "path": "stacks/azure/data-factory.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/data-factory/"
+    },
+    {
+      "path": "stacks/azure/database-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/defender-for-cloud.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/defender-for-cloud/"
+    },
+    {
+      "path": "stacks/azure/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/entra-external-id.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/entra/external-id/"
+    },
+    {
+      "path": "stacks/azure/entra-id.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/entra/identity/"
+    },
+    {
+      "path": "stacks/azure/event-grid.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/event-grid/"
+    },
+    {
+      "path": "stacks/azure/event-hubs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/event-hubs/"
+    },
+    {
+      "path": "stacks/azure/foundry-agents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/ai-foundry/concepts/agents"
+    },
+    {
+      "path": "stacks/azure/front-door.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/frontdoor/"
+    },
+    {
+      "path": "stacks/azure/functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-functions/"
+    },
+    {
+      "path": "stacks/azure/healthcare-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/key-vault.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/key-vault/"
+    },
+    {
+      "path": "stacks/azure/log-analytics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/azure-monitor/logs/"
+    },
+    {
+      "path": "stacks/azure/logic-apps.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/logic-apps/"
+    },
+    {
+      "path": "stacks/azure/microsoft-fabric.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/fabric/"
+    },
+    {
+      "path": "stacks/azure/microsoft-purview.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/purview/"
+    },
+    {
+      "path": "stacks/azure/postgresql-flexible-server.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://learn.microsoft.com/azure/postgresql/flexible-server/"
+    },
+    {
+      "path": "stacks/azure/saas-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/sentinel.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/sentinel/"
+    },
+    {
+      "path": "stacks/azure/service-bus.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/service-bus-messaging/"
+    },
+    {
+      "path": "stacks/azure/sre-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/static-web-apps.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/static-web-apps/"
+    },
+    {
+      "path": "stacks/azure/storage-account.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://learn.microsoft.com/azure/storage/"
+    },
+    {
+      "path": "stacks/azure/synapse-analytics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/synapse-analytics/"
+    },
+    {
+      "path": "stacks/azure/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/azure/terraform-azurerm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs"
+    },
+    {
+      "path": "stacks/azure/virtual-machines.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://learn.microsoft.com/azure/virtual-machines/"
+    },
+    {
+      "path": "stacks/cloudflare/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/access.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/cloudflare-one/identity/"
+    },
+    {
+      "path": "stacks/cloudflare/ai-gateway.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/ai-gateway/"
+    },
+    {
+      "path": "stacks/cloudflare/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/ai-search.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/ai-search/"
+    },
+    {
+      "path": "stacks/cloudflare/analytics-engine.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/analytics/analytics-engine/"
+    },
+    {
+      "path": "stacks/cloudflare/argo.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://developers.cloudflare.com/argo-smart-routing/"
+    },
+    {
+      "path": "stacks/cloudflare/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/browser-rendering.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/browser-rendering/"
+    },
+    {
+      "path": "stacks/cloudflare/cron-triggers.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://developers.cloudflare.com/workers/configuration/cron-triggers/"
+    },
+    {
+      "path": "stacks/cloudflare/d1.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/d1/"
+    },
+    {
+      "path": "stacks/cloudflare/database-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/ddos.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://developers.cloudflare.com/ddos-protection/"
+    },
+    {
+      "path": "stacks/cloudflare/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/durable-objects.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/durable-objects/"
+    },
+    {
+      "path": "stacks/cloudflare/email-routing.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/email-routing/"
+    },
+    {
+      "path": "stacks/cloudflare/email-workers.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/email-routing/email-workers/"
+    },
+    {
+      "path": "stacks/cloudflare/hyperdrive.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/hyperdrive/"
+    },
+    {
+      "path": "stacks/cloudflare/images.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/images/"
+    },
+    {
+      "path": "stacks/cloudflare/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/kv.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://developers.cloudflare.com/kv/"
+    },
+    {
+      "path": "stacks/cloudflare/logpush.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/logs/logpush/"
+    },
+    {
+      "path": "stacks/cloudflare/magic-transit.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/magic-transit/"
+    },
+    {
+      "path": "stacks/cloudflare/pages.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/pages/"
+    },
+    {
+      "path": "stacks/cloudflare/pipelines.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/pipelines/"
+    },
+    {
+      "path": "stacks/cloudflare/queues.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/queues/"
+    },
+    {
+      "path": "stacks/cloudflare/r2.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/r2/"
+    },
+    {
+      "path": "stacks/cloudflare/rate-limiting.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/waf/rate-limiting-rules/"
+    },
+    {
+      "path": "stacks/cloudflare/realtime.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/realtime/"
+    },
+    {
+      "path": "stacks/cloudflare/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/smart-placement.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/workers/configuration/smart-placement/"
+    },
+    {
+      "path": "stacks/cloudflare/stream.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/stream/"
+    },
+    {
+      "path": "stacks/cloudflare/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/cloudflare/tunnel.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/"
+    },
+    {
+      "path": "stacks/cloudflare/turnstile.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://developers.cloudflare.com/turnstile/"
+    },
+    {
+      "path": "stacks/cloudflare/vectorize.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/vectorize/"
+    },
+    {
+      "path": "stacks/cloudflare/waf.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/waf/"
+    },
+    {
+      "path": "stacks/cloudflare/workers-ai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers-ai/"
+    },
+    {
+      "path": "stacks/cloudflare/workers-for-platforms.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/"
+    },
+    {
+      "path": "stacks/cloudflare/workers-logs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers/observability/logs/"
+    },
+    {
+      "path": "stacks/cloudflare/workers-rpc.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers/runtime-apis/rpc/"
+    },
+    {
+      "path": "stacks/cloudflare/workers-static-assets.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers/static-assets/"
+    },
+    {
+      "path": "stacks/cloudflare/workers.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers/"
+    },
+    {
+      "path": "stacks/cloudflare/workflows.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workflows/"
+    },
+    {
+      "path": "stacks/cloudflare/wrangler.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://developers.cloudflare.com/workers/wrangler/commands/"
+    },
+    {
+      "path": "stacks/cloudflare/zaraz.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developers.cloudflare.com/zaraz/"
+    },
+    {
+      "path": "stacks/expo/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/app-config.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/workflow/configuration/"
+    },
+    {
+      "path": "stacks/expo/continuous-native-generation.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/workflow/continuous-native-generation/"
+    },
+    {
+      "path": "stacks/expo/custom-dev-clients.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/develop/development-builds/introduction/"
+    },
+    {
+      "path": "stacks/expo/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/eas-build.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/build/introduction/"
+    },
+    {
+      "path": "stacks/expo/eas-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/eas/"
+    },
+    {
+      "path": "stacks/expo/eas-hosting.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/eas/hosting/introduction/"
+    },
+    {
+      "path": "stacks/expo/eas-submit.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/submit/introduction/"
+    },
+    {
+      "path": "stacks/expo/eas-update.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/eas-update/introduction/"
+    },
+    {
+      "path": "stacks/expo/eas-workflows.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/eas-workflows/get-started/"
+    },
+    {
+      "path": "stacks/expo/expo-api-routes.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/router/reference/api-routes/"
+    },
+    {
+      "path": "stacks/expo/expo-auth-session.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/auth-session/"
+    },
+    {
+      "path": "stacks/expo/expo-camera.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/camera/"
+    },
+    {
+      "path": "stacks/expo/expo-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/more/expo-cli/"
+    },
+    {
+      "path": "stacks/expo/expo-dev-client.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/develop/development-builds/introduction/"
+    },
+    {
+      "path": "stacks/expo/expo-doctor.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.expo.dev/develop/development-builds/use-development-builds/#expo-doctor"
+    },
+    {
+      "path": "stacks/expo/expo-dom-components.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/guides/dom-components/"
+    },
+    {
+      "path": "stacks/expo/expo-file-system.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/filesystem/"
+    },
+    {
+      "path": "stacks/expo/expo-go.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/get-started/expo-go/"
+    },
+    {
+      "path": "stacks/expo/expo-image.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/image/"
+    },
+    {
+      "path": "stacks/expo/expo-location.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/location/"
+    },
+    {
+      "path": "stacks/expo/expo-modules.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.expo.dev/modules/overview/"
+    },
+    {
+      "path": "stacks/expo/expo-notifications.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/notifications/"
+    },
+    {
+      "path": "stacks/expo/expo-router.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/router/introduction/"
+    },
+    {
+      "path": "stacks/expo/expo-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/"
+    },
+    {
+      "path": "stacks/expo/expo-secure-store.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.expo.dev/versions/latest/sdk/securestore/"
+    },
+    {
+      "path": "stacks/expo/frontend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/hermes.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://hermesengine.dev/"
+    },
+    {
+      "path": "stacks/expo/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/metro-bundler.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://metrobundler.dev/"
+    },
+    {
+      "path": "stacks/expo/mobile-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/new-architecture.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://reactnative.dev/docs/the-new-architecture/landing-page"
+    },
+    {
+      "path": "stacks/expo/qa-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/expo/snack.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://snack.expo.dev/"
+    },
+    {
+      "path": "stacks/firebase/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/ab-testing.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/ab-testing"
+    },
+    {
+      "path": "stacks/firebase/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/app-check.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/app-check"
+    },
+    {
+      "path": "stacks/firebase/app-distribution.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://firebase.google.com/docs/app-distribution"
+    },
+    {
+      "path": "stacks/firebase/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/cloud-firestore.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/firestore"
+    },
+    {
+      "path": "stacks/firebase/cloud-functions-firebase.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/functions"
+    },
+    {
+      "path": "stacks/firebase/crashlytics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/crashlytics"
+    },
+    {
+      "path": "stacks/firebase/emulator-suite.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/emulator-suite"
+    },
+    {
+      "path": "stacks/firebase/fcm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/cloud-messaging"
+    },
+    {
+      "path": "stacks/firebase/firebase-ai-logic.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/ai-logic"
+    },
+    {
+      "path": "stacks/firebase/firebase-analytics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/analytics"
+    },
+    {
+      "path": "stacks/firebase/firebase-app-hosting.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/app-hosting"
+    },
+    {
+      "path": "stacks/firebase/firebase-auth.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/auth"
+    },
+    {
+      "path": "stacks/firebase/firebase-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/cli"
+    },
+    {
+      "path": "stacks/firebase/firebase-data-connect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/data-connect"
+    },
+    {
+      "path": "stacks/firebase/firebase-extensions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/extensions"
+    },
+    {
+      "path": "stacks/firebase/firebase-hosting.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/hosting"
+    },
+    {
+      "path": "stacks/firebase/firebase-storage.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://firebase.google.com/docs/storage"
+    },
+    {
+      "path": "stacks/firebase/firebase-studio.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.studio/"
+    },
+    {
+      "path": "stacks/firebase/firebase-test-lab.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://firebase.google.com/docs/test-lab"
+    },
+    {
+      "path": "stacks/firebase/frontend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/genkit.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://firebase.google.com/docs/genkit"
+    },
+    {
+      "path": "stacks/firebase/identity-platform.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/identity-platform/docs"
+    },
+    {
+      "path": "stacks/firebase/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/mobile-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/performance-monitoring.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/perf-mon"
+    },
+    {
+      "path": "stacks/firebase/realtime-database.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://firebase.google.com/docs/database"
+    },
+    {
+      "path": "stacks/firebase/remote-config.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/remote-config"
+    },
+    {
+      "path": "stacks/firebase/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/firebase/security-rules.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://firebase.google.com/docs/rules"
+    },
+    {
+      "path": "stacks/gcp/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/agent-builder.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/agent-builder/docs"
+    },
+    {
+      "path": "stacks/gcp/agentspace.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/agentspace/docs"
+    },
+    {
+      "path": "stacks/gcp/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/alloydb.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/alloydb/docs"
+    },
+    {
+      "path": "stacks/gcp/anthos.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/anthos/docs"
+    },
+    {
+      "path": "stacks/gcp/app-engine.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/appengine/docs"
+    },
+    {
+      "path": "stacks/gcp/artifact-registry.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/artifact-registry/docs"
+    },
+    {
+      "path": "stacks/gcp/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/biglake.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/biglake/docs"
+    },
+    {
+      "path": "stacks/gcp/bigquery-ml.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/bigquery/docs/bqml-introduction"
+    },
+    {
+      "path": "stacks/gcp/bigquery.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/bigquery/docs"
+    },
+    {
+      "path": "stacks/gcp/bigtable.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/bigtable/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-armor.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/armor/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-build.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/build/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-cdn.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/cdn/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-deploy.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/deploy/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/functions/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-iam.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/iam/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-kms.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/kms/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-run-jobs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/run/docs/create-jobs"
+    },
+    {
+      "path": "stacks/gcp/cloud-run.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/run/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-sql.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/sql/docs"
+    },
+    {
+      "path": "stacks/gcp/cloud-storage.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/storage/docs"
+    },
+    {
+      "path": "stacks/gcp/compute-engine.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/compute/docs"
+    },
+    {
+      "path": "stacks/gcp/database-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/dataflow.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/dataflow/docs"
+    },
+    {
+      "path": "stacks/gcp/dataform.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/dataform/docs"
+    },
+    {
+      "path": "stacks/gcp/dataproc.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/dataproc/docs"
+    },
+    {
+      "path": "stacks/gcp/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/firestore.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/firestore/docs"
+    },
+    {
+      "path": "stacks/gcp/gcloud-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/sdk/gcloud/reference"
+    },
+    {
+      "path": "stacks/gcp/gemini-code-assist.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/gemini/docs/codeassist"
+    },
+    {
+      "path": "stacks/gcp/gemini.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/overview"
+    },
+    {
+      "path": "stacks/gcp/gke-autopilot.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview"
+    },
+    {
+      "path": "stacks/gcp/gke.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/kubernetes-engine/docs"
+    },
+    {
+      "path": "stacks/gcp/imagen.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/image/overview"
+    },
+    {
+      "path": "stacks/gcp/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/logging.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/logging/docs"
+    },
+    {
+      "path": "stacks/gcp/looker-studio.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/looker-studio/docs"
+    },
+    {
+      "path": "stacks/gcp/looker.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/looker/docs"
+    },
+    {
+      "path": "stacks/gcp/memorystore.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/memorystore/docs"
+    },
+    {
+      "path": "stacks/gcp/monitoring.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/monitoring/docs"
+    },
+    {
+      "path": "stacks/gcp/pub-sub.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/pubsub/docs"
+    },
+    {
+      "path": "stacks/gcp/saas-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/secret-manager.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/secret-manager/docs"
+    },
+    {
+      "path": "stacks/gcp/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/spanner.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://cloud.google.com/spanner/docs"
+    },
+    {
+      "path": "stacks/gcp/sre-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/gcp/veo.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/video/overview"
+    },
+    {
+      "path": "stacks/gcp/vertex-ai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://cloud.google.com/vertex-ai/docs"
+    },
+    {
+      "path": "stacks/gcp/vpc.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://cloud.google.com/vpc/docs"
+    },
+    {
+      "path": "stacks/observability/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/alertmanager.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://prometheus.io/docs/alerting/latest/alertmanager/"
+    },
+    {
+      "path": "stacks/observability/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/datadog-apm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.datadoghq.com/tracing/"
+    },
+    {
+      "path": "stacks/observability/datadog-asm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/security/application_security/"
+    },
+    {
+      "path": "stacks/observability/datadog-cspm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/security/"
+    },
+    {
+      "path": "stacks/observability/datadog-database-monitoring.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/database_monitoring/"
+    },
+    {
+      "path": "stacks/observability/datadog-llm-observability.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.datadoghq.com/llm_observability/"
+    },
+    {
+      "path": "stacks/observability/datadog-logs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.datadoghq.com/logs/"
+    },
+    {
+      "path": "stacks/observability/datadog-rum.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/real_user_monitoring/"
+    },
+    {
+      "path": "stacks/observability/datadog-sds.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/sensitive_data_scanner/"
+    },
+    {
+      "path": "stacks/observability/datadog-software-catalog.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.datadoghq.com/service_catalog/"
+    },
+    {
+      "path": "stacks/observability/datadog-synthetics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.datadoghq.com/synthetics/"
+    },
+    {
+      "path": "stacks/observability/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/dynatrace-davis-ai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.dynatrace.com/docs/observe/davis-ai"
+    },
+    {
+      "path": "stacks/observability/dynatrace-grail-dql.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.dynatrace.com/docs/discover-dynatrace/platform/grail"
+    },
+    {
+      "path": "stacks/observability/dynatrace-oneagent.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.dynatrace.com/docs/setup-and-configuration/dynatrace-oneagent"
+    },
+    {
+      "path": "stacks/observability/ebpf-instrumentation.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://ebpf.io/"
+    },
+    {
+      "path": "stacks/observability/grafana-alerting.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/grafana/latest/alerting/"
+    },
+    {
+      "path": "stacks/observability/grafana-alloy.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/alloy/"
+    },
+    {
+      "path": "stacks/observability/grafana-beyla.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://grafana.com/docs/beyla/"
+    },
+    {
+      "path": "stacks/observability/grafana-cloud.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/grafana-cloud/"
+    },
+    {
+      "path": "stacks/observability/grafana-faro.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://grafana.com/docs/grafana-cloud/monitor-applications/frontend-observability/"
+    },
+    {
+      "path": "stacks/observability/grafana-loki.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/loki/"
+    },
+    {
+      "path": "stacks/observability/grafana-mimir.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/mimir/"
+    },
+    {
+      "path": "stacks/observability/grafana-oncall.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/oncall/"
+    },
+    {
+      "path": "stacks/observability/grafana-pyroscope.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/pyroscope/"
+    },
+    {
+      "path": "stacks/observability/grafana-tempo.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://grafana.com/docs/tempo/"
+    },
+    {
+      "path": "stacks/observability/honeycomb-beelines.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.honeycomb.io/getting-data-in/"
+    },
+    {
+      "path": "stacks/observability/honeycomb-events.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.honeycomb.io/"
+    },
+    {
+      "path": "stacks/observability/honeycomb-refinery.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.honeycomb.io/manage-data-volume/refinery/"
+    },
+    {
+      "path": "stacks/observability/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/k6.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://grafana.com/docs/k6/"
+    },
+    {
+      "path": "stacks/observability/newrelic-ai-monitoring.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.newrelic.com/docs/ai-monitoring/"
+    },
+    {
+      "path": "stacks/observability/newrelic-apm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.newrelic.com/docs/apm/"
+    },
+    {
+      "path": "stacks/observability/newrelic-errors-inbox.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.newrelic.com/docs/errors-inbox/"
+    },
+    {
+      "path": "stacks/observability/newrelic-nrql-nrdb.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.newrelic.com/docs/nrql/"
+    },
+    {
+      "path": "stacks/observability/newrelic-pixie.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.px.dev/"
+    },
+    {
+      "path": "stacks/observability/opentelemetry.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://opentelemetry.io/docs/"
+    },
+    {
+      "path": "stacks/observability/otel-collector.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://opentelemetry.io/docs/collector/"
+    },
+    {
+      "path": "stacks/observability/otel-genai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://opentelemetry.io/docs/specs/semconv/gen-ai/"
+    },
+    {
+      "path": "stacks/observability/otel-semantic-conventions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://opentelemetry.io/docs/specs/semconv/"
+    },
+    {
+      "path": "stacks/observability/prometheus-exporters.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://prometheus.io/docs/instrumenting/exporters/"
+    },
+    {
+      "path": "stacks/observability/prometheus-server.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://prometheus.io/docs/"
+    },
+    {
+      "path": "stacks/observability/promql.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+    },
+    {
+      "path": "stacks/observability/recording-rules.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/"
+    },
+    {
+      "path": "stacks/observability/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/sentry-crons.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.sentry.io/product/crons/"
+    },
+    {
+      "path": "stacks/observability/sentry-debug-ids.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.sentry.io/platforms/javascript/sourcemaps/"
+    },
+    {
+      "path": "stacks/observability/sentry-errors.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.sentry.io/product/issues/"
+    },
+    {
+      "path": "stacks/observability/sentry-performance.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.sentry.io/product/performance/"
+    },
+    {
+      "path": "stacks/observability/sentry-profiling.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.sentry.io/product/profiling/"
+    },
+    {
+      "path": "stacks/observability/sentry-replay.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.sentry.io/product/session-replay/"
+    },
+    {
+      "path": "stacks/observability/spl.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.splunk.com/Documentation/SplunkCloud/latest/SearchReference/"
+    },
+    {
+      "path": "stacks/observability/splunk-cloud.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.splunk.com/Documentation/SplunkCloud"
+    },
+    {
+      "path": "stacks/observability/splunk-itsi.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.splunk.com/Documentation/ITSI"
+    },
+    {
+      "path": "stacks/observability/splunk-observability-cloud.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.splunk.com/observability/"
+    },
+    {
+      "path": "stacks/observability/sre-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/observability/thanos.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://thanos.io/"
+    },
+    {
+      "path": "stacks/observability/victoriametrics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.victoriametrics.com/"
+    },
+    {
+      "path": "stacks/observability/watchdog-ai.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.datadoghq.com/watchdog/"
+    },
+    {
+      "path": "stacks/openai/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/agents-platform.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/agents"
+    },
+    {
+      "path": "stacks/openai/agents-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://github.com/openai/openai-agents-python"
+    },
+    {
+      "path": "stacks/openai/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/assistants-api-legacy.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/assistants/migration"
+    },
+    {
+      "path": "stacks/openai/audit-logs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/api-reference/audit-logs"
+    },
+    {
+      "path": "stacks/openai/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/batch-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://platform.openai.com/docs/guides/batch"
+    },
+    {
+      "path": "stacks/openai/built-in-tools.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/tools"
+    },
+    {
+      "path": "stacks/openai/chat-completions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/api-reference/chat"
+    },
+    {
+      "path": "stacks/openai/codex-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://github.com/openai/codex"
+    },
+    {
+      "path": "stacks/openai/computer-use.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/tools-computer-use"
+    },
+    {
+      "path": "stacks/openai/distillation-platform.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/distillation"
+    },
+    {
+      "path": "stacks/openai/embeddings.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://platform.openai.com/docs/guides/embeddings"
+    },
+    {
+      "path": "stacks/openai/eval-platform.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/evals"
+    },
+    {
+      "path": "stacks/openai/files-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://platform.openai.com/docs/api-reference/files"
+    },
+    {
+      "path": "stacks/openai/function-calling.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/function-calling"
+    },
+    {
+      "path": "stacks/openai/gpt-4-1.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/models"
+    },
+    {
+      "path": "stacks/openai/gpt-5.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/models"
+    },
+    {
+      "path": "stacks/openai/image-generation.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/images"
+    },
+    {
+      "path": "stacks/openai/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/moderation-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/moderation"
+    },
+    {
+      "path": "stacks/openai/o-series-reasoning.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/reasoning"
+    },
+    {
+      "path": "stacks/openai/openai-codex.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://codex.openai.com"
+    },
+    {
+      "path": "stacks/openai/openai-platform-console.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com"
+    },
+    {
+      "path": "stacks/openai/organization-project-hierarchy.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/production-best-practices"
+    },
+    {
+      "path": "stacks/openai/predicted-outputs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/predicted-outputs"
+    },
+    {
+      "path": "stacks/openai/prompt-caching.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/prompt-caching"
+    },
+    {
+      "path": "stacks/openai/realtime-agents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://github.com/openai/openai-agents-python"
+    },
+    {
+      "path": "stacks/openai/realtime-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/guides/realtime"
+    },
+    {
+      "path": "stacks/openai/responses-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://platform.openai.com/docs/api-reference/responses"
+    },
+    {
+      "path": "stacks/openai/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/stored-completions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/distillation"
+    },
+    {
+      "path": "stacks/openai/structured-outputs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/structured-outputs"
+    },
+    {
+      "path": "stacks/openai/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/openai/tts.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/text-to-speech"
+    },
+    {
+      "path": "stacks/openai/vision-fine-tuning.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://platform.openai.com/docs/guides/fine-tuning"
+    },
+    {
+      "path": "stacks/openai/vision-input.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://platform.openai.com/docs/guides/vision"
+    },
+    {
+      "path": "stacks/openai/whisper.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://platform.openai.com/docs/guides/speech-to-text"
+    },
+    {
+      "path": "stacks/salesforce/SKILL.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/agentforce.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://developer.salesforce.com/docs/einstein/genai/overview"
+    },
+    {
+      "path": "stacks/salesforce/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/apex.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/"
+    },
+    {
+      "path": "stacks/salesforce/appexchange-marketplace.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://appexchange.salesforce.com/"
+    },
+    {
+      "path": "stacks/salesforce/backend-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/data-360.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://developer.salesforce.com/docs/data/data-cloud-int/guide/"
+    },
+    {
+      "path": "stacks/salesforce/database-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/devops-engineer.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/einstein-trust-layer.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developer.salesforce.com/docs/einstein/genai/overview"
+    },
+    {
+      "path": "stacks/salesforce/external-client-apps.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.connected_apps_eca_migration.htm"
+    },
+    {
+      "path": "stacks/salesforce/financial-services-cloud.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "low",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.financial_services_cloud.htm"
+    },
+    {
+      "path": "stacks/salesforce/fintech-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/flow.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.flow.htm"
+    },
+    {
+      "path": "stacks/salesforce/frontend-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/health-cloud.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "low",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.health_cloud.htm"
+    },
+    {
+      "path": "stacks/salesforce/healthcare-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/heroku.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://www.heroku.com/"
+    },
+    {
+      "path": "stacks/salesforce/hyperforce.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "low",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.hyperforce_overview.htm"
+    },
+    {
+      "path": "stacks/salesforce/index.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/lwc.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developer.salesforce.com/docs/component-library/documentation/en/lwc"
+    },
+    {
+      "path": "stacks/salesforce/mfa-enforcement.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=sf.security_overview_mfa.htm"
+    },
+    {
+      "path": "stacks/salesforce/qa-engineer.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/saas-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/salesforce-functions.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://help.salesforce.com/s/articleView?id=000389226"
+    },
+    {
+      "path": "stacks/salesforce/salesforce-hosted-mcp.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "high",
+      "authoritative_url": "https://developer.salesforce.com/docs/einstein/genai/overview"
+    },
+    {
+      "path": "stacks/salesforce/security-engineer.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/salesforce/sf-cli.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium",
+      "authoritative_url": "https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/"
+    },
+    {
+      "path": "stacks/salesforce/system-architect.md",
+      "last_verified_on": "2026-05-12",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/ach-debit.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/ach-direct-debit"
+    },
+    {
+      "path": "stacks/stripe/adaptive-pricing.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/checkout/adaptive-pricing"
+    },
+    {
+      "path": "stacks/stripe/api-versions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/api/versioning"
+    },
+    {
+      "path": "stacks/stripe/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/bnpl-providers.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/buy-now-pay-later"
+    },
+    {
+      "path": "stacks/stripe/customer-portal.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.stripe.com/customer-management"
+    },
+    {
+      "path": "stacks/stripe/e-commerce-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/express-checkout-element.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/elements/express-checkout-element"
+    },
+    {
+      "path": "stacks/stripe/fintech-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/idempotency-keys.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/api/idempotent_requests"
+    },
+    {
+      "path": "stacks/stripe/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/link.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/link"
+    },
+    {
+      "path": "stacks/stripe/meter-api.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/billing/subscriptions/usage-based"
+    },
+    {
+      "path": "stacks/stripe/optimized-checkout-suite.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/checkout/optimized-checkout-suite"
+    },
+    {
+      "path": "stacks/stripe/payment-element.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/payment-element"
+    },
+    {
+      "path": "stacks/stripe/payment-intents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/payment-intents"
+    },
+    {
+      "path": "stacks/stripe/restricted-api-keys.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/keys#limit-access-with-restricted-api-keys"
+    },
+    {
+      "path": "stacks/stripe/rtp-fednow.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/treasury/moving-money/outbound-payments"
+    },
+    {
+      "path": "stacks/stripe/saas-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/sca-3ds2.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/strong-customer-authentication"
+    },
+    {
+      "path": "stacks/stripe/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/stripe/sepa-debit.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/sepa-debit"
+    },
+    {
+      "path": "stacks/stripe/setup-intents.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/save-and-reuse"
+    },
+    {
+      "path": "stacks/stripe/stripe-apps.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/stripe-apps"
+    },
+    {
+      "path": "stacks/stripe/stripe-billing.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/billing"
+    },
+    {
+      "path": "stacks/stripe/stripe-capital.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/capital"
+    },
+    {
+      "path": "stacks/stripe/stripe-checkout.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/payments/checkout"
+    },
+    {
+      "path": "stacks/stripe/stripe-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.stripe.com/stripe-cli"
+    },
+    {
+      "path": "stacks/stripe/stripe-climate.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.stripe.com/climate"
+    },
+    {
+      "path": "stacks/stripe/stripe-connect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/connect"
+    },
+    {
+      "path": "stacks/stripe/stripe-data-pipeline.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.stripe.com/data-pipeline"
+    },
+    {
+      "path": "stacks/stripe/stripe-financial-connections.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/financial-connections"
+    },
+    {
+      "path": "stacks/stripe/stripe-identity.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/identity"
+    },
+    {
+      "path": "stacks/stripe/stripe-issuing.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/issuing"
+    },
+    {
+      "path": "stacks/stripe/stripe-radar.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/radar"
+    },
+    {
+      "path": "stacks/stripe/stripe-sigma.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://docs.stripe.com/sigma"
+    },
+    {
+      "path": "stacks/stripe/stripe-tax.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/tax"
+    },
+    {
+      "path": "stacks/stripe/stripe-terminal.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://docs.stripe.com/terminal"
+    },
+    {
+      "path": "stacks/stripe/stripe-treasury.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/treasury"
+    },
+    {
+      "path": "stacks/stripe/stripe-workbench.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://dashboard.stripe.com/workbench"
+    },
+    {
+      "path": "stacks/stripe/tap-to-pay.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/terminal/payments/setup-reader/tap-to-pay"
+    },
+    {
+      "path": "stacks/stripe/webhooks.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://docs.stripe.com/webhooks"
+    },
+    {
+      "path": "stacks/supabase/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/branching.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/platform/branching"
+    },
+    {
+      "path": "stacks/supabase/database-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/database-functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://supabase.com/docs/guides/database/functions"
+    },
+    {
+      "path": "stacks/supabase/database-webhooks.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database/webhooks"
+    },
+    {
+      "path": "stacks/supabase/edge-functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/functions"
+    },
+    {
+      "path": "stacks/supabase/foreign-data-wrappers.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database/extensions/wrappers"
+    },
+    {
+      "path": "stacks/supabase/frontend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/migrations.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/deployment/database-migrations"
+    },
+    {
+      "path": "stacks/supabase/pg-cron.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://supabase.com/docs/guides/database/extensions/pg_cron"
+    },
+    {
+      "path": "stacks/supabase/pg-graphql.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/graphql"
+    },
+    {
+      "path": "stacks/supabase/pg-net.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database/extensions/pg_net"
+    },
+    {
+      "path": "stacks/supabase/pg-trgm.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://www.postgresql.org/docs/current/pgtrgm.html"
+    },
+    {
+      "path": "stacks/supabase/pgvector.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/ai/vector-columns"
+    },
+    {
+      "path": "stacks/supabase/postgres.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database"
+    },
+    {
+      "path": "stacks/supabase/row-level-security.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database/postgres/row-level-security"
+    },
+    {
+      "path": "stacks/supabase/saas-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/security-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/supabase/studio.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/getting-started/architecture"
+    },
+    {
+      "path": "stacks/supabase/supabase-auth.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/auth"
+    },
+    {
+      "path": "stacks/supabase/supabase-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/reference/cli"
+    },
+    {
+      "path": "stacks/supabase/supabase-cron.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/cron"
+    },
+    {
+      "path": "stacks/supabase/supabase-js.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/reference/javascript"
+    },
+    {
+      "path": "stacks/supabase/supabase-mcp.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://github.com/supabase-community/supabase-mcp"
+    },
+    {
+      "path": "stacks/supabase/supabase-queues.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/queues"
+    },
+    {
+      "path": "stacks/supabase/supabase-realtime.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/realtime"
+    },
+    {
+      "path": "stacks/supabase/supabase-ssr.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://supabase.com/docs/guides/auth/server-side"
+    },
+    {
+      "path": "stacks/supabase/supabase-storage.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/storage"
+    },
+    {
+      "path": "stacks/supabase/supabase-vector.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://supabase.com/docs/guides/database/vault"
+    },
+    {
+      "path": "stacks/supabase/supavisor.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://github.com/supabase/supavisor"
+    },
+    {
+      "path": "stacks/vercel/SKILL.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/ai-gateway.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/ai-gateway"
+    },
+    {
+      "path": "stacks/vercel/ai-ml-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/ai-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://sdk.vercel.ai/docs"
+    },
+    {
+      "path": "stacks/vercel/app-router.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://nextjs.org/docs/app"
+    },
+    {
+      "path": "stacks/vercel/backend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/build-cache.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://vercel.com/docs/monorepos/turborepo"
+    },
+    {
+      "path": "stacks/vercel/cache-components.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://nextjs.org/docs/app/api-reference/directives/use-cache"
+    },
+    {
+      "path": "stacks/vercel/chat-sdk.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://chat-sdk.dev"
+    },
+    {
+      "path": "stacks/vercel/devops-engineer.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/edge-config.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/storage/edge-config"
+    },
+    {
+      "path": "stacks/vercel/fluid-compute.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/fluid-compute"
+    },
+    {
+      "path": "stacks/vercel/frontend-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/image-optimization.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://nextjs.org/docs/app/api-reference/components/image"
+    },
+    {
+      "path": "stacks/vercel/index.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/isr.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating"
+    },
+    {
+      "path": "stacks/vercel/log-drains.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/log-drains"
+    },
+    {
+      "path": "stacks/vercel/nextjs.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://nextjs.org/docs"
+    },
+    {
+      "path": "stacks/vercel/partial-prerendering.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://nextjs.org/docs/app/getting-started/partial-prerendering"
+    },
+    {
+      "path": "stacks/vercel/server-actions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations"
+    },
+    {
+      "path": "stacks/vercel/server-components.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://react.dev/reference/rsc/server-components"
+    },
+    {
+      "path": "stacks/vercel/speed-insights.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/speed-insights"
+    },
+    {
+      "path": "stacks/vercel/system-architect.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium"
+    },
+    {
+      "path": "stacks/vercel/turbopack.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://nextjs.org/docs/app/api-reference/turbopack"
+    },
+    {
+      "path": "stacks/vercel/v0.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://v0.app"
+    },
+    {
+      "path": "stacks/vercel/vercel-agent.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/agent"
+    },
+    {
+      "path": "stacks/vercel/vercel-blob.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/storage/vercel-blob"
+    },
+    {
+      "path": "stacks/vercel/vercel-cache.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://vercel.com/docs/edge-network/caching"
+    },
+    {
+      "path": "stacks/vercel/vercel-cli.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://vercel.com/docs/cli"
+    },
+    {
+      "path": "stacks/vercel/vercel-cron.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/cron-jobs"
+    },
+    {
+      "path": "stacks/vercel/vercel-functions.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/functions"
+    },
+    {
+      "path": "stacks/vercel/vercel-kv.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "medium",
+      "authoritative_url": "https://vercel.com/docs/storage/vercel-kv"
+    },
+    {
+      "path": "stacks/vercel/vercel-postgres.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/storage/vercel-postgres"
+    },
+    {
+      "path": "stacks/vercel/vercel-queues.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/queues"
+    },
+    {
+      "path": "stacks/vercel/vercel-sandbox.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/sandbox"
+    },
+    {
+      "path": "stacks/vercel/web-analytics.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "low",
+      "authoritative_url": "https://vercel.com/docs/analytics"
+    },
+    {
+      "path": "stacks/vercel/workflow.md",
+      "last_verified_on": "2026-05-14",
+      "drift_risk": "high",
+      "authoritative_url": "https://vercel.com/docs/workflow"
+    }
+  ]
 }
