@@ -28,9 +28,9 @@ On Claude Code, some core disciplines become hook-enforced:
 
 | Core Discipline | Enforcement on Claude Code | What Happens Elsewhere |
 |----------------|---------------------------|------------------------|
-| TDD (core/always-on-protocols.md §1) | `pre-edit-check` hook warns if editing source without a test file | Model self-enforces from instructions |
-| Review (core/always-on-protocols.md §3) | `pre-commit-review-check` hook warns if committing without review evidence | Model self-enforces |
-| Branch Safety (core/always-on-protocols.md §6) | `pre-merge-verify` hook blocks merge if tests fail | Model self-enforces |
+| TDD (core/session.md §1) | `pre-edit-check` hook warns if editing source without a test file | Model self-enforces from instructions |
+| Review (core/session.md §3) | `pre-commit-review-check` hook warns if committing without review evidence | Model self-enforces |
+| Branch Safety (core/session.md §6) | `pre-merge-verify` hook blocks merge if tests fail | Model self-enforces |
 
 The core protocols are identical. Claude Code is stricter because the hook fires even if the model would have let it slide.
 

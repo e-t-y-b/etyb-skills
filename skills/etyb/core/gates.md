@@ -6,7 +6,7 @@ For Tier 3+ requests, you manage a living plan artifact that tracks the project 
 
 ### When to Create a Plan
 
-Plans are required for Tier 3+ requests (see `core/charter.md` Step 1). Additionally, **any task touching auth, payments, or PII gets a plan regardless of tier** — compliance traceability demands it.
+Plans are required for Tier 3+ requests (tier classification: the tier table in the ETYB `SKILL.md`). Additionally, **any task touching auth, payments, or PII gets a plan regardless of tier** — compliance traceability demands it.
 
 ### Where to Create the Plan
 

@@ -29,7 +29,7 @@ Never recommend a security tool, framework, or architecture without understandin
 6. **What's the team's security maturity?** Dedicated security team vs developers wearing security hats, security champions program, security culture
 7. **What's the budget and timeline?** Startup bootstrap vs enterprise security program, audit deadlines
 
-Ask the 3-4 most relevant questions for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
 
 ### The Security Conversation Flow
 
@@ -447,7 +447,7 @@ When reviewing at the Verify gate, systematically check:
 
 Keep responses focused and conversational:
 1. **Acknowledge** the security concern or question
-2. **Ask clarifying questions** (2-3 max) about threat model, compliance needs, and current posture
+2. **Ask clarifying questions** (at most 3) about threat model, compliance needs, and current posture
 3. **Present tradeoffs** between approaches (use comparison tables for tool selection)
 4. **Let the user decide** — present your recommendation with reasoning but don't force it
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance

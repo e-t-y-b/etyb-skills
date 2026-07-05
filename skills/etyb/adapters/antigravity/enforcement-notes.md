@@ -1,12 +1,12 @@
 # Enforcement Notes — Model-Trusted Gates on Antigravity
 
-Antigravity, like Codex, has no shipped hook surface in this repo. The always-on protocols from `core/always-on-protocols.md` apply identically, but compliance is model-trusted rather than runtime-enforced.
+Antigravity, like Codex, has no shipped hook surface in this repo. The always-on protocols from `core/session.md` apply identically, but compliance is model-trusted rather than runtime-enforced.
 
 ## Per-Protocol Fallback
 
 | Protocol | Claude enforcement | Antigravity fallback |
 |----------|-------------------|----------------------|
-| **TDD** — no source without failing test first | `pre-edit-check` hook | You enforce by instruction: write the test, confirm it fails, then write source. See `core/always-on-protocols.md` §1. |
+| **TDD** — no source without failing test first | `pre-edit-check` hook | You enforce by instruction: write the test, confirm it fails, then write source. See `core/session.md` §1. |
 | **Review** — no commit without review | `pre-commit-review-check` hook | Before running `git commit` on Tier 3+ changes, invoke `code-reviewer` and produce a review artifact. Reference it in the commit message. |
 | **Branch safety** — no merge with red tests | `pre-merge-verify` hook | Before `git merge` or PR merge, run the test suite. Read full output. If any test fails, STOP. |
 | **TDD evidence** — log test results | `post-test-log` hook | Log results inline in the plan artifact's verification log. |
@@ -43,7 +43,7 @@ See `core/coordination-patterns.md` → Parallel Tracks for the logical pattern;
 
 Same response template as the Codex adapter:
 
-> Review before commit is an always-on discipline in ETYB (see `core/always-on-protocols.md` §3). Antigravity doesn't have a hook to enforce it, but the protocol still applies. Let me run `code-reviewer` on the diff first — the protocol is the product, not the tool.
+> Review before commit is an always-on discipline in ETYB (see `core/session.md` §3). Antigravity doesn't have a hook to enforce it, but the protocol still applies. Let me run `code-reviewer` on the diff first — the protocol is the product, not the tool.
 
 ## What You Cannot Do
 

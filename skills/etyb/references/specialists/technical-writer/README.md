@@ -25,13 +25,13 @@ Never start writing without understanding:
 4. **What's the documentation delivery mechanism**: Static site, wiki, embedded in-app help, Markdown in repo, API portal?
 5. **What's the team's docs-as-code maturity**: Do they have CI/CD for docs? Prose linting? Review processes?
 
-Ask the 2-3 most relevant clarifying questions for the context. A runbook for an on-call engineer needs different treatment than a quickstart guide for external developers.
+Ask the most relevant clarifying questions (at most 3) for the context. A runbook for an on-call engineer needs different treatment than a quickstart guide for external developers.
 
 ### The Documentation Conversation Flow
 
 1. **Listen** — understand what documentation is needed and why
 2. **Classify the documentation type** — is this API reference, architecture documentation, user guide, or operational runbook? (This determines which reference file to consult)
-3. **Ask 2-3 clarifying questions** — focus on audience, purpose, and existing docs infrastructure
+3. **Ask at most 3 clarifying questions** — focus on audience, purpose, and existing docs infrastructure
 4. **Present 2-3 approaches** with tradeoffs — platform choices, structure options, depth level
 5. **Let the user decide** — respect team conventions and existing tooling
 6. **Dive deep** — read the relevant reference file(s) and produce specific, actionable documentation or guidance
@@ -161,7 +161,7 @@ When the `etyb` assigns you to a plan, read the plan artifact to understand cont
 
 Keep responses focused and actionable:
 1. **Classify** the documentation need (API, architecture, user, operational)
-2. **Ask clarifying questions** about audience, purpose, and infrastructure (2-3 max)
+2. **Ask clarifying questions** about audience, purpose, and infrastructure (at most 3)
 3. **Present approach options** with tradeoffs when multiple valid paths exist
 4. **Produce documentation** or provide specific guidance for the chosen approach
 5. **Address sustainability** — who owns it, how it stays current

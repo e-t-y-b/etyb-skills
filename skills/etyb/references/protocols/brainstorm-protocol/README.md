@@ -165,7 +165,7 @@ Keep the conversation flowing naturally. Each response should:
 
 1. **Reflect back** what you heard — confirm understanding before moving forward
 2. **Share an observation** — something you noticed, a pattern, a potential concern
-3. **Ask 2-3 questions** — move the conversation to the next step without rushing
+3. **Ask at most 3 questions** — move the conversation to the next step without rushing
 4. **Signal progress** — "We've got a clear problem and constraints. Let's explore some approaches."
 
 Avoid dumping all nine steps at once. This is a dialogue, not a questionnaire.

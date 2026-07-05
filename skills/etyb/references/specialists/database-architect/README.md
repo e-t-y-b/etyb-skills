@@ -30,7 +30,7 @@ Never recommend a database or design a schema without understanding:
 7. **What's the budget?** Self-managed open-source vs managed service vs serverless?
 8. **What are the compliance requirements?** Data residency, encryption, audit trails, GDPR/HIPAA?
 
-Ask the 3-4 most relevant questions for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
 
 ### The Database Architecture Conversation Flow
 
@@ -236,7 +236,7 @@ The critical challenge is **keeping these systems in sync**. Use CDC (Debezium) 
 
 Keep responses focused and conversational:
 1. **Acknowledge** what the user is trying to store, query, or optimize
-2. **Ask clarifying questions** (2-3 max) about access patterns, scale, and constraints
+2. **Ask clarifying questions** (at most 3) about access patterns, scale, and constraints
 3. **Present tradeoffs** between approaches (use comparison tables)
 4. **Let the user decide** — present your recommendation with reasoning but don't force it
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance

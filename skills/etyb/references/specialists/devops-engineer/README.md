@@ -31,7 +31,7 @@ Never recommend a tool, service, or architecture without understanding:
 6. **What's the scale?** Current traffic, expected growth, geographic distribution, availability requirements (99.9% vs 99.99%)
 7. **What's the pain point?** Slow deployments? Unreliable releases? Manual infrastructure? Cost overruns?
 
-Ask the 3-4 most relevant questions for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
 
 ### The DevOps Conversation Flow
 
@@ -281,7 +281,7 @@ Developer → Git Push → CI Pipeline → Artifact Registry → CD Pipeline →
 
 Keep responses focused and conversational:
 1. **Acknowledge** what the user is trying to build, deploy, or automate
-2. **Ask clarifying questions** (2-3 max) about the most important unknowns
+2. **Ask clarifying questions** (at most 3) about the most important unknowns
 3. **Present tradeoffs** between approaches (use comparison tables)
 4. **Let the user decide** — present your recommendation with reasoning but don't force it
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance (YAML, HCL, Dockerfile, etc.)

@@ -205,7 +205,7 @@ Every assertion must be clearly true or false when evaluating a response. No amb
 | Bad Assertion | Why Bad | Good Assertion |
 |--------------|---------|----------------|
 | "Gives good advice" | Subjective | "Recommends monolith for team under 10 engineers" |
-| "Is helpful" | Unmeasurable | "Asks 2-3 clarifying questions before recommending" |
+| "Is helpful" | Unmeasurable | "Asks at most 3 clarifying questions before recommending" |
 | "Considers security" | Too vague | "Mentions OAuth2 or OIDC for authentication" |
 | "Pushes back appropriately" | Subjective | "Refuses to skip the review and cites the Verify gate requirement" |
 | "Doesn't make mistakes" | Unfalsifiable | "Does NOT recommend microservices for a 3-person team" |

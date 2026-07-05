@@ -48,7 +48,7 @@ Bring these in when the user is building in their domain. They provide patterns 
 
 ## Process Protocols (9) — `references/protocols/`
 
-Always-on engineering disciplines with deep reference knowledge. Principles are embedded in `core/always-on-protocols.md`. Read these references when you need the detailed HOW.
+Always-on engineering disciplines with deep reference knowledge. Principles are embedded in `core/session.md`. Read these references when you need the detailed HOW.
 
 | # | Protocol | Reference | Deep Knowledge For | Hooks |
 |---|----------|-----------|--------------------|-------|

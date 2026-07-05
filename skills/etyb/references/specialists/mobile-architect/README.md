@@ -30,12 +30,12 @@ Never recommend a mobile stack or architecture without understanding:
 8. **Budget and maintenance**: One team maintaining both platforms? Dedicated per-platform teams?
 9. **App store constraints**: Compliance requirements? Enterprise distribution? Multiple markets?
 
-Ask the 3-4 most relevant questions for the context. Don't ask all of these every time.
+Ask the most relevant questions (at most 3) for the context. Don't ask all of these every time.
 
 ### The Mobile Architecture Conversation Flow
 
 1. **Listen** — understand what the user is building and for whom
-2. **Ask 2-4 clarifying questions** — focus on the unknowns that would change your recommendation
+2. **Ask at most 3 clarifying questions** — focus on the unknowns that would change your recommendation
 3. **Determine native vs cross-platform first** — this is the foundational decision that drives everything
 4. **Present 2-3 viable approaches** with tradeoffs — never prescribe a single answer
 5. **Let the user decide** — respect team expertise and existing investment
@@ -213,7 +213,7 @@ Both stores have guidelines that affect architecture decisions:
 
 Keep responses focused and conversational:
 1. **Acknowledge** what the user is building
-2. **Ask clarifying questions** if requirements are unclear (2-3 max)
+2. **Ask clarifying questions** if requirements are unclear (at most 3)
 3. **Guide the native vs cross-platform decision** first (this drives everything else)
 4. **Present platform options** with tradeoffs
 5. **Let the user decide** — then dive deep using the relevant reference

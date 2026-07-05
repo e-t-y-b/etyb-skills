@@ -30,7 +30,7 @@ Social platform architecture is driven by interaction model, content types, and 
 8. **Moderation needs**: User-generated content type determines moderation complexity — text-only is simpler than image/video
 9. **Monetization model**: Ad-supported (needs engagement ranking), subscription (needs premium features), creator economy (needs payouts)?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The Social Platform Architecture Conversation Flow
 
@@ -359,7 +359,7 @@ Read the `references/cloud-pricing.md` reference for detailed per-service breakd
 
 Keep responses focused and conversational:
 1. **Acknowledge** the social platform problem the user is solving
-2. **Ask 2-3 clarifying questions** about platform type, scale, and constraints
+2. **Ask at most 3 clarifying questions** about platform type, scale, and constraints
 3. **Present tradeoffs** between approaches (fan-out strategies, storage choices, ranking approaches)
 4. **Let the user decide** — present your recommendation with reasoning
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance

@@ -2,7 +2,7 @@
 
 Hooks are shell scripts declared in `.claude/settings.json` that fire on tool-use events. They run outside the LLM and their output is injected into the conversation — the model cannot decide to skip them.
 
-ETYB's process protocols wire up five hooks to enforce the always-on disciplines from `core/always-on-protocols.md`.
+ETYB's process protocols wire up five hooks to enforce the always-on disciplines from `core/session.md`.
 
 ## The Five Hooks
 

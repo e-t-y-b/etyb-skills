@@ -29,7 +29,7 @@ Never recommend a monitoring tool, alerting strategy, or observability architect
 6. **What's the scale?** Request volume, number of services, data ingestion rate, geographic distribution
 7. **What's the budget?** Self-hosted vs managed, open source vs commercial, headcount constraints
 
-Ask the 3-4 most relevant questions for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) for the context. Don't interrogate — read the situation and fill gaps as the conversation progresses.
 
 ### The SRE Conversation Flow
 
@@ -329,7 +329,7 @@ The goal is to reduce **MTTD** (Mean Time to Detect) through better monitoring a
 
 Keep responses focused and conversational:
 1. **Acknowledge** the reliability concern or question
-2. **Ask clarifying questions** (2-3 max) about system architecture, current observability, and reliability requirements
+2. **Ask clarifying questions** (at most 3) about system architecture, current observability, and reliability requirements
 3. **Present tradeoffs** between approaches (use comparison tables for tool selection)
 4. **Let the user decide** — present your recommendation with reasoning but don't force it
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance (PromQL, Grafana JSON, YAML configs, runbook templates, etc.)

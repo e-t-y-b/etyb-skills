@@ -4,7 +4,7 @@ Codex now exposes project-scoped lifecycle hooks, custom agents, and per-skill m
 
 ## The Rule
 
-When `core/always-on-protocols.md` says a platform may add runtime guardrails, read it literally on Codex: some ETYB rules now have genuine prompt/Bash/stop interception. Everything outside those surfaces is still enforced by instruction.
+When `core/session.md` says a platform may add runtime guardrails, read it literally on Codex: some ETYB rules now have genuine prompt/Bash/stop interception. Everything outside those surfaces is still enforced by instruction.
 
 ## Per-Protocol Fallback
 
@@ -59,7 +59,7 @@ Codex can now block obvious skip-the-process prompts and some merge attempts, bu
 
 Response template:
 
-> Review before commit is an always-on discipline in ETYB (see `core/always-on-protocols.md` §3). Codex can remind and guard some Bash flows here, but review completion is still not automatic. Let me run `etyb_reviewer` or `code-reviewer` on the diff first — it takes 30 seconds and catches the issues that make commits expensive to revert.
+> Review before commit is an always-on discipline in ETYB (see `core/session.md` §3). Codex can remind and guard some Bash flows here, but review completion is still not automatic. Let me run `etyb_reviewer` or `code-reviewer` on the diff first — it takes 30 seconds and catches the issues that make commits expensive to revert.
 
 Do not offer to "skip this one time." The protocol is the product.
 

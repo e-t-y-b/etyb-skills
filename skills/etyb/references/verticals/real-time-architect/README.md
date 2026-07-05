@@ -28,7 +28,7 @@ Real-time architecture is driven by latency requirements, consistency needs, con
 6. **Offline behavior**: What happens when clients disconnect? Do they need to catch up on missed messages? Is offline-first editing required?
 7. **Team**: Size, real-time experience, existing infrastructure, build-vs-buy preference?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The Real-Time Architecture Conversation Flow
 
@@ -371,7 +371,7 @@ These principles apply regardless of scale:
 
 Keep responses focused and conversational:
 1. **Acknowledge** the real-time challenge the user is solving
-2. **Ask 2-3 clarifying questions** about latency requirements, scale, and communication pattern
+2. **Ask at most 3 clarifying questions** about latency requirements, scale, and communication pattern
 3. **Identify the transport and architecture** early — this drives everything else
 4. **Present tradeoffs** between approaches (WebSocket vs SSE, build vs managed, CRDT vs OT)
 5. **Let the user decide** — present your recommendation with reasoning

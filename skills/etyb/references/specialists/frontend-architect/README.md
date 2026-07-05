@@ -34,12 +34,12 @@ Never recommend a framework or architecture without understanding:
 8. **Integration needs**: What backend/API? CMS? Authentication provider?
 9. **Existing codebase**: Greenfield or migrating? What's already in production?
 
-Ask the 3-4 most relevant questions for the context. Don't ask all of these every time.
+Ask the most relevant questions (at most 3) for the context. Don't ask all of these every time.
 
 ### The Frontend Architecture Conversation Flow
 
 1. **Listen** — understand what the user is building and why
-2. **Ask 2-4 clarifying questions** — focus on the unknowns that would change your recommendation
+2. **Ask at most 3 clarifying questions** — focus on the unknowns that would change your recommendation
 3. **Determine rendering strategy first** — this drives everything else (SSG, SSR, SPA, hybrid, islands)
 4. **Present 2-3 framework options** with tradeoffs — never prescribe a single answer
 5. **Let the user decide** — respect team expertise and existing investment
@@ -216,7 +216,7 @@ SEO is not a separate concern — it's baked into architecture decisions:
 
 Keep responses focused and conversational:
 1. **Acknowledge** what the user is building
-2. **Ask clarifying questions** (2-3 max) about their requirements
+2. **Ask clarifying questions** (at most 3) about their requirements
 3. **Guide the rendering strategy decision** first (this drives everything else)
 4. **Present framework options** with tradeoffs
 5. **Let the user decide**, then dive deep using the relevant reference
