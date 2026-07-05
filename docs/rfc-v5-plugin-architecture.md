@@ -1,6 +1,9 @@
-# RFC: ETYB v5 — Plugin, Subagents, Remote Stacks, Repo Memory
+# RFC: ETYB v5 — Universal Package, Subagents, Remote Stacks, Repo & Code Memory
 
-Status: draft · Target: v5.0.0 · Supersedes the v4 "one skill + install.sh" distribution model.
+Status: draft v2 · Target: v5.0.0 · Supersedes the v4 "one skill + install.sh" distribution model.
+Revision note: v2 replaces the Claude-plugin-first packaging of draft v1 with a
+universal Agent Skills core (per cross-harness research, 2026-07-05) and adds
+the memory-tooling and code-memory designs.
 
 ## Why v5
 
@@ -10,8 +13,9 @@ prose rather than mechanism:
 - `install.sh` ships only `skills/etyb/`; the 537 stack pages never reach the
   user's machine, and the docs claim "read from disk" when the design intent
   was always remote.
-- No `.claude/agents/*.md` exist, so specialist work, review, and brainstorm
-  all run inline in the user's session context — the opposite of the intent.
+- No agent definitions exist on Claude Code, so specialist work, review, and
+  brainstorm all run inline in the user's session context — the opposite of
+  the intent.
 - Hooks exist as scripts but are unregistered, documented with an invalid
   settings schema, and read `$1` instead of Claude Code's stdin JSON.
 - The always-injected skill `description` is ~3,600 chars against a 1,536-char
@@ -20,12 +24,15 @@ prose rather than mechanism:
   because currency lives in git commits, not in a continuously updatable source.
 
 v5 keeps the v4 knowledge architecture (roles, protocols, stacks, drift-check)
-and replaces the delivery mechanism with the platform's native primitives.
+and replaces the delivery mechanism with platform-native and open-standard
+primitives.
 
 ## Design principles
 
-1. **Plugin, not bare skills.** One `claude plugin install` delivers skills,
-   agents, hooks, and MCP config together. `install.sh` is retired.
+1. **One universal package.** The core is a pure Agent Skills-standard tree
+   that runs unmodified on every harness that adopted the open spec — which,
+   as of mid-2026, is all of them (see §1). Per-harness material is reduced to
+   thin adapter shims for the one non-portable surface: hooks.
 2. **Subagents own the heavy work.** Analysis, brainstorm, review, and stack
    research run in forked contexts with their own windows. The user's session
    receives distilled results only — no lag, no context pollution.
@@ -36,76 +43,74 @@ and replaces the delivery mechanism with the platform's native primitives.
    expert) is a thin skill that forks into its agent and consults stacks.
 5. **Token budget is a feature.** Hard ceilings per surface, enforced by
    structure (what loads) rather than discipline (what the model is told).
-6. **ETYB remembers the repo.** Per-repo memory persists across sessions via
-   the platform's native agent `memory` mechanism plus a maintained repo map.
+6. **ETYB remembers.** Two memory planes: *decision memory* (what we decided,
+   conventions, trouble spots — per repo, cross-session, shared across agents)
+   and *code memory* (a per-branch, commit-keyed graph of the code itself).
+   Both are delivered over MCP so every harness gets them, with graceful
+   degradation to platform-native memory where MCP is unavailable.
 
-## 1. Plugin packaging
+## 1. Universal packaging — one package, every harness
 
-```
-etyb/
-├── .claude-plugin/
-│   └── plugin.json              # name, version, description, author, homepage
-├── skills/
-│   ├── etyb/SKILL.md            # orchestrator — description ≤ 1,536 chars
-│   ├── etyb-architect/SKILL.md  # role skills (see §4), context: fork
-│   ├── etyb-review/SKILL.md
-│   ├── etyb-qa/SKILL.md
-│   └── ...
-├── agents/
-│   ├── etyb-explorer.md
-│   ├── etyb-planner.md
-│   ├── etyb-reviewer.md
-│   ├── etyb-stack-researcher.md
-│   └── etyb-cartographer.md     # repo-memory maintainer (§6)
-├── hooks/
-│   └── hooks.json               # valid Claude Code schema (§5)
-├── scripts/                     # hook handlers, stdin-JSON aware
-└── .mcp.json                    # optional: etyb-stacks MCP server (§3)
-```
+**The industry converged on ETYB's format.** Anthropic open-sourced the Agent
+Skills standard (SKILL.md; agentskills.io) in Dec 2025, and by mid-2026 it is
+natively supported by Claude Code, OpenAI Codex, Google Antigravity, ByteDance
+Trae, AWS Kiro, Cursor (2.4+), and Gemini CLI. Codex, Antigravity, Trae, and
+Gemini CLI additionally share a vendor-neutral discovery directory,
+`.agents/skills/`. MCP is supported by all seven, including remote servers.
+AGENTS.md (now stewarded by the Agentic AI Foundation) is read by all except
+Gemini CLI, which needs a one-line `contextFileName` setting.
 
-Distribution: a marketplace entry (`/plugin marketplace add e-t-y-b/etyb-skills`)
-or direct git install. Components ship at plugin root per the platform spec;
-only `plugin.json` lives in `.claude-plugin/`.
+The layered architecture:
 
-This single change closes the three v4 criticals: the stacks question becomes
-explicitly remote (§3), agents ship (§2), hooks ship wired (§5).
+| Layer | Contents | Portability |
+|---|---|---|
+| **Core (universal)** | `skills/` tree per the Agent Skills spec: orchestrator skill + role skills + stack trigger skills. Frontmatter restricted to the portable subset (`name`, `description`); Claude-only fields (`context: fork`, `agent`, `hooks`, `memory`) live in Claude adapter overlays, not the shared tree. | All harnesses |
+| **Context file** | A short generated `AGENTS.md` (charter summary + pointer to the etyb skill); `CLAUDE.md` kept for Claude Code; documented `contextFileName` flip for Gemini CLI. | All harnesses |
+| **Tools (universal)** | Remote/local MCP servers: `etyb-stacks` (§3), `etyb-memory` (§6), `etyb-code-memory` (§7). MCP config shims per harness (`.mcp.json`, `config.toml`, `mcp_config.json`, `mcp.json`, `settings.json` — syntax-only differences). | All harnesses |
+| **Adapters (thin)** | Hook wiring + native subagent definitions where the harness supports them: Claude Code (plugin: agents + hooks/hooks.json), Kiro (hooks + custom agents), Cursor (hooks + subagents), Codex (config.toml + custom agents, hooks behind `codex_hooks`), Gemini CLI (`.gemini/agents/`). Antigravity/Trae: instruction-level enforcement only. | Per harness |
+
+**Distribution:** `npx skills add e-t-y-b/etyb-skills` (vercel-labs `skills`
+CLI) installs the core tree into every detected agent's native skills
+directory — one command, 18+ harnesses, `skills-lock.json` for reproducible
+team installs, plus listing on skills.sh and `gh skills` compatibility. Claude
+Code users can alternatively install the plugin form
+(`.claude-plugin/plugin.json`), which is simply the core tree plus the Claude
+adapter (agents, hooks) packaged natively. `install.sh` is retired.
+
+**Generation, not duplication:** the per-harness adapters are generated from
+one source at release time (the `ruler`/`rulesync` transpiler pattern —
+adopting one of those tools for the rules layer is optional; our surface is
+small enough to template ourselves in `scripts/build-adapters.sh`).
+
+This resolves the v1-draft open question: the Claude plugin is no longer the
+package — it is one adapter output of the universal package.
 
 ## 2. Subagents — context isolation as the default
 
 **Rule: any work whose intermediate reads exceed ~2k tokens runs in a fork.**
 
-Agent definitions (`agents/*.md`, platform frontmatter spec):
+Agent roster (defined once, emitted per harness by the adapter build):
 
 | Agent | Purpose | Tools | Notes |
 |---|---|---|---|
-| `etyb-explorer` | codebase analysis, "understand X" | read-only | `background: true` capable |
+| `etyb-explorer` | codebase analysis, "understand X" | read-only + code-memory MCP | background-capable |
 | `etyb-planner` | plan drafting for Tier 3+ | read-only | returns plan artifact |
 | `etyb-reviewer` | stage-2 independent review | read-only | fresh context = real independence |
-| `etyb-stack-researcher` | fetch + distill remote stack pages | WebFetch, Read | the ONLY place stack pages are read |
-| `etyb-cartographer` | build/refresh repo memory | read-only + memory | `memory: project` |
+| `etyb-stack-researcher` | fetch + distill remote stack pages | WebFetch/stacks MCP | the ONLY place stack pages are read |
+| `etyb-cartographer` | maintain decision memory + repo map | read-only + memory MCP | see §6 |
 
-All role-facing agents carry `memory: project` so learning persists per repo
-across sessions (§6).
+Native emission per harness: Claude Code `.claude/agents/*.md` (with
+`memory: project`), Kiro custom agents, Cursor subagents, Codex custom agents
+(the four existing `.codex/agents/*.toml` are already correctly shaped),
+Gemini CLI `.gemini/agents/`. On Antigravity/Trae the role skills run inline
+with the same prompts (their built-in orchestration picks up parallelism).
 
-Role skills bind to agents via skill frontmatter:
-
-```yaml
----
-name: etyb-review
-description: Independent two-stage code review of the current diff.
-context: fork
-agent: etyb-reviewer
----
-```
-
-With `context: fork`, invoking the skill runs its body as the agent's task in
-an isolated window. Two-stage review finally works as designed: stage 1
-(spec conformance) in the dispatching context, stage 2 in a genuinely fresh
-reviewer context, and only the findings return to the user.
-
-Brainstorm gains a real fan-out: the orchestrator dispatches 2–3 explorer
-agents with different lenses in parallel and synthesizes, instead of the v4
-inline technique library.
+On Claude Code, role skills bind via `context: fork` + `agent:` so invoking a
+role never spends the user's window. Two-stage review finally works as
+designed: stage 1 (spec conformance) in the dispatching context, stage 2 in a
+genuinely fresh reviewer context, only findings returned. Brainstorm gains a
+real fan-out: 2–3 explorer agents with different lenses in parallel, then
+synthesis.
 
 The v4 `subagent-protocol` prose (context packets, 5-agent cap, independence
 rules) survives as the *prompt content* of these agents — it was always good
@@ -117,48 +122,44 @@ Stacks stay in this repo as the editable source of truth, but consumers never
 copy them. Two delivery tiers:
 
 **Tier A (v5.0, zero infra): manifest + raw fetch.**
-- `manifest.json` at repo root lists every page with `path`, `last_verified_on`,
+- `manifest.json` lists every page with `path`, `last_verified_on`,
   `drift_risk`, `authoritative_url`.
 - `etyb-stack-researcher` fetches manifest → page via
   `raw.githubusercontent.com/e-t-y-b/etyb-skills/main/...`.
-- Updating a page on `main` updates every user instantly. Currency stamps
-  finally mean "when this page was verified," not "when the repo was built."
+- Updating a page on `main` updates every user instantly.
 
 **Tier B (v5.x, the real middleware): `etyb-stacks` MCP server.**
-- Remote MCP server exposing tools such as
-  `stack_lookup(vendor, product, role)` and `stack_search(query)`.
-- Server returns the answer-bearing *section*, not the whole page — the token
-  optimization "tools" enable that raw fetch cannot.
-- Server-side you can add search, analytics (which pages get hit → what to
-  refresh first), staleness headers, and later private/paid stacks behind auth.
-- Plugin ships `.mcp.json`; agents discover the tools natively.
+- Remote MCP server exposing `stack_lookup(vendor, product, role)` and
+  `stack_search(query)`.
+- Returns the answer-bearing *section*, not the whole page — the token
+  optimization raw fetch cannot do.
+- Server-side: search, usage telemetry (which pages get hit → what to refresh
+  first), staleness headers, later private/paid stacks behind auth.
+- Because every target harness speaks remote MCP, this is also the
+  zero-install path: a harness with only the MCP config gets stack knowledge
+  with no skills installed at all (the "skills-over-MCP" pattern).
 
-**Degraded mode (both tiers):** in no-network environments the researcher
-states plainly that stack knowledge is unverifiable and answers from model
-knowledge with an explicit flag — same contract as v4's
-`knowledge-currency.md` degraded path, now with one owner (the researcher
-agent) instead of instructions scattered across every response.
+**Degraded mode:** in no-network environments the researcher states plainly
+that stack knowledge is unverifiable and answers from model knowledge with an
+explicit flag — one owner (the researcher agent) instead of instructions
+scattered across every response.
 
-Currency enforcement moves server/CI-side where it can actually see truth:
-`check-currency.sh` extends to per-page stamps, and a scheduled job diffs
-high-drift pages against `authoritative_url` instead of only checking stamp
-age. Batch re-stamps (508 pages with one date) are treated as a CI failure.
+Currency enforcement moves where it can see truth: `check-currency.sh`
+extends to per-page stamps; a scheduled job diffs high-drift pages against
+`authoritative_url` instead of only checking stamp age; batch re-stamps (508
+pages, one date) become a CI failure.
 
 ## 4. Skills as SDLC roles
 
-The 14 specialists + 6 verticals consolidate into role skills that share the
-five agents above rather than each demanding its own README load:
-
-- `etyb` (orchestrator) — classify, route, synthesize. Body ≤ 150 lines.
-  Tier classification moves inline into the body; the charter-read floor
-  (~4.5k tokens before a Tier 0 answer) is deleted.
+- `etyb` (orchestrator) — classify, route, synthesize. Body ≤ 150 lines,
+  description ≤ 1,536 chars. Tier classification inline; the charter-read
+  floor (~4.5k tokens before a Tier 0 answer) is deleted.
 - `etyb-architect`, `etyb-qa`, `etyb-review`, `etyb-debug`, `etyb-plan` —
-  thin forked skills. Role depth (the current specialist READMEs, pruned of
-  name-list filler) preloads into the *agent* via the agent `skills:` field,
-  so it costs the agent's window, never the user's.
-- Verticals become stack-shaped: `stacks/verticals/fintech/...` fetched
-  remotely like any vendor stack, since the review showed they carry dated
-  pricing/metrics and are not actually time-invariant.
+  thin role skills. Role depth (current specialist READMEs, pruned of
+  name-list filler) loads in the *agent's* window, never the user's.
+- Verticals become stack-shaped (`stacks/verticals/fintech/...`) fetched
+  remotely, since the review showed they carry dated pricing/metrics and are
+  not actually time-invariant.
 
 Token budget targets (structural, verified in CI by a lint that sums the
 always-on surface):
@@ -170,74 +171,142 @@ always-on surface):
 | Tier 1 answer, user-session cost | ~12,700 | ≤ 2,500 (rest in forks) |
 | Tier 3 plan, user-session cost | ~33,000+ | ≤ 5,000 (plan built by etyb-planner) |
 
-## 5. Hooks and rules — wired and valid
+## 5. Hooks and rules — wired where the harness allows
 
-`hooks/hooks.json` ships in the plugin using the current platform schema
-(nested `hooks: [{type: "command", command: ...}]` under each matcher; events
-`PreToolUse`, `PostToolUse`, `Stop`, `SessionStart`). All handler scripts are
-rewritten to parse the stdin JSON payload (`tool_input.file_path` etc.) —
-the v4 `$1` convention is retired.
+One set of handler scripts (stdin-JSON aware; the v4 `$1` convention is
+retired), wired by adapters on the harnesses with lifecycle events:
 
-Carried over, now actually firing:
-- TDD advisory on `Edit|Write` without a sibling test file.
-- Review-evidence check on `Stop` when a commit is staged.
-- Merge guard on `Bash` matching `git merge`/`git push` to protected branches.
+- **Claude Code** — plugin `hooks/hooks.json`, current schema (nested
+  `hooks: [{type: "command", command: ...}]`; events `PreToolUse`,
+  `PostToolUse`, `Stop`, `SessionStart`).
+- **Kiro** — near-identical events (`preToolUse` can block, `postToolUse`,
+  `stop`, `agentSpawn`).
+- **Cursor** — `beforeSubmitPrompt`, `PreToolUse`, `PostToolUse`, `stop`.
+- **Codex** — behind the `codex_hooks` feature flag.
+- **Antigravity / Trae / Gemini CLI** — no comparable hook surface; the
+  disciplines degrade to instruction-level enforcement in the skill text
+  (documented per adapter, not silently).
 
-New:
-- `SessionStart` hook injects the repo memory summary (§6) so every session
-  opens already knowing the repo.
+Carried over, now actually firing: TDD advisory on edit-without-test,
+review-evidence check on stop-with-staged-commit, merge guard on protected
+branches. New: `SessionStart` injects the repo memory summary (§6).
 
-Rules (hard constraints like "max 5 concurrent agents", "reviewer is
-read-only") move from prose into agent frontmatter (`tools`, `maxTurns`,
-`permissionMode`) where the platform enforces them.
+Hard constraints ("max 5 concurrent agents", "reviewer is read-only") move
+from prose into agent frontmatter (`tools`, `maxTurns`, `permissionMode`)
+where platforms enforce them.
 
-## 6. Multi-session repo memory
+## 6. Decision memory — per-repo, cross-session, cross-agent
 
-Two cooperating layers:
+**What the platform gives us (Claude Code):** agent `memory: project` writes
+`.claude/agent-memory/<agent>/MEMORY.md` + topic files; the first 200 lines /
+25KB of MEMORY.md auto-load at agent start. Documented limits that matter:
+memory is **per-agent isolated** (no sharing), **machine-local** (no sync; no
+persistence across ephemeral cloud/CI sessions), **not branch-aware**, and
+plain-text (no query). Other harnesses have even less.
 
-1. **Native agent memory.** Every ETYB agent sets `memory: project`. The
-   platform gives it a persistent per-project directory that survives
-   sessions — the agent's own accumulated understanding of this repo
-   (conventions, past decisions, known trouble spots).
-2. **Maintained repo map.** `etyb-cartographer` owns `.etyb/memory/repo-map.md`
-   (architecture, module ownership, test entry points, active plans, decision
-   log). It refreshes the map after significant merges (PostToolUse/Stop hook
-   heuristic or on-demand `etyb-map` skill) and the `SessionStart` hook
-   injects a ≤300-token summary of it.
+**Therefore v5 ships `etyb-memory`, a small MCP memory server**, and treats
+native memory as the degraded mode — exactly the owner's call: where platform
+memory falls short, tools maintain the memories.
 
-Result: ETYB is not a second controller — it is a per-repo colleague whose
-knowledge of the codebase compounds across sessions, while each individual
-session stays light.
+- **Storage:** `.etyb/memory/` in-repo (git-tracked by default → team-shared
+  and cloud/CI-durable for free; `local/` subdir gitignored for personal
+  notes). Structured JSONL/SQLite + rendered `repo-map.md`.
+- **Tools:** `memory_write(scope, topic, entry)`, `memory_query(query)`,
+  `memory_summary(budget_tokens)` — shared by ALL agents and ALL harnesses,
+  which closes the per-agent isolation and cross-machine gaps at once.
+- **Scopes:** `repo` (default, committed), `branch` (keyed to current branch,
+  merged forward by the cartographer on branch merge), `local` (personal).
+- **Injection:** `SessionStart` hook (where hooks exist) injects
+  `memory_summary(300)`; elsewhere the orchestrator skill's first action is a
+  `memory_summary` call.
+- **Curation:** `etyb-cartographer` owns compaction of stale entries and the
+  repo map (architecture, module ownership, test entry points, active plans,
+  decision log), refreshing after significant merges.
+- **Degraded mode:** no MCP available → fall back to native `memory: project`
+  (Claude) or plain `.etyb/memory/repo-map.md` reads (everywhere).
+
+## 7. Code memory — per-branch, commit-keyed code graph
+
+The goal: agents query a continuously maintained graph of the code — symbols,
+call chains, imports, blast radius — instead of re-reading the tree every
+session; and the graph tracks **each git branch at its latest commit**.
+
+**Landscape (researched 2026-07-05).** "Headroom" is a real tool (56k stars)
+but it is a context-compression layer, not a code graph — complementary, not
+competing. The relevant graph tools:
+
+| Tool | Shape | Branch/commit aware | License |
+|---|---|---|---|
+| codebase-memory-mcp | tree-sitter knowledge graph, SQLite, 14 MCP tools, team-shareable snapshot; used with Claude Code/Codex/Antigravity/Kiro | working-tree polling; no per-branch pinning | MIT |
+| GitNexus | tree-sitter graph + embedded graph DB, 17 MCP tools | **yes — `--branch` pinned indexes** | PolyForm Noncommercial |
+| Serena | live LSP symbol server (no persisted graph) | working tree only | MIT |
+| Greptile / Augment | hosted graphs, branch-aware | yes | commercial SaaS |
+| Sourcegraph SCIP | compiler-grade symbol index per commit | **yes — the reference design** | open format |
+
+**Strategy: adopt, then extend.**
+
+- **v5.0 (adopt):** ship `etyb-code-memory` as a thin wrapper/config around
+  **codebase-memory-mcp** (MIT, single static binary, SQLite, proven on the
+  exact harness set we target). Explorer/reviewer/planner agents get its
+  tools (`search_graph`, `trace_path`, `detect_changes`) in their tool lists.
+  Published benchmarks for this approach: ~10x fewer tokens and 2x fewer tool
+  calls than file-by-file exploration — directly serving the token goal.
+- **v5.x (extend — the differentiator):** add the per-branch commit-keyed
+  layer no permissively-licensed OSS tool ships, using the proven designs:
+  - **Content-addressed entries, branch tags** (Continue.dev/Cursor pattern):
+    symbols/chunks/embeddings computed once per file blob hash; a branch is a
+    set of tags over content-addressed entries. Branch switch = retag the
+    delta, not re-index. Reuse git's own Merkle tree for invalidation
+    (`git diff --name-status <indexed>..<head>` is the exact dirty set).
+  - **Nearest-commit + diff adjustment** (Sourcegraph pattern): index branch
+    heads only; answer queries on other commits from the nearest indexed
+    commit adjusted by git diff.
+  - **Storage:** sidecar `.codememory/` (gitignored), NOT `.git/objects`;
+    optional committed compressed snapshot for team warm-start
+    (codebase-memory-mcp pattern).
+- **Composition:** Headroom can sit in front as an optional compression proxy
+  for what the graph returns; decision memory (§6) stores *why*, code memory
+  stores *what is* — the cartographer links the two (decisions reference
+  graph nodes).
+
+Because delivery is MCP, code memory works identically on Claude Code, Codex,
+Antigravity, Trae, Kiro, Cursor, and Gemini CLI.
 
 ## Migration plan
 
-- **M1 — packaging:** `.claude-plugin/plugin.json`, move skills/agents/hooks
-  into plugin layout, delete `install.sh` + fix `installation.md`. Description
-  rewritten ≤ 1,536 chars.
-- **M2 — agents:** ship the five agents (port the four `.codex/agents/*.toml`
-  definitions, which are already correctly shaped, plus cartographer); convert
-  review/brainstorm/plan to `context: fork`.
+- **M1 — universal core:** restructure to the portable Agent Skills tree +
+  generated AGENTS.md; description ≤ 1,536 chars; `npx skills add`
+  distribution + Claude plugin as adapter output; delete `install.sh`.
+- **M2 — agents:** ship the five-agent roster across Claude/Codex/Kiro/
+  Cursor/Gemini adapters (port the existing `.codex/agents/*.toml`); wire
+  hooks with the correct schema on Claude/Kiro/Cursor.
 - **M3 — remote stacks Tier A:** manifest-driven fetch via
   `etyb-stack-researcher`; per-page currency CI; refresh anthropic-claude to
   the Claude 5 generation as the proving case.
-- **M4 — memory:** `memory: project` on agents, cartographer + SessionStart
-  injection.
-- **M5 — stacks Tier B:** hosted MCP server, sectioned responses, staleness
-  telemetry.
+- **M4 — decision memory:** `etyb-memory` MCP server + `.etyb/memory/`
+  layout + cartographer + SessionStart injection; native-memory fallback.
+- **M5 — code memory v1:** adopt codebase-memory-mcp via `etyb-code-memory`
+  wrapper; agent tool wiring.
+- **M6 — stacks Tier B + code memory v2:** hosted `etyb-stacks` MCP with
+  sectioned responses and staleness telemetry; per-branch commit-keyed layer
+  on the code graph.
 
-Each milestone is independently shippable; M1–M3 constitute a releasable
-v5.0.0.
+M1–M3 constitute a releasable v5.0.0. Each milestone is independently
+shippable.
 
 ## Open questions
 
-1. Stack hosting for Tier B: GitHub-backed serverless (Cloudflare Worker over
-   raw content) vs. dedicated service at `etyb.ai`? The signature already
-   points at `etyb.ai` — domain liveness must precede shipping any URL in
-   output.
+1. Stack/memory hosting for Tier B: GitHub-backed serverless (Cloudflare
+   Worker over raw content) vs. dedicated service at `etyb.ai`? Domain
+   liveness must precede shipping any URL in output.
 2. How much of the 20-specialist taxonomy survives consolidation? Proposal:
-   5 agents × role-skill prompts; verticals as stacks. Needs an eval pass
-   (skill-evolution-protocol applies to ourselves).
-3. Offline posture: ship an optional slim cache pack for air-gapped users, or
-   declare network a requirement?
-4. Codex/Antigravity parity: the adapter model survives, but v5 makes Claude
-   the reference implementation instead of the least-implemented one.
+   5 agents × role-skill prompts; verticals as stacks. Needs an eval pass.
+3. Offline posture: optional slim cache pack for air-gapped users, or declare
+   network a requirement?
+4. Code memory v2 build scope: wrap-and-extend codebase-memory-mcp (upstream
+   the branch layer?) vs. clean-room MCP server composing tree-sitter + SQLite
+   + optional SCIP ingestion (~4–8 weeks for a v1). Depends on upstream's
+   receptiveness and how central code memory becomes to ETYB's identity.
+5. Embeddings in code memory: local (fastembed-class) vs. none-at-first
+   (symbol graph only)? Symbol-graph-only ships faster and avoids a model
+   dependency.
