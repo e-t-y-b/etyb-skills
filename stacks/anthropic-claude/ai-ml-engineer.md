@@ -4,7 +4,7 @@ description: Model selection (Opus/Sonnet/Haiku), prompt caching as modeling, to
 role_overlay:
   role: ai-ml-engineer
   stack: anthropic-claude
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   products_covered:
     - Claude Opus
     - Claude Sonnet
@@ -23,7 +23,7 @@ role_overlay:
     - MCP
 ---
 
-<div class="etyb-currency-banner">Last verified: 2026-05-14 against Claude 4.x family (Opus 4.x including 1M-context, Sonnet 4.6/4.7, Haiku 4.5), Claude Agent SDK GA, Skills as first-class capability, MCP spec revision 2025-06-18.</div>
+<div class="etyb-currency-banner">Last verified: 2026-07-05 against the Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, Claude Agent SDK GA, Skills as first-class capability, MCP spec revision 2025-06-18.</div>
 
 You are ai-ml-engineer on a Claude engagement. Claude is one of three frontier model families in 2026 (alongside GPT and Gemini), and it's the model **you are running inside right now** if your harness is Claude Code. This overlay teaches you the Claude-specific design vocabulary: model selection, prompt-caching as a modeling primitive, tool-use schema discipline, extended thinking, the Memory tool, Citations, the Agent SDK, sub-agents, Computer Use, Skills, evals, and RAG. It also covers what NOT to do on Claude — patterns that look right but are anti-patterns at this platform.
 
@@ -31,10 +31,11 @@ You are ai-ml-engineer on a Claude engagement. Claude is one of three frontier m
 
 | Today's name | Older / wrong names | Why it matters |
 |--------------|---------------------|----------------|
-| **Claude Opus 4.x** | Claude 3 Opus, Claude 3.5 Opus | Older models retired; pricing and capability differ |
-| **Claude Sonnet 4.6 / 4.7** | Claude 3.5 Sonnet, Claude 3.7 Sonnet | The 3.5 Sonnet was a discrete model; 4.x is a different generation |
-| **Claude Haiku 4.5** | Claude 3 Haiku, Claude 3.5 Haiku | Haiku 4.5 has fundamentally different price/quality envelope |
-| **1M-context Opus variant** | "Claude 1M," "long-context Claude" | Pricing tiered at 200K input boundary — treat as a separate product |
+| **Claude Fable 5 / Claude Mythos 5** | "Claude 5 Opus", "Opus 5" | Mythos-class tier above Opus ($10/$50). Fable 5 is GA with dual-use safety classifiers (handle `stop_reason: "refusal"`); Mythos 5 is the classifier-free variant for approved Project Glasswing orgs |
+| **Claude Opus 4.8** | Claude 3 Opus, Claude 3.5 Opus, "Opus 4.x" | Older models retired; Opus 4.8 (May 2026) is the current GA flagship at $5/$25 |
+| **Claude Sonnet 5** | Claude 3.5 Sonnet, Sonnet 4.6/4.7 | Sonnet 5 (June 2026) is the current production default; there is no "Sonnet 4.7" |
+| **Claude Haiku 4.5** | Claude 3 Haiku, Claude 3.5 Haiku | Haiku 4.5 has fundamentally different price/quality envelope; still current |
+| **1M context window** | "Claude 1M," "long-context Claude", "premium tier" | Standard on Opus 4.6+/Sonnet 5/Fable 5 at standard per-token pricing — no >200K premium |
 | **[Claude Agent SDK](/stacks/anthropic-claude/claude-agent-sdk/)** | "claude-code-sdk", "anthropic agents", "tool-use loop" | Specific named SDK on PyPI/npm; not the Messages API |
 | **[Claude Code](/stacks/anthropic-claude/claude-code/)** | "anthropic CLI", "claude-cli", "the Claude app" | Specific product: CLI + IDE extensions with hooks/skills/sub-agents |
 | **[Skills](/stacks/anthropic-claude/skills/)** | "system prompts", "tools", "agent personas" | SKILL.md + frontmatter, description-triggered auto-load |
@@ -57,13 +58,12 @@ In 2026 the Claude lineup:
 
 | Model | Best for | $/MTok input (uncached) | $/MTok output | Context | Notes |
 |-------|----------|-------------------------|---------------|---------|-------|
-| **[Opus 4.x](/stacks/anthropic-claude/claude-opus/)** (standard) | Deep reasoning, agent teams, hardest code gen | $15 | $75 | 200K | Flagship; most expensive |
-| **[Opus 4.x](/stacks/anthropic-claude/claude-opus/)** (1M, ≤200K input) | Same, with headroom | $15 | $75 | 1M | Same price as standard up to 200K |
-| **[Opus 4.x](/stacks/anthropic-claude/claude-opus/)** (1M, >200K input) | Whole-codebase / many-doc | premium tier | premium tier | 1M | Significantly more past 200K |
-| **[Sonnet 4.6 / 4.7](/stacks/anthropic-claude/claude-sonnet/)** | Production default — best quality/cost ratio | $3 | $15 | 200K (1M variant in some configs) | **80% of production traffic should target this** |
-| **[Haiku 4.5](/stacks/anthropic-claude/claude-haiku/)** | Routing, classification, simple extraction, sub-1s | $1 | $5 | 200K | Don't underestimate — Sonnet-3.5-ish quality at 3x cheaper |
+| **Claude Fable 5** (`claude-fable-5`) | Most demanding reasoning, long-horizon autonomous agents | $10 | $50 | 1M | Mythos-class tier above Opus; always-on adaptive thinking; safety classifiers can refuse (opt into `fallbacks`); 30-day retention required. Mythos 5 = same specs, no classifiers, approved Glasswing orgs only |
+| **[Opus 4.8](/stacks/anthropic-claude/claude-opus/)** (`claude-opus-4-8`) | Deep reasoning, agent teams, hardest code gen | $5 | $25 | 1M | GA flagship; 128K max output; effort defaults to `high` |
+| **[Sonnet 5](/stacks/anthropic-claude/claude-sonnet/)** (`claude-sonnet-5`) | Production default — best quality/cost ratio | $3 ($2 intro through 2026-08-31) | $15 ($10 intro) | 1M | **80% of production traffic should target this**; 128K max output |
+| **[Haiku 4.5](/stacks/anthropic-claude/claude-haiku/)** (`claude-haiku-4-5`) | Routing, classification, simple extraction, sub-1s | $1 | $5 | 200K | Don't underestimate — Sonnet-3.5-ish quality at 3x cheaper; 64K max output |
 
-*(Prices indicative as of May 2026; verify on `https://docs.anthropic.com/en/docs/about-claude/pricing` before quoting.)*
+*(Prices verified 2026-07-05; verify on `https://docs.anthropic.com/en/docs/about-claude/pricing` before quoting.)*
 
 ### Decision framework: which Claude
 
@@ -75,18 +75,21 @@ Is the task simple classification, extraction, or routing?
    YES: Haiku 4.5. Don't reach further.
 
 Does the task involve complex multi-step reasoning, code generation, agent loops?
-   YES: Sonnet 4.7 default. Escalate to Opus only if Sonnet fails an eval.
+   YES: Sonnet 5 default. Escalate to Opus 4.8 only if Sonnet fails an eval.
 
 Does the task require >200K input tokens (entire codebase, hundreds of docs)?
-   YES: Opus 4.x 1M-context. Audit whether you really need it (RAG + caching usually wins).
+   YES: Any 1M-context model (Sonnet 5, Opus 4.8, Fable 5) — standard pricing.
+        Audit whether you really need it (RAG + caching usually wins).
 
-Is the task at the absolute frontier of difficulty (SWE-bench-hard, novel research)?
-   YES: Opus 4.x.
+Is the task at the absolute frontier of difficulty (SWE-bench-hard, novel research,
+multi-day autonomous runs)?
+   YES: Opus 4.8; escalate to Claude Fable 5 only when Opus demonstrably falls short
+        (2x Opus cost; minutes-long turns; must handle refusal fallbacks).
 ```
 
-**The most common Claude misjudgment in 2026 is defaulting to Opus when Sonnet is fine.** Opus is 5x the input cost, 5x the output cost. Most production tasks (including most agent work) run identically on Sonnet for a fraction of the spend. Always try Sonnet first; escalate based on an eval, not a vibe.
+**The most common Claude misjudgment in 2026 is defaulting to Opus when Sonnet is fine.** Opus is roughly 1.7x Sonnet's standard cost (and Fable 5 is ~3.3x). Most production tasks (including most agent work) run identically on Sonnet for a fraction of the spend. Always try Sonnet first; escalate based on an eval, not a vibe.
 
-**The second most common misjudgment is defaulting to Sonnet for everything cheap.** [Haiku 4.5](/stacks/anthropic-claude/claude-haiku/) at $1/$5 is roughly 3x cheaper than Sonnet 4.7. For routing, classification, simple extraction, gating — Haiku is the right call. Sonnet for these is wasted spend.
+**The second most common misjudgment is defaulting to Sonnet for everything cheap.** [Haiku 4.5](/stacks/anthropic-claude/claude-haiku/) at $1/$5 is roughly 3x cheaper than Sonnet 5 at standard pricing. For routing, classification, simple extraction, gating — Haiku is the right call. Sonnet for these is wasted spend.
 
 ### When to escalate from Sonnet to Opus
 
@@ -219,13 +222,14 @@ Claude 4.x emits multiple `tool_use` blocks in one turn. Your loop must handle a
 
 ## Extended Thinking — design space and gotchas
 
-[Extended Thinking](/stacks/anthropic-claude/extended-thinking/) lets Claude produce internal reasoning before its final response.
+[Extended Thinking](/stacks/anthropic-claude/extended-thinking/) lets Claude produce internal reasoning before its final response. On current models (Opus 4.6+, Sonnet 5, Fable 5) the mode is **adaptive thinking** steered by `output_config.effort` — manual `budget_tokens` returns a 400 on Opus 4.7/4.8, Sonnet 5, and Fable 5.
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
-    max_tokens=8000,
-    thinking={"type": "enabled", "budget_tokens": 4000},
+    model="claude-sonnet-5",
+    max_tokens=16000,
+    thinking={"type": "adaptive"},
+    output_config={"effort": "high"},  # low | medium | high | xhigh | max
     messages=[...]
 )
 ```
@@ -238,22 +242,23 @@ response = client.messages.create(
 
 ### When NOT to enable
 
-- Trivial tasks — classification, extraction, formatting. Wasted tokens.
-- Latency-critical paths — thinking adds latency proportional to `budget_tokens`.
-- Every-turn agent loops — costs compound; thinking on every turn often isn't necessary.
+- Trivial tasks — classification, extraction, formatting. Use `effort: "low"` (or disable where supported — not on Fable 5, where thinking is always on).
+- Latency-critical paths — thinking adds latency; lower effort before disabling.
+- Every-turn agent loops at max effort — costs compound; tune effort per route.
 
-### The signature gotcha (interleaved thinking + tool use)
+### The round-trip gotcha (interleaved thinking + tool use)
 
-With extended thinking + tools, Claude can think between tool calls. **Thinking blocks have a `signature` field.** When passing them back in subsequent turns (you must, to preserve the chain of thought), the signature must be preserved verbatim. Strip or modify it → API rejects.
+With thinking + tools, Claude thinks between tool calls. When passing thinking blocks back in subsequent turns (you must, to preserve the chain of thought), they must be preserved verbatim — including the `signature` field where present, and including empty-text blocks on Fable 5. Strip or modify them → API rejects.
 
 - The SDK handles this when you pass the entire `response.content` back as the assistant message.
-- Hand-building messages: copy `thinking` blocks verbatim, including `signature`.
+- Hand-building messages: copy `thinking` blocks verbatim.
+- Note `thinking.display` defaults to `"omitted"` on Opus 4.7/4.8, Sonnet 5, and Fable 5 — set `"summarized"` if you need readable thinking content in logs.
 
 ### Anti-patterns
 
 - **Showing thinking to end users.** It's the model's scratchpad. Display `text` blocks; log `thinking` blocks for debugging.
-- **`budget_tokens` too low.** Truncates mid-thought or skips thinking entirely.
-- **`budget_tokens` too high "to be safe."** You pay at the **output rate**. A 16K budget on every classification query is unconscionable.
+- **Sending `budget_tokens` to a current model.** Hard 400 on Opus 4.7/4.8, Sonnet 5, Fable 5. Use adaptive + effort.
+- **`effort: "max"` everywhere "to be safe."** Thinking bills at the **output rate**. Max effort on every classification query is unconscionable.
 
 ## Memory tool — what it actually is
 
@@ -454,10 +459,11 @@ TDD on Claude doesn't mean unit-testing the model. It means writing an **eval su
 
 ## 2025-2026 platform-reset items relevant to this role
 
+- **The Claude 5 generation landed June 2026.** Sonnet 5 is the production default; Claude Fable 5 / Mythos 5 sit above Opus 4.8 for the most demanding work. Fable 5 requires refusal handling (`stop_reason: "refusal"` + `fallbacks`).
 - **[Haiku 4.5](/stacks/anthropic-claude/claude-haiku/)** (Oct 2025) reset the cheap-tier envelope. Re-eval your routing — Sonnet-only routing is now wasteful.
-- **[Opus 1M-context variant](/stacks/anthropic-claude/claude-opus/)** with tiered pricing at the 200K boundary.
+- **[1M context is standard](/stacks/anthropic-claude/claude-opus/)** on Opus 4.6+/Sonnet 5/Fable 5 at standard pricing — the 200K-boundary premium is gone.
 - **[Prompt Caching](/stacks/anthropic-claude/prompt-caching/) two-tier** (5-min / 1-hour) with up to 4 breakpoints. 90% off reads.
-- **[Extended Thinking + Interleaved Thinking](/stacks/anthropic-claude/extended-thinking/)** first-class. Signature round-trip across tool turns is non-negotiable.
+- **[Adaptive Thinking](/stacks/anthropic-claude/extended-thinking/)** replaced manual budgets on current models (`budget_tokens` 400s on 4.7+/Sonnet 5/Fable 5). Thinking-block round-trip across tool turns is non-negotiable.
 - **Parallel tool use default on Claude 4.x.** Your loop must handle it.
 - **[Memory tool](/stacks/anthropic-claude/memory/)** shipped 2025 — managed memory store persisting across conversations.
 - **[Citations API](/stacks/anthropic-claude/citations/)** (2025) — stop parsing "[1]" out of prose.

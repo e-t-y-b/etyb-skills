@@ -5,7 +5,7 @@ product:
   name: Citations
   stack: anthropic-claude
   drift_risk: low
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [ai-ml-engineer, backend-architect]
   authoritative_url: https://docs.anthropic.com/en/docs/build-with-claude/citations
   notes: "Stable surface; requires document content blocks (not interpolated text); pair with Files API for uploaded documents."
@@ -44,7 +44,7 @@ Don't use Citations when:
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{
         "role": "user",

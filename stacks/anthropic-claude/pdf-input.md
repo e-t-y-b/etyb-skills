@@ -5,7 +5,7 @@ product:
   name: PDF Input
   stack: anthropic-claude
   drift_risk: low
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [ai-ml-engineer, backend-architect]
   authoritative_url: https://docs.anthropic.com/en/docs/build-with-claude/pdf-support
   notes: "Native PDF in Messages API; encrypted/scanned PDFs OCR'd internally; pair with Files API at scale."
@@ -52,7 +52,7 @@ Don't use PDF Input when:
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{
         "role": "user",

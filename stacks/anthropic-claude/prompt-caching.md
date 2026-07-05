@@ -5,7 +5,7 @@ product:
   name: Prompt Caching
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [ai-ml-engineer, backend-architect, system-architect]
   authoritative_url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching
   notes: "Pricing 1.25x/2x write; 0.1x read (90% off); two TTLs; up to 4 breakpoints. Architecture decision, not late optimization."
@@ -102,7 +102,7 @@ Without observability you don't know if caching works. Log this field; alert whe
 ## Gotchas
 
 - **Any whitespace difference invalidates.** Cache keys are based on exact prompt-prefix match. A trailing newline added during a refactor = cold cache everywhere.
-- **Model ID upgrades invalidate all caches.** Switching from `claude-sonnet-4-6-20251201` to `claude-sonnet-4-7-20260301` cold-starts caching. Plan upgrades for low-traffic windows if cost matters.
+- **Model ID upgrades invalidate all caches.** Switching from `claude-sonnet-4-6` to `claude-sonnet-5` cold-starts caching. Plan upgrades for low-traffic windows if cost matters.
 - **Caching doesn't reduce token counts in rate-limit math.** ITPM (Input Tokens Per Minute) limits count cached tokens. Caching saves money, not throughput.
 - **Output tokens not cached.** Only the input prefix is cached. The model still generates output fresh each time.
 - **Vision content invalidates.** Image content in the cached prefix means the image bytes must match exactly. Push images after the breakpoint if they change per request.

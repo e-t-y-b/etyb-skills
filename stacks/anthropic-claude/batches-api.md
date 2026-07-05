@@ -5,7 +5,7 @@ product:
   name: Batches API
   stack: anthropic-claude
   drift_risk: low
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [backend-architect, ai-ml-engineer, system-architect]
   authoritative_url: https://docs.anthropic.com/en/api/creating-message-batches
   notes: "Stable async API; 50% discount on both input and output tokens; up to 100K requests per batch."
@@ -56,7 +56,7 @@ batch = client.messages.batches.create(
         {
             "custom_id": f"ticket_{ticket.id}",
             "params": {
-                "model": "claude-haiku-4-5-20251022",
+                "model": "claude-haiku-4-5-20251001",
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": classify_prompt(ticket)}],
             },

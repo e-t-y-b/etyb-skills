@@ -186,7 +186,7 @@ Native histograms (Prometheus 3.x + OTel 1.27+): no manual bucket choice. Classi
 ```python
 with tracer.start_as_current_span("gen_ai.chat") as span:
     span.set_attribute("gen_ai.system", "anthropic")
-    span.set_attribute("gen_ai.request.model", "claude-3-5-sonnet-20241022")
+    span.set_attribute("gen_ai.request.model", "claude-sonnet-5")
     # ... TTFT capture, response handling
     span.set_attribute("gen_ai.usage.input_tokens", response.usage.input_tokens)
     span.set_attribute("gen_ai.usage.output_tokens", response.usage.output_tokens)

@@ -5,7 +5,7 @@ product:
   name: Files API
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [backend-architect, ai-ml-engineer]
   authoritative_url: https://docs.anthropic.com/en/api/files
   notes: "GA 2025; storage is workspace-scoped; lifecycle policies and PII residency considerations apply."
@@ -20,7 +20,7 @@ with open("document.pdf", "rb") as f:
     uploaded = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
 
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{
         "role": "user",

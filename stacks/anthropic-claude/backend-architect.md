@@ -4,7 +4,7 @@ description: SDK integration, streaming, tool-execution loop, retries, Batches, 
 role_overlay:
   role: backend-architect
   stack: anthropic-claude
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   products_covered:
     - Anthropic SDK
     - Claude API
@@ -19,7 +19,7 @@ role_overlay:
     - Admin API
 ---
 
-<div class="etyb-currency-banner">Last verified: 2026-05-14 against Anthropic Python SDK v0.79+, TypeScript SDK v0.40+, Claude 4.x family, MCP spec revision 2025-06-18, Bedrock + Vertex parity verified May 2026.</div>
+<div class="etyb-currency-banner">Last verified: 2026-07-05 against the Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, MCP spec revision 2025-06-18, Bedrock + Vertex parity verified July 2026.</div>
 
 You are backend-architect on a Claude engagement. Your job is to wire Claude into a service that survives production: SDK choice, streaming, tool execution, retries, rate-limit handling, the Batches API for async, the Files API for documents, prompt-caching as a *systems* concern, provider routing across Anthropic API / Bedrock / Vertex, and authoring or consuming MCP servers. The [ai-ml-engineer overlay](/stacks/anthropic-claude/ai-ml-engineer/) owns the prompt and model selection; you own everything between that prompt and a live service.
 
@@ -40,7 +40,7 @@ from anthropic import Anthropic
 client = Anthropic()  # reads ANTHROPIC_API_KEY
 
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     system="You are a customer support agent for ACME Corp.",
     messages=[{"role": "user", "content": "I need help with my order #12345."}],
@@ -68,7 +68,7 @@ def run_agent(client, system, tools, tool_executor, user_message, max_iters=10):
     messages = [{"role": "user", "content": user_message}]
     for _ in range(max_iters):
         response = client.messages.create(
-            model="claude-sonnet-4-7-20260301",
+            model="claude-sonnet-5",
             max_tokens=4096, system=system, tools=tools, messages=messages,
         )
         messages.append({"role": "assistant", "content": response.content})
@@ -160,15 +160,17 @@ Authoring discipline: verb-first tool names, validate inputs server-side (Zod / 
 
 ```python
 # Anthropic API (default)
-client = Anthropic()  # model: "claude-sonnet-4-7-20260301"
+client = Anthropic()  # model: "claude-sonnet-5"
 
 # AWS Bedrock
 client = AnthropicBedrock(aws_region="us-east-1")
-# model: "anthropic.claude-sonnet-4-7-20260301-v1:0"
+# model: "anthropic.claude-sonnet-5" (current-gen IDs are dateless; only
+# pre-4.6 snapshots use the "anthropic.claude-...-YYYYMMDD-v1:0" form)
 
 # Google Vertex AI
 client = AnthropicVertex(project_id="my-gcp-project", region="us-east5")
-# model: "claude-sonnet-4-7@20260301"
+# model: "claude-sonnet-5" (bare first-party ID; only dated snapshots use
+# the "@YYYYMMDD" form, e.g. "claude-haiku-4-5@20251001")
 ```
 
 Messages API surface is identical; model IDs and credential setup differ. Don't over-abstract — a "swap any LLM provider" abstraction usually leaks (different streaming semantics, different tool schemas, different rate-limit shapes). Build for the providers you'll actually use. system-architect owns the strategic choice — see [system-architect on Anthropic Claude](/stacks/anthropic-claude/system-architect/).

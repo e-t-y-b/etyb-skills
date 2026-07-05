@@ -1,9 +1,9 @@
 ---
 title: Anthropic Claude
-description: Anthropic Claude platform knowledge — Claude API, Opus/Sonnet/Haiku models, prompt caching, tool use, Batches, Files, Citations, Memory, Extended Thinking, Computer Use, Agent SDK, Claude Code, MCP, Skills. Current to May 2026.
+description: Anthropic Claude platform knowledge — Claude API, Fable/Mythos/Opus/Sonnet/Haiku models, prompt caching, tool use, Batches, Files, Citations, Memory, Extended/Adaptive Thinking, Computer Use, Agent SDK, Claude Code, MCP, Skills. Current to July 2026.
 stack:
   vendor: anthropic-claude
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   drift_risk_default: high
   applies_to_roles:
     - backend-architect
@@ -42,7 +42,7 @@ This Stack ships in **all tiers** — Lite, Core, and Pro. Claude is the substra
 
 ## Currency
 
-<div class="etyb-currency-banner">Last verified: 2026-05-14 against Claude 4.x family (Opus 4.x + 1M-context, Sonnet 4.6/4.7, Haiku 4.5), Claude Agent SDK GA, Claude Code on weekly cadence, MCP spec revision 2025-06-18.</div>
+<div class="etyb-currency-banner">Last verified: 2026-07-05 against the Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, Claude Agent SDK GA, Claude Code on weekly cadence, MCP spec revision 2025-06-18.</div>
 
 The Anthropic surface drifts fast — model IDs rotate every 2-3 months, beta flags ship to GA on a quarterly cadence, and the MCP spec still evolves. If today's date is more than 90 days past the `last_verified_on` above, treat model IDs, pricing numbers, beta-header flags, and tool versions with extra care — the [drift-check protocol](/conventions/knowledge-currency/) governs how agents handle staleness. The default `drift_risk` for this Stack is **high** for that reason.
 
@@ -50,11 +50,11 @@ The Anthropic surface drifts fast — model IDs rotate every 2-3 months, beta fl
 
 Critical context. An LLM with a 2024 cutoff will get most of these wrong:
 
-- **Model name rotation.** Claude 3 → 3.5 → 3.7 → 4 (May 2025) → 4.1 → 4.5 → 4.6 → 4.7 across 2025-2026. Current production default is **Claude Sonnet 4.7** (or the latest 4.x Sonnet at read time). `claude-3-opus-20240229` is retired.
-- **Opus 4.x 1M-context variant.** Tiered pricing: ≤200K input at standard rate, >200K at premium. Don't reflexively stuff a million tokens into context.
+- **Model name rotation.** Claude 3 → 3.5 → 3.7 → 4 (May 2025) → 4.1 → 4.5 → 4.6 → 4.7 (Apr 2026) → Opus 4.8 (May 2026) → **the Claude 5 generation** (Fable 5 / Mythos 5, June 2026; Sonnet 5, June 2026). Current production default is **Claude Sonnet 5** (`claude-sonnet-5`); GA flagship is **Claude Opus 4.8** (`claude-opus-4-8`); the Mythos-class tier above Opus is **Claude Fable 5** (`claude-fable-5`, $10/$50 — GA with dual-use safety classifiers) / **Claude Mythos 5** (`claude-mythos-5`, classifier-free, approved Project Glasswing orgs only). `claude-3-opus-20240229` is retired. Dateless IDs (4.6 generation onward) are pinned snapshots — never append a date suffix.
+- **1M context at standard pricing.** Opus 4.6+, Sonnet 5/4.6, and Fable 5 include the full 1M-token window with no >200K premium. Still don't reflexively stuff a million tokens into context — input cost scales linearly.
 - **Haiku 4.5** (Oct 2025) reset the cheap-tier envelope to ~Sonnet-3.5 quality, opening new routing patterns. Reconsider "Sonnet for everything" defaults.
 - **Prompt caching is two-tier.** 5-minute TTL (1.25x write, 0.1x read) is default; 1-hour TTL (2x write, 0.1x read) for stable long contexts. Up to **4 cache breakpoints** per request. Cache reads are **90% off**.
-- **Extended Thinking + Interleaved Thinking** (2025) are first-class. Thinking blocks have `signature` fields that must round-trip across tool-use turns.
+- **Extended Thinking became Adaptive Thinking.** Current models (Opus 4.6+, Sonnet 5, Fable 5) use `thinking: {type: "adaptive"}` + `output_config.effort`; manual `budget_tokens` returns 400 on Opus 4.7/4.8, Sonnet 5, and Fable 5. Thinking blocks must round-trip verbatim across tool-use turns.
 - **Computer Use** went from public beta (Oct 2024) to production-grade. Tool versions (`computer_20250124`, `computer_20251022`...) are **tied to model versions** — you cannot mix and match.
 - **Memory tool** shipped 2025 as a first-class capability — managed memory store persisting across conversations.
 - **Citations API** (2025) returns source-grounded responses with character-level spans. Don't parse "[1]" out of prose anymore.
@@ -65,7 +65,7 @@ Critical context. An LLM with a 2024 cutoff will get most of these wrong:
 - **Skills as a first-class capability** (2025-2026). `SKILL.md` + frontmatter, description-triggered auto-load. **This ETYB Stack is itself a Skill.**
 - **MCP went from Nov 2024 launch to industry standard.** Spec at 2025-06-18 revision; adopted by OpenAI, Google, Microsoft, JetBrains, Cursor, Zed. **Donated to the Linux Foundation under the Agentic AI Foundation (2026).** If you're building agent tooling in 2026, build it as an MCP server first.
 - **Bedrock + Vertex + Anthropic API parity** — Claude available on all three with effectively the same Messages API. Model IDs differ; SDK abstracts most of the rest.
-- **Pricing is stratified.** Cache writes cost more; cache reads cost a fraction; Batches cost half; >200K input on 1M-context Opus is premium. Don't quote a single $/MTok number.
+- **Pricing is stratified.** Cache writes cost more; cache reads cost a fraction; Batches cost half; Sonnet 5 has introductory pricing ($2/$10) through 2026-08-31; the old >200K long-context premium is gone. Don't quote a single $/MTok number.
 
 If you find yourself recommending `claude-3-opus-20240229`, hand-rolling a tool loop instead of using the Agent SDK, base64-inlining PDFs into every request, or treating prompt caching as "an optimization to consider later" — you're using stale knowledge.
 
@@ -76,9 +76,9 @@ Per-product pages under `/stacks/anthropic-claude/<product>/`. Drift risk reflec
 | Product | Drift risk | Why |
 |---|---|---|
 | [Claude API (Messages)](/stacks/anthropic-claude/claude-api/) | <span class="etyb-drift-badge" data-risk="high">high</span> | Model names rotate every 2-3 months; pricing changes; new beta flags every release |
-| [Claude Opus](/stacks/anthropic-claude/claude-opus/) | <span class="etyb-drift-badge" data-risk="high">high</span> | 1M-context variant priced separately (>200K input premium); model IDs versioned by date |
-| [Claude Sonnet](/stacks/anthropic-claude/claude-sonnet/) | <span class="etyb-drift-badge" data-risk="high">high</span> | Current default for production; 4.6/4.7 cadence |
-| [Claude Haiku](/stacks/anthropic-claude/claude-haiku/) | <span class="etyb-drift-badge" data-risk="medium">medium</span> | Haiku 4.5 (Oct 2025) reset price/quality envelope |
+| [Claude Opus](/stacks/anthropic-claude/claude-opus/) | <span class="etyb-drift-badge" data-risk="high">high</span> | Opus 4.8 current; 1M context standard-priced; Fable 5 / Mythos 5 tier above |
+| [Claude Sonnet](/stacks/anthropic-claude/claude-sonnet/) | <span class="etyb-drift-badge" data-risk="high">high</span> | Sonnet 5 (June 2026) current default for production; intro pricing through 2026-08-31 |
+| [Claude Haiku](/stacks/anthropic-claude/claude-haiku/) | <span class="etyb-drift-badge" data-risk="medium">medium</span> | Haiku 4.5 (Oct 2025) reset price/quality envelope; still current |
 | [Prompt Caching](/stacks/anthropic-claude/prompt-caching/) | <span class="etyb-drift-badge" data-risk="medium">medium</span> | Two TTLs, pricing 1.25x/2x write, 0.1x read; up to 4 breakpoints |
 | [Tool Use](/stacks/anthropic-claude/tool-use/) | <span class="etyb-drift-badge" data-risk="medium">medium</span> | Schema is stable; parallel tool use + `tool_choice` evolve per model |
 | [Batches API](/stacks/anthropic-claude/batches-api/) | <span class="etyb-drift-badge" data-risk="low">low</span> | 50% discount, async; up to 100K requests / 256MB / 24h |

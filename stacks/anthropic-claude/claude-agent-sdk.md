@@ -5,7 +5,7 @@ product:
   name: Claude Agent SDK
   stack: anthropic-claude
   drift_risk: high
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [backend-architect, ai-ml-engineer, system-architect]
   authoritative_url: https://docs.anthropic.com/en/api/claude-code-sdk
   notes: "Released 2025; replaces ad-hoc agent loops; harness conventions still settling — verify against release notes."
@@ -58,7 +58,7 @@ Skip the SDK for:
 from claude_agent_sdk import Agent
 
 agent = Agent(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     system="...",
     tools=[...],
     max_iters=10,

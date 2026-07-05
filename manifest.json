@@ -289,7 +289,7 @@
   "stacks_pages": [
     {
       "path": "stacks/anthropic-claude/SKILL.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
@@ -300,47 +300,47 @@
     },
     {
       "path": "stacks/anthropic-claude/ai-ml-engineer.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
       "path": "stacks/anthropic-claude/anthropic-sdk.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/api/client-sdks"
     },
     {
       "path": "stacks/anthropic-claude/backend-architect.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
       "path": "stacks/anthropic-claude/batches-api.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "low",
       "authoritative_url": "https://docs.anthropic.com/en/api/creating-message-batches"
     },
     {
       "path": "stacks/anthropic-claude/bedrock-provider.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/api/claude-on-amazon-bedrock"
     },
     {
       "path": "stacks/anthropic-claude/citations.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "low",
       "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/citations"
     },
     {
       "path": "stacks/anthropic-claude/claude-agent-sdk.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/api/claude-code-sdk"
     },
     {
       "path": "stacks/anthropic-claude/claude-api.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/api/"
     },
@@ -352,43 +352,43 @@
     },
     {
       "path": "stacks/anthropic-claude/claude-haiku.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
     },
     {
       "path": "stacks/anthropic-claude/claude-opus.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
     },
     {
       "path": "stacks/anthropic-claude/claude-sonnet.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/docs/about-claude/models"
     },
     {
       "path": "stacks/anthropic-claude/computer-use.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/docs/agents-and-tools/computer-use"
     },
     {
       "path": "stacks/anthropic-claude/extended-thinking.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high",
       "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking"
     },
     {
       "path": "stacks/anthropic-claude/files-api.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/api/files"
     },
     {
       "path": "stacks/anthropic-claude/index.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
@@ -405,19 +405,19 @@
     },
     {
       "path": "stacks/anthropic-claude/pdf-input.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "low",
       "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/pdf-support"
     },
     {
       "path": "stacks/anthropic-claude/prompt-caching.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching"
     },
     {
       "path": "stacks/anthropic-claude/security-engineer.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
@@ -434,7 +434,7 @@
     },
     {
       "path": "stacks/anthropic-claude/system-architect.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "high"
     },
     {
@@ -445,7 +445,7 @@
     },
     {
       "path": "stacks/anthropic-claude/vertex-ai-provider.md",
-      "last_verified_on": "2026-05-14",
+      "last_verified_on": "2026-07-05",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/api/claude-on-vertex-ai"
     },

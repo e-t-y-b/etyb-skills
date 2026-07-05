@@ -5,7 +5,7 @@ product:
   name: Anthropic SDK (multi-lang)
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [backend-architect, ai-ml-engineer]
   authoritative_url: https://docs.anthropic.com/en/api/client-sdks
   notes: "Python + TypeScript + Go + Java + Ruby first-party. Same SDK supports Anthropic API, Bedrock, Vertex via different constructors."
@@ -33,7 +33,7 @@ For agentic loops, layer the [Claude Agent SDK](/stacks/anthropic-claude/claude-
 
 ## 2025-2026 currency anchors
 
-- **Python SDK v0.79+** and **TypeScript SDK v0.40+** as of May 2026; verify current versions against package registries.
+- **SDK versions move fast** — verify current versions against the package registries before pinning; review changelogs on upgrade.
 - **Bedrock + Vertex provider clients** ship in the same package — `AnthropicBedrock` and `AnthropicVertex` classes alongside `Anthropic`.
 - **Async clients exist in Python (`AsyncAnthropic`) and Go (context-aware methods).** TypeScript is always async. Java has both blocking and reactive flavors.
 - **Streaming helpers** — `client.messages.stream()` in Python / TypeScript handles SSE event assembly. Don't parse raw SSE unless you must.
@@ -49,7 +49,7 @@ client = AsyncAnthropic()
 
 async def chat(user_message: str) -> str:
     response = await client.messages.create(
-        model="claude-sonnet-4-7-20260301",
+        model="claude-sonnet-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": user_message}],
     )
@@ -68,12 +68,14 @@ client = Anthropic()
 # AWS Bedrock
 from anthropic import AnthropicBedrock
 client = AnthropicBedrock(aws_region="us-east-1")
-# Model ID format: "anthropic.claude-sonnet-4-7-20260301-v1:0"
+# Model ID format: "anthropic.claude-sonnet-5" (current-gen, dateless);
+# pre-4.6 snapshots use "anthropic.claude-haiku-4-5-20251001-v1:0"
 
 # Google Vertex AI
 from anthropic import AnthropicVertex
 client = AnthropicVertex(project_id="my-gcp-project", region="us-east5")
-# Model ID format: "claude-sonnet-4-7@20260301"
+# Model ID format: "claude-sonnet-5" (bare first-party ID for current-gen);
+# dated snapshots use "@", e.g. "claude-haiku-4-5@20251001"
 ```
 
 The Messages API surface is identical across the three; model ID format and credential handling differ.
@@ -82,7 +84,7 @@ The Messages API surface is identical across the three; model ID format and cred
 
 ```python
 with client.messages.stream(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Write a short poem."}],
 ) as stream:
@@ -93,7 +95,7 @@ with client.messages.stream(
 
 ```typescript
 const stream = await client.messages.stream({
-  model: 'claude-sonnet-4-7-20260301',
+  model: 'claude-sonnet-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: 'Write a short poem.' }],
 });
