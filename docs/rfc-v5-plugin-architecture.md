@@ -297,6 +297,38 @@ competing. The relevant graph tools:
 Because delivery is MCP, code memory works identically on Claude Code, Codex,
 Antigravity, Trae, Kiro, Cursor, and Gemini CLI.
 
+## Licensing & provenance policy
+
+ETYB remains MIT and open source. Rules that keep it that way (engineering
+guidance, not legal advice):
+
+1. **Allowed dependency licenses:** MIT, BSD, ISC, Apache-2.0, public domain.
+   Apache-2.0 components keep their LICENSE/NOTICE files in any distribution;
+   a `THIRD-PARTY-NOTICES` file at repo root aggregates all bundled
+   attributions. **Never** GPL/AGPL (AGPL reaches through the network into
+   hosted services), and never PolyForm/noncommercial (GitNexus is excluded
+   for exactly this).
+2. **Bundle vs. install-on-setup:** bundling a third-party binary/code means
+   shipping its license text; having setup fetch it from the upstream release
+   keeps obligations upstream. `etyb-code-memory` defaults to
+   install-on-setup.
+3. **Branding vs. provenance:** everything is presented under the ETYB
+   interface, but provenance is never obscured — notices stay intact, and the
+   public repo makes composition inspectable by design. Hosted services
+   (stacks Tier B, hosted memory) carry no disclosure obligations because
+   nothing is distributed; that is the legitimate "behind the scenes" layer.
+   No third-party trademarks in ETYB branding without permission.
+4. **Learn-and-build is unrestricted:** techniques (Merkle-diff indexing,
+   branch-tag content addressing, nearest-commit diff adjustment, PageRank
+   repo maps, SCIP ingestion) are ideas, not copyrightable expression —
+   clean-room implementations carry no obligation. Verbatim snippets from
+   permissive repos keep their headers. ETYB-original layers (the per-branch
+   commit-keyed graph) are ETYB IP and may be licensed independently of the
+   MIT core (e.g., hosted-only enhancements).
+5. **Commercial SaaS (Greptile, Augment, etc.):** never wrapped or resold
+   without a written agreement; at most offered as optional user-configured
+   backends.
+
 ## Migration plan
 
 - **M1 — universal core:** restructure to the portable Agent Skills tree +
