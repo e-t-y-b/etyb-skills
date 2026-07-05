@@ -75,6 +75,31 @@ CREATE TABLE sessions (id TEXT PRIMARY KEY, harness TEXT, started INTEGER,
   memory_writes INTEGER DEFAULT 0, notes TEXT);
 ```
 
+**SQLite fitness envelope (why this holds):** precedent — the benchmarked
+codebase-memory-mcp is SQLite, proven at 28M LOC; embedded graph DBs are the
+riskier bet (Kuzu archived 2026). Expected scale for a large repo (~5M LOC):
+2–5M symbol rows, 10–30M edge rows, single-digit-GB DB — well within SQLite
+range with the indexes above. Concurrency: WAL — one writer (the indexer,
+batched transactions of ≥500 files), many readers (MCP queries during
+indexing). Traversals use recursive CTEs and are SAFE ONLY BECAUSE the tool
+contracts bound depth (trace_path ≤4, blast_radius ≤2) — never add an
+unbounded traversal tool; whole-graph products (module map for the
+visualizer) are precomputed and cached in `lens_cache(project, lens, json,
+computed_at)`, not queried live. `code_search` is backed by FTS5
+(`symbols_fts` over name+signature, trigram tokenizer) — LIKE-scans are not
+acceptable. Perf targets (soft, logged in CI): code_search p95 <100ms and
+trace_path p95 <500ms on a 1M-symbol DB.
+
+**Known-gap register vs the benchmarked tool (tracked, not hidden):**
+(a) edge resolution — we ship heuristic name/import resolution; the
+benchmarked tool adds LSP-style type resolution (10 langs). Upgrade path
+0.2: SCIP index ingestion (Apache-2.0 format) or LSP-assisted resolution;
+E1-T4 measures resolution rate so the gap is quantified per language.
+(b) semantic search — we defer embeddings; their code_search is
+embedding-backed. Gated by the E2-T8 benchmark: if hub-assisted answer
+quality on search-style questions falls below the target, embeddings
+(sqlite-vec + a local code-embedding model) get pulled into 0.2 scope.
+
 **Incremental algorithm (frozen):** on index/update of repo R branch B:
 `git rev-parse B` → head. If `branch_state` empty → full walk of
 `git ls-tree -r B` (path, blob hash); parse only hashes missing from

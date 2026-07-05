@@ -23,6 +23,7 @@ Rationale: `../rfc-etyb-ai-0.1.md`. Contracts (FROZEN):
 | E2-T5 | Session tracking | E2-T2 | todo |
 | E2-T6 | Harness auto-config (`etybd connect`) | E2-T1 | todo |
 | E2-T7 | Companion skill | E2-T2 | todo |
+| E2-T8 | Token/quality benchmark harness | E2-T2, E2-T7 | todo |
 | E3-T1 | Electron shell + daemon lifecycle | E2-T1 | todo |
 | E3-T2 | Projects sidebar + repo browser | E3-T1, E2-T2 | todo |
 | E3-T3 | Code-graph canvas (WebGL) | E3-T1, E2-T3 | todo |
@@ -137,6 +138,22 @@ never-writes-without-confirm test.
 (description draft provided there); `etybd connect` also installs it into
 detected harnesses' skill dirs (same confirm flow). **Accept:** skill
 passes spec-shape validation; description ≤1,024 chars; install flow test.
+
+**E2-T8 Token/quality benchmark harness.** Replicate the
+codebase-memory-mcp evaluation shape at small scale: a fixture set of ≥20
+questions across ≥3 real OSS repos (mixed sizes), three categories —
+locate ("where is X defined/handled"), trace ("what calls X / what breaks
+if X changes"), explain ("how does flow Y work"). Run each question through
+an agent (a) with hub tools + companion skill and (b) without (file
+exploration only); record tokens, tool calls, and graded answer quality
+(rubric in repo). Store results in `bench/results/` with commit + date.
+**Gates (frozen):** locate+trace categories must show ≥5x token reduction
+at equal-or-better quality; if search-style (locate) quality with the hub
+is below the no-hub baseline, embeddings move into 0.2 scope (ARCH §2
+known-gap register); if trace quality lags due to unresolved edges,
+resolution upgrade (SCIP/LSP) moves into 0.2 scope. Re-run per minor
+release. **Accept:** harness runs end-to-end in CI (manual trigger);
+first results committed and summarized in the PR.
 
 ## E3 — workspace app
 
