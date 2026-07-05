@@ -51,23 +51,43 @@ primitives.
 
 ## 1. Universal packaging — one package, every harness
 
-**The industry converged on ETYB's format.** Anthropic open-sourced the Agent
-Skills standard (SKILL.md; agentskills.io) in Dec 2025, and by mid-2026 it is
-natively supported by Claude Code, OpenAI Codex, Google Antigravity, ByteDance
-Trae, AWS Kiro, Cursor (2.4+), and Gemini CLI. Codex, Antigravity, Trae, and
-Gemini CLI additionally share a vendor-neutral discovery directory,
-`.agents/skills/`. MCP is supported by all seven, including remote servers.
-AGENTS.md (now stewarded by the Agentic AI Foundation) is read by all except
-Gemini CLI, which needs a one-line `contextFileName` setting.
+**The industry converged on ETYB's format.** Anthropic published the Agent
+Skills standard (SKILL.md; agentskills.io, spec repo
+github.com/agentskills/agentskills, Anthropic-stewarded) as an open standard
+in Dec 2025. By mid-2026 the official client showcase lists **42 adopters**,
+including every target harness: Claude Code, OpenAI Codex, Google Antigravity,
+ByteDance Trae, AWS Kiro, Cursor (2.4+) — plus GitHub Copilot/VS Code,
+Windsurf, Cline, Roo Code, OpenCode, Amp, Goose, and Factory. Codex,
+Antigravity, and Trae share a vendor-neutral discovery directory,
+`.agents/skills/`; several others (OpenCode, Amp) also read `.claude/skills/`
+and `.agents/skills/` for compatibility. MCP is supported across the board,
+including remote servers. AGENTS.md (stewarded by the Linux Foundation's
+Agentic AI Foundation, 60k+ OSS projects) is read natively by Codex, Copilot,
+Cursor, Windsurf, Trae, Kiro, Antigravity, and most others — but NOT by
+Claude Code, whose sanctioned bridge is a `CLAUDE.md` containing `@AGENTS.md`
+(kept alongside the generated AGENTS.md), nor by Gemini CLI without a
+settings flip.
+
+Note: Gemini CLI adopted the standard but is being sunset into the
+closed-source Antigravity CLI (stopped serving requests June 2026) — treat
+Antigravity as the Google target, not Gemini CLI.
+
+Open-spec frontmatter is `name` (1–64 chars) + `description` (**1–1,024
+chars**) required, with `license`, `compatibility`, and `metadata` as legal
+optional fields — so ETYB's existing frontmatter shape is spec-compliant;
+only the description length is not. The portable core targets the 1,024-char
+spec cap (which also satisfies Claude Code's 1,536-char listing cap).
+Everything else (`context: fork`, `agent`, `hooks`, `when_to_use`, `paths`)
+is a vendor extension and belongs in adapter overlays.
 
 The layered architecture:
 
 | Layer | Contents | Portability |
 |---|---|---|
 | **Core (universal)** | `skills/` tree per the Agent Skills spec: orchestrator skill + role skills + stack trigger skills. Frontmatter restricted to the portable subset (`name`, `description`); Claude-only fields (`context: fork`, `agent`, `hooks`, `memory`) live in Claude adapter overlays, not the shared tree. | All harnesses |
-| **Context file** | A short generated `AGENTS.md` (charter summary + pointer to the etyb skill); `CLAUDE.md` kept for Claude Code; documented `contextFileName` flip for Gemini CLI. | All harnesses |
-| **Tools (universal)** | Remote/local MCP servers: `etyb-stacks` (§3), `etyb-memory` (§6), `etyb-code-memory` (§7). MCP config shims per harness (`.mcp.json`, `config.toml`, `mcp_config.json`, `mcp.json`, `settings.json` — syntax-only differences). | All harnesses |
-| **Adapters (thin)** | Hook wiring + native subagent definitions where the harness supports them: Claude Code (plugin: agents + hooks/hooks.json), Kiro (hooks + custom agents), Cursor (hooks + subagents), Codex (config.toml + custom agents, hooks behind `codex_hooks`), Gemini CLI (`.gemini/agents/`). Antigravity/Trae: instruction-level enforcement only. | Per harness |
+| **Context file** | A short generated `AGENTS.md` (charter summary + pointer to the etyb skill; keep under Codex's 32 KiB combined-chain cap); `CLAUDE.md` containing `@AGENTS.md` for Claude Code. | All harnesses |
+| **Tools (universal)** | Remote/local MCP servers: `etyb-stacks` (§3), `etyb-memory` (§6), `etyb-code-memory` (§7). MCP config shims per harness (`.mcp.json`, `config.toml`, `mcp_config.json`, `mcp.json`, `settings.json` — syntax-only differences). Build constraints from the 2026 client matrix: transport is **streamable HTTP** (SSE is deprecated in Claude Code and unsupported in Antigravity); auth must accept static bearer tokens alongside OAuth (Antigravity CLI's OAuth is currently broken); and servers must be **tool-frugal** — some harnesses cap active MCP tools (Cursor ~40, Windsurf 100 across all servers), so ETYB budgets ≤ 8 tools total across its three servers. | All harnesses |
+| **Adapters (thin)** | Hook wiring + native subagent definitions where the harness supports them. Plugin packaging has converged in three harnesses, so adapters emit native plugin forms where they exist: Claude Code (`.claude-plugin/plugin.json`: agents + hooks/hooks.json), Cursor (`.cursor-plugin/plugin.json`: agents + hooks + skills), Gemini CLI (`gemini-extension.json`), plus Kiro (hooks + custom agents + `skill://` resources), Codex (config.toml + custom agents + hooks.json), Antigravity CLI (`agy plugin`). Trae: instruction-level enforcement only. | Per harness |
 
 **Distribution:** `npx skills add e-t-y-b/etyb-skills` (vercel-labs `skills`
 CLI) installs the core tree into every detected agent's native skills
@@ -182,10 +202,15 @@ retired), wired by adapters on the harnesses with lifecycle events:
 - **Kiro** — near-identical events (`preToolUse` can block, `postToolUse`,
   `stop`, `agentSpawn`).
 - **Cursor** — `beforeSubmitPrompt`, `PreToolUse`, `PostToolUse`, `stop`.
-- **Codex** — behind the `codex_hooks` feature flag.
-- **Antigravity / Trae / Gemini CLI** — no comparable hook surface; the
-  disciplines degrade to instruction-level enforcement in the skill text
-  (documented per adapter, not silently).
+- **Codex** — full hooks system (`hooks.json` in `.codex/` or `[hooks]` in
+  config.toml): `session-start`, `pre/post-tool-use`, `stop`,
+  `subagent-start/stop` — the existing `.codex/hooks/*.py` scripts rewire
+  onto it.
+- **Gemini CLI extensions** — `hooks/hooks.json` with `BeforeTool`/`AfterTool`
+  events (where that runtime is still in use).
+- **Antigravity / Trae** — no hook surface; the disciplines degrade to
+  instruction-level enforcement in the skill text (documented per adapter,
+  not silently).
 
 Carried over, now actually firing: TDD advisory on edit-without-test,
 review-evidence check on stop-with-staged-commit, merge guard on protected
