@@ -19,12 +19,14 @@ fail() {
 
 command -v jq >/dev/null 2>&1 || fail "jq is required"
 
-# 1. Exactly one installable skill directory.
+# 1. The etyb orchestrator skill plus thin etyb-* role skills (M2-T2).
 dirs="$(find skills -mindepth 1 -maxdepth 1 -type d \
           -exec test -f {}/SKILL.md \; -print \
         | sed 's|^skills/||' \
         | sort)"
-[[ "$dirs" == "etyb" ]] || fail "skills/ must contain exactly one skill (etyb), found: $dirs"
+grep -qx 'etyb' <<<"$dirs" || fail "skills/ must contain the etyb skill, found: $dirs"
+extra="$(grep -vx 'etyb' <<<"$dirs" | grep -vE '^etyb-[a-z][a-z-]*$' || true)"
+[[ -z "$extra" ]] || fail "skills/ may only contain etyb and etyb-* role skills, found: $extra"
 
 # 2. manifest.json .skill is { etyb: ... }
 manifest_keys="$(jq -r '.skill | keys[]' manifest.json | sort)"
@@ -55,4 +57,4 @@ vertical_count=$(find skills/etyb/references/verticals -mindepth 1 -maxdepth 1 -
 [[ "$protocol_count" == "9" ]] || fail "expected 9 protocol references, found $protocol_count"
 [[ "$vertical_count" == "6" ]] || fail "expected 6 vertical references, found $vertical_count"
 
-echo "✓ validate-skill-manifest-sync: v4 layout aligned (1 skill, 14+9+6 references, no tiers)"
+echo "✓ validate-skill-manifest-sync: layout aligned (etyb + etyb-* role skills, 14+9+6 references, no tiers)"

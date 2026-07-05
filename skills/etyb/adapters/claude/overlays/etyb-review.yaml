@@ -1,0 +1,5 @@
+# Claude-only frontmatter for skills/etyb-review/SKILL.md.
+# Merged into the emitted plugin copy by the adapter generator (M2-T5);
+# never applied to the shared tree.
+context: fork
+agent: etyb-reviewer

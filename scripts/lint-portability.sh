@@ -16,12 +16,12 @@ require_file() {
   [[ -f "$1" ]] || fail "missing required file: $1"
 }
 
-# In v4 there is exactly one installable skill: etyb. The 20 specialists,
-# 9 protocols, and 6 verticals live as internal references under it.
-skill_count=$(
+# One orchestrator skill (etyb) plus thin etyb-* role skills (v5 M2-T2).
+# Specialists, protocols, and verticals live as internal references under etyb.
+skill_dirs=$(
   find skills -mindepth 1 -maxdepth 1 -type d -exec test -f "{}/SKILL.md" \; -print \
-    | wc -l \
-    | tr -d ' '
+    | sed 's|^skills/||' \
+    | sort
 )
 
 manifest_skill_count=$(
@@ -32,8 +32,21 @@ manifest_skill_count=$(
   ' manifest.json
 )
 
-[[ "$skill_count" == "1" ]] || fail "expected 1 installable skill (etyb), found $skill_count"
+grep -qx 'etyb' <<<"$skill_dirs" || fail "skills/etyb (the orchestrator skill) is missing"
+if grep -vx 'etyb' <<<"$skill_dirs" | grep -qvE '^etyb-[a-z][a-z-]*$'; then
+  fail "skills/ may only contain etyb and etyb-* role skills, found: $skill_dirs"
+fi
 [[ "$manifest_skill_count" == "1" ]] || fail "manifest.json .skill must contain exactly one entry, found $manifest_skill_count"
+
+# Role skills stay portable in the shared tree: Claude-only frontmatter
+# (context: fork, agent: ...) lives in adapters/claude/overlays/ and is
+# merged only into emitted plugin copies by the adapter generator (M2-T5).
+while IFS= read -r role_dir; do
+  if rg -n "^(context|agent):" "$role_dir/SKILL.md" >/dev/null; then
+    fail "$role_dir/SKILL.md carries Claude-only frontmatter (context:/agent:) — move it to skills/etyb/adapters/claude/overlays/"
+  fi
+  require_file "skills/etyb/adapters/claude/overlays/$(basename "$role_dir").yaml"
+done < <(find skills -mindepth 1 -maxdepth 1 -type d -name 'etyb-*' | sort)
 
 # Internal reference libraries — verify each has the expected count.
 specialist_count=$(find skills/etyb/references/specialists -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
