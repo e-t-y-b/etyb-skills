@@ -49,7 +49,7 @@ your-project/
         └── <each specialist>/     # the 20+ specialists, each independent
 ```
 
-The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. Distribution scripts should copy or symlink skills into `.agents/skills/` and install the project-scoped `.codex/` runtime into the workspace root.
+The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. `npx skills add` places the skill into `.agents/skills/`; the project-scoped `.codex/` runtime is emitted by the v5 M2 adapter generator (`scripts/build-adapters.sh`) — until it lands, Codex runs model-trusted.
 
 ## Load These On Top Of Core
 

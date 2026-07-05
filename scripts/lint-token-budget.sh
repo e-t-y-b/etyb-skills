@@ -5,7 +5,7 @@
 # Enforces the v5 always-on token budget structurally:
 #   (a) every SKILL.md description ≤ 1,024 chars (Agent Skills open-spec cap)
 #   (b) the etyb skill's descriptions summed ≤ 1,600 chars (~400 tokens):
-#       counts skills/etyb/**/SKILL.md and skills/etyb-*/**/SKILL.md — the
+#       counts skills/etyb/SKILL.md and skills/etyb-*/SKILL.md — the
 #       skills a user installs together. stacks/*/SKILL.md are counted for
 #       (a) only: they are separate per-vendor skills, installed selectively,
 #       so they don't share the always-on budget.
@@ -15,6 +15,11 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+
+if ! python3 -c "import yaml" 2>/dev/null; then
+  echo "✗ lint-token-budget: needs python3 with PyYAML (pip install pyyaml)" >&2
+  exit 1
+fi
 
 fail=0
 err() { echo "✗ lint-token-budget: $1" >&2; fail=1; }

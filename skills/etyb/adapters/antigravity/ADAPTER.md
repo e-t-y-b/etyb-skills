@@ -21,7 +21,7 @@ On Antigravity, ETYB is model-trusted like on Codex, but this repo does not ship
 
 Antigravity discovers skills from:
 
-- **Workspace:** `<workspace-root>/.agent/skills/` (note: singular `.agent/`, not `.agents/`)
+- **Workspace:** `<workspace-root>/.agents/skills/` (current builds; early Antigravity builds used singular `.agent/skills/` — keep a symlink if you must support both)
 - **Global:** `~/.gemini/antigravity/skills/`
 
 Expected layout:

@@ -14,7 +14,7 @@ This is the router's view of **Stack Packs** — knowledge overlays that load wh
 
 ## Active Stack Packs — detection signals
 
-All packs v4.0.0. When a signal is ambiguous, **ask** before loading — injecting a wrong stack's guidance distorts the response.
+All packs track the bundle version (single-version policy — see `VERSION`). When a signal is ambiguous, **ask** before loading — injecting a wrong stack's guidance distorts the response.
 
 ### Salesforce (`stacks/salesforce/`) — verified 2026-05-12 (Spring '26)
 Roles: system/backend/frontend/database/devops/security/qa/ai-ml + saas/healthcare/fintech. Delegates: none yet (recheck as Salesforce-hosted MCPs ship).

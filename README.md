@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://etyb.ai"><strong>etyb.ai</strong></a> &nbsp;·&nbsp;
-  <a href="https://etyb.ai/changelog">v4.0.0 — Changelog</a> &nbsp;·&nbsp;
+  <a href="https://etyb.ai/changelog">Changelog</a> &nbsp;·&nbsp;
   <a href="STACKS.md">Stacks</a> &nbsp;·&nbsp;
   <a href="docs/installation.md">Install Guide</a> &nbsp;·&nbsp;
   <a href="docs/architecture.md">Architecture</a>
@@ -74,7 +74,7 @@ An AI coding agent that works like a 100-person engineering org — through a si
 - **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
 - **Covers the full SDLC** — from research through production operations
 - **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems
-- **Speaks your platform** — Stack Packs load across all roles when work involves a specific stack. [Salesforce](stacks/salesforce/SKILL.md) is live; AWS, GCP, Stripe, Shopify, SAP, ServiceNow on the way
+- **Speaks your platform** — Stack Packs load across all roles when work involves a specific stack. 13 Stacks are live under [`stacks/`](STACKS.md): AWS, GCP, Azure, Salesforce, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability
 - **Identifies itself** — every Tier 1-4 response ends with `ETYB · <role-engaged>` and a `What's new — etyb.ai/changelog` line. One brand, transparent expertise.
 
 ---
@@ -104,8 +104,8 @@ ETYB CTO core ── reads internal references on demand:
      │  └── Debugging — root-cause-first after repeated failures
      │
      │  STACK PACK OVERLAYS (load when platform signals match)
-     │  └── Salesforce — Apex, LWC, Data 360, Agentforce, MCP-native dev
-     │      (roadmap: AWS, GCP, Azure, Vercel, Supabase, Snowflake, ...)
+     │  └── 13 vendors — AWS, GCP, Azure, Salesforce, Anthropic, OpenAI,
+     │      Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, o11y
      │
 RESPONSE — signed: ETYB · <role-engaged> + changelog link
 ```
@@ -150,14 +150,14 @@ Three orthogonal axes: **specialists** (the roles), **protocols** (the disciplin
 
 | Reference | Always On | Runtime Support |
 |-----------|-----------|-----------------|
-| `tdd-protocol` | Every code change | Claude hooks, Codex prompt/Bash guardrails, Antigravity model-trusted |
-| `review-protocol` | Every review cycle | Claude pre-commit hook, Codex reviewer agent + commit reminder, Antigravity model-trusted |
-| `subagent-protocol` | Parallel work | Claude isolated subagents, Codex custom agents, Antigravity markdown-first |
-| `git-workflow-protocol` | Branch management | Claude pre-merge hook, Codex merge guard via Bash hooks, Antigravity model-trusted |
-| `plan-execution-protocol` | Active plans | Claude native plan mode + post-edit hook, Codex `.etyb/plans/`, Antigravity `.etyb/plans/` |
+| `tdd-protocol` | Every code change | Model-trusted; hook script ships in-repo, wiring lands in v5 M2 |
+| `review-protocol` | Every review cycle | Model-trusted; pre-commit check script ships, wiring in v5 M2 |
+| `subagent-protocol` | Parallel work | Platform subagent runtimes (agent definitions ship in v5 M2) |
+| `git-workflow-protocol` | Branch management | Model-trusted; pre-merge check script ships, wiring in v5 M2 |
+| `plan-execution-protocol` | Active plans | Portable `.etyb/plans/` artifacts on all platforms |
 | `brainstorm-protocol` | Ambiguous requests | Platform-neutral |
 | `skill-evolution-protocol` | Skill improvements | Platform-neutral |
-| `verification-protocol` | Every completion claim | Claude deterministic, Codex stop hook assist, Antigravity model-trusted |
+| `verification-protocol` | Every completion claim | Model-trusted on all platforms today |
 | `debugging-protocol` | Active troubleshooting | Platform-neutral |
 
 ### Stack Packs
@@ -225,7 +225,7 @@ Skills use progressive disclosure — a markdown-based RAG pattern:
 
 ```
 Layer 0  Runtime guardrails (0 tokens — scripts outside the LLM)
-Layer 1  ETYB SKILL.md always loaded (~3,500 tokens — the culture)
+Layer 1  ETYB SKILL.md always loaded (~800 tokens — the culture)
 Layer 2  Relevant reference loads on demand (~2,500 tokens — the specialist)
 Layer 3  Deep reference loads on demand (~4,000 tokens — single helper file)
 

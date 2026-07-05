@@ -4,6 +4,24 @@ All notable changes to ETYB Skills are documented here. Format is loosely based 
 
 The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB response links there.
 
+## [Unreleased]
+
+### Changed — v5 M1 "universal core" (in progress on the v5 branch)
+
+- `skills/etyb/SKILL.md` rewritten to the Agent Skills open-spec subset: 967-char description (spec cap 1,024), 76-line body with the Tier 0-4 table inline — Tier 0 requests need zero additional file reads.
+- `core/signature.md`, `core/response-formats.md`, `core/scale-calibration.md`, `core/always-on-protocols.md` consolidated into `core/session.md`; core modules total −40% words. Progress-marker and clarifying-question contradictions resolved (CTO-voice status lines, cap of 3, everywhere).
+- Root `AGENTS.md` added (open standard); `CLAUDE.md` reduced to an `@AGENTS.md` import plus Claude-only notes.
+- Whole-repo version `5.0.0-dev` under the single-version policy.
+
+### Removed
+
+- `scripts/install.sh`, `scripts/update.sh`, `scripts/install-codex-runtime.sh` and their tests — distribution is `npx skills add e-t-y-b/etyb-skills` (multi-harness) or the Claude Code plugin (`.claude-plugin/plugin.json`, name `etyb`, added).
+
+### Fixed
+
+- Docs no longer claim hook enforcement that is not wired (hooks land in v5 M2 via plugin `hooks/hooks.json`); the old lint check against gitignored `.claude/settings.json` — which could never pass on a clean clone — replaced with hook-script existence checks.
+- New `scripts/lint-token-budget.sh` in CI enforces description caps; all 13 stack descriptions exceed the spec cap and are scheduled for compression (M3-T5).
+
 ## [4.0.2] — 2026-05-15
 
 ### Removed

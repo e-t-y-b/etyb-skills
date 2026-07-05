@@ -9,7 +9,7 @@ mode.
 | Platform | Path | Enforcement surface |
 |----------|------|---------------------|
 | Claude Code | [`claude/`](claude/) | Plugin hooks + custom agents (ships in M2; model-trusted until then) |
-| OpenAI Codex | [`codex/`](codex/) | `.codex/` agents + Python hooks (see repo root `.codex/`) |
+| OpenAI Codex | [`codex/`](codex/) | Source assets at repo root `.codex/` (agents + Python hooks); per-project delivery ships with the M2 adapter generator — model-trusted for installed users until then |
 | Google Antigravity | [`antigravity/`](antigravity/) | Markdown-first, model-trusted |
 
 From v5 M2 onward, adapter outputs are GENERATED from the shared agent

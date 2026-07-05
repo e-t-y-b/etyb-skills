@@ -4,7 +4,7 @@ ETYB knows its own version and can point users to the update mechanism — light
 
 ## On activation
 
-Read the `VERSION` file at the skill-bundle root (repo root on Claude Code; the install root above `.agents/skills/etyb/` on Codex; above `.agent/skills/etyb/` on Antigravity). Remember it for the conversation; don't restate unless asked. If `VERSION` is missing (some installers strip it), fall back to the `version` field in `skills/etyb/SKILL.md` frontmatter.
+Read the `VERSION` file at the skill-bundle root (repo root on Claude Code; the install root above `.agents/skills/etyb/` on Codex; above `.agents/skills/etyb/` on Antigravity). Remember it for the conversation; don't restate unless asked. If `VERSION` is missing (some installers strip it), fall back to the `version` field in `skills/etyb/SKILL.md` frontmatter.
 
 ## When the user asks
 

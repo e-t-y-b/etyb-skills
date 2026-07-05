@@ -54,6 +54,18 @@ jobs:
             exit 1
           fi
 
+  portability-lint:
+    name: portability lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
+      - name: Run portability lint
+        run: bash scripts/lint-portability.sh
+
   token-budget:
     name: token budget lint
     runs-on: ubuntu-latest

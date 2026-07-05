@@ -7,7 +7,7 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 
 | Task | Title | Depends | Status |
 |---|---|---|---|
-| M1-T1 | Portable description rewrite | — | done (2026-07-05, 0846699; 971 chars) |
+| M1-T1 | Portable description rewrite | — | done (2026-07-05, 0846699; 967 chars) |
 | M1-T2 | SKILL.md body rewrite (≤150 lines) | M1-T1 | done (2026-07-05, 0846699; 76 lines) |
 | M1-T3 | Consolidate always-on core; resolve contradictions | M1-T2 | done (2026-07-05, 8be4b67; core −40.1%) |
 | M1-T4 | AGENTS.md + CLAUDE.md bridge | M1-T2 | done (2026-07-05, e5f8178) |
@@ -38,7 +38,7 @@ no task breakdown yet — run a design session against RFC §3 Tier B first.
   execution environment restricts pushes to the designated branch).
 - **M1-T1:** `validate-frontmatter.sh` hard-requires a literal `Triggers:`
   line; one sentence added to the approved description draft (971/1,024
-  chars total). Draft in this plan updated in spirit, not rewritten.
+  chars stripped total). Draft in this plan updated in spirit, not rewritten.
 - **M1-T6 → M3-T5:** all 13 `stacks/*/SKILL.md` descriptions exceed the
   1,024-char spec cap (1.7k–3.5k). Out of M1 scope (stacks frozen until
   M3). Lint warns on `stacks/` until M3-T5 compresses them, then flips to
