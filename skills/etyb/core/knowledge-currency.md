@@ -58,6 +58,18 @@ product:
 
 That per-page stamp is what governs the drift-check protocol below.
 
+## Protocol owner: the etyb-stack-researcher agent
+
+The `etyb-stack-researcher` agent (`agents/etyb-stack-researcher.md`) owns this
+protocol end-to-end — manifest lookup, page resolution, the drift-check paths below,
+and any `authoritative_url` fetch. The orchestrator and every other agent request
+stack facts by delegating to the researcher; they do not fetch stack pages or vendor
+docs themselves. This keeps heavy fetches and raw doc content out of the user
+session — the researcher returns a ≤400-token cited distillation instead. One
+exception stays with the orchestrator: loading the slim local
+`stacks/<vendor>/SKILL.md` briefing at detection time (see "How ETYB detects which
+Stack applies") is routing, not research.
+
 ## The drift-check protocol (tiered)
 
 Before committing to any time-sensitive claim sourced from a Stack:

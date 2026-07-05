@@ -61,7 +61,31 @@ payment-flow specifics, security primitives).
   currency disclosure line where required.
 - **Confidence** — verified-current / as-of-`<date>` / general knowledge.
 
-## Stack fetch protocol (M3-T2)
+## Stack fetch protocol
 
-The manifest-driven remote-stack fetch protocol lands in task M3-T2; until
-then, use the source order and currency rules above.
+How to obtain a stack page when answering. Base raw URL:
+`https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/`.
+
+0. **Local fast path:** if the page exists on disk (installed repo), Read
+   `manifest.json` at the repo root and the page file directly — skip the
+   network entirely. The protocol is identical from step 3 onward.
+1. **Manifest:** WebFetch `<base>/manifest.json` and read its `stacks_pages`
+   array. Each entry has `path` (e.g. `stacks/cloudflare/workers.md`),
+   `last_verified_on`, `drift_risk`, and — on product pages —
+   `authoritative_url`. Role overlays, `index.md`, and `SKILL.md` entries
+   carry no `authoritative_url`; for those, take it from the frontmatter of
+   the product page(s) the claim actually concerns.
+2. **Resolve most-specific page:** matching product page → role overlay →
+   `stacks/<vendor>/index.md`. Fetch it at `<base>/<path>`.
+3. **Apply the currency rules above** (soft / strict / degraded), using the
+   page frontmatter stamps (the manifest mirrors them):
+   - **Soft:** distill from the fetched/read page.
+   - **Strict:** additionally fetch the page's `authoritative_url`, ground
+     the answer in that content, and cite BOTH the page path and the URL.
+   - **Degraded (no network / fetch fails):** return an explicit
+     stale-and-unverifiable statement — "knowledge as of
+     `<last_verified_on>` from `<path>`; could not verify against
+     `<authoritative_url>`" — never silent guessing.
+4. **Return format:** a ≤400-token distillation; citation (page path +
+   `authoritative_url`); `last_verified_on`; and a one-line currency
+   disclosure naming the path taken (soft / strict / degraded).
