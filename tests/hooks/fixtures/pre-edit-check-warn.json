@@ -1,0 +1,10 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": "__CWD__/src/widget.ts",
+    "old_string": "a",
+    "new_string": "b"
+  },
+  "cwd": "__CWD__"
+}

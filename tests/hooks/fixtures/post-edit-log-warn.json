@@ -1,0 +1,6 @@
+{
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Edit",
+  "tool_input": {},
+  "cwd": "__CWD__"
+}
