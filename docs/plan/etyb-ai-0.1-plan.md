@@ -4,6 +4,15 @@ Rationale: `../rfc-etyb-ai-0.1.md`. Contracts (FROZEN):
 `etyb-ai-0.1-architecture.md` — cited below as ARCH §n. Protocol:
 `00-execution-guide.md`. Repo: `etyb-ai` (new; created at E0-T1).
 
+## Absorbed from etyb-skills (2026-07-05 scope decision)
+
+All MCP-server work lives here, not in the skills repo: decision memory
+(former skills M4 → E2-T4 + arch §2), code memory (former skills M5 →
+E1/E2 engine + arch §2), and hosted stacks middleware (former skills M6 →
+stacks Tier B, rfc-etyb-ai §3; a post-0.1 epic). No new tasks — the E-plan
+below already covers memory and code memory; hosted stacks is scheduled
+after 0.1.
+
 ## Status ledger
 
 | Task | Title | Depends | Status |

@@ -333,6 +333,15 @@ guidance, not legal advice):
    without a written agreement; at most offered as optional user-configured
    backends.
 
+## Scope note (2026-07-05)
+
+Milestones M4 (decision memory), M5 (code memory), and M6 (hosted stacks
+middleware) are MCP-server work and have moved to the **etyb.ai** product
+(`rfc-etyb-ai-0.1.md` / `plan/etyb-ai-0.1-plan.md`). etyb-skills 5.0 is
+M1+M2+M3 only — the portable skill, agents, hooks, and remotely-fetched
+stacks. The skills still *consume* those MCP servers when present (the
+degraded-mode contract is unchanged); they just aren't built in this repo.
+
 ## Migration plan
 
 - **M1 — universal core:** restructure to the portable Agent Skills tree +

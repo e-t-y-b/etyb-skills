@@ -1,4 +1,4 @@
-# etyb-skills 5.0 — execution plan (M1–M6)
+# etyb-skills 5.0 — execution plan (M1–M3)
 
 Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 `00-execution-guide.md`. Repo: e-t-y-b/etyb-skills.
@@ -23,13 +23,34 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 | M3-T3 | Per-page currency CI | M3-T1 | done (2026-07-05, abb2399) |
 | M3-T4 | anthropic-claude stack refresh | — | done (2026-07-05, salvage commit; Claude 5 generation) |
 | M3-T5 | Stack description compression (≤1,024 chars × 13) | — | done (2026-07-05; 13/13 ≤1,000, lint hard-fails now) |
-| M4-T1 | etyb-memory MCP server | — | todo |
-| M4-T2 | Memory wiring (hook injection + fallback) | M4-T1, M2-T4 | todo |
-| M5-T1 | etyb-code-memory wrapper (adopt) | — | todo |
-| M6-* | Hosted stacks middleware | M3 | needs-design-session |
 
-Release gate: **v5.0.0 = M1+M2+M3 done.** M4/M5 are 5.1 candidates. M6 has
-no task breakdown yet — run a design session against RFC §3 Tier B first.
+**Scope decision (2026-07-05):** etyb-skills 5.0 contains ALL skills-level
+work — M1+M2+M3 — and nothing else. Everything MCP-server-shaped moved to the
+etyb.ai product (`etyb-ai-0.1-plan.md`), which owns memory, code memory, and
+hosted stacks as daemon/MCP features:
+
+| Former task | Now owned by |
+|---|---|
+| M4-T1/T2 etyb-memory MCP | etyb.ai decision-memory (arch §2, plan E2-T4) |
+| M5-T1 etyb-code-memory | etyb.ai code-memory engine (arch §2, plan E1/E2) |
+| M6 hosted stacks middleware | etyb.ai stacks Tier B (rfc-etyb-ai §3, plan E-future) |
+
+Release gate: **v5.0.0 = M1+M2+M3 — all done.** This is the complete 5.0
+scope; there is no skills 5.1. Remaining before tagging: the release-prep
+debt below (needs a real Claude Code install + vendor-doc egress).
+
+## Release checklist (do on a real machine, then tag 5.0.0)
+
+- [ ] Flip `5.0.0-dev` → `5.0.0` across VERSION + 5 bundle files + 13 stacks
+      + SKILL.md (single-version policy; `validate-version-sync.sh` enforces).
+- [ ] Update `manifest.json` `published_at` and `.claude-plugin/marketplace.json`
+      (name `etyb`, version 5.0.0) to match plugin.json.
+- [ ] Observe the five hooks actually firing in a Claude Code plugin install
+      (M2-T4 debt — only fixture-verified so far).
+- [ ] Spot-verify the anthropic-claude Claude 5 facts against
+      docs.anthropic.com (M3-T4 debt — vendor egress was blocked in the
+      build environment).
+- [ ] Merge `claude/usability-standards-review-27ckxa` → `main`; tag `v5.0.0`.
 
 ## Deviations
 
