@@ -42,47 +42,59 @@ them). Work on a feature branch, commit in reviewable chunks, and finish
 with a summary of what changed vs. the RFC.
 ```
 
-## Prompt 2 — etyb.ai 0.1, bootstrap + E1 (run on your Mac)
+## Prompt 2 — etyb.ai 0.1, bootstrap + E1/E2 (run locally)
 
 ```
-Create a new project for etyb.ai — a macOS menu-bar app wrapping a local
-daemon that gives AI coding agents per-branch code memory over MCP. The
-approved plan is docs/rfc-etyb-ai-0.1.md in the e-t-y-b/etyb-skills repo
-(branch claude/usability-standards-review-27ckxa) — fetch and read it end
-to end first; it defines the four pillars, the 7-tool MCP surface, tech
-choices, and milestones E1-E5.
+Create a new project for etyb.ai — a cross-platform Electron workspace app
+plus a local daemon (etybd) that gives AI coding agents per-branch code
+memory over MCP and renders the codebase as visual lenses (code graph, data
+schema, API contracts) that humans and agents read alike. The approved plan
+is docs/rfc-etyb-ai-0.1.md in the e-t-y-b/etyb-skills repo (branch
+claude/usability-standards-review-27ckxa) — fetch and read it end to end
+first; it defines the five pillars, the 7-tool + lens-resources MCP
+surface, tech choices, and milestones E1-E5.
 
 Bootstrap:
-1. Initialize a new git repo `etyb-ai` (private for now) with a Rust
-   workspace: crates/etyb-core (indexer + storage), crates/etybd (daemon:
-   MCP streamable-HTTP server on localhost with generated bearer token),
-   and an apps/desktop Tauri 2 shell (menu-bar only for now). Copy the RFC
-   into docs/ as the canonical plan.
+1. Initialize a new git repo `etyb-ai` (private for now): a Rust workspace
+   with crates/etyb-core (indexer + lens extractors + storage) and
+   crates/etybd (daemon: MCP streamable-HTTP server on localhost with
+   generated bearer token, runs without any UI), plus apps/desktop — an
+   Electron app scaffold (projects sidebar, lens canvas placeholder,
+   private control channel to the daemon). Copy the RFC into docs/ as the
+   canonical plan.
 2. Execute E1 (engine): tree-sitter indexing for TypeScript/JavaScript,
    Python, Go, Rust, Java into a per-project SQLite symbol/call/import
    graph; per-branch keying with content-addressed entries (file blob hash
    -> symbols; branch = tag set; `git diff --name-status
    <indexed>..<head>` as the incremental invalidation set); a file/git
-   watcher that keeps the head index fresh.
-3. Then E2 (protocol): expose exactly 7 MCP tools — project_list,
-   code_search, trace_path, blast_radius, memory_query, memory_write,
-   session_note — plus a decision-memory store with repo/branch/link
-   scopes, and a headless `etybd` mode.
+   watcher that keeps the head index fresh. Projects link multiple repos
+   and share a decision-memory namespace.
+3. Then E2 (protocol): exactly 7 MCP tools — project_list, code_search,
+   trace_path, blast_radius, memory_query, memory_write, session_note —
+   plus lens documents (code-graph slices first) exposed as MCP RESOURCES
+   so they cost no tool slots; decision-memory store with
+   repo/branch/project scopes; headless `etybd` mode.
 4. Definition of done for this session: `etybd` runs locally, Claude Code
-   connects to it via .mcp.json, and code_search/trace_path answer real
-   queries against this very repo. Write integration tests that index a
-   fixture repo with two branches and assert branch-switch does not
-   re-index unchanged content.
+   connects via .mcp.json, code_search/trace_path answer real queries
+   against this very repo, and the code-graph lens resource returns a
+   module-level graph slice. Integration tests: index a fixture repo with
+   two branches and assert branch-switch does not re-index unchanged
+   content.
 
-Decisions already made (do not relitigate): local-first, no telemetry,
-no cloud in 0.1; tool budget is 7; SQLite storage; clean-room engine (no
-GPL/AGPL/PolyForm dependencies — MIT/Apache/BSD only, keep a
-THIRD-PARTY-NOTICES file). Open questions you may decide as you go are
-listed at the end of the RFC.
+Decisions already made (do not relitigate): Electron (bundled Chromium =
+deterministic WebGL for the graph canvas across macOS/Windows/Linux);
+local-first, no telemetry, no cloud in 0.1; tool budget is 7 with lenses
+as resources; SQLite storage; clean-room engine (no GPL/AGPL/PolyForm
+dependencies — MIT/Apache/BSD only, keep a THIRD-PARTY-NOTICES file). The
+UI (E3: interactive WebGL code graph; E4: data + contracts lenses,
+sessions timeline) comes after the engine proves out — do not start the
+visual canvas before E1/E2 are done. Open questions you may decide as you
+go are listed at the end of the RFC.
 ```
 
 ---
 
 Division of labor: Prompt 1 can also run in the Claude Code remote/cloud
-session attached to etyb-skills. Prompt 2 needs a Mac for the Tauri shell
-(E1/E2 daemon work is OS-agnostic, but you will want to run the result).
+session attached to etyb-skills. Prompt 2 runs locally (E1/E2 are
+OS-agnostic; the Electron app and installers are why you want your own
+machine).
