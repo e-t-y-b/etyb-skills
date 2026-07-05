@@ -37,7 +37,7 @@ Codex has a project-scoped custom-agent system separate from skills. ETYB uses `
 - `etyb_explorer` for read-only code path mapping and ownership tracing
 - `etyb_planner` for updating `.etyb/plans/` and gate state
 - `etyb_reviewer` for independent correctness / regression / security review
-- `etyb_docs_researcher` for primary-source doc verification
+- `etyb_stack_researcher` for primary-source doc verification
 
 **What still does not become equivalent to Claude:**
 - Hooks do not intercept Write/Edit, MCP, WebSearch, or other non-Bash tools today.

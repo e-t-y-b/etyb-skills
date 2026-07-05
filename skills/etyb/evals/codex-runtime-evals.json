@@ -34,7 +34,7 @@
         { "name": "mentions-explorer-agent", "type": "contains_keyword", "keywords": ["etyb_explorer"] },
         { "name": "mentions-planner-agent", "type": "contains_keyword", "keywords": ["etyb_planner"] },
         { "name": "mentions-reviewer-agent", "type": "contains_keyword", "keywords": ["etyb_reviewer"] },
-        { "name": "mentions-docs-agent", "type": "contains_keyword", "keywords": ["etyb_docs_researcher"] },
+        { "name": "mentions-docs-agent", "type": "contains_keyword", "keywords": ["etyb_stack_researcher"] },
         { "name": "does-not-deny-subagents", "type": "semantic", "description": "Should not claim Codex lacks any custom agent or parallel delegation capability" }
       ]
     }

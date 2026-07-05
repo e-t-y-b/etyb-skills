@@ -118,4 +118,6 @@ jobs:
         run: jq --version
 
       - name: Run maintainer validators
+        env:
+          CHECK_CURRENCY_STRICT: "1"   # per-page currency gate hard-fails (M3-T3, flipped after M3-T4)
         run: scripts/maintainer/validate-pr.sh

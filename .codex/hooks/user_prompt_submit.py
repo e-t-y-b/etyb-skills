@@ -10,7 +10,7 @@ from common import emit, load_payload, load_state, now_iso, prompt_block_reason,
 DEFAULT_CONTEXT = (
     "ETYB Codex runtime: default plan storage is `.etyb/plans/`. "
     "Prefer `etyb_explorer` for bounded discovery, `etyb_planner` for plan updates, "
-    "`etyb_reviewer` for independent review, and `etyb_docs_researcher` for doc verification. "
+    "`etyb_reviewer` for independent review, and `etyb_stack_researcher` for doc verification. "
     "Codex hooks can guard prompts, Bash commands, and turn stop, but edit-before-test is still a model-trusted gap."
 )
 

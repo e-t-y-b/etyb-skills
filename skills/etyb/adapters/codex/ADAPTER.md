@@ -63,7 +63,7 @@ The repo layout used in this project is `skills/etyb/` rather than `.agents/skil
 - **Hooks are real but scoped.** Codex can run `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and `Stop`, but tool interception is currently Bash-only.
 - **No pre-edit TDD check.** TDD remains required by `core/session.md` §1, but Codex still cannot intercept file edits before they happen.
 - **No native plan mode.** Default to `.etyb/plans/{name}.md`. This plan deliberately does not add a Codex-native plan artifact layer.
-- **Custom agents are project-scoped, not skill-embedded.** ETYB ships `.codex/agents/etyb_explorer.toml`, `etyb_planner.toml`, `etyb_reviewer.toml`, and `etyb_docs_researcher.toml` for bounded parallel work and independent review.
+- **Custom agents are project-scoped, not skill-embedded.** ETYB ships `.codex/agents/etyb_explorer.toml`, `etyb_planner.toml`, `etyb_reviewer.toml`, and `etyb_stack_researcher.toml` for bounded parallel work and independent review.
 - **Windows is currently excluded for hooks.** Codex hooks are still experimental and disabled on Windows per the current OpenAI docs.
 
 ## When To Recommend Claude Code Instead

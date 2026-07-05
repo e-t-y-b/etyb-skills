@@ -33,6 +33,16 @@ no task breakdown yet — run a design session against RFC §3 Tier B first.
 
 ## Deviations
 
+- **M2/M3 stage-2 review (2026-07-05, done):** independent review of range
+  9562de7..HEAD found 0 blockers, 2 majors, 2 minors — all resolved: currency
+  CI flipped to CHECK_CURRENCY_STRICT=1 (M-1); the etyb_docs_researcher→
+  etyb_stack_researcher rename's 4 dangling refs fixed in codex ADAPTER/
+  enforcement-notes, the .codex prompt hook, and the eval keyword (M-2);
+  the one content-free re-stamp reverted to 2026-05-14 (m-1). Accepted
+  limitation (m-2): frontmatter `tools:` can't express Bash-read-only or a
+  Write path-scope, so etyb-explorer's Bash and etyb-cartographer's Write
+  boundaries are prompt-enforced, not tool-enforced — hardened when hooks
+  can gate tool args.
 - **M2/M3 interruption (2026-07-05):** org monthly spend limit killed the
   M2-T4/M2-T5/M3-T4 subagents mid-task; the orchestrator verified and
   landed their near-complete working-tree output directly (salvage

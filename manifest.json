@@ -411,7 +411,7 @@
     },
     {
       "path": "stacks/anthropic-claude/prompt-caching.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-05-14",
       "drift_risk": "medium",
       "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching"
     },

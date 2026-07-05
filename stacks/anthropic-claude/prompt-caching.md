@@ -5,7 +5,7 @@ product:
   name: Prompt Caching
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-07-05"
+  last_verified_on: "2026-05-14"
   applies_to_roles: [ai-ml-engineer, backend-architect, system-architect]
   authoritative_url: https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching
   notes: "Pricing 1.25x/2x write; 0.1x read (90% off); two TTLs; up to 4 breakpoints. Architecture decision, not late optimization."
