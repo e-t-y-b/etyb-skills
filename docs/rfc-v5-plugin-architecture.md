@@ -1,6 +1,10 @@
 # RFC: ETYB v5 — Universal Package, Subagents, Remote Stacks, Repo & Code Memory
 
 Status: draft v2 · Target: v5.0.0 · Supersedes the v4 "one skill + install.sh" distribution model.
+Companion plan: `rfc-etyb-ai-0.1.md` — the etyb.ai local agent-memory hub is
+a separate product on its own release train. When the hub is installed, the
+memory servers specified here (§6, §7) detect it and delegate to it; the
+file-based behavior below is the standalone/degraded mode.
 Revision note: v2 replaces the Claude-plugin-first packaging of draft v1 with a
 universal Agent Skills core (per cross-harness research, 2026-07-05) and adds
 the memory-tooling and code-memory designs.
