@@ -42,7 +42,7 @@ jobs:
         run: |
           shopt -s globstar nullglob
           failed=0
-          for test in tests/hooks/test-*.sh; do
+          for test in tests/hooks/test-*.sh tests/maintainer/test-*.sh; do
             echo "=== running $test ==="
             if ! bash "$test"; then
               failed=$((failed + 1))
@@ -81,6 +81,26 @@ jobs:
 
       - name: Enforce always-on token budget
         run: bash scripts/lint-token-budget.sh
+
+  generated-drift:
+    name: generated files drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Manifest drift
+        run: bash scripts/build-manifest.sh && git diff --exit-code manifest.json
+
+      - name: Adapter emissions drift
+        run: bash scripts/build-adapters.sh && git diff --exit-code .codex/agents dist/adapters
+
+      - name: Hook fixture suite
+        run: bash tests/hooks/run.sh
 
   maintainer-checks:
     name: maintainer checks

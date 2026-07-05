@@ -13,16 +13,16 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 | M1-T4 | AGENTS.md + CLAUDE.md bridge | M1-T2 | done (2026-07-05, e5f8178) |
 | M1-T5 | Plugin manifest + retire install.sh | M1-T2 | done (2026-07-05, 82d6aef) |
 | M1-T6 | Token-budget CI lint | M1-T3 | done (2026-07-05, cleanup commit) |
-| M2-T1 | Five agent definitions (Claude) | M1 | todo |
-| M2-T2 | Role skills with context:fork overlays | M2-T1 | todo |
-| M2-T3 | Hook scripts → stdin JSON | — | todo |
-| M2-T4 | hooks.json wiring (Claude plugin) | M2-T3, M1-T5 | todo |
-| M2-T5 | Adapter generator (Codex/Kiro/Cursor emission) | M2-T1 | todo |
-| M3-T1 | Stack manifest generator | — | todo |
-| M3-T2 | Stack-researcher fetch protocol | M2-T1, M3-T1 | todo |
-| M3-T3 | Per-page currency CI | M3-T1 | todo |
-| M3-T4 | anthropic-claude stack refresh | — | todo |
-| M3-T5 | Stack description compression (≤1,024 chars × 13) | — | todo |
+| M2-T1 | Five agent definitions (Claude) | M1 | done (2026-07-05, 1b9334e) |
+| M2-T2 | Role skills with context:fork overlays | M2-T1 | done (2026-07-05, 1384e39) |
+| M2-T3 | Hook scripts → stdin JSON | — | done (2026-07-05, 08e09e6; 21 tests) |
+| M2-T4 | hooks.json wiring (Claude plugin) | M2-T3, M1-T5 | done (2026-07-05, salvage commit; live-session observation pending) |
+| M2-T5 | Adapter generator (Codex/Kiro/Cursor emission) | M2-T1 | done (2026-07-05, salvage commit; deterministic, 20 emissions) |
+| M3-T1 | Stack manifest generator | — | done (2026-07-05, f1b9f5b; 537 pages) |
+| M3-T2 | Stack-researcher fetch protocol | M2-T1, M3-T1 | done (2026-07-05, 320159b) |
+| M3-T3 | Per-page currency CI | M3-T1 | done (2026-07-05, abb2399) |
+| M3-T4 | anthropic-claude stack refresh | — | done (2026-07-05, salvage commit; Claude 5 generation) |
+| M3-T5 | Stack description compression (≤1,024 chars × 13) | — | todo (NEXT: last task before release gate) |
 | M4-T1 | etyb-memory MCP server | — | todo |
 | M4-T2 | Memory wiring (hook injection + fallback) | M4-T1, M2-T4 | todo |
 | M5-T1 | etyb-code-memory wrapper (adopt) | — | todo |
@@ -32,6 +32,16 @@ Release gate: **v5.0.0 = M1+M2+M3 done.** M4/M5 are 5.1 candidates. M6 has
 no task breakdown yet — run a design session against RFC §3 Tier B first.
 
 ## Deviations
+
+- **M2/M3 interruption (2026-07-05):** org monthly spend limit killed the
+  M2-T4/M2-T5/M3-T4 subagents mid-task; the orchestrator verified and
+  landed their near-complete working-tree output directly (salvage
+  commits). Outstanding debt: (a) the milestone-wide stage-2 review of
+  M2+M3 has NOT run yet — do it first next session; (b) M2-T4 live-session
+  hook observation impossible in this environment — verify on a real
+  Claude Code install; (c) M3-T4 fact-checking used repo knowledge +
+  reachable sources only (vendor-doc egress blocked here) — spot-verify
+  model facts against docs.anthropic.com before release.
 
 - **M1 process:** per-task `feat/` branches replaced by task-scoped commits
   on the session branch `claude/usability-standards-review-27ckxa` (remote

@@ -88,7 +88,7 @@ require_file ".codex/hooks/stop.py"
 require_file ".codex/agents/etyb_explorer.toml"
 require_file ".codex/agents/etyb_planner.toml"
 require_file ".codex/agents/etyb_reviewer.toml"
-require_file ".codex/agents/etyb_docs_researcher.toml"
+require_file ".codex/agents/etyb_stack_researcher.toml" ".codex/agents/etyb_cartographer.toml"
 
 [[ -x "scripts/lint-portability.sh" ]] || fail "scripts/lint-portability.sh must be executable"
 

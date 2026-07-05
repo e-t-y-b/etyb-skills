@@ -13,6 +13,9 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 - Root `AGENTS.md` added (open standard); `CLAUDE.md` reduced to an `@AGENTS.md` import plus Claude-only notes.
 - Whole-repo version `5.0.0-dev` under the single-version policy.
 
+- **M2 (agents & hooks):** five agent definitions under `agents/` (explorer, planner, reviewer, stack-researcher, cartographer; `memory: project`); three forked role skills (`/etyb-review`, `/etyb-plan`, `/etyb-explore`) with Claude overlays; hook scripts rewritten to the stdin-JSON contract (advisory `systemMessage` warnings, 21 tests) and wired via plugin `hooks/hooks.json`; deterministic adapter generator emits Codex TOMLs, Kiro agent JSONs, a Cursor plugin skeleton, and overlay-merged plugin skills under `dist/adapters/`.
+- **M3 (remote stacks):** `manifest.json` gains a generated 537-page `stacks_pages` array (`scripts/build-manifest.sh`); the stack-researcher agent owns the manifest-driven fetch + currency protocol; per-page currency checking with a batch-stamp detector (warn-first); the anthropic-claude stack refreshed to the Claude 5 generation (Sonnet 5 / Opus 4.8 / Haiku 4.5 / Fable-Mythos tier) with per-page verification stamps.
+
 ### Removed
 
 - `scripts/install.sh`, `scripts/update.sh`, `scripts/install-codex-runtime.sh` and their tests — distribution is `npx skills add e-t-y-b/etyb-skills` (multi-harness) or the Claude Code plugin (`.claude-plugin/plugin.json`, name `etyb`, added).
