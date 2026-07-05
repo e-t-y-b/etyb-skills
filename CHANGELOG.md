@@ -14,7 +14,7 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 - Whole-repo version `5.0.0-dev` under the single-version policy.
 
 - **M2 (agents & hooks):** five agent definitions under `agents/` (explorer, planner, reviewer, stack-researcher, cartographer; `memory: project`); three forked role skills (`/etyb-review`, `/etyb-plan`, `/etyb-explore`) with Claude overlays; hook scripts rewritten to the stdin-JSON contract (advisory `systemMessage` warnings, 21 tests) and wired via plugin `hooks/hooks.json`; deterministic adapter generator emits Codex TOMLs, Kiro agent JSONs, a Cursor plugin skeleton, and overlay-merged plugin skills under `dist/adapters/`.
-- **M3 (remote stacks):** `manifest.json` gains a generated 537-page `stacks_pages` array (`scripts/build-manifest.sh`); the stack-researcher agent owns the manifest-driven fetch + currency protocol; per-page currency checking with a batch-stamp detector (warn-first); the anthropic-claude stack refreshed to the Claude 5 generation (Sonnet 5 / Opus 4.8 / Haiku 4.5 / Fable-Mythos tier) with per-page verification stamps.
+- **M3 (remote stacks):** `manifest.json` gains a generated 537-page `stacks_pages` array (`scripts/build-manifest.sh`); the stack-researcher agent owns the manifest-driven fetch + currency protocol; per-page currency checking with a batch-stamp detector (warn-first); the anthropic-claude stack refreshed to the Claude 5 generation (Sonnet 5 / Opus 4.8 / Haiku 4.5 / Fable-Mythos tier) with per-page verification stamps. All 13 stack `SKILL.md` descriptions compressed under the 1,024-char open-spec cap (prose kept, trigger lists trimmed to the strongest signals); the token-budget lint now hard-fails over-cap descriptions.
 
 ### Removed
 

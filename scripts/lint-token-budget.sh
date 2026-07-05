@@ -43,16 +43,7 @@ total=0
 while IFS= read -r skill; do
   n=$(desc_chars "$skill")
   if (( n > 1024 )); then
-    case "$skill" in
-      stacks/*)
-        # Stack descriptions predate the spec-cap finding; M3-T5 compresses
-        # them. Warn-only until then — flip to err when M3-T5 lands.
-        echo "⚠ lint-token-budget: $skill description is ${n} chars (cap 1,024) — M3-T5 grace" >&2
-        ;;
-      *)
-        err "$skill description is ${n} chars (cap 1,024 — Agent Skills spec)"
-        ;;
-    esac
+    err "$skill description is ${n} chars (cap 1,024 — Agent Skills spec)"
   fi
   case "$skill" in
     skills/etyb/SKILL.md|skills/etyb-*/SKILL.md) total=$(( total + n )) ;;

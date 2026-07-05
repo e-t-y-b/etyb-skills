@@ -22,7 +22,7 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 | M3-T2 | Stack-researcher fetch protocol | M2-T1, M3-T1 | done (2026-07-05, 320159b) |
 | M3-T3 | Per-page currency CI | M3-T1 | done (2026-07-05, abb2399) |
 | M3-T4 | anthropic-claude stack refresh | — | done (2026-07-05, salvage commit; Claude 5 generation) |
-| M3-T5 | Stack description compression (≤1,024 chars × 13) | — | todo (NEXT: last task before release gate) |
+| M3-T5 | Stack description compression (≤1,024 chars × 13) | — | done (2026-07-05; 13/13 ≤1,000, lint hard-fails now) |
 | M4-T1 | etyb-memory MCP server | — | todo |
 | M4-T2 | Memory wiring (hook injection + fallback) | M4-T1, M2-T4 | todo |
 | M5-T1 | etyb-code-memory wrapper (adopt) | — | todo |

@@ -1,31 +1,8 @@
 ---
 name: stack-expo
-description: >
-  Expo platform knowledge overlay for the ETYB team. Loads when work involves the Expo
-  ecosystem — Expo SDK, Expo Router, EAS Build / Submit / Update / Workflows / Hosting,
-  expo-dev-client, Expo Modules API, Continuous Native Generation, Hermes, the New
-  Architecture (Fabric + TurboModules), Expo DOM Components, Expo API Routes, app.json /
-  app.config.js, the `npx expo` CLI, and the wider expo-* package family. This is NOT a
-  new team member; it is a context overlay that teaches each existing ETYB role what it
-  needs to know to ship production-grade Expo work as of SDK 55 (Spring 2026).
-  Triggers: expo, expo go, expo router, expo sdk, expo cli, eas, eas build, eas update,
-  eas submit, eas workflows, eas hosting, eas insights, eas cli, expo-dev-client, dev client,
-  custom dev client, expo modules, expo modules api, expo dom, dom components, expo api routes,
-  app.json, app.config.js, app.config.ts, app config plugin, expo config plugin, prebuild,
-  expo prebuild, continuous native generation, cng, hermes, jsc, fabric, turbomodule, turbo
-  modules, new architecture, bridgeless, react native, react-native, metro, metro bundler,
-  expo-router, expo-image, expo-file-system, expo-secure-store, expo-camera, expo-image-picker,
-  expo-notifications, expo-location, expo-auth-session, expo-application, expo-task-manager,
-  expo-background-fetch, expo-haptics, expo-linear-gradient, expo-linking, expo-system-ui,
-  expo-localization, expo-av, expo-video, expo-audio, expo-asset, expo-constants, expo-updates,
-  expo-font, expo-splash-screen, expo-status-bar, expo-screen-orientation, expo-sensors,
-  expo-store-review, expo-tracking-transparency, expo-web-browser, expo-clipboard, expo-print,
-  expo-sharing, expo-mail-composer, expo-sms, expo-contacts, expo-media-library, expo-calendar,
-  expo-doctor, snack, expo snack, eas-cli, ota update, over the air update, otaupdate channels,
-  testflight, app store connect, play console, internal distribution, internal testing,
-  flashlist, reanimated, react-native-reanimated, react-native-skia, nativewind, tamagui,
-  unistyles, gluestack, watermelondb, mmkv, nitro modules, codepush replacement, jest preset,
-  react-native-testing-library, maestro, detox, radon ide, react native devtools.
+description: |-
+  Expo platform knowledge overlay for the ETYB team. Loads when work involves the Expo ecosystem — Expo SDK, Expo Router, EAS Build / Submit / Update / Workflows / Hosting, expo-dev-client, Expo Modules API, Continuous Native Generation, Hermes, the New Architecture (Fabric + TurboModules), Expo DOM Components, Expo API Routes, app.json / app.config.js, the `npx expo` CLI, and the wider expo-* package family.
+  Triggers: expo, expo go, expo router, expo sdk, expo cli, eas, eas build, eas update, eas submit, eas workflows, eas hosting, eas insights, eas cli, expo-dev-client, dev client, custom dev client, expo modules, expo modules api, expo dom, dom components, expo api routes, app.json, app.config.js, app.config.ts, app config plugin, expo config plugin, prebuild, expo prebuild, continuous native generation, cng, hermes, jsc, fabric, turbomodule, turbo modules, new architecture, bridgeless, react native, react-native, metro, metro bundler, expo-router, expo-image, expo-file-system.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:

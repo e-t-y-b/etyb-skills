@@ -1,39 +1,8 @@
 ---
 name: stack-supabase
-description: >
-  Supabase platform knowledge overlay for the ETYB team. Loads when work involves the Supabase
-  ecosystem — Postgres (Supabase-hosted), Row-Level Security (RLS), Supabase Auth, Storage,
-  Realtime, Edge Functions, Database Webhooks, Database Functions, Supavisor pooler, pgvector,
-  pg_cron, pg_net, pg_graphql, pg_jsonschema, pgaudit, pgsodium, pgmq, Supabase Vault, Supabase
-  Queues, Supabase Cron, Branching, Studio, supabase-js, @supabase/ssr, Supabase CLI, Supabase
-  MCP server, Foreign Data Wrappers. This is NOT a new team member; it is a context overlay
-  that teaches each existing ETYB role what it needs to know to ship production-grade Supabase
-  work as of 2026-Q2.
-  Triggers: supabase, supabase auth, supabase storage, supabase realtime, supabase edge
-  functions, supabase functions, edge function, deno deploy, supabase-js, @supabase/ssr,
-  @supabase/supabase-js, supabase ssr, ssr cookies, server components supabase, supabase cli,
-  supabase login, supabase start, supabase db push, supabase db pull, supabase db reset,
-  supabase db diff, supabase gen types, supabase migration, supabase functions deploy,
-  supabase functions serve, supabase link, supabase init, supabase secrets, supabase branching,
-  database branch, preview branch, supabase preview, supabase studio, supabase dashboard,
-  postgres, postgresql, pg, rls, row level security, row-level security, policy, auth.uid,
-  auth.jwt, auth.role, pgvector, hnsw, ivfflat, embedding, vector index, vector similarity,
-  pg_graphql, pg_cron, pg_net, pg_jsonschema, pg_trgm, pgaudit, pgsodium, pgmq, pg_tle,
-  pg_stat_statements, pgvectorscale, postgres extension, supavisor, pgbouncer, transaction
-  pooler, session pooler, connection pooler, prepared statement, SET LOCAL, pgbouncer mode,
-  serverless postgres, vault, supabase vault, supabase secrets vault, supabase queue, queues,
-  pgmq, supabase cron, cron job, scheduled job, foreign data wrapper, fdw, wrappers, stripe
-  fdw, clickhouse fdw, bigquery fdw, redis fdw, magic link, otp, passwordless, social login,
-  third-party auth, oauth provider, supabase sso, supabase mfa, totp, webauthn, passkey
-  supabase, anonymous sign in, captcha hook, auth hook, send email hook, custom access token,
-  custom claims jwt, supabase storage, storage bucket, signed url, resumable upload, tus,
-  storage policy, image transformation, presence, broadcast, postgres changes, realtime
-  channel, realtime listen, supabase realtime authorization, supabase rls realtime, broadcast
-  authorization, presence sync, presence join, supabase mcp, supabase mcp server, supabase
-  agent, claude code supabase, foreign key, security definer, search_path, declarative schema,
-  declarative migrations, supabase types, type generation, codegen supabase, plv8, plpgsql,
-  trigger function, generated column, generated always as, identity column, materialized view,
-  pgcrypto, uuid_generate_v4, uuid v7, btree_gin, btree_gist, fuzzymatchsearch.
+description: |-
+  Supabase platform knowledge overlay for the ETYB team. Loads when work involves the Supabase ecosystem — Postgres (Supabase-hosted), Row-Level Security (RLS), Supabase Auth, Storage, Realtime, Edge Functions, Database Webhooks, Database Functions, Supavisor pooler, pgvector, pg_cron, pg_net, pg_graphql, pg_jsonschema, pgaudit, pgsodium, pgmq, Supabase Vault, Supabase Queues, Supabase Cron, Branching, Studio, supabase-js, @supabase/ssr, Supabase CLI, Supabase MCP server, Foreign Data Wrappers.
+  Triggers: supabase, supabase auth, supabase storage, supabase realtime, supabase edge functions, supabase functions, edge function, deno deploy, supabase-js, @supabase/ssr, @supabase/supabase-js, supabase ssr, ssr cookies, server components supabase, supabase cli, supabase login, supabase start, supabase db push, supabase db pull, supabase db reset, supabase db diff, supabase gen types, supabase migration, supabase functions deploy, supabase functions serve, supabase link, supabase init.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
