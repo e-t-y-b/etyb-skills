@@ -7,12 +7,12 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 
 | Task | Title | Depends | Status |
 |---|---|---|---|
-| M1-T1 | Portable description rewrite | — | todo |
-| M1-T2 | SKILL.md body rewrite (≤150 lines) | M1-T1 | todo |
-| M1-T3 | Consolidate always-on core; resolve contradictions | M1-T2 | todo |
-| M1-T4 | AGENTS.md + CLAUDE.md bridge | M1-T2 | todo |
-| M1-T5 | Plugin manifest + retire install.sh | M1-T2 | todo |
-| M1-T6 | Token-budget CI lint | M1-T3 | todo |
+| M1-T1 | Portable description rewrite | — | done (2026-07-05, 0846699; 971 chars) |
+| M1-T2 | SKILL.md body rewrite (≤150 lines) | M1-T1 | done (2026-07-05, 0846699; 76 lines) |
+| M1-T3 | Consolidate always-on core; resolve contradictions | M1-T2 | done (2026-07-05, 8be4b67; core −40.1%) |
+| M1-T4 | AGENTS.md + CLAUDE.md bridge | M1-T2 | done (2026-07-05, e5f8178) |
+| M1-T5 | Plugin manifest + retire install.sh | M1-T2 | done (2026-07-05, 82d6aef) |
+| M1-T6 | Token-budget CI lint | M1-T3 | done (2026-07-05, cleanup commit) |
 | M2-T1 | Five agent definitions (Claude) | M1 | todo |
 | M2-T2 | Role skills with context:fork overlays | M2-T1 | todo |
 | M2-T3 | Hook scripts → stdin JSON | — | todo |
@@ -22,6 +22,7 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 | M3-T2 | Stack-researcher fetch protocol | M2-T1, M3-T1 | todo |
 | M3-T3 | Per-page currency CI | M3-T1 | todo |
 | M3-T4 | anthropic-claude stack refresh | — | todo |
+| M3-T5 | Stack description compression (≤1,024 chars × 13) | — | todo |
 | M4-T1 | etyb-memory MCP server | — | todo |
 | M4-T2 | Memory wiring (hook injection + fallback) | M4-T1, M2-T4 | todo |
 | M5-T1 | etyb-code-memory wrapper (adopt) | — | todo |
@@ -32,7 +33,28 @@ no task breakdown yet — run a design session against RFC §3 Tier B first.
 
 ## Deviations
 
-(record here when implementation must diverge from a spec — see guide)
+- **M1 process:** per-task `feat/` branches replaced by task-scoped commits
+  on the session branch `claude/usability-standards-review-27ckxa` (remote
+  execution environment restricts pushes to the designated branch).
+- **M1-T1:** `validate-frontmatter.sh` hard-requires a literal `Triggers:`
+  line; one sentence added to the approved description draft (971/1,024
+  chars total). Draft in this plan updated in spirit, not rewritten.
+- **M1-T6 → M3-T5:** all 13 `stacks/*/SKILL.md` descriptions exceed the
+  1,024-char spec cap (1.7k–3.5k). Out of M1 scope (stacks frozen until
+  M3). Lint warns on `stacks/` until M3-T5 compresses them, then flips to
+  hard fail.
+- **Versioning:** whole repo bumped to `5.0.0-dev` (single-version policy
+  spans VERSION + 5 bundle files + 13 stacks + SKILL.md frontmatter); flip
+  to `5.0.0` at release. plugin.json follows the same policy (plan said
+  `5.0.0`).
+- **M1-T3:** hitting the ≤7,100-word core target required also compressing
+  `version-awareness.md` (462→284 words) — no behavior lost, fixed its
+  dangling `update.sh` reference.
+- **v4 hook-lint finding:** `lint-portability.sh` required hook wiring in
+  `.claude/settings.json`, which is *gitignored* — the check could pass
+  only on the original author's machine. Replaced with script-existence
+  checks + a TODO to re-add wiring checks against plugin `hooks/hooks.json`
+  when M2-T4 lands.
 
 ---
 

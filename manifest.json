@@ -1,7 +1,7 @@
 {
   "bundle": {
     "name": "etyb-skills",
-    "version": "4.0.2",
+    "version": "5.0.0-dev",
     "published_at": "2026-05-14",
     "manifest_url": "https://raw.githubusercontent.com/e-t-y-b/etyb-skills/main/manifest.json",
     "repository": "https://github.com/e-t-y-b/etyb-skills",
@@ -10,11 +10,11 @@
     "license": "MIT"
   },
   "skill": {
-    "etyb": "4.0.2"
+    "etyb": "5.0.0-dev"
   },
   "stacks": {
     "salesforce": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_release": "Spring '26",
       "last_verified_on": "2026-05-12",
       "applies_to_roles": [
@@ -33,7 +33,7 @@
       "deferred_roles": []
     },
     "aws": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "system-architect",
@@ -54,7 +54,7 @@
       ]
     },
     "gcp": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "system-architect",
@@ -75,7 +75,7 @@
       ]
     },
     "azure": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "system-architect",
@@ -96,7 +96,7 @@
       ]
     },
     "anthropic-claude": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "backend-architect",
@@ -114,7 +114,7 @@
       ]
     },
     "openai": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "ai-ml-engineer",
@@ -132,7 +132,7 @@
       ]
     },
     "cloudflare": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "backend-architect",
@@ -150,7 +150,7 @@
       ]
     },
     "vercel": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "frontend-architect",
@@ -168,7 +168,7 @@
       ]
     },
     "supabase": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "backend-architect",
@@ -186,7 +186,7 @@
       ]
     },
     "firebase": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "backend-architect",
@@ -203,7 +203,7 @@
       ]
     },
     "expo": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "mobile-architect",
@@ -220,7 +220,7 @@
       ]
     },
     "stripe": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "backend-architect",
@@ -240,7 +240,7 @@
       ]
     },
     "observability": {
-      "version": "4.0.2",
+      "version": "5.0.0-dev",
       "last_verified_on": "2026-05-14",
       "applies_to_roles": [
         "sre-engineer",

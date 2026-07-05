@@ -24,7 +24,7 @@ labels: bug
 ## Environment
 
 - Agent platform: <!-- Claude Code / OpenAI Codex / Google Antigravity / other -->
-- ETYB-Skills version: <!-- output of `cat VERSION` or `./scripts/update.sh --check` -->
+- ETYB-Skills version: <!-- output of `cat VERSION` -->
 - OS: <!-- macOS / Linux / Windows + WSL -->
 
 ## Additional context

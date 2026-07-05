@@ -21,7 +21,7 @@ docs/plan-*.md
 __pycache__/
 *.pyc
 
-# Local install artifacts (created by scripts/install.sh / install-codex-runtime.sh
+# Local install artifacts (legacy v4 installer output; kept ignored for old clones
 # when run with this repo as both source and target during development)
 .agents/
 

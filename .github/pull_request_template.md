@@ -14,7 +14,7 @@
 
 ## Affected skills / files
 
-<!-- e.g. skills/backend-architect/, scripts/update.sh, docs/installation.md -->
+<!-- e.g. skills/etyb/core/, stacks/aws/, docs/installation.md -->
 
 ## Verification
 
