@@ -168,7 +168,7 @@ for path in .claude/skills/etyb-oss-maintainer internal/etyb-oss-maintainer .cla
     warn "$path exists — etyb-oss-maintainer is maintainer-personal tooling and must never be committed to this repo"
   fi
 done
-for file in manifest.json .claude-plugin/marketplace.json scripts/install.sh scripts/install-codex-runtime.sh; do
+for file in manifest.json .claude-plugin/marketplace.json .claude-plugin/plugin.json; do
   if [[ -f "$file" ]] && grep -q "etyb-oss-maintainer" "$file"; then
     warn "$file references etyb-oss-maintainer — internal skill should not be in any installer or manifest"
   fi

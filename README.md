@@ -13,9 +13,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Claude_Code-hook--enforced-00cc66?style=flat-square" alt="Claude Code" />
-  <img src="https://img.shields.io/badge/OpenAI_Codex-hooks_+_agents-00cc66?style=flat-square" alt="OpenAI Codex" />
-  <img src="https://img.shields.io/badge/Google_Antigravity-model--trusted-888?style=flat-square" alt="Google Antigravity" />
+  <img src="https://img.shields.io/badge/Claude_Code-skill_+_plugin-00cc66?style=flat-square" alt="Claude Code" />
+  <img src="https://img.shields.io/badge/OpenAI_Codex-skill-00cc66?style=flat-square" alt="OpenAI Codex" />
+  <img src="https://img.shields.io/badge/Google_Antigravity-skill-00cc66?style=flat-square" alt="Google Antigravity" />
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License" />
   <img src="https://img.shields.io/badge/skill-1_command-black?style=flat-square" alt="One skill, /etyb" />
   <img src="https://img.shields.io/badge/content-in_repo-00cc66?style=flat-square" alt="Vendor knowledge in-repo" />
@@ -32,16 +32,15 @@ v4 collapses what used to be 30 separate skills into **one coordinated skill** w
 ## Quick Start
 
 ```bash
-# Claude Code — native plugin
+# Any agent — Claude Code, Codex, Cursor, Kiro, Trae, Antigravity
+npx skills add e-t-y-b/etyb-skills
+```
+
+Or, on Claude Code, install as a native plugin instead:
+
+```
 /plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb@etyb-skills
-
-# OpenAI Codex, Google Antigravity, or manual install
-git clone https://github.com/e-t-y-b/etyb-skills.git
-./etyb-skills/scripts/install.sh
-
-# Codex projects — add runtime hooks + custom agents
-./etyb-skills/scripts/install-codex-runtime.sh --target /path/to/your-project
 ```
 
 Once installed, every request goes through `/etyb`. Specialist expertise is loaded internally as you need it.
@@ -52,8 +51,8 @@ Once installed, every request goes through `/etyb`. Specialist expertise is load
 
 | Platform | Enforcement | What You Get |
 |----------|-------------|--------------|
-| **Claude Code** | Hook-enforced (flagship) | Deterministic gates via `PreToolUse`/`PostToolUse` hooks — edit-before-test, pre-merge, pre-commit review checks |
-| **OpenAI Codex** | Partial runtime-enforced | 4 lifecycle hooks (prompt guardrails, Bash guards, stop checks) + 4 custom agents + per-skill `openai.yaml` metadata. [Documented model-trusted gaps](skills/etyb/adapters/codex/ADAPTER.md) |
+| **Claude Code** | Model-trusted today; deterministic hooks + agents ship in v5 M2 | Full `/etyb` skill via skills CLI or native plugin |
+| **OpenAI Codex** | Model-trusted today; adapter-generated runtime ships in v5 M2 | Full `/etyb` skill discovered from `.agents/skills/` |
 | **Google Antigravity** | Model-trusted | Markdown-first protocols; ADK integration deferred. All gates and disciplines apply via instruction |
 
 ---
@@ -69,7 +68,7 @@ Once installed, every request goes through `/etyb`. Specialist expertise is load
 
 An AI coding agent that works like a 100-person engineering org — through a single trigger:
 
-- **Refuses to ship untested code** — TDD enforcement with deterministic hooks
+- **Refuses to ship untested code** — TDD-first discipline (deterministic hook enforcement returns in v5 M2)
 - **Stops you from building the wrong thing** — structured brainstorming before architecture
 - **Pushes back on bad review feedback** — evaluates findings on merit, no performative agreement
 - **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
@@ -189,47 +188,34 @@ Platform-specific knowledge overlays with **knowledge-currency timestamps**, aut
 
 ## Install
 
-### Claude Code (plugin)
+### Skills CLI (any agent)
 
 ```bash
+npx skills add e-t-y-b/etyb-skills
+```
+
+The [`skills` CLI](https://github.com/vercel-labs/skills) installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals — into every detected agent's skills directory (Claude Code `.claude/skills/`, Codex/Antigravity/Trae `.agents/skills/`, Kiro `.kiro/skills/`, Cursor `.cursor/skills/`). Project installs record a `skills-lock.json` — commit it so your team restores the same skill set with `npx skills experimental_install`.
+
+### Claude Code (plugin)
+
+```
 /plugin marketplace add e-t-y-b/etyb-skills
 /plugin install etyb@etyb-skills
 ```
 
-Installs the full `/etyb` skill — 14 specialists + 9 protocols + 6 verticals.
+Native plugin install from this repo's `.claude-plugin/` manifest. Use the skills CLI **or** the plugin, not both. See [docs/installation.md](docs/installation.md) for per-harness details, verification, and troubleshooting.
 
-### Codex, Antigravity, or Manual (CLI installer)
-
-```bash
-git clone https://github.com/e-t-y-b/etyb-skills.git
-cd etyb-skills
-
-./scripts/install.sh                 # default — copies skills/etyb/ to your skills dir
-./scripts/install.sh --dry-run       # change nothing, show plan
-./scripts/install.sh --target DIR    # install into DIR (overrides auto-detect)
-```
-
-The installer auto-detects target directories (`.claude/skills/`, `.agents/skills/`, `.agent/skills/`, `skills/`) and offers to back up legacy v3 sibling skills if it finds them.
-
-### Codex Runtime (hooks + agents)
-
-```bash
-./scripts/install-codex-runtime.sh --target /path/to/your-project
-```
-
-Installs `.codex/config.toml`, lifecycle hooks, and 4 custom agents (explorer, planner, reviewer, docs researcher). Backs up existing `.codex/` on conflict. See [docs/installation.md](docs/installation.md) for the full guide.
+> **v5 status:** deterministic hook enforcement and specialist agent definitions land in milestone M2. Right now ETYB's disciplines are model-trusted — enforced by instruction, not by installed hooks.
 
 ---
 
 ## Updating
 
 ```bash
-./scripts/update.sh --check   # is there a newer version?
-./scripts/update.sh           # interactive update (shows before/after)
-./scripts/update.sh --force   # skip confirmation prompts
+npx skills update
 ```
 
-Every ETYB response ends with `What's new — etyb.ai/changelog` so you always have a one-click path to release notes. The updater preserves `.etyb/plans/`, `.claude/plans/`, and `.claude/settings.local.json`. Uses `git merge --ff-only` — no destructive operations.
+Every ETYB response ends with `What's new — etyb.ai/changelog` so you always have a one-click path to release notes. On the plugin path, update the marketplace and reinstall from the `/plugin` menu.
 
 ---
 

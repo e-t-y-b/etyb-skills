@@ -1,187 +1,101 @@
 # Installation Guide
 
-ETYB-Skills is distributed as a bundle of 30 coordinated skills. This guide covers how to install, update, and resolve conflicts across Claude Code, OpenAI Codex, and Google Antigravity.
+ETYB is distributed as [agent skills](https://agentskills.io) — plain folders of markdown that any compliant coding agent can discover. One install command covers Claude Code, OpenAI Codex, Cursor, Kiro, Trae, Google Antigravity, and anything else that reads a skills directory.
 
-## Picking Your Install Method
-
-| You are using… | Recommended install |
-|----------------|---------------------|
-| Claude Code | `/plugin marketplace add` (native, handles discovery + install) |
-| OpenAI Codex | Clone + `scripts/install.sh --target .agents/skills` + `scripts/install-codex-runtime.sh --target <project-root>` |
-| Google Antigravity | Clone + `scripts/install.sh --target .agent/skills` |
-| Generic (any agentskills.io-compliant agent) | `npx skills add e-t-y-b/etyb-skills` or manual clone |
-| Developing ETYB itself | Clone + work in `skills/` directly |
-
-## Claude Code (Plugin System)
+## Primary Install (any agent)
 
 ```bash
+npx skills add e-t-y-b/etyb-skills
+```
+
+The [`skills` CLI](https://github.com/vercel-labs/skills) detects every agent configured in your project (and machine) and installs into each agent's skills directory. Useful variants:
+
+```bash
+npx skills add e-t-y-b/etyb-skills -g          # global (user-level) instead of project-level
+npx skills add e-t-y-b/etyb-skills --list      # list available skills without installing
+npx skills add e-t-y-b/etyb-skills --all       # all skills, all detected agents, no prompts
+npx skills ls                                  # show what is installed where
+```
+
+### Teams: pin with skills-lock.json
+
+Project-level installs record what was installed in `skills-lock.json`. Commit it. Teammates (and CI) restore the exact same skill set with:
+
+```bash
+npx skills experimental_install
+```
+
+## Claude Code Alternative (plugin)
+
+This repo ships a plugin manifest at `.claude-plugin/plugin.json`, so Claude Code can install ETYB natively instead of via the skills CLI. Inside a Claude Code session:
+
+```
 /plugin marketplace add e-t-y-b/etyb-skills
-/plugin install etyb-full@etyb-skills             # all 30 skills
-# or pick a subset:
-/plugin install etyb-process-protocols@etyb-skills  # 9 protocols + etyb
-/plugin install etyb-core-team@etyb-skills          # 14 core teams + etyb
-/plugin install etyb-verticals@etyb-skills          # 6 domain specialists
+/plugin install etyb@etyb-skills
 ```
 
-Plugin bundles are defined in `.claude-plugin/marketplace.json`.
+Pick one path — skills CLI **or** plugin — not both, or the `/etyb` skill will be discovered twice.
 
-## OpenAI Codex
+## Where Skills Land (per harness)
 
-Codex discovers skills from `.agents/skills/` at the workspace root and up to the git repo root, plus `~/.agents/skills/` globally. Project-scoped runtime hooks and custom agents live in `.codex/`.
+If you prefer a manual install, clone the repo and copy `skills/etyb/` (and any `stacks/<vendor>/` folders you want) into the directory your harness reads:
+
+| Harness | Discovery directory |
+|---------|---------------------|
+| Claude Code | `.claude/skills/` (project) or `~/.claude/skills/` (global) — or the plugin, above |
+| OpenAI Codex | `.agents/skills/` |
+| Google Antigravity | `.agents/skills/` |
+| Trae | `.agents/skills/` |
+| Kiro | `.kiro/skills/` |
+| Cursor | `.cursor/skills/` |
+
+The skill folder name must match the `name:` in its `SKILL.md` frontmatter (`etyb`), and it must sit directly inside the skills directory — not nested deeper.
+
+## Verifying the Install
+
+Check that the skill landed where your harness looks (adjust the path per the table above):
 
 ```bash
-git clone https://github.com/e-t-y-b/etyb-skills.git
-cd etyb-skills
-./scripts/install.sh --target /path/to/your-project/.agents/skills
-./scripts/install-codex-runtime.sh --target /path/to/your-project
+ls .claude/skills/etyb/SKILL.md      # Claude Code (project install)
+ls .agents/skills/etyb/SKILL.md      # Codex / Antigravity / Trae
+head -5 .claude/skills/etyb/SKILL.md # frontmatter should show "name: etyb"
 ```
 
-`install.sh` handles skill conflicts interactively. `install-codex-runtime.sh` installs:
-- `.codex/config.toml`
-- `.codex/hooks.json`
-- `.codex/hooks/*`
-- `.codex/agents/*`
-
-This gives Codex a real ETYB runtime surface: prompt guardrails, Bash-based verification checks, stop-time verification reminders, and project-scoped ETYB custom agents.
-
-See also: [`skills/etyb/adapters/codex/ADAPTER.md`](../skills/etyb/adapters/codex/ADAPTER.md) for the platform contract and `agents/openai.yaml` options shipped with every installable skill.
-
-## Google Antigravity
-
-Antigravity discovers skills from `.agent/skills/` (singular — distinct from Codex's `.agents/`) at the workspace root, plus `~/.gemini/antigravity/skills/` globally.
+If you installed with the skills CLI:
 
 ```bash
-git clone https://github.com/e-t-y-b/etyb-skills.git
-cd etyb-skills
-./scripts/install.sh --target /path/to/your-workspace/.agent/skills
+npx skills ls
 ```
 
-Antigravity remains markdown-first in this repo. The ADK path is documented for future work only; this bundle does not ship ADK code, Python agents, or tool wiring. See [`skills/etyb/adapters/antigravity/adk-integration.md`](../skills/etyb/adapters/antigravity/adk-integration.md) for the future-path note.
+Then start a session and ask the agent something engineering-shaped ("review this function", "why is this query slow"). The response should engage ETYB and end with its `ETYB · <role-engaged>` signature.
 
-## Generic / Manual Install
+## Enforcement Status (honest note)
 
-```bash
-git clone https://github.com/e-t-y-b/etyb-skills.git
-cd etyb-skills
-./scripts/install.sh                             # everything, auto-detect target
-./scripts/install.sh --bundle process-protocols  # just the 9 always-on protocols + etyb
-./scripts/install.sh --skills tdd-protocol,qa-engineer
-./scripts/install.sh --list-bundles              # discover available bundles
-./scripts/install.sh --dry-run                   # show what would happen
-./scripts/install.sh --target DIR                # explicit target
-```
-
-`scripts/install.sh` supports:
-- `--bundle NAME` — install a named group. Accepts short or full form: `process-protocols` and `etyb-process-protocols` both work.
-- `--skills a,b,c` — install specific skills by directory name (comma-separated). Mutually exclusive with `--bundle`.
-- `--list-bundles` — print every available bundle and its skill count, then exit.
-- `--dry-run` — preview changes, modify nothing.
-- `--force` — accept all conflicts with "replace" (no prompts).
-- `--on-conflict prompt|replace|keep|skip` — conflict policy.
-- `--target DIR` — explicit destination.
-- `--source DIR` — override source (defaults to `skills/` relative to script).
-
-### Available bundles
-
-Bundles mirror the plugins in `.claude-plugin/marketplace.json` — one source of truth for Claude's native plugin marketplace and the install script.
-
-| Bundle | Size | What's in it |
-|--------|------|--------------|
-| `full` | 30 | Every skill. Default when no flag is passed. |
-| `process-protocols` | 10 | ETYB + the 9 always-on engineering disciplines (TDD, review, subagents, git workflow, plan execution, brainstorm, skill evolution, verification, debugging) |
-| `core-team` | 15 | ETYB + 14 SDLC-spanning specialists (research, planning, architecture per layer, QA, DevOps, SRE, security, docs, code review) |
-| `verticals` | 6 | Domain architects (fintech, healthcare, e-commerce, SaaS, real-time, social platforms) |
-
-Plain-text manifests live in [`bundles/`](../bundles/) and are generated by `scripts/generate-bundles.py`. CI fails if they drift from `marketplace.json`.
-
-To add a new bundle:
-
-1. Add a `plugins[]` entry in `.claude-plugin/marketplace.json`.
-2. Run `scripts/generate-bundles.py` to emit the matching `bundles/<name>.txt`.
-3. Commit both.
-
-## Conflict Resolution
-
-When `install.sh` encounters an existing skill at the target path, it presents four options:
-
-| Option | Effect |
-|--------|--------|
-| **replace** | Back up existing skill to `<name>.bak.<timestamp>`, install ETYB's version |
-| **keep** | Install ETYB's version side-by-side as `<name>.etyb/` (no overwrite) |
-| **skip** | Leave existing skill in place, do not install ETYB's |
-| **prompt** (default) | Ask per skill |
-
-Use `--on-conflict` to apply one policy to the whole install.
-
-### v1.x Migration (`orchestrator` → `etyb`)
-
-In 2.0.0 the orchestrator skill was renamed from `orchestrator` to `etyb`. On install, the script detects any legacy `orchestrator/` folder in the target and offers to move it aside (to `orchestrator.bak.<timestamp>`) before installing fresh. The legacy folder is **moved, never deleted** — you can inspect or restore it manually if needed.
-
-### Data Never Touched
-
-Regardless of conflict policy, the install and update scripts NEVER modify:
-- `.etyb/plans/` — your plan artifacts
-- `.claude/plans/` — Claude Code native plan mode
-- `.claude/settings.local.json` — your local Claude Code settings
-- Any `*.bak.*` backups created by previous runs
+In the current v5 milestone, ETYB's disciplines — TDD-first, verification-before-claims, two-stage review — are **model-trusted**: they are enforced by instruction, not by runtime hooks. Deterministic hook enforcement and the specialist agent definitions ship in milestone M2 (see `docs/plan/skills-5.0-plan.md`). Until then, no hook wiring is installed and none needs verifying.
 
 ## Updating
 
 ```bash
-./scripts/update.sh --check    # report whether an update is available
-./scripts/update.sh            # interactive update
-./scripts/update.sh --force    # skip confirmation prompts
+npx skills update
 ```
 
-See [Updating section in README](../README.md#updating) and [CHANGELOG.md](../CHANGELOG.md).
-
-## Verifying the Install
-
-After installation:
-
-```bash
-ls <target>/                 # should list 30 skills including etyb/
-cat <target>/etyb/VERSION    # if VERSION was shipped
-```
-
-On Claude Code, verify hooks are wired:
-```bash
-cat .claude/settings.json | grep -c "hook"    # should be 5
-```
-
-On Codex, verify runtime assets are present:
-
-```bash
-ls /path/to/your-project/.codex
-cat /path/to/your-project/.codex/hooks.json
-```
-
-On Codex or Antigravity, verify SKILL.md discovery by asking the agent to list available skills — ETYB and specialists should appear.
+For the Claude Code plugin path, update the marketplace and reinstall from the `/plugin` menu.
 
 ## Uninstalling
 
 ```bash
-# Remove all ETYB skills from a target dir (preserves .bak.* backups and user data)
-for name in $(jq -r '.skills | keys[]' manifest.json); do
-  rm -rf "<target>/$name"
-done
+npx skills remove etyb
 ```
 
-Or on Claude Code: `/plugin uninstall etyb-full@etyb-skills`.
+Or delete the skill folder from your harness's skills directory (e.g. `rm -rf .claude/skills/etyb`). On the plugin path: `/plugin uninstall etyb@etyb-skills`.
 
 ## Troubleshooting
 
-**"No target dir detected"**
-Specify `--target` explicitly. The script looks for `.claude/skills/`, `.agents/skills/`, `.agent/skills/`, or `skills/` in that order.
+**Skill doesn't activate**
+Confirm the directory is exactly `<skills-dir>/etyb/SKILL.md` for your harness (see the table above) and that the folder name matches the frontmatter `name:`.
 
-**"fast-forward failed" on update**
-Your local branch has diverged from `origin/main`. Either `git stash` your changes, or merge manually with `git pull --rebase`.
+**Installed twice**
+If you used both the skills CLI and the Claude Code plugin, remove one — duplicate discovery causes trigger competition.
 
-**"could not fetch remote manifest"**
-The repo may be private or the network may be blocking raw.githubusercontent.com. Set `GITHUB_TOKEN` or `git pull` directly.
-
-**Skill doesn't activate on Codex/Antigravity**
-Check that the skill directory is at `.agents/skills/<name>/` (Codex) or `.agent/skills/<name>/` (Antigravity) — not nested deeper. The `name:` in SKILL.md frontmatter must match the parent directory name exactly.
-
-**Codex hooks are not firing**
-Confirm `/path/to/project/.codex/config.toml` has `codex_hooks = true`, `/path/to/project/.codex/hooks.json` exists, and you are running on a Codex build that supports hooks. Codex hooks are still experimental and currently disabled on Windows.
+**`npx skills` prompts hang in CI**
+Pass `-y` (skip confirmations) or use `npx skills experimental_install` against a committed `skills-lock.json`.
