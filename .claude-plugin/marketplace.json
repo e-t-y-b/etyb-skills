@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "ETYB — your virtual CTO and engineering team, as one coordinated skill",
-    "version": "5.0.0-dev"
+    "version": "5.0.0"
   },
   "plugins": [
     {

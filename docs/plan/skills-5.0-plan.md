@@ -41,9 +41,9 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 
 ## Release checklist (do on a real machine, then tag 5.0.0)
 
-- [ ] Flip `5.0.0-dev` → `5.0.0` across VERSION + 5 bundle files + 13 stacks
+- [x] Flip `5.0.0-dev` → `5.0.0` across VERSION + 5 bundle files + 13 stacks
       + SKILL.md (single-version policy; `validate-version-sync.sh` enforces).
-- [ ] Update `manifest.json` `published_at` and `.claude-plugin/marketplace.json`
+- [x] Update `manifest.json` `published_at` and `.claude-plugin/marketplace.json`
       (name `etyb`, version 5.0.0) to match plugin.json.
 - [x] Observe the five hooks actually firing in a Claude Code plugin install
       (M2-T4 debt — only fixture-verified so far).
@@ -53,6 +53,37 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 - [ ] Merge `claude/usability-standards-review-27ckxa` → `main`; tag `v5.0.0`.
 
 ## Deviations
+
+- **Version flip (2026-07-06, done):** `5.0.0-dev` → `5.0.0` across VERSION,
+  the 4 other bundle files (package.json, manifest.json, marketplace.json,
+  plugin.json), all 13 `stacks/*/SKILL.md`, `skills/etyb/SKILL.md`, and the
+  3 role-skill SKILL.md files (`etyb-explore`/`etyb-plan`/`etyb-review`);
+  `dist/adapters/**` and `.codex/agents/**` regenerated via
+  `build-adapters.sh` to pick up the bump (0 hand-edits to generated
+  output). `manifest.json`'s `bundle.published_at` set to 2026-07-06.
+  `validate-version-sync.sh` green. CHANGELOG.md's `[Unreleased]` section
+  converted to `[5.0.0] — 2026-07-06`.
+
+  Found and fixed two pre-existing bugs while regenerating `manifest.json`
+  to verify zero drift (its own release-gate check, run early since the
+  version bump touches it):
+  1. **`stacks/vercel/marketplace.md` was untracked** — `.gitignore:13` had
+     a bare `MARKETPLACE.md` pattern intended only for the repo-root
+     internal doc, but gitignore patterns without a `/` match the basename
+     anywhere in the tree, and on this (case-insensitive) filesystem it
+     also silently matched `stacks/vercel/marketplace.md`. That page (real
+     content: Vercel Marketplace integrations, referenced from
+     `stacks/vercel/SKILL.md`'s prose) had never been committed. Fixed the
+     pattern to `/MARKETPLACE.md` (root-anchored) and `git add -f`'d the
+     recovered page; `manifest.json` now lists 538 stack pages (was 537).
+  2. Verified the `build-manifest.sh` / `build-adapters.sh` drift checks
+     both by regenerating in-place and, separately, in a filtered copy
+     under scratch space (excluding an untracked, gitignored local
+     `stacks/salesforce-workspace/` eval-scratch directory left over from
+     unrelated prior work, which the manifest generator's `stacks/**/*.md`
+     glob doesn't skip since it isn't gitignore-aware) — confirms the
+     generators are drift-clean against the real committed tree, not just
+     against local disk state that wouldn't exist in a clean CI checkout.
 
 - **M2-T4 ledger note — live hook observation (2026-07-06, done):** installed
   the repo as a real Claude Code plugin (`claude plugin marketplace add

@@ -10,7 +10,7 @@
 .claude/
 
 # Internal documents (not for public distribution)
-MARKETPLACE.md
+/MARKETPLACE.md
 docs/plan-*.md
 .internal/
 

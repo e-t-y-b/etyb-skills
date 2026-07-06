@@ -7,7 +7,7 @@ license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "5.0.0-dev"
+  version: "5.0.0"
   category: stack-pack
   last_verified_release: "Expo SDK 55 (React Native 0.83, React 19.2)"
   last_verified_on: "2026-05-14"

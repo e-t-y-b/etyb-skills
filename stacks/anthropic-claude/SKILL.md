@@ -7,7 +7,7 @@ license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "5.0.0-dev"
+  version: "5.0.0"
   category: stack-pack
   last_verified_release: "Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, July 2026"
   last_verified_on: "2026-07-05"

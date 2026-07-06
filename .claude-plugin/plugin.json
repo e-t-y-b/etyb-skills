@@ -1,6 +1,6 @@
 {
   "name": "etyb",
-  "version": "5.0.0-dev",
+  "version": "5.0.0",
   "description": "ETYB — engineering co-pilot behind a single /etyb skill: senior-leader routing to specialist roles, TDD/verification/review discipline, and currency-stamped vendor stacks for post-cutoff platform facts.",
   "author": {
     "name": "e-t-y-b"

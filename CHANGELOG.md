@@ -6,15 +6,15 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 
 ## [Unreleased]
 
-### Changed — v5 M1 "universal core" (in progress on the v5 branch)
+## [5.0.0] — 2026-07-06
 
-- `skills/etyb/SKILL.md` rewritten to the Agent Skills open-spec subset: 967-char description (spec cap 1,024), 76-line body with the Tier 0-4 table inline — Tier 0 requests need zero additional file reads.
-- `core/signature.md`, `core/response-formats.md`, `core/scale-calibration.md`, `core/always-on-protocols.md` consolidated into `core/session.md`; core modules total −40% words. Progress-marker and clarifying-question contradictions resolved (CTO-voice status lines, cap of 3, everywhere).
-- Root `AGENTS.md` added (open standard); `CLAUDE.md` reduced to an `@AGENTS.md` import plus Claude-only notes.
-- Whole-repo version `5.0.0-dev` under the single-version policy.
+**Plugin-native distribution + deterministic hook enforcement + Claude 5.** v5 lands the full M1+M2+M3 scope of the skills-only 5.0 plan — this is the complete 5.0 release; there is no skills 5.1 (further MCP/memory work moves to the separate `etyb.ai` product).
 
-- **M2 (agents & hooks):** five agent definitions under `agents/` (explorer, planner, reviewer, stack-researcher, cartographer; `memory: project`); three forked role skills (`/etyb-review`, `/etyb-plan`, `/etyb-explore`) with Claude overlays; hook scripts rewritten to the stdin-JSON contract (advisory `systemMessage` warnings, 21 tests) and wired via plugin `hooks/hooks.json`; deterministic adapter generator emits Codex TOMLs, Kiro agent JSONs, a Cursor plugin skeleton, and overlay-merged plugin skills under `dist/adapters/`.
-- **M3 (remote stacks):** `manifest.json` gains a generated 537-page `stacks_pages` array (`scripts/build-manifest.sh`); the stack-researcher agent owns the manifest-driven fetch + currency protocol; per-page currency checking with a batch-stamp detector (warn-first); the anthropic-claude stack refreshed to the Claude 5 generation (Sonnet 5 / Opus 4.8 / Haiku 4.5 / Fable-Mythos tier) with per-page verification stamps. All 13 stack `SKILL.md` descriptions compressed under the 1,024-char open-spec cap (prose kept, trigger lists trimmed to the strongest signals); the token-budget lint now hard-fails over-cap descriptions.
+### Changed
+
+- **M1 (universal core):** `skills/etyb/SKILL.md` rewritten to the Agent Skills open-spec subset: 967-char description (spec cap 1,024), 76-line body with the Tier 0-4 table inline — Tier 0 requests need zero additional file reads. `core/signature.md`, `core/response-formats.md`, `core/scale-calibration.md`, `core/always-on-protocols.md` consolidated into `core/session.md`; core modules total −40% words. Progress-marker and clarifying-question contradictions resolved (CTO-voice status lines, cap of 3, everywhere). Root `AGENTS.md` added (open standard); `CLAUDE.md` reduced to an `@AGENTS.md` import plus Claude-only notes. Whole-repo version `5.0.0` under the single-version policy.
+- **M2 (agents & hooks):** five agent definitions under `agents/` (explorer, planner, reviewer, stack-researcher, cartographer; `memory: project`); three forked role skills (`/etyb-review`, `/etyb-plan`, `/etyb-explore`) with Claude overlays; hook scripts rewritten to the stdin-JSON contract (advisory `systemMessage` warnings, 21 tests) and wired via plugin `hooks/hooks.json`; deterministic adapter generator emits Codex TOMLs, Kiro agent JSONs, a Cursor plugin skeleton, and overlay-merged plugin skills under `dist/adapters/`. All five hooks verified firing against a real local Claude Code plugin install (see `docs/plan/skills-5.0-plan.md` M2-T4 for the observed transcript).
+- **M3 (remote stacks):** `manifest.json` gains a generated 538-page `stacks_pages` array (`scripts/build-manifest.sh`); the stack-researcher agent owns the manifest-driven fetch + currency protocol; per-page currency checking with a batch-stamp detector (now hard-fails, `CHECK_CURRENCY_STRICT=1`); the anthropic-claude stack refreshed to the Claude 5 generation (Sonnet 5 / Opus 4.8 / Haiku 4.5 / Fable-Mythos tier) with per-page verification stamps, spot-checked against live Anthropic docs at release time. All 13 stack `SKILL.md` descriptions compressed under the 1,024-char open-spec cap (prose kept, trigger lists trimmed to the strongest signals); the token-budget lint now hard-fails over-cap descriptions.
 
 ### Removed
 
@@ -22,8 +22,11 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 
 ### Fixed
 
-- Docs no longer claim hook enforcement that is not wired (hooks land in v5 M2 via plugin `hooks/hooks.json`); the old lint check against gitignored `.claude/settings.json` — which could never pass on a clean clone — replaced with hook-script existence checks.
-- New `scripts/lint-token-budget.sh` in CI enforces description caps; all 13 stack descriptions exceed the spec cap and are scheduled for compression (M3-T5).
+- Docs no longer claim hook enforcement that is not wired — `docs/installation.md`'s Enforcement Status note now accurately describes the advisory (non-blocking) hooks shipped on the Claude Code plugin path; the old lint check against gitignored `.claude/settings.json` — which could never pass on a clean clone — replaced with hook-script existence checks.
+- New `scripts/lint-token-budget.sh` in CI enforces description caps; all 13 stack descriptions compressed under the spec cap (M3-T5).
+- `hooks/session-start-memory.sh` shipped without the executable bit, which would have made the SessionStart hook fail with "permission denied" on a real plugin install; fixed.
+- `.claude-plugin/marketplace.json`'s plugin entry declared a redundant `skills` component list that conflicted with `plugin.json`'s convention-based auto-discovery, causing `claude plugin install` to report the plugin as failed to load; removed.
+- `.gitignore`'s `MARKETPLACE.md` pattern (intended only for the repo-root internal doc) was unscoped and silently excluded `stacks/vercel/marketplace.md` from version control on case-insensitive filesystems; anchored to `/MARKETPLACE.md` and recovered the untracked page.
 
 ## [4.0.2] — 2026-05-15
 

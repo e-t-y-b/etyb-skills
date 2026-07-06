@@ -10,7 +10,7 @@ compatibility: Designed for Claude Code, OpenAI Codex, Google Antigravity, and c
   AI coding agents
 metadata:
   author: e-t-y-b
-  version: 5.0.0-dev
+  version: 5.0.0
   category: etyb
 context: fork
 agent: etyb-explorer
