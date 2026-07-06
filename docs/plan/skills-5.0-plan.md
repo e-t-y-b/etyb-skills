@@ -54,6 +54,30 @@ debt below (needs a real Claude Code install + vendor-doc egress).
       PR opened: https://github.com/e-t-y-b/etyb-skills/pull/13 (all 6 CI
       checks green as of 2026-07-06). Merge/tag/npx-verify pending explicit
       go-ahead — see PR for the full diff before merging a major release.
+- [ ] **Post-merge, cross-repo announce to `etyb-dot-ai`** (etyb-oss-maintainer's
+      `website-impact-mapping.md`, release-runbook.md step 7 — strictly
+      *after* the tag lands, not before). Impact-mapping applied to the
+      `[5.0.0]` CHANGELOG section ahead of time so this is a same-day
+      follow-up once merge/tag happens:
+      - `Removed: scripts/install.sh` + "distribution is npx skills add ...
+        or the Claude Code plugin" → refresh install/getting-started page
+        instructions; this is also new-ish platform support (native Claude
+        Code plugin path) → update platform badges too.
+      - Everything else in the M1/M2/M3 CHANGENLOG prose (agents, hooks,
+        forked role skills, remote-stacks manifest, Claude 5 stack refresh)
+        → "review for impact" per the mapping table's catch-all rule — no
+        specific page rule matches, but a v4→v5 major-version release
+        typically wants a changelog entry at etyb.ai/changelog and a
+        version-link bump on the homepage/README-equivalent, at minimum.
+      - The 6 "Fixed:" bullets (hook executable bit, marketplace conflict,
+        gitignore data-loss bug, token-budget lint, install-docs honesty)
+        are all silent per the mapping table (`Fixed: install/hook/typo` →
+        no website item).
+      Not yet implemented as a PR on `e-t-y-b/etyb-dot-ai` — the runbook
+      sequences this after the release tag exists, and the tag doesn't
+      exist yet (merge is pending user review, previous checklist item).
+      Repo confirmed reachable (`gh repo view e-t-y-b/etyb-dot-ai`); no
+      writes made there.
 
 ## Deviations
 
