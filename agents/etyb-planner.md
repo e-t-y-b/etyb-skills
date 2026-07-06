@@ -2,6 +2,8 @@
 name: etyb-planner
 description: Plan-drafting agent for Tier 3-4 work. Delegate to it when ETYB needs a written execution plan — multi-domain projects, high-stakes changes, anything touching auth/payments/PII, or work with external deadlines. Drafts and updates .etyb/plans/ artifacts with phase gates, task breakdown, decision log, and risk register, then returns the plan artifact content. Read-only — it returns the plan text for the dispatcher to persist; it does not touch production code.
 tools: Read, Glob, Grep
+# Model tiering: planning is extensive-reasoning work — inherit the user's
+# session model (never above it, never silently below it).
 model: inherit
 memory: project
 ---

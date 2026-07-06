@@ -2,6 +2,8 @@
 name: etyb-cartographer
 description: Decision-memory and repo-map curator. Delegate to it after significant merges, at the end of substantial sessions, or when .etyb/memory/ needs maintenance — it refreshes the repo map (architecture, module ownership, test entry points, active plans), appends decision-log entries, compacts stale memory, and merges branch-scoped notes forward. The only agent that writes memory; its writes are confined to .etyb/memory/.
 tools: Read, Glob, Grep, Write
+# Model tiering: memory curation needs judgment about what to keep — inherit
+# the user's session model (bad compaction loses decisions permanently).
 model: inherit
 memory: project
 ---

@@ -16,8 +16,9 @@ require_file() {
   [[ -f "$1" ]] || fail "missing required file: $1"
 }
 
-# One orchestrator skill (etyb) plus thin etyb-* role skills (v5 M2-T2).
-# Specialists, protocols, and verticals live as internal references under etyb.
+# Exactly one skill: etyb, the single trigger surface. Specialists,
+# protocols, and verticals live as internal references under it; role work
+# runs through agents/ definitions, not peer skills (withdrawn pre-v5.0.0).
 skill_dirs=$(
   find skills -mindepth 1 -maxdepth 1 -type d -exec test -f "{}/SKILL.md" \; -print \
     | sed 's|^skills/||' \
@@ -32,21 +33,13 @@ manifest_skill_count=$(
   ' manifest.json
 )
 
-grep -qx 'etyb' <<<"$skill_dirs" || fail "skills/etyb (the orchestrator skill) is missing"
-if grep -vx 'etyb' <<<"$skill_dirs" | grep -qvE '^etyb-[a-z][a-z-]*$'; then
-  fail "skills/ may only contain etyb and etyb-* role skills, found: $skill_dirs"
-fi
+[[ "$skill_dirs" == "etyb" ]] || fail "skills/ must contain exactly one skill (etyb — the single trigger surface), found: $skill_dirs"
 [[ "$manifest_skill_count" == "1" ]] || fail "manifest.json .skill must contain exactly one entry, found $manifest_skill_count"
 
-# Role skills stay portable in the shared tree: Claude-only frontmatter
-# (context: fork, agent: ...) lives in adapters/claude/overlays/ and is
-# merged only into emitted plugin copies by the adapter generator (M2-T5).
-while IFS= read -r role_dir; do
-  if rg -n "^(context|agent):" "$role_dir/SKILL.md" >/dev/null; then
-    fail "$role_dir/SKILL.md carries Claude-only frontmatter (context:/agent:) — move it to skills/etyb/adapters/claude/overlays/"
-  fi
-  require_file "skills/etyb/adapters/claude/overlays/$(basename "$role_dir").yaml"
-done < <(find skills -mindepth 1 -maxdepth 1 -type d -name 'etyb-*' | sort)
+# The shared tree stays portable: no Claude-only frontmatter in SKILL.md.
+if rg -n "^(context|agent):" "skills/etyb/SKILL.md" >/dev/null; then
+  fail "skills/etyb/SKILL.md carries Claude-only frontmatter (context:/agent:) — the shared tree must stay portable"
+fi
 
 # Internal reference libraries — verify each has the expected count.
 specialist_count=$(find skills/etyb/references/specialists -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')

@@ -81,6 +81,38 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 
 ## Deviations
 
+- **Owner-directed pre-tag changes (2026-07-06, done):** after the senior
+  release review, the owner directed three product changes, applied on the
+  PR before tagging:
+  1. **Single entry point — M2-T2's role skills withdrawn.** `/etyb` is the
+     only skill call, explicit or auto-triggered; nothing else is
+     user-invocable. `skills/etyb-{review,plan,explore}/`, their Claude
+     fork overlays, and the `dist/adapters/claude-plugin-skills/` emission
+     were removed; the marketplace installs exactly `./skills/etyb`. The
+     same review/plan/explore work runs through the `agents/` definitions
+     dispatched by the orchestrator into sub-agent contexts. This also
+     closes the review's fork-overlay gap (overlays only existed in dist/,
+     so installed role skills would have run inline) by removing the
+     surface, and frees the description token budget (family sum
+     1587→967 chars). `lint-portability.sh` and
+     `validate-skill-manifest-sync.sh` tightened from "etyb + etyb-* role
+     skills" to "exactly one skill: etyb". M2-T2 remains historically done;
+     its deliverable was superseded by this direction change.
+  2. **Sub-agent model tiering.** Light work pins to the smallest tier
+     (`model: haiku`: etyb-explorer, etyb-stack-researcher — mirroring
+     their Codex `gpt-5.4-mini` pins); extensive-reasoning work inherits
+     the session model (etyb-planner, etyb-reviewer, etyb-cartographer).
+     Policy documented in AGENTS.md: pins may only ever go DOWN — the
+     user-selected session model is the ceiling; harnesses that can't
+     resolve the field fall back to the session model by construction.
+  3. **Fallback-to-live-docs guarantee hardened.** The degraded path in
+     `core/knowledge-currency.md` and the stack-researcher prompt now
+     requires going to the vendor's official documentation via WebFetch
+     when the in-repo stack tree doesn't answer the question — general
+     knowledge alone is the last resort (fetch unavailable) and must be
+     flagged. Previously a fully-missing stack degraded straight to
+     "general knowledge plus a flag."
+
 - **Full release gate (2026-07-06, done):** ran the complete CI-equivalent
   gate locally in a clean `git worktree` of this branch's HEAD (so
   untracked local scratch dirs like `stacks/salesforce-workspace/` and

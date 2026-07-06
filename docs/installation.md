@@ -2,6 +2,17 @@
 
 ETYB is distributed as [agent skills](https://agentskills.io) — plain folders of markdown that any compliant coding agent can discover. One install command covers Claude Code, OpenAI Codex, Cursor, Kiro, Trae, Google Antigravity, and anything else that reads a skills directory.
 
+## What each install path gets you
+
+| | skills CLI (`npx skills add`) — any harness | Claude Code plugin |
+|---|---|---|
+| `/etyb` skill (the single trigger surface) | ✅ | ✅ |
+| Sub-agent definitions (explorer, planner, reviewer, stack-researcher, cartographer) | ❌ — role work runs inline, instruction-guided | ✅ — dispatched into their own contexts, model-tiered (light work on the smallest model, never above your session model) |
+| Advisory hooks (TDD warning, review-evidence check, merge-verify, edit/test logging) | ❌ | ✅ — warn, never block |
+| Vendor stacks (13, currency-stamped) | ✅ read from the repo / GitHub raw | ✅ same |
+
+Either way, **`/etyb` is the only skill you ever invoke** — say the situation ("this query is slow", "review this diff") or call `/etyb` explicitly. There are no peer commands; the specialists, protocols, and sub-agents are internal.
+
 ## Primary Install (any agent)
 
 ```bash

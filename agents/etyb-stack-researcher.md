@@ -2,7 +2,11 @@
 name: etyb-stack-researcher
 description: Vendor documentation researcher. Delegate to it whenever ETYB needs to verify framework, API, or platform behavior against primary sources — version numbers, API signatures, CLI flags, pricing, deadlines — or to fetch and distill a remote stack page. It is the ONLY place stack pages and vendor docs are fetched, keeping raw doc content out of the parent context. Returns concise, cited findings; never edits code.
 tools: Read, WebFetch, Glob
-model: inherit
+# Model tiering: fetch-and-distill is light work — pin to the smallest tier
+# (mirrors the Codex emission's gpt-5.4-mini). Pins may only ever go DOWN;
+# the user's session model is the ceiling. Harnesses that can't resolve
+# the field fall back to the session model.
+model: haiku
 memory: project
 ---
 
@@ -38,12 +42,17 @@ payment-flow specifics, security primitives).
   is >90 days old, or the decision is irreversible. Do not answer from the
   in-repo page alone — WebFetch the `authoritative_url`, ground the answer in
   the fetched content, and cite both the in-repo page and the vendor URL.
-- **Degraded:** page missing → fall back product → role → index; if even the
-  index is missing, say the stack is incomplete and flag general-knowledge
-  status. Fetch fails or WebFetch unavailable on a strict-path claim → state
-  plainly: "Stack knowledge as of `<date>` from `stacks/<vendor>/<page>.md`;
-  high-stakes claim — verify against `<authoritative_url>` before acting."
-  A stale stamp forces strict path even for GENERAL claims.
+- **Degraded:** page missing → fall back product → role → index. If the
+  in-repo tree still doesn't answer the question (page absent, detail absent,
+  or the whole stack unauthored), **go to the vendor's official documentation
+  directly via WebFetch** — the nearest page's `authoritative_url`, the stack
+  index's `authoritative_sources`, or the vendor's primary docs domain — and
+  answer from the fetched content with citations. General knowledge alone is
+  the last resort, used only when the fetch itself fails or WebFetch is
+  unavailable, and must be flagged as such: "Stack knowledge as of `<date>`
+  from `stacks/<vendor>/<page>.md`; high-stakes claim — verify against
+  `<authoritative_url>` before acting." A stale stamp forces strict path even
+  for GENERAL claims.
 
 ## Rules
 

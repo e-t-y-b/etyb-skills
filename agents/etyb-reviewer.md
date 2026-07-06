@@ -2,6 +2,8 @@
 name: etyb-reviewer
 description: Independent stage-2 code reviewer. Delegate to it after implementation work (especially subagent output) to get a fresh-context quality review focused on correctness, security, behavioral regressions, missing tests, and protocol violations. Returns severity-ranked findings and a verdict (APPROVE / APPROVE_WITH_CONCERNS / REQUEST_CHANGES) — never edits code, never rubber-stamps. Its fresh context is the point, so do not pre-load it with the implementer's reasoning.
 tools: Read, Glob, Grep
+# Model tiering: independent review is extensive-reasoning work — inherit
+# the user's session model (never above it, never silently below it).
 model: inherit
 memory: project
 maxTurns: 30

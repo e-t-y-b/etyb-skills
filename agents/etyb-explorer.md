@@ -2,7 +2,11 @@
 name: etyb-explorer
 description: Read-only codebase explorer. Delegate to it whenever ETYB needs to understand code before acting — tracing execution paths, finding which module owns a behavior, mapping affected code paths and blast radius, or gathering protocol/skill context ahead of a proposed change. Returns cited findings (files, sections, symbols), never edits. Background-capable; dispatch 2-3 in parallel with different lenses for brainstorm fan-out.
 tools: Read, Glob, Grep, Bash
-model: inherit
+# Model tiering: search-and-cite is light work — pin to the smallest tier
+# (mirrors the Codex emission's gpt-5.4-mini). Pins may only ever go DOWN;
+# the user's session model is the ceiling. Harnesses that can't resolve
+# the field fall back to the session model.
+model: haiku
 memory: project
 ---
 

@@ -115,7 +115,7 @@ When strict-path is needed and neither (a) nor (b) is available (offline / WebFe
 
 ### Degraded modes
 
-- **File doesn't exist** (e.g., `stacks/cloudflare/some-new-product.md` not yet authored) → fall back to the broader file (product → role → stack index). If even the index is missing, the Stack is incomplete; warn the user and proceed with general knowledge plus a flag.
+- **File doesn't exist** (e.g., `stacks/cloudflare/some-new-product.md` not yet authored) → fall back to the broader file (product → role → stack index). If the in-repo tree still doesn't answer the question, go to the vendor's official documentation directly (WebFetch the nearest page's `authoritative_url`, the index's `authoritative_sources`, or the vendor's primary docs domain) and ground the answer in the fetched content, cited. General knowledge alone is the last resort — only when the fetch itself is unavailable — and must be flagged as such.
 - **Operating without the local install** (third-party agent fetching from GitHub raw) → same protocol but fetches happen over the network. Treat fetch failures as the in-repo equivalent of "file doesn't exist" above.
 - **Page exists but `last_verified_on` is older than the threshold** → treat as strict-path even if claim category looked GENERAL. Stale high-risk content is the dangerous case.
 

@@ -14,10 +14,7 @@
       "source": "./",
       "strict": true,
       "skills": [
-        "./skills/etyb",
-        "./skills/etyb-explore",
-        "./skills/etyb-plan",
-        "./skills/etyb-review"
+        "./skills/etyb"
       ]
     }
   ]

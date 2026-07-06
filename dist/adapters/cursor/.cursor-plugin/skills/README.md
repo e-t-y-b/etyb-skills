@@ -4,10 +4,9 @@
 # Skills — shared tree, not duplicated
 
 Cursor reads the same portable skills tree every other harness reads:
-`skills/` at the repo root (`skills/etyb/` — the orchestrator — plus the
-thin `skills/etyb-explore/`, `skills/etyb-plan/`, and `skills/etyb-review/`
-role skills). Point Cursor's skills discovery at that directory (e.g. via
-`.cursor/skills/`, per `docs/installation.md`).
+`skills/` at the repo root — `skills/etyb/`, the single orchestrator skill
+and the only trigger surface. Point Cursor's skills discovery at that
+directory (e.g. via `.cursor/skills/`, per `docs/installation.md`).
 
 Skill content is deliberately NOT copied into this plugin skeleton:
 duplicating it would fork the source of truth and defeat the shared-tree

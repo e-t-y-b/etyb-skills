@@ -37,6 +37,20 @@ name in conversation), so agents load it whenever the request has software conte
 - **At most 3 clarifying questions**, and only when the answer changes the work.
 - **Signature footer** — every Tier 1-4 response ends with the ETYB signature block.
 
+## Sub-agent model tiering
+
+The heavy lifting runs in sub-agents (`agents/`), never inline in the user's session.
+Each agent declares the model tier its work needs, under one rule: **a pin may only ever
+go down — the user's session model is the ceiling, never exceeded.**
+
+- **Light work pins to the smallest tier** (`model: haiku`): `etyb-explorer`
+  (search-and-cite) and `etyb-stack-researcher` (fetch-and-distill vendor docs).
+- **Extensive-reasoning work inherits the session model** (`model: inherit`):
+  `etyb-planner`, `etyb-reviewer`, `etyb-cartographer`.
+- **Unknown or unsupported resolves to the user's model**: any harness that cannot
+  interpret the `model` field ignores it and runs the agent on the session model —
+  the user-selected default, by construction.
+
 ## Status: v5 shipped
 
 The plugin-shaped v5 architecture is complete: portable SKILL.md, plugin manifest,
