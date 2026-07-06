@@ -51,6 +51,9 @@ debt below (needs a real Claude Code install + vendor-doc egress).
       docs.anthropic.com (M3-T4 debt — vendor egress was blocked in the
       build environment).
 - [ ] Merge `claude/usability-standards-review-27ckxa` → `main`; tag `v5.0.0`.
+      PR opened: https://github.com/e-t-y-b/etyb-skills/pull/13 (all 6 CI
+      checks green as of 2026-07-06). Merge/tag/npx-verify pending explicit
+      go-ahead — see PR for the full diff before merging a major release.
 
 ## Deviations
 
