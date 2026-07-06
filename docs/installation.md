@@ -71,7 +71,7 @@ Then start a session and ask the agent something engineering-shaped ("review thi
 
 ## Enforcement Status (honest note)
 
-In the current v5 milestone, ETYB's disciplines — TDD-first, verification-before-claims, two-stage review — are **model-trusted**: they are enforced by instruction, not by runtime hooks. Deterministic hook enforcement and the specialist agent definitions ship in milestone M2 (see `docs/plan/skills-5.0-plan.md`). Until then, no hook wiring is installed and none needs verifying.
+ETYB's disciplines — TDD-first, verification-before-claims, two-stage review — are primarily **model-trusted**: the skill instructs the agent to follow them. On the Claude Code plugin path only, five advisory hooks (`hooks/hooks.json`) add a deterministic layer on top: they observe Edit/Write/Bash/Stop/SessionStart events and surface `systemMessage` warnings (e.g. "no test file found", "no review evidence before commit") — they never block the action. Skills-CLI installs (Codex, Cursor, Kiro, etc.) do not get hook enforcement; the disciplines there remain instruction-only.
 
 ## Updating
 

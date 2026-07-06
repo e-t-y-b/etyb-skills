@@ -16,7 +16,7 @@ Rationale: `../rfc-v5-plugin-architecture.md`. Protocol:
 | M2-T1 | Five agent definitions (Claude) | M1 | done (2026-07-05, 1b9334e) |
 | M2-T2 | Role skills with context:fork overlays | M2-T1 | done (2026-07-05, 1384e39) |
 | M2-T3 | Hook scripts → stdin JSON | — | done (2026-07-05, 08e09e6; 21 tests) |
-| M2-T4 | hooks.json wiring (Claude plugin) | M2-T3, M1-T5 | done (2026-07-05, salvage commit; live-session observation pending) |
+| M2-T4 | hooks.json wiring (Claude plugin) | M2-T3, M1-T5 | done (2026-07-06, local plugin install; all 6 wired hooks observed firing — see Deviations) |
 | M2-T5 | Adapter generator (Codex/Kiro/Cursor emission) | M2-T1 | done (2026-07-05, salvage commit; deterministic, 20 emissions) |
 | M3-T1 | Stack manifest generator | — | done (2026-07-05, f1b9f5b; 537 pages) |
 | M3-T2 | Stack-researcher fetch protocol | M2-T1, M3-T1 | done (2026-07-05, 320159b) |
@@ -45,7 +45,7 @@ debt below (needs a real Claude Code install + vendor-doc egress).
       + SKILL.md (single-version policy; `validate-version-sync.sh` enforces).
 - [ ] Update `manifest.json` `published_at` and `.claude-plugin/marketplace.json`
       (name `etyb`, version 5.0.0) to match plugin.json.
-- [ ] Observe the five hooks actually firing in a Claude Code plugin install
+- [x] Observe the five hooks actually firing in a Claude Code plugin install
       (M2-T4 debt — only fixture-verified so far).
 - [ ] Spot-verify the anthropic-claude Claude 5 facts against
       docs.anthropic.com (M3-T4 debt — vendor egress was blocked in the
@@ -53,6 +53,80 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 - [ ] Merge `claude/usability-standards-review-27ckxa` → `main`; tag `v5.0.0`.
 
 ## Deviations
+
+- **M2-T4 ledger note — live hook observation (2026-07-06, done):** installed
+  the repo as a real Claude Code plugin (`claude plugin marketplace add
+  /path/to/etyb-skills` + `claude plugin install etyb@etyb-skills`) rather
+  than only running the fixture suite. This surfaced and fixed two real
+  bugs the fixtures could not catch:
+  1. **Marketplace/plugin manifest conflict.** `claude plugin list` reported
+     `etyb@etyb-skills` as "✘ failed to load — Plugin etyb has conflicting
+     manifests: both plugin.json and marketplace entry specify components.
+     Set strict: true in marketplace entry or remove component specs from
+     one location." `.claude-plugin/marketplace.json`'s plugin entry
+     declared `"skills": ["./skills/etyb"]` while `strict: false`, which
+     conflicts with `plugin.json`'s convention-based auto-discovery of the
+     same skill. Fix: removed the redundant `skills` array from the
+     marketplace entry (kept `strict: false`); `claude plugin list` then
+     showed `etyb@etyb-skills ... Status: ✔ enabled`, and `claude plugin
+     details etyb@etyb-skills` confirmed the full component inventory:
+     `Skills (4) etyb, etyb-explore, etyb-plan, etyb-review`; `Agents (5)
+     etyb-stack-researcher, etyb-reviewer, etyb-planner, etyb-explorer,
+     etyb-cartographer`; `Hooks (4) PreToolUse, PostToolUse, Stop,
+     SessionStart`.
+  2. **`hooks/session-start-memory.sh` shipped without the executable bit**
+     (git mode `100644`; every other hook script is `100755`). Since
+     `hooks.json` invokes it directly by path (no `bash` prefix), Claude
+     Code would hit `permission denied` (exit 126) the first time
+     SessionStart fired on a real install. Reproduced directly against the
+     installed plugin cache path
+     (`~/.claude/plugins/cache/etyb-skills/etyb/5.0.0-dev/hooks/session-start-memory.sh`):
+     `(eval):30: permission denied ... exit=126`. Fixed with `chmod +x` +
+     `git add` (mode now `100755`); after refreshing the marketplace and
+     reinstalling, the same invocation returned `exit=0` with no output, as
+     designed.
+
+  With both fixed, exercised all 6 wired hook commands directly at the
+  **installed plugin path** (`CLAUDE_PLUGIN_ROOT` resolved to the plugin
+  cache dir, not the repo checkout) with realistic Claude-Code-shaped stdin
+  payloads — this is stronger evidence than the fixture suite alone, since
+  it validates the actual materialized install, not the source tree.
+  Observed output:
+  - `PreToolUse[Edit|Write] → pre-edit-check.sh`: editing a `.js` file with
+    no sibling test emitted `{"systemMessage": "TDD warning: no test file
+    found for .../app.js. ..."}`, exit 0.
+  - `PostToolUse[Edit|Write] → post-edit-log.sh`: silent exit 0; appended
+    `{"timestamp":"...","file":"app.js","task":"unknown","plan":"unknown"}`
+    to `.etyb/edit-log.jsonl`.
+  - `PostToolUse[Bash] → post-test-log.sh`: a failing test command (`exit_code:
+    1`) emitted `{"systemMessage": "[TDD] Test command failed (exit 1) ...
+    Logged to .etyb/test-log.jsonl."}` and appended a `"result":"fail"`
+    entry.
+  - `Stop → pre-commit-review-check.sh`: a staged commit with no review
+    marker emitted `{"systemMessage": "[review-protocol] No review evidence
+    detected before commit. ..."}`.
+  - `PreToolUse[Bash, git merge*] → pre-merge-verify.sh`: `git merge
+    feature-x` on branch `main` with no passing entry in
+    `.etyb/test-log.jsonl` emitted the `[git-workflow]` warning; after
+    appending a `"result":"pass"` entry it went silent (exit 0), confirming
+    both the warn-path and the clean-path.
+  - `SessionStart → session-start-memory.sh`: silent exit 0 (stub, as
+    designed) — this is the one that was broken pre-fix (see above).
+
+  Full nested-session observation via `claude -p --debug hooks` inside the
+  installed plugin was not reachable in this non-interactive environment —
+  a spawned `claude -p` subprocess hit `401 Invalid authentication
+  credentials` (no separate credential path available to a nested
+  process here). The installed-path direct-invocation method above is the
+  substitute and is the stronger check of the two: it exercises the exact
+  materialized files Claude Code would run, catching the permission-bit
+  bug that a source-tree fixture run cannot see.
+
+  Also fixed while here: `docs/installation.md`'s "Enforcement Status" note
+  claimed "no hook wiring is installed and none needs verifying" — stale
+  since M2 landed hook wiring. Rewritten to describe the actual advisory
+  (non-blocking) hook behavior on the Claude Code plugin path, and that
+  skills-CLI installs on other harnesses do not get hook enforcement.
 
 - **M2/M3 stage-2 review (2026-07-05, done):** independent review of range
   9562de7..HEAD found 0 blockers, 2 majors, 2 minors — all resolved: currency
