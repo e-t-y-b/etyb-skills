@@ -68,7 +68,7 @@ Once installed, every request goes through `/etyb`. Specialist expertise is load
 
 An AI coding agent that works like a 100-person engineering org — through a single trigger:
 
-- **Refuses to ship untested code** — TDD-first discipline (deterministic hook enforcement returns in v5 M2)
+- **Refuses to ship untested code** — TDD-first discipline, backed by advisory hooks on the Claude Code plugin path (warn, never block)
 - **Stops you from building the wrong thing** — structured brainstorming before architecture
 - **Pushes back on bad review feedback** — evaluates findings on merit, no performative agreement
 - **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
@@ -205,7 +205,7 @@ The [`skills` CLI](https://github.com/vercel-labs/skills) installs the full `/et
 
 Native plugin install from this repo's `.claude-plugin/` manifest. Use the skills CLI **or** the plugin, not both. See [docs/installation.md](docs/installation.md) for per-harness details, verification, and troubleshooting.
 
-> **v5 status:** deterministic hook enforcement and specialist agent definitions land in milestone M2. Right now ETYB's disciplines are model-trusted — enforced by instruction, not by installed hooks.
+> **Enforcement note:** on the Claude Code plugin path, five advisory hooks (`hooks/hooks.json`) and five specialist agent definitions (`agents/`) ship with the install — the hooks surface warnings (no test file before an edit, no review evidence before a commit, merging without green tests) but never block. On skills-CLI installs for other harnesses, ETYB's disciplines are model-trusted — enforced by instruction only.
 
 ---
 

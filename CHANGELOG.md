@@ -27,6 +27,7 @@ The public-facing changelog lives at https://etyb.ai/changelog. Every ETYB respo
 - `hooks/session-start-memory.sh` shipped without the executable bit, which would have made the SessionStart hook fail with "permission denied" on a real plugin install; fixed.
 - `.claude-plugin/marketplace.json`'s plugin entry declared a redundant `skills` component list that conflicted with `plugin.json`'s convention-based auto-discovery, causing `claude plugin install` to report the plugin as failed to load; removed.
 - `.gitignore`'s `MARKETPLACE.md` pattern (intended only for the repo-root internal doc) was unscoped and silently excluded `stacks/vercel/marketplace.md` from version control on case-insensitive filesystems; anchored to `/MARKETPLACE.md` and recovered the untracked page.
+- Release-time truth sweep: `CLAUDE.md`, `AGENTS.md`, and `README.md` still said hooks and agent definitions "arrive in M2 — do not assume they exist" after M2 shipped them; all three now describe what actually installs. The marketplace plugin description double-counted the roster ("20 specialists + 9 protocols + 6 verticals" — the 20 already included the verticals); corrected to 14. A stale "Pro tier only" line in `core/team-registry.md` (tiers were removed in v4.0.0) dropped.
 
 ## [4.0.2] — 2026-05-15
 

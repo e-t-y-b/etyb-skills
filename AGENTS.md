@@ -37,10 +37,9 @@ name in conversation), so agents load it whenever the request has software conte
 - **At most 3 clarifying questions**, and only when the answer changes the work.
 - **Signature footer** — every Tier 1-4 response ends with the ETYB signature block.
 
-## Status: v4 → v5 migration in progress
+## Status: v5 shipped
 
-The repo is migrating to a plugin-shaped v5 architecture (portable SKILL.md, plugin
-manifest, agent definitions, hook wiring). Design rationale:
-`docs/rfc-v5-plugin-architecture.md`. Task-by-task roadmap and current status:
-`docs/plan/skills-5.0-plan.md`. Milestone M1 (universal core) is landing now; agent
-definitions and hook wiring arrive in M2 — do not assume they exist yet.
+The plugin-shaped v5 architecture is complete: portable SKILL.md, plugin manifest,
+five agent definitions under `agents/`, and advisory hook wiring via `hooks/hooks.json`
+(Claude Code plugin path only). Design rationale: `docs/rfc-v5-plugin-architecture.md`.
+Task-by-task history and release ledger: `docs/plan/skills-5.0-plan.md`.

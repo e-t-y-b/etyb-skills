@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "etyb",
-      "description": "ETYB — virtual CTO + 20 specialists + 9 protocols + 6 verticals. Vendor knowledge for 13 platforms ships in-repo under stacks/<vendor>/.",
+      "description": "ETYB — virtual CTO + 14 specialists + 9 protocols + 6 verticals. Vendor knowledge for 13 platforms ships in-repo under stacks/<vendor>/.",
       "source": "./",
       "strict": true,
       "skills": [

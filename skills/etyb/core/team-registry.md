@@ -23,7 +23,7 @@ All 20 specialists live as internal references under `references/specialists/<na
 
 ## Domain-Specific Teams (6) — `references/verticals/`
 
-Bring these in when the user is building in their domain. They provide patterns and constraints that core teams don't have. Pro tier only.
+Bring these in when the user is building in their domain. They provide patterns and constraints that core teams don't have.
 
 | # | Team | Reference | Domain |
 |---|------|-----------|--------|
