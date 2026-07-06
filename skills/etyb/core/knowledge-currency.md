@@ -58,6 +58,18 @@ product:
 
 That per-page stamp is what governs the drift-check protocol below.
 
+## Protocol owner: the etyb-stack-researcher agent
+
+The `etyb-stack-researcher` agent (`agents/etyb-stack-researcher.md`) owns this
+protocol end-to-end — manifest lookup, page resolution, the drift-check paths below,
+and any `authoritative_url` fetch. The orchestrator and every other agent request
+stack facts by delegating to the researcher; they do not fetch stack pages or vendor
+docs themselves. This keeps heavy fetches and raw doc content out of the user
+session — the researcher returns a ≤400-token cited distillation instead. One
+exception stays with the orchestrator: loading the slim local
+`stacks/<vendor>/SKILL.md` briefing at detection time (see "How ETYB detects which
+Stack applies") is routing, not research.
+
 ## The drift-check protocol (tiered)
 
 Before committing to any time-sensitive claim sourced from a Stack:
@@ -103,7 +115,7 @@ When strict-path is needed and neither (a) nor (b) is available (offline / WebFe
 
 ### Degraded modes
 
-- **File doesn't exist** (e.g., `stacks/cloudflare/some-new-product.md` not yet authored) → fall back to the broader file (product → role → stack index). If even the index is missing, the Stack is incomplete; warn the user and proceed with general knowledge plus a flag.
+- **File doesn't exist** (e.g., `stacks/cloudflare/some-new-product.md` not yet authored) → fall back to the broader file (product → role → stack index). If the in-repo tree still doesn't answer the question, go to the vendor's official documentation directly (WebFetch the nearest page's `authoritative_url`, the index's `authoritative_sources`, or the vendor's primary docs domain) and ground the answer in the fetched content, cited. General knowledge alone is the last resort — only when the fetch itself is unavailable — and must be flagged as such.
 - **Operating without the local install** (third-party agent fetching from GitHub raw) → same protocol but fetches happen over the network. Treat fetch failures as the in-repo equivalent of "file doesn't exist" above.
 - **Page exists but `last_verified_on` is older than the threshold** → treat as strict-path even if claim category looked GENERAL. Stale high-risk content is the dangerous case.
 

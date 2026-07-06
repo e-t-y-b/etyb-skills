@@ -6,11 +6,11 @@ You are running ETYB on **Claude Code**. This adapter layers deterministic enfor
 
 Claude Code gives you primitives no other platform has:
 
-1. **Hooks** — deterministic shell scripts that fire on tool-use events, outside the LLM. They cannot be reasoned around.
+1. **Hooks** — deterministic shell scripts that fire on lifecycle events, outside the LLM. Whether they fire cannot be reasoned around; their output is advisory (warnings, never blocks).
 2. **Built-in plan mode** — a native plan artifact at `.claude/plans/` that ETYB annotates rather than duplicates.
 3. **The Agent tool** — sub-agents for parallel work with context isolation.
 
-These turn ETYB's gates and protocols from "trusted instructions" into "enforced behavior." When a hook fires, it runs regardless of what the model decides. When plan mode is active, ETYB works inside Claude's plan rather than creating a parallel one.
+These give ETYB's gates and protocols deterministic *visibility*: when a hook fires, it runs regardless of what the model decides, and its warning lands in the conversation. Acting on the warning is still the model's job — hooks surface gaps, they do not block actions. When plan mode is active, ETYB works inside Claude's plan rather than creating a parallel one.
 
 ## Load These On Top Of Core
 
@@ -18,24 +18,24 @@ After reading the core modules per `SKILL.md`, read these adapter files in order
 
 | File | Purpose |
 |------|---------|
-| [`hooks.md`](hooks.md) | Map of the 5 hooks in `.claude/settings.json`, what each enforces, where it fires |
+| [`hooks.md`](hooks.md) | Map of the 6 hooks wired via the plugin's `hooks/hooks.json`, what each surfaces, where it fires |
 | [`plan-mode.md`](plan-mode.md) | `.claude/plans/` integration — detection, annotation, dual-plan resolution |
 | [`subagents.md`](subagents.md) | Using the Agent tool for parallel specialist work + two-stage review |
 
-## Model-Trusted vs. Hook-Enforced
+## Model-Trusted vs. Hook-Backed
 
-On Claude Code, some core disciplines become hook-enforced:
+On Claude Code, some core disciplines get hook-backed visibility:
 
-| Core Discipline | Enforcement on Claude Code | What Happens Elsewhere |
+| Core Discipline | On Claude Code | What Happens Elsewhere |
 |----------------|---------------------------|------------------------|
-| TDD (core/always-on-protocols.md §1) | `pre-edit-check` hook warns if editing source without a test file | Model self-enforces from instructions |
-| Review (core/always-on-protocols.md §3) | `pre-commit-review-check` hook warns if committing without review evidence | Model self-enforces |
-| Branch Safety (core/always-on-protocols.md §6) | `pre-merge-verify` hook blocks merge if tests fail | Model self-enforces |
+| TDD (core/session.md §1) | `pre-edit-check` hook warns if editing source without a test file | Model self-enforces from instructions |
+| Review (core/session.md §3) | `pre-commit-review-check` hook warns at end of turn if staged changes lack review evidence | Model self-enforces |
+| Branch Safety (core/session.md §6) | `pre-merge-verify` hook warns on merges into protected branches without passing-test evidence | Model self-enforces |
 
-The core protocols are identical. Claude Code is stricter because the hook fires even if the model would have let it slide.
+The core protocols are identical, and enforcement is the model's responsibility everywhere. Claude Code is stricter only in that the warning fires even when the model would have let the gap slide.
 
 ## Enforcement Trade-Off (Honest)
 
-Hook enforcement is a feature of the Claude Code runtime, not a feature of ETYB. On Codex and Antigravity, these gates still apply — but compliance is model-trusted. A determined user can route around model-trusted gates. They cannot route around a hook short of disabling it.
+Hook firing is a feature of the Claude Code runtime, not a feature of ETYB — and ETYB's hooks are advisory: they warn, they never block. On Codex and Antigravity, the same gates apply but even the detection is model-trusted. A determined user can route around model-trusted gates silently; on Claude Code the hook will at least put the gap on the record, and they cannot suppress that short of uninstalling the plugin or removing `jq`.
 
-That's why Claude Code is the flagship experience. If gate-enforced engineering discipline is the product, Claude Code is where it's strongest.
+That's why Claude Code is the flagship experience. If disciplined engineering with deterministic feedback is the product, Claude Code is where it's strongest.

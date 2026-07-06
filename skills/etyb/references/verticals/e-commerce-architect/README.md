@@ -28,7 +28,7 @@ E-commerce architecture is driven by business model more than technology prefere
 6. **Integrations**: ERP, WMS, accounting (QuickBooks/Xero), marketing tools, POS?
 7. **Special requirements**: Marketplace (multi-vendor), subscriptions, B2B features (net terms, purchase orders)?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The E-Commerce Architecture Conversation Flow
 
@@ -276,7 +276,7 @@ Note: Transaction fees (payment processing) are separate and typically 2.2-3.0% 
 
 Keep responses focused and conversational:
 1. **Acknowledge** the commerce problem the user is solving
-2. **Ask 2-3 clarifying questions** about business model, scale, and constraints
+2. **Ask at most 3 clarifying questions** about business model, scale, and constraints
 3. **Present tradeoffs** between approaches (platform vs headless vs custom, or between specific patterns)
 4. **Let the user decide** — present your recommendation with reasoning
 5. **Dive deep** once direction is set — read the relevant reference file(s) and give specific, actionable guidance

@@ -5,10 +5,10 @@ product:
   name: Computer Use
   stack: anthropic-claude
   drift_risk: high
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [ai-ml-engineer, system-architect, security-engineer]
   authoritative_url: https://docs.anthropic.com/en/docs/agents-and-tools/computer-use
-  notes: "Tool versions tied to model versions (computer_20250124, computer_20251022...); sandboxed VM mandatory."
+  notes: "Tool versions tied to model versions (computer_20250124 ... computer_20251124); sandboxed VM mandatory."
 ---
 
 ## What it is
@@ -35,7 +35,7 @@ Computer Use is the **wrong call** when:
 ## 2025-2026 currency anchors
 
 - **Production-grade trajectory.** From beta Oct 2024 to production-grade 2025-2026. Quality and reliability have improved; the operational discipline (sandbox, iteration cap, approval gates) has not relaxed.
-- **Dated tool versions tied to model versions.** `computer_20250124` was the early-2025 surface; `computer_20251022` is current as of late 2025. Verify the current tool version for your model in the [Computer Use docs](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use).
+- **Dated tool versions tied to model versions.** `computer_20250124` was the early-2025 surface; `computer_20251124` (beta header `computer-use-2025-11-24`) pairs with current-generation models such as Sonnet 5. Verify the current tool version for your model in the [Computer Use docs](https://docs.anthropic.com/en/docs/agents-and-tools/computer-use).
 - **Anthropic publishes reference VM images** (Docker, cloud-deployable). Use these as starting points; don't roll your own sandbox without explicit threat-model work.
 - **Provider-cloud availability:** Computer Use historically shipped to the [Anthropic API](/stacks/anthropic-claude/claude-api/) first; verify availability on [Bedrock](/stacks/anthropic-claude/bedrock-provider/) and [Vertex AI](/stacks/anthropic-claude/vertex-ai-provider/) before assuming.
 
@@ -76,7 +76,7 @@ Costs and risk compound. Cap iterations aggressively (10-30); fail fast.
 
 ### Anti-pattern — Mixing tool versions and model versions
 
-`computer_20250124` with a Sonnet 4.7 model throws an API error. Pin to the matched pair documented in the current Computer Use docs.
+`computer_20250124` with a current-generation model (e.g. Sonnet 5, which pairs with `computer_20251124`) throws an API error. Pin to the matched pair documented in the current Computer Use docs.
 
 ## Gotchas
 

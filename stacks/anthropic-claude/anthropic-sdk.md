@@ -1,19 +1,19 @@
 ---
 title: Anthropic SDK
-description: First-party SDKs in Python, TypeScript, Go, Java, Ruby. Same surface; one constructor per provider (Anthropic API, Bedrock, Vertex). Don't drop down to raw HTTP without a reason.
+description: First-party SDKs in Python, TypeScript, C#, Go, Java, PHP, Ruby. Same surface; one constructor per provider (Anthropic API, Bedrock, Vertex/Agent Platform, Foundry). Don't drop down to raw HTTP without a reason.
 product:
   name: Anthropic SDK (multi-lang)
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-06"
   applies_to_roles: [backend-architect, ai-ml-engineer]
-  authoritative_url: https://docs.anthropic.com/en/api/client-sdks
-  notes: "Python + TypeScript + Go + Java + Ruby first-party. Same SDK supports Anthropic API, Bedrock, Vertex via different constructors."
+  authoritative_url: https://platform.claude.com/docs/en/cli-sdks-libraries/overview
+  notes: "Python + TypeScript + C# + Go + Java + PHP + Ruby are all first-party now (C# and PHP added; both still beta). Same SDK family supports Anthropic API, Bedrock, Vertex/Agent Platform, Foundry via different constructors/packages."
 ---
 
 ## What it is
 
-Anthropic ships first-party SDKs in five languages as of mid-2026. Each SDK wraps the [Messages API](/stacks/anthropic-claude/claude-api/), exposing idiomatic clients with retries, idempotency keys, error mapping, streaming helpers, and provider-aware constructors for [Anthropic API](/stacks/anthropic-claude/claude-api/) / [Bedrock](/stacks/anthropic-claude/bedrock-provider/) / [Vertex AI](/stacks/anthropic-claude/vertex-ai-provider/).
+Anthropic ships first-party SDKs in **seven** languages as of mid-2026: Python, TypeScript, C#, Go, Java, PHP, and Ruby. Each SDK wraps the [Messages API](/stacks/anthropic-claude/claude-api/), exposing idiomatic clients with retries, idempotency keys, error mapping, streaming helpers, and provider-aware constructors for [Anthropic API](/stacks/anthropic-claude/claude-api/) / [Bedrock](/stacks/anthropic-claude/bedrock-provider/) / [Vertex AI](/stacks/anthropic-claude/vertex-ai-provider/) / Microsoft Foundry.
 
 | SDK | Package | Maturity | Use when |
 |-----|---------|----------|----------|
@@ -22,8 +22,10 @@ Anthropic ships first-party SDKs in five languages as of mid-2026. Each SDK wrap
 | **Go** | `github.com/anthropics/anthropic-sdk-go` | High | Go services, latency-sensitive backends |
 | **Java** | `com.anthropic:anthropic-java` | High | JVM services, Spring Boot integrations |
 | **Ruby** | `anthropic` (gem) | Good | Rails apps |
+| **C#** | `Anthropic` (NuGet) — **beta** | Newer | .NET services; `IChatClient` integration for `Microsoft.Extensions.AI` |
+| **PHP** | `anthropic-ai/sdk` (Composer) — **beta** | Newer | PHP 8.1+ apps; PSR-18 HTTP, Guzzle recommended for streaming |
 
-Community SDKs exist for PHP, Rust, Kotlin, C#, etc. — quality varies; verify before depending in production. See [Client SDKs](https://docs.anthropic.com/en/api/client-sdks).
+Both C# and PHP moved from community to first-party status and are documented on Anthropic's own site, though both are still marked beta (breaking changes possible in minor/patch releases). Community SDKs still exist for Rust, Kotlin, and others — quality varies; verify before depending in production. See [CLI, SDKs, and libraries](https://platform.claude.com/docs/en/cli-sdks-libraries/overview).
 
 ## When to use
 
@@ -33,7 +35,7 @@ For agentic loops, layer the [Claude Agent SDK](/stacks/anthropic-claude/claude-
 
 ## 2025-2026 currency anchors
 
-- **Python SDK v0.79+** and **TypeScript SDK v0.40+** as of May 2026; verify current versions against package registries.
+- **SDK versions move fast** — verify current versions against the package registries before pinning; review changelogs on upgrade.
 - **Bedrock + Vertex provider clients** ship in the same package — `AnthropicBedrock` and `AnthropicVertex` classes alongside `Anthropic`.
 - **Async clients exist in Python (`AsyncAnthropic`) and Go (context-aware methods).** TypeScript is always async. Java has both blocking and reactive flavors.
 - **Streaming helpers** — `client.messages.stream()` in Python / TypeScript handles SSE event assembly. Don't parse raw SSE unless you must.
@@ -49,7 +51,7 @@ client = AsyncAnthropic()
 
 async def chat(user_message: str) -> str:
     response = await client.messages.create(
-        model="claude-sonnet-4-7-20260301",
+        model="claude-sonnet-5",
         max_tokens=1024,
         messages=[{"role": "user", "content": user_message}],
     )
@@ -68,12 +70,14 @@ client = Anthropic()
 # AWS Bedrock
 from anthropic import AnthropicBedrock
 client = AnthropicBedrock(aws_region="us-east-1")
-# Model ID format: "anthropic.claude-sonnet-4-7-20260301-v1:0"
+# Model ID format: "anthropic.claude-sonnet-5" (current-gen, dateless);
+# pre-4.6 snapshots use "anthropic.claude-haiku-4-5-20251001-v1:0"
 
 # Google Vertex AI
 from anthropic import AnthropicVertex
 client = AnthropicVertex(project_id="my-gcp-project", region="us-east5")
-# Model ID format: "claude-sonnet-4-7@20260301"
+# Model ID format: "claude-sonnet-5" (bare first-party ID for current-gen);
+# dated snapshots use "@", e.g. "claude-haiku-4-5@20251001"
 ```
 
 The Messages API surface is identical across the three; model ID format and credential handling differ.
@@ -82,7 +86,7 @@ The Messages API surface is identical across the three; model ID format and cred
 
 ```python
 with client.messages.stream(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Write a short poem."}],
 ) as stream:
@@ -93,7 +97,7 @@ with client.messages.stream(
 
 ```typescript
 const stream = await client.messages.stream({
-  model: 'claude-sonnet-4-7-20260301',
+  model: 'claude-sonnet-5',
   max_tokens: 1024,
   messages: [{ role: 'user', content: 'Write a short poem.' }],
 });
@@ -158,4 +162,4 @@ Sync client + many threads = thread pool exhaustion under load. Use the async cl
 - [Claude Agent SDK](/stacks/anthropic-claude/claude-agent-sdk/) — layered on top
 - [Bedrock Provider](/stacks/anthropic-claude/bedrock-provider/), [Vertex AI Provider](/stacks/anthropic-claude/vertex-ai-provider/) — provider-specific constructors
 - [backend-architect overlay](/stacks/anthropic-claude/backend-architect/) — SDK integration depth
-- [Client SDKs](https://docs.anthropic.com/en/api/client-sdks)
+- [CLI, SDKs, and libraries](https://platform.claude.com/docs/en/cli-sdks-libraries/overview)

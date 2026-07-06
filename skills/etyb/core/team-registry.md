@@ -23,7 +23,7 @@ All 20 specialists live as internal references under `references/specialists/<na
 
 ## Domain-Specific Teams (6) — `references/verticals/`
 
-Bring these in when the user is building in their domain. They provide patterns and constraints that core teams don't have. Pro tier only.
+Bring these in when the user is building in their domain. They provide patterns and constraints that core teams don't have.
 
 | # | Team | Reference | Domain |
 |---|------|-----------|--------|
@@ -48,7 +48,7 @@ Bring these in when the user is building in their domain. They provide patterns 
 
 ## Process Protocols (9) — `references/protocols/`
 
-Always-on engineering disciplines with deep reference knowledge. Principles are embedded in `core/always-on-protocols.md`. Read these references when you need the detailed HOW.
+Always-on engineering disciplines with deep reference knowledge. Principles are embedded in `core/session.md`. Read these references when you need the detailed HOW.
 
 | # | Protocol | Reference | Deep Knowledge For | Hooks |
 |---|----------|-----------|--------------------|-------|

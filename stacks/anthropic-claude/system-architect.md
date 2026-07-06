@@ -4,7 +4,7 @@ description: When Claude vs alternatives; provider topology across Anthropic / B
 role_overlay:
   role: system-architect
   stack: anthropic-claude
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   products_covered:
     - Claude API
     - Claude Opus
@@ -22,7 +22,7 @@ role_overlay:
     - Workbench / Console
 ---
 
-<div class="etyb-currency-banner">Last verified: 2026-05-14 against Claude 4.x family, Bedrock + Vertex + Anthropic API parity verified May 2026, MCP at spec revision 2025-06-18, EU AI Act high-risk obligations effective August 2026.</div>
+<div class="etyb-currency-banner">Last verified: 2026-07-05 against the Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, Bedrock + Vertex + Anthropic API parity verified July 2026, MCP at spec revision 2025-06-18, EU AI Act high-risk obligations effective August 2026.</div>
 
 You are system-architect on a Claude engagement. Your job is the architecture-level decision: **does Claude belong in this system at all, and if yes, where does it run, how is it accessed, and how does it compose with the rest of the architecture?** The [ai-ml-engineer overlay](/stacks/anthropic-claude/ai-ml-engineer/) owns model selection within the Claude family; the [backend-architect overlay](/stacks/anthropic-claude/backend-architect/) owns SDK integration; you own the upstream question of whether Claude is the right LLM for this system and which provider hosts it.
 
@@ -84,12 +84,12 @@ For enterprises on AWS/GCP, consolidated billing is a real operational win. For 
 
 ### Feature parity (verify current)
 
-| Feature | Status across providers (May 2026) |
+| Feature | Status across providers (July 2026) |
 |---------|-------------------------------------|
-| Models | Parity within ~2-4 weeks of Anthropic API release |
+| Models | Parity within ~2-4 weeks of Anthropic API release; Fable 5 / Opus 4.8 / Sonnet 5 available on Bedrock, Google Cloud, and Microsoft Foundry |
 | [Prompt Caching](/stacks/anthropic-claude/prompt-caching/) | All three; Bedrock/Vertex historically had different limits |
 | [Tool Use](/stacks/anthropic-claude/tool-use/) | Parity |
-| [Extended Thinking](/stacks/anthropic-claude/extended-thinking/) | Parity on current 4.x |
+| [Extended / adaptive thinking](/stacks/anthropic-claude/extended-thinking/) | Parity on current models |
 | [Computer Use](/stacks/anthropic-claude/computer-use/) | Anthropic-API-first historically; verify Bedrock/Vertex |
 | [Memory](/stacks/anthropic-claude/memory/) | Verify availability — newer feature |
 | [Batches API](/stacks/anthropic-claude/batches-api/) | Anthropic-API-first; Bedrock/Vertex have their own batch surfaces |
@@ -248,7 +248,8 @@ Is the use case prohibited by Anthropic's AUP?
    YES: Reconsider the use case.
    NO: continue
 
-Default: Claude Sonnet 4.x. Escalate to Opus on eval signal.
+Default: Claude Sonnet 5. Escalate to Opus 4.8 on eval signal
+(Claude Fable 5 only for the most demanding long-horizon work).
 ```
 
 ### Frame 2 — Which provider?

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# Verify that the v4 single-skill layout is consistent across:
-#   skills/etyb/                            (only one installable skill)
-#   manifest.json .skill                    (declares it)
-#   .claude-plugin/marketplace.json         (one plugin "etyb")
+# Verify that the skill layout is consistent across:
+#   skills/                                 (exactly one skill: etyb)
+#   manifest.json .skill                    (declares the etyb orchestrator)
+#   .claude-plugin/marketplace.json         (one plugin "etyb", installing every skills/ dir)
 # Also spot-checks that every reference under skills/etyb/references/
 # directly correlates to the canonical 14+9+6 contract.
 
@@ -19,12 +19,13 @@ fail() {
 
 command -v jq >/dev/null 2>&1 || fail "jq is required"
 
-# 1. Exactly one installable skill directory.
+# 1. Exactly one skill: etyb, the single trigger surface. Role work runs
+#    through agents/ definitions, not peer skills (withdrawn pre-v5.0.0).
 dirs="$(find skills -mindepth 1 -maxdepth 1 -type d \
           -exec test -f {}/SKILL.md \; -print \
         | sed 's|^skills/||' \
         | sort)"
-[[ "$dirs" == "etyb" ]] || fail "skills/ must contain exactly one skill (etyb), found: $dirs"
+[[ "$dirs" == "etyb" ]] || fail "skills/ must contain exactly one skill (etyb — the single trigger surface), found: $dirs"
 
 # 2. manifest.json .skill is { etyb: ... }
 manifest_keys="$(jq -r '.skill | keys[]' manifest.json | sort)"
@@ -35,7 +36,7 @@ marketplace_plugins="$(jq -r '.plugins[].name' .claude-plugin/marketplace.json |
 [[ "$marketplace_plugins" == "etyb" ]] || fail ".claude-plugin/marketplace.json must contain exactly one plugin (etyb), found: $marketplace_plugins"
 
 marketplace_skills="$(jq -r '.plugins[0].skills[]' .claude-plugin/marketplace.json | sort)"
-[[ "$marketplace_skills" == "./skills/etyb" ]] || fail "marketplace plugin must install only ./skills/etyb, found: $marketplace_skills"
+[[ "$marketplace_skills" == "./skills/etyb" ]] || fail "marketplace plugin must install exactly ./skills/etyb, found: $marketplace_skills"
 
 # 4. v4.0 — tier system removed. The manifest must NOT carry a .tiers block,
 #    and stack entries must NOT carry available_on_tiers.
@@ -55,4 +56,4 @@ vertical_count=$(find skills/etyb/references/verticals -mindepth 1 -maxdepth 1 -
 [[ "$protocol_count" == "9" ]] || fail "expected 9 protocol references, found $protocol_count"
 [[ "$vertical_count" == "6" ]] || fail "expected 6 vertical references, found $vertical_count"
 
-echo "✓ validate-skill-manifest-sync: v4 layout aligned (1 skill, 14+9+6 references, no tiers)"
+echo "✓ validate-skill-manifest-sync: layout aligned (single skill etyb, 14+9+6 references, no tiers)"

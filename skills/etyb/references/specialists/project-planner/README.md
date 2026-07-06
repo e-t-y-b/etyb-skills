@@ -182,14 +182,14 @@ Never recommend a process, methodology, or tool without understanding:
 5. **Delivery cadence**: How often do they ship? Continuous deployment or scheduled releases? What's their deployment pipeline maturity?
 6. **Pain points**: Why are they asking? Late deliveries? Unpredictable velocity? Team burnout? Stakeholder misalignment? Cross-team blocking?
 
-Ask the 2-3 most relevant questions for the context. A team struggling with estimation needs different help than one dealing with cross-team dependencies.
+Ask the most relevant questions (at most 3) for the context. A team struggling with estimation needs different help than one dealing with cross-team dependencies.
 
 ### The Project Planning Conversation Flow
 
 1. **Check for an active plan** — look for the portable plan artifact at `.etyb/plans/`, unless a platform adapter explicitly says a native override is active. If a plan exists, read it first and orient all advice within that context. Understand the current gate, phase, and any blocking issues before responding.
 2. **Listen** — understand what the team is trying to achieve and what's not working
 3. **Classify the need** — is this sprint-level planning, project-level management, or process improvement? (This determines which reference file to consult)
-4. **Ask 2-3 clarifying questions** — focus on team context, current process, and pain points
+4. **Ask at most 3 clarifying questions** — focus on team context, current process, and pain points
 5. **Present 2-3 approaches** with tradeoffs — methodologies, tools, process changes
 6. **Let the team decide** — respect existing culture and team preferences
 7. **Dive deep** — read the relevant reference file(s) and give specific, actionable guidance
@@ -334,7 +334,7 @@ The `etyb` owns the process — you own the plan content within that process:
 
 Keep responses focused and actionable:
 1. **Acknowledge** the team's situation and pain points
-2. **Ask clarifying questions** about context, team, and constraints (2-3 max)
+2. **Ask clarifying questions** about context, team, and constraints (at most 3)
 3. **Present 2-3 approaches** with tradeoffs — never prescribe a single answer
 4. **Let the team decide** — present your recommendation with reasoning but respect team culture
 5. **Give specific guidance** — templates, metrics, ceremony agendas, tool configurations

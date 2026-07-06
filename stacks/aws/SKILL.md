@@ -1,57 +1,13 @@
 ---
 name: stack-aws
-description: >
-  AWS platform knowledge overlay for the ETYB team. Loads when work involves the
-  AWS ecosystem — EC2, Lambda, ECS, EKS, Fargate, Karpenter, S3, RDS, Aurora,
-  DynamoDB, ElastiCache, EventBridge, SQS, SNS, Kinesis, API Gateway, AppSync,
-  CloudFront, Route 53, VPC, IAM, KMS, Secrets Manager, CloudWatch, X-Ray,
-  CloudTrail, Config, GuardDuty, Bedrock, AgentCore, SageMaker, Step Functions,
-  Glue, Athena, Redshift, OpenSearch, MSK, Cognito, Amplify, AWS CDK,
-  CloudFormation, SAM, Copilot CLI, AWS Organizations, Control Tower, Q
-  Developer. This is NOT a new team member; it is a context overlay that
-  teaches each existing ETYB role what it needs to know to ship production-grade
-  AWS work as of 2026-Q2.
-  Triggers: aws, amazon web services, ec2, lambda, snapstart, ecs, ecs express,
-  eks, eks auto mode, eks hybrid nodes, fargate, fargate spot, karpenter, karpenter v1,
-  graviton, graviton4, graviton5, trainium, trainium2, trainium3, inferentia,
-  s3, s3 express one zone, s3 tables, s3 intelligent tiering, ebs, gp3, io2,
-  io2 block express, efs, fsx, fsx lustre, fsx ontap, rds, aurora, aurora serverless,
-  aurora serverless v2, aurora limitless, aurora dsql, dsql, dynamodb,
-  elasticache, valkey, memorydb, redshift, athena, glue, lake formation,
-  opensearch, opensearch serverless, msk, msk serverless, kinesis, kinesis data streams,
-  firehose, kinesis analytics, eventbridge, eventbridge pipes, eventbridge scheduler,
-  sqs, sns, mq, api gateway, http api, rest api, websocket api, appsync,
-  graphql, cloudfront, cloudfront functions, lambda edge, lambda@edge,
-  route 53, route53, route 53 profiles, global accelerator, vpc, vpc lattice,
-  transit gateway, tgw, direct connect, privatelink, vpc endpoint, nat gateway,
-  iam, iam identity center, sso, scp, service control policy, organizations,
-  control tower, landing zone, permission boundary, iam access analyzer, sts,
-  kms, secrets manager, parameter store, certificate manager, acm, waf, shield,
-  guardduty, security hub, inspector, macie, detective, audit manager, config,
-  cloudtrail, cloudwatch, cloudwatch logs, cloudwatch metrics, cloudwatch alarms,
-  application signals, container insights, internet monitor, x-ray, otel, adot,
-  bedrock, bedrock agents, bedrock guardrails, bedrock knowledge bases,
-  agentcore, agentcore runtime, agentcore browser, agentcore memory,
-  strands agents, strands, sagemaker, sagemaker studio, sagemaker ai studio,
-  sagemaker unified studio, sagemaker hyperpod, sagemaker pipelines, sagemaker jumpstart,
-  step functions, jsonata, sfn, glue, glue catalog, athena, redshift serverless,
-  cognito, cognito user pools, cognito identity pools, amplify, amplify gen 2,
-  amplify hosting, app runner, app runner maintenance, copilot cli, copilot eol,
-  cloudformation, cfn, cdk, cdk v2, cdk mixins, aws-cdk-lib, sam, sam cli,
-  serverless application model, terraform on aws, opentofu on aws,
-  cur, cost explorer, savings plans, reserved instances, spot, spot fleet,
-  fargate spot, well-architected, well architected framework, war,
-  q developer, amazon q developer, amazon q business, q business, codewhisperer,
-  re:invent, reinvent, aws blog, aws whats new, hyperforce on aws, multi-account,
-  account vending, control tower account factory, ram, resource access manager,
-  cdk pipelines, codepipeline, codebuild, codedeploy, codeartifact, ecr,
-  parallelcluster, batch, aws batch, neptune, documentdb, timestream, qldb,
-  iot core, greengrass, sigv4, signature v4, eks pod identity, iam roles for service accounts, irsa.
+description: |-
+  AWS platform knowledge overlay for the ETYB team. Loads when work involves the AWS ecosystem — EC2, Lambda, ECS, EKS, Fargate, Karpenter, S3, RDS, Aurora, DynamoDB, ElastiCache, EventBridge, SQS, SNS, Kinesis, API Gateway, AppSync, CloudFront, Route 53, VPC, IAM, KMS, Secrets Manager, CloudWatch, X-Ray, CloudTrail, Config, GuardDuty, Bedrock, AgentCore, SageMaker, Step Functions, Glue, Athena, Redshift, OpenSearch, MSK, Cognito, Amplify, AWS CDK, CloudFormation, SAM, Copilot CLI, AWS Organizations, Control Tower, Q Developer.
+  Triggers: aws, amazon web services, ec2, lambda, snapstart, ecs, ecs express, eks, eks auto mode, eks hybrid nodes, fargate, fargate spot, karpenter, karpenter v1, graviton, graviton4, graviton5, trainium, trainium2, trainium3, inferentia, s3, s3 express one zone, s3 tables, s3 intelligent tiering, ebs, gp3, io2, io2 block express, efs, fsx, fsx lustre, fsx ontap, rds, aurora, aurora serverless, aurora serverless v2, aurora limitless, aurora dsql, dsql.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.2"
+  version: "5.0.0"
   category: stack-pack
   last_verified_release: "2026-Q2"
   last_verified_on: "2026-05-14"

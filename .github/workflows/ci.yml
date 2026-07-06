@@ -42,7 +42,7 @@ jobs:
         run: |
           shopt -s globstar nullglob
           failed=0
-          for test in tests/hooks/test-*.sh; do
+          for test in tests/hooks/test-*.sh tests/maintainer/test-*.sh; do
             echo "=== running $test ==="
             if ! bash "$test"; then
               failed=$((failed + 1))
@@ -54,27 +54,53 @@ jobs:
             exit 1
           fi
 
-  installer-tests:
-    name: installer tests
+  portability-lint:
+    name: portability lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run install.sh tests
-        run: |
-          shopt -s globstar nullglob
-          failed=0
-          for test in tests/install/test-*.sh; do
-            echo "=== running $test ==="
-            if ! bash "$test"; then
-              failed=$((failed + 1))
-              echo "FAIL: $test"
-            fi
-          done
-          if [[ $failed -gt 0 ]]; then
-            echo "$failed test(s) failed"
-            exit 1
-          fi
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
+      - name: Run portability lint
+        run: bash scripts/lint-portability.sh
+
+  token-budget:
+    name: token budget lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Enforce always-on token budget
+        run: bash scripts/lint-token-budget.sh
+
+  generated-drift:
+    name: generated files drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Manifest drift
+        run: bash scripts/build-manifest.sh && git diff --exit-code manifest.json
+
+      - name: Adapter emissions drift
+        run: bash scripts/build-adapters.sh && git diff --exit-code .codex/agents dist/adapters
+
+      - name: Hook fixture suite
+        run: bash tests/hooks/run.sh
 
   maintainer-checks:
     name: maintainer checks
@@ -92,4 +118,6 @@ jobs:
         run: jq --version
 
       - name: Run maintainer validators
+        env:
+          CHECK_CURRENCY_STRICT: "1"   # per-page currency gate hard-fails (M3-T3, flipped after M3-T4)
         run: scripts/maintainer/validate-pr.sh

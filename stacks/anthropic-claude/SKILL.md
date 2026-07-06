@@ -1,16 +1,16 @@
 ---
 name: stack-anthropic-claude
-description: >
-  Anthropic Claude platform knowledge overlay for the ETYB team. Loads when work involves the Anthropic ecosystem — the Claude API (Messages API), Claude Opus / Sonnet / Haiku models, prompt caching, tool use (function calling), extended thinking, the Batches API, Files API, Citations, the Memory tool, Computer Use, vision and PDF input, the Claude Agent SDK, the Claude Code CLI / IDE extensions, Skills, sub-agents, the Anthropic SDK (TS/Python/Go/Java/Ruby), MCP (Model Context Protocol) servers and clients, and provider routing across Anthropic API / Amazon Bedrock / Google Vertex AI. This is NOT a new team member; it is a context overlay that teaches each existing ETYB role what it needs to know to ship production-grade Claude work as of 2026-Q2.
-  Triggers: anthropic, claude, claude-api, anthropic-api, messages-api, opus, claude-opus, claude-opus-4, claude-opus-4.5, claude-opus-4.6, claude-opus-4.7, sonnet, claude-sonnet, claude-sonnet-4, claude-sonnet-4.5, claude-sonnet-4.6, claude-sonnet-4.7, haiku, claude-haiku, claude-haiku-4, claude-haiku-4.5, 1m context, one million context, prompt caching, cache_control, ephemeral cache, 5-minute cache, 1-hour cache, tool use, function calling, claude tools, claude tool_use, batches api, message batches, files api, citations, claude citations, memory tool, claude memory, extended thinking, interleaved thinking, computer use, claude computer use, vision input, pdf input, claude pdf, claude agent sdk, claude-agent-sdk, agent sdk, claude code, claude-code, claude code cli, claude code ide, skills, claude skills, anthropic skills, sub-agents, subagents, claude sub-agents, anthropic sdk, anthropic-typescript, anthropic-python, anthropic-go, anthropic-java, anthropic-ruby, @anthropic-ai/sdk, mcp, model context protocol, mcp server, mcp client, mcp tools, mcp resources, mcp prompts, vertex ai claude, bedrock claude, claude on aws, claude on gcp, anthropic bedrock, anthropic vertex, workbench, anthropic workbench, anthropic console, admin api, anthropic admin api, anthropic budget, anthropic spend limits, claude rate limits, anthropic rate limits, aup, acceptable use policy, anthropic aup, usage policy, prompt injection claude, claude safety, constitutional ai, prefill, response prefill, system prompt, claude system prompt, stop_sequences, claude streaming, sse, server-sent events, anthropic streaming, claude responses.
+description: |-
+  Anthropic Claude platform knowledge overlay for the ETYB team. Loads when work involves the Anthropic ecosystem — the Claude API (Messages API), Claude Fable / Mythos / Opus / Sonnet / Haiku models, prompt caching, tool use (function calling), extended and adaptive thinking, the Batches API, Files API, Citations, the Memory tool, Computer Use, vision and PDF input, the Claude Agent SDK, the Claude Code CLI / IDE extensions, Skills, sub-agents, the Anthropic SDK (TS/Python/Go/Java/Ruby), MCP (Model Context Protocol) servers and clients, and provider routing across Anthropic API / Amazon Bedrock / Google Vertex AI.
+  Triggers: anthropic, claude, claude-api, anthropic-api, messages-api, fable, claude-fable, claude-fable-5, mythos, claude-mythos, claude-mythos-5, project glasswing, opus, claude-opus, claude-opus-4, claude-opus-4.5, claude-opus-4.6, claude-opus-4.7, claude-opus-4.8, sonnet, claude-sonnet, claude-sonnet-4, claude-sonnet-4.5, claude-sonnet-4.6, claude-sonnet-5, sonnet 5.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.2"
+  version: "5.0.0"
   category: stack-pack
-  last_verified_release: "Claude 4.x family, May 2026"
-  last_verified_on: "2026-05-14"
+  last_verified_release: "Claude 5 generation (Fable 5 / Mythos 5, Sonnet 5) + Opus 4.8 + Haiku 4.5, July 2026"
+  last_verified_on: "2026-07-05"
   applies_to_roles:
     - backend-architect
     - ai-ml-engineer
@@ -45,16 +45,16 @@ delegate_to_skills:
   - { skill: "claude-api", covers: [Claude API, Anthropic SDK, prompt caching, tool use, batch API, files, citations, memory, model migration] }
 products_covered:
   - { name: "Claude API (Messages)",        drift_risk: high,   notes: "Model names rotate every 2-3 months; pricing changes; new beta flags every release" }
-  - { name: "Claude Opus 4.x (1M context)", drift_risk: high,   notes: "1M-context variant priced separately (>200K input premium); model IDs versioned by date" }
-  - { name: "Claude Sonnet 4.x",            drift_risk: high,   notes: "Current default for most production work; 4.6/4.7 cadence" }
-  - { name: "Claude Haiku 4.x",             drift_risk: medium, notes: "Cheapest tier; Haiku 4.5 (Oct 2025) reset price/quality envelope" }
+  - { name: "Claude Opus (1M context)",     drift_risk: high,   notes: "Opus 4.8 current ($5/$25); 1M context standard-priced (no >200K premium since 4.6); Fable 5 / Mythos 5 ($10/$50) are the tier above; dateless IDs are pinned snapshots" }
+  - { name: "Claude Sonnet",                drift_risk: high,   notes: "Sonnet 5 (June 2026) current default for most production work; intro pricing $2/$10 through 2026-08-31, then $3/$15" }
+  - { name: "Claude Haiku",                 drift_risk: medium, notes: "Cheapest tier; Haiku 4.5 (Oct 2025) still current in the Claude 5 generation" }
   - { name: "Prompt Caching",               drift_risk: medium, notes: "Two TTLs (5-min, 1-hour); pricing 1.25x / 2x write, 0.1x read; up to 4 cache breakpoints" }
   - { name: "Tool Use",                     drift_risk: medium, notes: "Schema is stable; parallel tool use + tool_choice behaviors evolve with each model" }
   - { name: "Batches API",                  drift_risk: low,    notes: "50% discount, async; up to 100K requests / 256MB / 24h window" }
   - { name: "Files API",                    drift_risk: medium, notes: "GA 2025; replaces base64 inlining for PDFs/images at scale" }
   - { name: "Citations",                    drift_risk: low,    notes: "Document-grounded responses with source spans; stable surface" }
   - { name: "Memory tool",                  drift_risk: high,   notes: "Released 2025; surface still evolving — read release notes before claiming behavior" }
-  - { name: "Extended Thinking",            drift_risk: high,   notes: "Thinking + interleaved thinking; budget_tokens semantics; signature_delta required for tool-use round-trips" }
+  - { name: "Extended Thinking",            drift_risk: high,   notes: "Adaptive thinking + effort on current models; budget_tokens 400s on Opus 4.7+/Sonnet 5/Fable 5; thinking blocks must round-trip verbatim on tool use" }
   - { name: "Computer Use",                 drift_risk: high,   notes: "Beta → production trajectory; tool versions tied to model (computer_20250124, computer_20251022...)" }
   - { name: "Vision + PDF input",           drift_risk: low,    notes: "Native image/PDF in Messages API; size and page limits documented" }
   - { name: "Claude Agent SDK",             drift_risk: high,   notes: "Released 2025; replaces ad-hoc agent loops; harness conventions still settling" }
@@ -90,11 +90,11 @@ When `delegate_to_skills` (frontmatter above) lists a first-party vendor MCP/ski
 
 Critical context — an LLM with a 2024 cutoff will get these wrong:
 
-- **Model name rotation.** Claude 3 → Claude 3.5 → Claude 3.7 → Claude 4 (May 2025) → Claude 4.1 → Claude 4.5 → Claude 4.6 → Claude 4.7 across 2025-2026. The current production default is **Claude Sonnet 4.7** (or the latest Sonnet 4.x at read time). Older training data still recommends `claude-3-opus-20240229` — that model is retired. Always look up the current dated alias in the release notes before pinning a model ID.
-- **Opus 4.x has a 1M-context variant.** Pricing is tiered: <=200K input tokens at the standard rate, >200K input tokens at a premium rate. Don't blindly stuff a million tokens into context — it's billed differently and most tasks don't need it.
+- **Model name rotation.** Claude 3 → Claude 3.5 → Claude 3.7 → Claude 4 (May 2025) → Claude 4.1 → Claude 4.5 → Claude 4.6 → Claude 4.7 (Apr 2026) → Claude Opus 4.8 (May 2026) → **the Claude 5 generation** (Claude Fable 5 / Claude Mythos 5, June 2026; Claude Sonnet 5, June 2026). The current production default is **Claude Sonnet 5** (`claude-sonnet-5`); the GA flagship is **Claude Opus 4.8** (`claude-opus-4-8`); the Mythos-class tier above Opus is **Claude Fable 5** (`claude-fable-5`, $10/$50 per MTok — GA with dual-use safety classifiers that can refuse cyber/bio-adjacent requests) and its classifier-free sibling **Claude Mythos 5** (`claude-mythos-5`, limited to approved orgs in Project Glasswing). Older training data still recommends `claude-3-opus-20240229` — retired. From the 4.6 generation onward, dateless model IDs are pinned snapshots (not floating aliases) — pin them as-is; never append a date suffix.
+- **1M context is standard now.** Opus 4.6+, Sonnet 5/4.6, and Fable 5 ship a 1M-token context window **at standard per-token pricing** — the old >200K-input premium tier is gone. Still don't blindly stuff a million tokens into context — input cost scales linearly and most tasks don't need it.
 - **Haiku 4.5 (Oct 2025) reset the cheap-tier envelope.** Haiku at ~Sonnet-3.5 quality opens routing patterns that weren't viable before. Reconsider "Sonnet for everything" defaults.
 - **Prompt caching is two-tier.** 5-minute TTL (1.25x write cost, 0.1x read) is the default. 1-hour TTL (2x write cost, 0.1x read) is for stable long contexts. Up to **4 cache breakpoints** per request. **Cache reads are 90% off** — architect for cacheability, not just for short prompts.
-- **Extended Thinking + Interleaved Thinking** (2025) are first-class. Thinking blocks have signatures that must be preserved across tool-use round-trips, or you get errors. `budget_tokens` controls thinking length. Tool use during extended thinking is interleaved — the model thinks, calls a tool, thinks again, calls another, then responds.
+- **Extended Thinking became Adaptive Thinking.** On current models (Opus 4.6+, Sonnet 5, Fable 5) use `thinking: {type: "adaptive"}` with `output_config.effort` — manual `budget_tokens` is deprecated on 4.6 and returns a 400 on Opus 4.7/4.8, Sonnet 5, and Fable 5 (it survives only on older models like Haiku 4.5). On Fable 5 thinking is always on. Thinking blocks must be passed back verbatim across tool-use round-trips, or you get errors; interleaving between tool calls is automatic under adaptive thinking.
 - **Computer Use** went from public beta (Oct 2024) to production-grade capability (2025-2026). Tool versions are dated (`computer_20250124`, `computer_20251022`...) and **tied to model versions** — you cannot mix-and-match. Requires a sandboxed VM; nobody runs this on a production server.
 - **Memory tool** shipped in 2025 as a first-class capability — the model can persist state across conversations via a managed memory store. This is distinct from "memory" in the conversational sense (context window). Memory belongs to a workspace/user scope you define.
 - **Claude Agent SDK** (`@anthropic-ai/claude-agent-sdk`, `claude-agent-sdk` on PyPI) launched in 2025 as the recommended way to build agentic loops on top of the Messages API. It owns the tool loop, retries, sub-agent spawning, and harness conventions. **Don't roll your own agent loop in 2026** unless you have an explicit reason — use the SDK.

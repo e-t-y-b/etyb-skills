@@ -1,27 +1,28 @@
 ---
 title: Files API
-description: "Upload PDFs, images, and supported documents once; reference by `file_id` across many requests. Replaces base64-inlining at any non-trivial scale."
+description: "Upload PDFs, images, and supported documents once; reference by `file_id` across many requests. Replaces base64-inlining at any non-trivial scale. Still in beta."
 product:
   name: Files API
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-06"
   applies_to_roles: [backend-architect, ai-ml-engineer]
-  authoritative_url: https://docs.anthropic.com/en/api/files
-  notes: "GA 2025; storage is workspace-scoped; lifecycle policies and PII residency considerations apply."
+  authoritative_url: https://platform.claude.com/docs/en/build-with-claude/files
+  notes: "Still in beta (requires anthropic-beta: files-api-2025-04-14 header) as of mid-2026, not GA. 500MB max per file, 500GB total per organization. Available on Claude API, Claude Platform on AWS, Microsoft Foundry — not on Bedrock or Google Cloud."
 ---
 
 ## What it is
 
-The Files API (GA 2025) lets you upload PDFs, images, and other supported documents to Anthropic-managed storage and reference them by `file_id` across many requests. Replaces base64-inlining at any non-trivial scale.
+The Files API (**beta** — requires the `anthropic-beta: files-api-2025-04-14` header) lets you upload PDFs, images, and other supported documents to Anthropic-managed storage and reference them by `file_id` across many requests. Replaces base64-inlining at any non-trivial scale.
 
 ```python
 with open("document.pdf", "rb") as f:
     uploaded = client.beta.files.upload(file=("document.pdf", f, "application/pdf"))
 
-response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+response = client.beta.messages.create(
+    model="claude-sonnet-5",
     max_tokens=1024,
+    betas=["files-api-2025-04-14"],
     messages=[{
         "role": "user",
         "content": [
@@ -32,7 +33,7 @@ response = client.messages.create(
 )
 ```
 
-See [Files API reference](https://docs.anthropic.com/en/api/files).
+See [Files API reference](https://platform.claude.com/docs/en/build-with-claude/files).
 
 ## When to use
 
@@ -50,11 +51,13 @@ Stay on base64 inlining when:
 
 ## 2025-2026 currency anchors
 
-- **GA in 2025.** Surface stable; verify quota and lifetime details against current docs.
-- **Per-workspace storage quota** (verify current limit on Anthropic docs).
-- **Workspace-scoped files.** Cross-workspace requires re-upload. Multi-tenant SaaS = one workspace per tenant = files scoped to tenants naturally.
+- **Still beta as of mid-2026**, not GA — requires the `anthropic-beta: files-api-2025-04-14` header on every upload/list/retrieve/delete/download call and on any Messages request that references a `file_id`. Rate limit during beta: ~100 file-related requests/minute.
+- **Storage limits: 500MB max per file, 500GB total per organization** (not per-workspace — the quota pools across every workspace in the org).
+- **Workspace-scoped files.** A file is scoped to the workspace of the API key that created it; any API key in that same workspace can use it. Cross-workspace requires re-upload. Multi-tenant SaaS = one workspace per tenant = files scoped to tenants naturally.
 - **Files persist until deleted.** No automatic eviction. Implement deletion on user-data-deletion paths (GDPR / general hygiene).
-- **Supported types:** PDFs, images (PNG/JPEG/GIF/WebP), some other document formats — verify current support matrix.
+- **Supported types:** PDF and plain text as `document` blocks; JPEG/PNG/GIF/WebP as `image` blocks; other formats (.csv, .txt, .md, .docx, .xlsx) via the code-execution tool's `container_upload`, or convert to plain text and inline instead.
+- **Platform availability:** Claude API, Claude Platform on AWS, and Microsoft Foundry (Hosted-on-Anthropic deployments only). Not currently available on Amazon Bedrock or Google Cloud.
+- **Not ZDR-eligible.** Files API is explicitly excluded from Zero Data Retention, unlike PDF/Vision input.
 
 ## Patterns + anti-patterns
 
@@ -72,7 +75,7 @@ Decide and document:
 
 - **TTL for uploaded files** — 30 days? 1 year? Until user deletes their account?
 - **Deletion triggers** — user-initiated data deletion, GDPR right-to-be-forgotten, account closure, project archive.
-- **Quota monitoring** — alert at 80% of workspace quota.
+- **Quota monitoring** — alert at 80% of the 500GB per-organization quota (it pools across all workspaces, not per-workspace).
 
 Automate deletion via API; don't rely on manual ops cleanup.
 
@@ -86,7 +89,7 @@ Storage grows; eventually quota hits. Quotas surface as upload-time errors, ofte
 
 ### Anti-pattern — uploading PII without considering data residency
 
-Anthropic's storage is in their cloud. Data residency commitments may apply (verify [Trust Center](https://trust.anthropic.com/) for your jurisdiction). For strict residency requirements, you may need to keep documents in your own storage and inline them per request (or use [Bedrock](/stacks/anthropic-claude/bedrock-provider/) / [Vertex](/stacks/anthropic-claude/vertex-ai-provider/) where storage stays in your cloud region).
+Anthropic's storage is in their cloud, and Files API isn't ZDR-eligible. Data residency commitments may apply (verify [Trust Center](https://trust.anthropic.com/) for your jurisdiction). For strict residency requirements, base64-inline documents per request instead of uploading — Files API isn't available at all on [Bedrock](/stacks/anthropic-claude/bedrock-provider/) or [Vertex/Google Cloud](/stacks/anthropic-claude/vertex-ai-provider/) as of mid-2026, so it isn't an option for keeping storage in your own cloud region.
 
 ### Anti-pattern — not audit-logging uploads
 
@@ -97,7 +100,9 @@ Compliance regimes (HIPAA, GDPR, SOC 2) typically require records of when PHI/PI
 - **`file_id` format** is opaque; treat as a black-box identifier. Don't parse or pattern-match.
 - **Workspace isolation** is the unit. A `file_id` from one workspace doesn't work in another.
 - **Upload errors aren't generation errors.** A failed upload returns an HTTP error; a generation error against a valid `file_id` returns a Messages-API error. Different retry strategies.
-- **Files API on Bedrock / Vertex** has different shapes (cloud-provider-native storage). Verify per-provider before assuming portability.
+- **Beta header required everywhere.** Forgetting `anthropic-beta: files-api-2025-04-14` (or the SDK's `betas=["files-api-2025-04-14"]` equivalent) on the Messages call that references a `file_id`, not just on the upload, is a common integration bug.
+- **Files API isn't available on Bedrock or Google Cloud at all** (as of mid-2026) — only Claude API, Claude Platform on AWS, and Microsoft Foundry (Hosted-on-Anthropic only). Don't assume portability; fall back to base64-inlining for those providers.
+- **Uploaded files can't be downloaded.** Only files *created by* skills or the code-execution tool are downloadable — a file you uploaded yourself has no download endpoint.
 
 ## Cross-references
 

@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "__CWD__/evil\",\"injected\":\"true"
+  },
+  "cwd": "__CWD__"
+}

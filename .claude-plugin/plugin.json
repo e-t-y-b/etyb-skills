@@ -1,35 +1,10 @@
 {
-  "name": "etyb-skills",
-  "description": "Virtual engineering company \u2014 one coordinated skill (/etyb) with internal references for 20 specialists, 9 process protocols, and 6 vertical-domain architects. Installed in lite/core/pro tiers; signed responses link to etyb.ai/changelog.",
-  "version": "4.0.2",
+  "name": "etyb",
+  "version": "5.0.0",
+  "description": "ETYB — engineering co-pilot behind a single /etyb skill: senior-leader routing to specialist roles, TDD/verification/review discipline, and currency-stamped vendor stacks for post-cutoff platform facts.",
   "author": {
     "name": "e-t-y-b"
   },
-  "homepage": "https://etyb.ai",
-  "repository": "https://github.com/e-t-y-b/etyb-skills",
   "license": "MIT",
-  "keywords": [
-    "engineering",
-    "architecture",
-    "tdd",
-    "code-review",
-    "devops",
-    "security",
-    "full-stack",
-    "frontend",
-    "backend",
-    "database",
-    "mobile",
-    "ai-ml",
-    "fintech",
-    "healthcare",
-    "e-commerce",
-    "saas",
-    "real-time",
-    "social-platform",
-    "etyb",
-    "process-protocols",
-    "sdlc",
-    "virtual-team"
-  ]
+  "homepage": "https://github.com/e-t-y-b/etyb-skills"
 }

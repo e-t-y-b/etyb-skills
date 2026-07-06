@@ -344,9 +344,9 @@ Nine always-on engineering disciplines govern how work gets done. Their principl
 
 | Protocol | Folder | Scope | Description |
 |----------|--------|-------|-------------|
-| TDD Protocol | `skills/etyb/references/protocols/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Claude has deterministic hooks; Codex adds prompt/Bash guardrails; Antigravity stays model-trusted. |
+| TDD Protocol | `skills/etyb/references/protocols/tdd-protocol/` | All code-producing work | Red-green-refactor cycle, rationalization counters, TDD patterns. Hook scripts ship in-repo; runtime wiring lands in v5 M2 — model-trusted until then on all platforms. |
 | Subagent Protocol | `skills/etyb/references/protocols/subagent-protocol/` | Parallel and delegated work | Dispatch patterns, parallel coordination, two-stage review, context isolation. Platform mechanics come from adapters or project runtime, not the protocol itself. |
-| Git Workflow Protocol | `skills/etyb/references/protocols/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Claude blocks merges with a hook; Codex adds Bash merge guards; Antigravity is model-trusted. |
+| Git Workflow Protocol | `skills/etyb/references/protocols/git-workflow-protocol/` | Branch management | Worktree management, branch finishing, parallel development. Pre-merge check script ships in-repo; wiring lands in v5 M2 — model-trusted until then. |
 | Plan Execution Protocol | `skills/etyb/references/protocols/plan-execution-protocol/` | Any active plan | Task execution cycle, blocker management, gate transitions. Portable default is `.etyb/plans/`; Claude may override through native plan mode. |
 | Brainstorm Protocol | `skills/etyb/references/protocols/brainstorm-protocol/` | Ambiguous or exploratory requests | Exploration techniques, convergence patterns, design brief templates. |
 | Review Protocol | `skills/etyb/references/protocols/review-protocol/` | Code review lifecycle | Review dispatch, feedback evaluation, review integration. Hooks: `pre-commit-review-check` verifies review before commit. |
@@ -404,8 +404,8 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 
 | Platform | Runtime Contract |
 |----------|------------------|
-| Claude Code | Flagship. Deterministic hooks, native `.claude/plans/` integration, isolated subagent runtime support. |
-| OpenAI Codex | Project-scoped `.codex/` config, lifecycle hooks (`UserPromptSubmit`, `PreToolUse`, `PostToolUse`, `Stop`), custom agents in `.codex/agents/`, portable plans at `.etyb/plans/`. |
+| Claude Code | Plugin-based (`.claude-plugin/`). Hook wiring + custom agents land in v5 M2; model-trusted until then. |
+| OpenAI Codex | `.codex/` agents + Python hooks exist in-repo as source assets; per-project delivery ships with the v5 M2 adapter generator. Portable plans at `.etyb/plans/`. |
 | Google Antigravity | Markdown-first and model-trusted. Portable plans at `.etyb/plans/`. ADK remains a documented future path, not a shipped runtime in this repo. |
 
 ## Design Principles

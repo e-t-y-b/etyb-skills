@@ -28,7 +28,7 @@ SaaS architecture is driven by customer profile, pricing model, compliance requi
 6. **Team**: Size, SaaS experience, existing infrastructure, build-vs-buy preference?
 7. **Go-to-market**: Product-led growth (PLG), sales-led, hybrid? Self-serve onboarding or white-glove?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The SaaS Architecture Conversation Flow
 
@@ -302,7 +302,7 @@ These principles apply regardless of scale:
 
 Keep responses focused and conversational:
 1. **Acknowledge** the SaaS challenge the user is solving
-2. **Ask 2-3 clarifying questions** about business model, customer profile, and pricing model
+2. **Ask at most 3 clarifying questions** about business model, customer profile, and pricing model
 3. **Identify the tenancy model** early — this drives everything else
 4. **Present tradeoffs** between approaches (pool vs bridge vs silo, build vs buy, platform A vs B)
 5. **Let the user decide** — present your recommendation with reasoning

@@ -1,14 +1,14 @@
 ---
 title: PDF Input
-description: Claude 4.x natively accepts PDFs — no need to OCR first. Up to ~32MB, ~100 pages per PDF. Pair with Citations for page-level grounding.
+description: Claude natively accepts PDFs — no need to OCR first. Up to 32MB and 600 pages per request (100 pages for 200k-context models like Haiku). Pair with Citations for page-level grounding.
 product:
   name: PDF Input
   stack: anthropic-claude
   drift_risk: low
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-06"
   applies_to_roles: [ai-ml-engineer, backend-architect]
-  authoritative_url: https://docs.anthropic.com/en/docs/build-with-claude/pdf-support
-  notes: "Native PDF in Messages API; encrypted/scanned PDFs OCR'd internally; pair with Files API at scale."
+  authoritative_url: https://platform.claude.com/docs/en/build-with-claude/pdf-support
+  notes: "Native PDF in Messages API; scanned PDFs handled via vision, but encrypted/password-protected PDFs are explicitly NOT supported; pair with Files API at scale."
 ---
 
 ## What it is
@@ -21,7 +21,7 @@ Claude 4.x accepts PDFs directly — no need to OCR first. Three input modes (ma
 {"type": "document", "source": {"type": "file", "file_id": "file_..."}}
 ```
 
-Pair with the [Citations API](/stacks/anthropic-claude/citations/) for grounded responses with page-level source attribution. See [PDF Support](https://docs.anthropic.com/en/docs/build-with-claude/pdf-support).
+Pair with the [Citations API](/stacks/anthropic-claude/citations/) for grounded responses with page-level source attribution. See [PDF Support](https://platform.claude.com/docs/en/build-with-claude/pdf-support).
 
 ## When to use
 
@@ -40,8 +40,8 @@ Don't use PDF Input when:
 
 ## 2025-2026 currency anchors
 
-- **Native PDF in Messages API** — no separate PDF processing step needed. Encrypted/scanned PDFs are OCR'd internally by Claude.
-- **Size and page limits:** up to ~32MB per PDF, up to ~100 pages (verify current limits).
+- **Native PDF in Messages API** — no separate PDF processing step needed. Each page is converted to text + image internally; scanned/image-heavy pages are handled via Claude's vision, not a separate OCR step. **Encrypted or password-protected PDFs are not supported** — format requirement is "standard PDF (no passwords/encryption)."
+- **Size and page limits:** 32MB max request size (the limit applies to the whole request payload, not just the PDF); 600 pages max per request, but only **100 pages for 200k-context-window models** (i.e. Haiku 4.5) — Sonnet 5/Opus 4.8/Fable 5's 1M context gets the full 600.
 - **`document` content block type** is the trust boundary for indirect prompt injection — see [security-engineer overlay](/stacks/anthropic-claude/security-engineer/#prompt-injection--the-1-risk).
 - **Page-level Citations** — character spans on text-extractable PDFs; page references on visually-complex content.
 - **Files API support** — for PDFs referenced across many requests, upload once via [Files API](/stacks/anthropic-claude/files-api/).
@@ -52,7 +52,7 @@ Don't use PDF Input when:
 
 ```python
 response = client.messages.create(
-    model="claude-sonnet-4-7-20260301",
+    model="claude-sonnet-5",
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -84,7 +84,7 @@ Re-uploading the same large PDF content as base64 across requests wastes bandwid
 
 ### Anti-pattern — pre-OCR PDFs you don't need to
 
-Claude handles scanned PDFs internally. Running your own OCR step (Tesseract / Textract) before sending is duplicate work — and often lower quality than Claude's native handling.
+Claude reads scanned/image-heavy PDFs directly via vision (each page is sent as text + image). Running your own OCR step (Tesseract / Textract) before sending is duplicate work — and often lower quality than Claude's native handling. This does not apply to encrypted/password-protected PDFs — those aren't accepted at all and must be decrypted client-side first.
 
 ### Anti-pattern — treating PDF input as untrusted instruction source
 
@@ -92,10 +92,11 @@ PDFs uploaded by users can contain indirect prompt injection ("ignore the user's
 
 ## Gotchas
 
-- **Encrypted PDFs** — verify current support; password-protected PDFs may need decryption client-side.
+- **Encrypted/password-protected PDFs are rejected outright** — the format requirement is explicitly "no passwords/encryption." Decrypt client-side before sending; there's no server-side fallback.
 - **Tables, multi-column layouts** — quality varies by complexity. Verify extraction quality on representative samples before committing.
 - **Embedded images within PDFs** — Claude reads them; image tokens count toward the request size.
-- **Scanned PDFs with poor scan quality** — OCR errors propagate. Pre-process scans if quality is critical.
+- **Scanned PDFs with poor scan quality** — since each page is processed as an image, quality issues propagate the same way they would for [Vision](/stacks/anthropic-claude/vision/) input. Pre-process scans if quality is critical.
+- **Dense PDFs can blow the context window before hitting the page limit.** Many small-font pages, complex tables, or heavy graphics can exhaust context well under 600 pages; downsampling embedded images or splitting the document helps.
 
 ## Cross-references
 
@@ -104,4 +105,4 @@ PDFs uploaded by users can contain indirect prompt injection ("ignore the user's
 - [Citations](/stacks/anthropic-claude/citations/) — page-level grounding
 - [Files API](/stacks/anthropic-claude/files-api/) — upload once, reference many
 - [ai-ml-engineer overlay](/stacks/anthropic-claude/ai-ml-engineer/) — PDF in RAG patterns
-- [PDF Support Guide](https://docs.anthropic.com/en/docs/build-with-claude/pdf-support)
+- [PDF Support Guide](https://platform.claude.com/docs/en/build-with-claude/pdf-support)

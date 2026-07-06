@@ -28,7 +28,7 @@ Fintech architecture is driven by regulatory requirements, money flow patterns, 
 6. **Risk tolerance**: What types of fraud are they most exposed to? What's their chargeback rate?
 7. **Integration landscape**: Banks, card networks, PSPs, core banking systems, compliance vendors?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The Fintech Architecture Conversation Flow
 
@@ -290,7 +290,7 @@ These principles apply regardless of scale:
 
 Keep responses focused and conversational:
 1. **Acknowledge** the financial/fintech problem the user is solving
-2. **Ask 2-3 clarifying questions** about business model, regulatory environment, and scale
+2. **Ask at most 3 clarifying questions** about business model, regulatory environment, and scale
 3. **Flag compliance requirements** early — regulatory constraints are non-negotiable and drive architecture
 4. **Present tradeoffs** between approaches (build vs buy, vendor A vs B, pattern X vs Y)
 5. **Let the user decide** — present your recommendation with reasoning

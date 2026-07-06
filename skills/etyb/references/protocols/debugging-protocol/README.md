@@ -74,4 +74,4 @@ Read this reference when a bug has failed 3+ hypotheses, when routing a bug to t
 
 ## Integration With ETYB
 
-When `etyb` is present, this protocol activates during the Debugging Protocol Activation triggers defined in `etyb/core/always-on-protocols.md` §9. When `etyb` is absent, this protocol still applies — any specialist can invoke it directly when their work is stuck.
+When `etyb` is present, this protocol activates during the Debugging Protocol Activation triggers defined in `etyb/core/session.md` §9. When `etyb` is absent, this protocol still applies — any specialist can invoke it directly when their work is stuck.

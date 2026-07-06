@@ -5,7 +5,7 @@ product:
   name: Claude API (Messages)
   stack: anthropic-claude
   drift_risk: high
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [backend-architect, ai-ml-engineer, system-architect, security-engineer]
   authoritative_url: https://docs.anthropic.com/en/api/
   notes: "Model names rotate every 2-3 months; pricing changes; new beta flags every release."
@@ -29,12 +29,12 @@ Don't hand-roll HTTP to `/v1/messages` unless you have a specific reason — the
 
 ## 2025-2026 currency anchors
 
-- **Model IDs rotate every 2-3 months.** Pinning `claude-3-opus-20240229` in 2026 is wrong — that model is retired. Use the current Sonnet 4.x dated ID with a written upgrade plan; never use floating aliases in production without monitoring.
+- **Model IDs rotate every 2-3 months.** Pinning `claude-3-opus-20240229` in 2026 is wrong — that model is retired. Current-generation IDs are dateless pinned snapshots (`claude-sonnet-5`, `claude-opus-4-8`, `claude-fable-5`) — safe to pin as-is, with a written upgrade plan; do not construct date-suffixed variants for them. Only pre-4.6 models use dated IDs plus floating convenience aliases.
 - **`anthropic-beta` headers expire.** Today's beta header is tomorrow's GA. Track which beta flags your code depends on; revisit on every release-notes cycle.
 - **Parallel tool use is default on 4.x.** Multiple `tool_use` blocks can come back in one turn — your loop must handle all of them, not just the first.
 - **`thinking` content blocks are first-class** (2025) and their `signature` field must round-trip across tool-use turns. Stripping it breaks the request.
 - **`document` content blocks** (with the [Citations API](/stacks/anthropic-claude/citations/)) are the supported path for grounded RAG — don't interpolate retrieved text into user messages.
-- **Pricing is conditional.** Cache writes cost more than uncached; cache reads are 90% off; Batches are 50% off; >200K input on 1M-context Opus is premium. There's no single $/MTok number.
+- **Pricing is conditional.** Cache writes cost more than uncached; cache reads are 90% off; Batches are 50% off; Sonnet 5 has introductory pricing through 2026-08-31. (The old >200K long-context premium is gone — Opus 4.6+/Sonnet 5/Fable 5 bill the full 1M window at standard rates.) There's no single $/MTok number.
 
 ## Patterns + anti-patterns
 
@@ -48,7 +48,7 @@ The `system` parameter is treated specially: it's the most stable prefix candida
 
 ### Pattern — `stop_reason` drives your loop
 
-`end_turn` = final answer. `tool_use` = execute the tools, send back `tool_result`. `max_tokens` = you hit the cap; decide if you retry with more budget. `stop_sequence` = your stop sequence fired. `refusal` = the model refused (rare on Claude; verify policy fit). Loop conditions live on this field.
+`end_turn` = final answer. `tool_use` = execute the tools, send back `tool_result`. `max_tokens` = you hit the cap; decide if you retry with more budget. `stop_sequence` = your stop sequence fired. `refusal` = the model or a safety classifier declined — on Claude Fable 5 this is a first-class outcome (HTTP 200, unbilled if pre-output; opt into the `fallbacks` parameter to retry on another model). Loop conditions live on this field.
 
 ### Anti-pattern — raw HTTP without the SDK
 
@@ -56,7 +56,7 @@ Hand-rolling SSE event parsing, retry-with-backoff, idempotency key generation, 
 
 ### Anti-pattern — single `$/MTok` cost estimate
 
-A spreadsheet that multiplies "$3/MTok input" by your traffic forecast ignores cache hit rate, output:input ratio, batch eligibility, and 1M-context premium tiers. Real cost requires real measurement on real prompts. See [system-architect's cost framework](/stacks/anthropic-claude/system-architect/#cost-architecture).
+A spreadsheet that multiplies "$3/MTok input" by your traffic forecast ignores cache hit rate, output:input ratio, batch eligibility, and per-model tokenizer differences (the 4.7+/Sonnet 5/Fable 5 tokenizer yields ~30% more tokens for the same text). Real cost requires real measurement on real prompts. See [system-architect's cost framework](/stacks/anthropic-claude/system-architect/#cost-architecture).
 
 ### Anti-pattern — no `max_tokens` cap
 

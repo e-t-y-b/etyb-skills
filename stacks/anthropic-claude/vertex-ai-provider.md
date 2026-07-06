@@ -1,11 +1,11 @@
 ---
 title: Vertex AI Provider
-description: "Claude-on-GCP via Vertex AI. Same Messages API surface, different model IDs (`claude-sonnet-4-7@20260301`), GCP credentials, GCP billing, GCP region availability."
+description: "Claude-on-GCP via Vertex AI. Same Messages API surface; current-gen model IDs match the Claude API (`claude-sonnet-5`), dated snapshots use `@` (`claude-haiku-4-5@20251001`); GCP credentials, GCP billing, GCP region availability."
 product:
   name: Vertex provider
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [system-architect, backend-architect, security-engineer]
   authoritative_url: https://docs.anthropic.com/en/api/claude-on-vertex-ai
   notes: "GCP-resident customers only; verify regional availability per model; feature parity lags Anthropic API by weeks-to-months."
@@ -13,7 +13,7 @@ product:
 
 ## What it is
 
-Claude-on-GCP via Vertex AI. The same Claude models accessible through Vertex's model garden, with GCP-native auth (service accounts), GCP billing, and per-region availability. Same Messages API surface as the [Anthropic API](/stacks/anthropic-claude/claude-api/); different model ID format (`claude-sonnet-4-7@20260301`-style); different credential handling.
+Claude-on-GCP via Vertex AI. The same Claude models accessible through Vertex's model garden, with GCP-native auth (service accounts), GCP billing, and per-region availability. Same Messages API surface as the [Anthropic API](/stacks/anthropic-claude/claude-api/); model IDs for the 4.6 generation and later match the Claude API exactly (`claude-sonnet-5`, `claude-opus-4-8`), while pre-4.6 dated snapshots use an `@` separator (`claude-haiku-4-5@20251001`); different credential handling.
 
 The [Anthropic SDK](/stacks/anthropic-claude/anthropic-sdk/) provides `AnthropicVertex` as a drop-in alternative to `Anthropic`:
 
@@ -45,7 +45,7 @@ Use the [Anthropic API](/stacks/anthropic-claude/claude-api/) instead when:
 - **Models:** parity within ~2-4 weeks of Anthropic API release (verify per-model).
 - **Prompt caching:** available; verify exact behavior on Vertex (historically had different limits or invalidation rules).
 - **Tool use:** parity.
-- **Extended Thinking:** parity on current 4.x.
+- **Extended / adaptive thinking:** parity on current models. Claude Fable 5, Opus 4.8, and Sonnet 5 are available on Vertex (Google Cloud).
 - **Computer Use, Memory, Files API:** historically Anthropic-API-first; verify Vertex status.
 - **Batches API:** Anthropic-API-first; Vertex has its own batch inference path with different semantics.
 - **Beta flags / preview features:** Vertex usually doesn't carry beta surfaces.
@@ -54,14 +54,19 @@ Use the [Anthropic API](/stacks/anthropic-claude/claude-api/) instead when:
 
 ### Pattern — pin model IDs in Vertex format
 
-`claude-sonnet-4-7@20260301` — note the `@<date>` suffix that's Vertex-specific. Maintain a canonical-model → per-provider-ID mapping in your config:
+Current-generation IDs on Vertex are the bare first-party IDs (`claude-sonnet-5`); only pre-4.6 dated snapshots use the Vertex-specific `@<date>` suffix. Maintain a canonical-model → per-provider-ID mapping in your config:
 
 ```python
 MODELS = {
     "sonnet": {
-        "anthropic": "claude-sonnet-4-7-20260301",
-        "bedrock": "anthropic.claude-sonnet-4-7-20260301-v1:0",
-        "vertex": "claude-sonnet-4-7@20260301",
+        "anthropic": "claude-sonnet-5",
+        "bedrock": "anthropic.claude-sonnet-5",
+        "vertex": "claude-sonnet-5",
+    },
+    "haiku": {  # pre-4.6-generation dated-snapshot style
+        "anthropic": "claude-haiku-4-5-20251001",
+        "bedrock": "anthropic.claude-haiku-4-5-20251001-v1:0",
+        "vertex": "claude-haiku-4-5@20251001",
     },
 }
 ```

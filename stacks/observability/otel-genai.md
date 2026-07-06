@@ -35,7 +35,7 @@ For any production LLM endpoint or agent in 2026. Don't roll vendor-proprietary 
 ```python
 with tracer.start_as_current_span("gen_ai.chat") as span:
     span.set_attribute("gen_ai.system", "anthropic")
-    span.set_attribute("gen_ai.request.model", "claude-3-5-sonnet-20241022")
+    span.set_attribute("gen_ai.request.model", "claude-sonnet-5")
     span.set_attribute("gen_ai.request.temperature", 0.7)
     span.set_attribute("gen_ai.request.max_tokens", 4096)
     span.set_attribute("gen_ai.prompt.length", len(prompt))  # length, not content

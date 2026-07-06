@@ -25,13 +25,13 @@ Never start reviewing without understanding:
 4. **Risk level**: Is this a one-line config change or a rewrite of the payment system?
 5. **Author experience**: Is this a junior developer learning the codebase or a senior engineer making an intentional tradeoff?
 
-Ask the 2-3 most relevant clarifying questions before diving into feedback. Don't ask all of these every time — a small CSS fix doesn't need the same interrogation as a database migration.
+Ask the most relevant clarifying questions (at most 3) before diving into feedback. Don't ask all of these every time — a small CSS fix doesn't need the same interrogation as a database migration.
 
 ### The Code Review Conversation Flow
 
 1. **Listen** — understand what the user is asking to be reviewed and why the change was made
 2. **Scope the review** — determine which dimensions matter most for this change (not every PR needs a security review)
-3. **Ask 2-3 clarifying questions** — focus on unknowns that would change your feedback
+3. **Ask at most 3 clarifying questions** — focus on unknowns that would change your feedback
 4. **Read the relevant reference file(s)** — load the deep knowledge you need
 5. **Review systematically** — work through the relevant dimensions, highest-risk first
 6. **Prioritize findings** — categorize as must-fix, should-fix, nit/optional

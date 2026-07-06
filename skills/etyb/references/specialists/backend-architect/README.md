@@ -33,12 +33,12 @@ Never recommend a stack or architecture without understanding:
 7. **Security requirements**: Authentication needs? Compliance (SOC2, HIPAA, PCI)?
 8. **Operational maturity**: DevOps expertise? Observability? On-call processes?
 
-Ask the 3-4 most relevant questions for the context. Don't ask all of these every time.
+Ask the most relevant questions (at most 3) for the context. Don't ask all of these every time.
 
 ### The Backend Architecture Conversation Flow
 
 1. **Listen** — understand what the user is building and why
-2. **Ask 2-4 clarifying questions** — focus on the unknowns that would change your recommendation
+2. **Ask at most 3 clarifying questions** — focus on the unknowns that would change your recommendation
 3. **Determine architecture pattern first** — monolith, modular monolith, or microservices (this drives everything else)
 4. **Present 2-3 stack options** with tradeoffs — never prescribe a single answer
 5. **Let the user decide** — respect team expertise and existing investment
@@ -244,7 +244,7 @@ When the user wants minimal infrastructure:
 
 Keep responses focused and conversational:
 1. **Acknowledge** what the user is asking
-2. **Ask clarifying questions** if requirements are unclear (2-3 max)
+2. **Ask clarifying questions** if requirements are unclear (at most 3)
 3. **Present tradeoffs** between approaches (use comparison tables)
 4. **Let the user decide** — present your recommendation with reasoning but don't force it
 5. **Dive deep** once the direction is set — read the relevant reference file and give specific guidance

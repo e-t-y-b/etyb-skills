@@ -1,19 +1,13 @@
 ---
 name: stack-observability
-description: >
-  Observability platform knowledge overlay for the ETYB team. Loads when work
-  involves the observability ecosystem — Datadog, New Relic, Grafana stack
-  (Mimir/Loki/Tempo/Pyroscope/Faro/Beyla/Alloy), Prometheus, Splunk (Enterprise +
-  Observability Cloud), Honeycomb, Sentry, Dynatrace, and the OpenTelemetry
-  standard that ties them together. This is NOT a new team member; it is a
-  context overlay that teaches each existing ETYB role what it needs to know to
-  ship production-grade observability work as of 2026-Q2.
-  Triggers: observability, monitoring, alerting, telemetry, instrumentation, metrics, logs, traces, profiling, RUM, real user monitoring, synthetics, APM, application performance monitoring, datadog, dd-agent, datadog agent, dogstatsd, watchdog, bits ai, datadog llm observability, sensitive data scanner, datadog software catalog, datadog asm, cspm, cwpp, new relic, newrelic, nrql, nrdb, new relic ai monitoring, errors inbox, applied intelligence, pixie, nr1, grafana, grafana cloud, grafana enterprise, lgtm, mimir, loki, tempo, pyroscope, faro, beyla, alloy, grafana agent, grafana alerting, grafana oncall, grafana irm, k6, sift, grafana ml, promql, logql, traceql, prometheus, prometheus operator, kube-prometheus-stack, alertmanager, node-exporter, blackbox-exporter, postgres-exporter, redis-exporter, recording rule, alerting rule, federation, remote_write, thanos, victoriametrics, vmagent, amp, gmp, splunk, splunk cloud, splunk enterprise, splunk observability cloud, signalfx, spl, splunk index, itsi, splunk apm, splunk infrastructure monitoring, splunk synthetics, splunk rum, honeycomb, honeycomb beelines, honeycomb refinery, bubbleup, honeycomb triggers, honeycomb boards, honeycomb markers, honeycomb spans, sentry, sentry replay, sentry crons, sentry releases, sentry source maps, sentry issue owners, sentry profiling, sentry performance, dynatrace, oneagent, purepath, smartscape, davis ai, grail, dql, dynatrace synthetic, dynatrace rum, opentelemetry, otel, otlp, otel collector, otel-collector, otel auto-instrumentation, semantic conventions, semconv, w3c trace context, b3 propagation, vector, fluent bit, fluentd, logstash, elastic stack, elasticsearch, kibana, beats, slo, sli, error budget, burn rate, multi-window burn rate, golden signals, red method, use method, sre, runbook, alert fatigue, deduplication, apdex, exemplar, native histogram, exponential histogram, ebpf observability, ebpf tracing, universal service monitoring, sloth, pyrra, nobl9, openslo, llm observability, agent observability, langfuse, langsmith, helicone, llm tracing, gen ai observability, sli sli slo, error budget policy, incident management, pagerduty, opsgenie, statuspage, mean time to detect, mttd, mttr.
+description: |-
+  Observability platform knowledge overlay for the ETYB team. Loads when work involves the observability ecosystem — Datadog, New Relic, Grafana stack (Mimir/Loki/Tempo/Pyroscope/Faro/Beyla/Alloy), Prometheus, Splunk (Enterprise + Observability Cloud), Honeycomb, Sentry, Dynatrace, and the OpenTelemetry standard that ties them together.
+  Triggers: observability, monitoring, alerting, telemetry, instrumentation, metrics, logs, traces, profiling, RUM, real user monitoring, synthetics, APM, application performance monitoring, datadog, dd-agent, datadog agent, dogstatsd, watchdog, bits ai, datadog llm observability, sensitive data scanner, datadog software catalog, datadog asm, cspm, cwpp, new relic, newrelic, nrql, nrdb, new relic ai monitoring, errors inbox, applied intelligence, pixie, nr1, grafana, grafana cloud, grafana enterprise, lgtm, mimir, loki, tempo, pyroscope, faro, beyla, alloy, grafana agent, grafana alerting, grafana oncall, grafana irm, k6, sift, grafana ml, promql, logql.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.2"
+  version: "5.0.0"
   category: stack-pack
   last_verified_on: "2026-05-14"
   applies_to_roles:

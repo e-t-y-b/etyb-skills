@@ -1,11 +1,11 @@
 ---
 title: Bedrock Provider
-description: "Claude-on-AWS via Bedrock InvokeModel/Converse. Same Messages API surface, different model IDs (`anthropic.claude-sonnet-4-7-20260301-v1:0`), AWS IAM credentials, AWS billing, AWS region availability."
+description: "Claude-on-AWS via Bedrock. Same Messages API surface, different model IDs (`anthropic.claude-sonnet-5`), AWS IAM credentials, AWS billing, AWS region availability."
 product:
   name: Bedrock provider
   stack: anthropic-claude
   drift_risk: medium
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-05"
   applies_to_roles: [system-architect, backend-architect, security-engineer]
   authoritative_url: https://docs.anthropic.com/en/api/claude-on-amazon-bedrock
   notes: "AWS-resident customers only; verify regional availability per model; feature parity lags Anthropic API by weeks-to-months."
@@ -13,7 +13,7 @@ product:
 
 ## What it is
 
-Claude-on-AWS via Amazon Bedrock. The same Claude models accessible through Bedrock's InvokeModel / Converse APIs, with AWS-native auth (IAM), AWS billing, and per-region availability. Same Messages API surface as the [Anthropic API](/stacks/anthropic-claude/claude-api/); different model ID format (`anthropic.claude-sonnet-4-7-20260301-v1:0`-style ARN); different credential handling.
+Claude-on-AWS via Amazon Bedrock. The same Claude models accessible through Bedrock (current-generation models via the Messages-API Bedrock endpoint; legacy models via InvokeModel / Converse), with AWS-native auth (IAM), AWS billing, and per-region availability. Same Messages API surface as the [Anthropic API](/stacks/anthropic-claude/claude-api/); different model ID format (`anthropic.`-prefixed, e.g. `anthropic.claude-sonnet-5`; pre-4.6 snapshots use the older `anthropic.claude-...-YYYYMMDD-v1:0` ARN style); different credential handling.
 
 The [Anthropic SDK](/stacks/anthropic-claude/anthropic-sdk/) provides `AnthropicBedrock` as a drop-in alternative to `Anthropic`:
 
@@ -46,7 +46,7 @@ Use the [Anthropic API](/stacks/anthropic-claude/claude-api/) instead when:
 - **Models:** parity within ~2-4 weeks of Anthropic API release (verify per-model).
 - **Prompt caching:** available on Bedrock; verify exact behavior — historically had different limits or invalidation rules.
 - **Tool use:** parity.
-- **Extended Thinking:** parity on current 4.x models.
+- **Extended / adaptive thinking:** parity on current models. Claude Fable 5, Opus 4.8, and Sonnet 5 are available on Bedrock via the Messages-API Bedrock endpoint.
 - **Computer Use:** historically Anthropic-API-first; check current Bedrock status.
 - **Memory tool:** newer feature; verify Bedrock availability.
 - **Files API:** verify per-provider; sometimes Anthropic-API-only initially. Bedrock has its own batch inference and S3-based document handling that doesn't 1:1 map.
@@ -57,14 +57,19 @@ Use the [Anthropic API](/stacks/anthropic-claude/claude-api/) instead when:
 
 ### Pattern — pin model IDs in Bedrock format
 
-`anthropic.claude-sonnet-4-7-20260301-v1:0` is the Bedrock model ID format. Maintain a canonical-model → per-provider-ID mapping in your config:
+Bedrock IDs carry an `anthropic.` prefix. For the 4.6 generation and later the IDs are dateless (Opus 4.6, `anthropic.claude-opus-4-6-v1`, was the last to carry a `-v1` suffix); pre-4.6 snapshots use the dated `-YYYYMMDD-v1:0` form. Maintain a canonical-model → per-provider-ID mapping in your config:
 
 ```python
 MODELS = {
     "sonnet": {
-        "anthropic": "claude-sonnet-4-7-20260301",
-        "bedrock": "anthropic.claude-sonnet-4-7-20260301-v1:0",
-        "vertex": "claude-sonnet-4-7@20260301",
+        "anthropic": "claude-sonnet-5",
+        "bedrock": "anthropic.claude-sonnet-5",
+        "vertex": "claude-sonnet-5",
+    },
+    "haiku": {  # pre-4.6-generation dated-snapshot style
+        "anthropic": "claude-haiku-4-5-20251001",
+        "bedrock": "anthropic.claude-haiku-4-5-20251001-v1:0",
+        "vertex": "claude-haiku-4-5@20251001",
     },
 }
 ```

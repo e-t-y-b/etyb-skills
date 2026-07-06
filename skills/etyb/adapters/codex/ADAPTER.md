@@ -49,7 +49,7 @@ your-project/
         └── <each specialist>/     # the 20+ specialists, each independent
 ```
 
-The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. Distribution scripts should copy or symlink skills into `.agents/skills/` and install the project-scoped `.codex/` runtime into the workspace root.
+The repo layout used in this project is `skills/etyb/` rather than `.agents/skills/etyb/`. `npx skills add` places the skill into `.agents/skills/`; the project-scoped `.codex/` runtime is emitted by the v5 M2 adapter generator (`scripts/build-adapters.sh`) — until it lands, Codex runs model-trusted.
 
 ## Load These On Top Of Core
 
@@ -61,9 +61,9 @@ The repo layout used in this project is `skills/etyb/` rather than `.agents/skil
 ## Key Differences From Claude Code
 
 - **Hooks are real but scoped.** Codex can run `UserPromptSubmit`, `PreToolUse`, `PostToolUse`, and `Stop`, but tool interception is currently Bash-only.
-- **No pre-edit TDD check.** TDD remains required by `core/always-on-protocols.md` §1, but Codex still cannot intercept file edits before they happen.
+- **No pre-edit TDD check.** TDD remains required by `core/session.md` §1, but Codex still cannot intercept file edits before they happen.
 - **No native plan mode.** Default to `.etyb/plans/{name}.md`. This plan deliberately does not add a Codex-native plan artifact layer.
-- **Custom agents are project-scoped, not skill-embedded.** ETYB ships `.codex/agents/etyb_explorer.toml`, `etyb_planner.toml`, `etyb_reviewer.toml`, and `etyb_docs_researcher.toml` for bounded parallel work and independent review.
+- **Custom agents are project-scoped, not skill-embedded.** ETYB ships `.codex/agents/etyb_explorer.toml`, `etyb_planner.toml`, `etyb_reviewer.toml`, and `etyb_stack_researcher.toml` for bounded parallel work and independent review.
 - **Windows is currently excluded for hooks.** Codex hooks are still experimental and disabled on Windows per the current OpenAI docs.
 
 ## When To Recommend Claude Code Instead

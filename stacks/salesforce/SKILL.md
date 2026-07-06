@@ -1,13 +1,13 @@
 ---
 name: stack-salesforce
-description: >
-  Salesforce platform knowledge overlay for the ETYB team. Loads when work involves the Salesforce ecosystem — orgs, Apex, LWC, Flow, Data 360, Agentforce, MuleSoft, Heroku, Industries clouds, Trailhead, sfdx/sf CLI, AppExchange, OmniStudio, Trust Layer, Hyperforce. This is NOT a new team member; it is a context overlay that teaches each existing ETYB role what it needs to know to ship production-grade Salesforce work as of Spring '26.
-  Triggers: salesforce, sfdc, apex, lwc, lightning web component, lightning, visualforce, aura, flow builder, flow orchestration, agentforce, einstein, atlas reasoning, atlas reasoning engine, prompt builder, trust layer, einstein trust layer, model gateway, data cloud, data 360, zero copy, hyperforce, sales cloud, service cloud, marketing cloud, commerce cloud, experience cloud, health cloud, financial services cloud, fsc, manufacturing cloud, public sector solutions, omnistudio, omniscript, integration procedure, data mapper, dataraptor, mulesoft, anypoint, heroku, salesforce functions, named credential, external credential, external client app, eca, connected app, mfa enforcement, scratch org, sandbox, unlocked package, 2gp, sf cli, sfdx, salesforce cli, devops center, copado, gearset, autorabit, code analyzer, apex guru, apexguru, lwc jest, einstein bot, einstein copilot, agentforce vibes, agentforce builder, agent script, soql, sosl, pub/sub api, platform event, change data capture, big object, salesforce connect, tableau, slack canvas, mcp server salesforce, agentexchange, appexchange, security review, trailhead, trailblazer, dreamforce, tdx, trailblazerdx, salesforce admin, salesforce architect, ctas, certified technical architect, agentforce specialist.
+description: |-
+  Salesforce platform knowledge overlay for the ETYB team. Loads when work involves the Salesforce ecosystem — orgs, Apex, LWC, Flow, Data 360, Agentforce, MuleSoft, Heroku, Industries clouds, Trailhead, sfdx/sf CLI, AppExchange, OmniStudio, Trust Layer, Hyperforce.
+  Triggers: salesforce, sfdc, apex, lwc, lightning web component, lightning, visualforce, aura, flow builder, flow orchestration, agentforce, einstein, atlas reasoning, atlas reasoning engine, prompt builder, trust layer, einstein trust layer, model gateway, data cloud, data 360, zero copy, hyperforce, sales cloud, service cloud, marketing cloud, commerce cloud, experience cloud, health cloud, financial services cloud, fsc, manufacturing cloud, public sector solutions, omnistudio, omniscript, integration procedure, data mapper, dataraptor, mulesoft, anypoint, heroku, salesforce functions, named credential, external credential, external client app, eca, connected app, mfa enforcement, scratch org, sandbox, unlocked package.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.2"
+  version: "5.0.0"
   category: stack-pack
   last_verified_release: "Spring '26"
   last_verified_on: "2026-05-12"

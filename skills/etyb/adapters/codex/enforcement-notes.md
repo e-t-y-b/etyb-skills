@@ -4,7 +4,7 @@ Codex now exposes project-scoped lifecycle hooks, custom agents, and per-skill m
 
 ## The Rule
 
-When `core/always-on-protocols.md` says a platform may add runtime guardrails, read it literally on Codex: some ETYB rules now have genuine prompt/Bash/stop interception. Everything outside those surfaces is still enforced by instruction.
+When `core/session.md` says a platform may add runtime guardrails, read it literally on Codex: some ETYB rules now have genuine prompt/Bash/stop interception. Everything outside those surfaces is still enforced by instruction.
 
 ## Per-Protocol Fallback
 
@@ -37,7 +37,7 @@ Codex has a project-scoped custom-agent system separate from skills. ETYB uses `
 - `etyb_explorer` for read-only code path mapping and ownership tracing
 - `etyb_planner` for updating `.etyb/plans/` and gate state
 - `etyb_reviewer` for independent correctness / regression / security review
-- `etyb_docs_researcher` for primary-source doc verification
+- `etyb_stack_researcher` for primary-source doc verification
 
 **What still does not become equivalent to Claude:**
 - Hooks do not intercept Write/Edit, MCP, WebSearch, or other non-Bash tools today.
@@ -59,7 +59,7 @@ Codex can now block obvious skip-the-process prompts and some merge attempts, bu
 
 Response template:
 
-> Review before commit is an always-on discipline in ETYB (see `core/always-on-protocols.md` §3). Codex can remind and guard some Bash flows here, but review completion is still not automatic. Let me run `etyb_reviewer` or `code-reviewer` on the diff first — it takes 30 seconds and catches the issues that make commits expensive to revert.
+> Review before commit is an always-on discipline in ETYB (see `core/session.md` §3). Codex can remind and guard some Bash flows here, but review completion is still not automatic. Let me run `etyb_reviewer` or `code-reviewer` on the diff first — it takes 30 seconds and catches the issues that make commits expensive to revert.
 
 Do not offer to "skip this one time." The protocol is the product.
 

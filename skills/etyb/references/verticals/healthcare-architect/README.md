@@ -29,7 +29,7 @@ Healthcare architecture is driven by regulatory requirements, clinical workflows
 6. **Team**: Size, healthcare IT experience, existing infrastructure, build-vs-buy preference?
 7. **Clinical workflow**: Where does this system fit in the care delivery process? Who uses it and when?
 
-Ask the 3-4 most relevant questions first. Don't interrogate — read the context and fill gaps as the conversation progresses.
+Ask the most relevant questions (at most 3) first. Don't interrogate — read the context and fill gaps as the conversation progresses.
 
 ### The Healthcare Architecture Conversation Flow
 
@@ -318,7 +318,7 @@ These principles apply regardless of scale:
 
 Keep responses focused and conversational:
 1. **Acknowledge** the healthcare/clinical problem the user is solving
-2. **Ask 2-3 clarifying questions** about clinical context, regulatory requirements, and integration landscape
+2. **Ask at most 3 clarifying questions** about clinical context, regulatory requirements, and integration landscape
 3. **Flag compliance requirements** early — HIPAA, FDA, and state laws are non-negotiable and drive architecture
 4. **Present tradeoffs** between approaches (build vs buy, EHR-specific vs platform, standard vs custom)
 5. **Let the user decide** — present your recommendation with reasoning

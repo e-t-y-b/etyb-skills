@@ -1,13 +1,13 @@
 ---
 name: stack-cloudflare
-description: >
-  Cloudflare platform knowledge overlay for the ETYB team. Loads when work involves the Cloudflare ecosystem — Workers, Workers Bindings, Wrangler, Durable Objects, D1, R2, KV, Hyperdrive, Queues, Workflows, Pipelines, Vectorize, Workers AI, AI Gateway, AI Search (formerly AutoRAG), Realtime, Stream, Images, Pages, Workers Static Assets, Browser Rendering, Email Routing/Workers, Zaraz, Turnstile, Access (ZTNA), Tunnel, WAF, Rate Limiting, DDoS, Magic Transit, Argo, Logpush, Analytics Engine, Workers Logs, mTLS, CASB. This is NOT a new team member; it is a context overlay that teaches each existing ETYB role what it needs to know to ship production-grade Cloudflare work as of 2026-Q2.
-  Triggers: cloudflare, workers, cloudflare workers, worker, wrangler, durable object, durable objects, do, sqlite-backed do, alarms, d1, d1 database, r2, r2 bucket, kv, kv namespace, hyperdrive, queues, cloudflare queues, workflows, cloudflare workflows, pipelines, cloudflare pipelines, vectorize, vectorize v2, workers ai, ai gateway, ai search, autorag, cloudflare ai, llama 4 on workers, deepseek on workers, realtime, sfu, turn, cloudflare stream, cloudflare images, pages, cloudflare pages, workers static assets, _routes.json, _headers, _redirects, browser rendering, puppeteer worker, email routing, email workers, zaraz, turnstile, captcha alternative, access, cloudflare access, ztna, zero trust, cloudflare tunnel, cloudflared, argo tunnel, waf, owasp managed ruleset, rate limiting, rule, ddos, l3 ddos, magic transit, magic wan, argo smart routing, logpush, analytics engine, workers logs, tail workers, smart placement, workers for platforms, dispatch namespace, outbound worker, containers, workers and containers, container binding, rpc, service binding, env binding, queue binding, do binding, mtls cert, cloudflare casb, cloudflare radar, browser isolation, gateway dns, gateway http, miniflare, vitest-pool-workers, .dev.vars, .wrangler, workerd, nodejs_compat, compatibility_date, compatibility_flag, cron trigger, scheduled handler, fetch handler, queue handler, email handler, alarm handler.
+description: |-
+  Cloudflare platform knowledge overlay for the ETYB team. Loads when work involves the Cloudflare ecosystem — Workers, Workers Bindings, Wrangler, Durable Objects, D1, R2, KV, Hyperdrive, Queues, Workflows, Pipelines, Vectorize, Workers AI, AI Gateway, AI Search (formerly AutoRAG), Realtime, Stream, Images, Pages, Workers Static Assets, Browser Rendering, Email Routing/Workers, Zaraz, Turnstile, Access (ZTNA), Tunnel, WAF, Rate Limiting, DDoS, Magic Transit, Argo, Logpush, Analytics Engine, Workers Logs, mTLS, CASB.
+  Triggers: cloudflare, workers, cloudflare workers, worker, wrangler, durable object, durable objects, do, sqlite-backed do, alarms, d1, d1 database, r2, r2 bucket, kv, kv namespace, hyperdrive, queues, cloudflare queues, workflows, cloudflare workflows, pipelines, cloudflare pipelines, vectorize, vectorize v2, workers ai, ai gateway, ai search, autorag, cloudflare ai, llama 4 on workers, deepseek on workers, realtime, sfu, turn, cloudflare stream, cloudflare images, pages.
 license: MIT
 compatibility: ETYB stack pack — Designed for Claude Code, OpenAI Codex, Google Antigravity, and compatible AI coding agents
 metadata:
   author: e-t-y-b
-  version: "4.0.2"
+  version: "5.0.0"
   category: stack-pack
   last_verified_release: "2026-Q2"
   last_verified_on: "2026-05-14"

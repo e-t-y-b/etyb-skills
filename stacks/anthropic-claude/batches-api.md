@@ -5,23 +5,22 @@ product:
   name: Batches API
   stack: anthropic-claude
   drift_risk: low
-  last_verified_on: "2026-05-14"
+  last_verified_on: "2026-07-06"
   applies_to_roles: [backend-architect, ai-ml-engineer, system-architect]
-  authoritative_url: https://docs.anthropic.com/en/api/creating-message-batches
-  notes: "Stable async API; 50% discount on both input and output tokens; up to 100K requests per batch."
+  authoritative_url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
+  notes: "Stable async API; 50% discount on both input and output tokens; up to 100K requests OR 256MB per batch (whichever hits first); polling only, no webhooks."
 ---
 
 ## What it is
 
 The Batches API submits Claude work in bulk for asynchronous processing with a **50% discount on both input AND output tokens**. Constraints (verify current):
 
-- Up to **100K requests per batch**
-- Up to **256MB total request size**
-- Up to **24-hour completion window** (most batches finish in minutes-to-hours)
-- Polling-based status (or webhook on enterprise tiers)
+- Up to **100K requests per batch, or 256MB total request size — whichever limit is hit first**
+- Up to **24-hour completion window; most batches finish in under 1 hour**
+- **Polling only** — poll `processing_status` for batch state; there is no webhook/callback notification mechanism
 - Same Messages API surface, just submitted in bulk via `client.messages.batches.create()`
 
-See [Batches API reference](https://docs.anthropic.com/en/api/creating-message-batches).
+See [Batches API reference](https://platform.claude.com/docs/en/build-with-claude/batch-processing).
 
 ## When to use
 
@@ -56,7 +55,7 @@ batch = client.messages.batches.create(
         {
             "custom_id": f"ticket_{ticket.id}",
             "params": {
-                "model": "claude-haiku-4-5-20251022",
+                "model": "claude-haiku-4-5-20251001",
                 "max_tokens": 1024,
                 "messages": [{"role": "user", "content": classify_prompt(ticket)}],
             },
@@ -83,7 +82,7 @@ Running an eval suite of 1,000 prompts every commit is too expensive on the sync
 
 ### Anti-pattern — polling every second
 
-Wasteful — the operation runs for minutes-to-hours. Poll every 30-60 seconds, or use webhooks if available.
+Wasteful — most batches finish in under an hour but the window runs up to 24 hours. Poll every 30-60 seconds with backoff; there's no webhook option to replace polling.
 
 ### Anti-pattern — many tiny batches
 
@@ -110,4 +109,4 @@ A user clicks "summarize" and waits 47 minutes. Use the synchronous API for anyt
 - [Claude Haiku](/stacks/anthropic-claude/claude-haiku/) — natural pairing for bulk classification
 - [Prompt Caching](/stacks/anthropic-claude/prompt-caching/) — stack savings on cached prefixes
 - [backend-architect overlay](/stacks/anthropic-claude/backend-architect/) — when async pays
-- [Batches API reference](https://docs.anthropic.com/en/api/creating-message-batches)
+- [Batches API reference](https://platform.claude.com/docs/en/build-with-claude/batch-processing)

@@ -1,80 +1,73 @@
-#!/bin/bash
-# Pre-merge hook: verify tests pass before allowing merge
+#!/usr/bin/env bash
+# Pre-merge hook: warn on merges into protected branches without verify
+# evidence.
+# Claude Code hook contract: PreToolUse (matcher Bash, git merge commands).
 #
-# This hook runs the project's test suite and blocks the merge if any tests fail.
-# Install by copying to .git/hooks/pre-merge-commit or by configuring core.hooksPath.
+# Reads the hook payload JSON from stdin and extracts:
+#   .tool_input.command — only "git merge" commands are checked
+#   .cwd                — repository directory to inspect
 #
-# Usage:
-#   cp hooks/pre-merge-verify.sh .git/hooks/pre-merge-commit
-#   chmod +x .git/hooks/pre-merge-commit
+# Verify evidence = the most recent entry in .etyb/test-log.jsonl (written
+# by the TDD protocol's post-test-log hook) records a passing test run.
+# Merging into main/master/develop/release/* without that evidence draws
+# a warning. The LLM instructions do the actual gate enforcement — this
+# hook provides visibility.
+#
+# Output: {"systemMessage": "..."} on stdout when the warning fires;
+# nothing otherwise (advisory, non-blocking feedback shape).
+#
+# Exit codes:
+#   0 — always (advisory, never blocks the merge)
 
-set -euo pipefail
+set -uo pipefail
 
-echo "========================================"
-echo "  PRE-MERGE VERIFICATION"
-echo "  Running test suite before merge..."
-echo "========================================"
-echo ""
+# Graceful degradation: without jq the payload cannot be parsed.
+# Advisory hooks must never break the session — exit 0 silently.
+command -v jq >/dev/null 2>&1 || exit 0
 
-# Detect test runner
-detect_test_command() {
-  if [ -f "package.json" ]; then
-    if command -v pnpm &>/dev/null && [ -f "pnpm-lock.yaml" ]; then
-      echo "pnpm test"
-    elif command -v yarn &>/dev/null && [ -f "yarn.lock" ]; then
-      echo "yarn test"
-    elif command -v bun &>/dev/null && [ -f "bun.lockb" ]; then
-      echo "bun test"
-    else
-      echo "npm test"
-    fi
-  elif [ -f "pytest.ini" ] || [ -f "pyproject.toml" ] || [ -f "setup.cfg" ]; then
-    echo "pytest"
-  elif [ -f "Cargo.toml" ]; then
-    echo "cargo test"
-  elif [ -f "go.mod" ]; then
-    echo "go test ./..."
-  elif [ -f "Gemfile" ]; then
-    echo "bundle exec rspec"
-  elif [ -f "mix.exs" ]; then
-    echo "mix test"
-  elif [ -f "Makefile" ] && grep -q "^test:" Makefile; then
-    echo "make test"
-  else
-    echo ""
-  fi
+payload=$(cat)
+
+emit_warning() {
+  jq -n --arg msg "$1" '{systemMessage: $msg}'
 }
 
-TEST_CMD=$(detect_test_command)
+COMMAND=$(jq -r '.tool_input.command // empty' <<<"$payload" 2>/dev/null) || COMMAND=""
 
-if [ -z "$TEST_CMD" ]; then
-  echo "WARNING: Could not detect test runner."
-  echo "No test command found. Skipping pre-merge verification."
-  echo "To enforce testing, set a 'test' script in your package.json or project config."
+case "$COMMAND" in
+  *"git merge"*) ;;
+  *) exit 0 ;;
+esac
+
+CWD=$(jq -r '.cwd // empty' <<<"$payload" 2>/dev/null) || CWD=""
+if [ -z "$CWD" ] || [ ! -d "$CWD" ]; then
+  CWD=$PWD
+fi
+cd "$CWD" 2>/dev/null || exit 0
+
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
+
+# git merge merges INTO the currently checked-out branch.
+BRANCH=$(git symbolic-ref --short -q HEAD 2>/dev/null) || BRANCH=""
+if [ -z "$BRANCH" ]; then
   exit 0
 fi
 
-echo "Test command: $TEST_CMD"
-echo ""
+# Only guard protected branches.
+case "$BRANCH" in
+  main | master | develop | production | release/*) ;;
+  *) exit 0 ;;
+esac
 
-# Run tests
-if eval "$TEST_CMD"; then
-  echo ""
-  echo "========================================"
-  echo "  TESTS PASSED — merge allowed"
-  echo "========================================"
-  exit 0
-else
-  echo ""
-  echo "========================================"
-  echo "  ERROR: TESTS FAILED — merge blocked"
-  echo "========================================"
-  echo ""
-  echo "Fix failing tests before merging."
-  echo "Run '$TEST_CMD' to see failures."
-  echo ""
-  echo "To bypass this hook (NOT RECOMMENDED):"
-  echo "  git merge --no-verify"
-  echo ""
-  exit 1
+# Verify evidence: the most recent logged test run must be a pass.
+LOG_FILE=".etyb/test-log.jsonl"
+if [ -f "$LOG_FILE" ]; then
+  LAST_ENTRY=$(tail -n 1 "$LOG_FILE" 2>/dev/null) || LAST_ENTRY=""
+  if [ -n "$LAST_ENTRY" ] \
+    && jq -e '.result == "pass"' <<<"$LAST_ENTRY" >/dev/null 2>&1; then
+    exit 0
+  fi
 fi
+
+emit_warning "[git-workflow] Merging into protected branch '${BRANCH}' without verify evidence — no passing test run is recorded in .etyb/test-log.jsonl. Run the project's test suite (and let it be logged) before merging. Proceeding — this is a warning, not a block."
+
+exit 0

@@ -1,17 +1,33 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Pre-edit hook: warn if editing source without corresponding test file
-# This fires before any Edit tool use
+# Claude Code hook contract: PreToolUse (matcher Edit|Write).
+#
+# Reads the hook payload JSON from stdin and extracts:
+#   .tool_input.file_path — the file about to be edited/written
 #
 # Purpose: Provide a soft warning when a source file is being edited
 # but no corresponding test file exists. The LLM instructions do the
 # actual TDD enforcement — this hook provides visibility.
 #
+# Output: {"systemMessage": "..."} on stdout when the warning fires;
+# nothing otherwise (advisory, non-blocking feedback shape).
+#
 # Exit codes:
 #   0 — always (this is a warning, not a blocker)
 
-set -euo pipefail
+set -uo pipefail
 
-FILE_PATH="${1:-}"
+# Graceful degradation: without jq the payload cannot be parsed.
+# Advisory hooks must never break the session — exit 0 silently.
+command -v jq >/dev/null 2>&1 || exit 0
+
+payload=$(cat)
+
+emit_warning() {
+  jq -n --arg msg "$1" '{systemMessage: $msg}'
+}
+
+FILE_PATH=$(jq -r '.tool_input.file_path // empty' <<<"$payload" 2>/dev/null) || FILE_PATH=""
 
 if [ -z "$FILE_PATH" ]; then
   exit 0
@@ -121,15 +137,7 @@ case "$EXTENSION" in
 esac
 
 if [ "$TEST_EXISTS" = false ]; then
-  echo "=========================================="
-  echo "TDD WARNING: No test file found for:"
-  echo "  $FILE_PATH"
-  echo ""
-  echo "TDD Protocol requires a failing test BEFORE"
-  echo "writing production code. Consider:"
-  echo "  1. Write a failing test first"
-  echo "  2. Then edit this source file"
-  echo "=========================================="
+  emit_warning "TDD warning: no test file found for ${FILE_PATH}. The TDD protocol requires a failing test BEFORE production code — write a failing test first, then edit this source file. (Advisory only; not a block.)"
 fi
 
 exit 0
