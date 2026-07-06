@@ -2,7 +2,9 @@
 
 ## Overview
 
-ETYB Skills is a virtual engineering company implemented as a system of 30 coordinated AI agent skills. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and ETYB enforcing engineering discipline at every stage.
+ETYB Skills is a virtual engineering company implemented as **one skill, `/etyb`** -- the only trigger surface. Internally it holds 14 specialist references, 9 always-on process protocols, and 6 vertical-domain architects, plus five sub-agent definitions that carry out the heavy work (exploration, planning, review, vendor research, memory curation) in their own contexts. It covers the full software development lifecycle -- from research and discovery through operations and monitoring -- with mandatory quality gates, process protocols, and ETYB enforcing engineering discipline at every stage.
+
+The diagram below predates the v4.0.0 collapse from 30 separate skills to one; read every "team" and "sub-skill" box as an internal reference under `skills/etyb/references/`, not a separate installable skill or slash command. See [Core Concepts](#core-concepts) below.
 
 ## System Architecture
 
@@ -52,9 +54,9 @@ ETYB Skills is a virtual engineering company implemented as a system of 30 coord
 
 **ETYB** -- The process-enforcing CTO. Classifies request complexity into tiers (Tier 0-4), mandates the right domain experts, enforces phase gates, and tracks plan state. It does not perform work directly; it routes, coordinates, and enforces.
 
-**Domain Experts** -- Team leads with broad domain knowledge. Each domain expert delegates to specialist sub-skills for deep, targeted work. They participate in the plan lifecycle and coordinate handoffs with other teams.
+**Domain Experts (Specialist References)** -- Not separate skills: markdown references under `skills/etyb/references/specialists/<name>/`, read on demand when a request lands in that domain. Each contains production-proven patterns, decision matrices, and tool-specific guidance. ETYB reads one at a time and becomes that specialist for the response -- there is no delegation to a further "sub-skill" layer.
 
-**Sub-Skills** -- Specialists with deep expertise in a single area. They perform the actual work -- writing code, designing schemas, configuring pipelines, auditing security. Each sub-skill contains production-proven patterns, decision matrices, and tool-specific guidance.
+**Sub-Agents** -- The five definitions under `agents/` (explorer, planner, reviewer, stack-researcher, cartographer) that carry out heavy work -- codebase exploration, plan drafting, independent review, vendor-doc research, memory curation -- in their own dispatched contexts, keeping the user's session clean. Model-tiered: light work runs on the smallest model tier; extensive-reasoning work inherits the user's session model, which is always the ceiling. Ship with the Claude Code plugin; generated equivalents exist for Codex, Kiro, and Cursor (`scripts/build-adapters.sh`).
 
 **Quality Gates** -- Three mandatory checkpoints that cannot be bypassed:
 - **QA Engineer** enforces TDD -- no code ships without test coverage.
@@ -404,9 +406,10 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 
 | Platform | Runtime Contract |
 |----------|------------------|
-| Claude Code | Plugin-based (`.claude-plugin/`). Hook wiring + custom agents land in v5 M2; model-trusted until then. |
-| OpenAI Codex | `.codex/` agents + Python hooks exist in-repo as source assets; per-project delivery ships with the v5 M2 adapter generator. Portable plans at `.etyb/plans/`. |
+| Claude Code | Plugin-based (`.claude-plugin/`). Ships the skill, all 5 sub-agent definitions (model-tiered), and 5 advisory hooks (`hooks/hooks.json`) -- warn via `systemMessage`, never block. Full experience. |
+| OpenAI Codex | `.codex/agents/*.toml`, generated from the same `agents/*.md` source by `scripts/build-adapters.sh` (drift-checked in CI). Portable plans at `.etyb/plans/`. |
 | Google Antigravity | Markdown-first and model-trusted. Portable plans at `.etyb/plans/`. ADK remains a documented future path, not a shipped runtime in this repo. |
+| Kiro, Cursor | Generated agent/plugin skeletons under `dist/adapters/` from the same source, same drift check. No hook equivalent on these harnesses. |
 
 ## Design Principles
 
@@ -420,11 +423,14 @@ Each domain expert applies role-specific checklists on top of this framework -- 
 
 ## Inventory Summary
 
-- **1** ETYB (process-enforcing CTO and router)
-- **14** core domain expert teams with approximately 80 specialist sub-skills
+- **1** skill -- `/etyb`, the only trigger surface
+- **14** specialist references (domain expert teams)
 - **6** domain-specific architects for vertical product categories
 - **9** process protocols
+- **5** sub-agent definitions (explorer, planner, reviewer, stack-researcher, cartographer), model-tiered -- light work on the smallest tier, extensive reasoning inherits the user's session model (never above it)
+- **5** advisory hooks, Claude Code plugin only -- warn, never block
+- **13** currency-stamped vendor Stacks, 538 pages
 - **3** mandatory quality gates (TDD, security, code review)
 - **5-gate lifecycle** covering Design through Ship
 - **9** always-on engineering disciplines embedded in ETYB
-- **3 platform modes**: Claude flagship, Codex partial runtime-enforced, Antigravity markdown-first
+- **5 platform surfaces**: Claude Code (full: skill + agents + hooks), Codex (skill + generated agents), Antigravity (markdown-first), Kiro and Cursor (skill + generated agent skeletons)

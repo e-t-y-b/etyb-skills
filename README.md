@@ -71,7 +71,7 @@ An AI coding agent that works like a 100-person engineering org — through a si
 - **Refuses to ship untested code** — TDD-first discipline, backed by advisory hooks on the Claude Code plugin path (warn, never block)
 - **Stops you from building the wrong thing** — structured brainstorming before architecture
 - **Pushes back on bad review feedback** — evaluates findings on merit, no performative agreement
-- **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation
+- **Coordinates parallel work** — subagent dispatch with two-stage review and worktree isolation; heavy work runs in sub-agent contexts, model-tiered (cheap models for cheap work, never above your own selected model), so your session stays fast and your context stays clean
 - **Covers the full SDLC** — from research through production operations
 - **Knows your domain** — fintech ledgers, HIPAA compliance, e-commerce patterns, real-time systems
 - **Speaks your platform** — Stack Packs load across all roles when work involves a specific stack. 13 Stacks are live under [`stacks/`](STACKS.md): AWS, GCP, Azure, Salesforce, Anthropic Claude, OpenAI, Cloudflare, Vercel, Supabase, Firebase, Expo, Stripe, Observability
