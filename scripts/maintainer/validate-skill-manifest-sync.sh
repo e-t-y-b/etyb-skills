@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# Verify that the v4 single-skill layout is consistent across:
-#   skills/etyb/                            (only one installable skill)
-#   manifest.json .skill                    (declares it)
-#   .claude-plugin/marketplace.json         (one plugin "etyb")
+# Verify that the skill layout is consistent across:
+#   skills/                                 (etyb + thin etyb-* role skills, M2-T2)
+#   manifest.json .skill                    (declares the etyb orchestrator)
+#   .claude-plugin/marketplace.json         (one plugin "etyb", installing every skills/ dir)
 # Also spot-checks that every reference under skills/etyb/references/
 # directly correlates to the canonical 14+9+6 contract.
 
@@ -36,8 +36,12 @@ manifest_keys="$(jq -r '.skill | keys[]' manifest.json | sort)"
 marketplace_plugins="$(jq -r '.plugins[].name' .claude-plugin/marketplace.json | sort)"
 [[ "$marketplace_plugins" == "etyb" ]] || fail ".claude-plugin/marketplace.json must contain exactly one plugin (etyb), found: $marketplace_plugins"
 
+expected_skills="$(while IFS= read -r d; do echo "./skills/$d"; done <<<"$dirs" | sort)"
 marketplace_skills="$(jq -r '.plugins[0].skills[]' .claude-plugin/marketplace.json | sort)"
-[[ "$marketplace_skills" == "./skills/etyb" ]] || fail "marketplace plugin must install only ./skills/etyb, found: $marketplace_skills"
+[[ "$marketplace_skills" == "$expected_skills" ]] || fail "marketplace plugin skills must exactly match every skills/ dir (etyb + etyb-* role skills); expected:
+$expected_skills
+found:
+$marketplace_skills"
 
 # 4. v4.0 — tier system removed. The manifest must NOT carry a .tiers block,
 #    and stack entries must NOT carry available_on_tiers.

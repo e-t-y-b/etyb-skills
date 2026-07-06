@@ -54,6 +54,40 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 
 ## Deviations
 
+- **Release-gate contradiction found and resolved (2026-07-06, done):**
+  the M2-T4 fix (this checklist's item 1) removed `marketplace.json`'s
+  `"skills": ["./skills/etyb"]` array under `strict: false` to stop
+  `claude plugin install` from failing with a manifest conflict. Running
+  the full release gate (this checklist's item 4) surfaced that this
+  broke `scripts/maintainer/validate-skill-manifest-sync.sh`, which
+  hard-asserts the marketplace plugin installs *exactly* `./skills/etyb`
+  — a frozen v4-era single-skill invariant that M2-T2 (three thin
+  `etyb-explore`/`etyb-plan`/`etyb-review` role skills, shipped in v5)
+  already superseded but this validator was never updated for.
+
+  Investigated properly rather than picking whichever side was easier to
+  make pass: reinstalling the real plugin with `strict: true` restored
+  (and `skills: ["./skills/etyb"]` re-added) *did* clear the "conflicting
+  manifests" error, but `claude plugin details etyb@etyb-skills` then
+  showed only **1** skill loaded (`etyb`) instead of 4 — `strict: true`
+  with an explicit-but-incomplete `skills` array silently drops the
+  auto-discovered role skills, which would have shipped v5.0.0 with
+  `/etyb-review`, `/etyb-plan`, `/etyb-explore` unreachable via the
+  Claude Code plugin path. Listing all four skills explicitly
+  (`strict: true` + `skills: ["./skills/etyb", "./skills/etyb-explore",
+  "./skills/etyb-plan", "./skills/etyb-review"]`) is the configuration
+  that is simultaneously conflict-free AND loads the full component
+  inventory (4 skills, 5 agents, hooks) — confirmed via
+  `claude plugin details` after a clean uninstall/reinstall.
+
+  Fixed `validate-skill-manifest-sync.sh` to check the marketplace
+  `skills` array against the *actual* set of `skills/etyb*` directories
+  (computed, not hardcoded) instead of a hardcoded single value, so this
+  can't silently drift out of sync with `skills/` again the next time a
+  role skill is added or removed. `.claude-plugin/marketplace.json` is
+  the final, tested state; the script's own docstring calling this "the
+  v4 single-skill layout" was corrected too.
+
 - **M3-T4 ledger note — Claude 5 fact spot-check (2026-07-06, done):**
   dispatched 3 parallel research agents (with live WebFetch access — vendor
   egress is NOT blocked from this environment, unlike the build environment
@@ -165,14 +199,19 @@ debt below (needs a real Claude Code install + vendor-doc egress).
      one location." `.claude-plugin/marketplace.json`'s plugin entry
      declared `"skills": ["./skills/etyb"]` while `strict: false`, which
      conflicts with `plugin.json`'s convention-based auto-discovery of the
-     same skill. Fix: removed the redundant `skills` array from the
-     marketplace entry (kept `strict: false`); `claude plugin list` then
-     showed `etyb@etyb-skills ... Status: ✔ enabled`, and `claude plugin
-     details etyb@etyb-skills` confirmed the full component inventory:
-     `Skills (4) etyb, etyb-explore, etyb-plan, etyb-review`; `Agents (5)
+     same skill. First fix attempt: removed the redundant `skills` array
+     from the marketplace entry (kept `strict: false`) — this cleared the
+     conflict and loaded the full component inventory (`Skills (4) etyb,
+     etyb-explore, etyb-plan, etyb-review`; `Agents (5)
      etyb-stack-researcher, etyb-reviewer, etyb-planner, etyb-explorer,
      etyb-cartographer`; `Hooks (4) PreToolUse, PostToolUse, Stop,
-     SessionStart`.
+     SessionStart`), but was later found to conflict with
+     `validate-skill-manifest-sync.sh`'s frozen assertion that the
+     marketplace entry explicitly lists its skills — see the
+     "Release-gate contradiction found and resolved" entry below for the
+     final configuration (`strict: true` + all four skills listed
+     explicitly), which satisfies both the real plugin loader and the
+     validator.
   2. **`hooks/session-start-memory.sh` shipped without the executable bit**
      (git mode `100644`; every other hook script is `100755`). Since
      `hooks.json` invokes it directly by path (no `bash` prefix), Claude
