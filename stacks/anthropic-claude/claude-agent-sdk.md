@@ -5,9 +5,9 @@ product:
   name: Claude Agent SDK
   stack: anthropic-claude
   drift_risk: high
-  last_verified_on: "2026-07-05"
+  last_verified_on: "2026-07-06"
   applies_to_roles: [backend-architect, ai-ml-engineer, system-architect]
-  authoritative_url: https://docs.anthropic.com/en/api/claude-code-sdk
+  authoritative_url: https://code.claude.com/docs/en/agent-sdk/overview
   notes: "Released 2025; replaces ad-hoc agent loops; harness conventions still settling — verify against release notes."
 ---
 
@@ -24,7 +24,7 @@ What it gives you:
 - **Retries / timeouts / backoff** — sensible defaults built in.
 - **[MCP](/stacks/anthropic-claude/mcp/) integration** — tools defined via MCP servers loaded automatically if configured.
 
-See [Claude Agent SDK docs](https://docs.anthropic.com/en/api/claude-code-sdk) and verify field shapes against current release notes — the surface is still settling.
+See [Claude Agent SDK docs](https://code.claude.com/docs/en/agent-sdk/overview) and verify field shapes against current release notes — the surface is still settling.
 
 ## When to use
 
@@ -55,32 +55,45 @@ Skip the SDK for:
 ### Pattern — SDK-first agent design
 
 ```python
-from claude_agent_sdk import Agent
+import asyncio
+from claude_agent_sdk import query, ClaudeAgentOptions
 
-agent = Agent(
-    model="claude-sonnet-5",
-    system="...",
-    tools=[...],
-    max_iters=10,
-)
-result = await agent.run(user_message="...")
+async def main():
+    async for message in query(
+        prompt="Find and fix the bug in auth.py",
+        options=ClaudeAgentOptions(allowed_tools=["Read", "Edit", "Bash"]),
+    ):
+        if hasattr(message, "result"):
+            print(message.result)
+
+asyncio.run(main())
 ```
 
-Build agents on the SDK. Drop down to the raw [Messages API](/stacks/anthropic-claude/claude-api/) tool loop only when you have constraints the SDK doesn't fit.
+The SDK is function-based, not a long-lived `Agent` object: `query()` runs one turn (or a resumed session via `options.resume`) and streams messages back; there is no `Agent` class or `.run()` method. Build agents on the SDK. Drop down to the raw [Messages API](/stacks/anthropic-claude/claude-api/) tool loop only when you have constraints the SDK doesn't fit.
 
 ### Pattern — sub-agents for specialized tasks
 
 ```python
-# Parent agent spawns a code-reviewer sub-agent
-reviewer = await agent.spawn_subagent(
-    system="You are a code reviewer focused on security issues.",
-    tools=[code_read, code_lint],
-    max_iters=5,
-)
-review_result = await reviewer.run(user_message=f"Review this diff: {diff}")
+from claude_agent_sdk import query, ClaudeAgentOptions, AgentDefinition
+
+async for message in query(
+    prompt="Use the code-reviewer agent to review this diff",
+    options=ClaudeAgentOptions(
+        allowed_tools=["Read", "Glob", "Grep", "Agent"],
+        agents={
+            "code-reviewer": AgentDefinition(
+                description="Expert code reviewer for quality and security issues.",
+                prompt="Analyze code quality and flag security issues.",
+                tools=["Read", "Glob", "Grep"],
+            )
+        },
+    ),
+):
+    if hasattr(message, "result"):
+        print(message.result)
 ```
 
-One domain per sub-agent; two-stage review (sub-agent proposes, primary reviews). See [Sub-agents](/stacks/anthropic-claude/sub-agents/) for the full pattern.
+Sub-agents are declared in `options.agents` (not spawned imperatively) and invoked by the model through the built-in `Agent` tool — include `"Agent"` in `allowed_tools` to auto-approve those invocations. One domain per sub-agent; two-stage review (sub-agent proposes, primary reviews). See [Sub-agents](/stacks/anthropic-claude/sub-agents/) for the full pattern.
 
 ### Pattern — permission gating on destructive tools
 
@@ -117,4 +130,4 @@ The SDK exposes per-iteration callbacks. Wire them to your observability layer (
 - [MCP](/stacks/anthropic-claude/mcp/) — SDK loads MCP-defined tools
 - [Anthropic SDK](/stacks/anthropic-claude/anthropic-sdk/) — used under the Agent SDK
 - [backend-architect overlay](/stacks/anthropic-claude/backend-architect/) — when to drop down to raw Messages API
-- [Claude Agent SDK Docs](https://docs.anthropic.com/en/api/claude-code-sdk)
+- [Claude Agent SDK Docs](https://code.claude.com/docs/en/agent-sdk/overview)

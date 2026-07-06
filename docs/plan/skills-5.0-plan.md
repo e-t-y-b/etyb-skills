@@ -47,12 +47,80 @@ debt below (needs a real Claude Code install + vendor-doc egress).
       (name `etyb`, version 5.0.0) to match plugin.json.
 - [x] Observe the five hooks actually firing in a Claude Code plugin install
       (M2-T4 debt — only fixture-verified so far).
-- [ ] Spot-verify the anthropic-claude Claude 5 facts against
+- [x] Spot-verify the anthropic-claude Claude 5 facts against
       docs.anthropic.com (M3-T4 debt — vendor egress was blocked in the
       build environment).
 - [ ] Merge `claude/usability-standards-review-27ckxa` → `main`; tag `v5.0.0`.
 
 ## Deviations
+
+- **M3-T4 ledger note — Claude 5 fact spot-check (2026-07-06, done):**
+  dispatched 3 parallel research agents (with live WebFetch access — vendor
+  egress is NOT blocked from this environment, unlike the build environment
+  the M3-T4 debt note refers to) to check every checkable factual claim
+  (model IDs, pricing, context windows, dates, API behavior) across the 20
+  pages the M3-T4 refresh touched, against `platform.claude.com` (the
+  domain `docs.anthropic.com` now 301-redirects to — same content).
+  Verdict: **0 wrong facts** in the core model pages (`claude-sonnet.md`,
+  `claude-opus.md`, `claude-haiku.md`, `index.md`, `SKILL.md`,
+  `ai-ml-engineer.md`) and cloud/role-overlay pages (`bedrock-provider.md`,
+  `vertex-ai-provider.md`, `backend-architect.md`, `system-architect.md`,
+  `security-engineer.md`) — including the two specific lines a prior review
+  flagged for a "retired model id" (`backend-architect.md:189`,
+  `stacks/observability/otel-genai.md:38`), both confirmed already fixed,
+  no action needed. The M3-T4 debt claim that vendor egress was blocked
+  turned out to be environment-specific to the prior build sandbox, not a
+  durable constraint.
+
+  The API/SDK-surface pages (`claude-api.md`, `anthropic-sdk.md`,
+  `claude-agent-sdk.md`, `extended-thinking.md`, `citations.md`,
+  `pdf-input.md`, `files-api.md`, `batches-api.md`, `computer-use.md`) had
+  6 real defects, fixed (re-stamped to 2026-07-06, the only pages touched):
+  1. `claude-agent-sdk.md` — the two Python code samples used an invented
+     `Agent`/`.run()`/`.spawn_subagent()` API shape. The real SDK is
+     function-based: `query()` + `ClaudeAgentOptions`, with sub-agents
+     declared via `AgentDefinition` in `options.agents` and invoked through
+     the built-in `Agent` tool, not called imperatively. Rewrote both
+     samples against the live `code.claude.com/docs/en/agent-sdk/overview`
+     examples; also fixed the dead `authoritative_url`
+     (`docs.anthropic.com/en/api/claude-code-sdk` → `code.claude.com/docs/en/agent-sdk/overview`).
+  2. `anthropic-sdk.md` — claimed 5 first-party SDK languages (Python, TS,
+     Go, Java, Ruby) with PHP/C#/Rust/Kotlin as "community." Anthropic now
+     ships **7** first-party SDKs — C# (`Anthropic` on NuGet) and PHP
+     (`anthropic-ai/sdk` on Packagist) graduated to first-party (both still
+     beta). Table and prose updated.
+  3. `pdf-input.md` — claimed "~100 pages" max; actual limit is **600
+     pages per request, 100 only for 200k-context models** (Haiku 4.5).
+     Also claimed encrypted/scanned PDFs are "OCR'd internally" —
+     scanned/image PDFs are handled via vision (true), but
+     encrypted/password-protected PDFs are explicitly **not supported**
+     (rejected, not processed) — the file's own Gotchas section already
+     half-hedged this ("verify current support") while the currency-anchor
+     bullet flatly asserted the wrong thing. Fixed both.
+  4. `files-api.md` — claimed "GA 2025"; the Files API is **still beta**
+     as of mid-2026 (requires the `anthropic-beta: files-api-2025-04-14`
+     header on every call, including Messages requests that reference a
+     `file_id` — the file's own code sample was missing it). Storage quota
+     was described as "per-workspace"; it's **500GB per organization**
+     (pools across workspaces) plus a 500MB per-file limit the file didn't
+     mention at all. Also added: Files API isn't available on Bedrock or
+     Google Cloud at all (Claude API / Claude Platform on AWS / Microsoft
+     Foundry only), which contradicted an anti-pattern suggesting Bedrock/
+     Vertex as a residency workaround.
+  5. `batches-api.md` — claimed "polling-based status (or webhook on
+     enterprise tiers)"; live docs describe polling only, no webhook
+     mechanism at any tier. Removed the webhook claim.
+  6. All 5 edited files' `authoritative_url` and inline doc links updated
+     from `docs.anthropic.com` to `platform.claude.com` (the real
+     destination after the 301) or, for the Agent SDK, `code.claude.com`
+     (a distinct product domain, not a redirect).
+
+  Not edited (no wrong facts found, so not re-stamped, per the checklist's
+  "re-stamp only pages you actually edit"): `claude-api.md`,
+  `extended-thinking.md`, `citations.md`, `computer-use.md` — a few minor
+  omissions were noted (e.g. citations/structured-outputs incompatibility,
+  computer-use per-model image-size limits) but omissions aren't factual
+  errors and are out of scope for a spot-check.
 
 - **Version flip (2026-07-06, done):** `5.0.0-dev` → `5.0.0` across VERSION,
   the 4 other bundle files (package.json, manifest.json, marketplace.json,

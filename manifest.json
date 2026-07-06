@@ -305,9 +305,9 @@
     },
     {
       "path": "stacks/anthropic-claude/anthropic-sdk.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-07-06",
       "drift_risk": "medium",
-      "authoritative_url": "https://docs.anthropic.com/en/api/client-sdks"
+      "authoritative_url": "https://platform.claude.com/docs/en/cli-sdks-libraries/overview"
     },
     {
       "path": "stacks/anthropic-claude/backend-architect.md",
@@ -316,9 +316,9 @@
     },
     {
       "path": "stacks/anthropic-claude/batches-api.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-07-06",
       "drift_risk": "low",
-      "authoritative_url": "https://docs.anthropic.com/en/api/creating-message-batches"
+      "authoritative_url": "https://platform.claude.com/docs/en/build-with-claude/batch-processing"
     },
     {
       "path": "stacks/anthropic-claude/bedrock-provider.md",
@@ -334,9 +334,9 @@
     },
     {
       "path": "stacks/anthropic-claude/claude-agent-sdk.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-07-06",
       "drift_risk": "high",
-      "authoritative_url": "https://docs.anthropic.com/en/api/claude-code-sdk"
+      "authoritative_url": "https://code.claude.com/docs/en/agent-sdk/overview"
     },
     {
       "path": "stacks/anthropic-claude/claude-api.md",
@@ -382,9 +382,9 @@
     },
     {
       "path": "stacks/anthropic-claude/files-api.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-07-06",
       "drift_risk": "medium",
-      "authoritative_url": "https://docs.anthropic.com/en/api/files"
+      "authoritative_url": "https://platform.claude.com/docs/en/build-with-claude/files"
     },
     {
       "path": "stacks/anthropic-claude/index.md",
@@ -405,9 +405,9 @@
     },
     {
       "path": "stacks/anthropic-claude/pdf-input.md",
-      "last_verified_on": "2026-07-05",
+      "last_verified_on": "2026-07-06",
       "drift_risk": "low",
-      "authoritative_url": "https://docs.anthropic.com/en/docs/build-with-claude/pdf-support"
+      "authoritative_url": "https://platform.claude.com/docs/en/build-with-claude/pdf-support"
     },
     {
       "path": "stacks/anthropic-claude/prompt-caching.md",
