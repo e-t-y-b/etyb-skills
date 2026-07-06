@@ -45,6 +45,8 @@ This repo ships a plugin manifest at `.claude-plugin/plugin.json`, so Claude Cod
 /plugin install etyb@etyb-skills
 ```
 
+**Nothing to download or clone.** The marketplace `add` takes the GitHub repo reference directly — Claude Code fetches the repo itself and installs everything in one step: the `/etyb` skill, the five sub-agent definitions, the advisory hooks, and the vendor stacks. Updates arrive the same way (`/plugin` menu → update, or `claude plugin update etyb@etyb-skills`).
+
 Pick one path — skills CLI **or** plugin — not both, or the `/etyb` skill will be discovered twice.
 
 ## Where Skills Land (per harness)
