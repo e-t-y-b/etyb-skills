@@ -54,6 +54,23 @@ debt below (needs a real Claude Code install + vendor-doc egress).
 
 ## Deviations
 
+- **Full release gate (2026-07-06, done):** ran the complete CI-equivalent
+  gate locally in a clean `git worktree` of this branch's HEAD (so
+  untracked local scratch dirs like `stacks/salesforce-workspace/` and
+  `skills/etyb-workspace/` — pre-existing, gitignored eval debris unrelated
+  to this release — can't mask or fake results): `shellcheck -x` over all
+  21 shell scripts, `tests/hooks/test-*.sh` + `tests/maintainer/test-*.sh`,
+  `lint-portability.sh`, `lint-token-budget.sh`, `tests/hooks/run.sh` (21
+  passed), `build-manifest.sh` + `git diff --exit-code manifest.json` (no
+  drift), `build-adapters.sh` + `git diff --exit-code .codex/agents
+  dist/adapters` (no drift), and `CHECK_CURRENCY_STRICT=1
+  scripts/maintainer/validate-pr.sh` (all 6 maintainer checks green,
+  including the fixed `validate-skill-manifest-sync.sh`). `claude plugin
+  validate .` also green (one pre-existing informational warning about
+  root `CLAUDE.md` not loading as plugin context — expected, by design
+  per M1-T4's AGENTS.md/CLAUDE.md split, not a defect). This run is what
+  surfaced the marketplace/validator contradiction below.
+
 - **Release-gate contradiction found and resolved (2026-07-06, done):**
   the M2-T4 fix (this checklist's item 1) removed `marketplace.json`'s
   `"skills": ["./skills/etyb"]` array under `strict: false` to stop
